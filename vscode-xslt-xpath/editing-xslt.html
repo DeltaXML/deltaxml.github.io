@@ -110,7 +110,29 @@
 		</p>
 		<code class="block">&lt;?region modeA?&gt;
 ...
-&lt;?endregion modeA?&gt;]&gt;</code>
+&lt;?endregion modeA?&gt;</code>
+		<p>The Command Palette includes an extensive set of commands for code folding</p>
+		<h3>Intellisense (Auto Complete)</h3>
+		<p>Intellisense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
+			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
+			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
+		included/imported files are included in the suggestions list.</p>
+		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
+			fit the context of the curstor location. 
+			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">Code Snippet</a> is inserted
+			which will include common attributes for the selected instruction.
+		</p>
+		<p>Intellisense is manually triggered with <span class="shortcut">⌃Space</span>, with <span class="shortcut">Tab</span> or 
+			<span class="shortcut">Enter</span> used to accept suggestions. These <a href="">key bindings</a> are fully customizable.</p>
+		<h5>XSLT Instruction Snippets</h5>
+		<p>The special <code>xsl:stylesheet</code> suggestion includes a boiler plate 'identity transform' stylesheet complete with namespace
+			declarations.</p>
+		<p>The <code>xsl:message</code> suggestions include a <em>Watch Variables</em> snippet that lists the names and values of all
+			the immediate in-scope variables or parameters.</p>
+		<h5>More Snippets</h5>
+		You can define your own snippets in Visual Studio Code in a declarative way, without writing an extension. See the Visual Studio Code
+		documentation:
+		<a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets">Create your own snippets</a>
 	</div>
 	</div>
 </body>
