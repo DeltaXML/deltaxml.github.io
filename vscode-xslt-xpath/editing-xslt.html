@@ -67,14 +67,25 @@
 		<div class="main"><h2 class="pageTitle">Editing XSLT/XPath</h2>
 		
 		<div class="two-thirds column">
-			<p>With DeltaXML's XSLT/XPath extension, Visual Studio Code is now a fully featured
-			XSLT editor, standalone XPath files are also fully supported. Visual Studio's rich ecosystem is now available to XSLT and XPath developers.</p>
+			<p>With <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">DeltaXML's XSLT/XPath extension</a>
+				, Visual Studio Code is now a fully featured
+			XSLT 3.0 editor, standalone XPath 3.1 files are also fully supported. Visual Studio's rich ecosystem is now available to XSLT and XPath developers.</p>
 			
 			<p>This part of the documentation focuses on XSLT and XPath language features. More general XML features are
 				covered on the <a href="editing.html">Editing XML</a> page.
 				Fuller but language-neutral descriptions of the features covered here can be found in Microsoft's 
 				<a href="https://code.visualstudio.com/docs/editor/codebasics"> Visual Studio Code User Guide.</a></p>
-			<h3>Heading</h3>
+			<h3>Syntax Highlighting</h3>
+			<p>For improved performance and precision, this extension avoids the default 
+				but <a href="https://github.com/microsoft/vscode/issues/77140">problematic TM Grammar</a>
+				and instead exculisvely uses Visual Studio Code's releatively new 
+				<a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> 
+				feature. For external color themes you therefore need to explicitly enable Semantic Highlighting. See
+				the <a href="settings.html">Settings</a> page for more information.
+			</p>
+			<p>There is syntax highlighting for XSLT instructions, Literal Result Elements, XML attributes, XML character references, CDATA sections 
+				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
+				Text Value Templates are syntax highlighted also.</p>
 		</div>
 		
 	</div>
