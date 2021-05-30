@@ -71,7 +71,7 @@
 				, Visual Studio Code is now a fully featured
 			XSLT 3.0 editor, standalone XPath 3.1 files are also fully supported. Visual Studio's rich ecosystem is now available to XSLT and XPath developers.</p>
 			
-			<p>This part of the documentation focuses on XSLT and XPath language features. More general XML features are
+			<p>This documentation here focuses on XSLT and XPath language features. More general XML features are
 				covered on the <a href="editing.html">Editing XML</a> page.
 				Fuller but language-neutral descriptions of the features covered here can be found in Microsoft's 
 				<a href="https://code.visualstudio.com/docs/editor/codebasics"> Visual Studio Code User Guide.</a></p>
@@ -80,14 +80,37 @@
 				but <a href="https://github.com/microsoft/vscode/issues/77140">problematic TM Grammar</a>
 				and instead exculisvely uses Visual Studio Code's releatively new 
 				<a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> 
-				feature. For external color themes you therefore need to explicitly enable Semantic Highlighting. See
+				feature. For external <a href="https://code.visualstudio.com/docs/getstarted/themes">color themes</a> you eed to explicitly enable Semantic Highlighting. See
 				the <a href="settings.html">Settings</a> page for more information.
 			</p>
-			<p>There is syntax highlighting for XSLT instructions, Literal Result Elements, XML attributes, XML character references, CDATA sections 
+			<p>The extension provides syntax highlighting for XSLT instructions, XML Literal Result Elements, XML attributes, XML character references, CDATA sections 
 				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
 				Text Value Templates are syntax highlighted also.</p>
 		</div>
-		
+		<h3>Formatting</h3>
+		<p>Two commands are provided for formatting XML, XSLT or XPath expressions:</p>
+		<ul>
+			<li><strong>Format Document</strong> <span class="shortcut">(⇧⌥F)</span> - Format the entire active file.</li>
+			<li><strong>Format Selection</strong> <span class="shortcut">(⇧⌥F)</span> - Format the selected content.</li>
+			<li><strong>Format on Save</strong> <span class="shortcut">(⇧⌥F)</span> - Optionally specify to format only modifications.</li>
+		</ul>
+		<p>As well as explicitly invoking commands, formatting can be triggered as you type, 
+			when you save a file, or when you paste content from the clipboard. The following settings control this:</p>
+		<ul>
+			<li><code>editor.formatOnType</code> - Controls indentation for new lines.</li>
+			<li><code>editor.formatOnSave</code> - Controls indentation for new lines.</li>
+			<li><code>editor.formatOnPaste</code> - Controls indentation for new lines.</li>
+			<li><code>editor.editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
+		</ul>
+		<h3>Folding</h3>
+		<p>
+			Folding with this extension uses indentation to determine fold regions.
+			To set a region code-folding block, surround it with <code>&lt;?region?&gt;</code> and <code>&lt;?endregion?&gt;</code> processing instructions.
+			You may optionally include a label for the processing instructions, for example:
+		</p>
+		<code class="block">&lt;?region modeA?&gt;
+...
+&lt;?endregion modeA?&gt;]&gt;</code>
 	</div>
 	</div>
 </body>
