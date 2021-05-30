@@ -44,6 +44,17 @@ code.block {
   padding: 5px 5px;
   margin: 5px 0px;
   white-space: pre;
+  width: calc(100vw - 20px);
+  overflow-x: scroll;
+}
+
+li code.block {
+  width: calc(100vw - 50px);
+}
+
+li img.scale-with-grid {
+  max-width: calc(100vw - 50px);
+  width: 100%;
 }
 
 body {
