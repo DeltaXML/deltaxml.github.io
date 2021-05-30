@@ -17,7 +17,7 @@
 			<p>
 				To convert an element with a start-tag and end-tag to a self-closed element: With the cursor immediately to the
 				left of the <code>&gt;</code>at the end of the start-tag, type 
-				<span style="color: red; font-weight: bold; background-color: #f4f2f9; padding: 2px 3px">/</span>. Any element contents and the
+				<code>/</code>. Any element contents and the
 				end tag will be deleted automatically:
 			</p>
 			<code class="block"><![CDATA[<d><para]]><span style="color: red; font-weight: bold">/</span>&gt;<![CDATA[test</para</d>
