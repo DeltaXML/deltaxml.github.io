@@ -44,7 +44,8 @@ code.block {
   padding: 5px 5px;
   margin: 5px 0px;
   white-space: pre;
-  width: calc(100vw - 20px);
+  max-width: calc(100vw - 20px);
+  width: 100%;
   overflow-x: scroll;
 }
 
