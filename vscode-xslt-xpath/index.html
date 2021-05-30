@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!-- saved from url=(0019)http://qutoric.com/ -->
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>VS Code XSLT/XPath</title>
+	<meta name="description" content="Home page of Qutoric organisation" />
+	<meta name="author" content="Philip Fearon" />
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css" />
+	<link rel="stylesheet" href="./resources/skeleton.css" />
+	<link rel="stylesheet" href="./resources/layout.css" />
+	<link rel="stylesheet" href="./resources/custom.css" />
+							
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="shortcut icon" href="http://qutoric.com/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="http://qutoric.com/images/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="http://qutoric.com/images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="http://qutoric.com/images/apple-touch-icon-114x114.png" />
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">jj</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="six columns" style="padding-left: 20px;">
+				<img src="resources/deltaxml-logo.png" width="70px" style="float: left; padding-top: 10px;" />
+				<p style="float: left; padding: 20px 5px 0px 10px; color: #c2e664; text-align: center;">VS
+					Code<br />Extension<br /><span style="font-size: x-small;">By DeltaXML</span></p>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: white">XSLT and XPath</h3>
+				<h5 style="color: white;">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+				<ul>
+					<li><a class="active" href="index.html">Overview</a></li>
+					<li><a href="editing.html">Editing XML</a></li>
+					<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+					<li><a href="navigation.html">Code Navigation</a></li>
+					<li><a href="run-xslt.html">Running XSLT</a></li>
+					<li><a href="settings.html">Settings</a></li>
+				</ul>
+		</nav>
+		<div class="main">
+			<h2 class="pageTitle">Overview</h2>
+			<div class="two-thirds column">
+				<p>
+					This guide is a guide to coding XSLT or XPath in Visual Studio Code with DeltaXML's language
+					extension. These pages complement the extensive Visual Studio Code <a
+						href="https://code.visualstudio.com/docs">documentation</a> which summarises this application as follows:
+				</p>
+				<blockquote>
+					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is
+					available
+					for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a
+					rich ecosystem of extensions for other languages...
+				</blockquote>
+				<p>
+					<img src="resources/vscode-xslt.png" class="scale-with-grid" />
+				</p>
+				<h3>Getting Started</h3>
+				<p>
+					Visual Studio Code's user interface has a different look and feel to that of legacy XSLT editors. To reduce clutter, there
+					are no toolbars with scores of buttons, there is less emphasis also on the application menu bar. The sections below
+					introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
+				</p>
+				<h3>The Command Palette</h3>
+				<p>A principal part of Visual Studio Code's <a
+						href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a> is the Command
+					Palette,
+					triggered
+					by the keyboard shortcut <span class="shortcut">⇧⌘P</span>.
+					The Command Palette shows all available commands in a dropdown
+					list. The list of commands is
+					filtered as you type. The most recently used commands are shown at the top of the list.
+				</p>
+				<h3>Keyboard Shortcuts</h3>
+				<p>
+					While the Command Palette provides convenient access to features you should find that keyboard shortcuts are
+					more effective for commands you use most
+					frequently.
+					The keyboard shortcut for commands is shown alongside each listed command in the Command Palette. Not all
+					commands
+					have key bindings, but these can be configured using the command <code>Preferences: Open Keyboard Shortcuts</code> 
+					(<span class="shortcut">⌘K⌘S</span>). See: <a href="https://code.visualstudio.com/docs/getstarted/keybindings">
+						Key Bindings for Visual Studio Code</a>
+				</p>
+				<h3>Settings</h3>
+				<p>By adding or modifying Visual Studio Settings, using the <code>Preferences: Open User Settings</code> command, 
+					you can customize a range of editor and extension features to meet your needs.
+					See the <a href="settings.html">Settings</a> section for details on some of the more important settings for
+          developing in XSLT and XPath.
+				</p>
+				<h3>Install the XSLT/XPath Extension</h3>
+				<p>Extensions are managed in the Extensions view (<span class="shortcut">⇧⌘X</span>) of the Side Bar.
+					Type <code>XSLT XPath</code> in the Extensions view search bar and, on the <strong>XSLT/Path for Visual Studio
+						Code</strong> entry, press the <code>install</code> button
+					.</p>
+					<p>
+						<img src="resources/extension-view.png" class="scale-with-grid" />
+					</p>
+					<h5>Color Theme Extensions</h5>
+					<p>Visual Studio Code includes a small set of light and dark color themes. Alternative color themes are installed as extensions. The number of available themes can be overwhelming,
+						but there are websites like <a href="https://vscodethemes.com/">vscodethemes</a> that provide
+						a preview before installing the theme.
+					</p>
+					<aside>The XSLT/XPath extension syntax highlighter uses <a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">
+					Semantic Highlighting</a> that should be enabled specifically in Settings to work with external color themes.
+					Highlighter tokens are defined to provide effective highlighting for all the common color themes.
+					</aside>
+					<h5>Other Extensions</h5>
+					<p>Among the hundreds of high quality extensions available for Visual Studio Code, 
+						<a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare">Live Share</a>,
+						for collaborative working 
+					and <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server</a>
+					for when you're generating HTML with XSLT are particularly useful.
+					</p>
+				<h3>Edit XML, XSLT or XPath</h3>
+				<p>
+					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio Code 
+					<a href="https://code.visualstudio.com/docs/editor/codebasics">User Guide</a>.</p>
+				<h5>Language Specific Features</h5>
+				<p>XSLT and XPath specific editing features are described in the <a href="editing-xslt.html">Editing XSLT/XPath</a> section
+					of the documentation that your are reading now. More general XML editing features are described in the <a href="editing.html">Editing XML</a> section.</p>
+					<p>The features described in the sections include:</p>
+					<p>
+						<ul>
+							<li>Auto Completion</li>
+							<li>Syntax Highlighting</li>
+							<li>Code Formatting</li>
+							<li>Code Navigation</li>
+							<li>Code Diagnostics</li>
+						</ul>
+					</p>
+
+				<h3>Run XSLT</h3>
+				<p>XSLT transforms are run using <a href="https://code.visualstudio.com/Docs/editor/tasks">Tasks</a>.
+					Before configuring an XSLT task you should ensure that you open a 
+					<a href="https://code.visualstudio.com/docs/editor/workspaces">Workspace</a> folder (<span
+						class="shortcut">⌘O</span>) from Visual Studio Code.
+					The configuration is saved in a <code>tasks.json</code> file in this workspace folder.</p>
+				<p>To create your first task, use the <code>Run Build Task</code> command (<span class="shortcut">⇧⌘B</span>).
+					As there is no currently configured task, you will be prompeted to configure one. You can then,
+					select either the <code>Saxon</code> or <code>Saxon-JS</code> task.</p>
+				<p>A task will be added to the <code>tasks.json</code> task with default properties. To further configure the
+					task, these properties can be changed or other properties added. Auto-completion and hints are provided to
+					assist in the task configuration. Next time you press <span class="shortcut">⇧⌘B</span> your task will be run.</p>
+
+				<p>XSLT Tasks are explained in full in the <a href="run-xslt.html"></a>Running XSLT section. More general 
+				information can be found in the Visual Studio Code <a href="https://code.visualstudio.com/docs/editor/tasks">Tasks</a>
+				 documentation.</p>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

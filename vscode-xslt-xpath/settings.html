@@ -1,0 +1,148 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>VS Code XSLT/XPath</title>
+	<meta name="description" content="Home page of Qutoric organisation">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+							
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="shortcut icon" href="http://qutoric.com/images/favicon.ico">
+	<link rel="apple-touch-icon" href="http://qutoric.com/images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="http://qutoric.com/images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="http://qutoric.com/images/apple-touch-icon-114x114.png">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">jj</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="six columns" style="padding-left: 20px;">
+				<img src="resources/deltaxml-logo.png" width="70px" style="float: left; padding-top: 10px;">
+				<p style="float: left; padding: 20px 5px 0px 10px; color: #c2e664; text-align: center;">VS
+					Code<br>Extension<br><span style="font-size: x-small;">By DeltaXML</span></p>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: white">XSLT and XPath</h3>
+				<h5 style="color: white;">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+				<ul>
+					<li><a href="index.html">Overview</a></li>
+					<li><a href="editing.html">Editing XML</a></li>
+					<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+					<li><a href="navigation.html">Code Navigation</a></li>
+					<li><a href="run-xslt.html">Running XSLT</a></li>
+					<li><a href="settings.html" class="active">Settings</a></li>
+				</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">Settings</h2>
+    
+    <div class="two-thirds column">
+      <p>From the Command Palette (<span class="shortcut">⇧⌘P</span>) you can either invoke <code>Preferences: Open User Settings</code>
+      or <code>Preferences: Open Workspace Settings</code>. Settings can either be edited in the Settings form or by editing the
+        <code>settings.json</code> file directly.
+        </p>
+      <p>Editor settings can also be applied in a language-specific way, for this, use the command <code>Preferences: Configure Language Specific Settings</code>.	
+      </p>
+      <p>For general details on settings see the Visual Studio Code documentation <a href="https://code.visualstudio.com/docs/getstarted/settings">User and Workspace Settings</a></p>
+      <h3>XSLT Extension Specific Settings</h3>
+       <p>Type <code>xslt</code> to show a short-list of settings specific to XSLT:</p>
+      <img src="resources/tasks/settings.png" class="scale-with-grid">
+      <h5>XSLT Packages</h5>
+      <p>To allow XSLT package names to be resolved to file paths, package details should be added to the setting <code>XSLT.resources.xsltPackages</code>.</p>
+      <p>Sample XSLT package settings</p>
+      <code class="block">"XSLT.resources.xsltPackages": [
+  { "name": "example.com.package1", 
+    "version": "2.0", 
+    "path": "included1.xsl"
+  },
+  { "name": "example.com.package2",
+    "version": "2.0", 
+    "path": "features/included2.xsl"
+  },
+]</code>
+      <h5>XSLT Tasks</h5>
+      <p>The Saxon XSLT-Java and XSLT-JS TaskProviders are enabled by default. These can be enabled or disabled using the following settings properties:</p>
+      <code class="block">"XSLT.tasks.java.enabled": true
+"XSLT.tasks.js.enabled": true</code>
+      <h3>General Settings For XSLT</h3>
+      <p>You can set your preferences for XSLT and XML editing so they don't affect coding in languages managed by other extensions: this.name</p>
+      <code class="block">  "[xslt]": {   
+    "editor.defaultFormatter": "deltaxml.xslt-xpath",
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.wordSeparators": "`~!@#%^&amp;*()=+[{]}\\|;'\",:&lt;&gt;/?$",
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "deltaxml.xslt-xpath",
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.wordSeparators": "`~!@#%^&amp;*()=+[{]}\\|;'\",:&lt;&gt;/?$",
+  },</code>
+      <h5>Code Formatting</h5>
+      <p>The following settings directly affect code formatting in the XSLT/XPath extension:</p>
+      <code class="block">    "editor.defaultFormatter": "deltaxml.xslt-xpath",
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,</code>
+      <p>The <code>editor.formatOnSaveMode</code> setting can be used to only format XSLT lines changed since the last commit on Git.</p>
+      <h5>Syntax Highlighting</h5>
+      <p>Syntax highlighting for XSLT and XPath is achieved using Visual Studio Code's 
+        <a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> tokens alone.
+        Almost all other languages in Visaul Studio Code use a 
+        <a href="https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide">TextMate Grammar</a> for tokens which
+        may be supplemented by Semantic Highlighting.
+      </p>
+      <p>To ensure XSLT and XPath is syntax highlighted in any <a href="https://code.visualstudio.com/docs/getstarted/themes">Color Theme</a>,
+        you should explicity enable Semantic Highlighting with the setting:      
+      </p>
+      <code class="class">
+        "editor.semanticHighlighting.enabled": true
+      </code>
+      <p></p>
+      <h5>Word Separators</h5>
+      <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
+      listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word
+      separators as these characters are valid within a QName like an arrtibute name or a variable name.</p>
+    </div>
+    
+  </div>
+	</div>
+</body>
+
+</html>

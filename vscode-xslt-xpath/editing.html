@@ -1,0 +1,112 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>VS Code XSLT/XPath</title>
+	<meta name="description" content="Home page of Qutoric organisation">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+							
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="shortcut icon" href="http://qutoric.com/images/favicon.ico">
+	<link rel="apple-touch-icon" href="http://qutoric.com/images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="http://qutoric.com/images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="http://qutoric.com/images/apple-touch-icon-114x114.png">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">jj</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="six columns" style="padding-left: 20px;">
+				<img src="resources/deltaxml-logo.png" width="70px" style="float: left; padding-top: 10px;">
+				<p style="float: left; padding: 20px 5px 0px 10px; color: #c2e664; text-align: center;">VS
+					Code<br>Extension<br><span style="font-size: x-small;">By DeltaXML</span></p>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: white">XSLT and XPath</h3>
+				<h5 style="color: white;">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+				<ul>
+					<li><a href="index.html">Overview</a></li>
+					<li><a href="editing.html" class="active">Editing XML</a></li>
+					<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+					<li><a href="navigation.html">Code Navigation</a></li>
+					<li><a href="run-xslt.html">Running XSLT</a></li>
+					<li><a href="settings.html">Settings</a></li>
+				</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">Editing XML</h2>
+		
+		<div class="two-thirds column">
+			<p>
+				The comprehensive <a href="https://code.visualstudio.com/docs/editor/codebasics">User Guide</a>
+				for the Visual Studio Code editor should be your primary resource for learning about editor features
+				and how to use them effectively.</p>
+			<p>This section provides extra information specific to the XSLT/XPath extension environment,
+				and also emphasizes features that may be particularly useful from the XSLT or XPath coders perspective.</p>
+			<h3>XML Elements</h3>
+			<h5>Change Element Tag Name</h5>
+		  As you edit the start tag name of an element, the corresponding end tag name is changed at the same time to
+			keep the XML well-nested.
+			<h5>Self-Close Element</h5>
+			<p>
+				To convert an element with a start-tag and end-tag to a self-closed element: With the cursor immediately to the
+				left of the <code>&gt;</code>at the end of the start-tag, type 
+				<span style="color: red; font-weight: bold; background-color: #f4f2f9; padding: 2px 3px">/</span>. Any element contents and the
+				end tag will be deleted automatically:
+			</p>
+			<code class="block">&lt;d&gt;&lt;para<span style="color: red; font-weight: bold">/</span>&gt;test&lt;/para&lt;/d&gt;
+--&gt; &lt;d&gt;&lt;para<span style="color: red; font-weight: bold">/</span>&gt;&lt;/d&gt; </code>
+			<h5>Rename all elements with selected name</h5>
+			<p>
+				Select the element tag name you want to rename by double-clicking it, then press (<span class="shortcut">⇧⌘L</span>). This selects
+				all matching tag names so you're in a multi-cursor edit mode. As you edit the tag name you selected all
+				matching tag names are edited also. When done, press <span class="shortcut">Escape to exit multi-cursor edit</span>.
+			</p>
+			<aside>Note: This is a standard Visual Studio Command so the <em>Find</em> is not XML-aware.</aside>
+			<h3>XML Attributes</h3>
+			<h5>Auto Completion</h5>
+			<p>
+				With the cursor in the element start tag where you wish to add the attribute, press <span class="shortcut">⌃Space</span>
+				and select <code>attribute</code> to insert the code snippet:
+			</p>
+			<code class="block"><bold>name</bold>="<bold>value</bold>"</code>
+			<p>Edit the <code>name</code> and then press <span class="shortcut">Tab</span> to edit the <code>value</code>.</p>
+			<h3>Code Formatting</h3>
+			
+		</div>
+		
+	</div>
+	</div>
+</body>
+
+</html>

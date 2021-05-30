@@ -1,0 +1,155 @@
+.shortcut {
+  color: #0072be;
+  background-color: #f4f2f9;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+a, a:visited {
+  color: #0071BC;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+nav a:hover, nav a:focus {
+  color: #00b2fe
+}
+
+
+.pageTitle {
+  color: #0071BC;
+}
+
+code {
+  font-size: small;
+  background-color: #f4f2f9;
+  padding: 2px 4px;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+code.block {
+  font-size: small;
+  display: block;
+  padding: 5px 5px;
+  margin: 5px 0px;
+  white-space: pre;
+}
+
+body {
+  max-width: 1000px;
+  margin: auto;
+}
+
+aside {
+  padding: 10px 15px;
+  margin: 15px 15px;
+  font-style: italic;
+  background-color: lightgray;
+}
+
+@media (prefers-color-scheme: dark) {
+  body   { background:  #333; color: #cacaca; }
+  h1, h2, h3, h4, h5, h6 {
+    color: #eaeaea;
+  }
+  .shortcut, code {
+    background-color: #232323;
+  }
+  .shortcut {
+    color: #00b2fe;
+  }
+  a, a:visited {
+    color: #00b2fe;
+  }
+  strong {
+    color: #ffffff;
+  }
+  aside {
+    background-color: #404040;
+  }
+  .pageTitle {
+    color: #00b2fe;
+  }
+  blockquote {
+    color: #a0a0a0;
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+.colorBar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100px;
+  background-color: #3b495b;
+  width: 100%;
+}
+
+@media only screen and (max-width: 750px) {
+  .topTitle {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    background-color: #3b495b;
+  }
+}
+
+.hideBehind {
+  z-index: -5;
+}
+
+.topbar {
+  float: left;
+  width: 100%;
+  color: white;
+  height: 100px;
+}
+
+.topTitle {
+  padding: 20px;
+}
+
+.wrapper {
+  /* background-color: #cacaca; */
+  top: 210px;
+  height: calc(100vh - 100px);
+}
+
+nav {
+  width: 180px;
+  float: left;
+  padding: 15px 5px 5px 25px;
+  margin-top: 30px;
+}
+
+nav ul {
+  list-style: none;
+  margin-left: 0px;
+}
+
+ul {
+  list-style: disc;
+  margin-left: 50px;
+}
+
+.main {
+  top: 0px;
+  left: 300px;
+  height: 100%;
+  overflow-y: auto;
+  max-width: 700px;
+  float: left;
+  padding: 10px 10px;
+}

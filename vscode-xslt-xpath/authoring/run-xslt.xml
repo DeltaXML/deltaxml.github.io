@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+		
+		<div class="two-thirds column">
+			<p>Visual Studio Code's Tasks include custom task types for configuring and running Saxon (Java)
+				or Saxon-JS (JavaScript) XSLT transforms. The Saxon XSLT processor is called via its command-line interface, so task
+				configurations effectively control command-line arguments. An attempt is made to parse any error messages
+				returned from Saxon, so that the position of any Saxon-reported errors in the XSLT can be highlighted.
+			</p>
+			
+			<p>XSLT transforms are run using custom <code>xslt</code> or <code>xslt-js</code>
+				<a href="https://code.visualstudio.com/Docs/editor/tasks">Visual Studio Code Tasks</a>
+				for Saxon (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
+				<a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">Saxon</a> installation) 
+				or Saxon-JS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
+			<h3>Saxon (Java) setup</h3>
+			<ol>
+				<li><p>
+						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
+						open in Visual Studio Code (use <strong>File > open...</strong> from the menu).
+						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
+					</p></li>
+				<li>
+					<p>If Java is not already installed, Java 1.8 or later can be downloaded and installed from <a href="https://adoptopenjdk.net/installation.html">here</a></p>
+				</li>
+				<li>
+					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">here</a></p>
+				</li>
+				<li>
+					<p>Saxon (Java) tasks need the path to the installed Saxon jar file to be included in a property in your Visual Studio Code settings. 
+						Invoke <code>Preferences: Open User Settings</code> from the Command Palette (<span class="shortcut">⇧⌘P</span>) and type
+						<code>xslt</code> to show a short-list of settings:</p>
+					<img src="resources/tasks/settings.png" class="scale-with-grid" />
+				</li>
+				<li>
+					<p>Enter the Jar file path in the <strong>Tasks: Saxon Jar</strong> property (see above)</p>
+				</li>
+			</ol>
+			<h3>Saxon-JS setup</h3>
+			<ol>
+				<li><p>
+						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
+						open in Visual Studio Code (use <strong>File > open...</strong> from the menu).
+						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
+					</p></li>
+				<li>
+					<p>If NodeJS is not already installed, it can be downloaded and installed from <a href="https://nodejs.org/en/download/">here</a></p>
+				</li>
+				<li>
+					<p>Initialize <a href="https://docs.npmjs.com/about-npm">NPM</a> in the current folder and then install the Saxon-JS package (xslt3) by running the following commands in the Visual Studio Code terminal:
+						<code class="block">npm init -y
+npm install --save-dev xslt3</code>	
+					</p>
+				</li>
+			</ol>
+			<aside>The Saxon-JS task uses <a href="https://docs.npmjs.com/cli/v7/commands/npx">NPX</a> to invoke Saxon-JS task. 
+				NPX will download the Saxon-JS package if you choose not to follow the previous step and it can't find the Saxon-JS package in your global space.</aside>
+			<h3>To configure the initial task:</h3>
+			<ol>
+				<li><p>
+						Invoke <code>Tasks: Run Build Task</code> from the Command Palette (<span class="shortcut">⇧⌘B</span>):
+					</p>						
+					<img src="resources/tasks/run-task.png" class="scale-with-grid" />
+				</li>
+				<li><p>
+						Press <span class="shortcut">Enter</span> to <strong>Configure Build Task</strong>:
+					</p>					
+					<img src="resources/tasks/select-task.png" class="scale-with-grid" />
+				</li>
+				<li><p>
+						Select from the list (shown above) the task type you require (you may see more task types in the list), for either Saxon or Saxon-JS.
+					</p>
+					<img src="resources/tasks/edit-task.png" class="scale-with-grid" />
+				</li>
+				<li>
+					<p>
+						The <code>tasks.json</code> file will then be opened with a template task added for the task type specified. 
+						The task shown above is for the Saxon task. Edit this task to fit your XSLT transform requirement.
+						It's a good idea to change the <code>label</code> property (the value shown in the tasks list) to describe your XSLT transform.
+						Auto-completion with hints is available as you type. 
+						The actual file type is 'JSON with Comments' so you can add comments and leave trailing commas etc.
+					</p>
+				</li>
+				<li>
+					<p>
+						You can create any number of tasks for different XSLT transform scenarios. Note that the <code>group.isDefault</code>
+						property controls that task that is automatically launched when you next invoke 
+						<code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.
+					</p>
+				</li>
+				<li>
+					<pi>Save any changes to the <code>tasks.json</code> file <span class="shortcut">⌘S</span></pi>
+				</li>
+				<li>
+					<p>Run the newly configured XSLT transform by invoking <code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.</p>
+				</li>
+			</ol>
+			<h3>Configuring more tasks</h3>
+			<p>To create more tasks, just invoke <code>Tasks: Run Build Task</code> from the Command Palette 
+				and choose the task type you need. Provided you've changed the <code>label</code> property from the template
+				task for that type, a new task will created from the template task.
+			</p>
+			<p>Visual Studio Tasks are very flexible. You can combine XSLT tasks with other task types, for example, to run a shell command.
+				The <code>dependsOn</code> task property is used to chain tasks together. The <strong>Compound Tasks</strong>
+				section of the Visual Studio Code <a href="https://code.visualstudio.com/Docs/editor/tasks">Tasks documentation</a>
+				covers this concept in more detail.				
+			</p>
+			<h3>The Visual Studio Code terminal</h3>
+			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">integrated terminal</a>. 
+				The tab label reflects the Task configuration <code>label</code> property. 
+				When a Saxon XSLT task is run, <code>xsl:message</code> output and any Saxon errors will be shown in the terminal window.
+			</p>
+			
+		</div>
+		
+	</div>	
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <div class="main">
+    
+    <div class="two-thirds column">
+      <p>From the Command Palette (<span class="shortcut">⇧⌘P</span>) you can either invoke <code>Preferences: Open User Settings</code>
+      or <code>Preferences: Open Workspace Settings</code>. Settings can either be edited in the Settings form or by editing the
+        <code>settings.json</code> file directly.
+        </p>
+      <p>Editor settings can also be applied in a language-specific way, for this, use the command <code>Preferences: Configure Language Specific Settings</code>.	
+      </p>
+      <p>For general details on settings see the Visual Studio Code documentation <a href="https://code.visualstudio.com/docs/getstarted/settings">User and Workspace Settings</a></p>
+      <h3>XSLT Extension Specific Settings</h3>
+       <p>Type <code>xslt</code> to show a short-list of settings specific to XSLT:</p>
+      <img src="resources/tasks/settings.png" class="scale-with-grid" />
+      <h5>XSLT Packages</h5>
+      <p>To allow XSLT package names to be resolved to file paths, package details should be added to the setting <code>XSLT.resources.xsltPackages</code>.</p>
+      <p>Sample XSLT package settings</p>
+      <code class="block">"XSLT.resources.xsltPackages": [
+  { "name": "example.com.package1", 
+    "version": "2.0", 
+    "path": "included1.xsl"
+  },
+  { "name": "example.com.package2",
+    "version": "2.0", 
+    "path": "features/included2.xsl"
+  },
+]</code>
+      <h5>XSLT Tasks</h5>
+      <p>The Saxon XSLT-Java and XSLT-JS TaskProviders are enabled by default. These can be enabled or disabled using the following settings properties:</p>
+      <code class="block">"XSLT.tasks.java.enabled": true
+"XSLT.tasks.js.enabled": true</code>
+      <h3>General Settings For XSLT</h3>
+      <p>You can set your preferences for XSLT and XML editing so they don't affect coding in languages managed by other extensions: this.name</p>
+      <code class="block"><![CDATA[  "[xslt]": {   
+    "editor.defaultFormatter": "deltaxml.xslt-xpath",
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;'\",:<>/?$",
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "deltaxml.xslt-xpath",
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;'\",:<>/?$",
+  },]]></code>
+      <h5>Code Formatting</h5>
+      <p>The following settings directly affect code formatting in the XSLT/XPath extension:</p>
+      <code class="block">    "editor.defaultFormatter": "deltaxml.xslt-xpath",
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,</code>
+      <p>The <code>editor.formatOnSaveMode</code> setting can be used to only format XSLT lines changed since the last commit on Git.</p>
+      <h5>Syntax Highlighting</h5>
+      <p>Syntax highlighting for XSLT and XPath is achieved using Visual Studio Code's 
+        <a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> tokens alone.
+        Almost all other languages in Visaul Studio Code use a 
+        <a href="https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide">TextMate Grammar</a> for tokens which
+        may be supplemented by Semantic Highlighting.
+      </p>
+      <p>To ensure XSLT and XPath is syntax highlighted in any <a href="https://code.visualstudio.com/docs/getstarted/themes">Color Theme</a>,
+        you should explicity enable Semantic Highlighting with the setting:      
+      </p>
+      <code class="class">
+        "editor.semanticHighlighting.enabled": true
+      </code>
+      <p></p>
+      <h5>Word Separators</h5>
+      <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
+      listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word
+      separators as these characters are valid within a QName like an arrtibute name or a variable name.</p>
+    </div>
+    
+  </div>	
+</html>
