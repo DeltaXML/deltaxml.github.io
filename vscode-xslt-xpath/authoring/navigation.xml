@@ -26,8 +26,26 @@
 				This may be for example the <code>name</code> of an <code>xsl:variable</code> or the <code>mode</code> of an <code>xsl:template</code>.
 				The symbol names are the same as those shown in the Outline view.
 			</p>
+			<p>Clicking on a BreadCrumb item will show a dropdown outline view which you can then navigate through with the mouse, touch or cursor keys.</p>
+			<h5>Keyboard Navigation</h5>
+			<p>
+				Press <span class="shortcut">⇧⌘.</span> (note the 'dot' character) to select the last Breadcrumb item and open <strong>with</strong> a dropdown outline. 
+				You can then use cursor keys
+				to navigate the dropdown outline. Alternatively, press <span class="shortcut">⇧⌘;</span> (note the 'semi-colon' character) 
+				to select the last Breadcrumb item <strong>without</strong> a dropdown outline. 
+				Use the <span class="shortcut">←</span> and <span class="shortcut">→</span> keys to select a BreadCrumb item or the
+				<span class="shortcut">↓</span> for the dropdown outline.
+			</p>
 			<aside>Note: You can toggle the BreadCrumbs view on/off but if the BreadCrumbs view is disabled this will also disable XML, XSLT or XPath Warnings and Errors
 				as the Code Checker depends on the symbol name structure.</aside>
+			<h3>Outline View</h3>
+			<p>
+				The <a href="https://code.visualstudio.com/docs/getstarted/userinterface#_outline-view">Outline View</a> orTree View is a panel shown at the bottom
+				of the File Explorer. It shows the XML or XSLT document element tree, symbol names in the tree include my include element identifiers such
+				as the <code>mode</code> for an <code>xsl:template</code>.
+			</p>
+			<h3>File Links</h3>
+			<h3>Goto Definition (or Peek Definition)</h3>
 		</div>
 		
 	</div>	

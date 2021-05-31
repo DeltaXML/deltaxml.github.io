@@ -45,6 +45,15 @@ code.block {
   white-space: pre;
 }
 
+li code.block {
+  max-width: calc(100vw - 250px);
+}
+
+li img.scale-with-grid {
+  max-width: calc(100vw - 50px);
+  width: 100%;
+}
+
 body {
   max-width: 1000px;
   margin: auto;
@@ -146,6 +155,7 @@ ul {
   list-style: disc;
   margin-left: 50px;
 }
+
 
 .main {
   top: 0px;

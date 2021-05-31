@@ -17,11 +17,8 @@
 	
 	
 	
-							
 
-	
-	
-	
+
 	
 	
 
@@ -39,8 +36,10 @@
 		
 			
 				
-				VS
-					CodeExtensionBy DeltaXML
+					
+					VS
+						CodeExtensionBy DeltaXML
+				
 			
 			
 				XSLT and XPath
@@ -50,7 +49,7 @@
 	
 	
 		
-				
+			
 		
 		
 			Overview
@@ -70,8 +69,10 @@
 				
 				Getting Started
 				
-					Visual Studio Code's user interface has a different look and feel to that of legacy XSLT editors. To reduce clutter, there
-					are no toolbars with scores of buttons, there is less emphasis also on the application menu bar. The sections below
+					Visual Studio Code's user interface
+					has a different look and feel to that of legacy XSLT editors. To reduce clutter, there
+					are no toolbars with scores of buttons, there is less emphasis also on the application menu bar. The sections
+					below
 					introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
 				
 				The Command Palette
@@ -90,73 +91,81 @@
 					frequently.
 					The keyboard shortcut for commands is shown alongside each listed command in the Command Palette. Not all
 					commands
-					have key bindings, but these can be configured using the command Preferences: Open Keyboard Shortcuts 
+					have key bindings, but these can be configured using the command
+					Preferences: Open Keyboard Shortcuts
 					(⌘K⌘S). See: 
 						Key Bindings for Visual Studio Code
 				
 				Settings
-				By adding or modifying Visual Studio Settings, using the Preferences: Open User Settings command, 
+				By adding or modifying Visual Studio Settings, using the Preferences: Open User Settings
+					command,
 					you can customize a range of editor and extension features to meet your needs.
 					See the Settings section for details on some of the more important settings for
-          developing in XSLT and XPath.
+					developing in XSLT and XPath.
 				
 				Install the XSLT/XPath Extension
 				Extensions are managed in the Extensions view (⇧⌘X) of the Side Bar.
 					Type XSLT XPath in the Extensions view search bar and, on the XSLT/Path for Visual Studio
 						Code entry, press the install button
 					.
+				
 					
-						
-					
-					Color Theme Extensions
-					Visual Studio Code includes a small set of light and dark color themes. Alternative color themes are installed as extensions. The number of available themes can be overwhelming,
-						but there are websites like vscodethemes that provide
-						a preview before installing the theme.
-					
-					The XSLT/XPath extension syntax highlighter uses 
-					Semantic Highlighting that should be enabled specifically in Settings to work with external color themes.
+				
+				Color Theme Extensions
+				Visual Studio Code includes a small set of light and dark color themes. Alternative color themes are
+					installed as extensions. The number of available themes can be overwhelming,
+					but there are websites like vscodethemes that provide
+					a preview before installing the theme.
+				
+				The XSLT/XPath extension syntax highlighter uses 
+						Semantic Highlighting that should be enabled specifically in Settings to work with external color
+					themes.
 					Highlighter tokens are defined to provide effective highlighting for all the common color themes.
-					
-					Other Extensions
-					Among the hundreds of high quality extensions available for Visual Studio Code, 
-						Live Share,
-						for collaborative working 
+				
+				Other Extensions
+				Among the hundreds of high quality extensions available for Visual Studio Code,
+					Live Share,
+					for collaborative working
 					and Live Server
 					for when you're generating HTML with XSLT are particularly useful.
-					
+				
 				Edit XML, XSLT or XPath
 				
-					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio Code 
+					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio Code
 					User Guide.
+				
 				Language Specific Features
-				XSLT and XPath specific editing features are described in the Editing XSLT/XPath section
+				XSLT and XPath specific editing features are described in the Editing
+						XSLT/XPath section
 					of the documentation that your are reading now. More general XML editing features are described in the Editing XML section.
-					The features described in the sections include:
-					
-						
-							Auto Completion
-							Syntax Highlighting
-							Code Formatting
-							Code Navigation
-							Code Checking
-						
-					
+				The features described in the sections include:
+				
+				
+					Auto Completion
+					Syntax Highlighting
+					Code Formatting
+					Code Navigation
+					Code Checking
+				
+				
 
 				Run XSLT
 				XSLT transforms are run using Tasks.
-					Before configuring an XSLT task you should ensure that you open a 
+					Before configuring an XSLT task you should ensure that you open a
 					Workspace folder (⌘O) from Visual Studio Code.
 					The configuration is saved in a tasks.json file in this workspace folder.
+				
 				To create your first task, use the Run Build Task command (⇧⌘B).
 					As there is no currently configured task, you will be prompeted to configure one. You can then,
 					select either the Saxon or Saxon-JS task.
 				A task will be added to the tasks.json task with default properties. To further configure the
 					task, these properties can be changed or other properties added. Auto-completion and hints are provided to
 					assist in the task configuration. Next time you press ⇧⌘B your task will be run.
+				
 
-				XSLT Tasks are explained in full in the Running XSLT section. More general 
-				information can be found in the Visual Studio Code Tasks
-				 documentation.
+				XSLT Tasks are explained in full in the Running XSLT section. More general
+					information can be found in the Visual Studio Code Tasks
+					documentation.
 			
 
 		
