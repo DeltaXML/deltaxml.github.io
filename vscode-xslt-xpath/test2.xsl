@@ -11,6 +11,8 @@
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
   
+  <xsl:variable name="var1" as="xs:string" select="23333"/>
+  
   <xsl:template match="/*" mode="#all">
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>

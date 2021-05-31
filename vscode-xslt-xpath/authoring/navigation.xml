@@ -47,7 +47,19 @@
 				of the File Explorer. It shows the XML or XSLT document element tree, symbol names in the tree include my include element identifiers such
 				as the <code>mode</code> for an <code>xsl:template</code>.
 			</p>
-			<h3>Goto Definition (or Peek Definition)</h3>
+			<p>Symbols in the Outline View can be sorted by position, name or category. There's also a '<strong>Filter on Type</strong>' mode that
+			filters the Outline View while you type in part of a symbol name.</p>
+			<h3>Goto Definition</h3>
+			<p>
+				Invoke the <strong>Goto Defintion</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
+				This command navigates you to the location of the symbol definition (for example, the corresponding <code>xsl:variable</code> instruction),
+				opening the containing file in the editor group if not already open.
+			</p>
+			<h3>Peek Defintion</h3>
+			<p>Invoke the <strong>Peek</strong> command by pressing (<span class="shortcut">⌥F12</span>) on any symbol name such as a variable or function name.
+				This command embeds a view of the defintion inline avoiding the context-switch arising from the <strong>Goto Definition</strong> command.
+				The inline definition view permits quick edits of the defintion also. Press <span class="shortcut">Escape</span> to close the definition view.
+			</p>
 		</div>
 		
 	</div>	

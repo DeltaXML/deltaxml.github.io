@@ -7,19 +7,33 @@
                 exclude-result-prefixes="#all"
                 expand-text="yes"
                 version="3.0">
-
+  
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
   
   <xsl:include href="test2.xsl"/>
   
   <xsl:template match="div" mode="#all">
+    <dajjjta 
+      name="
+      abc
+      def
+      ghi
+      hij"
+      new="test"/>
+    <xsl:sequence 
+      select="
+        1,
+        2,
+        3,
+        4"/>
+    <xsl:sequence select="$var1"/>
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
       <p>added by me and updated</p>
     </xsl:copy>
   </xsl:template>
-
   
-
+  
+  
 </xsl:stylesheet>

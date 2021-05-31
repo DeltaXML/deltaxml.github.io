@@ -114,6 +114,9 @@
 			<li><code>editor.formatOnPaste</code> - Controls indentation for new lines.</li>
 			<li><code>editor.editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
 		</ul>
+		<p>The XPath formatter indents code blocks within <code>{}</code>, <code>[]</code> and <code>()</code> bracket-pairs.
+		Indentation is also adjusted for <code>if/else</code> blocks and range-variable blocks.	
+		</p>
 		<h3>Folding</h3>
 		<p>
 			Folding with this extension uses indentation to determine fold regions.
@@ -180,6 +183,12 @@
 			<li>Attribute Value Template Syntax</li>
 			<li>Text Value Template Syntax</li>			
 		</ol>
+		<h5>Unused Variables</h5>
+		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
+			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
+			imported stylesheets thay may reference the same variable.
+		</p>
+   <h5>Compile-time and Run-time problems</h5>
     <p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
 		When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT procesor 
 		(shown in the Task tab of the Terminal View) so that the problem token is highlighted,

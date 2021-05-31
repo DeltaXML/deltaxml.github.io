@@ -38,10 +38,15 @@
 			</p>
 			<code class="block"><bold>name</bold>="<bold>value</bold>"</code>
 			<p>Edit the <code>name</code> and then press <span class="shortcut">Tab</span> to edit the <code>value</code>.</p>
-			<h3>Code Formatting</h3>
-			<p>When you have an XML file open, normal XML formatting features are available. Normally, it is
-			only indentation that is affected, but, if no newlines are found at the start of the XML file,
-			new lines are added too.</p>
+			<h3 id="xmlformatting">XML Formatting</h3>
+			<p>When you have an XML file open, normal XML formatting features are available. With typical hand-edited XML, it is
+			only indentation that is correct by the formatting. However, if no newline characters are found at the start of the XML file,
+				it is assumed the contents is system generated and newline characters are added for elements that are not mixed content.</p>
+			<p>The formatter observes the normal rules for whitespace preservation in XML. So <code>xml:space</code> attributes affect
+			whether indentation is preserved. Whitespace in <code>CDATA</code> sections and 'significant' whitespace in content inferred
+				to be <em>mixed content</em> is also preserved.</p>
+			<p>XML attribute on newline and multi-line attribute value are indented by the XML formatting provider.</p>
+			
 		</div>
 		
 	</div>	
