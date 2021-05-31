@@ -10,6 +10,9 @@
 
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
+  
+  <xsl:include href="test.xml"/>
+  
   <xsl:template match="div" mode="#all">
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>

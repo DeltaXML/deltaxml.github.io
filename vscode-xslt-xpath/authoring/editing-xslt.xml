@@ -101,9 +101,6 @@
 			underline for the token in question. Reference checks attempt to resolve symbol names through all imported/include stylesheets and packages. 
 			Here is a summary of the key checks:
 		</p>
-		<aside>XSLT/XPath editors that rely only on a language compiler to report errors can 
-			suffer from a significant delay while you're typing. Depending on the compiler, they are not always able to report problem
-			locations with the same precision. It is probable also that compiler-dependent errors information only includes the first problem encountered.</aside>
 		<ol>
 			<li>XML Syntax</li>
 			<li>XSLT/XPath Variable name references</li>
@@ -124,5 +121,11 @@
 		(shown in the Task tab of the Terminal View) so that the problem token is highlighted,
 		and the error message is shown in the Problems View.	
 		</p>
-	</div>	
+		<aside>XSLT/XPath editors that rely only on a language compiler to report errors can 
+			suffer from a significant delay while you're typing. Depending on the compiler, they are not always able to report problem
+			locations with the same precision. It is probable also that compiler-dependent errors information only includes the first problem encountered.</aside>
+		<h3>Including external files</h3>
+		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
+			in the href, press <span class="shortcut">⌘+click</span> and then, in the 'Unable to Open...' dialog press the <strong>Create File</strong> button.</p>
+	</div>
 </html>
