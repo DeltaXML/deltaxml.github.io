@@ -7,19 +7,16 @@
                 exclude-result-prefixes="#all"
                 expand-text="yes"
                 version="3.0">
-
+  
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
   
-  <xsl:include href="test2.xsl"/>
-  
-  <xsl:template match="div" mode="#all">
+  <xsl:template match="/*" mode="#all">
     <xsl:copy>
       <xsl:apply-templates select="@*, node()" mode="#current"/>
-      <p>added by me and updated</p>
     </xsl:copy>
   </xsl:template>
-
   
-
+  
+  
 </xsl:stylesheet>
