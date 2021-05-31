@@ -67,11 +67,10 @@
 		
 		<div class="two-thirds column">
 			<p>
-				The comprehensive <a href="https://code.visualstudio.com/docs/editor/codebasics">User Guide</a>
-				for the Visual Studio Code editor should be your primary resource for learning about editor features
-				and how to use them effectively.</p>
-			<p>This section provides extra information specific to the XSLT/XPath extension environment,
-				and also emphasizes features that may be particularly useful from the XSLT or XPath coders perspective.</p>
+				The <a href="https://code.visualstudio.com/docs/editor/codebasics">Visual Studio Code  User Guide</a>
+				should be your main resource for learning about general editor features and how to use them effectively.</p>
+			<p>This page provides a high level guide from an XML editing or reviewing perspective. See the <a href="editing-xslt.html">Editing&nbsp;XSLT/XPath</a>
+			page for more language-specific help on these languages.</p>
 			<h3>XML Elements</h3>
 			<h5>Change Element Tag Name</h5>
 		  As you edit the start tag name of an element, the corresponding end tag name is changed at the same time to
@@ -91,8 +90,7 @@
 				all matching tag names so you're in a multi-cursor edit mode. As you edit the tag name you selected all
 				matching tag names are edited also. When done, press <span class="shortcut">Escape to exit multi-cursor edit</span>.
 			</p>
-			<aside>Note: This is a standard Visual Studio Command so the <em>Find</em> is not XML-aware.</aside>
-			<h5>Intellisense</h5>
+			<h3>Intellisense</h3>
 			<p>Outside of the extension intellisense features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
 			from the intellisense suggestions list.</p>
 			<p>
@@ -108,8 +106,17 @@
 			<p>The formatter observes the normal rules for whitespace preservation in XML. So <code>xml:space</code> attributes affect
 			whether indentation is preserved. Whitespace in <code>CDATA</code> sections and 'significant' whitespace in content inferred
 				to be <em>mixed content</em> is also preserved.</p>
-			<p>XML attribute on newline and multi-line attribute value are indented by the XML formatting provider.</p>
-			
+			<p>XML attributes on newlines and multi-line attribute value are indented by the XML formatting provider to reflect the level of nesting.</p>
+			<h3>XML Element Selection</h3>
+			<p>The XSLT/XPath extension provides a set of commands for selecting an element. 
+				These commands can be invoked from the Command Palette (<span class="shortcut">⇧⌘L</span>).</p>
+			<ul>
+				<li><strong>Goto XPath</strong> - navigate to the element/attribute given by the XPath </li>
+				<li><strong>Select current element</strong> - extend selection to include containing element's start/end tags</li>
+				<li><strong>Select parent element</strong> - extend selection to include parent element's start/end tags</li>
+				<li><strong>Select following element</strong> - extend selection to include next sibling's start/end tags</li>
+				<li><strong>Select preceding element</strong> - extend selection to include previous sibling's start/end tags</li>
+			</ul>			
 		</div>
 		
 	</div>
