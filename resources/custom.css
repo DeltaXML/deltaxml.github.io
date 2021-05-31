@@ -151,7 +151,8 @@ ul {
   top: 0px;
   left: 300px;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   max-width: 700px;
   float: left;
   padding: 10px 10px;
