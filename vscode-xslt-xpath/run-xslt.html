@@ -160,6 +160,14 @@ npm install --save-dev xslt3</code>
 					<p>Run the newly configured XSLT transform by invoking <code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.</p>
 				</li>
 			</ol>
+			<h3>Variable References in Tasks</h3>
+			<p>Visual Studio Code supports variable substitutions for Task configuration files.
+				Variable substitution uses the <code>${variableName}</code> syntax. You may have
+				noticed that the boiler plate XSLT Task uses <code>${file}</code> and <code>${workspaceFolder}</code>
+				variable references.
+			</p>
+			<p>A full list of variable references is given in Visual Studio Code's
+				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
 			<h3>Configuring more tasks</h3>
 			<p>To create more tasks, just invoke <code>Tasks: Run Build Task</code> from the Command Palette 
 				and choose the task type you need. Provided you've changed the <code>label</code> property from the template

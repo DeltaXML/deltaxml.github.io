@@ -5,18 +5,30 @@
 		<div class="two-thirds column">
 			<p>With <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">DeltaXML's XSLT/XPath extension</a>
 				, Visual Studio Code is now a fully featured
-			XSLT 3.0 editor, standalone XPath 3.1 files are also fully supported. Visual Studio's rich ecosystem is now available to XSLT and XPath developers.</p>
+			XSLT 3.0 editor. Standalone XPath 3.1 files are also fully supported. Visual Studio Code's rich ecosystem
+				is now available to XSLT and XPath developers.</p>
 			
-			<p>This documentation here focuses on XSLT and XPath language features. More general XML features are
-				covered on the <a href="editing.html">Editing XML</a> page.
-				Fuller but language-neutral descriptions of the features covered here can be found in Microsoft's 
-				<a href="https://code.visualstudio.com/docs/editor/codebasics"> Visual Studio Code User Guide.</a></p>
+				<p>Comprehensive, but language-neutral, descriptions of Visual Studio Code can be found in Microsoft's 
+				<a href="https://code.visualstudio.com/docs/editor/codebasics"> Visual Studio Code User Guide. Links to key sections are below:</a></p>
+			<ul>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_keyboard-shortcuts">Keyboard shortcuts</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_multiple-selections-multicursor">Multiple selections (multi-cursor)</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_column-box-selection">Column (box) selection</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save">Save / Auto Save</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_hot-exit">Hot Exit</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_find-and-replace">Find and Replace</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_search-across-files">Search across files</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_file-encoding-support">File encoding support</a></li>
+				<li><a href="https://code.visualstudio.com/docs/editor/emmet">Emmet (snippet abbreviations)</a></li>
+			</ul>
+			<p>The documentation here focuses on XSLT and XPath language features. More general XML features are
+				covered on the <a href="editing.html">Editing XML</a> page.</p>
 			<h3>Syntax Highlighting</h3>
-			<p>For improved performance and precision, this extension avoids the default 
+			<p>For improved performance and precision, this extension eschews the default 
 				but <a href="https://github.com/microsoft/vscode/issues/77140">problematic TM Grammar</a>
-				and instead exculisvely uses Visual Studio Code's releatively new 
-				<a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> 
-				feature. For external <a href="https://code.visualstudio.com/docs/getstarted/themes">color themes</a> you eed to explicitly enable Semantic Highlighting. See
+				and instead uses Visual Studio Code's
+				<a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> introduced in 2020.
+				feature. For external <a href="https://code.visualstudio.com/docs/getstarted/themes">color themes</a> you should explicitly enable Semantic Highlighting. See
 				the <a href="settings.html">Settings</a> page for more information.
 			</p>
 			<p>The extension provides syntax highlighting for XSLT instructions, XML Literal Result Elements, XML attributes, XML character references, CDATA sections 
@@ -27,8 +39,8 @@
 		<p>Two commands are provided for formatting XML, XSLT or XPath expressions:</p>
 		<ul>
 			<li><strong>Format Document</strong> <span class="shortcut">(⇧⌥F)</span> - Format the entire active file.</li>
-			<li><strong>Format Selection</strong> <span class="shortcut">(⇧⌥F)</span> - Format the selected content.</li>
-			<li><strong>Format on Save</strong> <span class="shortcut">(⇧⌥F)</span> - Optionally specify to format only modifications.</li>
+			<li><strong>Format Selection</strong> <span class="shortcut">(⌘K ⌘F)</span> - Format the selected content.</li>
+			<li><strong>Format on Save</strong> - Optionally specify to format only modifications.</li>
 		</ul>
 		<p>As well as explicitly invoking commands, formatting can be triggered as you type, 
 			when you save a file, or when you paste content from the clipboard. The following settings control this:</p>
@@ -47,7 +59,8 @@
 		<code class="block"><![CDATA[<?region modeA?>
 ...
 <?endregion modeA?>]]></code>
-		<p>The Command Palette includes an extensive set of commands for code folding</p>
+		<p>For more detail and a full list of Folding-related actions see the
+			<a href="https://code.visualstudio.com/docs/editor/codebasics#_folding">Folding</a> section in Visual Studio Code's User Guide.</p>
 		<h3>Intellisense (Auto Complete)</h3>
 		<p>Intellisense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
@@ -70,6 +83,40 @@
 			You can define your own snippets in Visual Studio Code in a declarative way, without writing an extension. See the Visual Studio Code
 			documentation:
 			<a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets">Create your own snippets</a>
+		</p>
+		<h3>Bracket Matching</h3>
+		<p>Matching brackets in XPath expressions are highlighted when the cursor is near one of them. You can jump to the matching
+		bracket with <span class="shortcut">⇧⌘\</span></p>
+		<h3>Code Checking</h3>
+		<aside>Note: Code Checking uses a Symbol Provider, to ensure checks are performed you should keep the
+			<a href="https://code.visualstudio.com/Docs/editor/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
+		<p>
+			The XSLT/XPath extension performs a comprehensive set of checks on your code as you type. Any syntax warning or error problems are highlighted with a squiggly
+			underline for the token in question. Reference checks attempt to resolve symbol names through all imported/include stylesheets and packages. 
+			Here is a summary of the key checks:
+		</p>
+		<aside>XSLT/XPath editors that rely only on a language compiler to report errors can 
+			suffer from a significant delay while you're typing. Depending on the compiler, they are not always able to report problem
+			locations with the same precision. It is probable also that compiler-dependent errors information only includes the first problem encountered.</aside>
+		<ol>
+			<li>XML Syntax</li>
+			<li>XSLT/Xpath Variable name references</li>
+			<li>XSLT/XPath Parameter name references</li>
+			<li><strong>All</strong> other symbol name refererences</li>
+			<li>Function name and arity (number of params)</li>
+			<li><code>xsl:with-param</code> names</li>
+			<li>File locations in <code>xsl:import xsl:include xsl:use-package</code></li>
+			<li>Order of operators/operands in XPath</li>
+			<li>Matching of brackets in XPath</li>
+			<li>XSLT instructions and their attributes</li>
+			<li>Duplicate global symbol names</li>
+			<li>Attribute Value Template Syntax</li>
+			<li>Text Value Template Syntax</li>			
+		</ol>
+    <p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
+		When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT procesor 
+		(shown in the Task tab of the Terminal View) so that the problem token is highlighted,
+		and the error message is shown in the Problems View.	
 		</p>
 	</div>	
 </html>
