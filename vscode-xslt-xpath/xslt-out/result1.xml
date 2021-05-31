@@ -149,8 +149,8 @@
 				
 				
 
-				Run XSLT
-				XSLT transforms are run using Tasks.
+				Run XSLT - Quick Start
+				XSLT transforms are run using Visual Studio Code Tasks.
 					Before configuring an XSLT task you should ensure that you open a
 					Workspace folder (⌘O) from Visual Studio Code.
 					The configuration is saved in a tasks.json file in this workspace folder.
@@ -162,7 +162,7 @@
 					task, these properties can be changed or other properties added. Auto-completion and hints are provided to
 					assist in the task configuration. Next time you press ⇧⌘B your task will be run.
 				
-
+        Run XSLT - Details
 				XSLT Tasks are explained in full in the Running XSLT section. More general
 					information can be found in the Visual Studio Code Tasks
 					documentation.
