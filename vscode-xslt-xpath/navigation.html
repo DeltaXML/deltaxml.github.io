@@ -67,8 +67,31 @@
 		<div class="main"><h2 class="pageTitle">Code Navigation</h2>
 		
 		<div class="two-thirds column">
-			<p>Intro</p>
-			<h3>Heading</h3>
+			<p>Visual Studio Code includes a compelling set of features for code navigation, 
+				the language-neutral details are outlined here <a href="https://code.visualstudio.com/docs/editor/editingevolved">here</a>.</p>
+			<p>This page outlines code navigation from an XSLT and XPath development perspective.</p>
+			<h3>File Navigation</h3>
+			<p>
+				While the Explorer View is used for workspace browsing, pressing <span class="shortcut">⌘P</span>, for the <strong>Quick Open</strong>
+				command, provides a quick-pick list of available files that is filtered/highlighted as you type.
+			</p>
+			<p>File tabs are arranged in one or more Editor Groups. Editor Groups are arranged either adjacent or above/below other Editor groups.
+			The same file may be open in more than one Editor Group. There are settings to control whether file tabs are scrollable or wrapped
+				within an Editor Group.</p>
+			<p>Hold <span class="shortcut">Ctrl</span> and press <span class="shortcut">Tab</span> for a list of files in an Editor Group. Keep pressing
+			<span class="shortcut">Tab</span> until you reach the file you want and then release <span class="shortcut">Ctrl</span> to open it.</p>
+			<h5>Previous/Next Location</h5>
+			<p>Many actions can be used to navigate you to a new location. Press <span class="shortcut">⌃-</span> for <strong>Previous Location</strong> and <span class="shortcut">⌃⇧-</span> for
+			<strong>Next Location</strong>. Locations may be in the same file or different files.</p>
+			<h3>XSLT/XML BreadCrumbs</h3>
+			<p>
+				The BreadCrumb View, shown at the top of the editor, shows the current element or attribute location
+				within an XML or XSLT file with respect to ancestor elements. In XSLT Breadcrumbs, an identifier is often shown as well as the element name.
+				This may be for example the <code>name</code> of an <code>xsl:variable</code> or the <code>mode</code> of an <code>xsl:template</code>.
+				The symbol names are the same as those shown in the Outline view.
+			</p>
+			<aside>Note: You can toggle the BreadCrumbs view on/off but if the BreadCrumbs view is disabled this will also disable XML, XSLT or XPath Warnings and Errors
+				as the Code Checker depends on the symbol name structure.</aside>
 		</div>
 		
 	</div>
