@@ -56,7 +56,7 @@
 			
 				
 					This is a guide to coding XSLT or XPath in Visual Studio Code with DeltaXML's language
-					extension. These pages complement the extensive Visual Studio Code documentation which summarises this application as follows:
+					extension. These pages are designed to complement the extensive Visual Studio Code documentation which summarises this application as follows:
 				
 				
 					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is
@@ -67,13 +67,17 @@
 				
 					
 				
-				Getting Started
+				The User Interface
 				
 					Visual Studio Code's user interface
-					has a different look and feel to that of legacy XSLT editors. To reduce clutter, there
-					are no toolbars with scores of buttons, there is less emphasis also on the application menu bar. The sections
-					below
-					introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
+					has a different look and feel to that of legacy XSLT editors. The Command Palette, along with keybindings to
+					most common commands play a signficant role in provding a clearer environment to work in. User interface clutter is significantly
+					reduced by eschewing previous designs which depended on a set of toolbars, each with an abundance of buttons.
+
+				The application menu barand associated dropdown menus usefully group the more essential actions for managing your code.
+				The View menu is particularly useful as it logically sets out the large set of view-configuration commands.
+				
+			  The sections below introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
 				
 				The Command Palette
 				A principal part of Visual Studio Code's user interface is the Command

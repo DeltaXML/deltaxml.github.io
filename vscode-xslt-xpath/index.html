@@ -70,7 +70,7 @@
 			<div class="two-thirds column">
 				<p>
 					This is a guide to coding XSLT or XPath in Visual Studio Code with DeltaXML's language
-					extension. These pages complement the extensive Visual Studio Code <a
+					extension. These pages are designed to complement the extensive Visual Studio Code <a
 						href="https://code.visualstudio.com/docs">documentation</a> which summarises this application as follows:
 				</p>
 				<blockquote>
@@ -82,13 +82,17 @@
 				<p>
 					<img src="resources/vscode-xslt.png" class="scale-with-grid" />
 				</p>
-				<h3>Getting Started</h3>
+				<h3>The User Interface</h3>
 				<p>
 					Visual Studio Code's <a href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a>
-					has a different look and feel to that of legacy XSLT editors. To reduce clutter, there
-					are no toolbars with scores of buttons, there is less emphasis also on the application menu bar. The sections
-					below
-					introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
+					has a different look and feel to that of legacy XSLT editors. The Command Palette, along with keybindings to
+					most common commands play a signficant role in provding a clearer environment to work in. User interface clutter is significantly
+					reduced by eschewing previous designs which depended on a set of toolbars, each with an abundance of buttons.</p>
+
+				<p>The application <strong>menu bar</strong>and associated dropdown menus usefully group the more essential actions for managing your code.
+				The <strong>View</strong> menu is particularly useful as it logically sets out the large set of view-configuration commands.
+				</p>
+			  <p>The sections below introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
 				</p>
 				<h3>The Command Palette</h3>
 				<p>A principal part of Visual Studio Code's <a
@@ -180,7 +184,8 @@
 					select either the <code>Saxon</code> or <code>Saxon-JS</code> task.</p>
 				<p>A task will be added to the <code>tasks.json</code> task with default properties. To further configure the
 					task, these properties can be changed or other properties added. Auto-completion and hints are provided to
-					assist in the task configuration. Next time you press <span class="shortcut">⇧⌘B</span> your task will be run.
+					assist in the task configuration. Next time you press <span class="shortcut">⇧⌘B</span> your task will be run
+					in a <strong>Task</strong> tab in the Terminal window (toggled with <span class="shortcut">⌘J</span>).
 				</p>
         <h3>Run XSLT - Details</h3>
 				<p>XSLT Tasks are explained in full in the <a href="run-xslt.html">Running XSLT</a> section. More general
