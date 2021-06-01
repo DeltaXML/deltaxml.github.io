@@ -4,8 +4,10 @@
 		
 		<div class="two-thirds column">
 			<p>Visual Studio Code's Tasks include custom task types for configuring and running Saxon (Java)
-				or Saxon-JS (JavaScript) XSLT transforms. The Saxon XSLT processor is called via its command-line interface, so task
-				configurations effectively control command-line arguments. An attempt is made to parse any error messages
+				or Saxon-JS (JavaScript) XSLT transforms. The Saxon XSLT processor is called via its command-line interface
+				from the <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>
+				in Visual Studio code.
+				Task configurations effectively control command-line arguments for the XSLT Processor. An attempt is made to parse any error messages
 				returned from Saxon, so that the position of any Saxon-reported errors in the XSLT can be highlighted.
 			</p>
 			
@@ -48,7 +50,8 @@
 					<p>If NodeJS is not already installed, it can be downloaded and installed from <a href="https://nodejs.org/en/download/">here</a></p>
 				</li>
 				<li>
-					<p>Initialize <a href="https://docs.npmjs.com/about-npm">NPM</a> in the current folder and then install the Saxon-JS package (xslt3) by running the following commands in the Visual Studio Code terminal:
+					<p>Initialize <a href="https://docs.npmjs.com/about-npm">NPM</a> 
+						in the current folder and then install the Saxon-JS package (xslt3) by running the following commands in the Visual Studio Code terminal (<span class="shortcut">⌘J</span>):
 						<code class="block">npm init -y
 npm install --save-dev xslt3</code>	
 					</p>
@@ -115,11 +118,13 @@ npm install --save-dev xslt3</code>
 				covers this concept in more detail.				
 			</p>
 			<h3>The Visual Studio Code terminal</h3>
-			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">integrated terminal</a>. 
+			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>,
+				the Pane hosting the Terminal view is toggle with <span class="shortcut">⌘J</span>. 
 				The tab label reflects the Task configuration <code>label</code> property. 
 				When a Saxon XSLT task is run, <code>xsl:message</code> output and any Saxon errors will be shown in the terminal window.
 			</p>
-			
+			<img src="resources/tasks/vscode-terminal.png" class="scale-with-grid" />
+
 		</div>
 		
 	</div>	

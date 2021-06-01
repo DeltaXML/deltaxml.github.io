@@ -164,9 +164,10 @@
 					select either the Saxon or Saxon-JS task.
 				A task will be added to the tasks.json task with default properties. To further configure the
 					task, these properties can be changed or other properties added. Auto-completion and hints are provided to
-					assist in the task configuration. Next time you press ⇧⌘B your task will be run.
+					assist in the task configuration. Next time you press ⇧⌘B your task will be run
+					in a Task tab in the Terminal window (toggled with ⌘J).
 				
-        Run XSLT - Details
+        More on running XSLT
 				XSLT Tasks are explained in full in the Running XSLT section. More general
 					information can be found in the Visual Studio Code Tasks
 					documentation.
