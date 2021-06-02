@@ -92,13 +92,21 @@
 			</p>
 			<h3>Intellisense</h3>
 			<p>Outside of the extension intellisense features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
-			from the intellisense suggestions list.</p>
+			from the intellisense suggestions list:</p>
+			<img src="resources/suggestions.png" class="scale-with-grid">
 			<p>
 				With the cursor in the element start tag where you wish to add the attribute, press <span class="shortcut">⌃Space</span>
 				and select <code>attribute</code> to insert the code snippet:
 			</p>
 			<code class="block"><bold>name</bold>="<bold>value</bold>"</code>
 			<p>Edit the <code>name</code> and then press <span class="shortcut">Tab</span> to edit the <code>value</code>.</p>
+			<h3>Well-Formed XML Checks</h3>
+			<img src="resources/problems.png" class="scale-with-grid">
+			<p>As you edit an XML file, the syntax is checked for any well-formedness errors. Any problems tokens are highlighted with
+				a squiggly underline in the editor. To see a description of the problem, hover over a highlighted token. To help navigate
+			between problems, the Problems View (press <span class="shortcut">⇧⌘M</span> to toggle) shows a list of XML syntax
+			problems. Problems are also highlighted in the Outline View. Selecting a Problem View list item, or Outline View node will
+				navigate you to the corresponding token in the XML editor.</p>	
 			<h3 id="xmlformatting">XML Formatting</h3>
 			<p>When you have an XML file open, normal XML formatting features are available. With typical hand-edited XML, it is
 			only indentation that is correct by the formatting. However, if no newline characters are found at the start of the XML file,
