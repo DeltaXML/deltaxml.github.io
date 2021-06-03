@@ -87,7 +87,7 @@
 			<p>The documentation here focuses on XSLT and XPath language features. More general XML features are
 				covered on the <a href="editing.html">Editing XML</a> page. 
 				Help on navigating code in the editor is provided in the <a href="navigation.html">Code Navigation</a> page.</p>
-			<h3>Syntax Highlighting</h3>
+			<h3 id="highlighting">Syntax Highlighting</h3>
 			<em>Eva Dark Theme</em>
 			<img src="resources/dark-eva.png" class="scale-with-grid">			
 			<p>For improved performance and precision, this extension eschews the default 
@@ -103,7 +103,7 @@
 				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
 				Text Value Templates are syntax highlighted also.</p>
 		</div>
-		<h3>Formatting</h3>
+		<h3 id="formatting">Formatting</h3>
 		<p>Two commands are provided for formatting XML, XSLT or XPath expressions:</p>
 		<ul>
 			<li><strong>Format Document</strong> <span class="shortcut">(⇧⌥F)</span> - Format the entire active file.</li>
@@ -132,7 +132,7 @@
 &lt;?endregion modeA?&gt;</code>
 		<p>For more detail and a full list of Folding-related actions see the
 			<a href="https://code.visualstudio.com/docs/editor/codebasics#_folding">Folding</a> section in Visual Studio Code's User Guide.</p>
-		<h3>Intellisense (Auto Complete)</h3>
+		<h3 id="intellisense">Intellisense (Auto Complete)</h3>
 		<p>Intellisense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
 			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
@@ -158,13 +158,13 @@
 		<h3>Bracket Matching</h3>
 		<p>Matching brackets in XPath expressions are highlighted when the cursor is near one of them. You can jump to the matching
 		bracket with <span class="shortcut">⇧⌘\</span></p>
-		<h3>Symbol Renaming</h3>
+		<h3 id="renaming">Symbol Renaming</h3>
 		<p>
 			The XSLT/XPath extension does not yet provide explicit language support for Visual Studio Code's Symbol Renaming feature. As a substitute, however,
 			the multi-select <span class="shortcut">⇧⌘L</span> feature works reasonably well. There will however be problems if the symbol name (or substring)
 			occurs elsewhere in the file - not related to the symbol.
 		</p>
-		<h3>Code Checking</h3>
+		<h3 id="checking">Code Checking</h3>
 		<aside>Note: Code Checking uses a Symbol Provider, to ensure checks are performed you should keep the
 			<a href="https://code.visualstudio.com/Docs/editor/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
 		<p>
@@ -202,8 +202,10 @@
 			suffer from a significant delay while you're typing. Depending on the compiler, they are not always able to report problem
 			locations with the same precision. It is probable also that compiler-dependent errors information only includes the first problem encountered.</aside>
 		<h3>Including external files</h3>
-		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
+		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code>, <code>xsl:use-package</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
 			in the href, press <span class="shortcut">⌘+click</span> and then, in the 'Unable to Open...' dialog press the <strong>Create File</strong> button.</p>
+		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the URI to a file path as the User or WorkSpace Setting:
+		<strong>XSLT.resources.xsltPackage</strong></aside>
 	</div>
 	</div>
 </body>

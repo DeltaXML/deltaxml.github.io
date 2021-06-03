@@ -140,15 +140,15 @@
 				
 				Language Specific Features
 				XSLT and XPath specific editing features are described in the Editing
-						XSLT/XPath section
+						XSLT/XPath page
 					of the documentation that your are reading now. More general XML editing features are described in the Editing XML section.
-				The features described in the sections include:
+				The features described at Editing XSLT/XPath include:
 				
 				
-					Auto Completion
+					IntelliSense (Auto Complete)
 					Syntax Highlighting
 					Code Formatting
-					Code Navigation
+					Symbol Renaming
 					Code Checking
 				
 				
