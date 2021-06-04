@@ -25,8 +25,10 @@
 				covered on the <a href="editing.html">Editing XML</a> page. 
 				Help on navigating code in the editor is provided in the <a href="navigation.html">Code Navigation</a> page.</p>
 			<h3 id="highlighting">Syntax Highlighting</h3>
-			<em>Eva Dark Theme</em>
-			<img src="resources/dark-eva.png" class="scale-with-grid" />			
+
+			<p class="caption"><em>Eva Dark Theme</em></p>
+			<img src="resources/dark-eva.png" class="scale-with-grid"/>		
+			
 			<p>For improved performance and precision, this extension eschews the default 
 				but <a href="https://github.com/microsoft/vscode/issues/77140">problematic TM Grammar</a>
 				and instead uses Visual Studio Code's
@@ -34,8 +36,10 @@
 				feature. For external <a href="https://code.visualstudio.com/docs/getstarted/themes">color themes</a> you should explicitly enable Semantic Highlighting. See
 				the <a href="settings.html">Settings</a> page for more information.
 			</p>
-			<em>Github Light Theme</em>
+
+			<p class="caption"><em>Github Light Theme</em></p>		
 			<img src="resources/light-github.png" class="scale-with-grid" style="border-style: solid; border-width: 1px"/>
+
 			<p>The extension provides syntax highlighting for XSLT instructions, XML Literal Result Elements, XML attributes, XML character references, CDATA sections 
 				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
 				Text Value Templates are syntax highlighted also.</p>

@@ -37,6 +37,12 @@ code {
   font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+p.caption {
+  padding: 0 0 0 0; 
+  margin:0 0 0 0;
+  font-style: italic;
+}
+
 code.block {
   font-size: small;
   display: block;
