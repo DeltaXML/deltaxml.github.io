@@ -14,7 +14,10 @@
   <xsl:include href="test2.xsl"/>
   
   <xsl:template match="div" mode="#all">
-    <dajjjta 
+    <new>
+      <name class="class"></name>
+    </new>
+
       name="
       abc
       def

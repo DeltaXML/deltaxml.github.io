@@ -135,14 +135,23 @@
       <p>To ensure XSLT and XPath is syntax highlighted in any <a href="https://code.visualstudio.com/docs/getstarted/themes">Color Theme</a>,
         you should explicity enable Semantic Highlighting with the setting:      
       </p>
-      <code class="class">
+      <code class="block">
         "editor.semanticHighlighting.enabled": true
       </code>
-      <p></p>
       <h5>Word Separators</h5>
       <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
       listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word
       separators as these characters are valid within a QName like an arrtibute name or a variable name.</p>
+      <h5>Emmet Snippets</h5>
+      <p>
+        <a href="https://code.visualstudio.com/docs/editor/emmet">Emmet Snippets</a> provide a convenient shorthand for inserting a
+        number of literal result elements and attributes into your XSLT in one go. To enable Emmet snippets for XSLT,
+        add the following setting:
+      </p>
+      <code class="block">
+        "emmet.includeLanguages": {
+          "xslt": "xml"
+        },      </code>
     </div>
     
   </div>

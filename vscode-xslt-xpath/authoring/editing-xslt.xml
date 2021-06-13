@@ -5,10 +5,10 @@
 		<div class="two-thirds column">
 			<p>With <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">DeltaXML's XSLT/XPath extension</a>
 				, Visual Studio Code is now a fully featured
-			XSLT 3.0 editor. Standalone XPath 3.1 files are also fully supported. Visual Studio Code's rich ecosystem
+				XSLT 3.0 editor. Standalone XPath 3.1 files are also fully supported. Visual Studio Code's rich ecosystem
 				is now available to XSLT and XPath developers.</p>
 			
-				<p>Comprehensive, but language-neutral, descriptions of Visual Studio Code can be found in Microsoft's 
+			<p>Comprehensive, but language-neutral, descriptions of Visual Studio Code can be found in Microsoft's 
 				<a href="https://code.visualstudio.com/docs/editor/codebasics"> Visual Studio Code User Guide. Links to key sections are below:</a></p>
 			<ul>
 				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_keyboard-shortcuts">Keyboard shortcuts</a></li>
@@ -25,7 +25,7 @@
 				covered on the <a href="editing.html">Editing XML</a> page. 
 				Help on navigating code in the editor is provided in the <a href="navigation.html">Code Navigation</a> page.</p>
 			<h3 id="highlighting">Syntax Highlighting</h3>
-
+			
 			<p class="caption"><em>Eva Dark Theme</em></p>
 			<img src="resources/dark-eva.png" class="scale-with-grid"/>		
 			
@@ -36,10 +36,10 @@
 				feature. For external <a href="https://code.visualstudio.com/docs/getstarted/themes">color themes</a> you should explicitly enable Semantic Highlighting. See
 				the <a href="settings.html">Settings</a> page for more information.
 			</p>
-
+			
 			<p class="caption"><em>Github Light Theme</em></p>		
 			<img src="resources/light-github.png" class="scale-with-grid" style="border-style: solid; border-width: 1px"/>
-
+			
 			<p>The extension provides syntax highlighting for XSLT instructions, XML Literal Result Elements, XML attributes, XML character references, CDATA sections 
 				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
 				Text Value Templates are syntax highlighted also.</p>
@@ -60,7 +60,7 @@
 			<li><code>editor.editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
 		</ul>
 		<p>The XPath formatter indents code blocks within <code>{}</code>, <code>[]</code> and <code>()</code> bracket-pairs.
-		Indentation is also adjusted for <code>if/else</code> blocks and range-variable blocks.	
+			Indentation is also adjusted for <code>if/else</code> blocks and range-variable blocks.	
 		</p>
 		<h3>Folding</h3>
 		<p>
@@ -77,7 +77,7 @@
 		<p>Intellisense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
 			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
-		included/imported files are included in the suggestions list.</p>
+			included/imported files are included in the suggestions list.</p>
 		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
 			fit the context of the curstor location. 
 			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">Code Snippet</a> is inserted
@@ -98,12 +98,15 @@
 		</p>
 		<h3>Bracket Matching</h3>
 		<p>Matching brackets in XPath expressions are highlighted when the cursor is near one of them. You can jump to the matching
-		bracket with <span class="shortcut">⇧⌘\</span></p>
+			bracket with <span class="shortcut">⇧⌘\</span></p>
+		
+
 		<h3 id="renaming">Symbol Renaming</h3>
+
 		<p>
-			The XSLT/XPath extension does not yet provide explicit language support for Visual Studio Code's Symbol Renaming feature. As a substitute, however,
-			the multi-select <span class="shortcut">⇧⌘L</span> feature works reasonably well. There will however be problems if the symbol name (or substring)
-			occurs elsewhere in the file - not related to the symbol.
+			There's currently no explicit language support for Visual Studio Code's Symbol Renaming feature. A good substitute, however,
+			is the multi-select feature for the selected name <span class="shortcut">⇧⌘L</span> . All other occurrences of the selected 
+			name are editing simultaneously. Pressing <span class="shortcut">Escape</span> quits the multi-select mode.
 		</p>
 		<h3 id="checking">Code Checking</h3>
 		<aside>Note: Code Checking uses a Symbol Provider, to ensure checks are performed you should keep the
@@ -128,24 +131,41 @@
 			<li>Attribute Value Template Syntax</li>
 			<li>Text Value Template Syntax</li>			
 		</ol>
+		<h5>'Non-Standalone' Stylesheets</h5>
+		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
+			that declares the required imports. If no knowledge of the parent module is available, spurious problems
+			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
+		</p>
+		<p>A search is made to find if the active XSLT stylesheet has been declared as an import by another stylesheet opened recently
+			in Visual Studio Code. If such a 'parent' stylesheet is found it is imported along with any other imports. Functions and,
+			variables etc. used in the active stylehseet can therefore be resolved.
+		</p>
 		<h5>Unused Variables</h5>
 		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
 			imported stylesheets thay may reference the same variable.
 		</p>
-   <h5>Compile-time and Run-time problems</h5>
-    <p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
-		When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT procesor 
-		(shown in the Task tab of the Terminal View) so that the problem token is highlighted,
-		and the error message is shown in the Problems View.	
+		<h5>Compile-time and Run-time problems</h5>
+		<p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
+			When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT procesor 
+			(shown in the Task tab of the Terminal View) so that the problem token is highlighted,
+			and the error message is shown in the Problems View.	
 		</p>
-		<aside>XSLT/XPath editors that rely only on a language compiler to report errors can 
-			suffer from a significant delay while you're typing. Depending on the compiler, they are not always able to report problem
-			locations with the same precision. It is probable also that compiler-dependent errors information only includes the first problem encountered.</aside>
-		<h3>Including external files</h3>
+
+		<aside>
+			<p>Advantages of using the native code-checker to supplement compile-time error detection:</p>
+			<ul>
+				<li>Improved response times (lower CPU usage) as you type</li>
+				<li>Improved precision on error location</li>
+				<li>Improved potential to report multiple errors</li>
+				<li>Provides warnings on unused variable references etc.</li>
+			</ul>		
+		</aside>
+
 		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code>, <code>xsl:use-package</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
 			in the href, press <span class="shortcut">⌘+click</span> and then, in the 'Unable to Open...' dialog press the <strong>Create File</strong> button.</p>
+		
 		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the URI to a file path as the User or WorkSpace Setting:
-		<strong>XSLT.resources.xsltPackage</strong></aside>
+			<strong>XSLT.resources.xsltPackage</strong></aside>
 	</div>
 </html>
