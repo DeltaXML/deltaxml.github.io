@@ -139,8 +139,9 @@
 			that declares the required imports. If no knowledge of the parent module is available, spurious problems
 			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
 		</p>
-		<p>A search is made to find if the active XSLT stylesheet has been declared as an import by another stylesheet opened recently
-			in Visual Studio Code. If such a 'parent' stylesheet is found it is imported along with any other imports. Functions and,
+		<p>The <strong>Inferred Imports</strong> feature prevents spurious problems being highlighted in the editor.
+			With this featue, a search is made to find if the active XSLT stylesheet has been declared as an import by another stylesheet opened recently
+			in Visual Studio Code. If such a 'parent' stylesheet is found (the most recently opened example is used) it is imported along with any other imports. Functions and,
 			variables etc. used in the active stylehseet can therefore be resolved.
 		</p>
 		<h5>Unused Variables</h5>
