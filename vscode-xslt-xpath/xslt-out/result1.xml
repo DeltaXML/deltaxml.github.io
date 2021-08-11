@@ -55,8 +55,9 @@
 			Overview
 			
 				
-					This is a guide to coding XSLT or XPath in Visual Studio Code with DeltaXML's language
-					extension. These pages are designed to complement the extensive Visual Studio Code documentation which summarises this application as follows:
+					This is a guide to coding XSLT or XPath in Visual Studio Code using the
+					 language and notebook extensions 
+					 maintained by DeltaXML. These pages are designed to complement the extensive Visual Studio Code documentation:
 				
 				
 					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is

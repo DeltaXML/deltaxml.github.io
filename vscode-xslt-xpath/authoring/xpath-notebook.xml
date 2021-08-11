@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+		
+		<div class="two-thirds column">
+			<p>XPath Notebooks add XPath 3.1's extensive JSON and XML analysis features to Visual Studio Code's Notebooks. 
+			Notebooks are used for data-analysis, code experimentation, tutorials or learning.</p>
+			
+			<p><img src="resources/xpath-notebook-small.png" class="scale-with-grid" /></p>
+			
+			<h3>Main Features</h3>
+			<ul>
+				<li>Context File (XML or JSON)</li>
+				<li>XML Namespace Context</li>
+				<li>Notebook XPath Variables</li>
+				<li>JSON output cell for XPath experimentation</li>
+				<li>Table output cell for data analysis</li>
+			</ul>
+
+		
+		</div>
+		
+	</div>	
+</html>
