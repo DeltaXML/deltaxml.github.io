@@ -13,11 +13,7 @@
 			<ul>
 				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_keyboard-shortcuts">Keyboard shortcuts</a></li>
 				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_multiple-selections-multicursor">Multiple selections (multi-cursor)</a></li>
-				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_column-box-selection">Column (box) selection</a></li>
-				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save">Save / Auto Save</a></li>
-				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_hot-exit">Hot Exit</a></li>
 				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_find-and-replace">Find and Replace</a></li>
-				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_search-across-files">Search across files</a></li>
 				<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_file-encoding-support">File encoding support</a></li>
 				<li><a href="https://code.visualstudio.com/docs/editor/emmet">Emmet (snippet abbreviations)</a></li>
 			</ul>
@@ -78,6 +74,13 @@
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
 			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
 			included/imported files are included in the suggestions list.</p>
+		<h5>Intellisense for XPath Locations</h5>
+		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
+			This is the last non-XSLT file opened in Visual Studio Code.</p>
+		<img src="resources/xpath-auto-complete.png" class="scale-with-grid" />
+		<p>XPath is evaluated as you type so node-names in the auto-completion list are filtered to be just
+		those that are possible given previous XPath steps such as axes and node-name tests.</p>
+		<h5>Triggering the auto-complete list</h5>
 		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
 			fit the context of the curstor location. 
 			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">Code Snippet</a> is inserted
