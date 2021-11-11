@@ -1,0 +1,14 @@
+{
+  "license": "MIT",
+  "amd": {},
+  "volo": {
+    "baseUrl": "www/lib"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.27.0"
+  },
+	"devDependencies": {
+		"ts-loader": "^9.2.5",
+		"typescript": "^4.4.2"
+	}
+}

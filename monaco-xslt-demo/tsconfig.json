@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"module": "amd",
+		"moduleResolution": "node",
+		"target": "es5",
+		"outDir": "./dist",
+		"lib": ["dom", "es2015", "es2015.collection", "es2015.promise"],
+		"types": [],
+		"baseUrl": "./node_modules",
+		"jsx": "preserve",
+		"typeRoots": ["node_modules/@types"],
+		"skipLibCheck": true,
+		"declaration": true 
+	},
+	"include": ["./src/**/*"],
+	"exclude": ["node_modules", "tools", "www"]
+}
