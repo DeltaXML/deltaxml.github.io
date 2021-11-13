@@ -45,6 +45,22 @@ define(["require", "exports", "monaco-editor", "./monacoXSLT", "./index.css"], f
         },
         releaseDocumentSemanticTokens: function (resultId) { }
     });
+    monaco.languages.registerDocumentFormattingEditProvider(_XSLT, {
+        provideDocumentFormattingEdits: function (model, options, token) {
+            return [];
+        }
+    });
+    monaco.languages.registerDocumentRangeFormattingEditProvider(_XSLT, {
+        provideDocumentRangeFormattingEdits: function (model, range, options, token) {
+            return [];
+        }
+    });
+    monaco.languages.registerOnTypeFormattingEditProvider(_XSLT, {
+        autoFormatTriggerCharacters: [],
+        provideOnTypeFormattingEdits: function (model, position, ch, options, token) {
+            return [];
+        }
+    });
     var mEditor = monaco.editor.create(document.body, {
         value: "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n\t\txmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n\t\texclude-result-prefixes=\"#all\"\n\t\texpand-text=\"yes\"\n\t\tversion=\"3.0\">\n\n<xsl:variable select=\"@*, /abc/def/node()\"/>\n</xsl:stylesheet>",
         language: _XSLT,

@@ -16,6 +16,7 @@ define(["require", "exports", "./xslLexer"], function (require, exports, xslLexe
         function SchemaQuery(schemaData) {
             this.soughtAttributes = [];
             this.emptyElements = [];
+            this.useIxsl = false;
             this.schema = schemaData;
             this.docType = schemaData.docType;
             switch (schemaData.docType) {
@@ -33,7 +34,8 @@ define(["require", "exports", "./xslLexer"], function (require, exports, xslLexe
         }
         SchemaQuery.prototype.getExpected = function (name, attributeName) {
             var result = new Expected();
-            if (this.schema.docType === xslLexer_1.DocumentTypes.XSLT && !name.startsWith('xsl:')) {
+            var isXsltName = name.startsWith('xsl:') || name.startsWith('ixsl');
+            if (this.schema.docType === xslLexer_1.DocumentTypes.XSLT && !isXsltName) {
                 var attGroup = this.schema.attributeGroups['xsl:literal-result-element-attributes'];
                 if (attGroup.attrs) {
                     this.mergeAttrArrays(result, Object.keys(attGroup.attrs));
@@ -49,7 +51,7 @@ define(["require", "exports", "./xslLexer"], function (require, exports, xslLexe
                 }
                 return result;
             }
-            if (this.schema.docType === xslLexer_1.DocumentTypes.SCH && !name.startsWith('xsl:')) {
+            if (this.schema.docType === xslLexer_1.DocumentTypes.SCH && !isXsltName) {
                 var attGroupName = this.schema.elements[name] ? this.schema.elements[name].attributeGroup : undefined;
                 if (attGroupName) {
                     var attGroup = this.schema.attributeGroups[attGroupName];
@@ -108,6 +110,9 @@ define(["require", "exports", "./xslLexer"], function (require, exports, xslLexe
                     isInstructionSg = false;
                     sgElement = this.schema.substitutionGroups.declaration.elements[name];
                 }
+                if (!sgElement) {
+                    sgElement = this.schema.substitutionGroups.ixslInstruction.elements[name];
+                }
                 if (sgElement) {
                     this.collectAttributeDetails(sgElement, result, attributeName);
                     this.lookupBaseType(sgElement, result, attributeName);
@@ -148,7 +153,6 @@ define(["require", "exports", "./xslLexer"], function (require, exports, xslLexe
                 ct.elementNames.forEach(function (name) {
                     var elementDefinition = _this.schema.elements[name];
                     var detail;
-                    ;
                     if (elementDefinition && elementDefinition.detail) {
                         detail = elementDefinition.detail;
                     }
@@ -255,6 +259,10 @@ define(["require", "exports", "./xslLexer"], function (require, exports, xslLexe
                     var subElements = Object.keys(_this.schema.substitutionGroups.instruction.elements);
                     newElements.push(['xsl:literal-result-element', '']);
                     subElements.forEach(function (se) { newElements.push([se, '']); });
+                    if (_this.useIxsl) {
+                        var subElements_1 = Object.keys(_this.schema.substitutionGroups.ixslInstruction.elements);
+                        subElements_1.forEach(function (se) { newElements.push([se, '']); });
+                    }
                 }
                 else if (item[0] === 'xsl:declaration' && _this.schema.substitutionGroups) {
                     var subElements = Object.keys(_this.schema.substitutionGroups.declaration.elements);

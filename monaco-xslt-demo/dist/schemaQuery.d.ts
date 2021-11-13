@@ -11,6 +11,7 @@ export declare class SchemaQuery {
     soughtAttributes: string[];
     emptyElements: string[];
     docType: DocumentTypes;
+    useIxsl: boolean;
     constructor(schemaData: SchemaData);
     getExpected(name: string, attributeName?: string): Expected;
     private addElementDetails;

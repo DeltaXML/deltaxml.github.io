@@ -14,6 +14,7 @@ export class SchemaQuery {
     public soughtAttributes: string[] = [];
     public emptyElements: string[] = [];
     public docType: DocumentTypes;
+    public useIxsl: boolean = false;
 
     constructor (schemaData: SchemaData) {
         this.schema = schemaData;
@@ -21,7 +22,7 @@ export class SchemaQuery {
         switch (schemaData.docType) {
             case DocumentTypes.XSLT:
                 this.soughtAttributes =  ['name', 'as', 'select', 'test', 'href'];
-                this.emptyElements = ['xsl:variable', 'xsl:value-of', 'xsl:param','xsl:sequence','xsl:attribute','xsl:output','xsl:apply-templates','xsl:with-param']
+                this.emptyElements = ['xsl:variable', 'xsl:value-of', 'xsl:param','xsl:sequence','xsl:attribute','xsl:output','xsl:apply-templates','xsl:with-param'];
                 break;
             case DocumentTypes.DCP:
                 this.soughtAttributes =  ['name', 'defaultValue', 'literalValue','version','id','description', 'path'];
@@ -35,7 +36,8 @@ export class SchemaQuery {
 
     public getExpected(name: string, attributeName?: string) {
         let result: Expected = new Expected();
-        if (this.schema.docType === DocumentTypes.XSLT && !name.startsWith('xsl:')) {
+        const isXsltName = name.startsWith('xsl:') || name.startsWith('ixsl');
+        if (this.schema.docType === DocumentTypes.XSLT && !isXsltName) {
             let attGroup = this.schema.attributeGroups['xsl:literal-result-element-attributes'];
             if (attGroup.attrs) {
                 this.mergeAttrArrays(result, Object.keys(attGroup.attrs));
@@ -51,7 +53,7 @@ export class SchemaQuery {
             }
             return result;
         }
-        if (this.schema.docType === DocumentTypes.SCH && !name.startsWith('xsl:')) {
+        if (this.schema.docType === DocumentTypes.SCH && !isXsltName) {
             let attGroupName = this.schema.elements[name]? this.schema.elements[name].attributeGroup : undefined;
             if (attGroupName) {
                 let attGroup = this.schema.attributeGroups[attGroupName];
@@ -110,6 +112,9 @@ export class SchemaQuery {
             if (!sgElement) {
                 isInstructionSg = false;
                 sgElement = <ComplexType>this.schema.substitutionGroups.declaration.elements[name];
+            } 
+            if (!sgElement) {
+                sgElement = <ComplexType>this.schema.substitutionGroups.ixslInstruction.elements[name];
             }
             if (sgElement) {
                 this.collectAttributeDetails(sgElement, result, attributeName);
@@ -147,7 +152,7 @@ export class SchemaQuery {
         if (ct.elementNames) {
             ct.elementNames.forEach((name) => {
                 let elementDefinition = this.schema.elements[name];
-                let detail: string | undefined;;
+                let detail: string | undefined;
                 if (elementDefinition && elementDefinition.detail) {
                     detail = elementDefinition.detail;
                 }
@@ -224,7 +229,7 @@ export class SchemaQuery {
     private lookupSimpleType(sgType: SimpleType, result: Expected) {
         if (sgType && sgType.enum) {
             sgType.enum.forEach((attrValue) => {
-                let detail = ''
+                let detail = '';
                 if (sgType.detail) {
                     let lookup = sgType.detail[attrValue];
                     detail = lookup? lookup: '';
@@ -243,7 +248,7 @@ export class SchemaQuery {
         source.forEach((item) => {
             if (target.indexOf(item) === -1) {
                 if (this.soughtAttributes.indexOf(item) > -1) {
-                    expected.foundAttributes.push(item)
+                    expected.foundAttributes.push(item);
                 }
                 target.push(item);
             }
@@ -258,10 +263,14 @@ export class SchemaQuery {
             if (item[0] === 'xsl:instruction' && this.schema.substitutionGroups) {
                 let subElements = Object.keys(this.schema.substitutionGroups.instruction.elements);
                 newElements.push(['xsl:literal-result-element', '']);
-                subElements.forEach((se) => {newElements.push([se, ''])});
+                subElements.forEach((se) => {newElements.push([se, '']);});
+                if (this.useIxsl) {
+                    let subElements = Object.keys(this.schema.substitutionGroups.ixslInstruction.elements);
+                    subElements.forEach((se) => {newElements.push([se, '']);});                   
+                }
             } else if (item[0] === 'xsl:declaration' && this.schema.substitutionGroups) {
                 let subElements = Object.keys(this.schema.substitutionGroups.declaration.elements);
-                subElements.forEach((se) => {newElements.push([se, ''])});
+                subElements.forEach((se) => {newElements.push([se, '']);});
             } else {
                 newElements.push(item);
             }
