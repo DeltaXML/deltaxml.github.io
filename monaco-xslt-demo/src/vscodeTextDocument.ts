@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
+import * as monaco from 'monaco-editor'
+import { MonacoToVSCode } from './monacoXSLT';
 
 export class VSCodePosition implements vscode.Position {
-	constructor (line: number, character: number) {
+	constructor(line: number, character: number) {
 		this.line = line;
 		this.character = character;
 	}
@@ -38,9 +40,14 @@ export class VSCodePosition implements vscode.Position {
 }
 
 export class VSCodeTextDocument implements vscode.TextDocument {
-	constructor() {
+	private model: monaco.editor.ITextModel;
 
+	constructor(model: monaco.editor.ITextModel) {
+		this.eol = model.getEOL() === '\n' ? vscode.EndOfLine.LF : vscode.EndOfLine.CRLF;
+		this.model = model;
+		this.lineCount = model.getLineCount();
 	}
+
 	uri: vscode.Uri;
 	fileName: string;
 	isUntitled: boolean;
@@ -53,11 +60,14 @@ export class VSCodeTextDocument implements vscode.TextDocument {
 	}
 	eol: vscode.EndOfLine;
 	lineCount: number;
-	lineAt(line: number): vscode.TextLine;
-	lineAt(position: vscode.Position): vscode.TextLine;
-	lineAt(position: any): vscode.TextLine {
-		throw new Error('Method not implemented.');
+	lineAt(line: any): vscode.TextLine {
+		if (typeof line === 'number') {
+			return new VSCodeTextLine(this.model, line);
+		} else {
+			throw new Error('Method not implemented.');
+		}
 	}
+
 	offsetAt(position: vscode.Position): number {
 		throw new Error('Method not implemented.');
 	}
@@ -65,7 +75,32 @@ export class VSCodeTextDocument implements vscode.TextDocument {
 		throw new Error('Method not implemented.');
 	}
 	getText(range?: vscode.Range): string {
-		throw new Error('Method not implemented.');
+		let result = '';
+		const lines = this.model.getLinesContent();
+		const startLine = range.start.line;
+		const endLine = range.end.line
+		if (range) {
+			if (startLine === endLine) {
+				result = this.model.getLineContent(startLine)
+				.substring(range.start.character, range.end.character);
+			} else {
+				const rangeLines: string[] = []
+				for (let index = startLine; index <= endLine; index++) {
+					const lineText = this.model.getLineContent(index);
+					if (index === startLine) {
+						rangeLines.push(lineText.substring(range.start.character));
+					} else if (index === endLine) {
+						rangeLines.push(lineText.substring(0, range.end.character));
+					} else {
+						rangeLines.push(lineText);
+					}
+				}
+				result = rangeLines.join(this.model.getEOL());
+			}
+		} else {
+			result = lines.join(this.model.getEOL());
+		}
+		return result;
 	}
 	getWordRangeAtPosition(position: vscode.Position, regex?: RegExp): vscode.Range {
 		throw new Error('Method not implemented.');
@@ -76,5 +111,29 @@ export class VSCodeTextDocument implements vscode.TextDocument {
 	validatePosition(position: vscode.Position): vscode.Position {
 		throw new Error('Method not implemented.');
 	}
+}
 
+export class VSCodeFormattingOptions implements vscode.FormattingOptions {
+	[key: string]: string | number | boolean;
+	tabSize: number;
+	insertSpaces: boolean;
+	constructor(options: monaco.languages.FormattingOptions) {
+		this.tabSize = options.tabSize;
+		this.insertSpaces = options.insertSpaces;
+	}
+}
+
+class VSCodeTextLine implements vscode.TextLine {
+	lineNumber: number;
+	text: string;
+	range: vscode.Range;
+	rangeIncludingLineBreak: vscode.Range;
+	firstNonWhitespaceCharacterIndex: number;
+	isEmptyOrWhitespace: boolean;
+
+	constructor(model: monaco.editor.ITextModel, line: number) {
+		this.lineNumber = line;
+		this.text = model.getLineContent(line);
+		this.firstNonWhitespaceCharacterIndex = this.text.search(/\S/);
+	}
 }
