@@ -3,7 +3,7 @@
 
 import * as monaco from 'monaco-editor';
 import './index.css';
-import { MonacoXSLT } from './monacoXSLT';
+import { MonacoXSLT, Themes } from './monacoXSLT';
 
 // @ts-ignore
 self.MonacoEnvironment = {
@@ -31,7 +31,7 @@ const themeColors: monaco.editor.IColors = {'mygreen': '#0000ff'};
 const themeData: monaco.editor.IStandaloneThemeData = {
     base: 'vs-dark',
     inherit: true,
-	rules: MonacoXSLT.vsDarkTokenColors,
+	rules: Themes.vsDarkTokenColors,
 	colors: themeColors
 }
 

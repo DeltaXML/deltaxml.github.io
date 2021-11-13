@@ -12,5 +12,7 @@ export declare class MonacoXSLT {
         data: Uint32Array;
         resultId: any;
     };
+}
+export declare class Themes {
     static vsDarkTokenColors: monaco.editor.ITokenThemeRule[];
 }

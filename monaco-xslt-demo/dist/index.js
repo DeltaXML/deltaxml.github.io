@@ -27,7 +27,7 @@ define(["require", "exports", "monaco-editor", "./monacoXSLT", "./index.css"], f
     var themeData = {
         base: 'vs-dark',
         inherit: true,
-        rules: monacoXSLT_1.MonacoXSLT.vsDarkTokenColors,
+        rules: monacoXSLT_1.Themes.vsDarkTokenColors,
         colors: themeColors
     };
     monaco.editor.defineTheme('xslDarkTheme', themeData);

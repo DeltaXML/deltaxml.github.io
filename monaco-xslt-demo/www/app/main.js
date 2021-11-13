@@ -10,7 +10,7 @@ require(['vs/editor/editor.main', 'dist/monacoXSLT', 'dist/xslThemeData'], funct
     const defaultXslDarkTheme = {
         base: 'vs-dark',
         inherit: true,
-        rules: xslPlugin.MonacoXSLT.vsDarkTokenColors
+        rules: xslPlugin.Themes.vsDarkTokenColors
     };
     monaco.editor.defineTheme(_XslDarkTheme, defaultXslDarkTheme);
 
@@ -22,6 +22,7 @@ require(['vs/editor/editor.main', 'dist/monacoXSLT', 'dist/xslThemeData'], funct
         provideDocumentSemanticTokens: function (model, lastResultId, token) {
             return mXSLT.provideDocumentSemanticTokens(model, lastResultId, token);
         },
+        // @ts-ignore
         releaseDocumentSemanticTokens: function (resultId) { }
     });
 
@@ -36,6 +37,7 @@ require(['vs/editor/editor.main', 'dist/monacoXSLT', 'dist/xslThemeData'], funct
 
 </xsl:stylesheet>`;
 
+    // @ts-ignore
     const editor = monaco.editor.create(document.getElementById('xslt-editor'), {
         value: xsltInit,
         language: _XSLT_Language_Id,
