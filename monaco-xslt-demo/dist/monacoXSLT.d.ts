@@ -16,3 +16,9 @@ export declare class MonacoXSLT {
 export declare class Themes {
     static vsDarkTokenColors: monaco.editor.ITokenThemeRule[];
 }
+export declare class XMLFormatter {
+    private lc;
+    private fc;
+    constructor(langId: string);
+    provideOnTypeFormattingEdits(model: monaco.editor.ITextModel, position: monaco.Position, ch: string, options: monaco.languages.FormattingOptions, token: monaco.CancellationToken): monaco.languages.ProviderResult<monaco.languages.TextEdit[]>;
+}

@@ -1,7 +1,5 @@
 import * as monaco from 'monaco-editor';
-import { TextEdit, Position, Range, CancellationToken } from 'vscode';
 import { XPathConfiguration, XSLTConfiguration } from './languageConfigurations';
-import { VSCodeFormattingOptions, VSCodeTextDocument } from './vscodeTextDocument';
 import { XMLDocumentFormattingProvider } from './xmlDocumentFormattingProvider';
 import { BaseToken } from './xpLexer';
 import { LanguageConfiguration, XslLexer } from './xslLexer';
@@ -91,44 +89,9 @@ export class XMLFormatter {
 		position: monaco.Position, ch: string, options: monaco.languages.FormattingOptions, token: monaco.CancellationToken):
 		monaco.languages.ProviderResult<monaco.languages.TextEdit[]> {
 
-		const vsDoc = new VSCodeTextDocument(model);
-		const vsPos = MonacoToVSCode.toPosition(position);
-		const vsOptions = new VSCodeFormattingOptions(options);
-		const vsToken = <CancellationToken>token;
-		const vsTextEdit = this.fc.provideOnTypeFormattingEdits(
-			vsDoc, vsPos, ch, vsOptions, vsToken
-		);
+		const mTextEdit = this.fc.provideOnTypeFormattingEdits(model, position, ch, options, token);
 
-		const mnTextEdit = vsTextEdit.map((value) => VScodeToMonaco.toTextEdit(value));
-		return mnTextEdit;
+		return mTextEdit;
 	}
-}
-
-export class VScodeToMonaco {
-	pos = new Position(0, 0);
-	te = TextEdit.insert(this.pos, 'text');
-	rng = new Range(this.pos, this.pos);
-
-	public static toRange(range: Range): monaco.IRange {
-		return {
-			startLineNumber: range.start.line,
-			startColumn: range.start.character,
-			endLineNumber: range.end.line,
-			endColumn: range.end.character
-		}
-	}
-
-	public static toTextEdit(textEdit: TextEdit): monaco.languages.TextEdit {
-		return {
-			range: VScodeToMonaco.toRange(textEdit.range),
-			text: textEdit.newText
-		}
-	};
-}
-
-export class MonacoToVSCode {
-	public static toPosition(pos: monaco.Position): Position {
-		return new Position(pos.lineNumber, pos.column)
-	} 
 }
 

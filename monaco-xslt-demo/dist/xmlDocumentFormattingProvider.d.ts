@@ -4,9 +4,10 @@
  *  Contributors:
  *  DeltaXML Ltd. - xmlDocumentFormattingProvider
  */
-import * as vscode from 'vscode';
 import { LanguageConfiguration } from './xslLexer';
-export declare class XMLDocumentFormattingProvider implements vscode.DocumentFormattingEditProvider, vscode.DocumentRangeFormattingEditProvider, vscode.OnTypeFormattingEditProvider {
+import { BaseToken } from './xpLexer';
+import * as monaco from 'monaco-editor';
+export declare class XMLDocumentFormattingProvider {
     replaceIndendation: boolean;
     minimiseXPathIndents: boolean;
     indentMixedContent: boolean;
@@ -21,9 +22,12 @@ export declare class XMLDocumentFormattingProvider implements vscode.DocumentFor
     private closeTagPos;
     constructor(xsltConfiguration: LanguageConfiguration);
     private trimLeft;
-    provideOnTypeFormattingEdits: (document: vscode.TextDocument, pos: vscode.Position, ch: string, options: vscode.FormattingOptions, token: vscode.CancellationToken) => vscode.TextEdit[];
-    provideDocumentFormattingEdits: (document: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken) => vscode.TextEdit[];
-    provideDocumentRangeFormattingEdits: (document: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, token: vscode.CancellationToken) => vscode.TextEdit[];
+    provideOnTypeFormattingEdits: (document: monaco.editor.ITextModel, pos: monaco.Position, ch: string, options: monaco.languages.FormattingOptions, token: monaco.CancellationToken) => monaco.languages.TextEdit[];
+    provideDocumentFormattingEdits: (document: monaco.editor.ITextModel, options: monaco.languages.FormattingOptions, token: monaco.CancellationToken) => monaco.languages.TextEdit[];
+    provideDocumentRangeFormattingEdits: (document: monaco.editor.ITextModel, range: monaco.Range, options: monaco.languages.FormattingOptions, token: monaco.CancellationToken) => monaco.languages.TextEdit[];
     private shouldAddNewLine;
     private getReplaceLineIndentTextEdit;
+    static getTextForToken(lineNumber: number, token: BaseToken, document: monaco.editor.IModel): string;
+    static firstNonWhitespaceCharacterIndex(text: string): number;
+    static getTextForModel(doc: monaco.editor.ITextModel, range?: monaco.Range): string;
 }

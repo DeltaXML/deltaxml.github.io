@@ -1,4 +1,4 @@
-define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenDiagnostics"], function (require, exports, vscode, xslLexer_1, xpLexer_1, xsltTokenDiagnostics_1) {
+define(["require", "exports", "./xslLexer", "./xpLexer", "monaco-editor"], function (require, exports, xslLexer_1, xpLexer_1, monaco) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.XMLDocumentFormattingProvider = void 0;
@@ -21,18 +21,18 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
             this.closeTagPos = null;
             this.provideOnTypeFormattingEdits = function (document, pos, ch, options, token) {
                 _this.isCloseTag = ch.indexOf('/') > -1;
-                if (_this.isCloseTag && pos.character > 1) {
-                    var tLine = document.lineAt(pos.line);
+                if (_this.isCloseTag && pos.column > 1) {
+                    var tLine = document.getLineContent(pos.column);
                     _this.closeTagLine = tLine;
                     _this.closeTagPos = pos;
-                    var chBefore = tLine.text.charAt(pos.character - 2);
+                    var chBefore = tLine.charAt(pos.column - 2);
                     _this.isCloseTag = chBefore === '<';
                 }
                 if (ch.indexOf('\n') > -1 || _this.isCloseTag) {
                     //const prevLine = document.lineAt(pos.line - 1);
-                    var newLine = document.lineAt(pos.line);
-                    _this.onTypeLineEmpty = newLine.text.trim().length === 0;
-                    var documentRange = new vscode.Range(newLine.range.start, newLine.range.end);
+                    var newLine = document.getLineContent(pos.column);
+                    _this.onTypeLineEmpty = newLine.trim().length === 0;
+                    var documentRange = new monaco.Range(pos.lineNumber, 1, pos.lineNumber, pos.column);
                     _this.onType = true;
                     var formatEdit = _this.provideDocumentRangeFormattingEdits(document, documentRange, options, token);
                     _this.onType = false;
@@ -43,15 +43,13 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                 }
             };
             this.provideDocumentFormattingEdits = function (document, options, token) {
-                var lastLine = document.lineAt(document.lineCount - 1);
-                var documentRange = new vscode.Range(document.positionAt(0), lastLine.range.end);
-                return _this.provideDocumentRangeFormattingEdits(document, documentRange, options, token);
+                return _this.provideDocumentRangeFormattingEdits(document, document.getFullModelRange(), options, token);
             };
             this.provideDocumentRangeFormattingEdits = function (document, range, options, token) {
                 var result = [];
                 var indentString = '';
                 var useTabs = !(options.insertSpaces);
-                var newLineString = (document.eol === vscode.EndOfLine.CRLF) ? "\r\n" : "\n";
+                var newLineString = document.getEOL();
                 // using non-whitespace for testing only!!
                 if (useTabs) {
                     indentString = '\t';
@@ -60,25 +58,25 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                     indentString = ' ';
                 }
                 var indentCharLength = useTabs ? 1 : options.tabSize;
-                var currentLine = document.lineAt(range.start.line);
-                if (range.start.character > currentLine.firstNonWhitespaceCharacterIndex) {
+                var currentLine = document.getLineContent(range.startLineNumber);
+                if (range.startColumn >= XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex(currentLine)) {
                     // don't format pastes / range selections if they don't include the start non-ws char of the line
                     return [];
                 }
-                var startFormattingLineNumber = range.start.line;
-                var firstLine = document.lineAt(0);
-                var adjustedStartRange = new vscode.Range(firstLine.range.start, range.end);
+                var startFormattingLineNumber = range.startLineNumber;
+                var firstLine = document.getLineContent(1);
+                var adjustedStartRange = new monaco.Range(1, 1, range.startLineNumber, range.endLineNumber);
                 var stringForTokens;
                 if (_this.onTypeLineEmpty) {
                     // add extra char to make token on newline - so it can be indented
-                    stringForTokens = document.getText(adjustedStartRange) + '< ';
+                    stringForTokens = XMLDocumentFormattingProvider.getTextForModel(document, adjustedStartRange) + '< ';
                 }
                 else {
-                    stringForTokens = document.getText(adjustedStartRange);
+                    stringForTokens = XMLDocumentFormattingProvider.getTextForModel(document, adjustedStartRange);
                 }
                 var lexPosition = { line: 0, startCharacter: 0, documentOffset: 0 };
                 var allTokens = _this.docType === xslLexer_1.DocumentTypes.XPath ?
-                    _this.xpLexer.analyse(document.getText(), xpLexer_1.ExitCondition.None, lexPosition) :
+                    _this.xpLexer.analyse(XMLDocumentFormattingProvider.getTextForModel(document), xpLexer_1.ExitCondition.None, lexPosition) :
                     _this.xslLexer.analyse(stringForTokens);
                 var lineNumber = -1;
                 var prevLineNumber = -1;
@@ -135,14 +133,14 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                                 complexStateStack = [[0, [], false]];
                                 emptyStackIsElseBlock = false;
                                 isXSLTStartTag = true;
-                                elementName = xsltTokenDiagnostics_1.XsltTokenDiagnostics.getTextForToken(lineNumber, token, document);
+                                elementName = XMLDocumentFormattingProvider.getTextForToken(lineNumber, token, document);
                                 isPreserveSpaceElement = elementName === 'xsl:text';
                                 break;
                             case xslLexer_1.XSLTokenLevelState.elementName:
                                 complexStateStack = [[0, [], false]];
                                 emptyStackIsElseBlock = false;
                                 isXSLTStartTag = false;
-                                elementName = xsltTokenDiagnostics_1.XsltTokenDiagnostics.getTextForToken(lineNumber, token, document);
+                                elementName = XMLDocumentFormattingProvider.getTextForToken(lineNumber, token, document);
                                 break;
                             case xslLexer_1.XSLTokenLevelState.xmlPunctuation:
                                 switch (xmlCharType) {
@@ -189,9 +187,9 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                                         newNestingLevel--;
                                         addNewLine = _this.shouldAddNewLine(documenthasNewLines, prevToken, token);
                                         if (_this.isCloseTag) {
-                                            closeTagWithinText = ((_a = _this.closeTagPos) === null || _a === void 0 ? void 0 : _a.line) === token.line &&
-                                                _this.closeTagPos.character >= token.startCharacter &&
-                                                _this.closeTagPos.character <= token.startCharacter + token.length;
+                                            closeTagWithinText = ((_a = _this.closeTagPos) === null || _a === void 0 ? void 0 : _a.lineNumber) - 1 === token.line &&
+                                                _this.closeTagPos.column - 1 >= token.startCharacter &&
+                                                _this.closeTagPos.column - 1 <= token.startCharacter + token.length;
                                             if (closeTagWithinText && xmlelementStack.length > 0) {
                                                 closeTagName = xmlelementStack[xmlelementStack.length - 1];
                                             }
@@ -239,26 +237,26 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                                 attributeNameOnNewLine = lineNumberDiff > 0;
                                 nameIndentRequired = true;
                                 if (token.length === 9 || (isXSLTStartTag && _this.minimiseXPathIndents)) {
-                                    var valueText = xsltTokenDiagnostics_1.XsltTokenDiagnostics.getTextForToken(lineNumber, token, document);
+                                    var valueText = XMLDocumentFormattingProvider.getTextForToken(lineNumber, token, document);
                                     awaitingXmlSpaceAttributeValue = (valueText === 'xml:space');
                                     nameIndentRequired = !(isXSLTStartTag && attributeNameOnNewLine && _this.xslLexer.isExpressionAtt(valueText));
                                 }
-                                var attNameLine = document.lineAt(lineNumber);
+                                var attNameLine = document.getLineContent(lineNumber + 1);
                                 if (!nameIndentRequired) {
                                     attributeNameOffset = 0;
                                 }
                                 else if (!attributeNameOnNewLine && attributeNameOffset === 0) {
-                                    attributeNameOffset = token.startCharacter - attNameLine.firstNonWhitespaceCharacterIndex;
+                                    attributeNameOffset = token.startCharacter - XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex(attNameLine);
                                 }
                                 break;
                             case xslLexer_1.XSLTokenLevelState.attributeValue:
-                                var attValueLine = document.lineAt(lineNumber);
-                                var attValueText = xsltTokenDiagnostics_1.XsltTokenDiagnostics.getTextForToken(lineNumber, token, document);
+                                var attValueLine = document.getLineContent(lineNumber + 1);
+                                var attValueText = XMLDocumentFormattingProvider.getTextForToken(lineNumber, token, document);
                                 // token constains single/double quotes also
                                 var textOnFirstLine = token.length > 1 && attValueText.trim().length > 1;
                                 var indentRemainder = attributeNameOffset % indentCharLength;
                                 var adjustedIndentChars = attributeNameOffset + (indentCharLength - indentRemainder);
-                                var calcOffset = token.startCharacter - attValueLine.firstNonWhitespaceCharacterIndex;
+                                var calcOffset = token.startCharacter - XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex(attValueLine);
                                 calcOffset = attributeNameOnNewLine ? calcOffset + attributeNameOffset : calcOffset;
                                 var newValueOffset = textOnFirstLine ? 1 + calcOffset : adjustedIndentChars;
                                 attributeValueOffset = lineNumberDiff > 0 ? attributeValueOffset : newValueOffset;
@@ -273,7 +271,7 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                                 attributeNameOffset = 0;
                                 newMultiLineState = (multiLineState === MultiLineState.None) ? MultiLineState.Start : MultiLineState.Middle;
                                 // TODO: outdent ?> on separate line - when token value is only whitespace
-                                var piText = xsltTokenDiagnostics_1.XsltTokenDiagnostics.getTextForToken(lineNumber, token, document);
+                                var piText = XMLDocumentFormattingProvider.getTextForToken(lineNumber, token, document);
                                 var trimPi = piText.trim();
                                 if (newMultiLineState === MultiLineState.Middle && trimPi.length > 0) {
                                     indent = 1;
@@ -281,7 +279,7 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                                 break;
                             case xslLexer_1.XSLTokenLevelState.xmlComment:
                                 newMultiLineState = (multiLineState === MultiLineState.None) ? MultiLineState.Start : MultiLineState.Middle;
-                                var commentLineText = xsltTokenDiagnostics_1.XsltTokenDiagnostics.getTextForToken(lineNumber, token, document);
+                                var commentLineText = XMLDocumentFormattingProvider.getTextForToken(lineNumber, token, document);
                                 var trimLine = _this.trimLeft(commentLineText);
                                 var doIndent = newMultiLineState === MultiLineState.Middle
                                     && token.length > 0 && !trimLine.startsWith('-->') && !trimLine.startsWith('<!--');
@@ -389,19 +387,35 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                     }
                     else if (_this.isCloseTag) {
                         if (nestingLevel > 0 && closeTagName !== null && _this.closeTagPos !== null) {
-                            var nonWsStart = _this.closeTagLine ? _this.closeTagLine.firstNonWhitespaceCharacterIndex : 0;
+                            var nonWsStart = _this.closeTagLine ? XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex(_this.closeTagLine) : 0;
                             var replacementString = '';
                             var edit = void 0;
-                            if ((nonWsStart + 2) === _this.closeTagPos.character) {
+                            if ((nonWsStart + 2) === _this.closeTagPos.column) {
                                 var requiredIndentLength = ((nestingLevel - 1) * indentCharLength);
                                 replacementString = indentString.repeat(requiredIndentLength);
                                 replacementString += '</' + closeTagName + '>';
-                                var startPos = new vscode.Position(_this.closeTagPos.line, 0);
-                                var endPos = new vscode.Position(_this.closeTagPos.line, token.startCharacter + 2);
-                                edit = vscode.TextEdit.replace(new vscode.Range(startPos, endPos), replacementString);
+                                var startPos = new monaco.Position(_this.closeTagPos.lineNumber, 1);
+                                var endPos = new monaco.Position(_this.closeTagPos.lineNumber, token.startCharacter + 3);
+                                edit = {
+                                    text: replacementString,
+                                    range: {
+                                        startLineNumber: _this.closeTagPos.lineNumber,
+                                        startColumn: 1,
+                                        endLineNumber: _this.closeTagPos.lineNumber,
+                                        endColumn: token.startCharacter + 3
+                                    }
+                                };
                             }
                             else {
-                                edit = vscode.TextEdit.insert(_this.closeTagPos, closeTagName + '>');
+                                edit = {
+                                    text: '>',
+                                    range: {
+                                        startLineNumber: _this.closeTagPos.lineNumber,
+                                        startColumn: _this.closeTagPos.column,
+                                        endLineNumber: _this.closeTagPos.lineNumber,
+                                        endColumn: _this.closeTagPos.column
+                                    }
+                                };
                             }
                             closeTagName = null;
                             result.push(edit);
@@ -411,9 +425,9 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                         // process any skipped lines (text not in tokens):
                         for (var i = lineNumberDiff - 1; i > -1; i--) {
                             var loopLineNumber = lineNumber - i;
-                            var currentLine_1 = document.lineAt(loopLineNumber);
+                            var currentLine_1 = document.getLineContent(loopLineNumber);
                             // token may not be at start of line
-                            var actualIndentLength = currentLine_1.firstNonWhitespaceCharacterIndex;
+                            var actualIndentLength = XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex(currentLine_1);
                             var preserveSpace = stackLength > 0 ? xmlSpacePreserveStack[stackLength - 1] : false;
                             var totalAttributeOffset = void 0;
                             if (!isXMLToken && _this.minimiseXPathIndents) {
@@ -439,24 +453,50 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                             if (!(preserveSpace || isPreserveSpaceElement)) {
                                 if (_this.replaceIndendation) {
                                     if (addNewLine) {
-                                        var editPos = new vscode.Position(loopLineNumber, token.startCharacter);
                                         var replacementString = newLineString + indentString.repeat(requiredIndentLength);
-                                        result.push(vscode.TextEdit.insert(editPos, replacementString));
+                                        var edit = {
+                                            text: replacementString,
+                                            range: {
+                                                startLineNumber: loopLineNumber + 1,
+                                                startColumn: token.startCharacter + 1,
+                                                endLineNumber: loopLineNumber + 1,
+                                                endColumn: token.startCharacter + 1
+                                            }
+                                        };
+                                        result.push(edit);
                                     }
                                     else {
                                         var replacementString = indentString.repeat(requiredIndentLength);
-                                        result.push(_this.getReplaceLineIndentTextEdit(currentLine_1, replacementString));
+                                        result.push(_this.getReplaceLineIndentTextEdit(loopLineNumber + 1, currentLine_1, replacementString));
                                     }
                                 }
                                 else if (actualIndentLength !== requiredIndentLength) {
                                     var indentLengthDiff = requiredIndentLength - actualIndentLength;
                                     if (indentLengthDiff > 0) {
-                                        result.push(vscode.TextEdit.insert(currentLine_1.range.start, indentString.repeat(indentLengthDiff)));
+                                        var replacementString = newLineString + indentString.repeat(indentLengthDiff);
+                                        var edit = {
+                                            text: replacementString,
+                                            range: {
+                                                startLineNumber: loopLineNumber + 1,
+                                                startColumn: 1,
+                                                endLineNumber: loopLineNumber + 1,
+                                                endColumn: 1
+                                            }
+                                        };
+                                        result.push(edit);
                                     }
                                     else {
-                                        var endPos = new vscode.Position(loopLineNumber, 0 - indentLengthDiff);
-                                        var deletionRange = currentLine_1.range.with(currentLine_1.range.start, endPos);
-                                        result.push(vscode.TextEdit.delete(deletionRange));
+                                        var replacementString = '';
+                                        var edit = {
+                                            text: replacementString,
+                                            range: {
+                                                startLineNumber: loopLineNumber + 1,
+                                                startColumn: 1,
+                                                endLineNumber: loopLineNumber + 1,
+                                                endColumn: 1 - indentLengthDiff
+                                            }
+                                        };
+                                        result.push(edit);
                                     }
                                 }
                             }
@@ -471,15 +511,31 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                 _this.isCloseTag = false;
                 return result;
             };
-            this.getReplaceLineIndentTextEdit = function (currentLine, indentString) {
-                var startPos = currentLine.range.start;
-                if (currentLine.firstNonWhitespaceCharacterIndex === 0) {
-                    return vscode.TextEdit.insert(startPos, indentString);
+            this.getReplaceLineIndentTextEdit = function (lineNumber, currentLine, indentString) {
+                var nonWSPos = XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex(currentLine);
+                if (nonWSPos === 0) {
+                    var edit = {
+                        text: indentString,
+                        range: {
+                            startLineNumber: lineNumber,
+                            startColumn: 1,
+                            endLineNumber: lineNumber,
+                            endColumn: 1
+                        }
+                    };
+                    return edit;
                 }
                 else {
-                    var endPos = new vscode.Position(currentLine.lineNumber, currentLine.firstNonWhitespaceCharacterIndex);
-                    var valueRange = currentLine.range.with(startPos, endPos);
-                    return vscode.TextEdit.replace(valueRange, indentString);
+                    var edit = {
+                        text: indentString,
+                        range: {
+                            startLineNumber: lineNumber,
+                            startColumn: 1,
+                            endLineNumber: lineNumber,
+                            endColumn: nonWSPos + 1
+                        }
+                    };
+                    return edit;
                 }
             };
             this.xslLexer = new xslLexer_1.XslLexer(xsltConfiguration);
@@ -509,6 +565,51 @@ define(["require", "exports", "vscode", "./xslLexer", "./xpLexer", "./xsltTokenD
                 addNewLine = (prevToken === null || prevToken === void 0 ? void 0 : prevToken.line) === token.line;
             }
             return addNewLine;
+        };
+        XMLDocumentFormattingProvider.getTextForToken = function (lineNumber, token, document) {
+            var start = token.startCharacter;
+            if (start < 0) {
+                console.error("ERROR: Found illegal token for document: " + document.uri);
+                console.error("token.startCharacter less than zero: " + token.startCharacter);
+                console.error(token);
+                start = 0;
+            }
+            var lineText = document.getLineContent(lineNumber);
+            var startColumn = token.startCharacter + 1;
+            var endColumn = token.startCharacter + token.length + 1;
+            var valueText = lineText.substring(startColumn, endColumn);
+            return valueText;
+        };
+        XMLDocumentFormattingProvider.firstNonWhitespaceCharacterIndex = function (text) { return text.search(/\S/); };
+        ;
+        XMLDocumentFormattingProvider.getTextForModel = function (doc, range) {
+            if (range) {
+                var rangeStartLine = range.startLineNumber;
+                var rangeEndLine = range.endLineNumber;
+                if (rangeStartLine === rangeEndLine) {
+                    return doc.getLineContent(rangeStartLine).substring(range.startColumn - 1, range.endColumn - 1);
+                }
+                else {
+                    var lines = [];
+                    for (var i = rangeStartLine; i <= range.endLineNumber; i++) {
+                        var lineText = doc.getLineContent(i);
+                        if (i === rangeStartLine) {
+                            lines.push(lineText.substring(range.startColumn - 1));
+                        }
+                        else if (i === rangeEndLine) {
+                            lines.push(lineText.substring(0, range.endColumn - 1));
+                        }
+                        else {
+                            lines.push(lineText);
+                        }
+                    }
+                    return lines.join('\n');
+                }
+            }
+            else {
+                var lines = doc.getLinesContent();
+                return lines.join('\n');
+            }
         };
         XMLDocumentFormattingProvider.xsltStartTokenNumber = xslLexer_1.XslLexer.getXsltStartTokenNumber();
         return XMLDocumentFormattingProvider;
