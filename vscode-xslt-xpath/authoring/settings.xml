@@ -65,7 +65,7 @@
       <h5>Syntax Highlighting</h5>
       <p>Syntax highlighting for XSLT and XPath is achieved using Visual Studio Code's 
         <a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> tokens alone.
-        Almost all other languages in Visaul Studio Code use a 
+        Almost all other languages in Visual Studio Code use a 
         <a href="https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide">TextMate Grammar</a> for tokens which
         may be supplemented by Semantic Highlighting.
       </p>
@@ -75,6 +75,9 @@
       <code class="block">
         "editor.semanticHighlighting.enabled": true
       </code>
+      <p>A selection of popular dark color themes, enhanced for XSLT/XPath are provided by the extension [XSLT Dark Themes](https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes)</p>
+      <p class="caption"><em>X Gruvbox Material Dark theme:</em></p>		
+      <img src="resources/gruvbox.png" class="scale-with-grid"/>
       <h5>Word Separators</h5>
       <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
       listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word

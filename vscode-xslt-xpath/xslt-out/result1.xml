@@ -119,9 +119,11 @@
 				Color Theme Extensions
 				Visual Studio Code includes a small set of light and dark color themes. Alternative color themes are
 					installed as extensions. The number of available themes can be overwhelming,
-					but there are websites like vscodethemes that provide
+					but VS Code has a built-in Theme Preview feature and there are websites like vscodethemes that provide
 					a preview before installing the theme.
 				
+				The XSLT Dark Themes extension provides
+				a set of popular dark color themes specially enhanced for XSLT and XPath
 				The XSLT/XPath extension syntax highlighter uses 
 						Semantic Highlighting that should be enabled specifically in Settings to work with external color
 					themes.

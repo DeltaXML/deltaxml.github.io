@@ -1,4 +1,4 @@
-require.config({ paths: { vs: '../node_modules/monaco-editor/min/vs', dist: '../dist' } });
+require.config({ paths: { vs: '../node_modules/monaco-editor/min/vs', dist: '../dist' }, ali });
 
 require(['vs/editor/editor.main', 'dist/monacoXSLT', 'dist/xslThemeData'], function (monaco, xslPlugin) {
     const _XSLT_Language_Id = 'xslt';

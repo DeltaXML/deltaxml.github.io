@@ -103,6 +103,21 @@
 			<p>The extension provides syntax highlighting for XSLT instructions, XML Literal Result Elements, XML attributes, XML character references, CDATA sections 
 				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
 				Text Value Templates are syntax highlighted also.</p>
+			
+			<h4>XSLT/XPath Dark Color Themes</h4>
+			<p>The plethora of VS Code themes will highlight XSLT/XPath very well using Semantic Highlighting fallbacks for language-specific tokens. 
+				There is however a <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes">XSLT Dark Themes</a> 
+				extension that enhances a set of popular dark themes specifically for XSLT and XPath:
+			</p>
+			<ol>
+				<li>Darcula From IntelliJ</li>
+				<li>Gruvbox Material Dark</li>
+				<li>Iceberg</li>
+				<li>Nord</li>
+				<li>Tokyo Night Storm</li>
+				<li>Zen</li>
+			</ol>
+			
 		</div>
 		<h3 id="formatting">Formatting</h3>
 		<p>Two commands are provided for formatting XML, XSLT or XPath expressions:</p>
@@ -190,10 +205,10 @@
 			<li>XML Syntax</li>
 			<li>XSLT/XPath Variable name references</li>
 			<li>XSLT/XPath Parameter name references</li>
-			<li><strong>All</strong> other symbol name refererences</li>
+			<li><strong>All</strong> other symbol name refererences (<code>xsl:accumulator</code> <code>xsl:key</code> etc.)</li>
 			<li>Function name and arity (number of params)</li>
 			<li><code>xsl:with-param</code> names</li>
-			<li>File locations in <code>xsl:import xsl:include xsl:use-package</code></li>
+			<li>File locations in <code>xsl:import</code> <code>xsl:include</code> <code>xsl:use-package</code></li>
 			<li>Order of operators/operands in XPath</li>
 			<li>Matching of brackets in XPath</li>
 			<li>XSLT instructions and their attributes</li>
@@ -201,7 +216,7 @@
 			<li>Attribute Value Template Syntax</li>
 			<li>Text Value Template Syntax</li>			
 		</ol>
-		<h5>'Non-Standalone' Stylesheets</h5>
+		<h5>Inferred Imports for 'Non-Standalone' Stylesheets</h5>
 		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
 			that declares the required imports. If no knowledge of the parent module is available, spurious problems
 			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
