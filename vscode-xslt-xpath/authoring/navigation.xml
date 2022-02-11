@@ -51,6 +51,7 @@
 			</p>
 			<p>Symbols in the Outline View can be sorted by position, name or category. There's also a '<strong>Filter on Type</strong>' mode that
 			filters the Outline View while you type in part of a symbol name.</p>
+
 			<h3>Peek/Goto Definition</h3>
 			<p>A symbol, such as a variable or function, is defined in one location in a stylesheet file, but used in other locations.
 			The <strong>Peek</strong> and <strong>Goto</strong>	commands let you either view inline or navigate to the definition of a selected symbol.
@@ -68,7 +69,29 @@
 				This command navigates you to the location of the symbol definition (for example, the corresponding <code>xsl:variable</code> instruction),
 				opening the containing stylesheet file in the editor group if not already open.
 			</p>
-			<p>After navigating to a defintion, you can quickly navigate to the location you were in using <span class="shortcut">Ctrl-</span></p>
+			
+			<!-- start -->			
+			<h3>Goto (Peek) References/Find All References</h3>
+			<p>This feature is about navigating to <strong>references</strong> to symbols, in contrast to the previous section that covers navigating to symbol <strong>definitions</strong>.
+				The <strong>Peek</strong> and <strong>Find All</strong>	commands let you either view inline or navigate through all the references (including the definition) of a selected symbol.
+			</p>
+			<h5>Goto (Peek) References</h5>
+			
+			<p>Invoke the <strong>Goto (Peek) References</strong> command by pressing (<span class="shortcut">⇧F12</span>) on any symbol name such as a variable or function name.
+				This command embeds a view of the resolved references inline, use the cursor keys to navigate between each reference listed.
+				The inline view permits quick edits of the reference also. Press <span class="shortcut">Escape</span> to close the references view.
+			</p>
+			<img src="resources/peek-reference.png" class="scale-with-grid" />
+			<h5>Find All References</h5>
+			<p>
+				Invoke the <strong>Find All References</strong> command by pressing (<span class="shortcut">⌥⇧F12</span>) on any symbol.
+				A References Panel, shown in the application Side Bar, lists all references, grouped by their stylesheet module.
+				Use the cursor keys to move through the references and press <span class="shortcut">Enter</span> to open the editor in
+				the reference location.
+			</p>
+			<p>After navigating to a reference or definition, you can quickly navigate to the location you were in using <span class="shortcut">Ctrl-</span></p>
+			<!-- end -->
+			
 			<h3>Goto Symbol</h3>
 			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">Shift⌘O</span> for a filtered quick-pick list of symbols used
 			in the current editor.
