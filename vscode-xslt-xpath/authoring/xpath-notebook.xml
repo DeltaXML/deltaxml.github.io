@@ -3,21 +3,52 @@
 	<div class="main">
 		
 		<div class="two-thirds column">
-			<p>XPath Notebooks add XPath 3.1's extensive JSON and XML analysis features to Visual Studio Code's Notebooks. 
-			Notebooks are used for data-analysis, code experimentation, tutorials or learning.</p>
+			<p>This section describes DeltaXml's <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xpath-notebook">XPath Notebook</a> extension for Visual Studio Code. Here we cover the fundamentals
+				of using XPath 3.1 in a Visual Studio Code Notebook.
+			</p>
 			
 			<p><img src="resources/xpath-notebook-small.png" class="scale-with-grid" /></p>
 			
-			<h3>Main Features</h3>
-			<ul>
-				<li>Context File (XML or JSON)</li>
-				<li>XML Namespace Context</li>
-				<li>Notebook XPath Variables</li>
-				<li>JSON output cell for XPath experimentation</li>
-				<li>Table output cell for data analysis</li>
-			</ul>
-
-		
+			<h3>Why use an XPath Notebook?</h3>
+			<p>XPath Notebooks are used for a wide range of purposes, including:
+				<ul>
+					<li>Quick analysis of XML or JSON</li>
+					<li>Learning and experimenting with XPath</li>
+					<li>Tutorials on XPath</li>
+					<li>Tutorials on a specific XML or JSON format</li>
+				</ul>	
+			</p>
+			<h3>Quick Start</h3>
+			<p>For this guide, we're assuming you've already installed the <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xpath-notebook">XPath Notebook</a>
+			extension for VS Code.	
+			</p>
+			<h4>1. Install Node.js</h4>
+			<p>This tool uses a builtin <a href="https://www.saxonica.com/saxon-js/index.xml">
+					SaxonJS XSLT processor</a> from Saxonica. 
+				This processor requires a recent installation of Node.js. Available
+				for download from <a href="https://nodejs.org/en/">https://nodejs.org/en/</a>. 
+			</p>
+			<h4>2. Select an XML 'source' file</h4>
+			<p>Open any XML (or JSON) source file in VS Code to set this as the context
+				item for XPath expressions in an XPath Notebook. The most recent XML/JSON file opened is used.
+			</p>
+			<h4>3. Create and save a new XPath Notebook</h4>
+			<p>From Visual Studio Code, open the Command Palette (<span class="shortcut">⇧⌘P</span>) 
+				and execute the <strong>New XPath Notebook</strong> command.</p>
+			<p>An untitled notebook with a <strong>Markdown</strong> cell and a <strong>Code</strong> cell will be shown,
+				initially the file is untitled with a .xbook file extension.
+				Save this notebook in the usual way (<span class="shortcut">⌘S</span>), 
+				keeping the <code>.xbook</code> extension.
+			</p>
+			<aside>Note: In the 1.65 VS Code release, an empty XPath notebook is created in addition to a XPath notebook
+				with a pre-populated Mardown cell (the API for creating new notebooks is not fully resolved yet).
+			</aside>
+			<h4>4. Edit and execute a new code cell</h4>
+			<p>To add a new XPath code cell, press the <strong>+ Code</strong> button at the top of the notebook.
+			In the new code cell, enter the <code>/*</code> XPath expression, then press <span class="shortcut">^Enter</span>
+				to execute the cell.
+			</p>
+			<p>The result cell is shown immediately below the Code cell.</p>
 		</div>
 		
 	</div>	
