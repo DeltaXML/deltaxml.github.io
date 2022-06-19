@@ -45,12 +45,19 @@
 			<img src="resources/navigation.png" class="scale-with-grid" />
 			
 			<p>
-				The <a href="https://code.visualstudio.com/docs/getstarted/userinterface#_outline-view">Outline View</a> (see right-hand panel) is a panel shown at the bottom
-				of the File Explorer. It renders the XML or XSLT document element hierarchy as a tree, symbol names in the tree include element identifiers such
+				The <a href="https://code.visualstudio.com/docs/getstarted/userinterface#_outline-view">Outline View</a> (see right-hand panel) is a panel
+				that, by default, is positioned below
+				the File Explorer in the Primary Side Bar. This can be moved however into other panels such as the Secondary Side Bar (see <a href="https://code.visualstudio.com/api/ux-guidelines/sidebars">Sidebars</a>).
+				The Outline view renders the XML or XSLT document element hierarchy as a tree, symbol names in the tree include element identifiers such
 				as the <code>mode</code> for an <code>xsl:template</code>.
 			</p>
 			<p>Symbols in the Outline View can be sorted by position, name or category. There's also a '<strong>Filter on Type</strong>' mode that
 			filters the Outline View while you type in part of a symbol name.</p>
+			
+			<aside>Note: XML Attributes are shown in the outline view by default, they are grouped inside an element 
+				within an attributes 'array' symbol. If you find attributes clutter the XML element outline you can hide 
+				them in <a href="settings.html">Settings</a> with the property: <code>outline.showArrays</code>. 				
+			</aside>
 
 			<h3>Peek/Goto Definition</h3>
 			<p>A symbol, such as a variable or function, is defined in one location in a stylesheet file, but used in other locations.
