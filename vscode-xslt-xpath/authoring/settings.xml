@@ -75,7 +75,9 @@
       <code class="block">
         "editor.semanticHighlighting.enabled": true
       </code>
-      <p>A selection of popular dark color themes, enhanced for XSLT/XPath are provided by the extension [XSLT Dark Themes](https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes)</p>
+      <p>A selection of popular dark color themes, enhanced for XSLT/XPath, are provided by the extension
+        <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes">XSLT Dark Themes</a>
+      </p>
       <p class="caption"><em>X Gruvbox Material Dark theme:</em></p>		
       <img src="resources/gruvbox.png" class="scale-with-grid"/>
       <h5>Word Separators</h5>
@@ -85,11 +87,17 @@
       <h5>Emmet Snippets</h5>
       <p>
         <a href="https://code.visualstudio.com/docs/editor/emmet">Emmet Snippets</a> provide a convenient shorthand for inserting a
-        number of literal result elements and attributes into your XSLT in one go. To enable Emmet snippets for XSLT,
+        number of literal result elements and attributes into your XSLT in one go. For example, entering:</p>
+        <code class="block">ul>li.item$*2</code>
+      <p>provides the following output:</p>
+      <code class="block"><![CDATA[      <ul>
+          <li class="item1"></li>
+          <li class="item2"></li>
+      </ul>]]></code>
+      <p>To enable Emmet snippets for XSLT,
         add the following setting:
       </p>
-      <code class="block">
-        "emmet.includeLanguages": {
+      <code class="block">        "emmet.includeLanguages": {
           "xslt": "xml"
         },      </code>
     </div>
