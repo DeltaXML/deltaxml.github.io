@@ -69,15 +69,21 @@
 			<h2 class="pageTitle">Overview</h2>
 			<div class="two-thirds column">
 				<p>
-					This is a guide to coding XSLT or XPath in Visual Studio Code using the
-					 <a href="https://marketplace.visualstudio.com/publishers/deltaxml">language and notebook extensions</a> 
-					 maintained by DeltaXML. These pages are designed to complement the extensive <a
-						href="https://code.visualstudio.com/docs">Visual Studio Code documentation</a>:
+					Coding in modern XSLT presents a rewarding yet challenging experience for the developer.
+					Discover in this guide how Visual Studio Code, extended with DeltaXML's 
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath extension</a>, 
+					can help with editing, reviewing, refactoring and running XSLT.
+				</p>
+				<aside>
+					XSLT 3.0 support is standard. The proposed XSLT 4.0 support is invoked by setting <strong>version="4.0"</strong> on the root element.
+				</aside>
+				<p>
+                     These pages complement the extensive <a
+					href="https://code.visualstudio.com/docs">Visual Studio Code documentation</a> that begins:
 				</p>
 				<blockquote>
 					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is
-					available
-					for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a
+					available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a
 					rich ecosystem of extensions for other languages...
 				</blockquote>
 				<p>
@@ -183,7 +189,8 @@
 					The configuration is saved in a <code>tasks.json</code> file in this workspace folder.
 				</p>
 				<p>To create your first task, use the <code>Run Build Task</code> command (<span class="shortcut">⇧⌘B</span>).
-					As there is no currently configured task, you will be prompeted to configure one. You can then,
+					As there is no currently configured task, you should be prompted to configure one 
+					(if another extension inhibits this, run <span class="shortcut">Configure Task</span> instead). You can then,
 					select either the <code>Saxon</code> or <code>Saxon-JS</code> task.</p>
 				<p>A task will be added to the <code>tasks.json</code> task with default properties. To further configure the
 					task, these properties can be changed or other properties added. Auto-completion and hints are provided to

@@ -8,7 +8,7 @@
                 expand-text="yes"
                 version="3.0">
   
-  <xsl:output method="html" indent="no"/>
+  <xsl:output method="html" version="5.0" indent="no"/>
   <xsl:mode name="copyPage" on-no-match="shallow-copy"/>
   
   <xsl:template match="nav//ul" mode="#default">

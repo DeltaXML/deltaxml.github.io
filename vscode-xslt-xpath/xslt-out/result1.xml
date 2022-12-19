@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 
 
 
@@ -55,14 +56,20 @@
 			Overview
 			
 				
-					This is a guide to coding XSLT or XPath in Visual Studio Code using the
-					 language and notebook extensions 
-					 maintained by DeltaXML. These pages are designed to complement the extensive Visual Studio Code documentation:
+					Coding in XSLT (now at 3.0) presents an interesting set of challenges for the developer.
+					Discover in this guide how Visual Studio Code, extended with DeltaXML's 
+					XSLT/XPath extension, 
+					can help with editing, reviewing, refactoring and running XSLT.
+				
+				
+					XSLT 3.0 support is standard. The proposed XSLT 4.0 support is invoked by setting version="4.0" on the root element.
+				
+				
+                     These pages complement the extensive Visual Studio Code documentation that begins:
 				
 				
 					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is
-					available
-					for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a
+					available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a
 					rich ecosystem of extensions for other languages...
 				
 				
@@ -163,7 +170,8 @@
 					The configuration is saved in a tasks.json file in this workspace folder.
 				
 				To create your first task, use the Run Build Task command (⇧⌘B).
-					As there is no currently configured task, you will be prompeted to configure one. You can then,
+					As there is no currently configured task, you should be prompted to configure one 
+					(if another extension inhibits this, run Configure Task instead). You can then,
 					select either the Saxon or Saxon-JS task.
 				A task will be added to the tasks.json task with default properties. To further configure the
 					task, these properties can be changed or other properties added. Auto-completion and hints are provided to

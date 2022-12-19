@@ -1,4 +1,5 @@
-<!DOCTYPE HTML><html lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -67,13 +68,11 @@
 		<div class="main"><h2 class="pageTitle">Editing XML</h2>
 		
 		<div class="two-thirds column">
-			<p>
-				The <a href="https://code.visualstudio.com/docs/editor/codebasics">Visual Studio Code  User Guide</a>
-				should be your main resource for learning about general editor features and how to use them effectively.</p>
-			<p>This page provides a high level guide from an XML editing or reviewing perspective. See the <a href="editing-xslt.html">Editing&nbsp;XSLT/XPath</a>
-			page for more language-specific help on these languages.</p>
+			<p>XSLT developers benefit from a set of XML editing features that are also available for any XML file.
+			These general purpose features are described here.	
+			</p>
 			<h3>XML Elements</h3>
-			<h5>Change Element Tag Name</h5>
+			<h5>Rename Tag</h5>
 		  As you edit the start tag name of an element, the corresponding end tag name is changed at the same time to
 			keep the XML well-nested.
 			<h5>Self-Close Element</h5>
@@ -91,9 +90,9 @@
 				all matching tag names so you're in a multi-cursor edit mode. As you edit the tag name you selected all
 				matching tag names are edited also. When done, press <span class="shortcut">Escape to exit multi-cursor edit</span>.
 			</p>
-			<h3>Intellisense</h3>
-			<p>Outside of the extension intellisense features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
-			from the intellisense suggestions list:</p>
+			<h3>Auto-Completion</h3>
+			<p>Outside of the auto-complete (intellisense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
+			from the auto-completion list:</p>
 			<img src="resources/suggestions.png" class="scale-with-grid">
 			<p>
 				With the cursor in the element start tag where you wish to add the attribute, press <span class="shortcut">⌃Space</span>
@@ -101,6 +100,10 @@
 			</p>
 			<code class="block"><bold>name</bold>="<bold>value</bold>"</code>
 			<p>Edit the <code>name</code> and then press <span class="shortcut">Tab</span> to edit the <code>value</code>.</p>
+			<h3>Emmet</h3>
+			<p>Emmet can be used to insert XML snippets using a shorthand notation. Emmet should be enabled in user settings.
+				See the <a href="settings.html">Settings</a> section for an example.	
+			</p>
 			<h3>Well-Formed XML Checks</h3>
 			<img src="resources/problems.png" class="scale-with-grid">
 			<p>As you edit an XML file, the syntax is checked for any well-formedness errors. Any problems tokens are highlighted with
@@ -121,10 +124,11 @@
 				These commands can be invoked from the Command Palette (<span class="shortcut">⇧⌘P</span>).</p>
 			<ul>
 				<li><strong>Goto XPath</strong> - navigate to the element/attribute given by the XPath </li>
-				<li><strong>Select current element</strong> - extend selection to include containing element's start/end tags</li>
-				<li><strong>Select parent element</strong> - extend selection to include parent element's start/end tags</li>
-				<li><strong>Select following element</strong> - extend selection to include next sibling's start/end tags</li>
-				<li><strong>Select preceding element</strong> - extend selection to include previous sibling's start/end tags</li>
+				<li><strong>Select current element</strong> - <span class="shortcut">⇧⌘0</span> extend selection to include containing element's start/end tags</li>
+				<li><strong>Select parent element</strong> - <span class="shortcut">⇧⌘9</span> extend selection to include parent element's start/end tags</li>
+				<li><strong>Select first child element</strong> - <span class="shortcut">⇧⌘8</span> select the first child element's start/end tags</li>
+				<li><strong>Select following element</strong> - <span class="shortcut">⇧⌘7</span> select next sibling's start/end tags</li>
+				<li><strong>Select preceding element</strong> - select previous sibling's start/end tags</li>
 			</ul>			
 		</div>
 		
