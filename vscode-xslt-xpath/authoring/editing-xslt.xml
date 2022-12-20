@@ -128,13 +128,22 @@
 			imported stylesheet modules. Press <span class="shortcut">⇧Enter</span> to preview the updates or <span class="shortcut">Enter</span>
 			to perform updates immediately.
 		</p>
-
-		<h3 id="checking">Code Checking</h3>
-		<aside>Note: Code Checking uses a Symbol Provider, to ensure checks are performed you should keep the
+		
+		<h3 id="renaming">Code Refactoring</h3>
+		<p>Code refactoring features like <strong>Extract Function</strong> are provided via VS Code's 
+			<span class="shortcut">QuickFix</span> feature and the 
+			<span class="shortcut">Refactor</span> command.</p>
+		<p>On refactoring, the XSLT is updated to fix any context problems introduced when code is moved.
+			For example by adding <code>xsl:param</code> instructions and modifying expressions to reference them.
+		</p>
+		<img src="resources/refactoring.png" class="scale-with-grid" />
+		<h3 id="checking">XSLT Linter</h3>
+		<aside>Note: The XSLT Linter uses a Symbol Provider. To ensure checks are performed you should keep the
 			<a href="https://code.visualstudio.com/Docs/editor/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
 		<p>
-			The XSLT/XPath extension performs a comprehensive set of checks on your code as you type. Any syntax warning or error problems are highlighted with a squiggly
-			underline for the token in question. Reference checks attempt to resolve symbol names through all imported/include stylesheets and packages. 
+			The XSLT/XPath linter performs checks on your code as you type, peforming symbol reference tests across all included modules. 
+			Any problems are shown in the Problems Panel and also highlighted inline with a squiggly
+			underline for the specific token at issue.
 			Here is a summary of the key checks:
 		</p>
 		<ol>
@@ -147,6 +156,7 @@
 			<li>File locations in <code>xsl:import</code> <code>xsl:include</code> <code>xsl:use-package</code></li>
 			<li>Order of operators/operands in XPath</li>
 			<li>Matching of brackets in XPath</li>
+			<li>Presence of the context-item for expressions where it is required</li>
 			<li>XSLT instructions and their attributes</li>
 			<li>Duplicate global symbol names</li>
 			<li>Attribute Value Template Syntax</li>
