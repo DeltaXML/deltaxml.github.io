@@ -129,13 +129,27 @@
 			to perform updates immediately.
 		</p>
 		
-		<h3 id="renaming">Code Refactoring</h3>
-		<p>Code refactoring features like <strong>Extract Function</strong> are provided via VS Code's 
-			<span class="shortcut">QuickFix</span> feature and the 
+		<h3 id="refactoring">Code Refactoring</h3>
+		<p>Code refactoring features like <strong>Extract xsl:function</strong> and <strong>Extract xsl:template</strong> are provided via VS Code's 
+			Quick Fix (<span class="shortcut">⌘</span><span class="shortcut">.</span>) feature and the 
 			<span class="shortcut">Refactor</span> command.</p>
-		<p>On refactoring, the XSLT is updated to fix any context problems introduced when code is moved.
-			For example by adding <code>xsl:param</code> instructions and modifying expressions to reference them.
+		<p>An available refactoring for a selection is indicated by a light-bulb💡 adjacent to the selection. Clicking on the 💡 will display the available refactorings.
+			The light-bulb is only shown when the code selection is a valid expression or a set of XSLT instructions that would be valid inside the new component.
+			If you don't see the light-bulb when you expect to, check that the code selection <strong>completely encloses</strong> the XSLT instruction or XPath expression.
 		</p>
+		<p>The name of an extracted new component should be changed with the <span class="shortcut">Rename Symbol</span> feature, this is automatically triggered when the new component is added.</p>
+		<p>After refactoring, the XSLT is updated to fix any context problems introduced when code is moved.
+			The new component has <code>xsl:param</code> instructions added to provide context-properties required.
+			Two modes are available:
+		</p>
+		<ul>
+			<li>
+			<strong>full refactoring</strong> - fixes 'missing-context' problems by updating XSLT to reference the context-property parameters.
+			</li>
+			<li>
+			<strong>partial refactoring</strong> - highlights 'missing context' problems in the XSLT.
+			</li>
+		</ul>
 		<img src="resources/refactoring.png" class="scale-with-grid" />
 		<h3 id="checking">XSLT Linter</h3>
 		<aside>Note: The XSLT Linter uses a Symbol Provider. To ensure checks are performed you should keep the
