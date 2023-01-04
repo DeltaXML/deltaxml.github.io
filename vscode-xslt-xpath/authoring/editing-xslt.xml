@@ -140,7 +140,7 @@
 		<p>The name of an extracted new component should be changed with the <span class="shortcut">Rename Symbol</span> feature, this is automatically triggered when the new component is added.</p>
 		<p>After refactoring, the XSLT is updated to fix any context problems introduced when code is moved.
 			The new component has <code>xsl:param</code> instructions added to provide context-properties required.
-			Two modes are available:
+			For extract to xsl:function two modes are available (fully documented <a href="refactoring-xslt.html">here</a>):
 		</p>
 		<ul>
 			<li>
@@ -150,7 +150,11 @@
 			<strong>partial refactoring</strong> - highlights 'missing context' problems in the XSLT.
 			</li>
 		</ul>
+		<p>
 		<img src="resources/refactoring.png" class="scale-with-grid" />
+			<emphasis>Refactoring with 'Extract to xsl:function' in full mode, referencing context-parameters $c.x, $c.p and $c.l</emphasis>
+
+		</p>
 		<h3 id="checking">XSLT Linter</h3>
 		<aside>Note: The XSLT Linter uses a Symbol Provider. To ensure checks are performed you should keep the
 			<a href="https://code.visualstudio.com/Docs/editor/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
