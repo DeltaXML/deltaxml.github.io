@@ -13,7 +13,7 @@
       In this refactor, required context properties must be passed as parameters when the new xsl:function is invoked, this is because
 			context properties are cleared inside an xsl:function.
 			</p>
-			<h4>Parial Mode</h4>
+			<h4>Partial Mode</h4>
 			<p>In the <strong>partial</strong> mode, required parameters are passed to the new function, but code in not refactored to 
 			reference the new parameters. Instead, the 'missing-context' properties are highlighted as problems.</p>
 			<h4>Full Mode</h4>
