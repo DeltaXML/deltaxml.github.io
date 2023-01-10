@@ -165,12 +165,53 @@ npm install --save-dev xslt3</code>
 					<p>Run the newly configured XSLT transform by invoking <code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.</p>
 				</li>
 			</ol>
-			<h3>Variable References in Tasks</h3>
+			<h3 id="references">Variable References in Tasks</h3>
 			<p>Visual Studio Code supports variable substitutions for Task configuration files.
-				Variable substitution uses the <code>${variableName}</code> syntax. You may have
-				noticed that the boiler plate XSLT Task uses <code>${file}</code> and <code>${workspaceFolder}</code>
+				Variable substitution uses the <code>${variableName}</code> syntax. Commands that
+				return a string can be invoked via variable substitution, the boiler plate XSLT Task uses <code>${command:xslt-xpath.pickXsltFile}'</code> and <code>${command:xslt-xpath.pickResultFile}'</code>
 				variable references.
 			</p>
+			<p>A set of 'Pick File' commands suitable for XSLT tasks is available to allow user-selected file paths to be used within an XSLT task.
+			Each command prompts the user to select a file. This is from: the current file, a 'recent files' list for that commmand (optionally from a specified 'previous stage' command),
+			or from a 'Open File' or 'Save File' VS Code dialog as appropriate. The available commands are listed below:	
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Command</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>xslt-xpath.pickFile</td>
+						<td>General file selection with arguments to provide custom behaviour.
+							This must be invoked with arguments that are supplied in the 'inputs'
+							property of the tasks.json file. Invoked by ${input:&lt;input-id&gt;}
+						</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickXsltFile</td>
+						<td>Returns a user-selected XSLT file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickXmlSourceFile</td>
+						<td>Returns a user-selected XML Source file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickStage2XmlSourceFile</td>
+						<td>Returns a user-selected Stage2 XML source file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickResultFile</td>
+						<td>Returns a user-selected result file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickStage2ResultFile</td>
+						<td>Returns a user-selected result file for Stage2</td>
+					</tr>
+				</tbody>
+			</table>
 			<p>A full list of variable references is given in Visual Studio Code's
 				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
 			<h3>Configuring more tasks</h3>
