@@ -1,5 +1,4 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE HTML><html lang="en">
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -171,7 +170,11 @@ npm install --save-dev xslt3</code>
 				return a string can be invoked via variable substitution, the boiler plate XSLT Task uses <code>${command:xslt-xpath.pickXsltFile}'</code> and <code>${command:xslt-xpath.pickResultFile}'</code>
 				variable references.
 			</p>
-			<p>A set of 'Pick File' commands suitable for XSLT tasks is available to allow user-selected file paths to be used within an XSLT task.
+			<h4>User-input for file-selection within a Task</h4>
+			<p>
+				A set of 'Pick File' commands suitable for XSLT tasks is available to allow user-selected file paths to be used within an XSLT task. An example is shown below:</p>
+			<p><img src="resources/newest-pickFiles.png" class="scale-with-grid"></p>
+			<p>
 			Each command prompts the user to select a file. This is from: the current file, a 'recent files' list for that commmand (optionally from a specified 'previous stage' command),
 			or from a 'Open File' or 'Save File' VS Code dialog as appropriate. The available commands are listed below:	
 			</p>
@@ -214,6 +217,81 @@ npm install --save-dev xslt3</code>
 			</table>
 			<p>A full list of variable references is given in Visual Studio Code's
 				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
+			<h4>The 'pickFile' command</h4>
+			<p>The general purpose command 'xslt-xpath.pickFile' is the base commands for specific 'pick file' commands like 'pickXsltFile'.
+			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 4 ways:
+				<ul>
+					<li>the current file (if it's extension is compatible with the extensions list)</li>
+					<li>from recently used (current stage) files - from list for the current label e.g. 'Select XSLT File'</li>
+					<li>from recently used (previous stage result) files - shows result files from a previous task</li>
+					<li>from an 'Open File' or 'Save File' dialog</li>
+				</ul>
+			</p>
+			<p>The 'recently used' file data is maintained per workspace and is restored when VS Code is closed and reopened. A 'clear recently used' option
+				is also listed when there are files already in the list. 
+			</p>
+			<p>The 'pickList' command must be invoked as an 'input' property of a task as it requires an 'options' argument. A sample 'inputs' property
+			can be added to the 'tasks.json' file with the <code>XSLT: add Inputs to Task file</code> command.</p>
+				<p>The 'pickFile' commands 'options' object have the following properties:
+				<ul>
+					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
+					<li>extensions? - an array of filter file-extensions (when set, a '*' option can also be selected from the dialog)</li>
+					<li>isResult? - causes the 'Save File' dialog to be shown when set true</li>
+					<li>prevStageLabel? - shows the recently used files for the specified label</li>
+					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent filesfrom previous stage'</li>
+				</ul>
+				<strong>A sample inputs property using the 'pickFile' command is shown below:</strong>
+			</p>
+			<code class="block">
+"inputs": [
+/*
+1. the specialist 'pickFile' command equivalents for the inputs defined here are:
+	"xsltFile": "${command:xslt-xpath.pickXsltFile}",              // can select from current file - if xslt - or recently used xslt files
+	"xmlSource": "${command:xslt-xpath.pickXmlSourceFile}",        // can select from current file or recently used stage1 source files
+	"xmlSource": "${command:xslt-xpath.pickStage2XmlSourceFile}",  // can select from recently used stage2 source files or stage1 result files
+	"resultPath": "${command:xslt-xpath.pickResultFile}",          // can save to recently used stage1 result files
+	"resultPath": "${command:xslt-xpath.pickStage2ResultFile}",    // can save to recently used stage2 result files
+
+2. these inputs invoke the 'pickFile' command with args for custom behaviour:
+*/
+{
+	/* --- Usage: ---
+	"xmlSource": "${input:xmlFile}",
+	*/
+	"id": "xmlFile",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select XML File", "extensions": ["xml", "xhtml", "svg"] }
+},
+{
+	/* --- Usage: ---
+	"xmlSource": "${input:xmlFile2}",
+	*/
+	"id": "xmlFile2",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select Stage1 XML File", "extensions": ["xml", "xhtml", "svg"], "prevStageLabel": "Select Result File", "prevStageGroup": "recent files from previous stage" }
+},
+{
+	/* --- Usage: ---
+	"xsltFile": "${input:xsltFile}",
+	*/
+	"id": "xsltFile",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select XSLT Stylesheet", "extensions": ["xsl", "xslt"] }
+},
+{
+	/* --- Usage: ---
+	"resultPath": "${input:resultFile}",
+	*/
+	"id": "resultFile",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select Result File", "isResult": true }
+}
+]
+				</code>
 			<h3>Configuring more tasks</h3>
 			<p>To create more tasks, just invoke <code>Tasks: Run Build Task</code> from the Command Palette 
 				and choose the task type you need. Provided you've changed the <code>label</code> property from the template
