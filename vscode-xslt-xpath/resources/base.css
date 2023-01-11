@@ -47,6 +47,16 @@
 	table {
 		border-collapse: collapse;
 		border-spacing: 0; }
+	table, td, th {
+		border: solid 1px;
+		margin-bottom: 12px;
+	}
+	td, th {
+		padding: 4px
+	}
+	th {
+		font-weight: bold;
+	}
 
 
 /* #Basic Styles

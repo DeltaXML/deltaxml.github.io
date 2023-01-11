@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXML's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="six columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="resources/deltaxml-logo.png" width="70px" style="float: left; padding-top: 10px;">
+					<p style="float: left; padding: 20px 5px 0px 10px; color: #c2e664; text-align: center;">VS
+						Code<br>Extension<br><span style="font-size: x-small;">By DeltaXML</span></p>
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: white">XSLT and XPath</h3>
+				<h5 style="color: white;">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="run-xslt.html">Running XSLT</a></li>
+				<li><a href="refactoring-xslt.html" class="active">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">Refactoring: Extract to xsl:function</h2>
+		
+		<div class="two-thirds column">
+			<p>The <a href="editing-xslt.html#refactoring">Refactoring</a> section of the Editing XSLT/XPath part
+				of this guide describes XSLT refactoring in general. This section provides additional detail on the 
+				<strong>'extract to xsl:function refactor.</strong>.
+			</p>
+			<h3 id="intro">Introduction</h3>
+			<p>
+			There are two available modes for extracting selected code to an xsl:function: <strong>full</strong> and <strong>partial</strong>.			
+      In this refactor, required context properties must be passed as parameters when the new xsl:function is invoked, this is because
+			context properties are cleared inside an xsl:function.
+			</p>
+			<h4>Partial Mode</h4>
+			<p>In the <strong>partial</strong> mode, required parameters are passed to the new function, but code in not refactored to 
+			reference the new parameters. Instead, the 'missing-context' properties are highlighted as problems.</p>
+			<h4>Full Mode</h4>
+			<p>The <strong>full</strong> refactor fixes 'missing-context' properties by refactoring the code to reference the 
+				relevant parameters.
+			</p>
+			<h3 id="example">A Sample Refactor</h3>
+			<p>The screenshots below show sample code refactored to extracte to an xsl:function.</p>
+			<p>
+				<img src="resources/original-selection.png" class="scale-with-grid">
+				<emphasis>1. The original code selected for refactoring</emphasis>
+			</p>
+			<p>
+				<img src="resources/partial-refactor.png" class="scale-with-grid">
+				<emphasis>2. After a <strong>partial</strong> refactor</emphasis>: 'missing-context' problems are highlighted
+			</p>
+			<p>
+				<img src="resources/full-refactor.png" class="scale-with-grid">
+				<emphasis>2. After a <strong>full</strong> refactor</emphasis>: there are no 'missing-context' problems as code is updated in the refactor to let parameters provide the context
+			</p>
+			<h3 id="restrictions">Known Restrictions</h3>
+			<p>
+				The code selected for a refactor is important. For example,
+				in many cases it may be more effective to extract an entire xsl:merge instruction instead of
+				a set of instructions within the child xsl:merge-action instruction.
+			</p>
+			<p>There are known limitations in what can be acheived when passing context to an xsl:function, these are outlined below.
+				Please note also that in general there will be cases where, because of context, it would be advisable to
+				extract to xsl:template instead of xsl:function.</p>
+			<ul>
+				<li>
+					Potential ‘missing context’ problems for the <i>xsl:call-template</i> instruction are highlighted but not fixed.
+					In such cases, it’s advisable to undo the refactor and use the <strong>extract to xsl:template</strong> refactoring instead.
+				</li>
+				<li>
+					The regex-group($n) expression (where $n is not a literal integer) with ‘missing context’  is a special refactoring case. 
+					It is resolved to <code>$r.group($n)</code> where <code>$r.group</code> references a context xsl:param of type
+					<code>map(xs:integer, xs:string)</code>, The number of items in the generated code for <code>$r.group</code> 
+					is set to <code>99</code>
+					this number should be corrected manually to the expected number of regex groups given the regex used.
+				</li>
+			</ul>
+			<h3 id="context-properties">Context Properties</h3>
+			<p>The table below lists the context properties, along with the corresponding xsl:function parameter names that will, 
+				if required, be created for an xsl:function refactor.</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Context property</th>
+						<th>Parameter</th>
+					</tr>
+				</thead>
+				<thead>
+					<tr>
+						<td>current() or '.'</td>
+						<td>c.x</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>position()</td>
+						<td>c.p</td>
+					</tr>
+					<tr>
+						<td>last()</td>
+						<td>c.l</td>
+					</tr>
+					<tr>
+						<td>current-group()</td>
+						<td>g.current</td>
+					</tr>
+					<tr>
+						<td>current-grouping-key()</td>
+						<td>g.key</td>
+					</tr>
+					<tr>
+						<td>regex-group($n)</td>
+						<td>r.group($n)</td>
+					</tr>
+					<tr>
+						<td>current-merge-group()</td>
+						<td>m.current</td>
+					</tr>
+					<tr>
+						<td>current-merge-key()</td>
+						<td>m.key</td>
+					</tr>
+					<tr>
+						<td>current-merge-group()</td>
+						<td>g.current</td>
+					</tr>
+					<tr>
+						<td>current-merge-group($name)</td>
+						<td>g.groups($name)</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+	</div>
+</body>
+
+</html>
