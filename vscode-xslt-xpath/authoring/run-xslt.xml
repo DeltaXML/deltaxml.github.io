@@ -154,11 +154,12 @@ npm install --save-dev xslt3</code>
 				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
 			<h4>The 'pickFile' command</h4>
 			<p>The general purpose command 'xslt-xpath.pickFile' is the base commands for specific 'pick file' commands like 'pickXsltFile'.
-			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 4 ways:
+			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 5 ways:
 				<ul>
 					<li>the current file (if it's extension is compatible with the extensions list)</li>
 					<li>from recently used (current stage) files - from list for the current label e.g. 'Select XSLT File'</li>
 					<li>from recently used (previous stage result) files - shows result files from a previous task</li>
+					<li>from the <code>&lt;?xml-stylesheet href="...?></code> href in the current file</li>
 					<li>from an 'Open File' or 'Save File' dialog</li>
 				</ul>
 			</p>
@@ -167,6 +168,7 @@ npm install --save-dev xslt3</code>
 			</p>
 			<p>The 'pickList' command must be invoked as an 'input' property of a task as it requires an 'options' argument. A sample 'inputs' property
 			can be added to the 'tasks.json' file with the <code>XSLT: add Inputs to Task file</code> command.</p>
+			<h3>Command Options for 'pickFile'</h3>
 				<p>The 'pickFile' commands 'options' object have the following properties:
 				<ul>
 					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
@@ -174,10 +176,11 @@ npm install --save-dev xslt3</code>
 					<li>isResult? - causes the 'Save File' dialog to be shown when set true</li>
 					<li>prevStageLabel? - shows the recently used files for the specified label</li>
 					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent filesfrom previous stage'</li>
+					<li>xmlStylesheetPI? - set 'true' for pick-list to include a <code>&lt;?xml-stylesheet?></code> href from current editor</li>
 				</ul>
-				<strong>A sample inputs property using the 'pickFile' command is shown below:</strong>
+				<strong>Sample input property definitions for the 'pickFile' command are listed below:</strong>
 			</p>
-			<code class="block" height="300px">
+			<code class="block" style="height: 300px">
 "inputs": [
 /*
 1. the specialist 'pickFile' command equivalents for the inputs defined here are:
@@ -214,7 +217,7 @@ npm install --save-dev xslt3</code>
 	"id": "xsltFile",
 	"type": "command",
 	"command": "xslt-xpath.pickFile",
-	"args": {"label": "Select XSLT Stylesheet", "extensions": ["xsl", "xslt"] }
+	"args": {"label": "Select XSLT Stylesheet", "extensions": ["xsl", "xslt"], "xmlStylesheetPI": true }
 },
 {
 	/* --- Usage: ---
