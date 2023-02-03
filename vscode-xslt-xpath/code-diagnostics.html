@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXML's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="six columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="resources/deltaxml-logo.png" width="70px" style="float: left; padding-top: 10px;">
+					<p style="float: left; padding: 20px 5px 0px 10px; color: #c2e664; text-align: center;">VS
+						Code<br>Extension<br><span style="font-size: x-small;">By DeltaXML</span></p>
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: white">XSLT and XPath</h3>
+				<h5 style="color: white;">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="run-xslt.html">Running XSLT</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html" class="active">Debugging</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">Debugging</h2>
+		
+		<div class="two-thirds column">
+			<p>There is no step-through debugger in the XSLT/XPath extesnion. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
+				Another popular approach is 
+				to add XSLT instructions that insert diagnostics information directly into the result document. 			
+			</p>
+			<h3>Diagnosing state of in-scope XSLT variables</h3>
+			<p>There is special provision for conveniently reviewing the state of in-scope XSLT variables. This approach is outlined here.</p>
+			<h4>1. Use Auto-complete for xsl:message</h4>
+			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction:</p>
+			<p>
+				<img src="resources/xslmessage-list.png" class="scale-with-grid">
+			</p>
+			<h4>2. Review Inserted xsl:message</h4>
+			<p>When <strong>complex variables</strong> is selected from the auto-complete list,
+				an xsl:message snippet will be inserted at the cursor with all the in-scope variables listed.
+				A title is automativally inserted into the xsl:message block. This corresponds to the name or mode of the parent instruction,
+				such as the name of an enclosing xsl:function or the mode of an xsl:template.
+			</p>
+			<p>
+				<img src="resources/inserted-message.png" class="scale-with-grid">
+			</p>
+			<h4>3. QuickFix imported library function</h4>
+			<p>
+				As can be seen in the image above the library XPath function <code>ext:print()</code> is included within a
+				Text Value Template (TVT) adjacent to each variable that is added in the current scope.
+				When inserted for the first time, the inserted functions will be marked as 'problems'. Hover over the
+				problem function and accept the 'QuickFix' by pressing <span class="shortcut">Enter</span>.
+			</p>
+			<p>The QuickFix will insert a namespace declaration for the <strong>'ext'</strong> prefix along
+				with an <strong>xsl:include</strong> instruction to import the XSLT library where this function is defined.
+				The <strong>href</strong> attribute for the instruction is set to the path of the 
+				<strong>xpath-result-serializer.xsl</strong> library module. If the library module is found in
+				the workspace folder then this file path will be used, otherwise it is set to reference the
+				library module installed with this extension.
+			</p>
+			<p>
+				<img src="resources/extprint-quickfix.png" class="scale-with-grid">
+			</p>
+			<h4>4. Run XSLT and Review State in Terminal</h4>
+			<p>
+				You can now <a href="run-xslt.html">run the XSLT</a> as normal, but you will now see the xsl:message output in the terminal
+				window for each variable. Each type is serialized in a form optimised for diagnostics. If using a version of Saxon prior to v0.9.0.2 the output
+				will be colorised also:
+			</p>
+			<p>
+				<p>
+					<img src="resources/printed-map.png" class="scale-with-grid">
+				</p>
+			</p>
+			<p><aside>Colorising is restricted to a limited set of Saxon versions because later versions don't support use of a built-in
+				TextEmitter command-line option. This option is needed to preventing the escaping of ANSI codes used for coloring the output.<br>
+				In later saxon versions, a <strong>MessageHandler</strong> can be used to achieve the same thing but this must be done using 
+					Saxon's Java API.	
+				</aside>
+			</p>
+		</div>
+		
+	</div>
+	</div>
+</body>
+
+</html>

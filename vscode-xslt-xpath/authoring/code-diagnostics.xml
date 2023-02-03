@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+		
+		<div class="two-thirds column">
+			<p>There is no step-through debugger in the XSLT/XPath extesnion. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
+				Another popular approach is 
+				to add XSLT instructions that insert diagnostics information directly into the result document. 			
+			</p>
+			<h3>Diagnosing state of in-scope XSLT variables</h3>
+			<p>There is special provision for conveniently reviewing the state of in-scope XSLT variables. This approach is outlined here.</p>
+			<h4>1. Use Auto-complete for xsl:message</h4>
+			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction:</p>
+			<p>
+				<img src="resources/xslmessage-list.png" class="scale-with-grid" />
+			</p>
+			<h4>2. Review Inserted xsl:message</h4>
+			<p>When <strong>complex variables</strong> is selected from the auto-complete list,
+				an xsl:message snippet will be inserted at the cursor with all the in-scope variables listed.
+				A title is automativally inserted into the xsl:message block. This corresponds to the name or mode of the parent instruction,
+				such as the name of an enclosing xsl:function or the mode of an xsl:template.
+			</p>
+			<p>
+				<img src="resources/inserted-message.png" class="scale-with-grid" />
+			</p>
+			<h4>3. QuickFix imported library function</h4>
+			<p>
+				As can be seen in the image above the library XPath function <code>ext:print()</code> is included within a
+				Text Value Template (TVT) adjacent to each variable that is added in the current scope.
+				When inserted for the first time, the inserted functions will be marked as 'problems'. Hover over the
+				problem function and accept the 'QuickFix' by pressing <span class="shortcut">Enter</span>.
+			</p>
+			<p>The QuickFix will insert a namespace declaration for the <strong>'ext'</strong> prefix along
+				with an <strong>xsl:include</strong> instruction to import the XSLT library where this function is defined.
+				The <strong>href</strong> attribute for the instruction is set to the path of the 
+				<strong>xpath-result-serializer.xsl</strong> library module. If the library module is found in
+				the workspace folder then this file path will be used, otherwise it is set to reference the
+				library module installed with this extension.
+			</p>
+			<p>
+				<img src="resources/extprint-quickfix.png" class="scale-with-grid" />
+			</p>
+			<h4>4. Run XSLT and Review State in Terminal</h4>
+			<p>
+				You can now <a href="run-xslt.html">run the XSLT</a> as normal, but you will now see the xsl:message output in the terminal
+				window for each variable. Each type is serialized in a form optimised for diagnostics. If using a version of Saxon prior to v0.9.0.2 the output
+				will be colorised also:
+			</p>
+			<p>
+				<p>
+					<img src="resources/printed-map.png" class="scale-with-grid" />
+				</p>
+			</p>
+			<p><aside>Colorising is restricted to a limited set of Saxon versions because later versions don't support use of a built-in
+				TextEmitter command-line option. This option is needed to preventing the escaping of ANSI codes used for coloring the output.<br/>
+				In later saxon versions, a <strong>MessageHandler</strong> can be used to achieve the same thing but this must be done using 
+					Saxon's Java API.	
+				</aside>
+			</p>
+		</div>
+		
+	</div>	
+</html>
