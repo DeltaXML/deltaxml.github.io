@@ -1,5 +1,4 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE HTML><html lang="en">
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -110,18 +109,23 @@
 			<h4>4. Run XSLT and Review State in Terminal</h4>
 			<p>
 				You can now <a href="run-xslt.html">run the XSLT</a> as normal, but you will now see the xsl:message output in the terminal
-				window for each variable. Each type is serialized in a form optimised for diagnostics. If using a version of Saxon prior to v0.9.0.2 the output
-				will be colorised also:
+				window for each variable. Each type is serialized in a form optimised for diagnostics. The basic features are:
 			</p>
+			<ul>
+				<li>Special formatting for nested arrays, maps and sequences</li>
+				<li>Space-saving multi-line formatting</li>
+				<li>Bracket-pair colorising for clarity</li>
+				<li>Colorising for different XPath 3.1 types</li>
+			</ul>
 			<p>
 				<p>
 					<img src="resources/printed-map.png" class="scale-with-grid">
 				</p>
 			</p>
-			<p><aside>Colorising is restricted to a limited set of Saxon versions because later versions don't support use of a built-in
-				TextEmitter command-line option. This option is needed to preventing the escaping of ANSI codes used for coloring the output.<br>
-				In later saxon versions, a <strong>MessageHandler</strong> can be used to achieve the same thing but this must be done using 
-					Saxon's Java API.	
+			<p><aside>Colorising for <strong>ext:print()</strong> should work from VSCode with all SaxonJ and SaxonJS versions. 
+					Because later SaxonJ versions don't support use of a built-in
+				TextEmitter command-line option, an extension class is used instead of `net.sf.saxon.Transform` when invoking
+				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br>
 				</aside>
 			</p>
 		</div>
