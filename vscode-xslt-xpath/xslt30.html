@@ -1,0 +1,116 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXML's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="six columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="resources/deltaxml-logo.png" width="70px" style="float: left; padding-top: 10px;">
+					<p style="float: left; padding: 20px 5px 0px 10px; color: #c2e664; text-align: center;">VS
+						Code<br>Extension<br><span style="font-size: x-small;">By DeltaXML</span></p>
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: white">XSLT and XPath</h3>
+				<h5 style="color: white;">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="run-xslt.html">Running XSLT</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li><a href="xslt30.html" class="active">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">XSLT 3.0</h2>
+		
+		<div class="two-thirds column">
+			<p>
+				<strong>XSLT 3.0</strong>, <a href="https://www.w3.org/TR/2017/REC-xslt-30-20170608/">published by W3c on 8 June 2017</a>,
+				is the latest stable version of XSLT. As such, it is the target version for  
+				XSLT in this extension, alongside <strong>XPath 3.1</strong>.
+			</p>
+			<h3>Learning XSLT 3.0</h3>
+			<p>The online W3C documentation for XSLT 3.0, along with its XPath 3.1 sub-language, comprises 3 main parts:</p>
+			<ul>
+				<li><a href="https://www.w3.org/TR/2017/REC-xslt-30-20170608/">XSL Transformations (XSLT) Version 3.0</a></li>
+				<li><a href="https://www.w3.org/TR/xpath-31/">XML Path Language (XPath) 3.1</a></li>
+				<li><a href="https://www.w3.org/TR/xpath-functions-31/">XPath and XQuery Functions and Operators 3.1</a></li>
+			</ul>
+			<aside>Note: The <a hrer="https://www.w3.org/TR/xslt-xquery-serialization-31/W3C">XSLT 3.1 Serialization</a> specification 
+				is available separately as this is shared with XQuery.</aside>
+			<h4>Offline Reading Material</h4>
+			<p>There are no published books for XSLT 3.0, but the <a href="https://isbnsearch.org/isbn/9780470192740">XSLT 2.0 and XPath 2.0 Programmer's Reference</a>
+				by Michael Kay
+				is frequently recommended. XSLT 3.0 is a signicant enhancement to XSLT 2.0 but it builds on the fundamental principals and language in XSLT 2.0.
+			</p>
+			<h4>Video Tutorials</h4>
+			<p>A set of video tutorials by Dimitre Novatchev is available:</p>
+			<ul>
+				<li><a href="https://www.pluralsight.com/courses/xslt-foundations-part1">XSLT 2.0 and 1.0 Foundations</a>.</li>
+				<li><a href="https://www.pluralsight.com/courses/xpath-3-0-whats-new">The Evolution of XPath: What’s New in XPath 3.0</a>.</li>
+			</ul>
+			<h3>Supporting XSLT Processors</h3>
+			<p>This extension integrates with the Saxon XSLT processor by Saxonica via XSLT tasks through the Saxon command-line interface. 
+				Saxon is probably the most popular/ubiquitous XSLT 3.0 procesor. 
+				It publishes specification <a href="https://www.saxonica.com/documentation11/#!conformance/xslt30">conformance data</a> 
+				and supports <a href="https://www.saxonica.com/products/platforms.xml">many platforms</a>.
+				A free open source version <a href="https://github.com/Saxonica/Saxon-HE">Saxon-HE</a> is available along with 
+				paid-for 'Professional' and 'Enterprise' variants are also available. These are
+				summarised in a <a href="https://www.saxonica.com/products/feature-matrix-12.xml">feature matrix</a>.</p>
+			<p>Altova's <a href="https://www.altova.com/raptorxml">RaptorXML</a> server supports XSLT 3.0. No XSLT standards conformance
+				data is published for this processor.
+			</p>
+		</div>
+		
+	</div>
+	</div>
+</body>
+
+</html>
