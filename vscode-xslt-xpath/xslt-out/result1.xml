@@ -61,7 +61,7 @@
 					can help with editing, reviewing, refactoring and running XSLT.
 				
 				
-					XSLT 3.0 support is standard. The proposed XSLT 4.0 support is invoked by setting version="4.0" on the root element.
+					XSLT 3.0 support is standard. Support for the proposed XSLT 4.0 is enabled by setting version="4.0" on the root element.
 				
 				
                      These pages complement the extensive Visual Studio Code documentation that begins:
@@ -78,7 +78,7 @@
 				
 					Visual Studio Code's user interface
 					has a different look and feel to that of legacy XSLT editors. The Command Palette, along with keybindings to
-					most common commands, play a signficant role in provding a clearer environment to work in. User interface clutter is significantly
+					most common commands, play a significant role in providing a clearer environment to work in. User interface clutter is significantly
 					reduced by eschewing previous designs which depended on a set of toolbars, each with an abundance of buttons.
 
 				The application menu bar and associated dropdown menus usefully group the more essential actions for managing your code.
