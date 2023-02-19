@@ -95,6 +95,12 @@
 					list. The list of commands is
 					filtered as you type. The most recently used commands are shown at the top of the list.
 				
+				Workspace Files
+				
+					The File &gt; Open Folder command is used to pick the 'Workspace' folder to be used by VS Code.
+					The keyboard shortcut ⌘P provides quick-access to all Workspace files from a pick-list.
+					'Fuzzy-matching' allows you to type in just a part of the filename to filter the pick-list files.
+				
 				Keyboard Shortcuts
 				
 					While the Command Palette provides convenient access to features you should find that keyboard shortcuts are
