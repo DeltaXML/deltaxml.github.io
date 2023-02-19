@@ -91,10 +91,24 @@
 			included/imported files are included in the suggestions list.</p>
 		<h5>Intellisense for XPath Locations</h5>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
-			This is the last non-XSLT file opened in Visual Studio Code.</p>
+			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
+			for the XSLT file editor will show the context filename. The label: <strong>[auto-completion context]</strong>
+			is shown if the context file has not been set.
+		</p>
+		<h6><strong>Locking the context file</strong></h6>
+		<p>To lock the auto-completion context file to a specific file, click on the status-bar item 
+			for the context file. You can then select from the list of recently opened XML files
+			or pick a different file using the system's file explorer dialog.
+		</p>
+		<p>
 		<img src="resources/xpath-auto-complete.png" class="scale-with-grid" />
+		</p>
+		<h6><strong>Variables and XPath Locations</strong></h6>
 		<p>XPath is evaluated as you type so node-names in the auto-completion list are filtered to be just
-		those that are possible given previous XPath steps such as axes and node-name tests.</p>
+		those that are possible given previous XPath steps such as axes and node-name tests. If an XPath location
+			expression starts with a variable that also contains an XPath location, that context from that variable
+			is also used to limit the node-names shown in the auto-completion list.
+		</p>
 		<h5>Triggering the auto-complete list</h5>
 		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
 			fit the context of the curstor location. 
