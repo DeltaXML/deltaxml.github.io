@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<!-- Basic Page Needs
@@ -25,7 +34,7 @@
 
 	<!-- Favicons
 							==================================================-->
-	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"/>
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32" />
 
 </head>
 
@@ -74,20 +83,25 @@
 			<div class="two-thirds column">
 				<p>
 					Coding in modern XSLT presents a rewarding yet challenging experience for the developer.
-					Discover in this guide how Visual Studio Code, extended with DeltaXML's 
-					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath extension</a>, 
+					Discover in this guide how Visual Studio Code, extended with DeltaXML's
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath
+						extension</a>,
 					can help with editing, reviewing, refactoring and running XSLT.
 				</p>
 				<aside>
-					<a href="xslt30.html">XSLT 3.0</a> support is standard. Support for the proposed <a href="xslt40.html">XSLT 4.0</a> is enabled by setting <strong>version="4.0"</strong> on the root element.
+					<a href="xslt30.html">XSLT 3.0</a> support is standard. Support for the proposed <a
+						href="xslt40.html">XSLT 4.0</a> is enabled by setting <strong>version="4.0"</strong> on the root
+					element.
 				</aside>
 				<p>
-                     These pages complement the extensive <a
-					href="https://code.visualstudio.com/docs">Visual Studio Code documentation</a> that begins:
+					These pages complement the extensive <a href="https://code.visualstudio.com/docs">Visual Studio Code
+						documentation</a> that begins:
 				</p>
 				<blockquote>
-					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is
-					available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a
+					Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and
+					is
+					available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript
+					and Node.js and has a
 					rich ecosystem of extensions for other languages...
 				</blockquote>
 				<p>
@@ -95,19 +109,27 @@
 				</p>
 				<h3>The User Interface</h3>
 				<p>
-					Visual Studio Code's <a href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a>
-					has a different look and feel to that of legacy XSLT editors. The Command Palette, along with keybindings to
-					most common commands, play a significant role in providing a clearer environment to work in. User interface clutter is significantly
-					reduced by eschewing previous designs which depended on a set of toolbars, each with an abundance of buttons.</p>
+					Visual Studio Code's <a href="https://code.visualstudio.com/docs/getstarted/userinterface">user
+						interface</a>
+					has a different look and feel to that of legacy XSLT editors. The Command Palette, along with
+					keybindings to
+					most common commands, play a significant role in providing a clearer environment to work in. User
+					interface clutter is significantly
+					reduced by eschewing previous designs which depended on a set of toolbars, each with an abundance of
+					buttons.</p>
 
-				<p>The application <strong>menu bar</strong> and associated dropdown menus usefully group the more essential actions for managing your code.
-				The <strong>View</strong> menu is particularly useful as it logically sets out the large set of view-configuration commands.
+				<p>The application <strong>menu bar</strong> and associated dropdown menus usefully group the more
+					essential actions for managing your code.
+					The <strong>View</strong> menu is particularly useful as it logically sets out the large set of
+					view-configuration commands.
 				</p>
-			  <p>The sections below introduce you to the fundamental parts of the user interface from the perspective of an XSLT/XPath developer.
+				<p>The sections below introduce you to the fundamental parts of the user interface from the perspective
+					of an XSLT/XPath developer.
 				</p>
 				<h3>The Command Palette</h3>
 				<p>A principal part of Visual Studio Code's <a
-						href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a> is the Command
+						href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a> is the
+					Command
 					Palette,
 					triggered
 					by the keyboard shortcut <span class="shortcut">⇧⌘P</span>.
@@ -117,18 +139,23 @@
 				</p>
 				<h3>Opening Workspace Files</h3>
 				<p>
-					The <strong>File: Open Folder</strong> command is used to select the starting 'Workspace' folder to be used by VS Code.
-					More folders can be added to the Workspace subsequently using the <strong>Workspaces: Add folder to workspace</strong>
+					The <strong>File: Open Folder</strong> command is used to select the starting 'Workspace' folder to
+					be used by VS Code.
+					More folders can be added to the Workspace subsequently using the <strong>Workspaces: Add folder to
+						workspace</strong>
 					command.
-					The keyboard shortcut <span class="shortcut">⌘P</span> provides quick-access to all Workspace files from a pick-list.
+					The keyboard shortcut <span class="shortcut">⌘P</span> provides quick-access to all Workspace files
+					from a pick-list.
 					'Fuzzy-matching' allows you to type in just a part of the filename to filter the pick-list files.
 				</p>
 				<h3>Keyboard Shortcuts</h3>
 				<p>
-					While the Command Palette provides convenient access to features you should find that keyboard shortcuts are
+					While the Command Palette provides convenient access to features you should find that keyboard
+					shortcuts are
 					more effective for commands you use most
 					frequently.
-					The keyboard shortcut for commands is shown alongside each listed command in the Command Palette. Not all
+					The keyboard shortcut for commands is shown alongside each listed command in the Command Palette.
+					Not all
 					commands
 					have key bindings, but these can be configured using the command
 					<code>Preferences: Open Keyboard Shortcuts</code>
@@ -140,12 +167,14 @@
 				<p>By adding or modifying Visual Studio Settings, using the <code>Preferences: Open User Settings</code>
 					command,
 					you can customize a range of editor and extension features to meet your needs.
-					See the <a href="settings.html">Settings</a> section for details on some of the more important settings for
+					See the <a href="settings.html">Settings</a> section for details on some of the more important
+					settings for
 					developing in XSLT and XPath.
 				</p>
 				<h3>Install the XSLT/XPath Extension</h3>
 				<p>Extensions are managed in the Extensions view (<span class="shortcut">⇧⌘X</span>) of the Side Bar.
-					Type <code>XSLT XPath</code> in the Extensions view search bar and, on the <strong>XSLT/Path for Visual Studio
+					Type <code>XSLT XPath</code> in the Extensions view search bar and, on the <strong>XSLT/Path for
+						Visual Studio
 						Code</strong> entry, press the <code>install</code> button
 					.</p>
 				<p>
@@ -154,34 +183,40 @@
 				<h5>Color Theme Extensions</h5>
 				<p>Visual Studio Code includes a small set of light and dark color themes. Alternative color themes are
 					installed as extensions. The number of available themes can be overwhelming,
-					but VS Code has a built-in Theme Preview feature and there are websites like <a href="https://vscodethemes.com/">vscodethemes</a> that provide
+					but VS Code has a built-in Theme Preview feature and there are websites like <a
+						href="https://vscodethemes.com/">vscodethemes</a> that provide
 					a preview before installing the theme.
 				</p>
-				<p>The <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes">XSLT Dark Themes</a> extension provides
-				a set of popular dark color themes specially enhanced for XSLT and XPath</p>
+				<p>The <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes">XSLT Dark
+						Themes</a> extension provides
+					a set of popular dark color themes specially enhanced for XSLT and XPath</p>
 				<aside>The XSLT/XPath extension syntax highlighter uses <a
 						href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">
-						Semantic Highlighting</a> that should be enabled specifically in Settings to work with external color
+						Semantic Highlighting</a> that should be enabled specifically in Settings to work with external
+					color
 					themes.
 					Highlighter tokens are defined to provide effective highlighting for all the common color themes.
 				</aside>
 				<h5>Other Extensions</h5>
 				<p>Among the hundreds of high quality extensions available for Visual Studio Code,
-					<a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare">Live Share</a>,
+					<a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare">Live
+						Share</a>,
 					for collaborative working
-					and <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server</a>
+					and <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live
+						Server</a>
 					for when you're generating HTML with XSLT are particularly useful.
 				</p>
 				<h3>Edit XML, XSLT or XPath</h3>
 				<p>
-					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio Code
+					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio
+					Code
 					<a href="https://code.visualstudio.com/docs/editor/codebasics">User Guide</a>.
 				</p>
 				<h5>Language Specific Features</h5>
 				<p>XSLT and XPath specific editing features are described in the <a href="editing-xslt.html">Editing
 						XSLT/XPath</a> page
-					of the documentation that your are reading now. More general XML editing features are described in the <a
-						href="editing.html">Editing XML</a> section.</p>
+					of the documentation that your are reading now. More general XML editing features are described in
+					the <a href="editing.html">Editing XML</a> section.</p>
 				<p>The features described at <a href="editing-xslt.html">Editing XSLT/XPath</a> include:</p>
 				<p>
 				<ul>
@@ -202,17 +237,24 @@
 						class="shortcut">⌘O</span>) from Visual Studio Code.
 					The configuration is saved in a <code>tasks.json</code> file in this workspace folder.
 				</p>
-				<p>To create your first task, use the <code>Run Build Task</code> command (<span class="shortcut">⇧⌘B</span>).
-					As there is no currently configured task, you should be prompted to configure one 
-					(if another extension inhibits this, run <span class="shortcut">Configure Task</span> instead). You can then,
+				<p>To create your first task, use the <code>Run Build Task</code> command (<span
+						class="shortcut">⇧⌘B</span>).
+					As there is no currently configured task, you should be prompted to configure one
+					(if another extension inhibits this, run <span class="shortcut">Configure Task</span> instead). You
+					can then,
 					select either the <code>Saxon</code> or <code>Saxon-JS</code> task.</p>
-				<p>A task will be added to the <code>tasks.json</code> task with default properties. To further configure the
-					task, these properties can be changed or other properties added. Auto-completion and hints are provided to
-					assist in the task configuration. Next time you press <span class="shortcut">⇧⌘B</span> your task will be run
-					in a <strong>Task</strong> tab in the Terminal window (toggled with <span class="shortcut">⌘J</span>).
+				<p>A task will be added to the <code>tasks.json</code> task with default properties. To further
+					configure the
+					task, these properties can be changed or other properties added. Auto-completion and hints are
+					provided to
+					assist in the task configuration. Next time you press <span class="shortcut">⇧⌘B</span> your task
+					will be run
+					in a <strong>Task</strong> tab in the Terminal window (toggled with <span
+						class="shortcut">⌘J</span>).
 				</p>
-        <h5>More on running XSLT</h5>
-				<p>XSLT Tasks are explained in full in the <a href="run-xslt.html">Running XSLT</a> section. More general
+				<h5>More on running XSLT</h5>
+				<p>XSLT Tasks are explained in full in the <a href="run-xslt.html">Running XSLT</a> section. More
+					general
 					information can be found in the Visual Studio Code <a
 						href="https://code.visualstudio.com/docs/editor/tasks">Tasks</a>
 					documentation.</p>
