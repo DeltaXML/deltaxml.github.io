@@ -11,6 +11,8 @@
   <xsl:output method="html" version="5.0" indent="no"/>
   <xsl:mode name="copyPage" on-no-match="shallow-copy"/>
   
+  <xsl:variable name="indexTitle" as="xs:string" select="normalize-space(/html/head/title)"/>
+  
   <xsl:template match="nav//ul" mode="#default">
     <xsl:message select="'debug message'"/>
     <xsl:apply-templates select="li/a/@href"/>    
@@ -34,6 +36,13 @@
         <xsl:with-param name="mainDiv" select="doc($inputFilename)//div[@class eq 'main']" tunnel="yes"/>
       </xsl:apply-templates>
     </xsl:result-document>
+  </xsl:template>
+  
+  <xsl:template match="title" mode="copyPage">
+    <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
+    <xsl:copy>
+      <xsl:value-of select="$pageTitle || ' | ' || $indexTitle"/>
+    </xsl:copy>
   </xsl:template>
   
   <xsl:template match="div[@class eq 'main']" mode="copyPage">
