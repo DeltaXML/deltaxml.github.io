@@ -190,7 +190,7 @@
 		</p>
 		<h5>Triggering the auto-complete list</h5>
 		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
-			fit the context of the curstor location. 
+			fit the context of the cursor location. 
 			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">Code Snippet</a> is inserted
 			which will include common attributes for the selected instruction.
 		</p>
@@ -252,7 +252,7 @@
 		<aside>Note: The XSLT Linter uses a Symbol Provider. To ensure checks are performed you should keep the
 			<a href="https://code.visualstudio.com/Docs/editor/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
 		<p>
-			The XSLT/XPath linter performs checks on your code as you type, peforming symbol reference tests across all included modules. 
+			The XSLT/XPath linter performs checks on your code as you type, performing symbol reference tests across all included modules. 
 			Any problems are shown in the Problems Panel and also highlighted inline with a squiggly
 			underline for the specific token at issue.
 			Here is a summary of the key checks:
@@ -261,7 +261,7 @@
 			<li>XML Syntax</li>
 			<li>XSLT/XPath Variable name references</li>
 			<li>XSLT/XPath Parameter name references</li>
-			<li><strong>All</strong> other symbol name refererences (<code>xsl:accumulator</code> <code>xsl:key</code> etc.)</li>
+			<li><strong>All</strong> other symbol name references (<code>xsl:accumulator</code> <code>xsl:key</code> etc.)</li>
 			<li>Function name and arity (number of params)</li>
 			<li><code>xsl:with-param</code> names</li>
 			<li>File locations in <code>xsl:import</code> <code>xsl:include</code> <code>xsl:use-package</code></li>
@@ -279,9 +279,9 @@
 			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
 		</p>
 		<p>The <strong>Inferred Imports</strong> feature prevents spurious problems being highlighted in the editor.
-			With this featue, a search is made to find if the active XSLT stylesheet has been declared as an import by another stylesheet opened recently
+			With this feature, a search is made to find if the active XSLT stylesheet has been declared as an import by another stylesheet opened recently
 			in Visual Studio Code. If such a 'parent' stylesheet is found (the most recently opened example is used) it is imported along with any other imports. Functions and,
-			variables etc. used in the active stylehseet can therefore be resolved.
+			variables etc. used in the active stylesheet can therefore be resolved.
 		</p>
 		<h5>Unused Variables</h5>
 		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
@@ -290,7 +290,7 @@
 		</p>
 		<h5>Compile-time and Run-time problems</h5>
 		<p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
-			When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT procesor 
+			When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT processor 
 			(shown in the Task tab of the Terminal View) so that the problem token is highlighted,
 			and the error message is shown in the Problems View.	
 		</p>
