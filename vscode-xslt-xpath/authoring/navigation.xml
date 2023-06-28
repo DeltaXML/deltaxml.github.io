@@ -66,13 +66,13 @@
 			<h5>Peek Definition</h5>
 			
 			<p>Invoke the <strong>Peek Definition</strong> command by pressing (<span class="shortcut">⌥F12</span>) on any symbol name such as a variable or function name.
-				This command embeds a view of the defintion inline avoiding the context-switch arising from the <strong>Goto Definition</strong> command.
-				The inline definition view permits quick edits of the defintion also. Press <span class="shortcut">Escape</span> to close the definition view.
+				This command embeds a view of the definition inline avoiding the context-switch arising from the <strong>Goto Definition</strong> command.
+				The inline definition view permits quick edits of the definition also. Press <span class="shortcut">Escape</span> to close the definition view.
 			</p>
 			<img src="resources/peek-definition.png" class="scale-with-grid" />
 			<h5>Goto Definition</h5>
 			<p>
-				Invoke the <strong>Goto Defintion</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
+				Invoke the <strong>Goto Definition</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
 				This command navigates you to the location of the symbol definition (for example, the corresponding <code>xsl:variable</code> instruction),
 				opening the containing stylesheet file in the editor group if not already open.
 			</p>

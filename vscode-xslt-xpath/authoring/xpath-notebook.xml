@@ -41,7 +41,7 @@
 				keeping the <code>.xbook</code> extension.
 			</p>
 			<aside>Note: In the 1.65 VS Code release, an empty XPath notebook is created in addition to a XPath notebook
-				with a pre-populated Mardown cell (the API for creating new notebooks is not fully resolved yet).
+				with a pre-populated Markdown cell (the API for creating new notebooks is not fully resolved yet).
 			</aside>
 			<h4>4. Edit and execute a new code cell</h4>
 			<p>To add a new XPath code cell, press the <strong>+ Code</strong> button at the top of the notebook.

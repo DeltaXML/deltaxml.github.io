@@ -76,7 +76,7 @@
         may be supplemented by Semantic Highlighting.
       </p>
       <p>To ensure XSLT and XPath is syntax highlighted in any <a href="https://code.visualstudio.com/docs/getstarted/themes">Color Theme</a>,
-        you should explicity enable Semantic Highlighting with the setting:      
+        you should explicitly enable Semantic Highlighting with the setting:      
       </p>
       <code class="block">
         "editor.semanticHighlighting.enabled": true
@@ -89,7 +89,7 @@
       <h5>Word Separators</h5>
       <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
       listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word
-      separators as these characters are valid within a QName like an arrtibute name or a variable name.</p>
+      separators as these characters are valid within a QName like an attribute name or a variable name.</p>
       <h5>Emmet Snippets</h5>
       <p>
         <a href="https://code.visualstudio.com/docs/editor/emmet">Emmet Snippets</a> provide a convenient shorthand for inserting a

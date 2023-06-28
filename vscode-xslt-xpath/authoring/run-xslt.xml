@@ -110,7 +110,7 @@ npm install --save-dev xslt3</code>
 				A set of 'Pick File' commands suitable for XSLT tasks is available to allow user-selected file paths to be used within an XSLT task. An example is shown below:</p>
 			<p><img src="resources/newest-pickFiles.png" class="scale-with-grid" /></p>
 			<p>
-			Each command prompts the user to select a file. This is from: the current file, a 'recent files' list for that commmand (optionally from a specified 'previous stage' command),
+			Each command prompts the user to select a file. This is from: the current file, a 'recent files' list for that command (optionally from a specified 'previous stage' command),
 			or from a 'Open File' or 'Save File' VS Code dialog as appropriate. The available commands are listed below:	
 			</p>
 			<table>
@@ -175,7 +175,7 @@ npm install --save-dev xslt3</code>
 					<li>extensions? - an array of filter file-extensions (when set, a '*' option can also be selected from the dialog)</li>
 					<li>isResult? - causes the 'Save File' dialog to be shown when set true</li>
 					<li>prevStageLabel? - shows the recently used files for the specified label</li>
-					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent filesfrom previous stage'</li>
+					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
 					<li>xmlStylesheetPI? - set 'true' for pick-list to include a <code>&lt;?xml-stylesheet?></code> href from current editor</li>
 				</ul>
 				<strong>Sample input property definitions for the 'pickFile' command are listed below:</strong>

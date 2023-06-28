@@ -38,7 +38,7 @@
 			<aside>			 
 				The free Saxon-HE version <strong>does not</strong> support the language extensions
 				for XSLT 4.0. You will need to reference a Saxon-PE or Saxon-EE Jar file (with license file)
-				in the <strong>saxonJar</strong> property of the task defintion.
+				in the <strong>saxonJar</strong> property of the task definition.
 			</aside>
 			<hr/>
 			<h3>Other Editors for XSLT 4.0</h3>
