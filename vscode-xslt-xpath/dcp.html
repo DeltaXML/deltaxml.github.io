@@ -15,7 +15,7 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT 4.0 | VS Code XSLT/XPath</title>
+	<title>Comparing XML | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXML's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -76,61 +76,38 @@
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="settings.html">Settings</a></li>
 				<li><a href="xslt30.html">XSLT 3.0</a></li>
-				<li><a href="xslt40.html" class="active">XSLT 4.0</a></li>
-				<li><a href="dcp.html">Comparing XML</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
+				<li><a href="dcp.html" class="active">Comparing XML</a></li>
 			</ul>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT 4.0</h2>
+		<div class="main"><h2 class="pageTitle">Comparing XML</h2>
 		
 		<div class="two-thirds column">
-			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by 
-				the <a href="https://qt4cg.org">W3C XSLT 4.0 Community group</a>.</p>
-			
-			<p>DeltaXML's XSLT/XPath language extension provides high-level support
-				for XSLT 4.0 as implemented in Saxon 12.0 and documented 
-				<a href="https://www.saxonica.com/documentation12/index.html#!v4extensions">here</a>.</p>
-			
-			
-			<p>Note that, given the independent release cycles for Saxon and the XSLT 4.0 draft, there will be
-				differences between the implementation and the draft specification. Some parts of the
-				specification are likely to change significantly before it is finalized.
+			<h2>Introduction</h2>
+			<p>This section describes the support for DeltaXML's <a href="https://docs.deltaxml.com/xml-compare/latest/dcp-user-guide">DCP format</a> provided by this extension. DCP
+				is used by DeltaXML's <a href="https://www.deltaxml.com/products/compare/xml-compare/">XML Compare</a> solution to help tailor a comparison for a specific document type or requirement.			
 			</p>
-			<p>We will endeavour to keep this extension up to date with the latest Saxon XSLT 4.0 implementation.
-			Earlier versions of XSLT 4.0 will not be supported for auto-completion and linting.	
+			<p><img src="resources/dcp-editing.png" class="scale-with-grid"></p>
+			<h2>Extending standard XML editor features</h2>
+			<p>You can create or update Simple DCP files with any XML editor with XML schema 1.0, or (preferably) XML Schema 1.1 support, 
+				like <a href="https://www.oxygenxml.com/">Oxygen XML</a>. 
+				To help with more complex XML comparison features, DCP supports features such as the input parameter referencing and XPath expressions. 
+				This extension includes specific support for these features.				
 			</p>
-			
-			<h3>Editing XSLT 4.0</h3>
-			<p>The <strong>version</strong> attribute on the stylesheet root element controls the
-				XSLT version supported by the linter and for auto-completion. When the 
-				version attribute on the stylesheet root element is set to <strong>4.0</strong>,
-				auto-completion for XSLT instructions and attributes and XPath functions will be included.
-				
-			</p>
+			<h3>Feature Summary</h3>
 			<p>
-				<img src="resources/xslt40-completion.png" class="scale-with-grid">
-			</p>
-			<h3>Running XSLT 4.0</h3>
-			<p>When invoking SaxonJ (Java) for XSLT 4.0 with an <a href="run-xslt.html">XSLT task</a> from VS Code, 
-				the <strong>allowSyntaxExtensions40</strong> must be set <strong>on</strong>
-				in the task defined in tasks.json. The task invokes Saxon via its command-line
-				interface with the configuration property <code>--allowSyntaxExtensions:on</code>. 
-			</p>
-			<aside>			 
-				The free Saxon-HE version <strong>does not</strong> support the language extensions
-				for XSLT 4.0. You will need to reference a Saxon-PE or Saxon-EE Jar file (with license file)
-				in the <strong>saxonJar</strong> property of the task definition.
-			</aside>
-			<hr>
-			<h3>Other Editors for XSLT 4.0</h3>
-            <p>The <a href="https://www.oxygenxml.com/xml_editor/whatisnew25.0.html">Oxygen XML 25.0 editor</a> also provides
-				language support for XSLT 4.0. It supports
-				the earlier <strong>Saxon 11</strong> implementation of XSLT 4.0.</p>
-			
-				<p>While Oxygen does need to be <a href="https://www.oxygenxml.com/xml_editor/buy_oxygen_xml_editor.html">purchased</a>,
-				it has the advantage of including Saxon-EE built-in, so you will not need to purchase Saxon
-				separately. Major versions of Oxygen are normally released annually so the next update is expected in October 2023.
-				Oxygen XML provides an integrated solution for XML developers 
-				and content authors, and hosts an <a href="https://www.oxygenxml.com/xml_editor.html">array of other features</a>.
+				<ul>
+					<li>XML Element auto-completion</li>
+					<li>XML Attribute auto-completion</li>
+					<li>Auto-completion for referenced parameter names</li>
+					<li>Auto-completion for referenced built-in resources</li>
+					<li>XPath syntax highlighting</li>
+					<li>XPath formatting</li>
+					<li>Highlighting for Attribute Value Templates (AVTs)</li>
+					<li>Linter for checking XPath expressions</li>
+					<li>Quick navigation to referenced XSLT files</li>
+					<li>Specialised XML outline tree-view</li>
+				</ul>
 			</p>
 		</div>
 		

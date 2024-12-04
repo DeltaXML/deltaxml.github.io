@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+		
+		<div class="two-thirds column">
+			<h2>Introduction</h2>
+			<p>This section describes the support for DeltaXML's <a href="https://docs.deltaxml.com/xml-compare/latest/dcp-user-guide">DCP format</a> provided by this extension. DCP
+				is used by DeltaXML's <a href="https://www.deltaxml.com/products/compare/xml-compare/">XML Compare</a> solution to help tailor a comparison for a specific document type or requirement.			
+			</p>
+			<p><img src="resources/dcp-editing.png" class="scale-with-grid" /></p>
+			<h2>Extending standard XML editor features</h2>
+			<p>You can create or update Simple DCP files with any XML editor with XML schema 1.0, or (preferably) XML Schema 1.1 support, 
+				like <a href="https://www.oxygenxml.com/">Oxygen XML</a>. 
+				To help with more complex XML comparison features, DCP supports features such as the input parameter referencing and XPath expressions. 
+				This extension includes specific support for these features.				
+			</p>
+			<h3>Feature Summary</h3>
+			<p>
+				<ul>
+					<li>XML Element auto-completion</li>
+					<li>XML Attribute auto-completion</li>
+					<li>Auto-completion for referenced parameter names</li>
+					<li>Auto-completion for referenced built-in resources</li>
+					<li>XPath syntax highlighting</li>
+					<li>XPath formatting</li>
+					<li>Highlighting for Attribute Value Templates (AVTs)</li>
+					<li>Linter for checking XPath expressions</li>
+					<li>Quick navigation to referenced XSLT files</li>
+					<li>Specialised XML outline tree-view</li>
+				</ul>
+			</p>
+		</div>
+		
+	</div>	
+
+</html>
