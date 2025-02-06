@@ -4,8 +4,8 @@
 		
 		<div class="two-thirds column">
 			<h2>Introduction</h2>
-			<p>This section describes the support for DeltaXML's <a href="https://docs.deltaxml.com/xml-compare/latest/dcp-user-guide">DCP format</a> provided by this extension. DCP
-				is used by DeltaXML's <a href="https://www.deltaxml.com/products/compare/xml-compare/">XML Compare</a> solution to help tailor a comparison for a specific document type or requirement.			
+			<p>This section describes the support for DeltaXignia's <a href="https://docs.deltaxml.com/xml-compare/latest/dcp-user-guide">DCP format</a> provided by this extension. DCP
+				is used by DeltaXignia's <a href="https://www.deltaxml.com/products/compare/xml-compare/">XML Compare</a> solution to help tailor a comparison for a specific document type or requirement.			
 			</p>
 			<p><img src="resources/dcp-editing.png" class="scale-with-grid" /></p>
 			<h2>Extending standard XML editor features</h2>

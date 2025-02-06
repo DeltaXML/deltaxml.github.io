@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 
 
 
@@ -46,14 +47,11 @@
 			
 				
 					
-					VS
-						CodeExtensionBy DeltaXML
 				
 			
 			
 				XSLT and XPath
 				for Visual Studio Code
-				
 				
 			
 		
@@ -66,8 +64,7 @@
 			Overview
 			
 				
-					Coding in modern XSLT presents a rewarding yet challenging experience for the developer.
-					Discover in this guide how Visual Studio Code, extended with DeltaXML's
+					Discover in this guide how Visual Studio Code, extended with DeltaXignia's
 					XSLT/XPath
 						extension,
 					can help with editing, reviewing, refactoring and running XSLT.

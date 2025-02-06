@@ -6,7 +6,7 @@
 			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by 
 				the <a href="https://qt4cg.org">W3C XSLT 4.0 Community group</a>.</p>
 			
-			<p>DeltaXML's XSLT/XPath language extension provides high-level support
+			<p>DeltaXignia's XSLT/XPath language extension provides high-level support
 				for XSLT 4.0 as implemented in Saxon 12.0 and documented 
 				<a href="https://www.saxonica.com/documentation12/index.html#!v4extensions">here</a>.</p>
 			
