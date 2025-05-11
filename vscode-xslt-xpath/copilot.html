@@ -16,7 +16,7 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>Comparing XML | VS Code XSLT/XPath</title>
+	<title>GitHub Copilot and XSLT | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -73,44 +73,44 @@
 				<li><a href="code-diagnostics.html">Debugging</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="settings.html">Settings</a></li>
-				<li><a href="copilot.html">GitHub Copilot and XSLT</a></li>
+				<li><a href="copilot.html" class="active">GitHub Copilot and XSLT</a></li>
 				<li><a href="xslt30.html">XSLT 3.0</a></li>
 				<li><a href="xslt40.html">XSLT 4.0</a></li>
-				<li><a href="dcp.html" class="active">Comparing XML</a></li>
+				<li><a href="dcp.html">Comparing XML</a></li>
 			</ul>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Comparing XML</h2>
-		
-		<div class="two-thirds column">
-			<h2>Introduction</h2>
-			<p>This section describes the support for DeltaXignia's <a href="https://docs.deltaxml.com/xml-compare/latest/dcp-user-guide">DCP format</a> provided by this extension. DCP
-				is used by DeltaXignia's <a href="https://www.deltaxml.com/products/compare/xml-compare/">XML Compare</a> solution to help tailor a comparison for a specific document type or requirement.			
-			</p>
-			<p><img src="resources/dcp-editing.png" class="scale-with-grid"></p>
-			<h2>Extending standard XML editor features</h2>
-			<p>You can create or update Simple DCP files with any XML editor with XML schema 1.0, or (preferably) XML Schema 1.1 support, 
-				like <a href="https://www.oxygenxml.com/">Oxygen XML</a>. 
-				To help with more complex XML comparison features, DCP supports features such as the input parameter referencing and XPath expressions. 
-				This extension includes specific support for these features.				
-			</p>
-			<h3>Feature Summary</h3>
-			<p>
-				<ul>
-					<li>XML Element auto-completion</li>
-					<li>XML Attribute auto-completion</li>
-					<li>Auto-completion for referenced parameter names</li>
-					<li>Auto-completion for referenced built-in resources</li>
-					<li>XPath syntax highlighting</li>
-					<li>XPath formatting</li>
-					<li>Highlighting for Attribute Value Templates (AVTs)</li>
-					<li>Linter for checking XPath expressions</li>
-					<li>Quick navigation to referenced XSLT files</li>
-					<li>Specialised XML outline tree-view</li>
-				</ul>
-			</p>
-		</div>
-		
-	</div>
+		<div class="main"><h2 class="pageTitle">GitHub Copilot and XSLT</h2>
+    
+    <div class="two-thirds column">
+      <p><a href="https://code.visualstudio.com/docs/copilot/overview">GitHub Copilot</a> for Visual Studio Code is an AI-powered coding assistant that provides real-time code suggestions and completions
+       to enhance developer productivity.
+      </p>
+      <p>Extensions like the XSLT/XPath extension for Visual Studio Code are leveraged by GitHub copilot to enhance the coding experience
+        by providing more detailed information on syntax issues and enabling syntax highlighting. When developers use the XSLT/XPath
+        extension, Copilot can analyze the code and offer suggestions or corrections for syntax errors, making it easier to identify
+        and resolve problems. This integration allows Copilot to understand the specific syntax rules and patterns of XSLT/XPath,
+        providing more accurate and context-aware assistance.</p>
+
+      <h4>Fixing XSLT Errors</h4>
+      <h5>Within the Editor</h5>
+      <p>A GitHub <strong>Copilot star icon</strong> appears in the margin on the same line of an error selected in the XSLT editor. When the icon
+        is clicked a popup panel will explain the problem and a suggested solution. Click the <code>Accept</code> icon if
+        you want to accept the solution, the edit will them be made for you.
+      </p>
+      
+      <figure>
+        <img src="../images/copilot-screenshot-star.png" class="scale-with-grid">
+        <figcaption style="margin:auto"><i>The GitHub Copilot star icon appears (line 15) alongside the selected error.</i></figcaption>
+      </figure>
+      <p></p>
+      <h5>Copilot Chat Panel</h5>
+      <p>An alternative approach, from within the <strong>Copilot Chat</strong> panel, is to enter the prompt: <code>@workspace /fix</code>.
+        This will explain the problem with the selected error and suggest a solution.
+      </p>
+      
+    </div>
+    
+  </div>
 	</div>
 </body>
 

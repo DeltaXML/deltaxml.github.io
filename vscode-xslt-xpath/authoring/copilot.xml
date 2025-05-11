@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <div class="main">
+    
+    <div class="two-thirds column">
+      <p><a href="https://code.visualstudio.com/docs/copilot/overview">GitHub Copilot</a> for Visual Studio Code is an AI-powered coding assistant that provides real-time code suggestions and completions
+       to enhance developer productivity.
+      </p>
+      <p>Extensions like the XSLT/XPath extension for Visual Studio Code are leveraged by GitHub copilot to enhance the coding experience
+        by providing more detailed information on syntax issues and enabling syntax highlighting. When developers use the XSLT/XPath
+        extension, Copilot can analyze the code and offer suggestions or corrections for syntax errors, making it easier to identify
+        and resolve problems. This integration allows Copilot to understand the specific syntax rules and patterns of XSLT/XPath,
+        providing more accurate and context-aware assistance.</p>
+
+      <h4>Fixing XSLT Errors</h4>
+      <h5>Within the Editor</h5>
+      <p>A GitHub <strong>Copilot star icon</strong> appears in the margin on the same line of an error selected in the XSLT editor. When the icon
+        is clicked a popup panel will explain the problem and a suggested solution. Click the <code>Accept</code> icon if
+        you want to accept the solution, the edit will them be made for you.
+      </p>
+      
+      <figure>
+        <img src="../images/copilot-screenshot-star.png" class="scale-with-grid" />
+        <figcaption style="margin:auto"><i>The GitHub Copilot star icon appears (line 15) alongside the selected error.</i></figcaption>
+      </figure>
+      <p/>
+      <h5>Copilot Chat Panel</h5>
+      <p>An alternative approach, from within the <strong>Copilot Chat</strong> panel, is to enter the prompt: <code>@workspace /fix</code>.
+        This will explain the problem with the selected error and suggest a solution.
+      </p>
+      
+    </div>
+    
+  </div>	
+</html>
