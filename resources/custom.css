@@ -135,6 +135,12 @@ aside {
   height: 100px;
 }
 
+.topbar img {
+  max-width: 100%;
+  height: auto;
+  padding: 2px 2px 2px 20x;
+}
+
 .topTitle {
   padding: 10px 8px 0px 20px;
 }
