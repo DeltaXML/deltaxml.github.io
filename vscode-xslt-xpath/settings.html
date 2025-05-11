@@ -114,9 +114,14 @@
       <code class="block">"XSLT.tasks.java.enabled": true
 "XSLT.tasks.js.enabled": true</code>
       <h3>General Settings For XSLT</h3>
-      <p>This extension includes default configuration settings for XSLT editing features.</p>
-      <p>These features include formatting, word-selection, and syntax-highlighting using semantic-tokens. You can set your own preferences for XSLT and XML editing. The language labels ensure these settings don't affect coding in other languages.</p>
-      <code class="block">  "[xslt]": {   
+      <h5>Configuration Settings From the Extension</h5>
+      <p>This extension includes default configuration settings for XSLT editing features. 
+      These features include formatting, word-selection, and syntax-highlighting using semantic-tokens. 
+      You can set your own preferences for XSLT and XML editing. The language labels ensure these settings don't 
+      affect coding in other languages.</p>
+      <details>
+        <summary>Sample extract from <code>settings.json</code></summary>
+              <code class="block">  "[xslt]": {   
     "editor.defaultFormatter": "deltaxml.xslt-xpath",
     "editor.formatOnSaveMode": "modifications",
     "editor.formatOnSave": true,
@@ -139,6 +144,8 @@
     "editor.tabSize": 4,
     "outline.showArrays": true, // hides attributes in tree-view
   },</code>
+      </details>
+      <p></p>
       <h5>Code Formatting</h5>
       <p>The following settings directly affect code formatting in the XSLT/XPath extension:</p>
       <code class="block">    "editor.defaultFormatter": "deltaxml.xslt-xpath",
@@ -163,8 +170,12 @@
       <p>A selection of popular dark color themes, enhanced for XSLT/XPath, are provided by the extension
         <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes">XSLT Dark Themes</a>
       </p>
+      <details>
+      <summary>[Image] Sample Theme Extended for XSLT</summary>
       <p class="caption"><em>X Gruvbox Material Dark theme:</em></p>		
-      <img src="resources/gruvbox.png" class="scale-with-grid">
+        <img src="resources/gruvbox.png" class="scale-with-grid">
+      </details>
+      <p></p>
       <h5>Word Separators</h5>
       <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
       listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word
