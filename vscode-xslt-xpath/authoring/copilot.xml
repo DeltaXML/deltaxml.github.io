@@ -6,6 +6,7 @@
       <p><a href="https://code.visualstudio.com/docs/copilot/overview">GitHub Copilot</a> for Visual Studio Code is an AI-powered coding assistant that provides real-time code suggestions and completions
        to enhance developer productivity.
       </p>
+      <p>Assistance is provided either <a href="https://code.visualstudio.com/docs/copilot/ai-powered-suggestions">inline</a> within the editor or within a separate <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat">Copilot Chat</a> panel.</p>
       <p>Extensions like the XSLT/XPath extension for Visual Studio Code are leveraged by GitHub copilot to enhance the coding experience
         by providing more detailed information on syntax issues and enabling syntax highlighting. When developers use the XSLT/XPath
         extension, Copilot can analyze the code and offer suggestions or corrections for syntax errors, making it easier to identify
@@ -24,10 +25,11 @@
         <figcaption style="margin:auto"><i>The GitHub Copilot star icon appears (line 15) alongside the selected error.</i></figcaption>
       </figure>
       <p/>
-      <h5>Copilot Chat Panel</h5>
-      <p>An alternative approach, from within the <strong>Copilot Chat</strong> panel, is to enter the prompt: <code>@workspace /fix</code>.
-        This will explain the problem with the selected error and suggest a solution.
+      <h4>Copilot Chat Panel</h4>
+      <p>Another approach for fixing XSLT problems is to use the <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat">Copilot Chat</a> panel and use the prompt: <code>@workspace /fix</code>.
+        Copilot will explain the problem with the selected error and suggest a solution.
       </p>
+      <p>Special <a href="https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/github-copilot-chat-cheat-sheet?tool=vscode">commands and options</a> enhance your experience in Copilot Chat.</p>
       
     </div>
     

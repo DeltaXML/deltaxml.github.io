@@ -176,24 +176,28 @@
 			The XSLT/XPath linter performs checks on your code as you type, performing symbol reference tests across all included modules. 
 			Any problems are shown in the Problems Panel and also highlighted inline with a squiggly
 			underline for the specific token at issue.
-			Here is a summary of the key checks:
 		</p>
-		<ol>
-			<li>XML Syntax</li>
-			<li>XSLT/XPath Variable name references</li>
-			<li>XSLT/XPath Parameter name references</li>
-			<li><strong>All</strong> other symbol name references (<code>xsl:accumulator</code> <code>xsl:key</code> etc.)</li>
-			<li>Function name and arity (number of params)</li>
-			<li><code>xsl:with-param</code> names</li>
-			<li>File locations in <code>xsl:import</code> <code>xsl:include</code> <code>xsl:use-package</code></li>
-			<li>Order of operators/operands in XPath</li>
-			<li>Matching of brackets in XPath</li>
-			<li>Presence of the context-item for expressions where it is required</li>
-			<li>XSLT instructions and their attributes</li>
-			<li>Duplicate global symbol names</li>
-			<li>Attribute Value Template Syntax</li>
-			<li>Text Value Template Syntax</li>			
-		</ol>
+		<details>
+			<summary>Checks made by the linter</summary>
+			<ol>
+				<li>XML Syntax</li>
+				<li>XSLT/XPath Variable name references</li>
+				<li>XSLT/XPath Parameter name references</li>
+				<li><strong>All</strong> other symbol name references (<code>xsl:accumulator</code> <code>xsl:key</code> etc.)</li>
+				<li>Function name and arity (number of params)</li>
+				<li><code>xsl:with-param</code> names</li>
+				<li>File locations in <code>xsl:import</code> <code>xsl:include</code> <code>xsl:use-package</code></li>
+				<li>Order of operators/operands in XPath</li>
+				<li>Matching of brackets in XPath</li>
+				<li>Presence of the context-item for expressions where it is required</li>
+				<li>XSLT instructions and their attributes</li>
+				<li>Duplicate global symbol names</li>
+				<li>Attribute Value Template Syntax</li>
+				<li>Text Value Template Syntax</li>
+				<li>Item types on <code>as</code> attributes of XSLT instructions</li>
+			</ol>
+		</details>
+		<p/>
 		<h5>Inferred Imports for 'Non-Standalone' Stylesheets</h5>
 		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
 			that declares the required imports. If no knowledge of the parent module is available, spurious problems
@@ -231,5 +235,12 @@
 		
 		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the URI to a file path as the User or WorkSpace Setting:
 			<strong>XSLT.resources.xsltPackage</strong></aside>
+		<h3>Auto tag-close</h3>
+		<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed. 
+			Note that this feature is only enabled when the VS Code user-setting <emphasis>Format on Type</emphasis> is set (indentation is fixed at the same time).</p>
+		<h3>GitHub Copilot</h3>
+		<p>New GitHub Copilot features continue to enhance the XSLT editing experience. See the VS Code <a href="https://code.visualstudio.com/docs/copilot/overview">GitHub Copilot</a>
+			documentation for information on edit suggestions and using <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat">Copilot Chat</a> in VS Code.
+			For a summary of selected features that are enhanced by the XSLT/XPath extension, see the <a href="copilot.html">GitHub Copilot and XSLT</a> page .</p>
 	</div>
 </html>
