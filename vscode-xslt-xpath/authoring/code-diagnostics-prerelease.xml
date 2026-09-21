@@ -8,64 +8,66 @@
 				<a href="code-diagnostics.html">Debugging</a> page instead.
 			</aside>
 			<p>There is no step-through debugger in the XSLT/XPath extension. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
-				Another popular approach is
-				to add XSLT instructions that insert diagnostics information directly into the result document.
+				Diagnostics are added using the <strong>xdm:debug()</strong> function, from the
+				<a href="https://github.com/DeltaXML/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
+				named in-scope variables to a formatted string for use in an xsl:message.
 			</p>
 			<h3>Diagnosing state of in-scope XSLT variables</h3>
 			<p>There is special provision for conveniently reviewing the state of in-scope XSLT variables. This approach is outlined here.</p>
 			<h4>1. Use Auto-complete for xsl:message</h4>
-			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction:</p>
-			<p>
-				<img src="resources/xslmessage-list.png" class="scale-with-grid" />
-			</p>
+			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction. Four completion items are offered when in-scope variables are found:</p>
+			<ul>
+				<li><strong>adaptive serialization</strong> - serializes a single variable using <code>serialize()</code> with the <code>adaptive</code> method</li>
+				<li><strong>simple variables</strong> - the original Text Value Template (TVT) style listing, with one variable per line</li>
+				<li><strong>xdm:debug variables</strong> - lists all in-scope variables in a single <strong>xdm:debug()</strong> call</li>
+				<li><strong>xdm:debug-color variables</strong> - as above, with ANSI-colored terminal output</li>
+			</ul>
+			<!-- TODO: replace with an updated screenshot of the auto-complete list once available -->
 			<h4>2. Review Inserted xsl:message</h4>
-			<p>When <strong>complex variables</strong> is selected from the auto-complete list,
-				an xsl:message snippet will be inserted at the cursor with all the in-scope variables listed.
-				A title is automatically inserted into the xsl:message block. This corresponds to the name or mode of the parent instruction,
-				such as the name of an enclosing xsl:function or the mode of an xsl:template.
+			<p>When <strong>xdm:debug variables</strong> (or <strong>xdm:debug-color variables</strong>) is selected from the auto-complete list,
+				an xsl:message snippet is inserted at the cursor with all in-scope variables collected into a single XPath map,
+				passed as the second argument to <strong>xdm:debug()</strong>. A title, defaulting to the name of the enclosing
+				xsl:function or the mode of an enclosing xsl:template, is inserted as the first argument.
 			</p>
 			<p>
-				<img src="resources/inserted-message.png" class="scale-with-grid" />
+				<code class="block">&lt;xsl:message select="xdm:debug('Watch: my-function', map {
+    'items': $items,
+    'total': $total
+})"/&gt;</code>
 			</p>
-			<h4>3. QuickFix imported library function</h4>
+			<!-- TODO: replace with an updated screenshot of the inserted xsl:message once available -->
+			<h4>3. QuickFix: Include the xdm-view Library</h4>
 			<p>
-				As can be seen in the image above the library XPath function <code>ext:print()</code> is included within a
-				Text Value Template (TVT) adjacent to each variable that is added in the current scope.
-				When inserted for the first time, the inserted functions will be marked as 'problems'. Hover over the
-				problem function and accept the 'QuickFix' by pressing <span class="shortcut">Enter</span>.
+				As can be seen above, the <code>xdm:debug()</code> function is not initially resolvable - it will be marked
+				as a 'problem' until its defining library is included. Hover over the problem function and accept the
+				'QuickFix' by pressing <span class="shortcut">Enter</span>.
 			</p>
-			<p>The QuickFix will insert a namespace declaration for the <strong>'ext'</strong> prefix along
-				with an <strong>xsl:include</strong> instruction to import the XSLT library where this function is defined.
-				The <strong>href</strong> attribute for the instruction is set to the path of the
-				<strong>xpath-result-serializer.xsl</strong> library module. If the library module is found in
-				the workspace folder then this file path will be used, otherwise it is set to reference the
-				library module installed with this extension.
-			</p>
-			<p>
-				<img src="resources/extprint-quickfix.png" class="scale-with-grid" />
-			</p>
+			<p>Two QuickFix options are offered:</p>
+			<ul>
+				<li><strong>Include XSLT module for xdm:debug</strong> (the default, preferred option) - inserts the
+					<strong>xdm</strong> namespace declaration (<code>http://deltaxignia.com/ns/xdm-persistence</code>) and an
+					<strong>xsl:include</strong> instruction referencing a workspace-local copy of <strong>xdm-view.xsl</strong>
+					if one is found, otherwise the copy of the <strong>xdm-viewer</strong> library bundled with this extension.
+				</li>
+				<li><strong>Copy xdm-view library into workspace</strong> - copies the bundled <strong>xdm-viewer</strong> library
+					(and its <strong>xdm-persistence</strong> dependency) into an <code>xslt-resources/xdm-view</code> folder in
+					your workspace, then applies the same include as above. Use this if you want the library files available
+					locally, for example to inspect or version them alongside your own stylesheets.
+				</li>
+			</ul>
+			<!-- TODO: replace with an updated screenshot of the QuickFix menu once available -->
 			<h4>4. Run XSLT and Review State in Terminal</h4>
 			<p>
-				You can now <a href="run-xslt.html">run the XSLT</a> as normal, but you will now see the xsl:message output in the terminal
-				window for each variable. Each type is serialized in a form optimised for diagnostics. The basic features are:
+				You can now <a href="run-xslt.html">run the XSLT</a> as normal, but you will now see the xsl:message output
+				in the terminal window, with each in-scope variable shown under a title banner. Node values are shown with
+				their location path and a pruned, truncated rendering, keeping the output readable for large trees.
 			</p>
-			<ul>
-				<li>Special formatting for nested arrays, maps and sequences</li>
-				<li>Space-saving multi-line formatting</li>
-				<li>Bracket-pair colorising for clarity</li>
-				<li>Colorising for different XPath 3.1 types</li>
-			</ul>
-			<p>
-				<p>
-					<img src="resources/printed-map.png" class="scale-with-grid" />
-				</p>
-			</p>
-			<p><aside>Colorising for <strong>ext:print()</strong> should work from VSCode with all SaxonJ and SaxonJS versions.
-					Because later SaxonJ versions don't support use of a built-in
+			<!-- TODO: replace with an updated screenshot of xdm:debug terminal output once available -->
+			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VSCode with all SaxonJ and SaxonJS versions.
+				Because later SaxonJ versions don't support use of a built-in
 				TextEmitter command-line option, an extension class is used instead of `net.sf.saxon.Transform` when invoking
 				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br/>
-				</aside>
-			</p>
+			</aside>
 		</div>
 
 	</div>
