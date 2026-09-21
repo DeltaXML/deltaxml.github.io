@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<div class="main">
-		
+
 		<div class="two-thirds column">
-			<aside>Using the pre-release build of the extension? See
-				<a href="code-diagnostics-prerelease.html">Debugging - Updated in Pre-Release</a>
-				for what's changed.
+			<aside>This page describes debugging features in the current <strong>pre-release</strong> build of the
+				XSLT/XPath extension. If you are using the stable release, see the
+				<a href="code-diagnostics.html">Debugging</a> page instead.
 			</aside>
 			<p>There is no step-through debugger in the XSLT/XPath extension. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
-				Another popular approach is 
-				to add XSLT instructions that insert diagnostics information directly into the result document. 			
+				Another popular approach is
+				to add XSLT instructions that insert diagnostics information directly into the result document.
 			</p>
 			<h3>Diagnosing state of in-scope XSLT variables</h3>
 			<p>There is special provision for conveniently reviewing the state of in-scope XSLT variables. This approach is outlined here.</p>
@@ -36,7 +36,7 @@
 			</p>
 			<p>The QuickFix will insert a namespace declaration for the <strong>'ext'</strong> prefix along
 				with an <strong>xsl:include</strong> instruction to import the XSLT library where this function is defined.
-				The <strong>href</strong> attribute for the instruction is set to the path of the 
+				The <strong>href</strong> attribute for the instruction is set to the path of the
 				<strong>xpath-result-serializer.xsl</strong> library module. If the library module is found in
 				the workspace folder then this file path will be used, otherwise it is set to reference the
 				library module installed with this extension.
@@ -60,13 +60,13 @@
 					<img src="resources/printed-map.png" class="scale-with-grid" />
 				</p>
 			</p>
-			<p><aside>Colorising for <strong>ext:print()</strong> should work from VSCode with all SaxonJ and SaxonJS versions. 
+			<p><aside>Colorising for <strong>ext:print()</strong> should work from VSCode with all SaxonJ and SaxonJS versions.
 					Because later SaxonJ versions don't support use of a built-in
 				TextEmitter command-line option, an extension class is used instead of `net.sf.saxon.Transform` when invoking
 				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br/>
 				</aside>
 			</p>
 		</div>
-		
-	</div>	
+
+	</div>
 </html>
