@@ -10,12 +10,12 @@
 
 		gtag('config', 'G-GEZCTHQENJ');
 	</script>
-
+	
 
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>Running XSLT - Updated in Pre-Release | VS Code XSLT/XPath</title>
+	<title>Run XSLT Pre-Release | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -66,8 +66,9 @@
 				<li><a href="index.html">Overview</a></li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li style="display: none;"><a href="run-xslt-prerelease.html" class="active">Run XSLT Pre-Release</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="run-xslt.html" class="active">Running XSLT</a></li>
+				<li><a href="run-xslt.html">Running XSLT</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
 				<li><a href="code-diagnostics.html">Debugging</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
@@ -77,7 +78,7 @@
 				<li><a href="xslt40.html">XSLT 4.0</a></li>
 			</ul>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Running XSLT - Updated in Pre-Release</h2>
+		<div class="main"><h2 class="pageTitle">Run XSLT Pre-Release</h2>
 
 		<div class="two-thirds column">
 			<aside>This page describes the new <strong>Quick Run</strong> command in the current <strong>pre-release</strong> build of the
@@ -99,6 +100,7 @@
 				<li>Click the <strong>Quick Run with Saxon</strong> play button in the editor title bar</li>
 				<li>Run <code>Quick Run with Saxon</code> from the Command Palette</li>
 			</ul>
+			<!-- TODO: replace with a screenshot of the editor-title Quick Run button once available -->
 			<p>
 				The stylesheet is the active editor's file. The XML source is the current
 				<a href="editing-xslt.html#intellisense">XML context file</a> - the same file used to provide XML
@@ -124,6 +126,7 @@
 					declared with a <code>select</code> default - including params declared in imported or included
 					stylesheets - ready for you to edit</li>
 			</ul>
+			<!-- TODO: replace with a screenshot of the generated task in tasks.json once available -->
 			<aside>Parameter values generated this way are prefixed with <code>?</code>, for example <code>?title</code>.
 				This tells Saxon to evaluate the value as an XPath expression rather than a literal string, so the
 				generated entry reproduces the parameter's own default exactly - it does not silently override it with
@@ -147,6 +150,50 @@
 				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
 				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
 				not change what gets restored.
+			</p>
+			<h3>SaxonC Tasks</h3>
+			<p>
+				A new <code>xslt-c</code> task type runs XSLT transforms using
+				<a href="https://www.saxonica.com/products/products.xml">SaxonC</a>, Saxonica's native C/C++ port of Saxon,
+				alongside the existing <code>xslt</code> (Saxon Java) and <code>xslt-js</code> (Saxon-JS) task types. Its
+				command-line arguments mirror the Saxon (Java) task closely, since SaxonC's <code>Transform</code>
+				command-line tool follows the same conventions.
+			</p>
+			<h4>Setup</h4>
+			<ol>
+				<li><p>
+						Install SaxonC and note the folder containing its <code>Transform</code> (or
+						<code>Transform.exe</code> on Windows) command-line executable.
+					</p></li>
+				<li><p>Set the <strong>XSLT.tasks.saxonCPath</strong> user setting to that folder.</p></li>
+				<li><p>
+						Invoke <code>Tasks: Run Build Task</code> from the Command Palette (<span class="shortcut">⇧⌘B</span>)
+						and configure a new <code>xslt-c</code> task, following the same steps as for a Saxon (Java) task
+						described above.
+					</p></li>
+			</ol>
+			<aside>SaxonC tasks can be disabled with the <strong>XSLT.tasks.saxonc.enabled</strong> setting, matching the
+				equivalent settings for Saxon (Java) and Saxon-JS tasks.
+			</aside>
+			<h4>Native library path (macOS/Linux)</h4>
+			<p>
+				Some SaxonC distributions are built without an embedded library search path, so the native shared libraries
+				alongside <code>Transform</code> - and any others it depends on - may not be found automatically. The
+				<code>xslt-c</code> task always searches the <code>lib</code> folder next to the configured
+				<code>saxonCPath</code>, and you can list additional folders (for example, a separately-packaged core
+				library) in the <strong>saxonCLibraryPaths</strong> task property, or the equivalent
+				<strong>XSLT.tasks.saxonCLibraryPaths</strong> user setting.
+			</p>
+			<aside>If a transform fails with an error like <code>Library not loaded: ...dylib ... no LC_RPATH's found</code>,
+				add the folder containing that library to <strong>saxonCLibraryPaths</strong>.
+			</aside>
+			<h4>Licensing</h4>
+			<p>
+				If SaxonC reports <code>No license file found - running with licensable features disabled</code>, set the
+				<strong>licenseFileLocation</strong> task property (or the equivalent
+				<strong>XSLT.tasks.saxonCLicenseFileLocation</strong> user setting) to the path of your
+				<code>saxon-license.lic</code> file. This is passed to <code>Transform</code> as
+				<code>--licenseFileLocation:</code>, the same option Saxon (Java) tasks use.
 			</p>
 		</div>
 

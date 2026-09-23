@@ -14,7 +14,6 @@
   <xsl:variable name="indexTitle" as="xs:string" select="normalize-space(/html/head/title)"/>
   
   <xsl:template match="nav//ul" mode="#default">
-    <xsl:message select="'debug message'"/>
     <xsl:apply-templates select="li/a/@href"/>    
   </xsl:template>
   
@@ -48,10 +47,7 @@
   <xsl:template match="div[@class eq 'main']" mode="copyPage">
     <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
     <xsl:param name="mainDiv" as="element()" tunnel="yes"/>
-    <xsl:message expand-text="yes">
-      ==== Watch Variables ====
-      pageTitle:     {$pageTitle}
-    </xsl:message>
+
     <div class="main">
       <h2 class="pageTitle">{$pageTitle}</h2>     
       <xsl:copy-of select="$mainDiv/node()"/>
@@ -64,7 +60,6 @@
       <xsl:apply-templates select="@* except @class" mode="#current"/>
       
       <xsl:if test="$filePart eq @href">
-        <xsl:message select="'class added'"/>
         <xsl:attribute name="class" select="'active'"/>
       </xsl:if>
       <xsl:apply-templates select="node()" mode="#current"/>
