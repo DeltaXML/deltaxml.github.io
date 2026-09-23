@@ -106,7 +106,10 @@
 				file now serves two purposes: XPath auto-completion, and as the Quick Run source document.
 			</p>
 			<p>
-				An XML context file must be set before Quick Run can be used. Each processor also needs its own setup:
+				An XML context file must be set before Quick Run can be used - or, for a stylesheet that declares
+				<code>xsl:initial-template</code>, the context file can be set to <strong>None</strong> (see
+				<a href="#initial-template">Starting from xsl:initial-template</a> below). Each processor also needs its
+				own setup:
 			</p>
 			<ul>
 				<li><strong>SaxonJ</strong> - the <strong>XSLT.tasks.saxonJar</strong> setting must point at your Saxon
@@ -126,8 +129,8 @@
 			</aside>
 			<h3>Choosing the processor: SaxonJ, SaxonJS or SaxonC</h3>
 			<p>
-				Quick Run uses SaxonJ by default. When an XSLT file is active, the processor currently selected is shown
-				in the status bar, for example <strong>▶ SaxonJ</strong>, next to the XML context file. To switch
+				Quick Run uses SaxonJ by default. When an XSLT or XML file is active, the processor currently selected is
+				shown in the status bar, for example <strong>▶ SaxonJ</strong>. To switch
 				processor, use any of the following:
 			</p>
 			<ul>
@@ -191,12 +194,84 @@
 				<code>tasks.json</code> and Quick Run will create a new one next time it's used for that
 				stylesheet/context-file pairing.
 			</p>
+			<h3 id="initial-template">Starting from xsl:initial-template</h3>
+			<p>
+				A stylesheet that declares an <code>xsl:initial-template</code> can be run with no source document at all.
+				To do this, click the XML context file in the status bar and choose <strong>None</strong> - the last entry
+				in the list of files. The status bar then shows <strong>[no XML context]</strong>.
+			</p>
+			<p>
+				With the context file set to None, Quick Run starts the stylesheet from <code>xsl:initial-template</code>
+				(Saxon's <code>-it</code> command-line option) instead of applying templates to a source document. The
+				<code>xsl:initial-template</code> can be declared in the stylesheet itself or in any module it imports or
+				includes. If there isn't one, Quick Run reports an error and offers to pick an XML context file instead.
+			</p>
+			<p>
+				The task created for this has an empty <code>xmlSource</code> and an empty <code>initialTemplate</code>
+				property, and is labelled with the stylesheet name, for example
+				<strong>report with xsl:initial-template</strong>. It is kept separately from any task for the same
+				stylesheet that has an XML source, so you can switch between the two just by changing the context file.
+			</p>
+			<p>
+				None stays selected until you pick a file again - opening or viewing other XML files does not replace it.
+				While it is selected, XPath auto-completion has no source document to take element and attribute names from.
+			</p>
+			<aside>A stylesheet can declare <code>xsl:initial-template</code> and also contain match templates designed for
+				a source document, so Quick Run doesn't guess which way to run it: while an XML context file is set, it
+				always applies templates to that file. The first time it creates a task for such a stylesheet, a
+				notification points out the alternatives - add <code>"initialTemplate": ""</code> to the task to start
+				from <code>xsl:initial-template</code> with the context file as the global context item, or choose None
+				to run with no source document at all.
+			</aside>
+			<h3>Running from an XML file</h3>
+			<p>
+				Quick Run can also be started from an XML file, to run a stylesheet on it without opening the stylesheet
+				first. With an XML file open in the active editor, invoke it in one of three ways:
+			</p>
+			<ul>
+				<li>Press <span class="shortcut">⌘⌥R</span> (<span class="shortcut">Ctrl+Alt+R</span> on Windows/Linux)</li>
+				<li>Click the play button in the editor title bar</li>
+				<li>Run <code>XSLT: Quick Run: Run XSLT on this XML File</code> from the Command Palette</li>
+			</ul>
+			<p>
+				This shows a list of the XSLT tasks that can run on the file, grouped as:
+			</p>
+			<ul>
+				<li><strong>tasks for books.xml</strong> (named after the XML file) - every task whose <code>xmlSource</code> is this file, for
+					any processor. This includes each task Quick Run has created for a stylesheet with this file as its
+					source, so any stylesheet you've already run on the file is one click away.</li>
+				<li><strong>tasks for the current file</strong> - tasks whose <code>xmlSource</code> is
+					<code>${file}</code>, which Visual Studio Code replaces with whichever file is active when the task
+					runs. Use this for general-purpose stylesheets you want to run on any XML file.</li>
+				<li><strong>Pick Stylesheet...</strong> - choose a stylesheet from the recently used list, from any
+					<code>&lt;?xml-stylesheet?&gt;</code> processing instruction in the XML file, or from the file explorer.
+					Quick Run then creates and runs a task for that stylesheet and this file, using the selected processor,
+					exactly as it would from the stylesheet itself - so it appears under <strong>tasks for books.xml</strong>
+					next time.</li>
+			</ul>
+			<p>
+				Each task is listed with its processor and stylesheet path, and you can type to filter on any of these.
+				If there are no matching tasks yet, Quick Run goes straight to picking a stylesheet. As with the
+				stylesheet's play button, holding <span class="shortcut">⌥</span> (<span class="shortcut">Alt</span> on
+				Windows/Linux) while clicking the XML file's play button switches the processor instead.
+			</p>
+			<p>
+				A task that runs on the current file looks like this:
+				<code class="block">{
+	"type": "xslt",
+	"label": "Summarise",
+	"saxonJar": "${config:XSLT.tasks.saxonJar}",
+	"xsltFile": "${workspaceFolder}/tools/summary.xsl",
+	"xmlSource": "${file}",
+	"resultPath": "${command:xslt-xpath.pickResultFile}"
+}</code>
+			</p>
 			<h3>The XML context file is remembered</h3>
 			<p>
 				Your chosen XML context file is now restored automatically when Visual Studio Code is reopened, rather
 				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
 				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
-				not change what gets restored.
+				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
 			</p>
 			<aside>For custom parameters and features beyond what's auto-populated, chaining tasks together, or any
 				other task configuration in detail, see the <a href="run-xslt-prerelease.html">XSLT Tasks</a> page - a task Quick
