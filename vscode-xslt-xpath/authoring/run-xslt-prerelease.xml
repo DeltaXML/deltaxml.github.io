@@ -16,7 +16,7 @@
 				for Saxon (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
 				<a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">Saxon</a> installation) 
 				or Saxon-JS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
-			<h3>Saxon (Java) setup</h3>
+			<h3 id="saxonj-tasks">Saxon (Java) setup</h3>
 			<ol>
 				<li><p>
 						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
@@ -39,7 +39,7 @@
 					<p>Enter the Jar file path in the <strong>Tasks: Saxon Jar</strong> property (see above)</p>
 				</li>
 			</ol>
-			<h3>Saxon-JS Tasks</h3>
+			<h3 id="saxonjs-tasks">Saxon-JS Tasks</h3>
 			<ol>
 				<li><p>
 						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
@@ -59,7 +59,7 @@ npm install --save-dev xslt3</code>
 			</ol>
 			<aside>The Saxon-JS task uses <a href="https://docs.npmjs.com/cli/v7/commands/npx">NPX</a> to invoke Saxon-JS task. 
 				NPX will download the Saxon-JS package if you choose not to follow the previous step and it can't find the Saxon-JS package in your global space.</aside>
-			<h3>SaxonC Tasks</h3>
+			<h3 id="saxonc-tasks">SaxonC Tasks</h3>
 			<p>
 				A new <code>xslt-c</code> task type runs XSLT transforms using
 				<a href="https://www.saxonica.com/products/products.xml">SaxonC</a>, Saxonica's native C/C++ port of Saxon,
