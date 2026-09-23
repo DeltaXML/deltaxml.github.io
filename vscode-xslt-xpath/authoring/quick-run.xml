@@ -10,6 +10,7 @@
 				same command-line arguments the corresponding XSLT task would use, but takes the stylesheet and XML
 				source directly from the editor rather than requiring a pre-configured <code>tasks.json</code> entry.
 			</p>
+			<img src="resources/quick-run.png" class="scale-with-grid" />
 			<h3>Running a stylesheet</h3>
 			<p>
 				With an XSLT file open in the active editor, invoke Quick Run in one of three ways:
