@@ -1,78 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 	<div class="main">
-
+		
 		<div class="two-thirds column">
-			<aside>This page describes the new <strong>Quick Run</strong> command in the current <strong>pre-release</strong> build of the
-				XSLT/XPath extension. If you are using the stable release, see the
-				<a href="run-xslt.html">Running XSLT</a> page instead.
-			</aside>
-			<p>
-				<strong>Quick Run</strong> is a lighter-weight way to run an XSLT stylesheet with Saxon (Java), without
-				first creating a task by hand. It reuses the same command-line arguments a Saxon Task would use, but
-				takes the stylesheet and XML source directly from the editor rather than requiring a pre-configured
-				<code>tasks.json</code> entry.
+			<p>Visual Studio Code's Tasks include custom task types for configuring and running Saxon (Java)
+				or Saxon-JS (JavaScript) XSLT transforms. The Saxon XSLT processor is called via its command-line interface
+				from the <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>
+				in Visual Studio code.
+				Task configurations effectively control command-line arguments for the XSLT Processor. An attempt is made to parse any error messages
+				returned from Saxon, so that the position of any Saxon-reported errors in the XSLT can be highlighted.
 			</p>
-			<h3>Running a stylesheet</h3>
-			<p>
-				With an XSLT file open in the active editor, invoke Quick Run in one of three ways:
-			</p>
-			<ul>
-				<li>Press <span class="shortcut">⌘⌥R</span> (<span class="shortcut">Ctrl+Alt+R</span> on Windows/Linux)</li>
-				<li>Click the <strong>Quick Run with Saxon</strong> play button in the editor title bar</li>
-				<li>Run <code>Quick Run with Saxon</code> from the Command Palette</li>
-			</ul>
-			<!-- TODO: replace with a screenshot of the editor-title Quick Run button once available -->
-			<p>
-				The stylesheet is the active editor's file. The XML source is the current
-				<a href="editing-xslt.html#intellisense">XML context file</a> - the same file used to provide XML
-				node-names when auto-completing XPath location steps, shown in the status bar. This means the context
-				file now serves two purposes: XPath auto-completion, and as the Quick Run source document.
-			</p>
-			<aside>The <strong>XSLT.tasks.saxonJar</strong> setting must already point at your Saxon jar file, and an
-				XML context file must be set, before Quick Run can be used. See the <strong>Saxon (Java) setup</strong>
-				section on the <a href="run-xslt.html">Running XSLT</a> page for how to configure the Saxon jar path.
-			</aside>
-			<h3>First use: a task is created for you</h3>
-			<p>
-				The first time Quick Run is used for a given stylesheet/context-file pairing, a real task is added to
-				your workspace's <code>tasks.json</code> file (creating the file if it doesn't exist yet) - not just an
-				ephemeral, one-off run. The generated task:
-			</p>
-			<ul>
-				<li>is labelled from the stylesheet and context file names, for example <strong>demo with books.xml</strong></li>
-				<li>uses the <code>xslt-xpath.pickResultFile</code> command for its result path, so you're prompted to
-					choose (or reuse a recently used) output location - the same 'recent files' behaviour described on the
-					<a href="run-xslt.html#references">Running XSLT</a> page</li>
-				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
-					declared with a <code>select</code> default - including params declared in imported or included
-					stylesheets - ready for you to edit</li>
-			</ul>
-			<!-- TODO: replace with a screenshot of the generated task in tasks.json once available -->
-			<aside>Parameter values generated this way are prefixed with <code>?</code>, for example <code>?title</code>.
-				This tells Saxon to evaluate the value as an XPath expression rather than a literal string, so the
-				generated entry reproduces the parameter's own default exactly - it does not silently override it with
-				an empty value.
-			</aside>
-			<h3>Subsequent runs</h3>
-			<p>
-				Once a task exists for a stylesheet/context-file pairing, Quick Run re-runs that same task rather than
-				creating another one. This means you can freely edit the generated task afterwards - change a parameter
-				value, adjust the result path, add Saxon features or additional parameters - and Quick Run will keep
-				using your edits on every subsequent run, just like running any other task.
-			</p>
-			<p>
-				If you want a fresh task instead, either edit the existing one directly, or remove it from
-				<code>tasks.json</code> and Quick Run will create a new one next time it's used for that
-				stylesheet/context-file pairing.
-			</p>
-			<h3>The XML context file is remembered</h3>
-			<p>
-				Your chosen XML context file is now restored automatically when Visual Studio Code is reopened, rather
-				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
-				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
-				not change what gets restored.
-			</p>
+			
+			<p>XSLT transforms are run using custom <code>xslt</code> or <code>xslt-js</code>
+				<a href="https://code.visualstudio.com/Docs/editor/tasks">Visual Studio Code Tasks</a>
+				for Saxon (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
+				<a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">Saxon</a> installation) 
+				or Saxon-JS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
+			<h3>Saxon (Java) setup</h3>
+			<ol>
+				<li><p>
+						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
+						open in Visual Studio Code (use <strong>File > open...</strong> from the menu).
+						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
+					</p></li>
+				<li>
+					<p>If Java is not already installed, Java 1.8 or later can be downloaded and installed from <a href="https://adoptopenjdk.net/installation.html">here</a></p>
+				</li>
+				<li>
+					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">here</a></p>
+				</li>
+				<li>
+					<p>Saxon (Java) tasks need the path to the installed Saxon jar file to be included in a property in your Visual Studio Code settings. 
+						Invoke <code>Preferences: Open User Settings</code> from the Command Palette (<span class="shortcut">⇧⌘P</span>) and type
+						<code>xslt</code> to show a short-list of settings:</p>
+					<img src="resources/tasks/settings.png" class="scale-with-grid" />
+				</li>
+				<li>
+					<p>Enter the Jar file path in the <strong>Tasks: Saxon Jar</strong> property (see above)</p>
+				</li>
+			</ol>
+			<h3>Saxon-JS Tasks</h3>
+			<ol>
+				<li><p>
+						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
+						open in Visual Studio Code (use <strong>File > open...</strong> from the menu).
+						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
+					</p></li>
+				<li>
+					<p>If NodeJS is not already installed, it can be downloaded and installed from <a href="https://nodejs.org/en/download/">here</a></p>
+				</li>
+				<li>
+					<p>Initialize <a href="https://docs.npmjs.com/about-npm">NPM</a> 
+						in the current folder and then install the Saxon-JS package (xslt3) by running the following commands in the Visual Studio Code terminal (<span class="shortcut">⌘J</span>):
+						<code class="block">npm init -y
+npm install --save-dev xslt3</code>	
+					</p>
+				</li>
+			</ol>
+			<aside>The Saxon-JS task uses <a href="https://docs.npmjs.com/cli/v7/commands/npx">NPX</a> to invoke Saxon-JS task. 
+				NPX will download the Saxon-JS package if you choose not to follow the previous step and it can't find the Saxon-JS package in your global space.</aside>
 			<h3>SaxonC Tasks</h3>
 			<p>
 				A new <code>xslt-c</code> task type runs XSLT transforms using
@@ -117,7 +103,202 @@
 				<code>saxon-license.lic</code> file. This is passed to <code>Transform</code> as
 				<code>--licenseFileLocation:</code>, the same option Saxon (Java) tasks use.
 			</p>
-		</div>
+			<h3>To configure the initial task:</h3>
+			<ol>
+				<li><p>
+						Invoke <code>Tasks: Run Build Task</code> from the Command Palette (<span class="shortcut">⇧⌘B</span>):
+					</p>						
+					<img src="resources/tasks/run-task.png" class="scale-with-grid" />
+				</li>
+				<li><p>
+						Press <span class="shortcut">Enter</span> to <strong>Configure Build Task</strong>:
+					</p>					
+					<img src="resources/tasks/select-task.png" class="scale-with-grid" />
+				</li>
+				<li><p>
+						Select from the list (shown above) the task type you require (you may see more task types in the list), for either Saxon or Saxon-JS.
+					</p>
+					<img src="resources/tasks/edit-task.png" class="scale-with-grid" />
+				</li>
+				<li>
+					<p>
+						The <code>tasks.json</code> file will then be opened with a template task added for the task type specified. 
+						The task shown above is for the Saxon task. Edit this task to fit your XSLT transform requirement.
+						It's a good idea to change the <code>label</code> property (the value shown in the tasks list) to describe your XSLT transform.
+						Auto-completion with hints is available as you type. 
+						The actual file type is 'JSON with Comments' so you can add comments and leave trailing commas etc.
+					</p>
+				</li>
+				<li>
+					<p>
+						You can create any number of tasks for different XSLT transform scenarios. Note that the <code>group.isDefault</code>
+						property controls that task that is automatically launched when you next invoke 
+						<code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.
+					</p>
+				</li>
+				<li>
+					<pi>Save any changes to the <code>tasks.json</code> file <span class="shortcut">⌘S</span></pi>
+				</li>
+				<li>
+					<p>Run the newly configured XSLT transform by invoking <code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.</p>
+				</li>
+			</ol>
+			<h3 id="references">Variable References in Tasks</h3>
+			<p>Visual Studio Code supports variable substitutions for Task configuration files.
+				Variable substitution uses the <code>${variableName}</code> syntax. Commands that
+				return a string can be invoked via variable substitution, the boiler plate XSLT Task uses <code>${command:xslt-xpath.pickXsltFile}'</code> and <code>${command:xslt-xpath.pickResultFile}'</code>
+				variable references.
+			</p>
+			<h4>User-input for file-selection within a Task</h4>
+			<p>
+				A set of 'Pick File' commands suitable for XSLT tasks is available to allow user-selected file paths to be used within an XSLT task. An example is shown below:</p>
+			<p><img src="resources/newest-pickFiles.png" class="scale-with-grid" /></p>
+			<p>
+			Each command prompts the user to select a file. This is from: the current file, a 'recent files' list for that command (optionally from a specified 'previous stage' command),
+			or from a 'Open File' or 'Save File' VS Code dialog as appropriate. The available commands are listed below:	
+			</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Command</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>xslt-xpath.pickFile</td>
+						<td>General file selection with arguments to provide custom behaviour.
+							This must be invoked with arguments that are supplied in the 'inputs'
+							property of the tasks.json file. Invoked by ${input:&lt;input-id&gt;}
+						</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickXsltFile</td>
+						<td>Returns a user-selected XSLT file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickXmlSourceFile</td>
+						<td>Returns a user-selected XML Source file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickStage2XmlSourceFile</td>
+						<td>Returns a user-selected Stage2 XML source file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickResultFile</td>
+						<td>Returns a user-selected result file</td>
+					</tr>
+					<tr>
+						<td>xslt-xpath.pickStage2ResultFile</td>
+						<td>Returns a user-selected result file for Stage2</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>A full list of variable references is given in Visual Studio Code's
+				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
+			<h4>The 'pickFile' command</h4>
+			<p>The general purpose command 'xslt-xpath.pickFile' is the base commands for specific 'pick file' commands like 'pickXsltFile'.
+			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 5 ways:
+				<ul>
+					<li>the current file (if it's extension is compatible with the extensions list)</li>
+					<li>from recently used (current stage) files - from list for the current label e.g. 'Select XSLT File'</li>
+					<li>from recently used (previous stage result) files - shows result files from a previous task</li>
+					<li>from the <code>&lt;?xml-stylesheet href="...?></code> href in the current file</li>
+					<li>from an 'Open File' or 'Save File' dialog</li>
+				</ul>
+			</p>
+			<p>The 'recently used' file data is maintained per workspace and is restored when VS Code is closed and reopened. A 'clear recently used' option
+				is also listed when there are files already in the list. 
+			</p>
+			<p>The 'pickList' command must be invoked as an 'input' property of a task as it requires an 'options' argument. A sample 'inputs' property
+			can be added to the 'tasks.json' file with the <code>XSLT: add Inputs to Task file</code> command.</p>
+			<h3>Command Options for 'pickFile'</h3>
+				<p>The 'pickFile' commands 'options' object have the following properties:
+				<ul>
+					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
+					<li>extensions? - an array of filter file-extensions (when set, a '*' option can also be selected from the dialog)</li>
+					<li>isResult? - causes the 'Save File' dialog to be shown when set true</li>
+					<li>prevStageLabel? - shows the recently used files for the specified label</li>
+					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
+					<li>xmlStylesheetPI? - set 'true' for pick-list to include a <code>&lt;?xml-stylesheet?></code> href from current editor</li>
+				</ul>
+				<strong>Sample input property definitions for the 'pickFile' command are listed below:</strong>
+			</p>
+			<code class="block" style="height: 300px">
+"inputs": [
+/*
+1. the specialist 'pickFile' command equivalents for the inputs defined here are:
+	"xsltFile": "${command:xslt-xpath.pickXsltFile}",              // can select from current file - if xslt - or recently used xslt files
+	"xmlSource": "${command:xslt-xpath.pickXmlSourceFile}",        // can select from current file or recently used stage1 source files
+	"xmlSource": "${command:xslt-xpath.pickStage2XmlSourceFile}",  // can select from recently used stage2 source files or stage1 result files
+	"resultPath": "${command:xslt-xpath.pickResultFile}",          // can save to recently used stage1 result files
+	"resultPath": "${command:xslt-xpath.pickStage2ResultFile}",    // can save to recently used stage2 result files
 
-	</div>
+2. these inputs invoke the 'pickFile' command with args for custom behaviour:
+*/
+{
+	/* --- Usage: ---
+	"xmlSource": "${input:xmlFile}",
+	*/
+	"id": "xmlFile",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select XML File", "extensions": ["xml", "xhtml", "svg"] }
+},
+{
+	/* --- Usage: ---
+	"xmlSource": "${input:xmlFile2}",
+	*/
+	"id": "xmlFile2",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select Stage1 XML File", "extensions": ["xml", "xhtml", "svg"], "prevStageLabel": "Select Result File", "prevStageGroup": "recent files from previous stage" }
+},
+{
+	/* --- Usage: ---
+	"xsltFile": "${input:xsltFile}",
+	*/
+	"id": "xsltFile",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select XSLT Stylesheet", "extensions": ["xsl", "xslt"], "xmlStylesheetPI": true }
+},
+{
+	/* --- Usage: ---
+	"resultPath": "${input:resultFile}",
+	*/
+	"id": "resultFile",
+	"type": "command",
+	"command": "xslt-xpath.pickFile",
+	"args": {"label": "Select Result File", "isResult": true }
+}
+]
+				</code>
+			<h3>Configuring more tasks</h3>
+			<p>To create more tasks, just invoke <code>Tasks: Run Build Task</code> from the Command Palette 
+				and choose the task type you need. Provided you've changed the <code>label</code> property from the template
+				task for that type, a new task will created from the template task.
+			</p>
+			<p>Visual Studio Tasks are very flexible. You can combine XSLT tasks with other task types, for example, to run a shell command.
+				The <code>dependsOn</code> task property is used to chain tasks together. The <strong>Compound Tasks</strong>
+				section of the Visual Studio Code <a href="https://code.visualstudio.com/Docs/editor/tasks">Tasks documentation</a>
+				covers this concept in more detail.				
+			</p>
+			<h3>The Visual Studio Code terminal</h3>
+			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>,
+				the Pane hosting the Terminal view is toggle with <span class="shortcut">⌘J</span>. 
+				The tab label reflects the Task configuration <code>label</code> property. 
+				When a Saxon XSLT task is run, <code>xsl:message</code> output and any Saxon errors will be shown in the terminal window.
+			</p>
+			<p>
+			<img src="resources/printed-map.png" class="scale-with-grid" />
+			</p>
+			<aside>
+			The above screenshot shows formatted and colorised xsl:message output available through
+			special auto-completion options. See the <a href="code-diagnostics.html">Debugging</a> section for more detail.	
+			</aside>
+
+		</div>
+		
+	</div>	
 </html>
