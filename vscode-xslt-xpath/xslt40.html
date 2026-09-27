@@ -76,47 +76,83 @@
 				<li><a href="copilot.html">GitHub Copilot and XSLT</a></li>
 				<li><a href="xslt30.html">XSLT 3.0</a></li>
 				<li><a href="xslt40.html" class="active">XSLT 4.0</a></li>
+				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a></li>
+				<li><a href="xslt40-notes.html">XSLT 4.0: Documentation Notes</a></li>
 			</ul>
 		</nav>
 		<div class="main"><h2 class="pageTitle">XSLT 4.0</h2>
-		
+
 		<div class="two-thirds column">
-			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by 
+			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by
 				the <a href="https://qt4cg.org">W3C XSLT 4.0 Community group</a>.</p>
-			
-			<p>DeltaXignia's XSLT/XPath language extension provides high-level support
-				for XSLT 4.0 as implemented in Saxon 12.0 and documented 
-				<a href="https://www.saxonica.com/documentation12/index.html#!v4extensions">here</a>.</p>
-			
-			
+
+			<p>DeltaXignia's XSLT/XPath language extension supports the XSLT 4.0 and XPath 4.0 features
+				implemented in Saxon 13, as documented
+				<a href="https://www.saxonica.com/documentation13/index.html#!v4extensions">here</a>.</p>
+
 			<p>Note that, given the independent release cycles for Saxon and the XSLT 4.0 draft, there will be
 				differences between the implementation and the draft specification. Some parts of the
 				specification are likely to change significantly before it is finalized.
 			</p>
 			<p>We will endeavour to keep this extension up to date with the latest Saxon XSLT 4.0 implementation.
-			Earlier versions of XSLT 4.0 will not be supported for auto-completion and linting.	
+			Earlier versions of XSLT 4.0 will not be supported for auto-completion and linting.
 			</p>
-			
+
 			<h3>Editing XSLT 4.0</h3>
 			<p>The <strong>version</strong> attribute on the stylesheet root element controls the
-				XSLT version supported by the linter and for auto-completion. When the 
+				XSLT version supported by the linter and for auto-completion. When the
 				version attribute on the stylesheet root element is set to <strong>4.0</strong>,
 				auto-completion for XSLT instructions and attributes and XPath functions will be included.
-				
+				In an XSLT 3.0 stylesheet, the linter reports XPath 4.0 syntax as an error.
 			</p>
 			<p>
 				<img src="resources/xslt40-completion.png" class="scale-with-grid">
 			</p>
+			<p>XPath files, with the <code>.xpath</code> extension, are always treated as XPath 4.0.</p>
+			<h5>XSLT 4.0 support</h5>
+			<p>The syntax highlighter, linter and auto-completion support:</p>
+			<ul>
+				<li><strong>New XPath 4.0 syntax</strong> - the pipeline <code>-&gt;</code> and mapping arrow
+					<code>=!&gt;</code> operators, braced <code>if</code> expressions, map constructors without the
+					<code>map</code> keyword, string templates, and the new <code>-or-self</code> axes</li>
+				<li><strong>New item types</strong> - choice types, such as <code>(xs:date | xs:time)</code>, and the
+					<code>enum</code>, <code>record</code>, <code>fn</code> and <code>jnode</code> types</li>
+				<li><strong>Named item types</strong> - declared with <code>xsl:item-type</code>, with checks on the
+					names used, go to definition and find references</li>
+				<li><strong>Function syntax</strong> - <code>fn</code> and focus functions, keyword arguments such as
+					<code>ex:area(scale := 2)</code>, optional parameters (<code>xsl:param required="no"</code>) and
+					partial function application</li>
+				<li><strong>JNodes</strong> - path expressions on trees of maps and arrays, with <code>jtree()</code>,
+					<code>jkey()</code>, <code>jvalue()</code> and <code>get(...)</code> steps</li>
+				<li><strong>New instructions</strong> - snippets for <code>xsl:switch</code>, <code>xsl:array</code> and
+					<code>xsl:select</code>, and template rules declared within an <code>xsl:mode</code> (enclosed
+					modes)</li>
+			</ul>
+			<p>Features in the XSLT 4.0 draft that Saxon 13 doesn't implement - such as extensible record types,
+				the deep lookup operator <code>??</code> and type tests such as <code>~record(...)</code> within a
+				path - are reported by the linter.</p>
+			<p>Two XSLT 4.0 features have their own pages:</p>
+			<ul>
+				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a> - auto-completion, checks and
+					refactoring for record and enumeration types, including <code>xsl:switch</code> on an
+					enumeration</li>
+				<li><a href="xslt40-notes.html">XSLT 4.0: Documentation Notes</a> - documenting functions and
+					templates with <code>xsl:note</code>, for hover help and signature help</li>
+			</ul>
 			<h3>Running XSLT 4.0</h3>
-			<p>When invoking SaxonJ (Java) for XSLT 4.0 with an <a href="run-xslt.html">XSLT task</a> from VS Code, 
-				the <strong>allowSyntaxExtensions40</strong> must be set <strong>on</strong>
-				in the task defined in tasks.json. The task invokes Saxon via its command-line
-				interface with the configuration property <code>--allowSyntaxExtensions:on</code>. 
-			</p>
-			<aside>			 
+			<p>XSLT 4.0 stylesheets run with <a href="quick-run.html">Quick Run</a>, or with an
+				<a href="run-xslt.html">XSLT task</a>. Saxon needs the <code>--allowSyntaxExtensions:on</code>
+				configuration property for XPath 4.0 syntax. This is controlled by the <strong>allowSyntaxExtensions40</strong>
+				task property:</p>
+			<ul>
+				<li><strong>auto</strong> (the default) - on, unless the Saxon jar file, or SaxonC path, is for Saxon-HE</li>
+				<li><strong>on</strong> - always on</li>
+				<li><strong>off</strong> - never on</li>
+			</ul>
+			<aside>
 				The free Saxon-HE version <strong>does not</strong> support the language extensions
 				for XSLT 4.0. You will need to reference a Saxon-PE or Saxon-EE Jar file (with license file)
-				in the <strong>saxonJar</strong> property of the task definition.
+				in the <strong>saxonJar</strong> property of the task definition, or the equivalent SaxonC edition.
 			</aside>
 			<hr>
 			<h3>Other Editors for XSLT 4.0</h3>
@@ -129,7 +165,7 @@
 				and content authors, and hosts an <a href="https://www.oxygenxml.com/xml_editor.html">array of other features</a>.
 			</p>
 		</div>
-		
+
 	</div>
 	</div>
 </body>

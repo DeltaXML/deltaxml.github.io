@@ -76,6 +76,8 @@
 				<li><a href="copilot.html">GitHub Copilot and XSLT</a></li>
 				<li><a href="xslt30.html">XSLT 3.0</a></li>
 				<li><a href="xslt40.html">XSLT 4.0</a></li>
+				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a></li>
+				<li><a href="xslt40-notes.html">XSLT 4.0: Documentation Notes</a></li>
 			</ul>
 		</nav>
 		<div class="main"><h2 class="pageTitle">XSLT: Quick Run</h2>
@@ -118,14 +120,14 @@
 			</p>
 			<ul>
 				<li><strong>SaxonJ</strong> - the <strong>XSLT.tasks.saxonJar</strong> setting must point at your Saxon
-					jar file. See the <strong>Saxon (Java) setup</strong> section on the <a href="run-xslt-prerelease.html#saxonj-tasks">XSLT
+					jar file. See the <strong>Saxon (Java) setup</strong> section on the <a href="run-xslt.html#saxonj-tasks">XSLT
 					Tasks</a> page.</li>
 				<li><strong>SaxonJS</strong> - requires a <a href="https://nodejs.org/en/">NodeJS</a> installation; the
 					<code>xslt3</code> package is run using NPX. See the <strong>Saxon-JS Tasks</strong> section on the
-					<a href="run-xslt-prerelease.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
+					<a href="run-xslt.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
 				<li><strong>SaxonC</strong> - the <strong>XSLT.tasks.saxonCPath</strong> setting must point at the folder
 					containing the SaxonC <code>Transform</code> executable (<code>Transform.exe</code> on Windows). See the
-					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt-prerelease.html#saxonc-tasks">XSLT Tasks</a> page for
+					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">XSLT Tasks</a> page for
 					setup details, including native library paths and licensing.</li>
 			</ul>
 			<aside>Tasks for each processor can be turned off with the <strong>XSLT.tasks.java.enabled</strong>,
@@ -170,7 +172,7 @@
 					<strong>demo with books.xml (SaxonC)</strong></li>
 				<li>uses the <code>xslt-xpath.pickResultFile</code> command for its result path, so you're prompted to
 					choose (or reuse a recently used) output location - the same 'recent files' behaviour described in the
-					<a href="run-xslt-prerelease.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
+					<a href="run-xslt.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
 				<li>refers to the processor's setting (for example <code>${config:XSLT.tasks.saxonCPath}</code>) rather
 					than copying its current value, so the task keeps working if you later change the setting</li>
 				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
@@ -279,7 +281,7 @@
 				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
 			</p>
 			<aside>For custom parameters and features beyond what's auto-populated, chaining tasks together, or any
-				other task configuration in detail, see the <a href="run-xslt-prerelease.html">XSLT Tasks</a> page - a task Quick
+				other task configuration in detail, see the <a href="run-xslt.html">XSLT Tasks</a> page - a task Quick
 				Run creates is a normal task, so everything described there still applies to it.
 			</aside>
 		</div>

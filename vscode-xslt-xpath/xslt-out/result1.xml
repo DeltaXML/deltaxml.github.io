@@ -200,12 +200,15 @@
 					Code Formatting
 					Code Refactoring
 					Symbol Renaming
-					Code Refactoring
+					Hover Help and Signature Help
 					XSLT/XPath Linter
 				
 				
 
 				Run XSLT - Quick Start
+				The quickest way to run the stylesheet in the active editor is Quick Run:
+					press ⌘⌥R (Ctrl+Alt+R on Windows/Linux) or click
+					the play button in the editor title bar. The first run creates an XSLT task for you, which later runs reuse.
 				XSLT transforms are run using Visual Studio Code Tasks.
 					Before configuring an XSLT task you should ensure that you open a
 					Workspace folder (⌘O) from Visual Studio Code.

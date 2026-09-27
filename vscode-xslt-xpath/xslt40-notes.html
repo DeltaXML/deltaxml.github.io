@@ -1,0 +1,177 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>XSLT 4.0: Documentation Notes | VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
+				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li><a href="copilot.html">GitHub Copilot and XSLT</a></li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
+				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a></li>
+				<li><a href="xslt40-notes.html" class="active">XSLT 4.0: Documentation Notes</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">XSLT 4.0: Documentation Notes</h2>
+
+		<div class="two-thirds column">
+			<p>XSLT 4.0 adds the <code>xsl:note</code> element, for documentation within a stylesheet. The
+				XSLT/XPath extension supports notes written in a simple format, <strong>xdoc-md</strong>: Markdown
+				text followed by tags such as <code>@param</code> and <code>@return</code>, in the style of Javadoc
+				and xqDoc.</p>
+			<p>A note in this format, as the first child of an <code>xsl:function</code> or named
+				<code>xsl:template</code>, is shown in hover help and signature help wherever the function or template
+				is used - including from other stylesheet modules.</p>
+			<p>These features are enabled when the stylesheet has <strong>version="4.0"</strong>.</p>
+
+			<h3 id="writing">Writing a documentation note</h3>
+			<p>Set the <code>format</code> attribute to <code>xdoc-md</code>. The text before the first tag is a
+				description, in Markdown. Each tag starts a new line, and continues on the following lines up to the
+				next tag:</p>
+			<code class="block">&lt;xsl:function name="ex:area" as="xs:double"&gt;
+  &lt;xsl:note format="xdoc-md"&gt;
+    Returns the area of a rectangle, **scaled** by an optional factor.
+
+    @param $width the width, in `cm`
+    @param $height the height, in `cm`
+    @param $scale the scale factor
+    @return the area, in square centimetres
+  &lt;/xsl:note&gt;
+  &lt;xsl:param name="width" as="xs:double"/&gt;
+  &lt;xsl:param name="height" as="xs:double"/&gt;
+  &lt;xsl:param name="scale" as="xs:double" required="no" select="1"/&gt;
+  &lt;xsl:sequence select="$width * $height * $scale"/&gt;
+&lt;/xsl:function&gt;</code>
+			<h5>Tags</h5>
+			<ul>
+				<li><code>@param $name</code> - a parameter</li>
+				<li><code>@return</code> - the result</li>
+				<li><code>@see</code> - a related function, template or URI</li>
+				<li><code>@since</code> - the version it was added in</li>
+				<li><code>@deprecated</code> - why it should no longer be used, and what to use instead</li>
+				<li><code>@error</code> - an error it may raise</li>
+			</ul>
+			<h5>Markdown</h5>
+			<p>The description and tag text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
+				<code>`code`</code>, <code>[links](https://example.com)</code> and <code>#</code> headings.</p>
+			<p>As the note is XML, the characters <code>&lt;</code> and <code>&amp;</code> must be escaped, for
+				example <code>&amp;lt;</code>. Alternatively, put text containing markup in a CDATA section: its content
+				is shown exactly as written.</p>
+
+			<h3 id="adding">Adding a note</h3>
+			<p>With the cursor on the start tag of an <code>xsl:function</code> or <code>xsl:template</code> that
+				has no note, choose <strong>Add documentation note</strong> from the refactorings (💡 or
+				<span class="shortcut">⌘</span><span class="shortcut">.</span>). A note is inserted as the first child,
+				with an <code>@param</code> for each parameter, and an <code>@return</code> for a function (or a
+				template with an <code>as</code> attribute). Press <span class="shortcut">Tab</span> to move between the
+				description placeholders.</p>
+			<p>Within a note, typing <code>@</code> offers the tag names. After <code>@param</code>, the parameter
+				names without an <code>@param</code> yet are offered.</p>
+
+			<h3 id="where-shown">Where notes are shown</h3>
+			<ul>
+				<li><strong>Hover help</strong> - on a call to the function, or on the <code>name</code> of an
+					<code>xsl:call-template</code>, the note's description and tags are shown with the signature. On the
+					<code>name</code> of an <code>xsl:with-param</code>, the parameter's <code>@param</code> text is
+					shown.</li>
+				<li><strong>Signature help</strong> - while typing the arguments of a function call, or the
+					<code>xsl:with-param</code> children of an <code>xsl:call-template</code>, the parameter hints show
+					the <code>@param</code> text for the current parameter.</li>
+				<li><strong>Auto-completion</strong> - the <code>xsl:with-param</code> suggestions within an
+					<code>xsl:call-template</code> show the <code>@param</code> text for each parameter.</li>
+			</ul>
+			<p>Notes on functions and templates in included and imported stylesheets are shown too.</p>
+			<!-- TODO: screenshot of hover help showing a documentation note -->
+
+			<h3 id="highlighting">Highlighting</h3>
+			<p>The content of a note is highlighted as documentation: tags, parameter names, code, bold and italic
+				text, headings and links each have their own semantic token type. The token types have fallbacks, so
+				they're highlighted in most color themes. To change their colors, add rules for the token types
+				<code>xdocText</code>, <code>xdocTag</code>, <code>xdocParam</code>, <code>xdocCode</code>,
+				<code>xdocBold</code>, <code>xdocItalic</code>, <code>xdocHeading</code>, <code>xdocLink</code> and
+				<code>xdocCdata</code> to the <code>editor.semanticTokenColorCustomizations</code> setting.</p>
+
+			<h3 id="checks">Checks</h3>
+			<p>The <code>@param</code> tags are checked against the <code>xsl:param</code> elements of the function
+				or template:</p>
+			<ul>
+				<li>an <code>@param</code> for a name that isn't a parameter is a warning</li>
+				<li>a second <code>@param</code> for the same parameter is a warning</li>
+				<li>when a note has <code>@param</code> tags, parameters without one are reported as information, with
+					an <strong>Add missing @param</strong> quick fix</li>
+			</ul>
+		</div>
+
+	</div>
+	</div>
+</body>
+
+</html>

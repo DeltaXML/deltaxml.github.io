@@ -3,10 +3,6 @@
 	<div class="main">
 
 		<div class="two-thirds column">
-			<aside>This page describes debugging features in the current <strong>pre-release</strong> build of the
-				XSLT/XPath extension. If you are using the stable release, see the
-				<a href="code-diagnostics.html">Debugging</a> page instead.
-			</aside>
 			<p>There is no step-through debugger in the XSLT/XPath extension. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
 				Diagnostics are added using the <strong>xdm:debug()</strong> function, from the
 				<a href="https://github.com/DeltaXML/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
@@ -63,10 +59,11 @@
 				their location path and a pruned, truncated rendering, keeping the output readable for large trees.
 			</p>
 			<!-- TODO: replace with an updated screenshot of xdm:debug terminal output once available -->
-			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VSCode with all SaxonJ and SaxonJS versions.
+			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VSCode with all SaxonJ, SaxonC and SaxonJS versions.
 				Because later SaxonJ versions don't support use of a built-in
 				TextEmitter command-line option, an extension class is used instead of `net.sf.saxon.Transform` when invoking
 				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br/>
+				For this same reason, in SaxonC, the XML output from SaxonC is decoded prior to output to the terminal.
 			</aside>
 		</div>
 

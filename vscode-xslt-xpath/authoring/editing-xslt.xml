@@ -89,6 +89,17 @@
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
 			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
 			included/imported files are included in the suggestions list.</p>
+		<h5 id="hover">Hover Help and Signature Help</h5>
+		<p>Hovering over a function call shows the function's signature and description. This works for
+			built-in functions, with a link to the function's definition in the W3C specification, and for user-defined
+			<code>xsl:function</code>s, including those in included and imported stylesheets. Hovering over the name of an
+			<code>xsl:call-template</code> shows the named template's parameters.</p>
+		<p>While typing the arguments of a function call, signature help (parameter hints) shows the function's
+			parameters, with the current parameter highlighted. Signature help is also shown for the
+			<code>xsl:with-param</code> children of an <code>xsl:call-template</code>. Signature help can be triggered
+			manually with <span class="shortcut">⇧⌘Space</span>.</p>
+		<p>In an XSLT 4.0 stylesheet, a <a href="xslt40-notes.html">documentation note</a> on a function or
+			template is included in its hover help and signature help.</p>
 		<h5>Intellisense for XPath Locations</h5>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
 			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
@@ -116,12 +127,28 @@
 			which will include common attributes for the selected instruction.
 		</p>
 		<p>Intellisense is manually triggered with <span class="shortcut">⌃Space</span>, with <span class="shortcut">Tab</span> or 
-			<span class="shortcut">Enter</span> used to accept suggestions. These <a href="">key bindings</a> are fully customizable.</p>
+			<span class="shortcut">Enter</span> used to accept suggestions. These <a href="https://code.visualstudio.com/docs/getstarted/keybindings">key bindings</a> are fully customizable.</p>
+		<h5>XPath Expressions and Operators</h5>
+		<p>At the start of an XPath expression, the suggestions include snippets for the expressions with several
+			parts: <code>for</code>, <code>let</code>, <code>some</code>, <code>every</code>, <code>if</code>,
+			<code>map</code> and <code>array</code> - for example, <code>let $x := … return …</code>, with
+			placeholders for each part.</p>
+		<p>After an operand, such as a variable or a closing bracket, only the keyword operators that can follow are
+			suggested, such as <code>cast as</code>, <code>instance of</code> and <code>union</code> - and
+			<code>return</code> or <code>satisfies</code> within a <code>for</code>, <code>let</code>,
+			<code>some</code> or <code>every</code> expression. Short operators such as <code>and</code>,
+			<code>eq</code> and <code>div</code> are quicker to type, so aren't included.</p>
+		<h5>Parameters for xsl:call-template</h5>
+		<p>Typing <span class="shortcut">&lt;</span> within an <code>xsl:call-template</code> suggests an
+			<code>xsl:with-param</code> for each of the called template's parameters that isn't passed yet, for
+			example <code>xsl:with-param colour</code>, which inserts the parameter name. The same applies to the
+			parameters of the enclosing <code>xsl:iterate</code> within an <code>xsl:next-iteration</code>. The
+			<code>name</code> attribute of an <code>xsl:with-param</code> also offers the parameter names.</p>
 		<h5>XSLT Instruction Snippets</h5>
 		<p>The special <code>xsl:stylesheet</code> suggestion includes a boiler plate 'identity transform' stylesheet complete with namespace
 			declarations.</p>
-		<p>The <code>xsl:message</code> suggestions include a <em>Watch Variables</em> snippet that lists the names and values of all
-			the immediate in-scope variables or parameters.</p>
+		<p>The <code>xsl:message</code> suggestions include snippets that use the <code>xdm:debug()</code> function to
+			show the names and values of in-scope variables and parameters - see <a href="code-diagnostics.html">Debugging</a>.</p>
 		<h5>More Snippets</h5>
 		<p>
 			You can define your own snippets in Visual Studio Code in a declarative way, without writing an extension. See the Visual Studio Code
@@ -144,9 +171,18 @@
 		</p>
 		
 		<h3 id="refactoring">Code Refactoring</h3>
-		<p>Code refactoring features like <strong>Extract xsl:function</strong> and <strong>Extract xsl:template</strong> are provided via VS Code's 
+		<p>Code refactoring features are provided via VS Code's 
 			Quick Fix (<span class="shortcut">⌘</span><span class="shortcut">.</span>) feature and the 
-			<span class="shortcut">Refactor</span> command.</p>
+			<span class="shortcut">Refactor</span> command:</p>
+		<ul>
+			<li><strong>Extract xsl:function</strong> - from selected XSLT instructions or a selected XPath expression</li>
+			<li><strong>Extract xsl:template</strong> - from selected XSLT instructions</li>
+			<li><strong>Extract xsl:variable</strong> - from a selected XPath expression</li>
+			<li><strong>Extract record type</strong> and <strong>Use record type</strong> - XSLT 4.0, for a map constructor
+				or <code>xsl:map</code>, see <a href="xslt40-records.html#record-refactoring">Records and Enums</a></li>
+			<li><strong>Add documentation note</strong> - XSLT 4.0, with the cursor on the start tag of an <code>xsl:function</code>
+				or <code>xsl:template</code>, see <a href="xslt40-notes.html#adding">Documentation Notes</a></li>
+		</ul>
 		<p>An available refactoring for a selection is indicated by a light-bulb💡 adjacent to the selection. Clicking on the 💡 will display the available refactorings.
 			The light-bulb is only shown when the code selection is a valid expression or a set of XSLT instructions that would be valid inside the new component.
 			If you don't see the light-bulb when you expect to, check that the code selection <strong>completely encloses</strong> the XSLT instruction or XPath expression.
@@ -169,6 +205,20 @@
 			<emphasis>Refactoring with 'Extract to xsl:function' in full mode, referencing context-parameters $c.x, $c.p and $c.l</emphasis>
 
 		</p>
+		<h5 id="quick-fixes">Quick Fixes</h5>
+		<p>Some problems reported by the linter have a Quick Fix, shown with the 💡 light-bulb when the cursor is on the
+			problem:</p>
+		<ul>
+			<li><strong>include XSLT module for xdm:debug</strong> - for the <code>xdm:debug()</code> function used in
+				<code>xsl:message</code>, see <a href="code-diagnostics.html">Debugging</a></li>
+			<li><strong>Add missing record fields</strong> - for a map constructor or <code>xsl:map</code> without all the
+				required fields of its record type</li>
+			<li><strong>Add missing xsl:when cases</strong> - for an <code>xsl:switch</code> on an enumeration type that
+				doesn't test all its values</li>
+			<li><strong>Remove duplicate enum value</strong> - for an enumeration type with a duplicate value</li>
+			<li><strong>Add missing @param</strong> - for a documentation note without an <code>@param</code> for each
+				parameter</li>
+		</ul>
 		<h3 id="checking">XSLT Linter</h3>
 		<aside>Note: The XSLT Linter uses a Symbol Provider. To ensure checks are performed you should keep the
 			<a href="https://code.visualstudio.com/Docs/editor/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
@@ -195,6 +245,14 @@
 				<li>Attribute Value Template Syntax</li>
 				<li>Text Value Template Syntax</li>
 				<li>Item types on <code>as</code> attributes of XSLT instructions</li>
+				<li>Accumulator names in <code>use-accumulators</code> attributes, and accumulators not used by any <code>use-accumulators</code> attribute</li>
+				<li>Operators in patterns - <code>or</code>, <code>and</code>, <code>eq</code> or <code>,</code> outside a predicate or
+					function call, for example <code>match="a or b"</code> instead of <code>match="a | b"</code></li>
+				<li>Duplicate keys in map constructors and in the <code>xsl:map-entry</code> children of an <code>xsl:map</code></li>
+				<li>Braced URI literals, for example <code>Q{http://example.com}name</code></li>
+				<li>The order of <code>xsl:param</code>, <code>xsl:on-completion</code> and <code>xsl:next-iteration</code> within <code>xsl:iterate</code></li>
+				<li>XSLT 4.0: record and enumeration types, see <a href="xslt40-records.html">Records and Enums</a></li>
+				<li>XSLT 4.0: the <code>@param</code> tags of documentation notes, see <a href="xslt40-notes.html#checks">Documentation Notes</a></li>
 			</ol>
 		</details>
 		<p/>
