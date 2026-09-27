@@ -158,6 +158,12 @@
 				example, to always use SaxonC for one project. Switching processor updates the setting where it is
 				already defined (the workspace folder, then the workspace), otherwise it updates your User settings.
 			</p>
+			<aside>
+				SaxonC, a native executable, starts much faster than SaxonJ, which needs a few hundred milliseconds to
+				start the Java VM and load Saxon on each run. So SaxonC usually gives the quickest turnaround when
+				running a stylesheet on small or medium inputs. For longer transforms, SaxonJ's Java JIT compiler
+				makes it faster: in our tests, SaxonJ was ahead once execution took more than about two seconds.
+			</aside>
 			<h3>First use: a task is created for you</h3>
 			<p>
 				The first time Quick Run is used for a given stylesheet/context-file pairing, a real task is added to
