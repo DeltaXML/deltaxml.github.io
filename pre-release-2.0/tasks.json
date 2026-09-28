@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "xslt",
+			"label": "blog",
+			"saxonJar": "${config:XSLT.tasks.saxonJar}",
+			"xsltFile": "test.xsl",
+			"xmlSource": "index.html",
+			"resultPath": "${workspaceFolder}/xslt-out/result.html",
+			"group": {
+				"kind": "build"
+			},
+			"problemMatcher": [
+				"$saxon-xslt"
+			]
+		}
+	]
+}
