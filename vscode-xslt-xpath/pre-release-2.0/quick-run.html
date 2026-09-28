@@ -1,0 +1,320 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>XSLT: Quick Run | VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="quick-run.html" class="active">XSLT: Quick Run</a></li>
+				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
+				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
+				<li><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a></li>
+				<li><a href="xslt40-notes.html">XSLT 4.0: Documentation Notes</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">XSLT: Quick Run</h2>
+
+		<div class="two-thirds column">
+			<p>
+				<strong>Quick Run</strong> is the fastest way to run an XSLT stylesheet, without first creating a task
+				by hand. It can run the stylesheet with any of the three Saxon processors: <strong>SaxonJ</strong>
+				(Java), <strong>SaxonJS</strong> (JavaScript) or <strong>SaxonC</strong> (native C/C++). It reuses the
+				same command-line arguments the corresponding XSLT task would use, but takes the stylesheet and XML
+				source directly from the editor rather than requiring a pre-configured <code>tasks.json</code> entry.
+			</p>
+			<figure>
+			<img src="resources/quick-run.png" class="scale-with-grid">
+				<figurecaption>
+						<p><i style="font-style: italic">(1) XSLT in active editor, (2) the Saxon processor, (3) the XML context file - Click the play button to run</i></p>
+				</figurecaption>
+			</figure>
+			<h3>Running a stylesheet</h3>
+			<p>
+				With an XSLT file open in the active editor, invoke Quick Run in one of three ways:
+			</p>
+			<ul>
+				<li>Press <span class="shortcut">⌘⌥R</span> (<span class="shortcut">Ctrl+Alt+R</span> on Windows/Linux)</li>
+				<li>Click the play button in the editor title bar - its tooltip names the processor currently in use,
+					for example <strong>Quick Run with SaxonC</strong></li>
+				<li>Run <code>Quick Run with Saxon</code> from the Command Palette</li>
+			</ul>
+			<p>
+				The stylesheet is the active editor's file. The XML source is the current
+				<a href="editing-xslt.html#intellisense">XML context file</a> - the same file used to provide XML
+				node-names when auto-completing XPath location steps, shown in the status bar. This means the context
+				file now serves two purposes: XPath auto-completion, and as the Quick Run source document.
+			</p>
+			<p>
+				An XML context file must be set before Quick Run can be used - or, for a stylesheet that declares
+				<code>xsl:initial-template</code>, the context file can be set to <strong>None</strong> (see
+				<a href="#initial-template">Starting from xsl:initial-template</a> below). Each processor also needs its
+				own setup:
+			</p>
+			<ul>
+				<li><strong>SaxonJ</strong> - the <strong>XSLT.tasks.saxonJar</strong> setting must point at your Saxon
+					jar file. See the <strong>Saxon (Java) setup</strong> section on the <a href="run-xslt.html#saxonj-tasks">XSLT
+					Tasks</a> page.</li>
+				<li><strong>SaxonJS</strong> - requires a <a href="https://nodejs.org/en/">NodeJS</a> installation; the
+					<code>xslt3</code> package is run using NPX. See the <strong>Saxon-JS Tasks</strong> section on the
+					<a href="run-xslt.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
+				<li><strong>SaxonC</strong> - the <strong>XSLT.tasks.saxonCPath</strong> setting must point at the folder
+					containing the SaxonC <code>Transform</code> executable (<code>Transform.exe</code> on Windows). See the
+					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">XSLT Tasks</a> page for
+					setup details, including native library paths and licensing.</li>
+			</ul>
+			<aside>Tasks for each processor can be turned off with the <strong>XSLT.tasks.java.enabled</strong>,
+				<strong>XSLT.tasks.js.enabled</strong> and <strong>XSLT.tasks.saxonc.enabled</strong> settings. Quick Run
+				reports an error if the selected processor's tasks are disabled.
+			</aside>
+			<h3 id="modules">Running a module that another stylesheet imports</h3>
+			<p>
+				A module that another stylesheet imports or includes may use functions, variables or templates declared in
+				other modules of that stylesheet. In the editor, these references are resolved through the top-level
+				stylesheet - see <a href="editing-xslt.html#inferred-imports">Inferred Imports</a> - but the module can't be
+				compiled, and so can't be run, on its own.
+			</p>
+			<p>
+				When you Quick Run such a module, it's checked first - with the modules it imports and includes - and if it
+				depends on the top-level stylesheet, you're offered the choice:
+			</p>
+			<ul>
+				<li><strong>Run <em>top-level stylesheet</em></strong> - runs the top-level stylesheet instead, with the same
+					XML context file and processor</li>
+				<li><strong>Run Anyway</strong> - runs the module itself</li>
+			</ul>
+			<p>
+				The choice is remembered for the module until Visual Studio Code is restarted. A module that can be run on its
+				own is run straight away, with no prompt. The top-level stylesheet can also be run from the ▶ button in the
+				<a href="editing-xslt.html#inferred-imports">XSLT Imports</a> view, whichever of its modules is being edited.
+			</p>
+			<h3>Choosing the processor: SaxonJ, SaxonJS or SaxonC</h3>
+			<p>
+				Quick Run uses SaxonJ by default. When an XSLT or XML file is active, the processor currently selected is
+				shown in the status bar, for example <strong>▶ SaxonJ</strong>. To switch
+				processor, use any of the following:
+			</p>
+			<ul>
+				<li>Click the processor name in the status bar</li>
+				<li>Hold <span class="shortcut">⌥</span> (<span class="shortcut">Alt</span> on Windows/Linux) and click
+					the play button in the editor title bar - while the key is held, the play button changes to a
+					'switch' button</li>
+				<li>Run <code>XSLT: Quick Run: Switch Processor</code> from the Command Palette</li>
+			</ul>
+			<p>
+				Each of these shows a list of the three processors to pick from, with the current one marked. The play
+				button's tooltip and the status bar update straight away.
+			</p>
+			<p>
+				The choice is stored in the <strong>XSLT.tasks.quickRunProcessor</strong> setting, whose values are the
+				task types: <code>xslt</code> (SaxonJ), <code>xslt-js</code> (SaxonJS) and <code>xslt-c</code> (SaxonC).
+				You can also edit this setting directly, either as a User setting or as a Workspace setting - for
+				example, to always use SaxonC for one project. Switching processor updates the setting where it is
+				already defined (the workspace folder, then the workspace), otherwise it updates your User settings.
+			</p>
+			<aside>
+				SaxonC, a native executable, starts much faster than SaxonJ, which needs a few hundred milliseconds to
+				start the Java VM and load Saxon on each run. So SaxonC usually gives the quickest turnaround when
+				running a stylesheet on small or medium inputs. For longer transforms, SaxonJ's Java JIT compiler
+				makes it faster: in our tests, SaxonJ was ahead once execution took more than about two seconds.
+			</aside>
+			<h3>First use: a task is created for you</h3>
+			<p>
+				The first time Quick Run is used for a given stylesheet/context-file pairing, a real task is added to
+				your workspace's <code>tasks.json</code> file (creating the file if it doesn't exist yet) - not just an
+				ephemeral, one-off run. The generated task:
+			</p>
+			<ul>
+				<li>is a normal task for the selected processor: an <code>xslt</code> task for SaxonJ, an
+					<code>xslt-js</code> task for SaxonJS or an <code>xslt-c</code> task for SaxonC</li>
+				<li>is labelled from the stylesheet and context file names, for example <strong>demo with books.xml</strong>.
+					SaxonJS and SaxonC task labels have the processor name added, for example
+					<strong>demo with books.xml (SaxonC)</strong></li>
+				<li>uses the <code>xslt-xpath.pickResultFile</code> command for its result path, so you're prompted to
+					choose (or reuse a recently used) output location - the same 'recent files' behaviour described in the
+					<a href="run-xslt.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
+				<li>refers to the processor's setting (for example <code>${config:XSLT.tasks.saxonCPath}</code>) rather
+					than copying its current value, so the task keeps working if you later change the setting</li>
+				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
+					declared with a <code>select</code> default - including params declared in imported or included
+					stylesheets - ready for you to edit</li>
+			</ul>
+			<aside>Parameter values generated this way are prefixed with <code>?</code>, for example <code>?title</code>.
+				This tells Saxon to evaluate the value as an XPath expression rather than a literal string, so the
+				generated entry reproduces the parameter's own default exactly - it does not silently override it with
+				an empty value.
+			</aside>
+			<h3>Subsequent runs</h3>
+			<p>
+				Once a task exists for a stylesheet/context-file pairing, Quick Run re-runs that same task rather than
+				creating another one. This means you can freely edit the generated task afterwards - change a parameter
+				value, adjust the result path, add Saxon features or additional parameters - and Quick Run will keep
+				using your edits on every subsequent run, just like running any other task.
+			</p>
+			<p>
+				Tasks are kept separately for each processor. If you switch processor, the next Quick Run for the same
+				stylesheet/context-file pairing creates a new task for that processor; your existing tasks for the other
+				processors are left unchanged, and are used again if you switch back.
+			</p>
+			<p>
+				If you want a fresh task instead, either edit the existing one directly, or remove it from
+				<code>tasks.json</code> and Quick Run will create a new one next time it's used for that
+				stylesheet/context-file pairing.
+			</p>
+			<h3 id="initial-template">Starting from xsl:initial-template</h3>
+			<p>
+				A stylesheet that declares an <code>xsl:initial-template</code> can be run with no source document at all.
+				To do this, click the XML context file in the status bar and choose <strong>None</strong> - the last entry
+				in the list of files. The status bar then shows <strong>[no XML context]</strong>.
+			</p>
+			<p>
+				With the context file set to None, Quick Run starts the stylesheet from <code>xsl:initial-template</code>
+				(Saxon's <code>-it</code> command-line option) instead of applying templates to a source document. The
+				<code>xsl:initial-template</code> can be declared in the stylesheet itself or in any module it imports or
+				includes. If there isn't one, Quick Run reports an error and offers to pick an XML context file instead.
+			</p>
+			<p>
+				The task created for this has an empty <code>xmlSource</code> and an empty <code>initialTemplate</code>
+				property, and is labelled with the stylesheet name, for example
+				<strong>report with xsl:initial-template</strong>. It is kept separately from any task for the same
+				stylesheet that has an XML source, so you can switch between the two just by changing the context file.
+			</p>
+			<p>
+				None stays selected until you pick a file again - opening or viewing other XML files does not replace it.
+				While it is selected, XPath auto-completion has no source document to take element and attribute names from.
+			</p>
+			<aside>A stylesheet can declare <code>xsl:initial-template</code> and also contain match templates designed for
+				a source document, so Quick Run doesn't guess which way to run it: while an XML context file is set, it
+				always applies templates to that file. The first time it creates a task for such a stylesheet, a
+				notification points out the alternatives - add <code>"initialTemplate": ""</code> to the task to start
+				from <code>xsl:initial-template</code> with the context file as the global context item, or choose None
+				to run with no source document at all.
+			</aside>
+			<h3>Running from an XML file</h3>
+			<p>
+				Quick Run can also be started from an XML file, to run a stylesheet on it without opening the stylesheet
+				first. With an XML file open in the active editor, invoke it in one of three ways:
+			</p>
+			<ul>
+				<li>Press <span class="shortcut">⌘⌥R</span> (<span class="shortcut">Ctrl+Alt+R</span> on Windows/Linux)</li>
+				<li>Click the play button in the editor title bar</li>
+				<li>Run <code>XSLT: Quick Run: Run XSLT on this XML File</code> from the Command Palette</li>
+			</ul>
+			<p>
+				This shows a list of the XSLT tasks that can run on the file, grouped as:
+			</p>
+			<ul>
+				<li><strong>tasks for books.xml</strong> (named after the XML file) - every task whose <code>xmlSource</code> is this file, for
+					any processor. This includes each task Quick Run has created for a stylesheet with this file as its
+					source, so any stylesheet you've already run on the file is one click away.</li>
+				<li><strong>tasks for the current file</strong> - tasks whose <code>xmlSource</code> is
+					<code>${file}</code>, which Visual Studio Code replaces with whichever file is active when the task
+					runs. Use this for general-purpose stylesheets you want to run on any XML file.</li>
+				<li><strong>Pick Stylesheet...</strong> - choose a stylesheet from the recently used list, from any
+					<code>&lt;?xml-stylesheet?&gt;</code> processing instruction in the XML file, or from the file explorer.
+					Quick Run then creates and runs a task for that stylesheet and this file, using the selected processor,
+					exactly as it would from the stylesheet itself - so it appears under <strong>tasks for books.xml</strong>
+					next time.</li>
+			</ul>
+			<p>
+				Each task is listed with its processor and stylesheet path, and you can type to filter on any of these.
+				If there are no matching tasks yet, Quick Run goes straight to picking a stylesheet. As with the
+				stylesheet's play button, holding <span class="shortcut">⌥</span> (<span class="shortcut">Alt</span> on
+				Windows/Linux) while clicking the XML file's play button switches the processor instead.
+			</p>
+			<p>
+				A task that runs on the current file looks like this:
+				<code class="block">{
+	"type": "xslt",
+	"label": "Summarise",
+	"saxonJar": "${config:XSLT.tasks.saxonJar}",
+	"xsltFile": "${workspaceFolder}/tools/summary.xsl",
+	"xmlSource": "${file}",
+	"resultPath": "${command:xslt-xpath.pickResultFile}"
+}</code>
+			</p>
+			<h3>The XML context file is remembered</h3>
+			<p>
+				Your chosen XML context file is now restored automatically when Visual Studio Code is reopened, rather
+				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
+				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
+				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
+			</p>
+			<aside>For custom parameters and features beyond what's auto-populated, chaining tasks together, or any
+				other task configuration in detail, see the <a href="run-xslt.html">XSLT Tasks</a> page - a task Quick
+				Run creates is a normal task, so everything described there still applies to it.
+			</aside>
+		</div>
+
+	</div>
+	</div>
+</body>
+
+</html>
