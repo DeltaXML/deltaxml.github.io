@@ -222,7 +222,7 @@
 			<p>&nbsp;</p>
 			<figure>
 				<img src="resources/after-extract-record-type.png" class="scale-with-grid">
-				<figcaption style="margin:auto"><i><b>After refactor:</b> a prompt to rename the the record-type now it's delcared and set on the variable.</i></figcaption>
+				<figcaption style="margin:auto"><i><b>After refactor:</b> a prompt to rename the record-type now it's delcared and set on the variable.</i></figcaption>
 			</figure>
 
 			<h3 id="enums">Enumeration types</h3>
@@ -240,19 +240,18 @@
 			</ul>
 			<p>A string literal that isn't one of the values is reported as an error.</p>
 			<h5 id="switch">xsl:switch on an enumeration</h5>
-			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
-				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,
-				function call or record field lookup with a declared type - the extension works with its values:</p>
-			<code class="block">&lt;xsl:switch select="$c"&gt;
-  &lt;xsl:when test="'red'" select="'stop'"/&gt;
-  &lt;xsl:when test="'green'" select="'go'"/&gt;
-  &lt;xsl:when test="'blue'" select="'go'"/&gt;
-&lt;/xsl:switch&gt;</code>
 			<figure>
 				<img src="resources/enum-add-missing.png" class="scale-with-grid">
 				<figcaption style="margin:auto"><i>Quick Fix options shown for <code>xsl:switch</code> on an enum type.</i></figcaption>
 			</figure>
 			<p>&nbsp;</p>
+			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
+				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,
+				function call or record field lookup with a declared type - the extension works with its values:</p>
+			<code class="block">&lt;xsl:switch select="$c"&gt;
+				&lt;xsl:when test="'red'" select="'stop'"/&gt;
+				&lt;xsl:when test="'green'" select="'go'"/&gt;
+				&lt;/xsl:switch&gt;</code>
 			<ul>
 				<li>The suggestions for an <code>xsl:when</code> <code>test</code> are the values not already
 					tested.</li>

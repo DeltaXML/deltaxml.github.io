@@ -93,7 +93,7 @@
 			<h4>1. Use Auto-complete for xsl:message</h4>
 			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction. Four completion items are offered when in-scope variables are found:</p>
 			<ul>
-				<li><strong>(black)</strong> - inserts a simple placeholder, for entering your own xsl:message content</li>
+				<li><strong>(blank)</strong> - inserts a simple placeholder, for entering your own xsl:message content</li>
 				<li><strong>adaptive serialization</strong> - serializes last declared variable using <code>serialize()</code> with the <code>adaptive</code> method</li>
 				<li><strong>xdm:debug variables</strong> - lists all in-scope variables in a single <strong>xdm:debug()</strong> call</li>
 				<li><strong>xdm:debug-color variables</strong> - as above, with ANSI-colored terminal output</li>
@@ -149,7 +149,7 @@
 			</p>
 			<figure>
 				<img src="resources/xdm-debug-output.png" style="width:480px" class="scale-with-grid">
-				<figcaption style="margin:auto"><i>Quick Fix menu to resolve the call to <code>xdm:debug-color()</code></i></figcaption>
+				<figcaption style="margin:auto"><i><code>xsl:message</code> output <code>xdm:debug-color()</code>.</i></figcaption>
 			</figure>
 			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VSCode with all SaxonJ, SaxonC and SaxonJS versions.
 				Because later SaxonJ versions don't support use of a built-in
@@ -160,18 +160,16 @@
 			<h4>5. Features of <code>xdm:debug()</code></h4>
             <p>The <code>xdm:debug()</code> function is recommended as it supplements the built-in <code>serialize</code> function with features that are
 				especially important when you're interested in several variable values or the values have complex types.</p>
-			<p>When using <code>xsl:message</code> auto-complete, you may not always need to modify arguments for this function, but these are namely:</p>
-			<pre>
-					$title as xs:string, 
-					$labels as map(xs:string, 
-					item()*),
-					$level? as xs:integer
-			</pre>
+			<p>The auto-complete fills in the arguments, so you rarely need to change them. The function signatures are:</p>
+			<code class="block">
+xdm:debug($title as xs:string, $labels as map(xs:string, item()*)) as xs:string
+xdm:debug($title as xs:string, $labels as map(xs:string, item()*), $level as xs:integer) as xs:string
+			</code>
 			<ul>
 			    <li>The output begins with a title to help locate the xsl:message in the code</li>
 				<li>The remaining content is structured in two columns: variable names in the first, values in the second</li>
 				<li>Nested maps, arrays and sequences are formatted for readability</li>
-				<li>Bracket-pair colouring helps identify the start/end of maps, sequences or arrays</li>
+				<li>Bracket-pair coloring helps identify the start/end of maps, sequences or arrays</li>
 				<li>A set of named variables or parameters can be serialized with a single function</li>
 				<li>Lexical XPath locations are shown above each node</li>
 				<li>Node content is truncated when required to keep message output concise</li>

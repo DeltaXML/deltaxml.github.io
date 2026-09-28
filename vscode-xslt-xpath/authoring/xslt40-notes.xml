@@ -48,7 +48,7 @@
 				names without an <code>@param</code> yet are offered.</p>
 			<figure>
 				<img src="resources/add-documentation.png" class="scale-with-grid" />
-				<figcaption style="margin:auto"><i>The code action for 'Add Documentation' is offered on selecting a function element.</i></figcaption>
+				<figcaption style="margin:auto"><i>The code action 'Add documentation note' is offered on selecting a function element.</i></figcaption>
 			</figure>
 
 			<h3 id="where-shown">Where notes are shown</h3>
