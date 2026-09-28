@@ -258,6 +258,11 @@
 			<li><strong>Extract xsl:function</strong> - from selected XSLT instructions or a selected XPath expression</li>
 			<li><strong>Extract xsl:template</strong> - from selected XSLT instructions</li>
 			<li><strong>Extract xsl:variable</strong> - from a selected XPath expression</li>
+			<li><strong>Wrap with...</strong> (<span class="shortcut">⌥⇧W</span>) - wraps the selected instructions, or the element whose
+				start tag is at the cursor, in an instruction such as <code>xsl:if</code>, <code>xsl:choose</code> or
+				<code>xsl:for-each</code>, or a literal result element - chosen from a list of the instructions allowed at that point,
+				with the recently used ones first. The selected lines are indented within the new instruction, and the cursor is
+				placed in its first attribute, such as <code>test</code> or <code>select</code></li>
 			<li><strong>Extract record type</strong> and <strong>Use record type</strong> - XSLT 4.0, for a map constructor
 				or <code>xsl:map</code>, see <a href="xslt40-records.html#record-refactoring">Records and Enums</a></li>
 			<li><strong>Add documentation note</strong> - XSLT 4.0, with the cursor on the start tag of an <code>xsl:function</code>
@@ -342,10 +347,30 @@
 			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
 		</p>
 		<p>The <strong>Inferred Imports</strong> feature prevents spurious problems being highlighted in the editor.
-			With this feature, a search is made to find if the active XSLT stylesheet has been declared as an import by another stylesheet opened recently
-			in Visual Studio Code. If such a 'parent' stylesheet is found (the most recently opened example is used) it is imported along with any other imports. Functions and,
-			variables etc. used in the active stylesheet can therefore be resolved.
+			With this feature, the top-level ('parent') stylesheet that imports or includes the active module, directly or indirectly,
+			is found and imported along with any other imports. Functions, variables etc. used in the active module, but declared in
+			modules that only the parent imports, can therefore be resolved.
 		</p>
+		<p>A parent stylesheet opened recently in Visual Studio Code is used first. Otherwise, the parent is found from the workspace's
+			XSLT files, which are scanned in the background the first time they're needed, so the parent doesn't have to be opened
+			first. The scan only reads the <code>href</code> attributes of <code>xsl:import</code> and <code>xsl:include</code>
+			instructions, and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
+			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
+			setting.
+		</p>
+		<h6><strong>The XSLT Imports view</strong></h6>
+		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
+			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
+			tree is expanded down to the active module, which is marked <em>current</em>, and clicking a module opens it. The tooltip for
+			a module lists any other stylesheets that import or include it.
+		</p>
+		<p>
+			<figure>
+				<img src="resources/import-view.png" class="scale-with-grid">
+				<figcaption style="margin:auto"><i>The XSLT Imports view is a subpanel of Explorer.</i></figcaption>
+			</figure>
+		</p>
+		<!-- TODO: screenshot of the XSLT Imports view -->
 		<h5>Unused Variables</h5>
 		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
