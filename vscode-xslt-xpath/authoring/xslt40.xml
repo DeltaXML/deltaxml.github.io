@@ -6,9 +6,10 @@
 			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by
 				the <a href="https://qt4cg.org">W3C XSLT 4.0 Community group</a>.</p>
 
-			<p>DeltaXignia's XSLT/XPath language extension supports the XSLT 4.0 and XPath 4.0 features
-				implemented in Saxon 13, as documented
-				<a href="https://www.saxonica.com/documentation13/index.html#!v4extensions">here</a>.</p>
+			<p>DeltaXignia's XSLT/XPath language extension provides full language support for the XSLT 4.0 and XPath 4.0
+				features implemented in Saxon 13, as documented
+				<a href="https://www.saxonica.com/documentation13/index.html#!v4extensions">here</a>: type-aware
+				auto-completion, checks, hover help and refactoring, as well as syntax highlighting.</p>
 
 			<p>Note that, given the independent release cycles for Saxon and the XSLT 4.0 draft, there will be
 				differences between the implementation and the draft specification. Some parts of the

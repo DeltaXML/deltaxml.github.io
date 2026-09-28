@@ -74,7 +74,7 @@
 				<li><a href="code-diagnostics.html">Debugging</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="settings.html">Settings</a></li>
-				<li><a href="copilot.html">GitHub Copilot and XSLT</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
 				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
 				<li><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
 				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a></li>
@@ -95,14 +95,31 @@
 						href="xslt40.html">XSLT 4.0</a> is enabled by setting <strong>version="4.0"</strong> on the root
 					element.
 				</aside>
-				<aside>
-					<strong>New in release 2.0:</strong> <a href="quick-run.html">Quick Run</a> for running a stylesheet
-					without configuring a task, <a href="run-xslt.html#saxonc-tasks">SaxonC</a> support,
-					<a href="editing-xslt.html#hover">signature help</a> for functions and templates, and XSLT 4.0
-					<a href="xslt40-records.html">records and enums</a> and <a href="xslt40-notes.html">documentation
-					notes</a>. See the <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/wiki/Release-Notes">release
-					notes</a> for the full list of changes.
-				</aside>
+				<h3>What's new in release 2.0</h3>
+				<ul>
+					<li><strong><a href="xslt40.html">Full language support for XSLT 4.0 in Saxon 13</a></strong> - type-aware
+						auto-completion, checks, hover help and refactoring for the XSLT 4.0 and XPath 4.0 features Saxon 13
+						implements: new syntax and item types, keyword arguments and optional parameters, <code>xsl:switch</code>,
+						and <a href="xslt40-notes.html">documentation notes</a> with <code>xsl:note</code></li>
+					<li><strong><a href="xslt40-records.html">Records and enums</a></strong> - auto-completion, checks, hover
+						help and refactoring for XPath 4.0 record and enumeration types, from map constructors to
+						<code>xsl:switch</code> cases</li>
+					<li><strong><a href="quick-run.html">Quick Run</a></strong> - run the active stylesheet with a shortcut or
+						the toolbar button, without configuring a task first - with SaxonJ, SaxonJS or the new
+						<a href="run-xslt.html#saxonc-tasks">SaxonC</a> support</li>
+					<li><strong><a href="editing-xslt.html#inferred-imports">Inferred imports</a></strong> - the top-level
+						stylesheet of a module is found from the workspace, without opening it first, and the new
+						<strong>XSLT Imports</strong> view shows its tree of imports and includes</li>
+					<li><strong><a href="editing-xslt.html#hover">Editing</a></strong> - signature help and richer hover help
+						for functions and templates, more auto-completion, and the new
+						<a href="editing-xslt.html#refactoring">Wrap with...</a> refactoring</li>
+					<li><strong><a href="code-diagnostics.html">Debugging</a></strong> - one auto-completed
+						<code>xsl:message</code> for all the in-scope variables, formatted and colored with
+						<code>xdm:debug()</code></li>
+				</ul>
+				<p>See the <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/wiki/Release-Notes">release notes</a>
+					for the full list of changes.</p>
+			   <hr/>
 				<p>
 					These pages complement the extensive <a href="https://code.visualstudio.com/docs">Visual Studio Code
 						documentation</a> that begins:
