@@ -134,6 +134,27 @@
 				<strong>XSLT.tasks.js.enabled</strong> and <strong>XSLT.tasks.saxonc.enabled</strong> settings. Quick Run
 				reports an error if the selected processor's tasks are disabled.
 			</aside>
+			<h3 id="modules">Running a module that another stylesheet imports</h3>
+			<p>
+				A module that another stylesheet imports or includes may use functions, variables or templates declared in
+				other modules of that stylesheet. In the editor, these references are resolved through the top-level
+				stylesheet - see <a href="editing-xslt.html#inferred-imports">Inferred Imports</a> - but the module can't be
+				compiled, and so can't be run, on its own.
+			</p>
+			<p>
+				When you Quick Run such a module, it's checked first - with the modules it imports and includes - and if it
+				depends on the top-level stylesheet, you're offered the choice:
+			</p>
+			<ul>
+				<li><strong>Run <em>top-level stylesheet</em></strong> - runs the top-level stylesheet instead, with the same
+					XML context file and processor</li>
+				<li><strong>Run Anyway</strong> - runs the module itself</li>
+			</ul>
+			<p>
+				The choice is remembered for the module until Visual Studio Code is restarted. A module that can be run on its
+				own is run straight away, with no prompt. The top-level stylesheet can also be run from the ▶ button in the
+				<a href="editing-xslt.html#inferred-imports">XSLT Imports</a> view, whichever of its modules is being edited.
+			</p>
 			<h3>Choosing the processor: SaxonJ, SaxonJS or SaxonC</h3>
 			<p>
 				Quick Run uses SaxonJ by default. When an XSLT or XML file is active, the processor currently selected is

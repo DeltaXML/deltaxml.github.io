@@ -261,7 +261,7 @@
 			</ol>
 		</details>
 		<p/>
-		<h5>Inferred Imports for 'Non-Standalone' Stylesheets</h5>
+		<h5 id="inferred-imports">Inferred Imports for 'Non-Standalone' Stylesheets</h5>
 		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
 			that declares the required imports. If no knowledge of the parent module is available, spurious problems
 			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
@@ -278,19 +278,29 @@
 			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
 			setting.
 		</p>
+		<p>To use a different top-level stylesheet - for example, one of two that import the same modules - run
+			<strong>XSLT: Choose Top-Level Stylesheet...</strong> from the Command Palette, or the button in the title bar of the
+			XSLT Imports view. The list shows the top-level stylesheets that import or include the active module, directly or
+			indirectly: the one chosen is used for all the modules of its tree. <strong>Automatic</strong> goes back to the
+			nearest folder, and <strong>Browse...</strong> picks any stylesheet, for the active module alone. The choices are saved
+			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
+			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
+		</p>
 		<h6><strong>The XSLT Imports view</strong></h6>
 		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
 			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
 			tree is expanded down to the active module, which is marked <em>current</em>, and clicking a module opens it. The tooltip for
 			a module lists any other stylesheets that import or include it.
 		</p>
+		<p>The ▶ button on the top-level stylesheet runs it with <a href="quick-run.html">Quick Run</a>, using the current XML
+			context file - whichever module of its tree is being edited.
+		</p>
 		<p>
 			<figure>
 				<img src="resources/import-view.png" class="scale-with-grid" />
-				<figcaption style="margin:auto"><i>The XSLT Imports view is a subpanel of Explorer.</i></figcaption>
+				<figcaption style="margin:auto"><i>The XSLT Imports view in the Explorer, with the ▶ Quick Run button for the top-level stylesheet.</i></figcaption>
 			</figure>
 		</p>
-		<!-- TODO: screenshot of the XSLT Imports view -->
 		<h5>Unused Variables</h5>
 		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
