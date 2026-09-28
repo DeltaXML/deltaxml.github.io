@@ -157,6 +157,28 @@
 				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br>
 				For this same reason, in SaxonC, the XML output from SaxonC is decoded prior to output to the terminal.
 			</aside>
+			<h4>5. Features of <code>xdm:debug()</code></h4>
+            <p>The <code>xdm:debug()</code> function is recommended as it supplements the built-in <code>serialize</code> function with features that are
+				especially important when you're interested in several variable values or the values have complex types.</p>
+			<p>When using <code>xsl:message</code> auto-complete, you may not always need to modify arguments for this function, but these are namely:</p>
+			<pre>
+					$title as xs:string, 
+					$labels as map(xs:string, 
+					item()*),
+					$level? as xs:integer
+			</pre>
+			<ul>
+			    <li>The output begins with a title to help locate the xsl:message in the code</li>
+				<li>The remaining content is structured in two columns: variable names in the first, values in the second</li>
+				<li>Nested maps, arrays and sequences are formatted for readability</li>
+				<li>Bracket-pair colouring helps identify the start/end of an map, sequence or array</li>
+				<li>A set of named variables or parameters can be serialized with a single function</li>
+				<li>Lexical XPath locations are shown above each node</li>
+				<li>Node content is truncated when required to keep message output concise</li>
+				<li>Syntax highlighting helps identify types and map keys etc.</li>
+				<li>Values are annotated with their type where this is non-obvious</li>
+				<li>The optional <code>$level</code> argument adds indentation proportional to this value - helpful for recursive calls</li>
+			</ul>
 		</div>
 
 	</div>

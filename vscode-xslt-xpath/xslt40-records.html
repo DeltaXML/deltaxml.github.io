@@ -215,7 +215,15 @@
 				type '<em>name</em>'</strong> refactoring is also offered, in the <strong>Rewrite</strong> section of
 				the list. It sets the <code>as</code> attribute to the existing type without adding a
 				declaration.</p>
-			<!-- TODO: screenshot of the Extract record type and Use record type refactorings -->
+			<figure>
+				<img src="resources/extract-record-type-menu.png" class="scale-with-grid">
+				<figcaption style="margin:auto"><i><b>Before refactor:</b> The two 💡 refactorings for a candidate record-type variable.</i></figcaption>
+			</figure>
+			<p>&nbsp;</p>
+			<figure>
+				<img src="resources/after-extract-record-type.png" class="scale-with-grid">
+				<figcaption style="margin:auto"><i><b>After refactor:</b> a prompt to rename the the record-type now it's delcared and set on the variable.</i></figcaption>
+			</figure>
 
 			<h3 id="enums">Enumeration types</h3>
 			<h5>Auto-completion for values</h5>
@@ -238,7 +246,13 @@
 			<code class="block">&lt;xsl:switch select="$c"&gt;
   &lt;xsl:when test="'red'" select="'stop'"/&gt;
   &lt;xsl:when test="'green'" select="'go'"/&gt;
+  &lt;xsl:when test="'blue'" select="'go'"/&gt;
 &lt;/xsl:switch&gt;</code>
+			<figure>
+				<img src="resources/enum-add-missing.png" class="scale-with-grid">
+				<figcaption style="margin:auto"><i>Quick Fix options shown for <code>xsl:switch</code> on an enum type.</i></figcaption>
+			</figure>
+			<p>&nbsp;</p>
 			<ul>
 				<li>The suggestions for an <code>xsl:when</code> <code>test</code> are the values not already
 					tested.</li>
