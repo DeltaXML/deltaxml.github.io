@@ -13,12 +13,15 @@
 			<h4>1. Use Auto-complete for xsl:message</h4>
 			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction. Four completion items are offered when in-scope variables are found:</p>
 			<ul>
-				<li><strong>adaptive serialization</strong> - serializes a single variable using <code>serialize()</code> with the <code>adaptive</code> method</li>
-				<li><strong>simple variables</strong> - the original Text Value Template (TVT) style listing, with one variable per line</li>
+				<li><strong>(black)</strong> - inserts a simple placeholder, for entering your own xsl:message content</li>
+				<li><strong>adaptive serialization</strong> - serializes last declared variable using <code>serialize()</code> with the <code>adaptive</code> method</li>
 				<li><strong>xdm:debug variables</strong> - lists all in-scope variables in a single <strong>xdm:debug()</strong> call</li>
 				<li><strong>xdm:debug-color variables</strong> - as above, with ANSI-colored terminal output</li>
 			</ul>
-			<!-- TODO: replace with an updated screenshot of the auto-complete list once available -->
+			<figure>
+				<img src="resources/xsl-message-list.png" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>The auto-complete list for xsl:message when variables or parameters are in context.</i></figcaption>
+			</figure>
 			<h4>2. Review Inserted xsl:message</h4>
 			<p>When <strong>xdm:debug variables</strong> (or <strong>xdm:debug-color variables</strong>) is selected from the auto-complete list,
 				an xsl:message snippet is inserted at the cursor with all in-scope variables collected into a single XPath map,
@@ -31,14 +34,17 @@
     'total': $total
 })"/&gt;</code>
 			</p>
-			<!-- TODO: replace with an updated screenshot of the inserted xsl:message once available -->
-			<h4>3. QuickFix: Include the xdm-view Library</h4>
+			<figure>
+				<img src="resources/inserted-message.png" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>The generated <code>xsl:message</code> inserted with unresolved call to <code>xdm:debug-color()</code></i></figcaption>
+			</figure>
+			<h4>3. Quick Fix: Include the xdm-view Library</h4>
 			<p>
 				As can be seen above, the <code>xdm:debug()</code> function is not initially resolvable - it will be marked
 				as a 'problem' until its defining library is included. Hover over the problem function and accept the
 				'QuickFix' by pressing <span class="shortcut">Enter</span>.
 			</p>
-			<p>Two QuickFix options are offered:</p>
+			<p>Two Quick Fix options are offered:</p>
 			<ul>
 				<li><strong>Include XSLT module for xdm:debug</strong> (the default, preferred option) - inserts the
 					<strong>xdm</strong> namespace declaration (<code>http://deltaxignia.com/ns/xdm-persistence</code>) and an
@@ -51,14 +57,20 @@
 					locally, for example to inspect or version them alongside your own stylesheets.
 				</li>
 			</ul>
-			<!-- TODO: replace with an updated screenshot of the QuickFix menu once available -->
+			<figure>
+				<img src="resources/xdm-debug-quickfix.png" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>Quick Fix menu to resolve the call to <code>xdm:debug-color()</code></i></figcaption>
+			</figure>
 			<h4>4. Run XSLT and Review State in Terminal</h4>
 			<p>
 				You can now <a href="run-xslt.html">run the XSLT</a> as normal, but you will now see the xsl:message output
 				in the terminal window, with each in-scope variable shown under a title banner. Node values are shown with
 				their location path and a pruned, truncated rendering, keeping the output readable for large trees.
 			</p>
-			<!-- TODO: replace with an updated screenshot of xdm:debug terminal output once available -->
+			<figure>
+				<img src="resources/xdm-debug-output.png" style="width:480px" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>Quick Fix menu to resolve the call to <code>xdm:debug-color()</code></i></figcaption>
+			</figure>
 			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VSCode with all SaxonJ, SaxonC and SaxonJS versions.
 				Because later SaxonJ versions don't support use of a built-in
 				TextEmitter command-line option, an extension class is used instead of `net.sf.saxon.Transform` when invoking

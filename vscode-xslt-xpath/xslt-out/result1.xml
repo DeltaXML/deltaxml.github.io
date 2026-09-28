@@ -73,6 +73,14 @@
 					element.
 				
 				
+					New in release 2.0: Quick Run for running a stylesheet
+					without configuring a task, SaxonC support,
+					signature help for functions and templates, and XSLT 4.0
+					records and enums and documentation
+					notes. See the release
+					notes for the full list of changes.
+				
+				
 					These pages complement the extensive Visual Studio Code
 						documentation that begins:
 				
