@@ -200,11 +200,18 @@
 				Other Extensions
 				Among the hundreds of high quality extensions available for Visual Studio Code,
 					Live
-						Share,
-					for collaborative working
-					and Live
-						Server
-					for when you're generating HTML with XSLT are particularly useful.
+						Share, for collaborative working, is particularly useful.
+				
+				Viewing HTML Output
+				When your XSLT generates HTML, you can view the result in Visual Studio Code's
+					integrated browser, with no
+					extension needed. When a transform writes an HTML result file, the notification that the task has completed
+					has an Open in Browser button, as well as Open for the file's source. You can
+					also choose Open in Integrated Browser from the editor title bar of an HTML file, or from its
+					context menu in the Explorer. With the
+					workbench.browser.autoReloadOnFileChange setting, the page reloads each time the transform
+					writes the result file again - so you can edit the stylesheet, run it with
+					Quick Run, and see the updated output alongside the XSLT.
 				
 				Edit XML, XSLT or XPath
 				

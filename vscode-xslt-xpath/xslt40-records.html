@@ -240,30 +240,22 @@
 			</ul>
 			<p>A string literal that isn't one of the values is reported as an error.</p>
 			<h5 id="switch">xsl:switch on an enumeration</h5>
-			<figure>
-				<img src="resources/enum-add-missing.png" class="scale-with-grid">
-				<figcaption style="margin:auto"><i>Quick Fix options shown for <code>xsl:switch</code> on an enum type.</i></figcaption>
-			</figure>
-			<p>&nbsp;</p>
 			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
 				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,
-				function call or record field lookup with a declared type - the extension works with its values:</p>
-			<code class="block">&lt;xsl:switch select="$c"&gt;
-				&lt;xsl:when test="'red'" select="'stop'"/&gt;
-				&lt;xsl:when test="'green'" select="'go'"/&gt;
-				&lt;/xsl:switch&gt;</code>
+				function call or record field lookup with a declared type - the extension works with its values.</p>
+			<p>
+				<figure>
+					<img src="resources/enum-add-missing.png" class="scale-with-grid">
+					<figcaption style="margin:auto"><i>Quick Fix options shown for <code>xsl:switch</code> on an enum type.</i></figcaption>
+				</figure>
+			</p>
 			<ul>
-				<li>The suggestions for an <code>xsl:when</code> <code>test</code> are the values not already
-					tested.</li>
-				<li>Values with no <code>xsl:when</code>, when there's no <code>xsl:otherwise</code>, are reported
-					as information on the <code>xsl:switch</code> - here, <code>'blue'</code> - as the result for them
-					is empty.</li>
-				<li>Two quick fixes add an <code>xsl:when</code> for each missing value: <strong>Add missing xsl:when
-					cases with select</strong> adds <code>&lt;xsl:when test="'blue'" select=""/&gt;</code>, and
-					<strong>Add missing xsl:when cases with content</strong> adds an <code>xsl:when</code> with a
-					sequence constructor.</li>
-				<li>A test value that isn't one of the values, or that's already tested by an earlier
-					<code>xsl:when</code>, is a warning - as the <code>xsl:when</code> can never match it.</li>
+				<li>A Quick Fix options are shown on any selected xsl:switch element with a (detected) enum type:</li>
+				<ul>
+					<li><b>Add missing xsl:when cases with select</b> (self-closing <code>&lt;xsl:when select=""/&gt;</code>)</li>
+					<li><b>Add missing xsl:when cases with content</b> ( <code>&lt;xsl:when&gt;\n&lt;xsl:when/&gt;</code>)</li>
+				</ul>
+				<li>If using auto-complete inside xsl:switch, all xsl:when options remaining for that enum are in the completion-list</li>
 			</ul>
 		</div>
 
