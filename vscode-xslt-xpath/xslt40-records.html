@@ -94,6 +94,10 @@
 				expressions: that is left to Saxon when the stylesheet is compiled.</aside>
 			<p>These features are enabled when the stylesheet has <strong>version="4.0"</strong>. See the
 				<a href="xslt40.html">XSLT 4.0</a> page for the XSLT 4.0 features supported.</p>
+			<p>For Saxon PE or EE 12.8 or later, run with syntax extensions, they can also be enabled for XSLT 3.0
+				stylesheets, with the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code> - see
+				<a href="settings.html#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a>. That page also
+				describes converting Saxon's earlier <code>saxon:type-alias</code> and <code>tuple(...)</code> syntax.</p>
 
 			<h3 id="declaring">Declaring types</h3>
 			<p>A record type lists its fields, each with an optional type. A field name followed by <code>?</code>
@@ -103,6 +107,9 @@
 &lt;xsl:item-type name="colour" as="enum('red', 'green', 'blue')"/&gt;</code>
 			<p>A type can also be written inline in an <code>as</code> attribute, for example
 				<code>as="record(x as xs:double, y as xs:double)"</code>.</p>
+			<p>In an attribute value, quotes within a type can be written as references, as Saxon allows - for example
+				<code>as="enum(&amp;quot;it's&amp;quot;, 'is')"</code> or a field name quoted with
+				<code>&amp;#39;</code> - and the extension reads them as the quotes they stand for.</p>
 			<h5>Auto-completion for types</h5>
 			<ul>
 				<li>Within an <code>as</code> attribute, and after <code>instance of</code>, <code>castable as</code>
@@ -185,6 +192,27 @@
 			<p>Hovering over a field name - in a lookup, a map constructor key or the <code>key</code> of an
 				<code>xsl:map-entry</code> - shows the field's declaration. Go to Definition on a field name goes to
 				the field in the record type.</p>
+			<p>Hovering over the name of a named item type - where it's used, or on its declaration - shows its
+				declaration, with its values for an enumeration type. When the <code>xsl:item-type</code> has a
+				<a href="xslt40-notes.html">documentation note</a>, the note is shown too, and a field's
+				<code>@field</code> text is shown when hovering over the field, and with the field in the
+				auto-completion suggestions.</p>
+			<!-- TODO screenshot: hover over a record field in a lookup, e.g. $bounds?width, showing the field's
+			     declaration and its @field text from the xsl:item-type's documentation note -->
+			<h5 id="rename-field">Renaming a field</h5>
+			<p>Rename Symbol (<span class="shortcut">F2</span>) on a field name - in the record type, a lookup, a map
+				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, or an <code>@field</code> tag
+				of a documentation note - renames the field, and all its references. Find All References
+				(<span class="shortcut">⇧⌥F12</span>) lists them.</p>
+			<ul>
+				<li>Only the field of that record type is renamed - not a field with the same name in another
+					record type.</li>
+				<li>The references are found in the stylesheet, the modules it includes or imports, and - from the
+					workspace's modules - each stylesheet that imports or includes it, with the modules they use. So a
+					rename in a module of types reaches the stylesheets that use them.</li>
+				<li>A quoted field name keeps its quotes, e.g. <code>'unit name'</code>. A new name must be an NCName,
+					unless the field's name isn't one.</li>
+			</ul>
 			<h5>Path steps on records (JNodes)</h5>
 			<p>XPath 4.0 path expressions can navigate maps and arrays as trees of <strong>JNodes</strong>. The
 				<code>jtree()</code> function wraps a map in a tree, so that each field becomes a step:</p>
@@ -239,6 +267,10 @@
 				<li>the <code>test</code> of an <code>xsl:when</code> in an <code>xsl:switch</code> - see below</li>
 			</ul>
 			<p>A string literal that isn't one of the values is reported as an error.</p>
+			<p>Hovering over the name of an enumeration type - or a global variable or parameter, a parameter of a
+				function or template, or a record field, with the type - lists its values - on one line for a few values, otherwise as a list. For a type declared as another, or as a
+				choice of enumeration types, the values are those it resolves to.</p>
+			<!-- TODO screenshot: hover over the name of an enumeration type, showing its values -->
 			<h5 id="switch">xsl:switch on an enumeration</h5>
 			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
 				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,

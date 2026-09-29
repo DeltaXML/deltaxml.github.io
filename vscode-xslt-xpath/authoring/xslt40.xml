@@ -26,6 +26,9 @@
 				auto-completion for XSLT instructions and attributes and XPath functions will be included.
 				In an XSLT 3.0 stylesheet, the linter reports XPath 4.0 syntax as an error.
 			</p>
+			<p>For Saxon PE or EE 12.8 or later, run with syntax extensions, XSLT 4.0 item types - with record and
+				enumeration types - and <code>xsl:note</code> can also be enabled in XSLT 3.0 stylesheets: see
+				<a href="settings.html#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a>.</p>
 			<p>
 				<img src="resources/xslt40-completion.png" class="scale-with-grid" />
 			</p>

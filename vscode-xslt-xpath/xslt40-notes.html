@@ -92,7 +92,14 @@
 				declaration is used - including from other stylesheet modules - and on the declaration's own name. For
 				functions and templates, it's also shown in signature help. For a record type, declared with
 				<code>xsl:item-type</code>, the note can also describe each of the record's fields.</p>
-			<p>These features are enabled when the stylesheet has <strong>version="4.0"</strong>.</p>
+			<p>A <a href="#module-notes">module note</a>, as the first child of the <code>xsl:stylesheet</code>,
+				describes the module and its global parameters and variables - and a global parameter or variable can
+				have a note of its own, for more detail.</p>
+			<p>The XSLT 4.0 specification allows <code>xsl:note</code> anywhere, with any attributes and content, and
+				leaves the format of the documentation open. The <code>format="xdoc-md"</code> attribute is the
+				extension's convention for the notes it shows: XSLT processors ignore it, with the rest of the note.</p>
+			<p>These features are enabled when the stylesheet has <strong>version="4.0"</strong> - and for XSLT 3.0,
+				see <a href="#xslt30">Notes in XSLT 3.0</a>.</p>
 
 			<h3 id="writing">Writing a documentation note</h3>
 			<p>Set the <code>format</code> attribute to <code>xdoc-md</code>. The text before the first tag is a
@@ -105,17 +112,22 @@
 
 			<h5>Tags</h5>
 			<ul>
-				<li><code>@param $name</code> - a parameter of a function or template</li>
+				<li><code>@param $name</code> - a parameter of a function or template - or, in a module note, a global
+					parameter</li>
 				<li><code>@return</code> - the result of a function or template</li>
 				<li><code>@field name</code> - a field of a record type, for an <code>xsl:item-type</code></li>
+				<li><code>@variable $name</code> - a global variable, in a module note</li>
 				<li><code>@see</code> - a related function, template or URI</li>
 				<li><code>@since</code> - the version it was added in</li>
 				<li><code>@deprecated</code> - why it should no longer be used, and what to use instead</li>
 				<li><code>@error</code> - an error a function or template may raise</li>
+				<li><code>@author</code> and <code>@version</code> - for a module note</li>
 			</ul>
 			<p><code>@field</code> isn't an xqDoc tag: the extension adds it, in the same style, for documenting
 				records. A field name that isn't an NCName is quoted, as in the record type - for example
 				<code>@field 'unit name' e.g. cm</code>.</p>
+			<!-- TODO screenshot: an xsl:item-type with a record type and a documentation note with @field tags,
+			     showing their highlighting -->
 			<h5>Markdown</h5>
 			<p>The description and tag text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
 				<code>`code`</code>, <code>[links](https://example.com)</code> and <code>#</code> headings.</p>
@@ -124,24 +136,35 @@
 				is shown exactly as written.</p>
 
 			<h3 id="adding">Adding a note</h3>
-			<p>With the cursor on the start tag of an <code>xsl:function</code>, <code>xsl:template</code> or
-				<code>xsl:item-type</code> that has no <code>xsl:note</code>, choose <strong>Add documentation
+			<p>With the cursor on the start tag of an <code>xsl:function</code>, <code>xsl:template</code>,
+				<code>xsl:item-type</code>, the <code>xsl:stylesheet</code>, or a global <code>xsl:param</code> or
+				<code>xsl:variable</code>, that has no <code>xsl:note</code>, choose <strong>Add documentation
 				note</strong> from the refactorings (💡 or <span class="shortcut">⌘</span><span class="shortcut">.</span>).
 				A note is inserted as the first child, with:</p>
 			<ul>
 				<li>an <code>@param</code> for each parameter, and an <code>@return</code> for a function (or a
 					template with an <code>as</code> attribute)</li>
-				<li>for an <code>xsl:item-type</code> with a record type, an <code>@field</code> for each field - an
-					empty <code>&lt;xsl:item-type .../&gt;</code> gets an end tag for the note</li>
+				<li>for an <code>xsl:item-type</code> with a record type, an <code>@field</code> for each field</li>
+				<li>for a module note, an <code>@param</code> or <code>@variable</code> for each global parameter or
+					variable that has no note of its own</li>
 			</ul>
+			<p>An empty element, e.g. <code>&lt;xsl:item-type .../&gt;</code>, gets an end tag for the note.</p>
 			<p>Press <span class="shortcut">Tab</span> to move between the description placeholders.</p>
-			<p>Notes can also be added with auto-completion: after <code>&lt;</code>, <strong>xsl:note</strong> inserts a
-				note on one line, and <strong>xsl:note xdoc-md</strong> a documentation note. These are offered within any
-				XSLT element, and within literal result elements - XSLT 4.0 allows <code>xsl:note</code> anywhere.</p>
+			<p>Notes can also be added with auto-completion, after <code>&lt;</code>:</p>
+			<ul>
+				<li><strong>xsl:note</strong> inserts a note on one line. It's offered within any XSLT element, and
+					within literal result elements - XSLT 4.0 allows <code>xsl:note</code> anywhere.</li>
+				<li><strong>xsl:note xdoc-md</strong> inserts a documentation note. It's offered where one is used - within
+					a function, named template, item type, global parameter or variable, or at the top level for the
+					module note - and when there isn't one yet. There, it's listed first, and preselected.</li>
+			</ul>
+			<p>Within the start tag of an <code>xsl:note</code>, <code>format</code> is offered as an attribute, and
+				<code>xdoc-md</code> as its value.</p>
 			<p>Within a note, typing <code>@</code> offers the tags that apply: <code>@field</code> for an
-				<code>xsl:item-type</code>, and <code>@param</code>, <code>@return</code> and <code>@error</code> for a
-				function or template. After <code>@param</code>, the parameter names without an <code>@param</code> yet
-				are offered - and after <code>@field</code>, the fields without an <code>@field</code> yet.</p>
+				<code>xsl:item-type</code>; <code>@param</code>, <code>@return</code> and <code>@error</code> for a
+				function or template; and <code>@param</code>, <code>@variable</code>, <code>@author</code> and
+				<code>@version</code> for a module note. After <code>@param</code>, the parameter names without an
+				<code>@param</code> yet are offered - and likewise after <code>@field</code> and <code>@variable</code>.</p>
 			<figure>
 				<img src="resources/add-documentation.png" class="scale-with-grid">
 				<figcaption style="margin:auto"><i>The code action 'Add documentation note' is offered on selecting a function element.</i></figcaption>
@@ -165,6 +188,10 @@
 					lookup, a child step on a JNode, a map constructor key and an <code>xsl:map-entry</code>. For an item
 					type declared as another, e.g. <code>as="cx:point"</code>, the other type's <code>@field</code> text
 					is used.</li>
+				<li><strong>Variable references</strong> - on a reference to a global parameter or variable, e.g.
+					<code>$scale</code>, or the <code>name</code> of its declaration, its type and documentation are
+					shown - see <a href="#module-notes">Module notes</a>. On a reference to a parameter of a function or
+					template, its <code>@param</code> text is shown.</li>
 				<li><strong>Signature help</strong> - while typing the arguments of a function call, or the
 					<code>xsl:with-param</code> children of an <code>xsl:call-template</code>, the parameter hints show
 					the <code>@param</code> text for the current parameter.</li>
@@ -176,6 +203,59 @@
 				<img src="resources/xsl-note-hover.png" class="scale-with-grid">
 				<figcaption style="margin:auto"><i>To see <code>xdoc-md</code> documentation on the function (or named template) hover over the referring code.</i></figcaption>
 			</figure>
+
+			<h3 id="module-notes">Module notes</h3>
+			<p>A documentation note as the first child of the <code>xsl:stylesheet</code> (or <code>xsl:transform</code>
+				or <code>xsl:package</code>) describes the module. Its tags can describe the global parameters and
+				variables briefly, so they don't need notes of their own:</p>
+			<code class="block">&lt;xsl:stylesheet ... version="4.0"&gt;
+  &lt;xsl:note format="xdoc-md"&gt;
+    Draws shapes.
+
+    @param $scale the scale factor
+    @variable $origin the point all shapes start from
+    @author Ann
+    @version 1.2
+  &lt;/xsl:note&gt;
+  &lt;xsl:param name="scale" as="xs:double" select="1"/&gt;
+  &lt;xsl:param name="colour" as="cx:colour" select="'red'"&gt;
+    &lt;xsl:note format="xdoc-md"&gt;The fill colour, used for **every** shape.&lt;/xsl:note&gt;
+  &lt;/xsl:param&gt;</code>
+			<p>For more detail, a global <code>xsl:param</code> or <code>xsl:variable</code> can have a documentation
+				note of its own, as its first child. It's shown in place of the module note's <code>@param</code> or
+				<code>@variable</code> text - so a module note can give a brief summary, and the parameter's own note the
+				details.</p>
+			<ul>
+				<li><strong>Hover help on variables</strong> - on a reference to a global parameter or variable, or
+					the <code>name</code> of its declaration: its type, its documentation, and for an enumeration type,
+					its values.</li>
+				<li><strong>Hover help on imports</strong> - on the <code>href</code> of an <code>xsl:import</code> or
+					<code>xsl:include</code>: the module's note, and its path.</li>
+				<li><strong>Preview</strong> - on the start tag of the module note: the note as it's shown for an
+					import of the module.</li>
+				<li><strong>Rename</strong> - renaming a global parameter or variable renames its <code>@param</code>
+					or <code>@variable</code> tag too.</li>
+			</ul>
+			<!-- TODO screenshot: a module note, with the hover on a reference to a global parameter, e.g. $scale,
+			     showing its @param text from the module note -->
+			<!-- TODO screenshot: the hover on the start tag of a module note, previewing the note -->
+			<!-- TODO screenshot: the hover on the href of an xsl:import, showing the imported module's note -->
+
+			<h3 id="xslt30">Notes in XSLT 3.0</h3>
+			<p>An XSLT 3.0 processor reports <code>XTSE0010</code> for <code>xsl:note</code>, as an unknown XSLT
+				element - unless it's excluded with <code>use-when="false()"</code>, which works with any processor.
+				In a stylesheet with <code>version="3.0"</code>:</p>
+			<ul>
+				<li>an <code>xsl:note</code> without a <code>use-when</code> attribute is a warning, with the quick fix
+					<strong>Exclude with use-when="false()"</strong></li>
+				<li>the <code>xsl:note</code> completions and <strong>Add documentation note</strong> insert the note
+					with <code>use-when="false()"</code></li>
+				<li>documentation notes are shown, highlighted and checked, as in XSLT 4.0</li>
+			</ul>
+			<p>Saxon PE and EE 12.8 or later, run with syntax extensions, accept <code>xsl:note</code> in an XSLT 3.0
+				stylesheet. With the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code>, notes need no
+				<code>use-when</code>, and XSLT 4.0 item types are available too - see
+				<a href="settings.html#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a>.</p>
 
 			<h3 id="highlighting">Highlighting Details</h3>
 			<p>The content of a note is highlighted as documentation: tags, parameter and field names, code, bold and
@@ -201,6 +281,11 @@
 				<li>an <code>@param</code>, <code>@return</code> or <code>@error</code> in the note of an
 					<code>xsl:item-type</code> is a warning</li>
 			</ul>
+			<p>In a module note, the <code>@param</code> and <code>@variable</code> tags are checked against the global
+				parameters and variables in the same way. A global parameter or variable with a note of its own isn't
+				reported as missing from the module note. <code>@return</code> and <code>@error</code> in a module note,
+				and <code>@param</code>, <code>@variable</code>, <code>@return</code> and <code>@error</code> in the note
+				of a global parameter or variable, are warnings.</p>
 		</div>
 
 	</div>
