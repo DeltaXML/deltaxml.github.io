@@ -5,47 +5,63 @@
 		<div class="two-thirds column">
 			<p>XSLT 4.0 adds the <code>xsl:note</code> element, for documentation within a stylesheet. The
 				XSLT/XPath extension supports notes written in a simple format, <strong>xdoc-md</strong>: Markdown
-				text followed by fields such as <code>@param</code> and <code>@return</code>, in the style of Javadoc
+				text followed by tags such as <code>@param</code> and <code>@return</code>, in the style of Javadoc
 				and xqDoc.</p>
-			<p>A note in this format, as the first child of an <code>xsl:function</code> or named
-				<code>xsl:template</code>, is shown in hover help and signature help wherever the function or template
-				is used - including from other stylesheet modules.</p>
+			<p>A note in this format, as the first child of an <code>xsl:function</code>, a named
+				<code>xsl:template</code> or an <code>xsl:item-type</code>, is shown in hover help wherever the
+				declaration is used - including from other stylesheet modules - and on the declaration's own name. For
+				functions and templates, it's also shown in signature help. For a record type, declared with
+				<code>xsl:item-type</code>, the note can also describe each of the record's fields.</p>
 			<p>These features are enabled when the stylesheet has <strong>version="4.0"</strong>.</p>
 
 			<h3 id="writing">Writing a documentation note</h3>
-			<p>Set the <code>format</code> attribute to <code>xdoc-md</code>. The text before the first field is a
-				description, in Markdown. Each field starts a new line, and continues on the following lines up to the
-				next field:</p>
+			<p>Set the <code>format</code> attribute to <code>xdoc-md</code>. The text before the first tag is a
+				description, in Markdown. Each tag starts a new line, and continues on the following lines up to the
+				next tag:</p>
 			<figure>
 				<img src="resources/xsl-note-markdown.png" class="scale-with-grid" />
-				<figcaption style="margin:auto"><i>The xdoc-md fields within xsl:note are highlighted along with any markdown used</i></figcaption>
+				<figcaption style="margin:auto"><i>The xdoc-md tags within xsl:note are highlighted along with any markdown used</i></figcaption>
 			</figure>
 
-			<h5>Fields</h5>
+			<h5>Tags</h5>
 			<ul>
-				<li><code>@param $name</code> - a parameter</li>
-				<li><code>@return</code> - the result</li>
+				<li><code>@param $name</code> - a parameter of a function or template</li>
+				<li><code>@return</code> - the result of a function or template</li>
+				<li><code>@field name</code> - a field of a record type, for an <code>xsl:item-type</code></li>
 				<li><code>@see</code> - a related function, template or URI</li>
 				<li><code>@since</code> - the version it was added in</li>
 				<li><code>@deprecated</code> - why it should no longer be used, and what to use instead</li>
-				<li><code>@error</code> - an error it may raise</li>
+				<li><code>@error</code> - an error a function or template may raise</li>
 			</ul>
+			<p><code>@field</code> isn't an xqDoc tag: the extension adds it, in the same style, for documenting
+				records. A field name that isn't an NCName is quoted, as in the record type - for example
+				<code>@field 'unit name' e.g. cm</code>.</p>
 			<h5>Markdown</h5>
-			<p>The description and field text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
+			<p>The description and tag text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
 				<code>`code`</code>, <code>[links](https://example.com)</code> and <code>#</code> headings.</p>
 			<p>As the note is XML, the characters <code>&lt;</code> and <code>&amp;</code> must be escaped as normal XML, for
 				example <code>&amp;lt;</code>. Alternatively, put text containing markup in a CDATA section: its content
 				is shown exactly as written.</p>
 
 			<h3 id="adding">Adding a note</h3>
-			<p>With the cursor on the start tag of an <code>xsl:function</code> or <code>xsl:template</code> that
-				has no note, choose <strong>Add documentation note</strong> from the refactorings (💡 or
-				<span class="shortcut">⌘</span><span class="shortcut">.</span>). A note is inserted as the first child,
-				with an <code>@param</code> for each parameter, and an <code>@return</code> for a function (or a
-				template with an <code>as</code> attribute). Press <span class="shortcut">Tab</span> to move between the
-				description placeholders.</p>
-			<p>Within a note, typing <code>@</code> offers the field names. After <code>@param</code>, the parameter
-				names without an <code>@param</code> yet are offered.</p>
+			<p>With the cursor on the start tag of an <code>xsl:function</code>, <code>xsl:template</code> or
+				<code>xsl:item-type</code> that has no <code>xsl:note</code>, choose <strong>Add documentation
+				note</strong> from the refactorings (💡 or <span class="shortcut">⌘</span><span class="shortcut">.</span>).
+				A note is inserted as the first child, with:</p>
+			<ul>
+				<li>an <code>@param</code> for each parameter, and an <code>@return</code> for a function (or a
+					template with an <code>as</code> attribute)</li>
+				<li>for an <code>xsl:item-type</code> with a record type, an <code>@field</code> for each field - an
+					empty <code>&lt;xsl:item-type .../&gt;</code> gets an end tag for the note</li>
+			</ul>
+			<p>Press <span class="shortcut">Tab</span> to move between the description placeholders.</p>
+			<p>Notes can also be added with auto-completion: after <code>&lt;</code>, <strong>xsl:note</strong> inserts a
+				note on one line, and <strong>xsl:note xdoc-md</strong> a documentation note. These are offered within any
+				XSLT element, and within literal result elements - XSLT 4.0 allows <code>xsl:note</code> anywhere.</p>
+			<p>Within a note, typing <code>@</code> offers the tags that apply: <code>@field</code> for an
+				<code>xsl:item-type</code>, and <code>@param</code>, <code>@return</code> and <code>@error</code> for a
+				function or template. After <code>@param</code>, the parameter names without an <code>@param</code> yet
+				are offered - and after <code>@field</code>, the fields without an <code>@field</code> yet.</p>
 			<figure>
 				<img src="resources/add-documentation.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>The code action 'Add documentation note' is offered on selecting a function element.</i></figcaption>
@@ -54,37 +70,56 @@
 			<h3 id="where-shown">Where notes are shown</h3>
 			<ul>
 				<li><strong>Hover help</strong> - on a call to the function, or on the <code>name</code> of an
-					<code>xsl:call-template</code>, the note's description and fields are shown with the signature. On the
+					<code>xsl:call-template</code>, the note's description and tags are shown with the signature. On the
 					<code>name</code> of an <code>xsl:with-param</code>, the parameter's <code>@param</code> text is
 					shown.</li>
+				<li><strong>Hover help on item types</strong> - on a named item type where it's used, e.g. in an
+					<code>as</code> attribute or after <code>instance of</code>, the note is shown with the type's
+					declaration.</li>
+				<li><strong>Hover help on declarations</strong> - on the <code>name</code> of an
+					<code>xsl:function</code>, named <code>xsl:template</code> or <code>xsl:item-type</code>, the note
+					is shown just as for a use of it. On the <code>name</code> of an <code>xsl:param</code> of a function
+					or template, the parameter's <code>@param</code> text is shown.</li>
+				<li><strong>Record fields</strong> - the <code>@field</code> text is shown in hover help on a field,
+					e.g. <code>r</code> in <code>$c?r</code>, and with the field suggestions of auto-completion: for a
+					lookup, a child step on a JNode, a map constructor key and an <code>xsl:map-entry</code>. For an item
+					type declared as another, e.g. <code>as="cx:point"</code>, the other type's <code>@field</code> text
+					is used.</li>
 				<li><strong>Signature help</strong> - while typing the arguments of a function call, or the
 					<code>xsl:with-param</code> children of an <code>xsl:call-template</code>, the parameter hints show
 					the <code>@param</code> text for the current parameter.</li>
 				<li><strong>Auto-completion</strong> - the <code>xsl:with-param</code> suggestions within an
 					<code>xsl:call-template</code> show the <code>@param</code> text for each parameter.</li>
 			</ul>
-			<p>Notes on functions and templates in included and imported stylesheets are shown too.</p>
+			<p>Notes on functions, templates and item types in included and imported stylesheets are shown too.</p>
 			<figure>
 				<img src="resources/xsl-note-hover.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>To see <code>xdoc-md</code> documentation on the function (or named template) hover over the referring code.</i></figcaption>
 			</figure>
 
 			<h3 id="highlighting">Highlighting Details</h3>
-			<p>The content of a note is highlighted as documentation: fields, parameter names, code, bold and italic
-				text, headings and links each have their own semantic token type. The token types have fallbacks, so
+			<p>The content of a note is highlighted as documentation: tags, parameter and field names, code, bold and
+				italic text, headings and links each have their own semantic token type. The token types have fallbacks, so
 				they're highlighted in most color themes. To change their colors, add rules for the token types
 				<code>xdocText</code>, <code>xdocTag</code>, <code>xdocParam</code>, <code>xdocCode</code>,
 				<code>xdocBold</code>, <code>xdocItalic</code>, <code>xdocHeading</code>, <code>xdocLink</code> and
 				<code>xdocCdata</code> to the <code>editor.semanticTokenColorCustomizations</code> setting.</p>
 
-			<h3 id="checks">Field Checks</h3>
-			<p>The <code>@param</code> fields are checked against the <code>xsl:param</code> elements of the function
-				or template:</p>
+			<h3 id="checks">Tag Checks</h3>
+			<p>The <code>@param</code> tags are checked against the <code>xsl:param</code> elements of the function
+				or template, and the <code>@field</code> tags against the fields of the item type's record type:</p>
 			<ul>
-				<li>an <code>@param</code> for a name that isn't a parameter is a warning</li>
-				<li>a second <code>@param</code> for the same parameter is a warning</li>
-				<li>when a note has <code>@param</code> fields, parameters without one are reported as information, with
-					an <strong>Add missing @param</strong> quick fix</li>
+				<li>an <code>@param</code> for a name that isn't a parameter, or an <code>@field</code> for a name that
+					isn't a field, is a warning</li>
+				<li>a second <code>@param</code> for the same parameter, or <code>@field</code> for the same field, is a
+					warning</li>
+				<li>when a note has <code>@param</code> tags, parameters without one are reported as information, with
+					an <strong>Add missing @param</strong> quick fix - and likewise fields without an <code>@field</code>,
+					with an <strong>Add missing @field</strong> quick fix</li>
+				<li>an <code>@field</code> in the note of a function or template, or of an item type that isn't a record
+					type, is a warning</li>
+				<li>an <code>@param</code>, <code>@return</code> or <code>@error</code> in the note of an
+					<code>xsl:item-type</code> is a warning</li>
 			</ul>
 		</div>
 
