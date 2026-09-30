@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>An <strong>XML catalog</strong> maps the URIs used in a stylesheet to the files they're resolved to. With
+				a catalog, a stylesheet can import a shared library by a fixed name, such as
+				<code>http://example.com/xslt/strings.xsl</code>, wherever the library's files are kept - only the
+				catalog changes when they move. Catalogs are an OASIS standard,
+				<a href="https://www.oasis-open.org/committees/download.php/14809/xml-catalogs.html">XML Catalogs 1.1</a>,
+				and Saxon supports them with its <code>-catalog</code> option.</p>
+			<p>The XSLT/XPath extension uses a catalog to resolve the <code>href</code> of <code>xsl:import</code> and
+				<code>xsl:include</code> - so the declarations of a module imported by its catalog name are known to
+				the linter, auto-completion, hover help and go to definition - and passes the same catalog to Saxon
+				when a stylesheet is run.</p>
+			<p>Catalogs are useful when:</p>
+			<ul>
+				<li>a team shares XSLT libraries across projects, and each project keeps its copy of a library in a
+					different place</li>
+				<li>stylesheets import libraries by <code>http:</code> URIs, and the files should be read locally -
+					for speed, or to work offline</li>
+				<li>libraries are reorganised, or a new version is tried, without editing the stylesheets that
+					import them</li>
+			</ul>
+			<p>To try it out, see the <a href="#demo">catalog demo</a>.</p>
+
+			<h3 id="setup">Setting up a catalog</h3>
+			<p>Set <code>XSLT.resources.catalog</code> to the path of the catalog file - relative to the workspace
+				folder, or with <code>${workspaceFolder}</code>. For a team, add it to the workspace settings, in the
+				project's <code>.vscode/settings.json</code>:</p>
+			<code class="block">"XSLT.resources.catalog": "catalog.xml"</code>
+			<p>The setting names one master catalog. It can hand lookups on to any number of other catalogs, with
+				<a href="#next-catalog"><code>nextCatalog</code></a> entries - for example, a catalog for each
+				library.</p>
+			<p>When there's no setting, and the root of the workspace folder has a <code>catalog.xml</code> that's an
+				XML catalog, you're asked whether to use it: <strong>Use</strong> adds the setting to the workspace
+				settings, and <strong>Don't Ask Again</strong> is remembered for the workspace.</p>
+			<aside>To use no catalog, and not be asked, set the setting to <code>""</code>.</aside>
+			<p>Changes to the setting, and to the catalog files, are picked up straight away.</p>
+
+			<h3 id="catalog-files">Catalog files</h3>
+			<p>A catalog is an XML file whose root element is <code>catalog</code>, in the namespace
+				<code>urn:oasis:names:tc:entity:xmlns:xml:catalog</code>. Each entry maps a URI - the name used in an
+				<code>href</code> - to the URI of a file. A relative path in a catalog is relative to the catalog file
+				itself.</p>
+			<code class="block">&lt;catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog"&gt;
+  &lt;uri name="http://example.com/xslt/strings.xsl" uri="lib/strings/strings.xsl"/&gt;
+&lt;/catalog&gt;</code>
+			<p>With this catalog, <code>&lt;xsl:import href="http://example.com/xslt/strings.xsl"/&gt;</code> imports
+				<code>lib/strings/strings.xsl</code>. The name needn't be a real web address: it's an identifier for the
+				library.</p>
+			<p>The extension uses these entries:</p>
+			<ul>
+				<li><code>uri</code> - maps one URI, its <code>name</code>, to the URI of a file, its <code>uri</code></li>
+				<li><code>rewriteURI</code> - maps every URI that starts with its <code>uriStartString</code>, replacing
+					that part with its <code>rewritePrefix</code>, and keeping the rest - e.g. a whole folder of
+					libraries:
+					<code class="block">&lt;rewriteURI uriStartString="http://example.com/lib/" rewritePrefix="lib/"/&gt;</code>
+					maps <code>http://example.com/lib/strings/strings.xsl</code> to
+					<code>lib/strings/strings.xsl</code></li>
+				<li><code>uriSuffix</code> - maps every URI that ends with its <code>uriSuffix</code> to the URI of a
+					file</li>
+				<li id="next-catalog"><code>nextCatalog</code> - another catalog file, its <code>catalog</code>, to try
+					when this catalog has no entry for a URI</li>
+				<li><code>group</code> - groups entries, e.g. to give them an <code>xml:base</code> - which can also be
+					on the <code>catalog</code> element or an entry, to set the base URI that its relative paths are
+					resolved against</li>
+			</ul>
+			<p>In each catalog, an exact <code>uri</code> entry is used first, then the <code>rewriteURI</code> entry
+				with the longest <code>uriStartString</code> that matches, then the <code>uriSuffix</code> entry with the
+				longest <code>uriSuffix</code> - and only if none matches, the <code>nextCatalog</code> entries, in
+				order. An <code>href</code> is looked up as it's written, and then, if it's relative, as the absolute
+				URI it resolves to.</p>
+
+			<h3 id="editing">In the editor</h3>
+			<p>For an <code>xsl:import</code> or <code>xsl:include</code> whose <code>href</code> the catalog resolves:</p>
+			<ul>
+				<li>the module's declarations are known, as for a module imported by its file path</li>
+				<li>Cmd/Ctrl+click on the <code>href</code> opens the module's file</li>
+				<li>hover help on the <code>href</code> shows how the catalog resolved it: the entry that matched, and
+					the catalog files it was found through - e.g. <em>Resolved by the XML catalog: the
+					<code>uri</code> entry for <code>http://example.com/xslt/strings.xsl</code> in
+					catalogs/libraries.xml, via catalog.xml</em></li>
+			</ul>
+			<!-- TODO screenshot: hover on a catalog-resolved href, showing the entry and the catalog chain -->
+			<p>An <code>href</code> that's a URI the catalog doesn't resolve to a file is reported, naming the
+				catalog:</p>
+			<ul>
+				<li>an <code>http:</code> or <code>https:</code> URI is a warning - its declarations aren't known, but
+					Saxon will try to fetch it when the stylesheet is run</li>
+				<li>another URI, e.g. <code>urn:example:strings</code>, is an error - Saxon can't resolve it either</li>
+			</ul>
+			<p>In the Problems panel, the problem has a link to the catalog - and Cmd/Ctrl+click on the
+				<code>href</code> opens the catalog, to add an entry for it. With no catalog, the problem suggests
+				using one.</p>
+			<!-- TODO screenshot: the warning for an http: href that isn't in the catalog -->
+
+			<h5>Catalog files in the editor</h5>
+			<p>In a catalog file - one that the catalog of the setting reads, or any XML file with a
+				<code>catalog</code> root element in the catalog namespace:</p>
+			<ul>
+				<li>the <code>uri</code> of each entry, and the <code>catalog</code> of each <code>nextCatalog</code>
+					entry, is a document link, so you can Cmd/Ctrl+click from the master catalog, through the
+					catalogs, to a library file</li>
+				<li>an entry whose file - or, for a <code>rewritePrefix</code>, folder - isn't found has a warning,
+					e.g. after a library has moved</li>
+			</ul>
+			<!-- TODO screenshot: a catalog file, with a warning for an entry whose file isn't found -->
+
+			<h3 id="running">Running stylesheets with the catalog</h3>
+			<p>The <a href="run-xslt.html">XSLT tasks</a> for SaxonJ (<code>xslt</code>) and SaxonC
+				(<code>xslt-c</code>) - including those <a href="quick-run.html">Quick Run</a> creates - pass the
+				catalog of the setting to Saxon, with the <code>-catalog</code> option, so the stylesheet is run with
+				the same imports as it's edited with. A task's own <code>catalogFilenames</code> property is used
+				instead, when it has one:</p>
+			<code class="block">"catalogFilenames": "${workspaceFolder}/other-catalog.xml"</code>
+			<aside>Saxon uses the catalog for all the URIs it resolves - including <code>doc()</code>,
+				<code>document()</code> and <code>unparsed-text()</code>, and DTDs - not only imports. So the catalog is
+				always passed, even when the stylesheet's imports don't need it.</aside>
+
+			<h3 id="limitations">Limitations</h3>
+			<ul>
+				<li>The setting names one master catalog - use <code>nextCatalog</code> entries for others.</li>
+				<li>The editor uses the <code>uri</code>, <code>rewriteURI</code>, <code>uriSuffix</code> and
+					<code>nextCatalog</code> entries - not <code>system</code>, <code>public</code> or
+					<code>delegate</code> entries, which are for DTDs and other external entities. Saxon uses them all.</li>
+				<li>Saxon-JS tasks aren't passed the catalog.</li>
+			</ul>
+
+			<h3 id="demo">Catalog demo</h3>
+			<p>The <a href="https://github.com/DeltaXML/deltaxml.github.io/tree/master/vscode-xslt-xpath/samples/catalog-demo">catalog-demo</a>
+				folder is a small, complete example: a master catalog that hands lookups on to a secondary catalog,
+				which maps the URIs of two XSLT libraries, in different folders, to their files - and a top-level
+				stylesheet that imports both libraries by those URIs. Clone the repository, or copy the files, to try
+				it.</p>
+			<code class="block">catalog-demo/
+├── catalog.xml              master catalog: a nextCatalog entry for catalogs/libraries.xml
+├── catalogs/
+│   └── libraries.xml        secondary catalog: a uri entry for each library
+├── lib/
+│   ├── strings/strings.xsl  imported as http://example.com/xslt/strings.xsl
+│   └── dates/dates.xsl      imported as http://example.com/xslt/dates.xsl
+├── main.xsl                 imports both libraries by their catalog names
+└── .vscode/settings.json    "XSLT.resources.catalog": "catalog.xml"</code>
+			<p>How <code>http://example.com/xslt/strings.xsl</code> is resolved:</p>
+			<ol>
+				<li><code>catalog.xml</code> has no entry for it, so its <code>nextCatalog</code> entry is tried:
+					<code>catalogs/libraries.xml</code></li>
+				<li><code>libraries.xml</code> has a <code>uri</code> entry with that <code>name</code>, whose
+					<code>uri</code> is <code>../lib/strings/strings.xsl</code> - relative to
+					<code>libraries.xml</code></li>
+				<li>so the import is <code>lib/strings/strings.xsl</code></li>
+			</ol>
+			<h5>Try it</h5>
+			<ol>
+				<li>Open the <code>catalog-demo</code> folder in VS Code (<strong>File &gt; Open Folder...</strong>), so
+					that its <code>.vscode/settings.json</code> applies</li>
+				<li>Open <code>main.xsl</code>: there are no problems, and hover help on <code>str:shout</code> shows
+					the function's signature, from <code>strings.xsl</code></li>
+				<li>Hover on an <code>href</code>, to see the entry that resolved it - and Cmd/Ctrl+click it, to open
+					the library file</li>
+				<li>Open <code>catalog.xml</code>, and follow its links to <code>catalogs/libraries.xml</code> and the
+					library files</li>
+				<li>Run <code>main.xsl</code> with Quick Run: the result is e.g. <code>CATALOGS WORK! | Wednesday 30
+					September 2026</code></li>
+			</ol>
+			<p>Then:</p>
+			<ul>
+				<li>Change an <code>href</code> to a URI that isn't in the catalog, e.g.
+					<code>http://example.com/xslt/missing.xsl</code>, to see the warning - and Cmd/Ctrl+click it to open
+					the catalog</li>
+				<li>Move <code>lib/dates</code> to another folder: its entry in <code>catalogs/libraries.xml</code>
+					has a warning. Update the entry's <code>uri</code> - <code>main.xsl</code> doesn't change</li>
+				<li>Replace the two <code>uri</code> entries with the <code>rewriteURI</code> entry in the comment in
+					<code>libraries.xml</code>, and change the <code>href</code>s in <code>main.xsl</code> to match</li>
+				<li>Delete <code>.vscode/settings.json</code> and reopen the folder, to be offered
+					<code>catalog.xml</code></li>
+			</ul>
+			<p>From the command line, the same catalog is passed to Saxon with <code>-catalog</code>:</p>
+			<code class="block">java -cp saxon-he-13.0.jar net.sf.saxon.Transform -xsl:main.xsl -it -catalog:catalog.xml</code>
+		</div>
+	</div>
+</html>

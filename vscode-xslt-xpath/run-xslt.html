@@ -69,6 +69,7 @@
 				<li><a href="navigation.html">Code Navigation</a></li>
 				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
 				<li><a href="run-xslt.html" class="active">XSLT: Tasks</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
 				<li><a href="code-diagnostics.html">Debugging</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
@@ -364,6 +365,10 @@ npm install --save-dev xslt3</code>
 				section of the Visual Studio Code <a href="https://code.visualstudio.com/Docs/editor/tasks">Tasks documentation</a>
 				covers this concept in more detail.				
 			</p>
+			<h3 id="catalogs">XML catalogs</h3>
+			<p>The <code>xslt</code> and <code>xslt-c</code> tasks pass the catalog of the
+				<code>XSLT.resources.catalog</code> setting to Saxon, with the <code>-catalog</code> option - unless the
+				task has its own <code>catalogFilenames</code> property. See <a href="xml-catalogs.html">XML Catalogs</a>.</p>
 			<h3>The Visual Studio Code terminal</h3>
 			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>,
 				the Pane hosting the Terminal view is toggle with <span class="shortcut">⌘J</span>. 

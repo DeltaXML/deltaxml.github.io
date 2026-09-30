@@ -69,6 +69,7 @@
 				<li><a href="navigation.html">Code Navigation</a></li>
 				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
 				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
 				<li><a href="code-diagnostics.html">Debugging</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
@@ -408,6 +409,8 @@
 		
 		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the URI to a file path as the User or WorkSpace Setting:
 			<strong>XSLT.resources.xsltPackage</strong></aside>
+		<aside>An <code>href</code> can also be a URI that an XML catalog maps to a file, e.g.
+			<code>http://example.com/xslt/strings.xsl</code> - see <a href="xml-catalogs.html">XML Catalogs</a>.</aside>
 		<h3>Auto tag-close</h3>
 		<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed. 
 			Note that this feature is only enabled when the VS Code user-setting <emphasis>Format on Type</emphasis> is set (indentation is fixed at the same time).</p>

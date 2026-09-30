@@ -31,6 +31,11 @@
     "path": "features/included2.xsl"
   },
 ]</code>
+      <h5>XML Catalog</h5>
+      <p>To resolve the <code>href</code> of <code>xsl:import</code> and <code>xsl:include</code> with an OASIS XML
+        catalog - and pass the catalog to Saxon when a stylesheet is run - set <code>XSLT.resources.catalog</code> to
+        the catalog file's path, relative to the workspace folder. See <a href="xml-catalogs.html">XML Catalogs</a>.</p>
+      <code class="block">"XSLT.resources.catalog": "catalog.xml"</code>
       <h5>XSLT Tasks</h5>
       <p>The Saxon XSLT-Java and XSLT-JS TaskProviders are enabled by default. These can be enabled or disabled using the following settings properties:</p>
       <code class="block">"XSLT.tasks.java.enabled": true
