@@ -117,8 +117,13 @@
 				<a href="xslt40-notes.html">documentation note</a>, the note is shown too, and a field's
 				<code>@field</code> text is shown when hovering over the field, and with the field in the
 				auto-completion suggestions.</p>
-			<!-- TODO screenshot: hover over a record field in a lookup, e.g. $bounds?width, showing the field's
-			     declaration and its @field text from the xsl:item-type's documentation note -->
+			<p>
+				<figure>
+					<img src="resources/record-field-hover.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>Hover over a record field in a lookup, e.g. $shape?colour, showing the field's
+			     declaration and its @field text from the xsl:item-type's documentation note.</i></figcaption>
+				</figure>
+			</p>
 			<h5 id="rename-field">Renaming a field</h5>
 			<p>Rename Symbol (<span class="shortcut">F2</span>) on a field name - in the record type, a lookup, a map
 				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, or an <code>@field</code> tag
@@ -191,7 +196,12 @@
 			<p>Hovering over the name of an enumeration type - or a global variable or parameter, a parameter of a
 				function or template, or a record field, with the type - lists its values - on one line for a few values, otherwise as a list. For a type declared as another, or as a
 				choice of enumeration types, the values are those it resolves to.</p>
-			<!-- TODO screenshot: hover over the name of an enumeration type, showing its values -->
+			<p>
+				<figure>
+					<img src="resources/enum-values-hover.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>Hover over the name of an enumeration type, showing its values</i></figcaption>
+				</figure>
+			</p>
 			<h5 id="switch">xsl:switch on an enumeration</h5>
 			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
 				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,

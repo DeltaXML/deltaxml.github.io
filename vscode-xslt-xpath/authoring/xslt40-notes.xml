@@ -46,8 +46,10 @@
 			<p><code>@field</code> isn't an xqDoc tag: the extension adds it, in the same style, for documenting
 				records. A field name that isn't an NCName is quoted, as in the record type - for example
 				<code>@field 'unit name' e.g. cm</code>.</p>
-			<!-- TODO screenshot: an xsl:item-type with a record type and a documentation note with @field tags,
-			     showing their highlighting -->
+			<figure>
+				<img src="resources/xsl-note-field-tags.png" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>The xdoc-md tags and Markdown are highlighted within an <code>xsl:note</code>.</i></figcaption>
+			</figure>
 			<h5>Markdown</h5>
 			<p>The description and tag text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
 				<code>`code`</code>, <code>[links](https://example.com)</code> and <code>#</code> headings.</p>
@@ -156,14 +158,29 @@
 				<li><strong>Rename</strong> - renaming a global parameter or variable renames its <code>@param</code>
 					or <code>@variable</code> tag too.</li>
 			</ul>
-			<!-- TODO screenshot: a module note, with the hover on a reference to a global parameter, e.g. $scale,
-			     showing its @param text from the module note -->
-			<!-- TODO screenshot: the hover on the start tag of a module note, previewing the note -->
-			<!-- TODO screenshot: the hover on the href of an xsl:import, showing the imported module's note -->
+			<p>
+				<figure>
+					<img src="resources/module-note-param-hover.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>The hover on a reference to a global parameter, $scale, showing its @param text from the module note.</i></figcaption>
+				</figure>
+			</p>
+			<p>
+				<figure>
+					<img src="resources/module-note-preview.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>The hover on the start tag of a module note, previewing the note.</i></figcaption>
+				</figure>
+			</p>			
+			<p>
+				<figure>
+					<img src="resources/import-module-note-hover.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>The hover on the href of an xsl:import, showing the imported module's note.</i></figcaption>
+				</figure>
+			</p>
 
 			<h3 id="xslt30">Notes in XSLT 3.0</h3>
-			<p>An XSLT 3.0 processor reports <code>XTSE0010</code> for <code>xsl:note</code>, as an unknown XSLT
-				element - unless it's excluded with <code>use-when="false()"</code>, which works with any processor.
+			<p>Unless you're using a compatible Saxon version with Saxon extensions enabled (see note below),
+				an XSLT 3.0 processor reports <code>XTSE0010</code> for <code>xsl:note</code>, as an unknown XSLT
+				element - the workaround is just to exclude this with <code>use-when="false()"</code>, which works with any processor.
 				In a stylesheet with <code>version="3.0"</code>:</p>
 			<ul>
 				<li>an <code>xsl:note</code> without a <code>use-when</code> attribute is a warning, with the quick fix
@@ -172,10 +189,10 @@
 					with <code>use-when="false()"</code></li>
 				<li>documentation notes are shown, highlighted and checked, as in XSLT 4.0</li>
 			</ul>
-			<p>Saxon PE and EE 12.8 or later, run with syntax extensions, accept <code>xsl:note</code> in an XSLT 3.0
-				stylesheet. With the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code>, notes need no
-				<code>use-when</code>, and XSLT 4.0 item types are available too - see
-				<a href="settings.html#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a>.</p>
+			<aside>Saxon PE and EE 12.8 or later, run with Saxon extensions, accept <code>xsl:note</code> in an XSLT 3.0
+				stylesheet. With the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code>, the linter recognises notes so they need no
+				<code>use-when</code>, XSLT 4.0 <code>xsl:item-type</code> instructions are fully supported too - see
+				<a href="settings.html#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a>.</aside>
 
 			<h3 id="highlighting">Highlighting Details</h3>
 			<p>The content of a note is highlighted as documentation: tags, parameter and field names, code, bold and
