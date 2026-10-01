@@ -66,40 +66,12 @@
 					Discover in this guide how Visual Studio Code, extended with DeltaXignia's
 					XSLT/XPath
 						extension,
-					can help with editing, reviewing, refactoring and running XSLT.
+					can help with editing, reviewing, refactoring and
+					XSLT 3.0 and the proposal for XSLT 4.0  - as implemented in Saxon13.
 				
 				
-					XSLT 3.0 support is standard. Support for the proposed XSLT 4.0 is enabled by setting version="4.0" on the root
-					element.
+				This latest release includes new language, code documenting and editing features, described at: Release 2.0 Highlights.
 				
-				What's new in release 2.0
-				
-					Full language support for XSLT 4.0 in Saxon 13 - type-aware
-						auto-completion, checks, hover help and refactoring for the XSLT 4.0 and XPath 4.0 features Saxon 13
-						implements: new syntax and item types, keyword arguments and optional parameters, xsl:switch,
-						and documentation notes with xsl:note
-					Records and enums - auto-completion, checks, hover
-						help and refactoring for XPath 4.0 record and enumeration types, from map constructors to
-						xsl:switch cases
-					Quick Run - run the active stylesheet with a shortcut or
-						the toolbar button, without configuring a task first - with SaxonJ, SaxonJS or the new
-						SaxonC support
-					Inferred imports - the top-level
-						stylesheet of a module is found from the workspace, without opening it first, and the new
-						XSLT Imports view shows its tree of imports and includes
-					XML Catalogs - resolve the href of
-						xsl:import and xsl:include, e.g. the http: URI of a shared library, to a
-						local file with an OASIS XML catalog - also passed to Saxon when a stylesheet is run
-					Editing - signature help and richer hover help
-						for functions and templates, more auto-completion, and the new
-						Wrap with... refactoring
-					Debugging - one auto-completed
-						xsl:message for all the in-scope variables, formatted and colored with
-						xdm:debug()
-				
-				See the release notes
-					for the full list of changes.
-			   
 				
 					These pages complement the extensive Visual Studio Code
 						documentation that begins:

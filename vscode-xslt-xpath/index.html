@@ -65,6 +65,7 @@
 		<nav>
 			<ul>
 				<li><a class="active" href="index.html">Overview</a></li>
+				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
@@ -78,8 +79,8 @@
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
 				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
 				<li><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
-				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a></li>
-				<li><a href="xslt40-notes.html">XSLT 4.0: Documentation Notes</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
 		</nav>
 		<div class="main">
@@ -89,41 +90,12 @@
 					Discover in this guide how Visual Studio Code, extended with DeltaXignia's
 					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath
 						extension</a>,
-					can help with editing, reviewing, refactoring and running XSLT.
+					can help with editing, reviewing, refactoring and
+					<a href="xslt30.html">XSLT 3.0</a> and the proposal for <a href="xslt40.html">XSLT 4.0</a>  - as implemented in Saxon13.
 				</p>
 				<aside>
-					<a href="xslt30.html">XSLT 3.0</a> support is standard. Support for the proposed <a
-						href="xslt40.html">XSLT 4.0</a> is enabled by setting <strong>version="4.0"</strong> on the root
-					element.
+				This latest 2.0 release includes significant new language, code documenting and editing features, summarised in: <a href="new-release.html">Release 2.0 Highlights</a>.
 				</aside>
-				<h3>What's new in release 2.0</h3>
-				<ul>
-					<li><strong><a href="xslt40.html">Full language support for XSLT 4.0 in Saxon 13</a></strong> - type-aware
-						auto-completion, checks, hover help and refactoring for the XSLT 4.0 and XPath 4.0 features Saxon 13
-						implements: new syntax and item types, keyword arguments and optional parameters, <code>xsl:switch</code>,
-						and <a href="xslt40-notes.html">documentation notes</a> with <code>xsl:note</code></li>
-					<li><strong><a href="xslt40-records.html">Records and enums</a></strong> - auto-completion, checks, hover
-						help and refactoring for XPath 4.0 record and enumeration types, from map constructors to
-						<code>xsl:switch</code> cases</li>
-					<li><strong><a href="quick-run.html">Quick Run</a></strong> - run the active stylesheet with a shortcut or
-						the toolbar button, without configuring a task first - with SaxonJ, SaxonJS or the new
-						<a href="run-xslt.html#saxonc-tasks">SaxonC</a> support</li>
-					<li><strong><a href="editing-xslt.html#inferred-imports">Inferred imports</a></strong> - the top-level
-						stylesheet of a module is found from the workspace, without opening it first, and the new
-						<strong>XSLT Imports</strong> view shows its tree of imports and includes</li>
-					<li><strong><a href="xml-catalogs.html">XML Catalogs</a></strong> - resolve the <code>href</code> of
-						<code>xsl:import</code> and <code>xsl:include</code>, e.g. the <code>http:</code> URI of a shared library, to a
-						local file with an OASIS XML catalog - also passed to Saxon when a stylesheet is run</li>
-					<li><strong><a href="editing-xslt.html#hover">Editing</a></strong> - signature help and richer hover help
-						for functions and templates, more auto-completion, and the new
-						<a href="editing-xslt.html#refactoring">Wrap with...</a> refactoring</li>
-					<li><strong><a href="code-diagnostics.html">Debugging</a></strong> - one auto-completed
-						<code>xsl:message</code> for all the in-scope variables, formatted and colored with
-						<code>xdm:debug()</code></li>
-				</ul>
-				<p>See the <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/wiki/Release-Notes">release notes</a>
-					for the full list of changes.</p>
-			   <hr/>
 				<p>
 					These pages complement the extensive <a href="https://code.visualstudio.com/docs">Visual Studio Code
 						documentation</a> that begins:
