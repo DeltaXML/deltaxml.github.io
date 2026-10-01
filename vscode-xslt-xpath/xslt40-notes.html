@@ -119,7 +119,8 @@
 				<li><code>@return</code> - the result of a function or template</li>
 				<li><code>@field name</code> - a field of a record type, for an <code>xsl:item-type</code></li>
 				<li><code>@variable $name</code> - a global variable, in a module note</li>
-				<li><code>@see</code> - a related function, template or URI</li>
+				<li><code>@see</code> - a related function, template, item type, variable or URI - see
+					<a href="#references">References to other declarations</a></li>
 				<li><code>@since</code> - the version it was added in</li>
 				<li><code>@deprecated</code> - why it should no longer be used, and what to use instead</li>
 				<li><code>@error</code> - an error a function or template may raise</li>
@@ -208,6 +209,30 @@
 				<figcaption style="margin:auto"><i>To see <code>xdoc-md</code> documentation on the function (or named template) hover over the referring code.</i></figcaption>
 			</figure>
 
+			<h3 id="references">References to other declarations</h3>
+			<p>A note can refer to a function, template, item type or variable declared elsewhere - after
+				<code>@see</code>, or as a Markdown code span anywhere in the note - using the XPath syntax for it:</p>
+			<ul>
+				<li><code>my:area#2</code> - the function with that arity</li>
+				<li><code>my:area()</code> or <code>my:area</code> - a function of any arity - or for <code>my:area</code>,
+					else a named item type or template</li>
+				<li><code>$scale</code> - a parameter of the function or template the note documents, or else a global
+					parameter or variable</li>
+				<li><code>template my:draw</code> - a named template</li>
+			</ul>
+			<p>For example, <code>@see my:area#2</code>, or <code>Uses `$scale` and `template my:draw`.</code> In a code span,
+				a name without a prefix is only a reference as <code>$name</code>, <code>name#2</code>,
+				<code>name()</code> or <code>template name</code>, as code spans are used for other text too.</p>
+			<ul>
+				<li><strong>Navigation</strong> - <strong>Go to Definition</strong> and hover help work on a reference just
+					as on a use of the declaration, including declarations in imported and included modules.</li>
+				<li><strong>Find references and rename</strong> - the references in notes are found, and renamed, with the
+					declaration - e.g. renaming <code>my:area</code> changes <code>@see my:area#2</code> too.</li>
+				<li><strong>Auto-completion</strong> - after <code>@see</code>, and within a code span, the declarations
+					are suggested, written so that they refer to them: parameters and variables, e.g. <code>$scale</code>,
+					functions by arity, e.g. <code>my:area#2</code>, then item types and templates.</li>
+			</ul>
+
 			<h3 id="module-notes">Module notes</h3>
 			<p>A documentation note as the first child of the <code>xsl:stylesheet</code> (or <code>xsl:transform</code>
 				or <code>xsl:package</code>) describes the module. Its tags can describe the global parameters and
@@ -284,6 +309,12 @@
 				<code>xdocBold</code>, <code>xdocItalic</code>, <code>xdocHeading</code>, <code>xdocLink</code> and
 				<code>xdocCdata</code> to the <code>editor.semanticTokenColorCustomizations</code> setting.</p>
 
+			<h3 id="xml">Notes as XML</h3>
+			<p>The extension includes an <a href="https://invisiblexml.org">Invisible XML</a> grammar for its
+				documentation notes, <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/xslt-resources/xdoc-md">xdoc-md.ixml</a>.
+				With the XPath 4.0 <code>invisible-xml()</code> function, a stylesheet can use it to turn its notes into
+				XML - for example, to generate documentation for a library of functions.</p>
+
 			<h3 id="checks">Tag Checks</h3>
 			<p>The <code>@param</code> tags are checked against the <code>xsl:param</code> elements of the function
 				or template, and the <code>@field</code> tags against the fields of the item type's record type:</p>
@@ -299,6 +330,8 @@
 					type, is a warning</li>
 				<li>an <code>@param</code>, <code>@return</code> or <code>@error</code> in the note of an
 					<code>xsl:item-type</code> is a warning</li>
+				<li>an <code>@see</code> reference that refers to no declaration, e.g. <code>@see my:aera#2</code>, is a
+					warning - but not other text, e.g. a URL, or a built-in function or type, e.g. <code>fn:sum#1</code></li>
 			</ul>
 			<p>In a module note, the <code>@param</code> and <code>@variable</code> tags are checked against the global
 				parameters and variables in the same way. A global parameter or variable with a note of its own isn't

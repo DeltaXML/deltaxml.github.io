@@ -82,7 +82,12 @@
 					<code>uri</code> entry for <code>http://example.com/xslt/strings.xsl</code> in
 					catalogs/libraries.xml, via catalog.xml</em></li>
 			</ul>
-			<!-- TODO screenshot: hover on a catalog-resolved href, showing the entry and the catalog chain -->
+			<p>
+			<figure>
+				<img src="resources/catalog-import-hover.png" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>Hover on a catalog-resolved href, showing the entry and the catalog chain.</i></figcaption>
+			</figure>
+			</p>
 			<p>An <code>href</code> that's a URI the catalog doesn't resolve to a file is reported, naming the
 				catalog:</p>
 			<ul>
@@ -93,8 +98,12 @@
 			<p>In the Problems panel, the problem has a link to the catalog - and Cmd/Ctrl+click on the
 				<code>href</code> opens the catalog, to add an entry for it. With no catalog, the problem suggests
 				using one.</p>
-			<!-- TODO screenshot: the warning for an http: href that isn't in the catalog -->
-
+			<p>
+				<figure>
+					<img src="resources/catalog-import-warning.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>The warning for an http: href that isn't in the catalog.</i></figcaption>
+				</figure>
+			</p>
 			<h5>Catalog files in the editor</h5>
 			<p>In a catalog file - one that the catalog of the setting reads, or any XML file with a
 				<code>catalog</code> root element in the catalog namespace:</p>
@@ -105,8 +114,12 @@
 				<li>an entry whose file - or, for a <code>rewritePrefix</code>, folder - isn't found has a warning,
 					e.g. after a library has moved</li>
 			</ul>
-			<!-- TODO screenshot: a catalog file, with a warning for an entry whose file isn't found -->
-
+			<p>
+				<figure>
+					<img src="resources/catalog-uri-warning.png" class="scale-with-grid" />
+					<figcaption style="margin:auto"><i>A catalog file, with a warning for an entry whose file isn't found</i></figcaption>
+				</figure>
+			</p>
 			<h3 id="running">Running stylesheets with the catalog</h3>
 			<p>The <a href="run-xslt.html">XSLT tasks</a> for SaxonJ (<code>xslt</code>) and SaxonC
 				(<code>xslt-c</code>) - including those <a href="quick-run.html">Quick Run</a> creates - pass the

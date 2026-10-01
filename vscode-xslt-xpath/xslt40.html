@@ -128,6 +128,10 @@
 				<li><strong>Function syntax</strong> - <code>fn</code> and focus functions, keyword arguments such as
 					<code>ex:area(scale := 2)</code>, optional parameters (<code>xsl:param required="no"</code>) and
 					partial function application</li>
+				<li><strong>Functions in no namespace</strong> - an <code>xsl:function</code> name without a prefix, e.g.
+					<code>name="double"</code>, called as <code>double(2)</code> - a Saxon 13 extension, not available in
+					Saxon-HE. A function with the name and arity of a built-in function, e.g. <code>count</code>, replaces
+					it in calls without a prefix, so is reported as a warning.</li>
 				<li><strong>JNodes</strong> - path expressions on trees of maps and arrays, with <code>jtree()</code>,
 					<code>jkey()</code>, <code>jvalue()</code> and <code>get(...)</code> steps</li>
 				<li><strong>New instructions</strong> - snippets for <code>xsl:switch</code>, <code>xsl:array</code> and
@@ -139,10 +143,10 @@
 				path - are reported by the linter.</p>
 			<p>Two XSLT 4.0 features have their own pages:</p>
 			<ul>
-				<li><a href="xslt40-records.html">XSLT 4.0: Records and Enums</a> - auto-completion, checks and
+				<li><a href="xslt40-records.html">Records and Enums</a> - auto-completion, checks and
 					refactoring for record and enumeration types, including <code>xsl:switch</code> on an
 					enumeration</li>
-				<li><a href="xslt40-notes.html">XSLT 4.0: Documentation Notes</a> - documenting functions and
+				<li><a href="xslt40-notes.html">Code Documentation</a> - documenting functions and
 					templates with <code>xsl:note</code>, for hover help and signature help</li>
 			</ul>
 			<h3>Running XSLT 4.0</h3>

@@ -115,8 +115,8 @@
 				file now serves two purposes: XPath auto-completion, and as the Quick Run source document.
 			</p>
 			<p>
-				An XML context file must be set before Quick Run can be used - or, for a stylesheet that declares
-				<code>xsl:initial-template</code>, the context file can be set to <strong>None</strong> (see
+				An XML context file must be set before Quick Run can be used - unless the stylesheet declares an
+				<code>xsl:initial-template</code>, which Quick Run then starts from (see
 				<a href="#initial-template">Starting from xsl:initial-template</a> below). Each processor also needs its
 				own setup:
 			</p>
@@ -232,16 +232,18 @@
 			</p>
 			
 			<aside>An alternative way to run a task created with Quick Run is to invoke the <strong>Tasks: Run Task</strong>
-			   command from the Commmand Pallette, this will list all your tasks in a pick list. The tasks are sorted with the
-				most recently run tasks are shown at the top.</aside>
+			   command from the Command Palette, this will list all your tasks in a pick list. The tasks are sorted with the
+				most recently run tasks at the top.</aside>
 			<h3 id="initial-template">Starting from xsl:initial-template</h3>
 			<p>
 				A stylesheet that declares an <code>xsl:initial-template</code> can be run with no source document at all.
-				To do this, click the XML context file in the status bar and choose <strong>None</strong> - the last entry
-				in the list of files. The status bar then shows <strong>[no XML context]</strong>.
+				When no XML context file has been set yet, Quick Run does this automatically. To keep running without a
+				source document once XML files are opened - which otherwise become the context file - click the XML
+				context file in the status bar and choose <strong>None</strong>, the last entry in the list of files. The
+				status bar then shows <strong>[no XML context]</strong>.
 			</p>
 			<p>
-				With the context file set to None, Quick Run starts the stylesheet from <code>xsl:initial-template</code>
+				With no XML context file, Quick Run starts the stylesheet from <code>xsl:initial-template</code>
 				(Saxon's <code>-it</code> command-line option) instead of applying templates to a source document. The
 				<code>xsl:initial-template</code> can be declared in the stylesheet itself or in any module it imports or
 				includes. If there isn't one, Quick Run reports an error and offers to pick an XML context file instead.
