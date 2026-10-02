@@ -1,0 +1,131 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>AI Assistants | VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
+				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li><a href="ai-assistants.html" class="active">AI Assistants</a></li>
+				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
+				<li><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">AI Assistants</h2>
+
+		<div class="two-thirds column">
+			<p>AI coding assistants in Visual Studio Code - such as GitHub Copilot or Claude Code - can make good use of the
+				XSLT/XPath extension. They don't need anything special from it: the extension's problems, documentation notes
+				and debugging output are all in forms that assistants read and write well.</p>
+
+			<h3 id="problems">Fixing problems</h3>
+			<p>The problems reported by the extension's <a href="editing-xslt.html#checking">linter</a> are standard Visual
+				Studio Code diagnostics, shown in the Problems panel. They identify the exact symbol at issue - an unresolved
+				variable, a function called with the wrong number of arguments, a record field that doesn't exist - so an
+				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
+				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a
+				problem from its Quick Fix menu, and Claude Code reads them through its Visual Studio Code integration.</p>
+
+			<h3 id="notes">Documentation notes</h3>
+			<p>XSLT 4.0 <a href="xslt40-notes.html">documentation notes</a> - <code>xsl:note format="xdoc-md"</code> - use
+				Markdown with <code>@param</code> and <code>@return</code> tags, in the style of Javadoc: a format that
+				assistants already know. An assistant can read a function's note to understand it, and can write notes too - for
+				example, when asked to document the functions in a stylesheet. As the extension checks the
+				<code>@param</code> tags against the parameters, a missing or misnamed parameter in a note is reported
+				straight away.</p>
+
+			<h3 id="debugging">Debugging output</h3>
+			<p>The output of <a href="code-diagnostics.html">xdm:debug()</a> in <code>xsl:message</code> is plain, labelled
+				text: each variable's value in XPath syntax, with its type where it isn't obvious, and each node with its
+				path. Copied from the terminal into a chat, it gives an assistant the actual values to reason about, rather than
+				a description of the problem.</p>
+
+			<h3 id="running">Running XSLT</h3>
+			<p><a href="quick-run.html">Quick Run</a> creates ordinary tasks in the workspace's <code>tasks.json</code>
+				file, and each task shows the Saxon command line it runs in the terminal. An assistant that can run commands
+				can run a transform in the same way.</p>
+
+			<h3 id="limitations">Current limitations</h3>
+			<p>The extension doesn't yet provide an MCP server or language model tools, so an assistant can't ask it directly
+				for information - for example, to check a file that isn't open, to find where a symbol is declared, to list the
+				fields of a record type, or to show the imports of a module. Assistants that run outside Visual Studio Code, such
+				as command-line agents, only see the extension's problems if they can read Visual Studio Code's diagnostics.
+				Tools for assistants may be added in a future release.</p>
+		</div>
+
+	</div>
+	</div>
+</body>
+
+</html>

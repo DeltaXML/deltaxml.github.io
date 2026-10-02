@@ -33,27 +33,48 @@
 				file now serves two purposes: XPath auto-completion, and as the Quick Run source document.
 			</p>
 			<p>
-				An XML context file must be set before Quick Run can be used - or, for a stylesheet that declares
-				<code>xsl:initial-template</code>, the context file can be set to <strong>None</strong> (see
+				An XML context file must be set before Quick Run can be used - unless the stylesheet declares an
+				<code>xsl:initial-template</code>, which Quick Run then starts from (see
 				<a href="#initial-template">Starting from xsl:initial-template</a> below). Each processor also needs its
 				own setup:
 			</p>
 			<ul>
 				<li><strong>SaxonJ</strong> - the <strong>XSLT.tasks.saxonJar</strong> setting must point at your Saxon
-					jar file. See the <strong>Saxon (Java) setup</strong> section on the <a href="run-xslt-prerelease.html#saxonj-tasks">XSLT
+					jar file. See the <strong>Saxon (Java) setup</strong> section on the <a href="run-xslt.html#saxonj-tasks">XSLT
 					Tasks</a> page.</li>
 				<li><strong>SaxonJS</strong> - requires a <a href="https://nodejs.org/en/">NodeJS</a> installation; the
 					<code>xslt3</code> package is run using NPX. See the <strong>Saxon-JS Tasks</strong> section on the
-					<a href="run-xslt-prerelease.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
+					<a href="run-xslt.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
 				<li><strong>SaxonC</strong> - the <strong>XSLT.tasks.saxonCPath</strong> setting must point at the folder
 					containing the SaxonC <code>Transform</code> executable (<code>Transform.exe</code> on Windows). See the
-					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt-prerelease.html#saxonc-tasks">XSLT Tasks</a> page for
+					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">XSLT Tasks</a> page for
 					setup details, including native library paths and licensing.</li>
 			</ul>
 			<aside>Tasks for each processor can be turned off with the <strong>XSLT.tasks.java.enabled</strong>,
 				<strong>XSLT.tasks.js.enabled</strong> and <strong>XSLT.tasks.saxonc.enabled</strong> settings. Quick Run
 				reports an error if the selected processor's tasks are disabled.
 			</aside>
+			<h3 id="modules">Running a module that another stylesheet imports</h3>
+			<p>
+				A module that another stylesheet imports or includes may use functions, variables or templates declared in
+				other modules of that stylesheet. In the editor, these references are resolved through the top-level
+				stylesheet - see <a href="editing-xslt.html#inferred-imports">Inferred Imports</a> - but the module can't be
+				compiled, and so can't be run, on its own.
+			</p>
+			<p>
+				When you Quick Run such a module, it's checked first - with the modules it imports and includes - and if it
+				depends on the top-level stylesheet, you're offered the choice:
+			</p>
+			<ul>
+				<li><strong>Run <em>top-level stylesheet</em></strong> - runs the top-level stylesheet instead, with the same
+					XML context file and processor</li>
+				<li><strong>Run Anyway</strong> - runs the module itself</li>
+			</ul>
+			<p>
+				The choice is remembered for the module until Visual Studio Code is restarted. A module that can be run on its
+				own is run straight away, with no prompt. The top-level stylesheet can also be run from the ▶ button in the
+				<a href="editing-xslt.html#inferred-imports">XSLT Imports</a> view, whichever of its modules is being edited.
+			</p>
 			<h3>Choosing the processor: SaxonJ, SaxonJS or SaxonC</h3>
 			<p>
 				Quick Run uses SaxonJ by default. When an XSLT or XML file is active, the processor currently selected is
@@ -78,6 +99,12 @@
 				example, to always use SaxonC for one project. Switching processor updates the setting where it is
 				already defined (the workspace folder, then the workspace), otherwise it updates your User settings.
 			</p>
+			<aside>
+				SaxonC, a native executable, starts much faster than SaxonJ, which needs a few hundred milliseconds to
+				start the Java VM and load Saxon on each run. So SaxonC usually gives the quickest turnaround when
+				running a stylesheet on small or medium inputs. For longer transforms, SaxonJ's Java JIT compiler
+				makes it faster: in our tests, SaxonJ was ahead once execution took more than about two seconds.
+			</aside>
 			<h3>First use: a task is created for you</h3>
 			<p>
 				The first time Quick Run is used for a given stylesheet/context-file pairing, a real task is added to
@@ -92,7 +119,7 @@
 					<strong>demo with books.xml (SaxonC)</strong></li>
 				<li>uses the <code>xslt-xpath.pickResultFile</code> command for its result path, so you're prompted to
 					choose (or reuse a recently used) output location - the same 'recent files' behaviour described in the
-					<a href="run-xslt-prerelease.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
+					<a href="run-xslt.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
 				<li>refers to the processor's setting (for example <code>${config:XSLT.tasks.saxonCPath}</code>) rather
 					than copying its current value, so the task keeps working if you later change the setting</li>
 				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
@@ -121,14 +148,20 @@
 				<code>tasks.json</code> and Quick Run will create a new one next time it's used for that
 				stylesheet/context-file pairing.
 			</p>
+			
+			<aside>An alternative way to run a task created with Quick Run is to invoke the <strong>Tasks: Run Task</strong>
+			   command from the Command Palette, this will list all your tasks in a pick list. The tasks are sorted with the
+				most recently run tasks at the top.</aside>
 			<h3 id="initial-template">Starting from xsl:initial-template</h3>
 			<p>
 				A stylesheet that declares an <code>xsl:initial-template</code> can be run with no source document at all.
-				To do this, click the XML context file in the status bar and choose <strong>None</strong> - the last entry
-				in the list of files. The status bar then shows <strong>[no XML context]</strong>.
+				When no XML context file has been set yet, Quick Run does this automatically. To keep running without a
+				source document once XML files are opened - which otherwise become the context file - click the XML
+				context file in the status bar and choose <strong>None</strong>, the last entry in the list of files. The
+				status bar then shows <strong>[no XML context]</strong>.
 			</p>
 			<p>
-				With the context file set to None, Quick Run starts the stylesheet from <code>xsl:initial-template</code>
+				With no XML context file, Quick Run starts the stylesheet from <code>xsl:initial-template</code>
 				(Saxon's <code>-it</code> command-line option) instead of applying templates to a source document. The
 				<code>xsl:initial-template</code> can be declared in the stylesheet itself or in any module it imports or
 				includes. If there isn't one, Quick Run reports an error and offers to pick an XML context file instead.
@@ -201,7 +234,7 @@
 				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
 			</p>
 			<aside>For custom parameters and features beyond what's auto-populated, chaining tasks together, or any
-				other task configuration in detail, see the <a href="run-xslt-prerelease.html">XSLT Tasks</a> page - a task Quick
+				other task configuration in detail, see the <a href="run-xslt.html">XSLT Tasks</a> page - a task Quick
 				Run creates is a normal task, so everything described there still applies to it.
 			</aside>
 		</div>

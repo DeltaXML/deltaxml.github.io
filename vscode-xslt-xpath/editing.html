@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head><meta charset="UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -64,19 +64,22 @@
 		<nav>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
+				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
 				<li><a href="editing.html" class="active">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
-				<li style="display: none;"><a href="run-xslt-prerelease.html">XSLT Tasks - Pre-Release</a></li>
-				<li style="display: none;"><a href="quick-run.html">XSLT: Quick Run</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="run-xslt.html">Running XSLT</a></li>
+				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
+				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
 				<li><a href="code-diagnostics.html">Debugging</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="settings.html">Settings</a></li>
-				<li><a href="copilot.html">GitHub Copilot and XSLT</a></li>
-				<li><a href="xslt30.html">XSLT 3.0</a></li>
-				<li><a href="xslt40.html">XSLT 4.0</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
+				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
+				<li><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
 		</nav>
 		<div class="main"><h2 class="pageTitle">Editing XML</h2>
@@ -135,14 +138,18 @@
 			<p>XML attributes on newlines and multi-line attribute value are indented by the XML formatting provider to reflect the level of nesting.</p>
 			<h3>XML Element Selection</h3>
 			<p>The XSLT/XPath extension provides a set of commands for selecting an element. 
-				These commands can be invoked from the Command Palette (<span class="shortcut">⇧⌘P</span>).</p>
+				These commands can be invoked from the Command Palette (<span class="shortcut">⇧⌘P</span>), or from the
+				<strong>XML Selection</strong> submenu of the editor's context menu (right-click), which also shows their
+				keyboard shortcuts. From the keyboard, <strong>XML: Select Element...</strong> (<span class="shortcut">⇧⌘2</span>)
+				shows the same commands in a quick pick. On Windows and Linux, the shortcuts use <span class="shortcut">Ctrl+Shift</span> instead
+				of <span class="shortcut">⇧⌘</span>, for example <span class="shortcut">Ctrl+Shift+0</span>.</p>
 			<ul>
 				<li><strong>Goto XPath</strong> - navigate to the element/attribute given by the XPath </li>
 				<li><strong>Select current element</strong> - <span class="shortcut">⇧⌘0</span> extend selection to include containing element's start/end tags</li>
 				<li><strong>Select parent element</strong> - <span class="shortcut">⇧⌘9</span> extend selection to include parent element's start/end tags</li>
 				<li><strong>Select first child element</strong> - <span class="shortcut">⇧⌘8</span> select the first child element's start/end tags</li>
 				<li><strong>Select following element</strong> - <span class="shortcut">⇧⌘7</span> select next sibling's start/end tags</li>
-				<li><strong>Select preceding element</strong> - select previous sibling's start/end tags</li>
+				<li><strong>Select preceding element</strong> - <span class="shortcut">⇧⌘6</span> select previous sibling's start/end tags</li>
 			</ul>			
 		</div>
 		

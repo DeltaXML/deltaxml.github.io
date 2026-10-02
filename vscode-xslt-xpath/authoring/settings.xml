@@ -31,10 +31,58 @@
     "path": "features/included2.xsl"
   },
 ]</code>
+      <h5>XML Catalog</h5>
+      <p>To resolve the <code>href</code> of <code>xsl:import</code> and <code>xsl:include</code> with an OASIS XML
+        catalog - and pass the catalog to Saxon when a stylesheet is run - set <code>XSLT.resources.catalog</code> to
+        the catalog file's path, relative to the workspace folder. See <a href="xml-catalogs.html">XML Catalogs</a>.</p>
+      <code class="block">"XSLT.resources.catalog": "catalog.xml"</code>
       <h5>XSLT Tasks</h5>
       <p>The Saxon XSLT-Java and XSLT-JS TaskProviders are enabled by default. These can be enabled or disabled using the following settings properties:</p>
       <code class="block">"XSLT.tasks.java.enabled": true
 "XSLT.tasks.js.enabled": true</code>
+      <h5 id="xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</h5>
+      <p>Saxon PE and EE 12.8 or later, run with syntax extensions, accept XSLT 4.0's named item types and
+        <code>xsl:note</code> in a stylesheet with <code>version="3.0"</code>. To edit such stylesheets with the
+        same support as for XSLT 4.0, enable the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code> - it's
+        off by default. For a team, add it to the workspace settings, in the project's
+        <code>.vscode/settings.json</code>:</p>
+      <code class="block">"XSLT.validation.xslt30ItemTypesAndNotes": true</code>
+      <p>With the setting, in an XSLT 3.0 stylesheet:</p>
+      <ul>
+        <li><code>xsl:item-type</code> declarations are accepted, with <code>record(...)</code> and
+          <code>enum(...)</code> types - which can also be used directly in <code>as</code> attributes</li>
+        <li>the <a href="xslt40-records.html">record and enumeration type</a> support applies: completions of
+          record fields, map keys and enumeration values, checks of map constructors, lookups and values, hover
+          help, and renaming a record field</li>
+        <li><code>xsl:note</code> needs no <code>use-when</code> attribute - see
+          <a href="xslt40-notes.html">Documentation Notes</a></li>
+      </ul>
+      <p>Other XSLT 4.0 and XPath 4.0 features - such as <code>xsl:switch</code>, keyword arguments and
+        <code>fn(...)</code> types - still need <code>version="4.0"</code>, and are reported as errors in an XSLT
+        3.0 stylesheet.</p>
+      <p>Without the setting, <code>xsl:item-type</code> and record and enumeration types are reported as errors in
+        an XSLT 3.0 stylesheet, and an <code>xsl:note</code> gets a warning unless it's excluded with
+        <code>use-when="false()"</code>, as an XSLT 3.0 processor reports <code>XTSE0010</code> for it.</p>
+      <p>To run the stylesheets, Saxon needs syntax extensions: the <code>--allowSyntaxExtensions:on</code> option on
+        the command line, or <code>allowSyntaxExtensions="true"</code> in a Saxon configuration file. The
+        extension's <a href="run-xslt.html">XSLT tasks</a> and <a href="quick-run.html">Quick Run</a> enable it
+        with the default <code>"allowSyntaxExtensions40": "auto"</code> task property, for Saxon PE and EE.</p>
+      <p><strong>Saxon type aliases:</strong> Saxon's earlier syntax for named types -
+        <code>saxon:type-alias</code>, <code>tuple(...)</code> types and <code>~name</code> for a reference to a type
+        alias - is ignored by Saxon 12.8 and later, which only report the references. The linter warns about a
+        <code>saxon:type-alias</code>, and the command <strong>XSLT: Convert Saxon Type Aliases to
+        xsl:item-type</strong> - also the warning's quick fix - converts them in all the workspace's files, shown for
+        review in the refactor preview first:</p>
+      <ul>
+        <li><code>&lt;saxon:type-alias name="dfx:bounds" type="..."/&gt;</code> becomes
+          <code>&lt;xsl:item-type name="dfx:bounds" as="..."/&gt;</code></li>
+        <li><code>tuple(t: xs:integer, label?: xs:string)</code> becomes
+          <code>record(t as xs:integer, label? as xs:string)</code></li>
+        <li><code>as="~dfx:bounds"</code> becomes <code>as="dfx:bounds"</code></li>
+      </ul>
+      <p>A type alias with an extensible tuple type, e.g. <code>tuple(a: xs:string, *)</code>, isn't converted - nor
+        is one that references it - as XSLT 4.0 has no extensible record types. These are listed after the
+        conversion, to convert by hand.</p>
       <h3>General Settings For XSLT</h3>
       <h5>Configuration Settings From the Extension</h5>
       <p>This extension includes default configuration settings for XSLT editing features. 
