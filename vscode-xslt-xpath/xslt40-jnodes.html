@@ -1,0 +1,262 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>JSON and JNodes | VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
+				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
+				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
+				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-jnodes.html" class="active">JSON and JNodes</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">JSON and JNodes</h2>
+
+		<div class="two-thirds column">
+			<p>XPath 4.0 path expressions can navigate JSON - maps and arrays - as they do XML. The
+				<code>jtree()</code> function wraps a map or array in a tree of <strong>JNodes</strong>, with a JNode
+				for each map entry and array member, so a path such as <code>$order/customer/name</code> works on
+				JSON data, with predicates, the descendant and parent axes, and the other features of path
+				expressions.</p>
+			<p>When a JNode is declared with a <a href="xslt40-records.html">record type</a>, for example
+				<code>jnode(*, order)</code>, the XSLT/XPath extension knows which fields each step can reach. It checks
+				each step, offers the field names as auto-completion suggestions, and shows each field's type and
+				documentation on hover.</p>
+			<p>JNodes need <strong>version="4.0"</strong> and Saxon-PE or Saxon-EE 13, run with syntax extensions
+				enabled (Quick Run enables these for a <code>version="4.0"</code> stylesheet). Saxon-HE 13 doesn't
+				support XPath 4.0 syntax. In an XSLT 3.0 stylesheet, the <code>jnode(...)</code> item type and the
+				<code>get(...)</code> node test are reported as needing XPath 4.0.</p>
+			<aside>A sample project, <a href="https://github.com/pgfearo/xslt-json-schema-records">xslt-json-schema-records</a>,
+				shows the features on this page in use. It converts a JSON Schema to XSLT 4.0 record types, reading
+				the schema as JNodes, then reads JSON order data typed with the generated record types.</aside>
+
+			<h3 id="navigating">Navigating JSON with JNodes</h3>
+			<p>A JNode tree is made with <code>jtree()</code>, from a map or array - for example the result of
+				<code>json-doc()</code> or <code>parse-json()</code>:</p>
+			<code class="block">&lt;xsl:variable name="root" select="jtree(json-doc('order.schema.json'))"/&gt;
+&lt;xsl:variable name="defs" as="jnode()*" select="$root/get('$defs')/*"/&gt;</code>
+			<ul>
+				<li><strong>Name steps</strong> select map entries by key, e.g. <code>$order/customer/name</code>.
+					<code>*</code> selects every entry of a map, or every member of an array, e.g.
+					<code>$order/lines/*</code>.</li>
+				<li><strong>get(...)</strong> is the node test for a key that isn't an NCName, such as
+					<code>get('$ref')</code> or <code>get('first name')</code>, or for an array member by position,
+					such as <code>get(1)</code>. The extension reports <code>get('a')</code> used on its own, as a
+					function call, as a call to an unknown function.</li>
+				<li><strong>Axes</strong> work as they do for XML: <code>$schema//get('$ref')</code> finds every
+					<code>$ref</code> at any depth, and <code>$line/../../currency</code> goes up from an order line,
+					through the <code>lines</code> array, to the order.</li>
+				<li><strong>jkey()</strong> gives a JNode's key - the map key, or the position of an array
+					member - and <strong>jvalue()</strong> gives the value it wraps. Where a value is atomized, such as
+					in an arithmetic expression or a text value template, a JNode gives its value, so
+					<code>$line/quantity * $line/unit-price</code> works without <code>jvalue()</code>.</li>
+				<li>A JNode is matched with the <code>jnode()</code> item type, e.g.
+					<code>$tree/type instance of jnode(type)</code>. <code>jnode()</code> is offered in auto-completion
+					for <code>as</code> attributes in XSLT 4.0.</li>
+			</ul>
+			<aside>Saxon 13 doesn't support type node tests such as <code>~record(...)</code> or
+				<code>~xs:string</code> in a path step, so the extension reports these as errors.</aside>
+
+			<h3 id="typed-jnodes">JNodes with a record type</h3>
+			<p>A variable, parameter or function result declared as <code>jnode(*, <em>T</em>)</code>, where
+				<em>T</em> is a record type, is a JNode whose value is a <em>T</em>. A named item type can be used
+				too, e.g. <code>&lt;xsl:item-type name="order-node" as="jnode(*, order)"/&gt;</code>. Child steps
+				from the JNode are then auto-completed and checked against the record's fields, at any depth:</p>
+			<code class="block">&lt;xsl:variable name="order-value" as="order" select="json-doc($order-uri)"/&gt;
+&lt;xsl:variable name="order" as="jnode(*, order)" select="jtree($order-value)"/&gt;
+...
+&lt;xsl:function name="ord:line-total" as="xs:double"&gt;
+  &lt;xsl:param name="line" as="jnode(*, line)"/&gt;
+  &lt;xsl:sequence select="$line/quantity * $line/unit-price"/&gt;
+&lt;/xsl:function&gt;</code>
+			<ul>
+				<li><strong>Auto-completion</strong> - after a <code>/</code>, the suggestions list the record's
+					fields. Typing <code>$order/customer/</code> lists the fields of the <code>customer</code> record
+					type.</li>
+				<li><strong>Checks</strong> - a step that isn't a field is a warning, e.g. <em>Child step 'nam' -
+					this is not a field of the record type: customer</em> for <code>$order/customer/nam</code>. A
+					<code>?</code> lookup on the JNode, e.g. <code>$order?id</code>, is checked in the same way.</li>
+				<li><strong>Hover</strong> - hovering over a field name in a step, such as <code>unit-price</code> in
+					<code>$line/unit-price</code>, shows the field's type. Its <code>@field</code> text is shown too,
+					from the <code>xsl:item-type</code>'s <a href="xslt40-notes.html">documentation note</a>.
+					Hovering over the type name in <code>jnode(*, order)</code> shows the record type, with its
+					fields and documentation.</li>
+			</ul>
+			<p>Child steps after <code>jtree($p)/</code>, where <code>$p</code> has a record type, are
+				auto-completed and checked in the same way.</p>
+			<figure>
+				<img src="resources/jnode-types-on-hover.png" class="scale-with-grid">
+				<figcaption style="margin:auto"><i>Hovering on <code>order</code> in <code>jnode(*, order)</code>
+					shows the record type, imported from a module of types generated from a JSON Schema: its fields,
+					their types, and each field's description from the schema.</i></figcaption>
+			</figure>
+			<h5 id="jtree-fix">Maps need jtree() before '/'</h5>
+			<p>A <code>/</code> step needs a JNode on its left, not a map. Saxon 13 reports XPTY0019 for a step
+				such as <code>$order-value/id</code>, where <code>$order-value</code> is a map with a record type, so
+				the extension reports this as an error, with the suggested fix
+				<code>jtree($order-value)/id</code>. Alternatives are a lookup, <code>$order-value?id</code>, or a
+				variable declared as a <code>jnode(*, order)</code>, as above. A step after a lookup, such as
+				<code>$p?address/city</code>, is reported in the same way.</p>
+
+			<h3 id="debugging">Debugging: xdm:debug() shows JNode paths</h3>
+			<p>The <a href="code-diagnostics.html">xdm:debug()</a> function shows a JNode's location in its tree, as
+				an XPath path from the tree's root, above the value it wraps - in the same way it shows the location
+				of an XML node. For an order line, this is a path such as <code>/lines/*[2]</code>, so you can see
+				which part of the JSON each value came from:</p>
+			<code class="block">&lt;xsl:message select="xdm:debug('ord:line', map {
+  'line': $line,
+  'sku': $line/sku,
+  'bundle': $line/bundle-items
+})"/&gt;</code>
+			<p>The <code>xsl:message</code> output, for the second order line:</p>
+			<code class="block">────────────────────────────── ord:line ──────────────────────────────
+line:   /lines/*[2]
+        {
+          'sku': 'KIT-7',
+          'description': 'Electronics starter kit',
+          'quantity': 1,
+          'unit-price': 64,
+          'bundle-items': [
+            {'sku': 'TL-1', 'description': 'Soldering iron', 'quantity': 1, 'unit-price': 0},
+            {'sku': 'TL-2', 'description': 'Multimeter', 'quantity': 1, 'unit-price': 0}
+          ]
+        }
+sku:    /lines/*[2]/sku
+        'KIT-7'
+bundle: /lines/*[2]/bundle-items
+        [
+          {'sku': 'TL-1', 'description': 'Soldering iron', 'quantity': 1, 'unit-price': 0},
+          {'sku': 'TL-2', 'description': 'Multimeter', 'quantity': 1, 'unit-price': 0}
+        ]</code>
+			<p>The <strong>xdm:debug variables</strong> auto-completion for <code>xsl:message</code> inserts a call
+				like this one, with every in-scope variable. See <a href="code-diagnostics.html">Debugging</a>.</p>
+
+			<h3 id="limits">Things to know about JNodes and record types in Saxon 13</h3>
+			<ul>
+				<li><strong>A <code>jnode(*, <em>T</em>)</code> type matches only an <em>instance</em> of
+					<em>T</em>.</strong> A map with keys that <em>T</em> doesn't declare isn't an instance, so
+					<code>jtree(json-doc('order.json'))</code> doesn't match <code>jnode(*, order)</code> when the data
+					has extra properties. Converting the value to the record type first - as for
+					<code>$order-value</code> above - drops the extra keys, at every depth, and fails if a required
+					field is missing or has the wrong type.</li>
+				<li><strong>No recursive item types.</strong> An <code>xsl:item-type</code> can't refer to itself,
+					directly or through other types (Saxon reports SXTA0001). A field that would refer back, such as
+					a bundle of order lines within an order line, has to be <code>map(*)</code> or
+					<code>array(map(*))</code> instead, so the steps after it aren't checked.</li>
+				<li><strong>JSON numbers are <code>xs:double</code>.</strong> <code>json-doc()</code> and
+					<code>parse-json()</code> give every JSON number as an <code>xs:double</code>, so a record field
+					for a number must be <code>xs:double</code> - <code>xs:integer</code> would reject the data. A
+					JSON <code>null</code> is an empty sequence, so a nullable field needs an occurrence indicator,
+					e.g. <code>xs:string?</code>.</li>
+				<li><strong>No <code>??</code> operator.</strong> Saxon 13 doesn't support the deep lookup operator,
+					so use the descendant axis on JNodes instead, e.g. <code>$schema//get('$ref')</code>.</li>
+			</ul>
+
+			<h3 id="sample">Sample: JSON Schema to record types</h3>
+			<p>The <a href="https://github.com/pgfearo/xslt-json-schema-records">xslt-json-schema-records</a>
+				sample works in two stages:</p>
+			<ol>
+				<li><code>schema-to-records.xsl</code> reads a JSON Schema, <code>order.schema.json</code>, as JNodes,
+					and writes <code>order-types.xsl</code>: an <code>xsl:item-type</code> for the schema and for each
+					of its <code>$defs</code>. Each property's <code>description</code> becomes an <code>@field</code>
+					in the type's documentation note, so it's shown on hover.</li>
+				<li><code>order-report.xsl</code> includes <code>order-types.xsl</code>, and prints a summary of
+					<code>order.json</code>, using <code>jnode(*, order)</code>, <code>jnode(*, line)</code> and other
+					typed JNodes.</li>
+			</ol>
+			<p>Run each stylesheet with <a href="quick-run.html">Quick Run</a>, choosing 'None' as the XML context
+				file, so it starts from <code>xsl:initial-template</code>. Then, in <code>order-report.xsl</code>,
+				try:</p>
+			<ul>
+				<li>typing <code>$order/customer/</code> to see the customer's fields as suggestions</li>
+				<li>changing <code>$order/customer/name</code> to <code>$order/customer/nam</code>, to see the
+					warning</li>
+				<li>hovering on <code>unit-price</code> in <code>$line/unit-price</code>, or on <code>line</code>
+					in <code>jnode(*, line)</code>, to see the documentation taken from the schema</li>
+				<li>changing <code>$order/id</code> to <code>$order-value/id</code>, to see the
+					<code>jtree()</code> error and its fix</li>
+				<li>adding a property to <code>customer</code> in <code>order.schema.json</code>, running
+					<code>schema-to-records.xsl</code> again, and seeing it offered after
+					<code>$order/customer/</code></li>
+			</ul>
+			<p>The sample's README describes how each JSON Schema keyword maps to an XPath type.</p>
+		</div>
+
+	</div>
+	</div>
+</body>
+
+</html>

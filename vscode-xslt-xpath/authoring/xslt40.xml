@@ -50,20 +50,21 @@
 					<code>name="double"</code>, called as <code>double(2)</code> - a Saxon 13 extension, not available in
 					Saxon-HE. A function with the name and arity of a built-in function, e.g. <code>count</code>, replaces
 					it in calls without a prefix, so is reported as a warning.</li>
-				<li><strong>JNodes</strong> - path expressions on trees of maps and arrays, with <code>jtree()</code>,
+				<li><strong><a href="xslt40-jnodes.html">JNodes</a></strong> - path expressions on trees of maps and arrays, with <code>jtree()</code>,
 					<code>jkey()</code>, <code>jvalue()</code> and <code>get(...)</code> steps</li>
 				<li><strong>New instructions</strong> - snippets for <code>xsl:switch</code>, <code>xsl:array</code> and
 					<code>xsl:select</code>, and template rules declared within an <code>xsl:mode</code> (enclosed
 					modes)</li>
 			</ul>
-			<p>Features in the XSLT 4.0 draft that Saxon 13 doesn't implement - such as extensible record types,
-				the deep lookup operator <code>??</code> and type tests such as <code>~record(...)</code> within a
-				path - are reported by the linter.</p>
-			<p>Two XSLT 4.0 features have their own pages:</p>
+			<p>Features in the XSLT 4.0 draft that Saxon 13 doesn't implement - such as extensible record types
+				- are reported by the linter.</p>
+			<p>Some of the more significant XSLT 4.0 features have their own pages:</p>
 			<ul>
 				<li><a href="xslt40-records.html">Records and Enums</a> - auto-completion, checks and
 					refactoring for record and enumeration types, including <code>xsl:switch</code> on an
 					enumeration</li>
+				<li><a href="xslt40-jnodes.html">JSON and JNodes</a> - path expressions on JSON, with
+					auto-completion, checks and hover help for JNodes with a record type</li>
 				<li><a href="xslt40-notes.html">Code Documentation</a> - documenting functions and
 					templates with <code>xsl:note</code>, for hover help and signature help</li>
 			</ul>

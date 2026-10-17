@@ -154,7 +154,6 @@
 				<img src="resources/notes-see-hover.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>Hover on a reference in a note to review the referenced item's description.</i></figcaption>
 			</figure>
-			<p>&#160;</p>
 			<figure>
 				<img src="resources/notes-see-completion.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>Auto-completion hints are triggered when adding a reference in a note.</i></figcaption>
