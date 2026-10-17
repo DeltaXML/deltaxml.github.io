@@ -19,6 +19,9 @@
                 <li><strong><a href="xslt40-records.html">Records and enums</a></strong> - auto-completion, checks, hover
                     help and refactoring for XPath 4.0 record and enumeration types, from map constructors to
                     <code>xsl:switch</code> cases</li>
+                <li><strong><a href="xslt40-jnodes.html">JSON and JNodes</a></strong> - XPath 4.0 path expressions
+                    on JSON, with auto-completion, checks and hover help for steps on JNodes with a record type, and
+                    JNode paths shown by <code>xdm:debug()</code></li>
                 <li><strong><a href="quick-run.html">Quick Run</a></strong> - run the active stylesheet with a shortcut or
                     the toolbar button, without configuring a task first - with SaxonJ, SaxonJS or the new
                     <a href="run-xslt.html#saxonc-tasks">SaxonC</a> support</li>
