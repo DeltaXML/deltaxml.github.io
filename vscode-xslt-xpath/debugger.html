@@ -285,8 +285,13 @@
 				<code>every</code> variables and inline function parameters. The VS Code setting
 				<code>debug.inlineValues</code> turns this off.</p>
 			<h3 id="evaluating">Watch, hover and the Debug Console</h3>
-			<p>XPath expressions can be evaluated in the <strong>Watch</strong> view and the <strong>Debug
-				Console</strong>, in the context of the selected call stack frame, with:</p>
+			<p>While paused, type an XPath expression at the prompt at the bottom of the <strong>Debug
+				Console</strong> and press <span class="shortcut">Enter</span> to evaluate it - for example,
+				<code>line[@qty gt 1]/@product</code> on an <code>order</code> element, or
+				<code>count(current-group())</code> in <code>xsl:for-each-group</code>. Expressions added to the
+				<strong>Watch</strong> view are evaluated in the same way, and again each time execution pauses.</p>
+			<p>Expressions are evaluated in the context of the call stack frame selected in the <strong>Call
+				Stack</strong> view, with:</p>
 			<ul>
 				<li>the variables in scope, and the context item</li>
 				<li>the stylesheet's namespace declarations and functions, e.g. <code>f:line-total($line)</code></li>
