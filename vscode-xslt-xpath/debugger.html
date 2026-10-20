@@ -210,7 +210,12 @@
 					<p><i style="font-style: italic">The debugger paused on a dynamic error.</i></p>
 				</figurecaption>
 			</figure>
-
+			<p>A <em>static</em> error - one Saxon finds when it compiles the stylesheet - can't be paused at, as the
+				stylesheet never runs. This includes a type error that Saxon can tell will always happen: for example,
+				an <code>xsl:variable</code> with <code>as="xs:string"</code> whose <code>select</code> is
+				<code>count(...)</code>, which is always an <code>xs:integer</code>. The session then ends with a
+				notification that gives the first error and its line, and the errors are listed in the
+				<strong>Problems</strong> view.</p>
 			<h3 id="stepping">Stepping</h3>
 			<p>The debug toolbar has the usual <strong>Continue</strong> (<span class="shortcut">F5</span>),
 				<strong>Step Over</strong> (<span class="shortcut">F10</span>), <strong>Step Into</strong>
@@ -240,7 +245,7 @@
 				inline function is stepped through each time it's called - for example, by
 				<code>fold-left()</code>.</p>
 			<figure>
-				<img src="resources/debugger-xpath-step.png" class="scale-with-grid">
+				<img src="resources/debugger-xpath-step.jpg" class="scale-with-grid">
 				<figurecaption>
 					<p><i style="font-style: italic">Evaluation context and call stack in the Run and Debug view when execution is paused.</i></p>
 				</figurecaption>
