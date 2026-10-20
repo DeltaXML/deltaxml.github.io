@@ -241,7 +241,8 @@
 				starts.</p>
 			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
-				its result is shown in the Debug Console. The instruction itself then runs as usual. The body of an
+				its result is shown in the Debug Console, e.g. <code>▸ $line-totals (xsl:variable/@select, lines
+				25-28) returned (6.75, 10.8, 15.75)</code>. The instruction itself then runs as usual. The body of an
 				inline function is stepped through each time it's called - for example, by
 				<code>fold-left()</code>.</p>
 			<figure>
@@ -322,7 +323,8 @@
 				to <strong>Open in Browser</strong>.</p>
 			<h5 id="saxon-errors">Saxon errors</h5>
 			<p>Saxon's error messages in the Debug Console are linked to the location of the error. The errors are
-				also listed in the <strong>Problems</strong> view, as for <a href="run-xslt.html">XSLT tasks</a>.</p>
+				also listed in the <strong>Problems</strong> view, as for <a href="run-xslt.html">XSLT tasks</a>. A file's
+				errors are removed from the Problems view when the file is edited, as they may no longer apply.</p>
 
 			<h3 id="demo">Sample: stepping through XPath</h3>
 			<p>The <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/sample/debugger-demo">debugger-demo</a>
