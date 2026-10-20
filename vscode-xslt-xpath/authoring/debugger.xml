@@ -29,7 +29,7 @@
 			<figure>
 				<img src="resources/debugger-start.png" class="scale-with-grid" />
 				<figurecaption>
-					<p><i style="font-style: italic">The Debug Panel provides options for how to launch the debugger.</i></p>
+					<p><i style="font-style: italic">The Run and Debug View provides options for how to launch the debugger.</i></p>
 				</figurecaption>
 			</figure>
 			<h5 id="launch-json">Launch configurations</h5>
@@ -122,8 +122,7 @@
 			<p>A multi-line XPath expression in a <code>select</code>, <code>test</code> or <code>value</code>
 				attribute can be stepped through: use <strong>Step Into</strong> at the instruction, or set a
 				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
-				starts. A line that starts with <code>return</code>, <code>then</code>, <code>else</code> or a similar
-				keyword doesn't start an expression, so a breakpoint there is unverified.</p>
+				starts.</p>
 			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
 				its result is shown in the Debug Console. The instruction itself then runs as usual. The body of an
@@ -132,7 +131,7 @@
 			<figure>
 				<img src="resources/debugger-xpath-step.png" class="scale-with-grid" />
 				<figurecaption>
-					<p><i style="font-style: italic">Evaluation context and call stack are shown in the Debug Panel when execution is paused.</i></p>
+					<p><i style="font-style: italic">Evaluation context and call stack in the Run and Debug view when execution is paused.</i></p>
 				</figurecaption>
 			</figure>
 			<h3 id="call-stack">Call stack</h3>
@@ -224,7 +223,7 @@
 				<li>For debugging, the stylesheet is compiled without optimization, so all variables can be inspected. Saxon
 					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
 					only constant values - and an instruction removed that way can't be stopped at.</li>
-				<li>Values can't be changed in the Variables view, and there are no function breakpoints.</li>
+				<li>Values can't be changed in the Variables view.</li>
 				<li>Only modules loaded from files can be stopped in.</li>
 			</ul>
 
@@ -234,8 +233,6 @@
 				Java runtime is too old for the Saxon jar.</p>
 			<p>The <strong>XSLT Debugger</strong> log, in the Output panel, shows how each session was launched: the
 				Java command line, the Saxon product, the Java runtime and the Saxon options used.</p>
-			<p><strong>TODO screenshot</strong> (<code>resources/debugger-log.png</code>): the Output panel with the
-				<strong>XSLT Debugger</strong> log selected, after a session has started.</p>
 		</div>
 
 	</div>
