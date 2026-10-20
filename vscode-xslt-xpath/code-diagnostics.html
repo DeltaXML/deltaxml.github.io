@@ -15,7 +15,7 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>Debugging | VS Code XSLT/XPath</title>
+	<title>Debugging with xsl:message | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -70,9 +70,10 @@
 				<li><a href="navigation.html">Code Navigation</a></li>
 				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
 				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="debugger.html">XSLT: Debugger</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
-				<li><a href="code-diagnostics.html" class="active">Debugging</a></li>
+				<li><a href="code-diagnostics.html" class="active">Debugging with xsl:message</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
@@ -83,10 +84,13 @@
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Debugging</h2>
+		<div class="main"><h2 class="pageTitle">Debugging with xsl:message</h2>
 
 		<div class="two-thirds column">
-			<p>There is no step-through debugger in the XSLT/XPath extension. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
+			<p>To set breakpoints and step through a stylesheet with SaxonJ, see the <a href="debugger.html">XSLT Debugger</a>.</p>
+			<p>Adding <strong>xsl:message</strong> instructions is another way to debug XSLT - one that works with
+				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
+				output is sent to the terminal window.
 				Diagnostics are added using the <strong>xdm:debug()</strong> function, from the
 				<a href="https://github.com/DeltaXML/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
 				named in-scope variables to a formatted string for use in an xsl:message.

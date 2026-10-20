@@ -1,0 +1,329 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>XSLT: Debugger | VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
+				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="debugger.html" class="active">XSLT: Debugger</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
+				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
+				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
+			</ul>
+		</nav>
+		<div class="main"><h2 class="pageTitle">XSLT: Debugger</h2>
+
+		<div class="two-thirds column">
+			<p>XSLT stylesheets can be debugged with SaxonJ in VS Code's debugger: set breakpoints, step through
+				templates, functions and multi-line XPath expressions, and inspect variables, the context item and the
+				output written so far.</p>
+			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
+				<a href="code-diagnostics.html">Debugging with xsl:message</a>.</p>
+			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
+				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Debugging with SaxonJS or
+				SaxonC isn't supported. For XPath 4.0 syntax in an XSLT 4.0 stylesheet, Saxon-PE or Saxon-EE is
+				needed.</aside>
+
+			<h3 id="starting">Starting a debug session</h3>
+			<p>Open the stylesheet and set a breakpoint - click in the margin to the left of a line number, or press
+				<span class="shortcut">F9</span>. Then start debugging in any of these ways:</p>
+			<ul>
+				<li>the <strong>Debug Stylesheet with SaxonJ</strong> button in the editor title bar</li>
+				<li><strong>XSLT: Debug Stylesheet with SaxonJ</strong> from the Command Palette</li>
+				<li><span class="shortcut">F5</span>, when there's no <code>launch.json</code> - or the
+					<strong>Debug Stylesheet</strong> link in the <strong>Run and Debug</strong> view</li>
+			</ul>
+			<p>The stylesheet runs as <a href="quick-run.html">Quick Run</a> runs it: with the XML context file, or
+				from <code>xsl:initial-template</code> when there's no context file. It uses the same Quick Run task, so
+				parameters added to that task also apply when debugging. When the stylesheet is imported or included by
+				another, you're offered the choice of running the parent stylesheet instead.</p>
+			<figure>
+				<img src="resources/debugger-start.png" class="scale-with-grid">
+				<figurecaption>
+					<p><i style="font-style: italic">The Debug Panel provides options for how to launch the debugger.</i></p>
+				</figurecaption>
+			</figure>
+			<h5 id="launch-json">Launch configurations</h5>
+			<p>With no <code>launch.json</code>, the <strong>Run and Debug</strong> view offers <strong>Debug Active
+				Stylesheet</strong>, and a <strong>Debug <em>task label</em></strong> configuration for each
+				<code>xslt</code> task in <code>tasks.json</code> (see <a href="run-xslt.html">XSLT: Tasks</a>).
+				<strong>create a launch.json file</strong> adds these to a new <code>launch.json</code>.</p>
+			<p>A launch configuration uses the <code>xslt-saxon</code> debugger type, with one of:</p>
+			<ul>
+				<li><code>"quickRun": true</code> - the stylesheet in the active editor, as Quick Run runs it</li>
+				<li><code>"task"</code> - the label of an <code>xslt</code> task in <code>tasks.json</code>, whose
+					properties are used; properties set in the configuration override them</li>
+				<li>the same properties as an <code>xslt</code> task, such as <code>xsltFile</code>,
+					<code>xmlSource</code>, <code>initialTemplate</code>, <code>resultPath</code> and
+					<code>parameters</code></li>
+			</ul>
+			<code class="block">{
+    "type": "xslt-saxon",
+    "request": "launch",
+    "name": "Debug report",
+    "task": "report with books.xml",
+    "stopOnEntry": false
+}</code>
+			<p><code>"stopOnEntry": true</code> pauses at the first instruction executed. In <code>launch.json</code>,
+				<strong>Add Configuration...</strong> offers four snippets: <strong>XSLT (Saxon): Debug Active
+				Stylesheet</strong>, <strong>Debug a Task</strong>, <strong>Debug Stylesheet</strong> (with a source
+				file) and <strong>Debug from Initial Template</strong>.</p>
+
+			<h3 id="breakpoints">Breakpoints</h3>
+			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
+				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
+			<p>Breakpoints can also be set inside a multi-line XPath expression - see
+				<a href="#xpath">Stepping through XPath</a>.</p>
+			<h5 id="conditional">Conditional breakpoints, hit counts and logpoints</h5>
+			<p>Right-click in the margin and choose <strong>Add Conditional Breakpoint...</strong> or <strong>Add
+				Logpoint...</strong> - or right-click an existing breakpoint and choose <strong>Edit
+				Breakpoint</strong>:</p>
+			<ul>
+				<li><strong>Expression</strong> - an XPath expression, evaluated where the breakpoint is, with its
+					variables and context item, e.g. <code>@customer = 'Grace'</code> or <code>$total gt 30</code>. If
+					the expression raises an error, execution pauses and the error is shown.</li>
+				<li><strong>Hit Count</strong> - <code>5</code> (the 5th hit), <code>&gt;5</code>,
+					<code>&gt;=5</code>, <code>&lt;5</code>, <code>&lt;=5</code> or <code>%5</code> (every 5th hit).
+					With an expression too, only the hits where the expression is true are counted.</li>
+				<li><strong>Log Message</strong> - a logpoint writes the message to the Debug Console without
+					pausing. Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, e.g.
+					<code>{$line/@product} costs {f:line-total($line)}</code>.</li>
+			</ul>
+			<figure>
+				<img src="resources/debugger-conditional.png" class="scale-with-grid">
+				<figurecaption>
+					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
+				</figurecaption>
+			</figure>
+			<h5 id="errors">Pausing on errors</h5>
+			<p>The <strong>Breakpoints</strong> view has two options for errors:</p>
+			<ul>
+				<li><strong>Dynamic Errors</strong> (on by default) - pauses where a dynamic error that ends the
+					transform is raised, including <code>xsl:message</code> with <code>terminate="yes"</code>. The
+					error's code and message are shown, and the variables at that point can be inspected.</li>
+				<li><strong>Errors Caught by xsl:try</strong> (off by default) - also pauses at errors that an
+					<code>xsl:try</code> catches. This needs Saxon 12.5 or later.</li>
+			</ul>
+			<figure>
+				<img src="resources/debugger-error.png" class="scale-with-grid">
+				<figurecaption>
+					<p><i style="font-style: italic">The debugger paused on a dynamic error.</i></p>
+				</figurecaption>
+			</figure>
+
+			<h3 id="stepping">Stepping</h3>
+			<p>The debug toolbar has the usual <strong>Continue</strong> (<span class="shortcut">F5</span>),
+				<strong>Step Over</strong> (<span class="shortcut">F10</span>), <strong>Step Into</strong>
+				(<span class="shortcut">F11</span>), <strong>Step Out</strong>
+				(<span class="shortcut">⇧F11</span>), <strong>Pause</strong> and <strong>Stop</strong> commands. In
+				XSLT terms:</p>
+			<ul>
+				<li><strong>Step Over</strong> goes to the next line in the current template or function, without
+					stopping in the templates and functions it calls - for example, with
+					<code>xsl:apply-templates</code> or <code>xsl:call-template</code>.</li>
+				<li><strong>Step Into</strong> stops in each template rule, named template or function called, and
+					in a global variable when it's evaluated.</li>
+				<li><strong>Step Out</strong> continues until the current template or function returns.</li>
+				<li>The bodies of <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and
+					<code>xsl:iterate</code> are stepped through, not over, for each item.</li>
+			</ul>
+			<p>Stepping goes line by line: execution stops once each time it reaches a line, not once for each
+				instruction on it. A breakpoint in a loop stops once for each iteration.</p>
+			<h5 id="xpath">Stepping through XPath</h5>
+			<p>A multi-line XPath expression in a <code>select</code>, <code>test</code> or <code>value</code>
+				attribute can be stepped through: use <strong>Step Into</strong> at the instruction, or set a
+				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
+				starts. A line that starts with <code>return</code>, <code>then</code>, <code>else</code> or a similar
+				keyword doesn't start an expression, so a breakpoint there is unverified.</p>
+			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
+				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
+				its result is shown in the Debug Console. The instruction itself then runs as usual. The body of an
+				inline function is stepped through each time it's called - for example, by
+				<code>fold-left()</code>.</p>
+			<figure>
+				<img src="resources/debugger-xpath-step.png" class="scale-with-grid">
+				<figurecaption>
+					<p><i style="font-style: italic">Evaluation context and call stack are shown in the Debug Panel when execution is paused.</i></p>
+				</figurecaption>
+			</figure>
+			<h3 id="call-stack">Call stack</h3>
+			<p>The <strong>Call Stack</strong> view has a frame for each:</p>
+			<ul>
+				<li>template rule, with its match pattern and mode, e.g.
+					<code>xsl:template match="order" mode="summary"</code></li>
+				<li>named template, e.g. <code>xsl:template name="header"</code></li>
+				<li>function, by name and arity, e.g. <code>f:line-total#1</code></li>
+				<li>global variable or parameter being evaluated, e.g. <code>xsl:variable $orders</code></li>
+				<li><code>xsl:for-each</code>, <code>xsl:for-each-group</code> or <code>xsl:iterate</code>
+					instruction, with its <code>select</code> expression</li>
+				<li>XPath expression being stepped through, e.g. <code>xsl:variable/@select (XPath)</code></li>
+			</ul>
+			<p>Selecting a frame shows its location in the editor, and its variables in the Variables view.</p>
+			<h3 id="variables">Variables</h3>
+			<p>The <strong>Variables</strong> view has four sections:</p>
+			<ul>
+				<li><strong>Locals</strong> - the parameters of the template, function or
+					<code>xsl:iterate</code>, then the variables in scope - from <code>xsl:variable</code>, and from
+					XPath <code>for</code>, <code>let</code>, <code>some</code> and <code>every</code> expressions,
+					including a positional <code>at $pos</code> variable. Tunnel parameters are shown as
+					<code>$name (tunnel)</code>.</li>
+				<li><strong>Context</strong> - the context item (<code>.</code>), <code>position()</code> and
+					<code>last()</code>, and where they apply, <code>current-group()</code>,
+					<code>current-grouping-key()</code> and each <code>regex-group()</code>.</li>
+				<li><strong>Globals</strong> - the global variables and parameters, sorted by name. A global variable
+					that hasn't been used yet is evaluated when it's shown.</li>
+				<li><strong>Output</strong> - which result is being written to, or that a temporary tree is being built
+					(for example, an <code>xsl:variable</code>'s content), and the end of each output written so
+					far.</li>
+			</ul>
+			<p>Nodes, maps, arrays and sequences can be expanded. An element shows its attributes, then its child
+				nodes, with the line number of the element in its source document. Long values are truncated, and an
+				expanded value shows at most 1000 items.</p>
+			<h5 id="inline-values">Inline values</h5>
+			<p>While paused, the value of each variable declared earlier in the current template or function is shown
+				at the end of the line where it's declared. This applies to <code>xsl:variable</code> and
+				<code>xsl:param</code>, and in XPath, to <code>let</code>, <code>for</code>, <code>some</code> and
+				<code>every</code> variables and inline function parameters. The VS Code setting
+				<code>debug.inlineValues</code> turns this off.</p>
+			<h3 id="evaluating">Watch, hover and the Debug Console</h3>
+			<p>XPath expressions can be evaluated in the <strong>Watch</strong> view and the <strong>Debug
+				Console</strong>, in the context of the selected call stack frame, with:</p>
+			<ul>
+				<li>the variables in scope, and the context item</li>
+				<li>the stylesheet's namespace declarations and functions, e.g. <code>f:line-total($line)</code></li>
+				<li><code>current()</code>, <code>current-group()</code>, <code>current-grouping-key()</code> and
+					<code>regex-group()</code>, which give their values where execution is paused</li>
+			</ul>
+			<p>Results are shown, and can be expanded, as in the Variables view. Hovering over a variable reference
+				such as <code>$total</code>, or the name in a variable declaration, shows its value.</p>
+			<h3 id="output">Output while debugging</h3>
+			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - opens
+				beside the stylesheet at the first pause where there is some, and is updated at each pause. It's
+				serialized by Saxon as the result is, but indented for readability, and shown in the language of its
+				output method: XML, HTML, JSON or plain text. The result itself is written as the stylesheet
+				specifies.</p>
+			<ul>
+				<li><strong>XSLT: Show Debug Output</strong>, or its button on the debug toolbar, opens the output at
+					any time. When there's more than one output, you choose which to show.</li>
+				<li>The <code>XSLT.debug.openOutput</code> setting turns off opening the output automatically.</li>
+				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
+					written to the Debug Console.</li>
+			</ul>
+			<p>When the session ends, a notification offers to <strong>Open</strong> the result file - or, for HTML,
+				to <strong>Open in Browser</strong>.</p>
+			<h5 id="saxon-errors">Saxon errors</h5>
+			<p>Saxon's error messages in the Debug Console are linked to the location of the error. The errors are
+				also listed in the <strong>Problems</strong> view, as for <a href="run-xslt.html">XSLT tasks</a>.</p>
+
+			<h3 id="demo">Sample: stepping through XPath</h3>
+			<p>The <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/sample/debugger-demo">debugger-demo</a>
+				sample has a stylesheet, <code>debug-xpath.xsl</code>, and an XML file, <code>orders.xml</code>. Open
+				<code>orders.xml</code>, so it becomes the XML context file, then <code>debug-xpath.xsl</code>, and
+				start debugging. Things to try are listed in a comment at the top of the stylesheet, including:</p>
+			<ul>
+				<li>stepping through a multi-line <code>for ... return</code> expression, and into a function it
+					calls</li>
+				<li>a breakpoint inside an expression in <code>xsl:for-each-group</code>, with
+					<code>count(current-group())</code> in the Watch view</li>
+				<li>conditional breakpoints, hit counts and a logpoint</li>
+				<li>pausing at a dynamic error, after changing a price in <code>orders.xml</code> to
+					<code>n/a</code></li>
+			</ul>
+
+			<h3 id="limitations">Limitations</h3>
+			<ul>
+				<li>For debugging, the stylesheet is compiled without optimization, so all variables can be inspected. Saxon
+					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
+					only constant values - and an instruction removed that way can't be stopped at.</li>
+				<li>Values can't be changed in the Variables view, and there are no function breakpoints.</li>
+				<li>Only modules loaded from files can be stopped in.</li>
+			</ul>
+
+			<h3 id="troubleshooting">Troubleshooting</h3>
+			<p>When a debug session doesn't start, a notification gives the reason, with a <strong>Show
+				Output</strong> button - for example, when Java isn't on the PATH, the Saxon jar doesn't exist, or the
+				Java runtime is too old for the Saxon jar.</p>
+			<p>The <strong>XSLT Debugger</strong> log, in the Output panel, shows how each session was launched: the
+				Java command line, the Saxon product, the Java runtime and the Saxon options used.</p>
+			<p><strong>TODO screenshot</strong> (<code>resources/debugger-log.png</code>): the Output panel with the
+				<strong>XSLT Debugger</strong> log selected, after a session has started.</p>
+		</div>
+
+	</div>
+	</div>
+</body>
+
+</html>

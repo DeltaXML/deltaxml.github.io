@@ -3,7 +3,10 @@
 	<div class="main">
 
 		<div class="two-thirds column">
-			<p>There is no step-through debugger in the XSLT/XPath extension. When debugging XSLT, the <strong>xsl:message</strong> instruction can be used to send output to the terminal window.
+			<p>To set breakpoints and step through a stylesheet with SaxonJ, see the <a href="debugger.html">XSLT Debugger</a>.</p>
+			<p>Adding <strong>xsl:message</strong> instructions is another way to debug XSLT - one that works with
+				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
+				output is sent to the terminal window.
 				Diagnostics are added using the <strong>xdm:debug()</strong> function, from the
 				<a href="https://github.com/DeltaXML/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
 				named in-scope variables to a formatted string for use in an xsl:message.
