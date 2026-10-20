@@ -90,6 +90,9 @@
 			<p>XSLT stylesheets can be debugged with SaxonJ in VS Code's debugger: set breakpoints, step through
 				templates, functions and multi-line XPath expressions, and inspect variables, the context item and the
 				output written so far.</p>
+			<p>If you're new to debugging in VS Code, see
+				<a href="https://code.visualstudio.com/docs/debugtest/debugging">Debugging</a> in the VS Code
+				documentation for the debug toolbar, views and keyboard shortcuts.</p>
 			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
 				<a href="code-diagnostics.html">Debugging with xsl:message</a>.</p>
 			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
@@ -113,7 +116,7 @@
 			<figure>
 				<img src="resources/debugger-start.png" class="scale-with-grid">
 				<figurecaption>
-					<p><i style="font-style: italic">The Debug Panel provides options for how to launch the debugger.</i></p>
+					<p><i style="font-style: italic">The Run and Debug View provides options for how to launch the debugger.</i></p>
 				</figurecaption>
 			</figure>
 			<h5 id="launch-json">Launch configurations</h5>
@@ -140,7 +143,9 @@
 			<p><code>"stopOnEntry": true</code> pauses at the first instruction executed. In <code>launch.json</code>,
 				<strong>Add Configuration...</strong> offers four snippets: <strong>XSLT (Saxon): Debug Active
 				Stylesheet</strong>, <strong>Debug a Task</strong>, <strong>Debug Stylesheet</strong> (with a source
-				file) and <strong>Debug from Initial Template</strong>.</p>
+				file) and <strong>Debug from Initial Template</strong>. See
+				<a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug configuration</a>
+				in the VS Code documentation for more on <code>launch.json</code>.</p>
 
 			<h3 id="breakpoints">Breakpoints</h3>
 			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
@@ -168,6 +173,28 @@
 					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
 				</figurecaption>
 			</figure>
+			<h5 id="function-breakpoints">Function and named-template breakpoints</h5>
+			<p>To stop whenever a stylesheet function or named template is called, without finding where it's
+				declared, click <strong>+</strong> (<strong>Add Function Breakpoint</strong>) in the
+				<strong>Breakpoints</strong> view and enter its name. The function or template can be in any module of
+				the stylesheet, including imported and included modules. Execution stops at the start of the function
+				or template, where the Variables view shows its parameters - for a named template, these are the
+				values passed to it.</p>
+			<ul>
+				<li><strong>The name</strong> is written as it is where the function or template is declared, with
+					the same prefix, e.g. <code>f:total</code> or <code>cell</code> - or as an EQName, e.g.
+					<code>Q{urn:f}total</code>. A <code>()</code> after the name is allowed.</li>
+				<li><strong>An arity</strong> selects one version of a function, e.g. <code>f:total#2</code>. With no
+					arity, every version of the function stops.</li>
+				<li><strong>Conditions and hit counts</strong> work as for line breakpoints - right-click the
+					breakpoint and choose <strong>Edit Condition</strong> or <strong>Edit Hit Count</strong>. The
+					condition can use the parameters, e.g. <code>$n = 2</code>.</li>
+			</ul>
+			<p>A name that isn't valid is shown as unverified straight away. A function or template that isn't in the
+				stylesheet - or a function with no version of the arity given - is shown as unverified once the
+				stylesheet has compiled; hover over the breakpoint for the reason. Template rules - templates with a
+				<code>match</code> attribute - aren't stopped at this way, even when they also have a
+				<code>name</code>: use a line breakpoint instead.</p>
 			<h5 id="errors">Pausing on errors</h5>
 			<p>The <strong>Breakpoints</strong> view has two options for errors:</p>
 			<ul>
@@ -206,8 +233,7 @@
 			<p>A multi-line XPath expression in a <code>select</code>, <code>test</code> or <code>value</code>
 				attribute can be stepped through: use <strong>Step Into</strong> at the instruction, or set a
 				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
-				starts. A line that starts with <code>return</code>, <code>then</code>, <code>else</code> or a similar
-				keyword doesn't start an expression, so a breakpoint there is unverified.</p>
+				starts.</p>
 			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
 				its result is shown in the Debug Console. The instruction itself then runs as usual. The body of an
@@ -216,7 +242,7 @@
 			<figure>
 				<img src="resources/debugger-xpath-step.png" class="scale-with-grid">
 				<figurecaption>
-					<p><i style="font-style: italic">Evaluation context and call stack are shown in the Debug Panel when execution is paused.</i></p>
+					<p><i style="font-style: italic">Evaluation context and call stack in the Run and Debug view when execution is paused.</i></p>
 				</figurecaption>
 			</figure>
 			<h3 id="call-stack">Call stack</h3>
@@ -308,7 +334,7 @@
 				<li>For debugging, the stylesheet is compiled without optimization, so all variables can be inspected. Saxon
 					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
 					only constant values - and an instruction removed that way can't be stopped at.</li>
-				<li>Values can't be changed in the Variables view, and there are no function breakpoints.</li>
+				<li>Values can't be changed in the Variables view.</li>
 				<li>Only modules loaded from files can be stopped in.</li>
 			</ul>
 
@@ -318,8 +344,6 @@
 				Java runtime is too old for the Saxon jar.</p>
 			<p>The <strong>XSLT Debugger</strong> log, in the Output panel, shows how each session was launched: the
 				Java command line, the Saxon product, the Java runtime and the Saxon options used.</p>
-			<p><strong>TODO screenshot</strong> (<code>resources/debugger-log.png</code>): the Output panel with the
-				<strong>XSLT Debugger</strong> log selected, after a session has started.</p>
 		</div>
 
 	</div>

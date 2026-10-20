@@ -6,6 +6,9 @@
 			<p>XSLT stylesheets can be debugged with SaxonJ in VS Code's debugger: set breakpoints, step through
 				templates, functions and multi-line XPath expressions, and inspect variables, the context item and the
 				output written so far.</p>
+			<p>If you're new to debugging in VS Code, see
+				<a href="https://code.visualstudio.com/docs/debugtest/debugging">Debugging</a> in the VS Code
+				documentation for the debug toolbar, views and keyboard shortcuts.</p>
 			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
 				<a href="code-diagnostics.html">Debugging with xsl:message</a>.</p>
 			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
@@ -56,7 +59,9 @@
 			<p><code>"stopOnEntry": true</code> pauses at the first instruction executed. In <code>launch.json</code>,
 				<strong>Add Configuration...</strong> offers four snippets: <strong>XSLT (Saxon): Debug Active
 				Stylesheet</strong>, <strong>Debug a Task</strong>, <strong>Debug Stylesheet</strong> (with a source
-				file) and <strong>Debug from Initial Template</strong>.</p>
+				file) and <strong>Debug from Initial Template</strong>. See
+				<a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug configuration</a>
+				in the VS Code documentation for more on <code>launch.json</code>.</p>
 
 			<h3 id="breakpoints">Breakpoints</h3>
 			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
@@ -84,6 +89,28 @@
 					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
 				</figurecaption>
 			</figure>
+			<h5 id="function-breakpoints">Function and named-template breakpoints</h5>
+			<p>To stop whenever a stylesheet function or named template is called, without finding where it's
+				declared, click <strong>+</strong> (<strong>Add Function Breakpoint</strong>) in the
+				<strong>Breakpoints</strong> view and enter its name. The function or template can be in any module of
+				the stylesheet, including imported and included modules. Execution stops at the start of the function
+				or template, where the Variables view shows its parameters - for a named template, these are the
+				values passed to it.</p>
+			<ul>
+				<li><strong>The name</strong> is written as it is where the function or template is declared, with
+					the same prefix, e.g. <code>f:total</code> or <code>cell</code> - or as an EQName, e.g.
+					<code>Q{urn:f}total</code>. A <code>()</code> after the name is allowed.</li>
+				<li><strong>An arity</strong> selects one version of a function, e.g. <code>f:total#2</code>. With no
+					arity, every version of the function stops.</li>
+				<li><strong>Conditions and hit counts</strong> work as for line breakpoints - right-click the
+					breakpoint and choose <strong>Edit Condition</strong> or <strong>Edit Hit Count</strong>. The
+					condition can use the parameters, e.g. <code>$n = 2</code>.</li>
+			</ul>
+			<p>A name that isn't valid is shown as unverified straight away. A function or template that isn't in the
+				stylesheet - or a function with no version of the arity given - is shown as unverified once the
+				stylesheet has compiled; hover over the breakpoint for the reason. Template rules - templates with a
+				<code>match</code> attribute - aren't stopped at this way, even when they also have a
+				<code>name</code>: use a line breakpoint instead.</p>
 			<h5 id="errors">Pausing on errors</h5>
 			<p>The <strong>Breakpoints</strong> view has two options for errors:</p>
 			<ul>
