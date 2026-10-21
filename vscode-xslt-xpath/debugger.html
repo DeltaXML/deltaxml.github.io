@@ -165,11 +165,11 @@
 					With an expression too, only the hits where the expression is true are counted.</li>
 				<li><strong>Log Message</strong> - a logpoint writes the message to the Debug Console without
 					pausing. Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, e.g.
-					<code>{$line/@product} costs {f:line-total($line)}</code>
-				<aside><strong>Logging all variables</strong>							
-				- using <code>{$*}</code> is a special case, this lists the names and values of all local
-					variable in scope at the logpoint.				
-					</aside>
+					<code>{$line/@product} costs {f:line-total($line)}</code>.
+					<aside><strong>Logging all variables:</strong> <code>{$*}</code> is a special case - it's replaced by
+						the name and value of each local variable in scope at the logpoint, one per line, e.g.
+						<code>order {@id}: {$*}</code>. It's like an <code>xsl:message</code> with <code>xdm:debug()</code>,
+						but without changing the stylesheet.</aside>
 				</li>
 			</ul>
 			<figure>
