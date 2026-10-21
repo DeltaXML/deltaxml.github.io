@@ -165,7 +165,12 @@
 					With an expression too, only the hits where the expression is true are counted.</li>
 				<li><strong>Log Message</strong> - a logpoint writes the message to the Debug Console without
 					pausing. Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, e.g.
-					<code>{$line/@product} costs {f:line-total($line)}</code>.</li>
+					<code>{$line/@product} costs {f:line-total($line)}</code>
+				<aside><strong>Logging all variables</strong>							
+				- using <code>{$*}</code> is a special case, this lists the names and values of all local
+					variable in scope at the logpoint.				
+					</aside>
+				</li>
 			</ul>
 			<figure>
 				<img src="resources/debugger-conditional.png" class="scale-with-grid">
@@ -236,13 +241,21 @@
 				instruction on it. A breakpoint in a loop stops once for each iteration.</p>
 			<h5 id="xpath">Stepping through XPath</h5>
 			<p>A multi-line XPath expression in a <code>select</code>, <code>test</code> or <code>value</code>
-				attribute can be stepped through: use <strong>Step Into</strong> at the instruction, or set a
+				attribute - or in <code>xsl:map-entry</code>'s <code>key</code>, <code>xsl:evaluate</code>'s
+				<code>xpath</code>, <code>context-item</code> or <code>with-params</code>, or the content of an XSLT
+				4.0 <code>xsl:select</code> - can be stepped through. An <code>xsl:when</code>'s <code>test</code> is
+				stopped at where it's evaluated: only the tests reached, in order, until one is true. Within
+				<code>xsl:catch</code>, the <code>$err:</code> variables can be used, as in Watch. An <code>xsl:with-param</code>'s <code>select</code> is stepped through as part of the
+				instruction it's in, e.g. <code>xsl:call-template</code>. An <code>xsl:sort</code>'s
+				<code>select</code> is stopped at for each item, as its sort key is computed - before the first item
+				is processed - with that item as the context item. Use <strong>Step Into</strong> at the instruction, or set a
 				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
 				starts.</p>
 			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
 				its result is shown in the Debug Console, e.g. <code>▸ $line-totals (xsl:variable/@select, lines
-				25-28) returned (6.75, 10.8, 15.75)</code>. The instruction itself then runs as usual. The body of an
+				25-28) returned (6.75, 10.8, 15.75)</code> - or the dynamic error it raised, e.g. one an
+				<code>xsl:try</code> catches. The instruction itself then runs as usual. The body of an
 				inline function is stepped through each time it's called - for example, by
 				<code>fold-left()</code>.</p>
 			<figure>
@@ -259,7 +272,8 @@
 				<li>named template, e.g. <code>xsl:template name="header"</code></li>
 				<li>function, by name and arity, e.g. <code>f:line-total#1</code></li>
 				<li>global variable or parameter being evaluated, e.g. <code>xsl:variable $orders</code></li>
-				<li><code>xsl:for-each</code>, <code>xsl:for-each-group</code> or <code>xsl:iterate</code>
+				<li><code>xsl:for-each</code>, <code>xsl:for-each-group</code>, <code>xsl:iterate</code> or
+					<code>xsl:analyze-string</code>
 					instruction, with its <code>select</code> expression</li>
 				<li>XPath expression being stepped through, e.g. <code>xsl:variable/@select (XPath)</code></li>
 			</ul>
@@ -348,6 +362,21 @@
 					only constant values - and an instruction removed that way can't be stopped at.</li>
 				<li>Values can't be changed in the Variables view.</li>
 				<li>Only modules loaded from files can be stopped in.</li>
+				<li>Saxon only evaluates <code>xsl:assert</code> with assertions enabled - <code>"enableAssertions":
+					"on"</code> in the <code>xslt</code> task - so without that, its breakpoints are unverified.</li>
+				<li>Saxon evaluates some instructions lazily - e.g. an <code>xsl:for-each</code> in an
+					<code>xsl:map</code> runs when the map is built - so the call stack may not show them while their
+					content is stopped in. The context item is still the right one.</li>
+				<li>Accumulators: Saxon computes an accumulator's values for the whole document the first time one of
+					them is needed - e.g. by <code>accumulator-before()</code> - so a breakpoint in an
+					<code>xsl:accumulator-rule</code> stops for each node in turn at that point, not as each node is
+					processed. If a breakpoint condition or a Watch expression is the first to need the values, they're
+					computed while it's evaluated, and the rule's breakpoints aren't stopped at. Accumulator rules are
+					reported to the debugger by Saxon 12.8 or later.</li>
+				<li>Keys: Saxon builds a key's index for the whole document the first time <code>key()</code> is
+					called for it - so a breakpoint on an <code>xsl:key</code> stops for each node indexed at that
+					point. As for accumulators, if a breakpoint condition or Watch expression is the first to need the
+					index, it's built while that's evaluated, and the key's breakpoints aren't stopped at.</li>
 			</ul>
 
 			<h3 id="troubleshooting">Troubleshooting</h3>
