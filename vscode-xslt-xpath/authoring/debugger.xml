@@ -167,6 +167,12 @@
 				is processed - with that item as the context item. Use <strong>Step Into</strong> at the instruction, or set a
 				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
 				starts.</p>
+			<p><strong>Step Into</strong> goes through an expression when that shows more than its result: when it
+				binds variables (<code>for</code>, <code>let</code>, <code>some</code> or <code>every</code>), calls a
+				stylesheet function or an inline function, or has an <code>if</code> whose branches are on lines of their
+				own - execution then stops at the branch taken. Otherwise - for example, for comparisons joined by
+				<code>or</code> - <strong>Step Into</strong> steps over it, and the variable's value is shown when it's
+				in scope. A breakpoint on a line of the expression still stops there.</p>
 			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
 				its result is shown in the Debug Console, e.g. <code>&#x25B8; $line-totals (xsl:variable/@select, lines
