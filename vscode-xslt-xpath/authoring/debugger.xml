@@ -206,7 +206,9 @@
 					<code>last()</code>, and where they apply, <code>current-group()</code>,
 					<code>current-grouping-key()</code> and each <code>regex-group()</code>.</li>
 				<li><strong>Globals</strong> - the global variables and parameters, sorted by name. A global variable
-					that hasn't been used yet is evaluated when it's shown.</li>
+					that hasn't been used yet is evaluated when it's shown. While a global variable is being
+					evaluated, one that might use it - directly, or through a function - isn't evaluated, and is shown
+					as <code>(not evaluated yet)</code>: evaluating it would be a circular reference.</li>
 				<li><strong>Output</strong> - which result is being written to, or that a temporary tree is being built
 					(for example, an <code>xsl:variable</code>'s content), and the end of each output written so
 					far.</li>
