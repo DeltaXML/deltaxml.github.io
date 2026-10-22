@@ -173,6 +173,14 @@
 				own - execution then stops at the branch taken. Otherwise - for example, for comparisons joined by
 				<code>or</code> - <strong>Step Into</strong> steps over it, and the variable's value is shown when it's
 				in scope. A breakpoint on a line of the expression still stops there.</p>
+			<p>A simple map (<code>!</code>), a path step (<code>/</code>) or a predicate (<code>[...]</code>) is
+				evaluated for each item of the expression before it. A breakpoint on a line of its right-hand side, or
+				predicate, stops for each item, with that item as the context item and its <code>position()</code> and
+				<code>last()</code> in the <strong>Context</strong> section. <strong>Step Into</strong> goes through such
+				a loop only when what's evaluated for each item has something to show, as above - e.g. a function
+				call - so that it doesn't stop for each item of a long path. A function argument that Saxon evaluates
+				lazily - within the function, when it's first used - shows its context item, but
+				<code>position()</code> and <code>last()</code> as <code>(not known)</code>.</p>
 			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
 				its result is shown in the Debug Console, e.g. <code>&#x25B8; $line-totals (xsl:variable/@select, lines
