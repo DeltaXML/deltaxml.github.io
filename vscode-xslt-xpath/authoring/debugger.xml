@@ -177,7 +177,9 @@
 				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
 				its result is shown in the Debug Console, e.g. <code>&#x25B8; $line-totals (xsl:variable/@select, lines
 				25-28) returned (6.75, 10.8, 15.75)</code> - or the dynamic error it raised, e.g. one an
-				<code>xsl:try</code> catches. The instruction itself then runs as usual. The body of an
+				<code>xsl:try</code> catches. The instruction itself then runs as usual, but without stopping again in
+				the functions the expression calls, or writing their <code>xsl:message</code> output again - so each is
+				stopped in, and its messages written, once. The body of an
 				inline function is stepped through each time it's called - for example, by
 				<code>fold-left()</code>.</p>
 			<figure>
@@ -285,6 +287,10 @@
 					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
 					only constant values - and an instruction removed that way can't be stopped at.</li>
 				<li>Values can't be changed in the Variables view.</li>
+				<li>With <code>"messageEscaping": "on"</code> in the <code>xslt</code> task, Saxon writes
+					<code>xsl:message</code> output itself, so a message from a function called by an expression that's
+					stepped through is written twice: once as the expression is stepped through, and again as the
+					instruction runs.</li>
 				<li>Only modules loaded from files can be stopped in.</li>
 				<li>Saxon only evaluates <code>xsl:assert</code> with assertions enabled - <code>"enableAssertions":
 					"on"</code> in the <code>xslt</code> task - so without that, its breakpoints are unverified.</li>
