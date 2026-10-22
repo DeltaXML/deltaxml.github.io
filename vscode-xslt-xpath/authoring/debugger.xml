@@ -160,7 +160,11 @@
 				attribute - or in <code>xsl:map-entry</code>'s <code>key</code>, <code>xsl:evaluate</code>'s
 				<code>xpath</code>, <code>context-item</code> or <code>with-params</code>, or the content of an XSLT
 				4.0 <code>xsl:select</code> - can be stepped through. An <code>xsl:when</code>'s <code>test</code> is
-				stopped at where it's evaluated: only the tests reached, in order, until one is true. Within
+				stopped at where it's evaluated: only the tests reached, in order, until one is true. In XSLT 4.0, the
+				<code>select</code> of an <code>xsl:when</code> or <code>xsl:otherwise</code>, and an
+				<code>xsl:if</code>'s <code>then</code> and <code>else</code>, are stepped through only when that branch
+				is taken; an <code>xsl:record</code>'s attributes - its fields' expressions - are stepped through as the
+				record is built. Within
 				<code>xsl:catch</code>, the <code>$err:</code> variables can be used, as in Watch. An <code>xsl:with-param</code>'s <code>select</code> is stepped through as part of the
 				instruction it's in, e.g. <code>xsl:call-template</code>. An <code>xsl:sort</code>'s
 				<code>select</code> is stopped at for each item, as its sort key is computed - before the first item
@@ -295,6 +299,12 @@
 					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
 					only constant values - and an instruction removed that way can't be stopped at.</li>
 				<li>Values can't be changed in the Variables view.</li>
+				<li>An expression that's stepped through is evaluated in full - except a test, e.g. an
+					<code>xsl:if</code>'s, which is evaluated only as far as needed for true or false, as Saxon does.
+					Where Saxon itself would evaluate only part of it - e.g. an <code>xsl:iterate</code>'s
+					<code>select</code>, when <code>xsl:break</code> ends the loop, or a variable that's only partly
+					used - stepping through it can call more functions, and so write more <code>xsl:message</code>
+					output, than a normal run.</li>
 				<li>With <code>"messageEscaping": "on"</code> in the <code>xslt</code> task, Saxon writes
 					<code>xsl:message</code> output itself, so a message from a function called by an expression that's
 					stepped through is written twice: once as the expression is stepped through, and again as the
