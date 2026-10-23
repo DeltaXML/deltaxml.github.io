@@ -4,9 +4,13 @@
         
         <div class="two-thirds column">
             <p>
-                Highlights of the new features included in this release:
+                Highlights of the features added in release 2.0 and later:
             </p>
             <ul>
+                <li><strong><a href="debugger.html">Step-through debugging</a></strong> - debug stylesheets with SaxonJ
+                    (any edition, including Saxon-HE): breakpoints with conditions, hit counts and logpoints, stepping
+                    through templates, functions and multi-line XPath expressions - including inline functions - and the
+                    variables, context item and output so far, as you go</li>
                 <li><strong><a href="xslt40.html">Full language support for XSLT 4.0 in Saxon 13</a></strong> - type-aware
                     auto-completion, checks, hover help and refactoring for the XSLT 4.0 and XPath 4.0 features Saxon 13
                     implements: new syntax and item types, keyword arguments and optional parameters, <code>xsl:switch</code>,
@@ -34,7 +38,7 @@
                 <li><strong><a href="editing-xslt.html#hover">Editing</a></strong> - signature help and richer hover help
                     for functions and templates, more auto-completion, and the new
                     <a href="editing-xslt.html#refactoring">Wrap with...</a> refactoring</li>
-                <li><strong><a href="code-diagnostics.html">Debugging</a></strong> - one auto-completed
+                <li><strong><a href="code-diagnostics.html">Print debugging</a></strong> - one auto-completed
                     <code>xsl:message</code> for all the in-scope variables, formatted and colored with
                     <code>xdm:debug()</code></li>
             </ul>
