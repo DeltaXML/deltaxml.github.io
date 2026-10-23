@@ -6,7 +6,7 @@
 			"label": "createVSCodePages",
 			"saxonJar": "${config:XSLT.tasks.saxonJar}",
 			"xsltFile": "${workspaceFolder}/vscode-xslt-xpath/xsl/createPages.xsl",
-			"xmlSource": "${workspaceFolder}/vscode-xslt-xpath/index.html",
+			"xmlSource": "${workspaceFolder}/vscode-xslt-xpath/authoring/layout.xml",
 			"resultPath": "${workspaceFolder}/vscode-xslt-xpath/xslt-out/result1.xml",
 			"group": {
 				"kind": "build",
