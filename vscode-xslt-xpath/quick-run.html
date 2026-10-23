@@ -206,21 +206,53 @@
 					<a href="run-xslt.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
 				<li>refers to the processor's setting (for example <code>${config:XSLT.tasks.saxonCPath}</code>) rather
 					than copying its current value, so the task keeps working if you later change the setting</li>
-				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
-					declared with a <code>select</code> default - including params declared in imported or included
-					stylesheets - ready for you to edit</li>
+				<li>includes an entry in its <code>parameters</code> array for each stylesheet parameter that must be
+					set - including those declared in imported or included stylesheets. Parameters with a default are
+					left out, so the stylesheet's own defaults apply</li>
 			</ul>
-			<aside>Parameter values generated this way are prefixed with <code>?</code>, for example <code>?title</code>.
-				This tells Saxon to evaluate the value as an XPath expression rather than a literal string, so the
-				generated entry reproduces the parameter's own default exactly - it does not silently override it with
-				an empty value.
-			</aside>
+			<h5 id="required-parameters">Required parameters</h5>
+			<p>A stylesheet parameter must be set when it has <code>required="yes"</code>, or when it has no default
+				(no <code>select</code> attribute or content) and an <code>as</code> type that doesn't allow an empty
+				sequence - for example <code>as="xs:string"</code> or <code>as="element()+"</code>, but not
+				<code>as="xs:string?"</code>. A parameter without an <code>as</code> attribute defaults to a
+				zero-length string, so it isn't added.</p>
+			<p>The value of each one comes from an input that's added to the <code>inputs</code> of
+				<code>tasks.json</code>, so you're asked for it each time the task runs:</p>
+			<code class="block">"parameters": [
+    { "name": "title", "value": "${input:xsltParam-title}" },
+    { "name": "?config", "value": "${input:xsltParam-config}" }
+]
+...
+"inputs": [
+    {
+        "id": "xsltParam-title",
+        "type": "command",
+        "command": "xslt-xpath.enterParameterValue",
+        "args": { "name": "title", "type": "xs:string", "xpath": false }
+    },
+    ...
+]</code>
+			<p>You can type a value, or pick one you've used before for a parameter of that name - the last one used
+				is first, so <span class="shortcut">Enter</span> uses it again. Press <span class="shortcut">Escape</span>
+				to cancel the run. Once you've settled on a value, you can replace the <code>${input:...}</code>
+				reference with the value itself. Parameters with the same name, in different tasks, share an input.</p>
+			<aside>For an atomic type, such as <code>xs:string</code>, <code>xs:integer</code> or
+				<code>xs:anyURI</code>, the value is typed as it is, without quotes - Saxon converts it to the declared
+				type. For other types, such as maps, arrays and nodes, the parameter name is prefixed with
+				<code>?</code>, for example <code>?config</code>, which tells Saxon to evaluate the value as an XPath
+				expression: <code>map{'a': 1}</code>, <code>doc('data.xml')</code>, or <code>'text'</code> for a
+				string.</aside>
 			<h3>Subsequent runs</h3>
 			<p>
 				Once a task exists for a stylesheet/context-file pairing, Quick Run re-runs that same task rather than
 				creating another one. This means you can freely edit the generated task afterwards - change a parameter
 				value, adjust the result path, add Saxon features or additional parameters - and Quick Run will keep
 				using your edits on every subsequent run, just like running any other task.
+			</p>
+			<p>
+				For different sets of parameters, copy the task in <code>tasks.json</code> and give the copy a new
+				label. When more than one task is for the stylesheet/context-file pairing, Quick Run (and debugging)
+				asks which task to run - the tasks you've used most recently are listed first.
 			</p>
 			<p>
 				Tasks are kept separately for each processor. If you switch processor, the next Quick Run for the same

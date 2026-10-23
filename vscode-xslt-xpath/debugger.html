@@ -111,8 +111,13 @@
 			</ul>
 			<p>The stylesheet runs as <a href="quick-run.html">Quick Run</a> runs it: with the XML context file, or
 				from <code>xsl:initial-template</code> when there's no context file. It uses the same Quick Run task, so
-				parameters added to that task also apply when debugging. When the stylesheet is imported or included by
-				another, you're offered the choice of running the parent stylesheet instead.</p>
+				parameters added to that task also apply when debugging - if there's more than one task for the
+				stylesheet and context file, you pick which. When the stylesheet is imported or included by another,
+				you're offered the choice of running the parent stylesheet instead.</p>
+			<p>A Quick Run task includes the stylesheet's <a href="quick-run.html#required-parameters">required
+				parameters</a>, with values from <code>tasks.json</code> inputs. You're asked for these values when the
+				debug session starts, as when the task runs. If a task refers to an input that <code>tasks.json</code>
+				doesn't define, the session doesn't start, and you're offered <strong>Open tasks.json</strong>.</p>
 			<figure>
 				<img src="resources/debugger-start.png" class="scale-with-grid">
 				<figurecaption>
