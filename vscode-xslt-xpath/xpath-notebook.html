@@ -64,21 +64,25 @@
 		<nav>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
-				<li><a href="debugger.html">XSLT: Debugger</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
 				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html" class="active">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
@@ -93,7 +97,7 @@
 			
 			<p><img src="resources/xpath-notebook-small.png" class="scale-with-grid"></p>
 			
-			<h3>Why use an XPath Notebook?</h3>
+			<h3 id="why-use-an-xpath-notebook">Why use an XPath Notebook?</h3>
 			<p>XPath Notebooks are used for a wide range of purposes, including:
 				<ul>
 					<li>Quick analysis of XML or JSON</li>
@@ -102,21 +106,21 @@
 					<li>Tutorials on a specific XML or JSON format</li>
 				</ul>	
 			</p>
-			<h3>Quick Start</h3>
+			<h3 id="quick-start">Quick Start</h3>
 			<p>For this guide, we're assuming you've already installed the <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xpath-notebook">XPath Notebook</a>
 			extension for VS Code.	
 			</p>
-			<h4>1. Install Node.js</h4>
+			<h4 id="1-install-node-js">1. Install Node.js</h4>
 			<p>This tool uses a builtin <a href="https://www.saxonica.com/saxon-js/index.xml">
 					SaxonJS XSLT processor</a> from Saxonica. 
 				This processor requires a recent installation of Node.js. Available
 				for download from <a href="https://nodejs.org/en/">https://nodejs.org/en/</a>. 
 			</p>
-			<h4>2. Select an XML 'source' file</h4>
+			<h4 id="2-select-an-xml-source-file">2. Select an XML 'source' file</h4>
 			<p>Open any XML (or JSON) source file in VS Code to set this as the context
 				item for XPath expressions in an XPath Notebook. The most recent XML/JSON file opened is used.
 			</p>
-			<h4>3. Create and save a new XPath Notebook</h4>
+			<h4 id="3-create-and-save-a-new-xpath-notebook">3. Create and save a new XPath Notebook</h4>
 			<p>From Visual Studio Code, open the Command Palette (<span class="shortcut">⇧⌘P</span>) 
 				and execute the <strong>New XPath Notebook</strong> command.</p>
 			<p>An untitled notebook with a <strong>Markdown</strong> cell and a <strong>Code</strong> cell will be shown,
@@ -127,7 +131,7 @@
 			<aside>Note: In the 1.65 VS Code release, an empty XPath notebook is created in addition to a XPath notebook
 				with a pre-populated Markdown cell (the API for creating new notebooks is not fully resolved yet).
 			</aside>
-			<h4>4. Edit and execute a new code cell</h4>
+			<h4 id="4-edit-and-execute-a-new-code-cell">4. Edit and execute a new code cell</h4>
 			<p>To add a new XPath code cell, press the <strong>+ Code</strong> button at the top of the notebook.
 			In the new code cell, enter the <code>/*</code> XPath expression, then press <span class="shortcut">^Enter</span>
 				to execute the cell.
@@ -136,7 +140,7 @@
 		</div>
 		
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#quick-start">Quick Start</a><ul><li><a href="#1-install-node-js">1. Install Node.js</a></li><li><a href="#2-select-an-xml-source-file">2. Select an XML 'source' file</a></li><li><a href="#3-create-and-save-a-new-xpath-notebook">3. Create and save a new XPath Notebook</a></li><li><a href="#4-edit-and-execute-a-new-code-cell">4. Edit and execute a new code cell</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 </body>
 
 </html>

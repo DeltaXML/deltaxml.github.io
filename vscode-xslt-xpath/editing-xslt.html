@@ -64,21 +64,25 @@
 		<nav>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html" class="active">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
-				<li><a href="debugger.html">XSLT: Debugger</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
 				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
@@ -124,7 +128,7 @@
 				and all tokens within XPath expressions. XPath expressions within Attribute Value Templates (AVTs) and 
 				Text Value Templates are syntax highlighted also.</p>
 			
-			<h4>XSLT/XPath Dark Color Themes</h4>
+			<h4 id="xslt-xpath-dark-color-themes">XSLT/XPath Dark Color Themes</h4>
 			<p>The plethora of VS Code themes will highlight XSLT/XPath very well using Semantic Highlighting fallbacks for language-specific tokens. 
 				There is however a <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-dark-themes">XSLT Dark Themes</a> 
 				extension that enhances a set of popular dark themes specifically for XSLT and XPath:
@@ -157,7 +161,7 @@
 		<p>The XPath formatter indents code blocks within <code>{}</code>, <code>[]</code> and <code>()</code> bracket-pairs.
 			Indentation is also adjusted for <code>if/else</code> blocks and range-variable blocks.	
 		</p>
-		<h3>Folding</h3>
+		<h3 id="folding">Folding</h3>
 		<p>
 			Folding with this extension uses indentation to determine fold regions.
 			To set a region code-folding block, surround it with <code>&lt;?region?&gt;</code> and <code>&lt;?endregion?&gt;</code> processing instructions.
@@ -184,7 +188,7 @@
 			manually with <span class="shortcut">⇧⌘Space</span>.</p>
 		<p>In an XSLT 4.0 stylesheet, a <a href="xslt40-notes.html">documentation note</a> on a function or
 			template is included in its hover help and signature help.</p>
-		<h5>Intellisense for XPath Locations</h5>
+		<h5 id="intellisense-for-xpath-locations">Intellisense for XPath Locations</h5>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
 			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
 			for the XSLT file editor will show the context filename. The label: <strong>[auto-completion context]</strong>
@@ -204,7 +208,7 @@
 			expression starts with a variable that also contains an XPath location, that context from that variable
 			is also used to limit the node-names shown in the auto-completion list.
 		</p>
-		<h5>Triggering the auto-complete list</h5>
+		<h5 id="triggering-the-auto-complete-list">Triggering the auto-complete list</h5>
 		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
 			fit the context of the cursor location. 
 			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">Code Snippet</a> is inserted
@@ -212,7 +216,7 @@
 		</p>
 		<p>Intellisense is manually triggered with <span class="shortcut">⌃Space</span>, with <span class="shortcut">Tab</span> or 
 			<span class="shortcut">Enter</span> used to accept suggestions. These <a href="https://code.visualstudio.com/docs/getstarted/keybindings">key bindings</a> are fully customizable.</p>
-		<h5>XPath Expressions and Operators</h5>
+		<h5 id="xpath-expressions-and-operators">XPath Expressions and Operators</h5>
 		<p>At the start of an XPath expression, the suggestions include snippets for the expressions with several
 			parts: <code>for</code>, <code>let</code>, <code>some</code>, <code>every</code>, <code>if</code>,
 			<code>map</code> and <code>array</code> - for example, <code>let $x := … return …</code>, with
@@ -222,20 +226,20 @@
 			<code>return</code> or <code>satisfies</code> within a <code>for</code>, <code>let</code>,
 			<code>some</code> or <code>every</code> expression. Short operators such as <code>and</code>,
 			<code>eq</code> and <code>div</code> are quicker to type, so aren't included.</p>
-		<h5>Parameters for xsl:call-template</h5>
+		<h5 id="parameters-for-xsl-call-template">Parameters for xsl:call-template</h5>
 		<p>Typing <span class="shortcut">&lt;</span> within an <code>xsl:call-template</code> suggests an
 			<code>xsl:with-param</code> for each of the called template's parameters that isn't passed yet, for
 			example <code>xsl:with-param colour</code>, which inserts the parameter name. The same applies to the
 			parameters of the enclosing <code>xsl:iterate</code> within an <code>xsl:next-iteration</code>. The
 			<code>name</code> attribute of an <code>xsl:with-param</code> also offers the parameter names.</p>
-		<h5>XSLT Instruction Snippets</h5>
+		<h5 id="xslt-instruction-snippets">XSLT Instruction Snippets</h5>
 		<p>In an empty file, the <code>xsl:stylesheet</code> and <code>xsl:package</code> suggestions insert a
 			boiler plate stylesheet complete with namespace declarations, including one for your own functions - an
 			'identity transform', or one starting from <code>xsl:initial-template</code>. Each is available for
 			XSLT 3.0 and XSLT 4.0, shown on the right of the suggestion.</p>
 		<p>The <code>xsl:message</code> suggestions include snippets that use the <code>xdm:debug()</code> function to
 			show the names and values of in-scope variables and parameters - see <a href="code-diagnostics.html">Debugging</a>.</p>
-		<h5>More Snippets</h5>
+		<h5 id="more-snippets">More Snippets</h5>
 		<p>
 			You can define your own snippets in Visual Studio Code in a declarative way, without writing an extension. See the Visual Studio Code
 			documentation:
@@ -244,7 +248,7 @@
 		<p><strong>Emmet Snippets</strong> provide a useful shorthand for inserting literal result elements. They can be enabled for XSLT
 			in <a href="settings.html">Visual Studio Code Settings</a>.	
 		</p>
-		<h3>Bracket Matching</h3>
+		<h3 id="bracket-matching">Bracket Matching</h3>
 		<p>Matching brackets in XPath expressions are highlighted when the cursor is near one of them. You can jump to the matching
 			bracket with <span class="shortcut">⇧⌘\</span></p>
 		
@@ -387,12 +391,12 @@
 				<figcaption style="margin:auto"><i>The XSLT Imports view in the Explorer, with the ▶ Quick Run button for the top-level stylesheet.</i></figcaption>
 			</figure>
 		</p>
-		<h5>Unused Variables</h5>
+		<h5 id="unused-variables">Unused Variables</h5>
 		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
 			imported stylesheets they may reference the same variable.
 		</p>
-		<h5>Compile-time and Run-time problems</h5>
+		<h5 id="compile-time-and-run-time-problems">Compile-time and Run-time problems</h5>
 		<p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
 			When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT processor 
 			(shown in the Task tab of the Terminal View) so that the problem token is highlighted,
@@ -416,15 +420,15 @@
 			<strong>XSLT.resources.xsltPackage</strong></aside>
 		<aside>An <code>href</code> can also be a URI that an XML catalog maps to a file, e.g.
 			<code>http://example.com/xslt/strings.xsl</code> - see <a href="xml-catalogs.html">XML Catalogs</a>.</aside>
-		<h3>Auto tag-close</h3>
+		<h3 id="auto-tag-close">Auto tag-close</h3>
 		<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed. 
 			Note that this feature is only enabled when the VS Code user-setting <emphasis>Format on Type</emphasis> is set (indentation is fixed at the same time).</p>
-		<h3>GitHub Copilot</h3>
+		<h3 id="github-copilot">GitHub Copilot</h3>
 		<p>New GitHub Copilot features continue to enhance the XSLT editing experience. See the VS Code <a href="https://code.visualstudio.com/docs/copilot/overview">GitHub Copilot</a>
 			documentation for information on edit suggestions and using <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat">Copilot Chat</a> in VS Code.
 			For a summary of selected features that are enhanced by the XSLT/XPath extension, see the <a href="copilot.html">GitHub Copilot and XSLT</a> page .</p>
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#highlighting">Syntax Highlighting</a><ul><li><a href="#xslt-xpath-dark-color-themes">XSLT/XPath Dark Color Themes</a></li></ul></li><li><a href="#formatting">Formatting</a></li><li><a href="#folding">Folding</a></li><li><a href="#intellisense">Intellisense (Auto Complete)</a><ul><li><a href="#hover">Hover Help and Signature Help</a></li><li><a href="#intellisense-for-xpath-locations">Intellisense for XPath Locations</a></li><li><a href="#triggering-the-auto-complete-list">Triggering the auto-complete list</a></li><li><a href="#xpath-expressions-and-operators">XPath Expressions and Operators</a></li><li><a href="#parameters-for-xsl-call-template">Parameters for xsl:call-template</a></li><li><a href="#xslt-instruction-snippets">XSLT Instruction Snippets</a></li><li><a href="#more-snippets">More Snippets</a></li></ul></li><li><a href="#bracket-matching">Bracket Matching</a></li><li><a href="#renaming">Symbol Renaming</a></li><li><a href="#refactoring">Code Refactoring</a><ul><li><a href="#quick-fixes">Quick Fixes</a></li></ul></li><li><a href="#checking">XSLT Linter</a><ul><li><a href="#inferred-imports">Inferred Imports for 'Non-Standalone' Stylesheets</a></li><li><a href="#unused-variables">Unused Variables</a></li><li><a href="#compile-time-and-run-time-problems">Compile-time and Run-time problems</a></li></ul></li><li><a href="#auto-tag-close">Auto tag-close</a></li><li><a href="#github-copilot">GitHub Copilot</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 </body>
 
 </html>

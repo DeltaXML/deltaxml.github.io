@@ -15,7 +15,7 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT: Tasks | VS Code XSLT/XPath</title>
+	<title>Tasks | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -64,27 +64,31 @@
 		<nav>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html" class="active">XSLT: Tasks</a></li>
-				<li><a href="debugger.html">XSLT: Debugger</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html" class="active">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
 				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT: Tasks</h2>
+		<div class="main"><h2 class="pageTitle">Tasks</h2>
 		
 		<div class="two-thirds column">
 			<p>Visual Studio Code's Tasks include custom task types for configuring and running Saxon (Java)
@@ -151,7 +155,7 @@ npm install --save-dev xslt3</code>
 				command-line arguments mirror the Saxon (Java) task closely, since SaxonC's <code>Transform</code>
 				command-line tool follows the same conventions.
 			</p>
-			<h4>Setup</h4>
+			<h4 id="setup">Setup</h4>
 			<ol>
 				<li><p>
 						Install SaxonC and note the folder containing its <code>Transform</code> (or
@@ -167,7 +171,7 @@ npm install --save-dev xslt3</code>
 			<aside>SaxonC tasks can be disabled with the <strong>XSLT.tasks.saxonc.enabled</strong> setting, matching the
 				equivalent settings for Saxon (Java) and Saxon-JS tasks.
 			</aside>
-			<h4>Native library path (macOS/Linux)</h4>
+			<h4 id="native-library-path-macos-linux">Native library path (macOS/Linux)</h4>
 			<p>
 				Some SaxonC distributions are built without an embedded library search path, so the native shared libraries
 				alongside <code>Transform</code> - and any others it depends on - may not be found automatically. The
@@ -179,7 +183,7 @@ npm install --save-dev xslt3</code>
 			<aside>If a transform fails with an error like <code>Library not loaded: ...dylib ... no LC_RPATH's found</code>,
 				add the folder containing that library to <strong>saxonCLibraryPaths</strong>.
 			</aside>
-			<h4>Licensing</h4>
+			<h4 id="licensing">Licensing</h4>
 			<p>
 				If SaxonC reports <code>No license file found - running with licensable features disabled</code>, set the
 				<strong>licenseFileLocation</strong> task property (or the equivalent
@@ -187,7 +191,7 @@ npm install --save-dev xslt3</code>
 				<code>saxon-license.lic</code> file. This is passed to <code>Transform</code> as
 				<code>--licenseFileLocation:</code>, the same option Saxon (Java) tasks use.
 			</p>
-			<h3>To configure the initial task:</h3>
+			<h3 id="to-configure-the-initial-task">To configure the initial task:</h3>
 			<ol>
 				<li><p>
 						Invoke <code>Tasks: Run Build Task</code> from the Command Palette (<span class="shortcut">⇧⌘B</span>):
@@ -233,7 +237,7 @@ npm install --save-dev xslt3</code>
 				return a string can be invoked via variable substitution, the boiler plate XSLT Task uses <code>${command:xslt-xpath.pickXsltFile}'</code> and <code>${command:xslt-xpath.pickResultFile}'</code>
 				variable references.
 			</p>
-			<h4>User-input for file-selection within a Task</h4>
+			<h4 id="user-input-for-file-selection-within-a-task">User-input for file-selection within a Task</h4>
 			<p>
 				A set of 'Pick File' commands suitable for XSLT tasks is available to allow user-selected file paths to be used within an XSLT task. An example is shown below:</p>
 			<p><img src="resources/newest-pickFiles.png" class="scale-with-grid"></p>
@@ -280,7 +284,7 @@ npm install --save-dev xslt3</code>
 			</table>
 			<p>A full list of variable references is given in Visual Studio Code's
 				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
-			<h4>The 'pickFile' command</h4>
+			<h4 id="the-pickfile-command">The 'pickFile' command</h4>
 			<p>The general purpose command 'xslt-xpath.pickFile' is the base commands for specific 'pick file' commands like 'pickXsltFile'.
 			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 5 ways:
 				<ul>
@@ -296,7 +300,7 @@ npm install --save-dev xslt3</code>
 			</p>
 			<p>The 'pickList' command must be invoked as an 'input' property of a task as it requires an 'options' argument. A sample 'inputs' property
 			can be added to the 'tasks.json' file with the <code>XSLT: add Inputs to Task file</code> command.</p>
-			<h3>Command Options for 'pickFile'</h3>
+			<h3 id="command-options-for-pickfile">Command Options for 'pickFile'</h3>
 				<p>The 'pickFile' commands 'options' object have the following properties:
 				<ul>
 					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
@@ -358,7 +362,7 @@ npm install --save-dev xslt3</code>
 }
 ]
 				</code>
-			<h3>Configuring more tasks</h3>
+			<h3 id="configuring-more-tasks">Configuring more tasks</h3>
 			<p>To create more tasks, just invoke <code>Tasks: Run Build Task</code> from the Command Palette 
 				and choose the task type you need. Provided you've changed the <code>label</code> property from the template
 				task for that type, a new task will created from the template task.
@@ -372,7 +376,7 @@ npm install --save-dev xslt3</code>
 			<p>The <code>xslt</code> and <code>xslt-c</code> tasks pass the catalog of the
 				<code>XSLT.resources.catalog</code> setting to Saxon, with the <code>-catalog</code> option - unless the
 				task has its own <code>catalogFilenames</code> property. See <a href="xml-catalogs.html">XML Catalogs</a>.</p>
-			<h3>The Visual Studio Code terminal</h3>
+			<h3 id="the-visual-studio-code-terminal">The Visual Studio Code terminal</h3>
 			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>,
 				the Pane hosting the Terminal view is toggle with <span class="shortcut">⌘J</span>. 
 				The tab label reflects the Task configuration <code>label</code> property. 
@@ -389,7 +393,7 @@ npm install --save-dev xslt3</code>
 		</div>
 		
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#saxonc-tasks">SaxonC Tasks</a><ul><li><a href="#setup">Setup</a></li><li><a href="#native-library-path-macos-linux">Native library path (macOS/Linux)</a></li><li><a href="#licensing">Licensing</a></li></ul></li><li><a href="#to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#references">Variable References in Tasks</a><ul><li><a href="#user-input-for-file-selection-within-a-task">User-input for file-selection within a Task</a></li><li><a href="#the-pickfile-command">The 'pickFile' command</a></li></ul></li><li><a href="#command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#configuring-more-tasks">Configuring more tasks</a></li><li><a href="#catalogs">XML catalogs</a></li><li><a href="#the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 </body>
 
 </html>

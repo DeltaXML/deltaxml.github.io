@@ -64,21 +64,25 @@
 		<nav>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html" class="active">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
-				<li><a href="debugger.html">XSLT: Debugger</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
 				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
@@ -90,7 +94,7 @@
 			<p>Visual Studio Code includes a compelling set of features for code navigation, 
 				the language-neutral details are outlined <a href="https://code.visualstudio.com/docs/editor/editingevolved">here</a>.</p>
 			<p>This page outlines code navigation from an XSLT and XPath development perspective.</p>
-			<h3>File Navigation</h3>
+			<h3 id="file-navigation">File Navigation</h3>
 			<p>
 				While the Explorer View is used for workspace browsing, pressing <span class="shortcut">⌘P</span>, for the <strong>Quick Open</strong>
 				command, provides a quick-pick list of available files that is filtered/highlighted as you type.
@@ -100,13 +104,13 @@
 				within an Editor Group.</p>
 			<p>Hold <span class="shortcut">Ctrl</span> and press <span class="shortcut">Tab</span> for a list of files in an Editor Group. Keep pressing
 			<span class="shortcut">Tab</span> until you reach the file you want and then release <span class="shortcut">Ctrl</span> to open it.</p>
-			<h5>Previous/Next Location</h5>
+			<h5 id="previous-next-location">Previous/Next Location</h5>
 			<p>Many actions can be used to navigate you to a new location. Press <span class="shortcut">⌃-</span> for <strong>Previous Location</strong> and <span class="shortcut">⌃⇧-</span> for
 			<strong>Next Location</strong>. Locations may be in the same file or different files.</p>
-			<h5>File Links</h5>
+			<h5 id="file-links">File Links</h5>
 			<p>In XSLT, The <code>href</code> attribute values of <code>xsl:import</code>, <code>xsl:include</code> and <code>xsl:use-package</code> have a solid underline if the file path is resolved.
 			Press <span class="shortcut">⌘+Click</span> on the file path to navigate to that file.</p>
-			<h3>XSLT/XML Breadcrumbs</h3>
+			<h3 id="xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</h3>
 			<p>
 				The Breadcrumb View, shown at the top of the editor, shows the current element or attribute location
 				within an XML or XSLT file with respect to ancestor elements. In XSLT Breadcrumbs, an identifier is often shown as well as the element name.
@@ -114,7 +118,7 @@
 				The symbol names are the same as those shown in the Outline view.
 			</p>
 			<p>Clicking on a Breadcrumb item will show a dropdown Outline view which you can then navigate through with the mouse, touch or cursor keys.</p>
-			<h5>Keyboard Navigation</h5>
+			<h5 id="keyboard-navigation">Keyboard Navigation</h5>
 			<p>
 				Press <span class="shortcut">⇧⌘.</span> (note the 'dot' character) to select the last Breadcrumb item and open <strong>with</strong> a dropdown outline. 
 				You can then use cursor keys
@@ -125,7 +129,7 @@
 			</p>
 			<aside>Note: You can toggle the Breadcrumbs view on/off but if the Breadcrumbs view is disabled this will also disable XML, XSLT or XPath Warnings and Errors.
 				The Code Checker depends on the symbol name provider that Breadcrumbs invokes.</aside>
-			<h3>Outline View</h3>
+			<h3 id="outline-view">Outline View</h3>
 			<img src="resources/navigation.png" class="scale-with-grid">
 			
 			<p>
@@ -143,18 +147,18 @@
 				them in <a href="settings.html">Settings</a> with the property: <code>outline.showArrays</code>. 				
 			</aside>
 
-			<h3>Peek/Goto Definition</h3>
+			<h3 id="peek-goto-definition">Peek/Goto Definition</h3>
 			<p>A symbol, such as a variable or function, is defined in one location in a stylesheet file, but used in other locations.
 			The <strong>Peek</strong> and <strong>Goto</strong>	commands let you either view inline or navigate to the definition of a selected symbol.
 			</p>
-			<h5>Peek Definition</h5>
+			<h5 id="peek-definition">Peek Definition</h5>
 			
 			<p>Invoke the <strong>Peek Definition</strong> command by pressing (<span class="shortcut">⌥F12</span>) on any symbol name such as a variable or function name.
 				This command embeds a view of the definition inline avoiding the context-switch arising from the <strong>Goto Definition</strong> command.
 				The inline definition view permits quick edits of the definition also. Press <span class="shortcut">Escape</span> to close the definition view.
 			</p>
 			<img src="resources/peek-definition.png" class="scale-with-grid">
-			<h5>Goto Definition</h5>
+			<h5 id="goto-definition">Goto Definition</h5>
 			<p>
 				Invoke the <strong>Goto Definition</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
 				This command navigates you to the location of the symbol definition (for example, the corresponding <code>xsl:variable</code> instruction),
@@ -162,18 +166,18 @@
 			</p>
 			
 			<!-- start -->			
-			<h3>Goto (Peek) References/Find All References</h3>
+			<h3 id="goto-peek-references-find-all-references">Goto (Peek) References/Find All References</h3>
 			<p>This feature is about navigating to <strong>references</strong> to symbols, in contrast to the previous section that covers navigating to symbol <strong>definitions</strong>.
 				The <strong>Peek</strong> and <strong>Find All</strong>	commands let you either view inline or navigate through all the references (including the definition) of a selected symbol.
 			</p>
-			<h5>Goto (Peek) References</h5>
+			<h5 id="goto-peek-references">Goto (Peek) References</h5>
 			
 			<p>Invoke the <strong>Goto (Peek) References</strong> command by pressing (<span class="shortcut">⇧F12</span>) on any symbol name such as a variable or function name.
 				This command embeds a view of the resolved references inline, use the cursor keys to navigate between each reference listed.
 				The inline view permits quick edits of the reference also. Press <span class="shortcut">Escape</span> to close the references view.
 			</p>
 			<img src="resources/peek-reference.png" class="scale-with-grid">
-			<h5>Find All References</h5>
+			<h5 id="find-all-references">Find All References</h5>
 			<p>
 				Invoke the <strong>Find All References</strong> command by pressing (<span class="shortcut">⌥⇧F12</span>) on any symbol.
 				A References Panel, shown in the application Side Bar, lists all references, grouped by their stylesheet module.
@@ -183,7 +187,7 @@
 			<p>After navigating to a reference or definition, you can quickly navigate to the location you were in using <span class="shortcut">Ctrl-</span></p>
 			<!-- end -->
 			
-			<h3>Goto Symbol</h3>
+			<h3 id="goto-symbol">Goto Symbol</h3>
 			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">Shift⌘O</span> for a filtered quick-pick list of symbols used
 			in the current editor.
 				The text you enter filters the list, the <span class="shortcut">↑</span> and <span class="shortcut">↓</span> keys navigate you through the symbol list, with the
@@ -195,7 +199,7 @@
 		</div>
 		
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#file-navigation">File Navigation</a><ul><li><a href="#previous-next-location">Previous/Next Location</a></li><li><a href="#file-links">File Links</a></li></ul></li><li><a href="#xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a><ul><li><a href="#keyboard-navigation">Keyboard Navigation</a></li></ul></li><li><a href="#outline-view">Outline View</a></li><li><a href="#peek-goto-definition">Peek/Goto Definition</a><ul><li><a href="#peek-definition">Peek Definition</a></li><li><a href="#goto-definition">Goto Definition</a></li></ul></li><li><a href="#goto-peek-references-find-all-references">Goto (Peek) References/Find All References</a><ul><li><a href="#goto-peek-references">Goto (Peek) References</a></li><li><a href="#find-all-references">Find All References</a></li></ul></li><li><a href="#goto-symbol">Goto Symbol</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 </body>
 
 </html>

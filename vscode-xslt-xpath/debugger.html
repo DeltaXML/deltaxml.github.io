@@ -15,7 +15,7 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT: Debugger | VS Code XSLT/XPath</title>
+	<title>Debugger | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -64,27 +64,31 @@
 		<nav>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
-				<li><a href="debugger.html" class="active">XSLT: Debugger</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html" class="active">Debugger</a></li>
 				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT: Debugger</h2>
+		<div class="main"><h2 class="pageTitle">Debugger</h2>
 
 		<div class="two-thirds column">
 			<p>XSLT stylesheets can be debugged with SaxonJ in VS Code's debugger: set breakpoints, step through
@@ -425,7 +429,7 @@
 		</div>
 
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints, hit counts and logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 </body>
 
 </html>
