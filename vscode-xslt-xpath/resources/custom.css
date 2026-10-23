@@ -139,6 +139,39 @@ aside {
   height: 100px;
   background-color: #3b495b;
   width: 100%;
+  overflow: hidden;
+}
+
+/* the header's background, behind the logo and title: a faint dot grid, fading in towards the right ... */
+.colorBar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1.6px);
+  background-size: 14px 14px;
+  -webkit-mask-image: linear-gradient(to right, transparent 35%, #000 80%);
+  mask-image: linear-gradient(to right, transparent 35%, #000 80%);
+}
+
+/* ... and at the right, a node tree, like an XML document's, with a path through it picked out in blue, as an XPath
+   expression selects it */
+.colorBar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 640px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 100'%3E%3Cpath d='M40 50H95V18H150M40 50H95V82H150M150 18H205V10H260M150 18H205V28H260M150 82H205V70H260M150 82H205V90H260M260 10H315V10H370M260 50H315V59H370M260 70H315V76H370M370 10H425V14H480M370 41H425V49H480M370 76H425V70H480M370 76H425V84H480M480 33H535V39H590M480 70H535V77H590' fill='none' stroke='%23aaeaaa' stroke-opacity='.22' stroke-width='1.2'/%3E%3Cpath d='M40 50H95V50H150M150 50H205V50H260M260 50H315V41H370M370 41H425V33H480M480 33H535V27H590' fill='none' stroke='%2300b2fe' stroke-opacity='.75' stroke-width='1.6'/%3E%3Ccircle cx='40' cy='50' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='150' cy='18' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='150' cy='50' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='150' cy='82' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='10' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='28' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='50' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='260' cy='70' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='90' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='370' cy='10' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='370' cy='41' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='370' cy='59' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='370' cy='76' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='14' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='33' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='480' cy='49' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='70' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='84' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='590' cy='27' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='590' cy='39' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='590' cy='77' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E") right center / auto 100% no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 35%);
+  mask-image: linear-gradient(to right, transparent, #000 35%);
+}
+
+/* narrower screens: the title needs the space */
+@media only screen and (max-width: 1100px) {
+  .colorBar::after {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 750px) {
