@@ -63,6 +63,10 @@
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation"
+					autocomplete="off" spellcheck="false" />
+			</div>
 			<ul>
 				<li><a class="active" href="index.html">Overview</a></li>
 				<li><a href="new-release.html">What's New</a></li>
@@ -116,7 +120,7 @@
 				<p>
 					<img src="resources/vscode-xslt.png" class="scale-with-grid" />
 				</p>
-				<h3>The User Interface</h3>
+				<h3 id="the-user-interface">The User Interface</h3>
 				<p>
 					Visual Studio Code's <a href="https://code.visualstudio.com/docs/getstarted/userinterface">user
 						interface</a>
@@ -135,7 +139,7 @@
 				<p>The sections below introduce you to the fundamental parts of the user interface from the perspective
 					of an XSLT/XPath developer.
 				</p>
-				<h3>The Command Palette</h3>
+				<h3 id="the-command-palette">The Command Palette</h3>
 				<p>A principal part of Visual Studio Code's <a
 						href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a> is the
 					Command
@@ -146,7 +150,7 @@
 					list. The list of commands is
 					filtered as you type. The most recently used commands are shown at the top of the list.
 				</p>
-				<h3>Opening Workspace Files</h3>
+				<h3 id="opening-workspace-files">Opening Workspace Files</h3>
 				<p>
 					The <strong>File: Open Folder</strong> command is used to select the starting 'Workspace' folder to
 					be used by VS Code.
@@ -157,7 +161,7 @@
 					from a pick-list.
 					'Fuzzy-matching' allows you to type in just a part of the filename to filter the pick-list files.
 				</p>
-				<h3>Keyboard Shortcuts</h3>
+				<h3 id="keyboard-shortcuts">Keyboard Shortcuts</h3>
 				<p>
 					While the Command Palette provides convenient access to features you should find that keyboard
 					shortcuts are
@@ -172,7 +176,7 @@
 						href="https://code.visualstudio.com/docs/getstarted/keybindings">
 						Key Bindings for Visual Studio Code</a>
 				</p>
-				<h3>Settings</h3>
+				<h3 id="settings">Settings</h3>
 				<p>By adding or modifying Visual Studio Settings, using the <code>Preferences: Open User Settings</code>
 					command,
 					you can customize a range of editor and extension features to meet your needs.
@@ -180,7 +184,7 @@
 					settings for
 					developing in XSLT and XPath.
 				</p>
-				<h3>Install the XSLT/XPath Extension</h3>
+				<h3 id="install-the-xslt-xpath-extension">Install the XSLT/XPath Extension</h3>
 				<p>Extensions are managed in the Extensions view (<span class="shortcut">⇧⌘X</span>) of the Side Bar.
 					Type <code>XSLT XPath</code> in the Extensions view search bar and, on the <strong>XSLT/Path for
 						Visual Studio
@@ -222,7 +226,7 @@
 					writes the result file again - so you can edit the stylesheet, run it with
 					<a href="quick-run.html">Quick Run</a>, and see the updated output alongside the XSLT.
 				</p>
-				<h3>Edit XML, XSLT or XPath</h3>
+				<h3 id="edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</h3>
 				<p>
 					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio
 					Code
@@ -246,7 +250,7 @@
 				</ul>
 				</p>
 
-				<h3>Run XSLT - Quick Start</h3>
+				<h3 id="run-xslt-quick-start">Run XSLT - Quick Start</h3>
 				<p>The quickest way to run the stylesheet in the active editor is <a href="quick-run.html">Quick Run</a>:
 					press <span class="shortcut">⌘⌥R</span> (<span class="shortcut">Ctrl+Alt+R</span> on Windows/Linux) or click
 					the play button in the editor title bar. The first run creates an XSLT task for you, which later runs reuse.</p>
@@ -283,6 +287,8 @@
 
 		</div>
 	</div>
+	<script src="resources/search-index.js" defer="defer"></script>
+	<script src="resources/search.js" defer="defer"></script>
 </body>
 
 </html>

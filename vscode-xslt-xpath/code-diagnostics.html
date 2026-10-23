@@ -62,6 +62,9 @@
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
 				<li><a href="new-release.html">What's New</a></li>
@@ -193,6 +196,8 @@ xdm:debug($title as xs:string, $labels as map(xs:string, item()*), $level as xs:
 
 	</div>
 	</div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
 </body>
 
 </html>
