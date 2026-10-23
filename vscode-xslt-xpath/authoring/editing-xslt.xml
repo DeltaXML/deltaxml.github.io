@@ -89,7 +89,7 @@
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
 			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
 			included/imported files are included in the suggestions list.</p>
-		<h5 id="hover">Hover Help and Signature Help</h5>
+		<h4 id="hover">Hover Help and Signature Help</h4>
 		<p>Hovering over a function call shows the function's signature and description. This works for
 			built-in functions, with a link to the function's definition in the W3C specification, and for user-defined
 			<code>xsl:function</code>s, including those in included and imported stylesheets. Hovering over the name of an
@@ -100,13 +100,13 @@
 			manually with <span class="shortcut">⇧⌘Space</span>.</p>
 		<p>In an XSLT 4.0 stylesheet, a <a href="xslt40-notes.html">documentation note</a> on a function or
 			template is included in its hover help and signature help.</p>
-		<h5>Intellisense for XPath Locations</h5>
+		<h4>Intellisense for XPath Locations</h4>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
 			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
 			for the XSLT file editor will show the context filename. The label: <strong>[auto-completion context]</strong>
 			is shown if the context file has not been set.
 		</p>
-		<h6><strong>Locking the context file</strong></h6>
+		<h5><strong>Locking the context file</strong></h5>
 		<p>To lock the auto-completion context file to a specific file, click on the status-bar item 
 			for the context file. You can then select from the list of recently opened XML files
 			or pick a different file using the system's file explorer dialog.
@@ -114,13 +114,13 @@
 		<p>
 		<img src="resources/xpath-auto-complete.png" class="scale-with-grid" />
 		</p>
-		<h6><strong>Variables and XPath Locations</strong></h6>
+		<h5><strong>Variables and XPath Locations</strong></h5>
 		<p>XPath is evaluated as you type so node-names in the auto-completion list are filtered to be just
 		those that are possible given previous XPath steps such as axes and node-name tests. If an XPath location
 			expression starts with a variable that also contains an XPath location, that context from that variable
 			is also used to limit the node-names shown in the auto-completion list.
 		</p>
-		<h5>Triggering the auto-complete list</h5>
+		<h4>Triggering the auto-complete list</h4>
 		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
 			fit the context of the cursor location. 
 			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">Code Snippet</a> is inserted
@@ -128,7 +128,7 @@
 		</p>
 		<p>Intellisense is manually triggered with <span class="shortcut">⌃Space</span>, with <span class="shortcut">Tab</span> or 
 			<span class="shortcut">Enter</span> used to accept suggestions. These <a href="https://code.visualstudio.com/docs/getstarted/keybindings">key bindings</a> are fully customizable.</p>
-		<h5>XPath Expressions and Operators</h5>
+		<h4>XPath Expressions and Operators</h4>
 		<p>At the start of an XPath expression, the suggestions include snippets for the expressions with several
 			parts: <code>for</code>, <code>let</code>, <code>some</code>, <code>every</code>, <code>if</code>,
 			<code>map</code> and <code>array</code> - for example, <code>let $x := … return …</code>, with
@@ -138,20 +138,20 @@
 			<code>return</code> or <code>satisfies</code> within a <code>for</code>, <code>let</code>,
 			<code>some</code> or <code>every</code> expression. Short operators such as <code>and</code>,
 			<code>eq</code> and <code>div</code> are quicker to type, so aren't included.</p>
-		<h5>Parameters for xsl:call-template</h5>
+		<h4>Parameters for xsl:call-template</h4>
 		<p>Typing <span class="shortcut">&lt;</span> within an <code>xsl:call-template</code> suggests an
 			<code>xsl:with-param</code> for each of the called template's parameters that isn't passed yet, for
 			example <code>xsl:with-param colour</code>, which inserts the parameter name. The same applies to the
 			parameters of the enclosing <code>xsl:iterate</code> within an <code>xsl:next-iteration</code>. The
 			<code>name</code> attribute of an <code>xsl:with-param</code> also offers the parameter names.</p>
-		<h5>XSLT Instruction Snippets</h5>
+		<h4>XSLT Instruction Snippets</h4>
 		<p>In an empty file, the <code>xsl:stylesheet</code> and <code>xsl:package</code> suggestions insert a
 			boiler plate stylesheet complete with namespace declarations, including one for your own functions - an
 			'identity transform', or one starting from <code>xsl:initial-template</code>. Each is available for
 			XSLT 3.0 and XSLT 4.0, shown on the right of the suggestion.</p>
 		<p>The <code>xsl:message</code> suggestions include snippets that use the <code>xdm:debug()</code> function to
 			show the names and values of in-scope variables and parameters - see <a href="code-diagnostics.html">Debugging</a>.</p>
-		<h5>More Snippets</h5>
+		<h4>More Snippets</h4>
 		<p>
 			You can define your own snippets in Visual Studio Code in a declarative way, without writing an extension. See the Visual Studio Code
 			documentation:
@@ -212,7 +212,7 @@
 			<emphasis>Refactoring with 'Extract to xsl:function' in full mode, referencing context-parameters $c.x, $c.p and $c.l</emphasis>
 
 		</p>
-		<h5 id="quick-fixes">Quick Fixes</h5>
+		<h4 id="quick-fixes">Quick Fixes</h4>
 		<p>Some problems reported by the linter have a Quick Fix, shown with the 💡 light-bulb when the cursor is on the
 			problem:</p>
 		<ul>
@@ -263,7 +263,7 @@
 			</ol>
 		</details>
 		<p/>
-		<h5 id="inferred-imports">Inferred Imports for 'Non-Standalone' Stylesheets</h5>
+		<h4 id="inferred-imports">Inferred Imports for 'Non-Standalone' Stylesheets</h4>
 		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
 			that declares the required imports. If no knowledge of the parent module is available, spurious problems
 			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
@@ -288,7 +288,7 @@
 			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
 			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
 		</p>
-		<h6><strong>The XSLT Imports view</strong></h6>
+		<h5><strong>The XSLT Imports view</strong></h5>
 		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
 			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
 			tree is expanded down to the active module, which is marked <em>current</em>, and clicking a module opens it. The tooltip for
@@ -303,12 +303,12 @@
 				<figcaption style="margin:auto"><i>The XSLT Imports view in the Explorer, with the ▶ Quick Run button for the top-level stylesheet.</i></figcaption>
 			</figure>
 		</p>
-		<h5>Unused Variables</h5>
+		<h4>Unused Variables</h4>
 		<p>The Code Checker detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
 			imported stylesheets they may reference the same variable.
 		</p>
-		<h5>Compile-time and Run-time problems</h5>
+		<h4>Compile-time and Run-time problems</h4>
 		<p>The Code Checking feature is designed to find most basic code problems due to typos or changes to referenced symbols.
 			When XSLT is run, an attempt is made to parse error messages from the Saxon XSLT processor 
 			(shown in the Task tab of the Terminal View) so that the problem token is highlighted,

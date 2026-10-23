@@ -126,7 +126,7 @@
 					set - including those declared in imported or included stylesheets. Parameters with a default are
 					left out, so the stylesheet's own defaults apply</li>
 			</ul>
-			<h5 id="required-parameters">Required parameters</h5>
+			<h4 id="required-parameters">Required parameters</h4>
 			<p>A stylesheet parameter must be set when it has <code>required="yes"</code>, or when it has no default
 				(no <code>select</code> attribute or content) and an <code>as</code> type that doesn't allow an empty
 				sequence - for example <code>as="xs:string"</code> or <code>as="element()+"</code>, but not

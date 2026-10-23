@@ -18,7 +18,7 @@
       <h3>XSLT Extension Specific Settings</h3>
        <p>Type <code>xslt</code> to show a short-list of settings specific to XSLT:</p>
       <img src="resources/tasks/settings.png" class="scale-with-grid" />
-      <h5>XSLT Packages</h5>
+      <h4>XSLT Packages</h4>
       <p>To allow XSLT package names to be resolved to file paths, package details should be added to the setting <code>XSLT.resources.xsltPackages</code>.</p>
       <p>Sample XSLT package settings</p>
       <code class="block">"XSLT.resources.xsltPackages": [
@@ -31,16 +31,16 @@
     "path": "features/included2.xsl"
   },
 ]</code>
-      <h5>XML Catalog</h5>
+      <h4>XML Catalog</h4>
       <p>To resolve the <code>href</code> of <code>xsl:import</code> and <code>xsl:include</code> with an OASIS XML
         catalog - and pass the catalog to Saxon when a stylesheet is run - set <code>XSLT.resources.catalog</code> to
         the catalog file's path, relative to the workspace folder. See <a href="xml-catalogs.html">XML Catalogs</a>.</p>
       <code class="block">"XSLT.resources.catalog": "catalog.xml"</code>
-      <h5>XSLT Tasks</h5>
+      <h4>XSLT Tasks</h4>
       <p>The Saxon XSLT-Java and XSLT-JS TaskProviders are enabled by default. These can be enabled or disabled using the following settings properties:</p>
       <code class="block">"XSLT.tasks.java.enabled": true
 "XSLT.tasks.js.enabled": true</code>
-      <h5 id="xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</h5>
+      <h4 id="xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</h4>
       <p>Saxon PE and EE 12.8 or later, run with syntax extensions, accept XSLT 4.0's named item types and
         <code>xsl:note</code> in a stylesheet with <code>version="3.0"</code>. To edit such stylesheets with the
         same support as for XSLT 4.0, enable the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code> - it's
@@ -84,7 +84,7 @@
         is one that references it - as XSLT 4.0 has no extensible record types. These are listed after the
         conversion, to convert by hand.</p>
       <h3>General Settings For XSLT</h3>
-      <h5>Configuration Settings From the Extension</h5>
+      <h4>Configuration Settings From the Extension</h4>
       <p>This extension includes default configuration settings for XSLT editing features. 
       These features include formatting, word-selection, and syntax-highlighting using semantic-tokens. 
       You can set your own preferences for XSLT and XML editing. The language labels ensure these settings don't 
@@ -120,7 +120,7 @@
 ...]]></code>
       </details>
       <p/>
-      <h5>Code Formatting</h5>
+      <h4>Code Formatting</h4>
       <p>The following settings directly affect code formatting in the XSLT/XPath extension:</p>
       <code class="block">    "editor.defaultFormatter": "deltaxml.xslt-xpath",
     "editor.formatOnSaveMode": "modifications",
@@ -128,7 +128,7 @@
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,</code>
       <p>The <code>editor.formatOnSaveMode</code> setting can be used to only format XSLT lines changed since the last commit on Git.</p>
-      <h5>Syntax Highlighting</h5>
+      <h4>Syntax Highlighting</h4>
       <p>Syntax highlighting for XSLT and XPath is achieved using Visual Studio Code's 
         <a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> tokens alone.
         Almost all other languages in Visual Studio Code use a 
@@ -151,11 +151,11 @@
         <img src="resources/gruvbox.png" class="scale-with-grid"/>
       </details>
       <p></p>
-      <h5>Word Separators</h5>
+      <h4>Word Separators</h4>
       <p>The <code>editor.wordSeparators</code> setting affects how the full 'word' is selected when you double-click on a part of the word. The characters 
       listed are used as word separators. Typically in XSLT, you do not want characters like <code>-</code> and <code>.</code> treated as word
       separators as these characters are valid within a QName like an attribute name or a variable name.</p>
-      <h5>Emmet Snippets</h5>
+      <h4>Emmet Snippets</h4>
       <p>
         <a href="https://code.visualstudio.com/docs/editor/emmet">Emmet Snippets</a> provide a convenient shorthand for inserting a
         number of literal result elements and attributes into your XSLT in one go. For example, entering:</p>

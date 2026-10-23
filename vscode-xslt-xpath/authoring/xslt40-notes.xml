@@ -30,7 +30,7 @@
 				<figcaption style="margin:auto"><i>The xdoc-md tags within xsl:note are highlighted along with any markdown used</i></figcaption>
 			</figure>
 
-			<h5>Tags</h5>
+			<h4>Tags</h4>
 			<ul>
 				<li><code>@param $name</code> - a parameter of a function or template - or, in a module note, a global
 					parameter</li>
@@ -51,7 +51,7 @@
 				<img src="resources/xsl-note-field-tags.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>The xdoc-md tags and Markdown are highlighted within an <code>xsl:note</code>.</i></figcaption>
 			</figure>
-			<h5>Markdown</h5>
+			<h4>Markdown</h4>
 			<p>The description and tag text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
 				<code>`code`</code>, <code>[links](https://example.com)</code> and <code>#</code> headings.</p>
 			<p>As the note is XML, the characters <code>&lt;</code> and <code>&amp;</code> must be escaped as normal XML, for

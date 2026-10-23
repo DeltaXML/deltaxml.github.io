@@ -128,7 +128,7 @@
 					<p><i style="font-style: italic">The Run and Debug View provides options for how to launch the debugger.</i></p>
 				</figurecaption>
 			</figure>
-			<h5 id="launch-json">Launch configurations</h5>
+			<h4 id="launch-json">Launch configurations</h4>
 			<p>With no <code>launch.json</code>, the <strong>Run and Debug</strong> view offers <strong>Debug Active
 				Stylesheet</strong>, and a <strong>Debug <em>task label</em></strong> configuration for each
 				<code>xslt</code> task in <code>tasks.json</code> (see <a href="run-xslt.html">XSLT: Tasks</a>).
@@ -161,7 +161,7 @@
 				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
 			<p>Breakpoints can also be set inside a multi-line XPath expression - see
 				<a href="#xpath">Stepping through XPath</a>.</p>
-			<h5 id="conditional">Conditional breakpoints, hit counts and logpoints</h5>
+			<h4 id="conditional">Conditional breakpoints, hit counts and logpoints</h4>
 			<p>Right-click in the margin and choose <strong>Add Conditional Breakpoint...</strong> or <strong>Add
 				Logpoint...</strong> - or right-click an existing breakpoint and choose <strong>Edit
 				Breakpoint</strong>:</p>
@@ -187,7 +187,7 @@
 					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
 				</figurecaption>
 			</figure>
-			<h5 id="function-breakpoints">Function and named-template breakpoints</h5>
+			<h4 id="function-breakpoints">Function and named-template breakpoints</h4>
 			<p>To stop whenever a stylesheet function or named template is called, without finding where it's
 				declared, click <strong>+</strong> (<strong>Add Function Breakpoint</strong>) in the
 				<strong>Breakpoints</strong> view and enter its name. The function or template can be in any module of
@@ -209,7 +209,7 @@
 				stylesheet has compiled; hover over the breakpoint for the reason. Template rules - templates with a
 				<code>match</code> attribute - aren't stopped at this way, even when they also have a
 				<code>name</code>: use a line breakpoint instead.</p>
-			<h5 id="errors">Pausing on errors</h5>
+			<h4 id="errors">Pausing on errors</h4>
 			<p>The <strong>Breakpoints</strong> view has two options for errors:</p>
 			<ul>
 				<li><strong>Dynamic Errors</strong> (on by default) - pauses where a dynamic error that ends the
@@ -248,7 +248,7 @@
 			</ul>
 			<p>Stepping goes line by line: execution stops once each time it reaches a line, not once for each
 				instruction on it. A breakpoint in a loop stops once for each iteration.</p>
-			<h5 id="xpath">Stepping through XPath</h5>
+			<h4 id="xpath">Stepping through XPath</h4>
 			<p>A multi-line XPath expression in a <code>select</code>, <code>test</code> or <code>value</code>
 				attribute - or in <code>xsl:map-entry</code>'s <code>key</code>, <code>xsl:evaluate</code>'s
 				<code>xpath</code>, <code>context-item</code> or <code>with-params</code>, or the content of an XSLT
@@ -329,7 +329,7 @@
 			<p>Nodes, maps, arrays and sequences can be expanded. An element shows its attributes, then its child
 				nodes, with the line number of the element in its source document. Long values are truncated, and an
 				expanded value shows at most 1000 items.</p>
-			<h5 id="inline-values">Inline values</h5>
+			<h4 id="inline-values">Inline values</h4>
 			<p>While paused, the value of each variable declared earlier in the current template or function is shown
 				at the end of the line where it's declared. This applies to <code>xsl:variable</code> and
 				<code>xsl:param</code>, and in XPath, to <code>let</code>, <code>for</code>, <code>some</code> and
@@ -366,7 +366,7 @@
 			</ul>
 			<p>When the session ends, a notification offers to <strong>Open</strong> the result file - or, for HTML,
 				to <strong>Open in Browser</strong>.</p>
-			<h5 id="saxon-errors">Saxon errors</h5>
+			<h4 id="saxon-errors">Saxon errors</h4>
 			<p>Saxon's error messages in the Debug Console are linked to the location of the error. The errors are
 				also listed in the <strong>Problems</strong> view, as for <a href="run-xslt.html">XSLT tasks</a>. A file's
 				errors are removed from the Problems view when the file is edited, as they may no longer apply.</p>

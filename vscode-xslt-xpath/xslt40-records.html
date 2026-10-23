@@ -118,7 +118,7 @@
 			<p>In an attribute value, quotes within a type can be written as references, as Saxon allows - for example
 				<code>as="enum(&amp;quot;it's&amp;quot;, 'is')"</code> or a field name quoted with
 				<code>&amp;#39;</code> - and the extension reads them as the quotes they stand for.</p>
-			<h5 id="auto-completion-for-types">Auto-completion for types</h5>
+			<h4 id="auto-completion-for-types">Auto-completion for types</h4>
 			<ul>
 				<li>Within an <code>as</code> attribute, and after <code>instance of</code>, <code>castable as</code>
 					and the other type operators, the names of declared item types are offered with the built-in
@@ -126,7 +126,7 @@
 				<li>The <code>record(...)</code> and <code>enum(...)</code> suggestions insert a snippet with
 					placeholders for the fields or values.</li>
 			</ul>
-			<h5 id="checks-on-declarations">Checks on declarations</h5>
+			<h4 id="checks-on-declarations">Checks on declarations</h4>
 			<ul>
 				<li>An item type name that isn't declared is reported, as are duplicate declarations and a type that
 					refers to itself (directly or through other named types).</li>
@@ -141,7 +141,7 @@
 			<h3 id="building-records">Building records</h3>
 			<p>A record is built with a map constructor, or with the <code>xsl:map</code> instruction. Wherever the
 				record type is known, the extension helps you complete the map and checks it against the type.</p>
-			<h5 id="map-constructors">Map constructors</h5>
+			<h4 id="map-constructors">Map constructors</h4>
 			<p>In the <code>select</code> attribute of a declaration with a record type, type <code>{</code> (or
 				<code>map {</code>) and accept the suggestion to insert a complete map constructor, with an entry for
 				each required field - when the record has optional fields, a second suggestion includes them too:</p>
@@ -156,7 +156,7 @@
 				with a value. A double-click selects the whole placeholder, ready to type over.</p>
 			<p>After typing <code>,</code> at the end of an entry, the suggestions list the fields that aren't in
 				the map yet, including optional fields.</p>
-			<h5 id="the-xsl-map-instruction">The xsl:map instruction</h5>
+			<h4 id="the-xsl-map-instruction">The xsl:map instruction</h4>
 			<p>Where a record is built with <code>xsl:map</code>, for example in the content of an
 				<code>xsl:variable</code> with a record type, typing <code>&lt;</code> offers an
 				<code>xsl:map</code> suggestion with an <code>xsl:map-entry</code> for each required field (or, as a
@@ -164,7 +164,7 @@
 				existing <code>xsl:map</code>, the <code>xsl:map-entry</code> suggestions are named after the fields not
 				yet added, for example <code>xsl:map-entry 'age'</code>, and the <code>key</code> attribute offers the
 				field names.</p>
-			<h5 id="checks-on-records">Checks on records</h5>
+			<h4 id="checks-on-records">Checks on records</h4>
 			<ul>
 				<li><strong>Missing fields</strong> - a required field that's missing is an error, with an
 					<strong>Add missing record fields</strong> quick fix that adds an entry, with a placeholder, for
@@ -176,7 +176,7 @@
 				<li><strong>Duplicate keys</strong> - two entries with the same literal key are an error, in any map
 					constructor or <code>xsl:map</code>, whether or not it has a record type.</li>
 			</ul>
-			<h5 id="where-the-record-type-comes-from">Where the record type comes from</h5>
+			<h4 id="where-the-record-type-comes-from">Where the record type comes from</h4>
 			<p>Maps are checked, and completed, where their type is declared:</p>
 			<ul>
 				<li>the <code>select</code> or content of an <code>xsl:variable</code>, <code>xsl:param</code> or
@@ -191,12 +191,12 @@
 			</ul>
 
 			<h3 id="using-records">Using records</h3>
-			<h5 id="lookups">Lookups</h5>
+			<h4 id="lookups">Lookups</h4>
 			<p>After the <code>?</code> lookup operator on a value with a record type, the suggestions list the
 				record's fields. This works for variables, calls to functions with a declared record result, and
 				chains of lookups such as <code>$p?address?city</code>. A lookup of a field that isn't in the record
 				type is a warning.</p>
-			<h5 id="hover-and-navigation">Hover and navigation</h5>
+			<h4 id="hover-and-navigation">Hover and navigation</h4>
 			<p>Hovering over a field name - in a lookup, a map constructor key or the <code>key</code> of an
 				<code>xsl:map-entry</code> - shows the field's declaration. Go to Definition on a field name goes to
 				the field in the record type.</p>
@@ -212,7 +212,7 @@
 			     declaration and its @field text from the xsl:item-type's documentation note.</i></figcaption>
 				</figure>
 			</p>
-			<h5 id="rename-field">Renaming a field</h5>
+			<h4 id="rename-field">Renaming a field</h4>
 			<p>Rename Symbol (<span class="shortcut">F2</span>) on a field name - in the record type, a lookup, a map
 				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, or an <code>@field</code> tag
 				of a documentation note - renames the field, and all its references. Find All References
@@ -226,7 +226,7 @@
 				<li>A quoted field name keeps its quotes, e.g. <code>'unit name'</code>. A new name must be an NCName,
 					unless the field's name isn't one.</li>
 			</ul>
-			<h5 id="path-steps-on-records-jnodes">Path steps on records (JNodes)</h5>
+			<h4 id="path-steps-on-records-jnodes">Path steps on records (JNodes)</h4>
 			<p>XPath 4.0 path expressions can navigate maps and arrays as trees of <strong>JNodes</strong>, e.g.
 				<code>jtree($p)/address/city</code>. Field names are suggested, and checked, for steps after
 				<code>jtree($p)/</code>, and after a variable declared as a JNode for a record type, such as
@@ -261,7 +261,7 @@
 			</figure>
 
 			<h3 id="enums">Enumeration types</h3>
-			<h5 id="auto-completion-for-values">Auto-completion for values</h5>
+			<h4 id="auto-completion-for-values">Auto-completion for values</h4>
 			<p>Where an enumeration type is expected, typing a quote character offers the enumeration's values. This
 				applies to:</p>
 			<ul>
@@ -283,7 +283,7 @@
 					<figcaption style="margin:auto"><i>Hover over the name of an enumeration type, showing its values</i></figcaption>
 				</figure>
 			</p>
-			<h5 id="switch">xsl:switch on an enumeration</h5>
+			<h4 id="switch">xsl:switch on an enumeration</h4>
 			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
 				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,
 				function call or record field lookup with a declared type - the extension works with its values.</p>

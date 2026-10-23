@@ -168,7 +168,7 @@
 					shows the record type, imported from a module of types generated from a JSON Schema: its fields,
 					their types, and each field's description from the schema.</i></figcaption>
 			</figure>
-			<h5 id="jtree-fix">Maps need jtree() before '/'</h5>
+			<h4 id="jtree-fix">Maps need jtree() before '/'</h4>
 			<p>A <code>/</code> step needs a JNode on its left, not a map. Saxon 13 reports XPTY0019 for a step
 				such as <code>$order-value/id</code>, where <code>$order-value</code> is a map with a record type, so
 				the extension reports this as an error, with the suggested fix
