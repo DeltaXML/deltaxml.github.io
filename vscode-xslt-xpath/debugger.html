@@ -136,6 +136,11 @@
 				Stylesheet</strong>, and a <strong>Debug <em>task label</em></strong> configuration for each
 				<code>xslt</code> task in <code>tasks.json</code> (see <a href="run-xslt.html">XSLT: Tasks</a>).
 				<strong>create a launch.json file</strong> adds these to a new <code>launch.json</code>.</p>
+			<p>To debug a task without a <code>launch.json</code>, choose <strong>XSLT (Saxon)...</strong> in the
+				<strong>Run and Debug</strong> view's dropdown, or use <strong>Debug: Select and Start Debugging</strong>
+				from the Command Palette, then the task's <strong>Debug <em>task label</em></strong>. The configuration
+				stays selected in the dropdown, so <span class="shortcut">F5</span> debugs that task again - whichever
+				file is open.</p>
 			<p>A launch configuration uses the <code>xslt-saxon</code> debugger type, with one of:</p>
 			<ul>
 				<li><code>"quickRun": true</code> - the stylesheet in the active editor, as Quick Run runs it</li>
@@ -373,6 +378,9 @@
 			<p>Saxon's error messages in the Debug Console are linked to the location of the error. The errors are
 				also listed in the <strong>Problems</strong> view, as for <a href="run-xslt.html">XSLT tasks</a>. A file's
 				errors are removed from the Problems view when the file is edited, as they may no longer apply.</p>
+			<p>When the transform fails, the notification at the end of the session gives Saxon's reason - for
+				example, that the XML source file doesn't exist - or, for a dynamic error, its message, code and line.
+				For a stylesheet with static errors, which can't be debugged, it gives the first of them.</p>
 
 			<h3 id="demo">Sample: stepping through XPath</h3>
 			<p>The <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/sample/debugger-demo">debugger-demo</a>
