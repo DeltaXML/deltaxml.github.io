@@ -81,7 +81,7 @@ aside {
   background-color: lightgray;
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   body {
     background: #333;
     color: #cacaca;
@@ -321,7 +321,7 @@ nav li.nav-heading {
   color: #777;
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   .search input {
     border-color: #555;
     background: #232323;
@@ -456,7 +456,7 @@ figcaption {
   font-weight: bold;
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   .page-toc ul {
     border-left-color: #4a4a4a;
   }
@@ -502,5 +502,123 @@ figcaption {
     height: auto;
     overflow: visible;
     padding: 10px 16px 40px;
+  }
+}
+
+/* printing, e.g. to PDF: the page's content only - in light colours, whatever the colour scheme, and flowing over
+   as many pages as it needs, rather than scrolling within .main */
+@page {
+  margin: 16mm 15mm;
+}
+
+@media print {
+  body {
+    max-width: none;
+    background: #fff;
+    color: #222;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  .colorBar,
+  .topbar,
+  nav,
+  .page-toc,
+  .search-results {
+    display: none !important;
+  }
+
+  .wrapper {
+    display: block;
+    height: auto;
+  }
+
+  .main {
+    height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+
+  /* the product name above each page's title, in place of the header */
+  .main::before {
+    content: "XSLT and XPath for Visual Studio Code";
+    display: block;
+    margin-bottom: 10pt;
+    padding-bottom: 4pt;
+    border-bottom: 1px solid #ccc;
+    color: #777;
+    font-size: 9pt;
+  }
+
+  .main .two-thirds.column,
+  .main .two-thirds.column > * {
+    max-width: none;
+  }
+
+  .pageTitle {
+    margin-top: 0;
+  }
+
+  .main h3 {
+    margin-top: 18pt;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  figure,
+  code.block,
+  aside {
+    break-inside: avoid;
+  }
+
+  img,
+  li img.scale-with-grid {
+    max-width: 100%;
+  }
+
+  /* a tall screenshot is scaled down to fit on a page */
+  figure img {
+    width: auto;
+    max-height: 125mm;
+    object-fit: contain;
+  }
+
+  /* code blocks wrap, as they can't scroll on paper */
+  code.block,
+  li code.block {
+    max-width: none;
+    overflow: visible;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    border: 1px solid #ddd;
+  }
+
+  code,
+  .shortcut,
+  aside {
+    background-color: #f3f3f3;
+    color: #222;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  aside {
+    margin: 10pt 0;
+    border-left: 3px solid #bbb;
+  }
+
+  a,
+  a:visited {
+    color: #0057a0;
   }
 }

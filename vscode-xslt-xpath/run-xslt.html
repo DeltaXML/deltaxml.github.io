@@ -379,6 +379,30 @@ npm install --save-dev xslt3</code>
 			<p>The <code>xslt</code> and <code>xslt-c</code> tasks pass the catalog of the
 				<code>XSLT.resources.catalog</code> setting to Saxon, with the <code>-catalog</code> option - unless the
 				task has its own <code>catalogFilenames</code> property. See <a href="xml-catalogs.html">XML Catalogs</a>.</p>
+			<h3 id="java-extension-functions">Java extension functions</h3>
+			<p>An <code>xslt</code> task can run a stylesheet that calls Java code. Add the folder or jar with your classes to
+				the task's <code>classPathEntries</code> property. Saxon supports two kinds of Java extension function:</p>
+			<ul>
+				<li><strong>Reflexive</strong> - a namespace with a <code>java:</code> URI names a Java class, and the
+					functions in it call the class's methods, e.g. <code>math:sqrt(2)</code> with
+					<code>xmlns:math="java:java.lang.Math"</code>. These need Saxon-PE or Saxon-EE.</li>
+				<li><strong>Integrated</strong> - a class that extends Saxon's <code>ExtensionFunctionDefinition</code>,
+					registered by a Saxon configuration file. Set the task's <code>configFilename</code> property to the
+					file. These work with any Saxon edition, including Saxon-HE.</li>
+			</ul>
+			<code class="block">"classPathEntries": ["${workspaceFolder}/lib/my-functions.jar"],
+"configFilename": "${workspaceFolder}/saxon-config.xml"</code>
+			<p>The configuration file names each integrated function's class:</p>
+			<code class="block">&lt;configuration xmlns="http://saxon.sf.net/ns/configuration" edition="HE"&gt;
+  &lt;resources&gt;
+    &lt;extensionFunction&gt;com.example.Shout&lt;/extensionFunction&gt;
+  &lt;/resources&gt;
+&lt;/configuration&gt;</code>
+			<p>The <a href="debugger.html">debugger</a> runs the stylesheet with the task's properties, so Java extension
+				functions work when debugging too - including in Watch expressions.</p>
+			<p>The linter doesn't check calls of a <code>java:</code> namespace's functions. For an integrated function, add
+				its prefix to the <code>XSLT.validation.externalFunctionPrefixes</code> setting - the quick fix for a
+				function that isn't found does this - and calls of functions with that prefix aren't checked.</p>
 			<h3 id="the-visual-studio-code-terminal">The Visual Studio Code terminal</h3>
 			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>,
 				the Pane hosting the Terminal view is toggle with <span class="shortcut">⌘J</span>. 
@@ -396,7 +420,7 @@ npm install --save-dev xslt3</code>
 		</div>
 		
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#saxonc-tasks">SaxonC Tasks</a><ul><li><a href="#setup">Setup</a></li><li><a href="#native-library-path-macos-linux">Native library path (macOS/Linux)</a></li><li><a href="#licensing">Licensing</a></li></ul></li><li><a href="#to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#references">Variable References in Tasks</a><ul><li><a href="#user-input-for-file-selection-within-a-task">User-input for file-selection within a Task</a></li><li><a href="#the-pickfile-command">The 'pickFile' command</a></li></ul></li><li><a href="#command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#configuring-more-tasks">Configuring more tasks</a></li><li><a href="#catalogs">XML catalogs</a></li><li><a href="#the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#saxonc-tasks">SaxonC Tasks</a><ul><li><a href="#setup">Setup</a></li><li><a href="#native-library-path-macos-linux">Native library path (macOS/Linux)</a></li><li><a href="#licensing">Licensing</a></li></ul></li><li><a href="#to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#references">Variable References in Tasks</a><ul><li><a href="#user-input-for-file-selection-within-a-task">User-input for file-selection within a Task</a></li><li><a href="#the-pickfile-command">The 'pickFile' command</a></li></ul></li><li><a href="#command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#configuring-more-tasks">Configuring more tasks</a></li><li><a href="#catalogs">XML catalogs</a></li><li><a href="#java-extension-functions">Java extension functions</a></li><li><a href="#the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
