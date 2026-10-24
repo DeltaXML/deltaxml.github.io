@@ -369,15 +369,16 @@
 			<p>Results are shown, and can be expanded, as in the Variables view. Hovering over a variable reference
 				such as <code>$total</code>, or the name in a variable declaration, shows its value.</p>
 			<h3 id="output">Output while debugging</h3>
-			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - opens
-				beside the stylesheet at the first pause where there is some, and is updated at each pause. It's
-				serialized by Saxon as the result is, but indented for readability, and shown in the language of its
-				output method: XML, HTML, JSON or plain text. The result itself is written as the stylesheet
-				specifies.</p>
+			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - can be
+				shown beside the stylesheet while paused, and is updated at each pause. It's serialized by Saxon as the
+				result is, but indented for readability, and shown in the language of its output method: XML, HTML, JSON
+				or plain text. The result itself is written as the stylesheet specifies.</p>
 			<ul>
 				<li><strong>XSLT: Show Debug Output</strong>, or its button on the debug toolbar, opens the output at
-					any time. When there's more than one output, you choose which to show.</li>
-				<li>The <code>XSLT.debug.openOutput</code> setting turns off opening the output automatically.</li>
+					any time - the output being written to, or, when none is and there's more than one, the one you
+					choose.</li>
+				<li>To open the output automatically, at the first pause where there is some, turn on the
+					<code>XSLT.debug.openOutput</code> setting - it's off by default.</li>
 				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
 					written to the Debug Console.</li>
 			</ul>

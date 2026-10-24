@@ -207,12 +207,22 @@
 				</figure>
 			</p>
 			<ul>
-				<li>A Quick Fix options are shown on any selected xsl:switch element with a (detected) enum type:</li>
-				<ul>
-					<li><b>Add missing xsl:when cases with select</b> (self-closing <code>&lt;xsl:when select=""/&gt;</code>)</li>
-					<li><b>Add missing xsl:when cases with content</b> ( <code>&lt;xsl:when&gt;\n&lt;xsl:when/&gt;</code>)</li>
-				</ul>
-				<li>If using auto-complete inside xsl:switch, all xsl:when options remaining for that enum are in the completion-list</li>
+				<li><strong>Missing values</strong> - when an enumeration value has no <code>xsl:when</code>, and there's
+					no <code>xsl:otherwise</code>, the <code>xsl:switch</code> is marked with the information message
+					<em>xsl:switch has no xsl:when or xsl:otherwise for the enumeration values: ...</em>. Its two quick
+					fixes add an <code>xsl:when</code> for each missing value:
+					<ul>
+						<li><strong>Add missing xsl:when cases with select</strong> - e.g.
+							<code>&lt;xsl:when test="'green'" select=""/&gt;</code></li>
+						<li><strong>Add missing xsl:when cases with content</strong> - e.g.
+							<code>&lt;xsl:when test="'green'"&gt;...&lt;/xsl:when&gt;</code></li>
+					</ul>
+				</li>
+				<li><strong>Values that never match</strong> - a <code>test</code> value that isn't one of the
+					enumeration's values, or that an earlier <code>xsl:when</code> already tests, is a warning, as the
+					<code>xsl:when</code> never matches it.</li>
+				<li><strong>Auto-completion</strong> - inside an <code>xsl:switch</code>, the completion list offers an
+					<code>xsl:when</code> for each value not yet tested.</li>
 			</ul>
 		</div>
 

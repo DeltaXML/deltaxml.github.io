@@ -882,7 +882,7 @@
 			<li><code>editor.formatOnType</code> - Controls indentation for new lines.</li>
 			<li><code>editor.formatOnSave</code> - Controls indentation for new lines.</li>
 			<li><code>editor.formatOnPaste</code> - Controls indentation for new lines.</li>
-			<li><code>editor.editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
+			<li><code>editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
 		</ul>
 		<p>The XPath formatter indents code blocks within <code>{}</code>, <code>[]</code> and <code>()</code> bracket-pairs.
 			Indentation is also adjusted for <code>if/else</code> blocks and range-variable blocks.	
@@ -917,8 +917,9 @@
 		<h4 id="editing-xslt--intellisense-for-xpath-locations">Intellisense for XPath Locations</h4>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
 			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
-			for the XSLT file editor will show the context filename. The label: <strong>[auto-completion context]</strong>
-			is shown if the context file has not been set.
+			for the XSLT file editor will show the context filename. The label <strong>[XML context file]</strong>
+			is shown if the context file has not been set, and <strong>[no XML context]</strong> if 'none' was picked.
+			The same file is the XML source for <a href="#quick-run">Quick Run</a>.
 		</p>
 		<h5 id="editing-xslt--locking-the-context-file"><strong>Locking the context file</strong></h5>
 		<p>To lock the auto-completion context file to a specific file, click on the status-bar item 
@@ -1142,8 +1143,9 @@
 		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code>, <code>xsl:use-package</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
 			in the href, press <span class="shortcut">⌘+click</span> and then, in the 'Unable to Open...' dialog press the <strong>Create File</strong> button.</p>
 		
-		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the URI to a file path as the User or WorkSpace Setting:
-			<strong>XSLT.resources.xsltPackage</strong></aside>
+		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the package
+			name to a file path in the User or Workspace setting <code>XSLT.resources.xsltPackages</code> - see
+			<a href="#settings--xslt-packages">XSLT packages</a>.</aside>
 		<aside>An <code>href</code> can also be a URI that an XML catalog maps to a file, e.g.
 			<code>http://example.com/xslt/strings.xsl</code> - see <a href="#xml-catalogs">XML Catalogs</a>.</aside>
 		<h3 id="editing-xslt--auto-tag-close">Auto tag-close</h3>
@@ -1325,13 +1327,11 @@
 						<th>Parameter</th>
 					</tr>
 				</thead>
-				<thead>
+				<tbody>
 					<tr>
 						<td>current() or '.'</td>
 						<td>c.x</td>
 					</tr>
-				</thead>
-				<tbody>
 					<tr>
 						<td>position()</td>
 						<td>c.p</td>
@@ -1361,12 +1361,8 @@
 						<td>m.key</td>
 					</tr>
 					<tr>
-						<td>current-merge-group()</td>
-						<td>g.current</td>
-					</tr>
-					<tr>
 						<td>current-merge-group($name)</td>
-						<td>g.groups($name)</td>
+						<td>m.groups($name)</td>
 					</tr>
 				</tbody>
 			</table>
@@ -1850,11 +1846,11 @@
 				returned from Saxon, so that the position of any Saxon-reported errors in the XSLT can be highlighted.
 			</p>
 			
-			<p>XSLT transforms are run using custom <code>xslt</code> or <code>xslt-js</code>
+			<p>XSLT is run or debugged using custom <code>xslt</code>,  <code>xslt-c</code> or <code>xslt-js</code>
 				<a href="https://code.visualstudio.com/Docs/editor/tasks">Visual Studio Code Tasks</a>
-				for Saxon (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
-				<a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">Saxon</a> installation) 
-				or Saxon-JS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
+				for SaxonJ (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
+				<a href="https://www.saxonica.com/html/download/java.html">Saxon</a> installation), SaxonC
+				or SaxonJS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
 			<h3 id="run-xslt--saxonj-tasks">Saxon (Java) setup</h3>
 			<ol>
 				<li><p>
@@ -1985,8 +1981,9 @@ npm install --save-dev xslt3</code>
 			<h3 id="run-xslt--references">Variable References in Tasks</h3>
 			<p>Visual Studio Code supports variable substitutions for Task configuration files.
 				Variable substitution uses the <code>${variableName}</code> syntax. Commands that
-				return a string can be invoked via variable substitution, the boiler plate XSLT Task uses <code>${command:xslt-xpath.pickXsltFile}'</code> and <code>${command:xslt-xpath.pickResultFile}'</code>
-				variable references.
+				return a string can be invoked via variable substitution: the boiler plate XSLT task uses the
+				<code>${command:xslt-xpath.pickXsltFile}</code> and <code>${command:xslt-xpath.pickXmlSourceFile}</code>
+				variable references, and writes its result to <code>${workspaceFolder}/xsl-out/result1.xml</code>.
 			</p>
 			<h4 id="run-xslt--user-input-for-file-selection-within-a-task">User-input for file-selection within a Task</h4>
 			<p>
@@ -2049,16 +2046,16 @@ npm install --save-dev xslt3</code>
 			<p>The 'recently used' file data is maintained per workspace and is restored when VS Code is closed and reopened. A 'clear recently used' option
 				is also listed when there are files already in the list. 
 			</p>
-			<p>The 'pickList' command must be invoked as an 'input' property of a task as it requires an 'options' argument. A sample 'inputs' property
-			can be added to the 'tasks.json' file with the <code>XSLT: add Inputs to Task file</code> command.</p>
+			<p>The 'pickFile' command must be invoked from an 'input' property of a task, as it requires an 'args' argument. A sample 'inputs' property
+			can be added to the 'tasks.json' file with the <strong>XSLT: Add XSLT Inputs to Tasks File</strong> command.</p>
 			<h3 id="run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</h3>
-				<p>The 'pickFile' commands 'options' object have the following properties:
+				<p>The 'pickFile' command's 'args' object has the following properties:
 				<ul>
 					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
 					<li>extensions? - an array of filter file-extensions (when set, a '*' option can also be selected from the dialog)</li>
 					<li>isResult? - causes the 'Save File' dialog to be shown when set true</li>
 					<li>prevStageLabel? - shows the recently used files for the specified label</li>
-					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
+					<li>prevStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
 					<li>xmlStylesheetPI? - set 'true' for pick-list to include a <code>&lt;?xml-stylesheet?&gt;</code> href from current editor</li>
 				</ul>
 				<strong>Sample input property definitions for the 'pickFile' command are listed below:</strong>
@@ -2440,15 +2437,16 @@ npm install --save-dev xslt3</code>
 			<p>Results are shown, and can be expanded, as in the Variables view. Hovering over a variable reference
 				such as <code>$total</code>, or the name in a variable declaration, shows its value.</p>
 			<h3 id="debugger--output">Output while debugging</h3>
-			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - opens
-				beside the stylesheet at the first pause where there is some, and is updated at each pause. It's
-				serialized by Saxon as the result is, but indented for readability, and shown in the language of its
-				output method: XML, HTML, JSON or plain text. The result itself is written as the stylesheet
-				specifies.</p>
+			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - can be
+				shown beside the stylesheet while paused, and is updated at each pause. It's serialized by Saxon as the
+				result is, but indented for readability, and shown in the language of its output method: XML, HTML, JSON
+				or plain text. The result itself is written as the stylesheet specifies.</p>
 			<ul>
 				<li><strong>XSLT: Show Debug Output</strong>, or its button on the debug toolbar, opens the output at
-					any time. When there's more than one output, you choose which to show.</li>
-				<li>The <code>XSLT.debug.openOutput</code> setting turns off opening the output automatically.</li>
+					any time - the output being written to, or, when none is and there's more than one, the one you
+					choose.</li>
+				<li>To open the output automatically, at the first pause where there is some, turn on the
+					<code>XSLT.debug.openOutput</code> setting - it's off by default.</li>
 				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
 					written to the Debug Console.</li>
 			</ul>
@@ -2529,7 +2527,7 @@ npm install --save-dev xslt3</code>
 				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
 				output is sent to the terminal window.
 				Diagnostics are added using the <strong>xdm:debug()</strong> function, from the
-				<a href="https://github.com/DeltaXML/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
+				<a href="https://github.com/pgfearo/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
 				named in-scope variables to a formatted string for use in an xsl:message.
 			</p>
 			<h3 id="code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</h3>
@@ -3071,12 +3069,22 @@ xdm:debug($title as xs:string, $labels as map(xs:string, item()*), $level as xs:
 				</figure>
 			</p>
 			<ul>
-				<li>A Quick Fix options are shown on any selected xsl:switch element with a (detected) enum type:</li>
-				<ul>
-					<li><b>Add missing xsl:when cases with select</b> (self-closing <code>&lt;xsl:when select=""/&gt;</code>)</li>
-					<li><b>Add missing xsl:when cases with content</b> ( <code>&lt;xsl:when&gt;\n&lt;xsl:when/&gt;</code>)</li>
-				</ul>
-				<li>If using auto-complete inside xsl:switch, all xsl:when options remaining for that enum are in the completion-list</li>
+				<li><strong>Missing values</strong> - when an enumeration value has no <code>xsl:when</code>, and there's
+					no <code>xsl:otherwise</code>, the <code>xsl:switch</code> is marked with the information message
+					<em>xsl:switch has no xsl:when or xsl:otherwise for the enumeration values: ...</em>. Its two quick
+					fixes add an <code>xsl:when</code> for each missing value:
+					<ul>
+						<li><strong>Add missing xsl:when cases with select</strong> - e.g.
+							<code>&lt;xsl:when test="'green'" select=""/&gt;</code></li>
+						<li><strong>Add missing xsl:when cases with content</strong> - e.g.
+							<code>&lt;xsl:when test="'green'"&gt;...&lt;/xsl:when&gt;</code></li>
+					</ul>
+				</li>
+				<li><strong>Values that never match</strong> - a <code>test</code> value that isn't one of the
+					enumeration's values, or that an earlier <code>xsl:when</code> already tests, is a warning, as the
+					<code>xsl:when</code> never matches it.</li>
+				<li><strong>Auto-completion</strong> - inside an <code>xsl:switch</code>, the completion list offers an
+					<code>xsl:when</code> for each value not yet tested.</li>
 			</ul>
 		</div>
 
@@ -3163,7 +3171,7 @@ xdm:debug($title as xs:string, $labels as map(xs:string, item()*), $level as xs:
 			<h4 id="xslt40-jnodes--jtree-fix">Maps need jtree() before '/'</h4>
 			<p>A <code>/</code> step needs a JNode on its left, not a map. Saxon 13 reports XPTY0019 for a step
 				such as <code>$order-value/id</code>, where <code>$order-value</code> is a map with a record type, so
-				the extension reports this as an error, with the suggested fix
+				the extension reports this as an error. The message suggests converting the map first, e.g.
 				<code>jtree($order-value)/id</code>. Alternatives are a lookup, <code>$order-value?id</code>, or a
 				variable declared as a <code>jnode(*, order)</code>, as above. A step after a lookup, such as
 				<code>$p?address/city</code>, is reported in the same way.</p>
@@ -3244,7 +3252,7 @@ bundle: /lines/*[2]/bundle-items
 				<li>hovering on <code>unit-price</code> in <code>$line/unit-price</code>, or on <code>line</code>
 					in <code>jnode(*, line)</code>, to see the documentation taken from the schema</li>
 				<li>changing <code>$order/id</code> to <code>$order-value/id</code>, to see the
-					<code>jtree()</code> error and its fix</li>
+					error that suggests <code>jtree()</code></li>
 				<li>adding a property to <code>customer</code> in <code>order.schema.json</code>, running
 					<code>schema-to-records.xsl</code> again, and seeing it offered after
 					<code>$order/customer/</code></li>

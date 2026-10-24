@@ -107,11 +107,11 @@
 				returned from Saxon, so that the position of any Saxon-reported errors in the XSLT can be highlighted.
 			</p>
 			
-			<p>XSLT transforms are run using custom <code>xslt</code> or <code>xslt-js</code>
+			<p>XSLT is run or debugged using custom <code>xslt</code>,  <code>xslt-c</code> or <code>xslt-js</code>
 				<a href="https://code.visualstudio.com/Docs/editor/tasks">Visual Studio Code Tasks</a>
-				for Saxon (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
-				<a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">Saxon</a> installation) 
-				or Saxon-JS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
+				for SaxonJ (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
+				<a href="https://www.saxonica.com/html/download/java.html">Saxon</a> installation), SaxonC
+				or SaxonJS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
 			<h3 id="saxonj-tasks">Saxon (Java) setup</h3>
 			<ol>
 				<li><p>
@@ -242,8 +242,9 @@ npm install --save-dev xslt3</code>
 			<h3 id="references">Variable References in Tasks</h3>
 			<p>Visual Studio Code supports variable substitutions for Task configuration files.
 				Variable substitution uses the <code>${variableName}</code> syntax. Commands that
-				return a string can be invoked via variable substitution, the boiler plate XSLT Task uses <code>${command:xslt-xpath.pickXsltFile}'</code> and <code>${command:xslt-xpath.pickResultFile}'</code>
-				variable references.
+				return a string can be invoked via variable substitution: the boiler plate XSLT task uses the
+				<code>${command:xslt-xpath.pickXsltFile}</code> and <code>${command:xslt-xpath.pickXmlSourceFile}</code>
+				variable references, and writes its result to <code>${workspaceFolder}/xsl-out/result1.xml</code>.
 			</p>
 			<h4 id="user-input-for-file-selection-within-a-task">User-input for file-selection within a Task</h4>
 			<p>
@@ -306,16 +307,16 @@ npm install --save-dev xslt3</code>
 			<p>The 'recently used' file data is maintained per workspace and is restored when VS Code is closed and reopened. A 'clear recently used' option
 				is also listed when there are files already in the list. 
 			</p>
-			<p>The 'pickList' command must be invoked as an 'input' property of a task as it requires an 'options' argument. A sample 'inputs' property
-			can be added to the 'tasks.json' file with the <code>XSLT: add Inputs to Task file</code> command.</p>
+			<p>The 'pickFile' command must be invoked from an 'input' property of a task, as it requires an 'args' argument. A sample 'inputs' property
+			can be added to the 'tasks.json' file with the <strong>XSLT: Add XSLT Inputs to Tasks File</strong> command.</p>
 			<h3 id="command-options-for-pickfile">Command Options for 'pickFile'</h3>
-				<p>The 'pickFile' commands 'options' object have the following properties:
+				<p>The 'pickFile' command's 'args' object has the following properties:
 				<ul>
 					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
 					<li>extensions? - an array of filter file-extensions (when set, a '*' option can also be selected from the dialog)</li>
 					<li>isResult? - causes the 'Save File' dialog to be shown when set true</li>
 					<li>prevStageLabel? - shows the recently used files for the specified label</li>
-					<li>previousStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
+					<li>prevStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
 					<li>xmlStylesheetPI? - set 'true' for pick-list to include a <code>&lt;?xml-stylesheet?&gt;</code> href from current editor</li>
 				</ul>
 				<strong>Sample input property definitions for the 'pickFile' command are listed below:</strong>

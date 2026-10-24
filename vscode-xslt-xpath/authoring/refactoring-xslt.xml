@@ -66,13 +66,11 @@
 						<th>Parameter</th>
 					</tr>
 				</thead>
-				<thead>
+				<tbody>
 					<tr>
 						<td>current() or '.'</td>
 						<td>c.x</td>
 					</tr>
-				</thead>
-				<tbody>
 					<tr>
 						<td>position()</td>
 						<td>c.p</td>
@@ -102,12 +100,8 @@
 						<td>m.key</td>
 					</tr>
 					<tr>
-						<td>current-merge-group()</td>
-						<td>g.current</td>
-					</tr>
-					<tr>
 						<td>current-merge-group($name)</td>
-						<td>g.groups($name)</td>
+						<td>m.groups($name)</td>
 					</tr>
 				</tbody>
 			</table>

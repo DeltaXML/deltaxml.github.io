@@ -164,7 +164,7 @@
 			<li><code>editor.formatOnType</code> - Controls indentation for new lines.</li>
 			<li><code>editor.formatOnSave</code> - Controls indentation for new lines.</li>
 			<li><code>editor.formatOnPaste</code> - Controls indentation for new lines.</li>
-			<li><code>editor.editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
+			<li><code>editor.formatOnSaveMode</code> - <em>modifications</em> setting, only formats code changes on save.</li>
 		</ul>
 		<p>The XPath formatter indents code blocks within <code>{}</code>, <code>[]</code> and <code>()</code> bracket-pairs.
 			Indentation is also adjusted for <code>if/else</code> blocks and range-variable blocks.	
@@ -199,8 +199,9 @@
 		<h4 id="intellisense-for-xpath-locations">Intellisense for XPath Locations</h4>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
 			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
-			for the XSLT file editor will show the context filename. The label: <strong>[auto-completion context]</strong>
-			is shown if the context file has not been set.
+			for the XSLT file editor will show the context filename. The label <strong>[XML context file]</strong>
+			is shown if the context file has not been set, and <strong>[no XML context]</strong> if 'none' was picked.
+			The same file is the XML source for <a href="quick-run.html">Quick Run</a>.
 		</p>
 		<h5 id="locking-the-context-file"><strong>Locking the context file</strong></h5>
 		<p>To lock the auto-completion context file to a specific file, click on the status-bar item 
@@ -424,8 +425,9 @@
 		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code>, <code>xsl:use-package</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
 			in the href, press <span class="shortcut">⌘+click</span> and then, in the 'Unable to Open...' dialog press the <strong>Create File</strong> button.</p>
 		
-		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the URI to a file path as the User or WorkSpace Setting:
-			<strong>XSLT.resources.xsltPackage</strong></aside>
+		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the package
+			name to a file path in the User or Workspace setting <code>XSLT.resources.xsltPackages</code> - see
+			<a href="settings.html#xslt-packages">XSLT packages</a>.</aside>
 		<aside>An <code>href</code> can also be a URI that an XML catalog maps to a file, e.g.
 			<code>http://example.com/xslt/strings.xsl</code> - see <a href="xml-catalogs.html">XML Catalogs</a>.</aside>
 		<h3 id="auto-tag-close">Auto tag-close</h3>

@@ -83,7 +83,7 @@
 			<h4 id="jtree-fix">Maps need jtree() before '/'</h4>
 			<p>A <code>/</code> step needs a JNode on its left, not a map. Saxon 13 reports XPTY0019 for a step
 				such as <code>$order-value/id</code>, where <code>$order-value</code> is a map with a record type, so
-				the extension reports this as an error, with the suggested fix
+				the extension reports this as an error. The message suggests converting the map first, e.g.
 				<code>jtree($order-value)/id</code>. Alternatives are a lookup, <code>$order-value?id</code>, or a
 				variable declared as a <code>jnode(*, order)</code>, as above. A step after a lookup, such as
 				<code>$p?address/city</code>, is reported in the same way.</p>
@@ -164,7 +164,7 @@ bundle: /lines/*[2]/bundle-items
 				<li>hovering on <code>unit-price</code> in <code>$line/unit-price</code>, or on <code>line</code>
 					in <code>jnode(*, line)</code>, to see the documentation taken from the schema</li>
 				<li>changing <code>$order/id</code> to <code>$order-value/id</code>, to see the
-					<code>jtree()</code> error and its fix</li>
+					error that suggests <code>jtree()</code></li>
 				<li>adding a property to <code>customer</code> in <code>order.schema.json</code>, running
 					<code>schema-to-records.xsl</code> again, and seeing it offered after
 					<code>$order/customer/</code></li>
