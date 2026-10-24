@@ -15,7 +15,7 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>Debugging with xsl:message | VS Code XSLT/XPath</title>
+	<title>Print Debugging | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
@@ -79,7 +79,7 @@
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
 				<li><a href="debugger.html">Debugger</a></li>
-				<li><a href="code-diagnostics.html" class="active">Debugging with xsl:message</a></li>
+				<li><a href="code-diagnostics.html" class="active">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
@@ -96,10 +96,12 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Debugging with xsl:message</h2>
+		<div class="main"><h2 class="pageTitle">Print Debugging</h2>
 
 		<div class="two-thirds column">
-			<p>To set breakpoints and step through a stylesheet with SaxonJ, see the <a href="debugger.html">XSLT Debugger</a>.</p>
+			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">XSLT Debugger</a>.
+				The debugger also supports logpoints for printing debug values and text to the debug console - this
+				avoids the need to modify your XSLT but provides less flexibility than <code>xsl:message</code></p>
 			<p>Adding <strong>xsl:message</strong> instructions is another way to debug XSLT - one that works with
 				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
 				output is sent to the terminal window.

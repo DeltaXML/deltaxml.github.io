@@ -81,7 +81,7 @@
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
 				<li><a href="debugger.html">Debugger</a></li>
-				<li><a href="code-diagnostics.html">Debugging with xsl:message</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>

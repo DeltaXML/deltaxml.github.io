@@ -18,15 +18,12 @@
 		},
 		{
 			// the whole guide as a PDF, from all-pages.html - after building the pages. Needs WeasyPrint
-			// (brew install weasyprint); -D 200 limits screenshots to 200 dpi, to keep the PDF small
+			// (brew install weasyprint): make-pdf.py runs it with its Python, so the PDF opens with its outline showing
 			"type": "shell",
 			"label": "createVSCodePDF",
-			"command": "weasyprint",
+			"command": "/opt/homebrew/opt/weasyprint/libexec/bin/python",
 			"args": [
-				"--optimize-images",
-				"-D",
-				"200",
-				"--pdf-tags",
+				"xsl/make-pdf.py",
 				"all-pages.html",
 				"vscode-xslt-xpath-guide.pdf"
 			],

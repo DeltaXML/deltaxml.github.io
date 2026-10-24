@@ -3,7 +3,9 @@
 	<div class="main">
 
 		<div class="two-thirds column">
-			<p>To set breakpoints and step through a stylesheet with SaxonJ, see the <a href="debugger.html">XSLT Debugger</a>.</p>
+			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">XSLT Debugger</a>.
+				The debugger also supports logpoints for printing debug values and text to the debug console - this
+				avoids the need to modify your XSLT but provides less flexibility than <code>xsl:message</code></p>
 			<p>Adding <strong>xsl:message</strong> instructions is another way to debug XSLT - one that works with
 				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
 				output is sent to the terminal window.

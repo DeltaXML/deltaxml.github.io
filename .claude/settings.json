@@ -18,7 +18,13 @@
       "Bash(mutool trace *)",
       "Bash(python3 -I - /private/tmp/claude-502/-Users-phil-fearon-Documents-github-deltaxml-github-io/46adec6b-6cdb-4eeb-b99a-942c27fd4b5b/scratchpad/trace.xml)",
       "Bash(python3 -I - authoring/*.xml)",
-      "Bash(grep -n -B1 -A4 'code.block {\\\\|li code.block\\\\|li img.scale' resources/custom.css)"
+      "Bash(grep -n -B1 -A4 'code.block {\\\\|li code.block\\\\|li img.scale' resources/custom.css)",
+      "Bash(pdfinfo vscode-xslt-xpath-guide.pdf)",
+      "Read(//opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/**)",
+      "Bash(/opt/homebrew/opt/weasyprint/libexec/bin/python -c \"import weasyprint; print\\(weasyprint.__version__\\)\")",
+      "Bash(/opt/homebrew/opt/weasyprint/libexec/bin/python xsl/make-pdf.py all-pages.html vscode-xslt-xpath-guide.pdf)",
+      "Bash(mutool show *)",
+      "Bash(python3 -I -c \"import json,re; s=open\\('../.vscode/tasks.json'\\).read\\(\\); print\\('tasks.json ok' if '\\\\\"createVSCodePDF\\\\\"' in s else 'missing'\\)\")"
     ]
   }
 }
