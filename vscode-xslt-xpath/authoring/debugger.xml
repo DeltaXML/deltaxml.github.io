@@ -231,7 +231,11 @@
 					<code>xsl:iterate</code>, then the variables in scope - from <code>xsl:variable</code>, and from
 					XPath <code>for</code>, <code>let</code>, <code>some</code> and <code>every</code> expressions,
 					including a positional <code>at $pos</code> variable. Tunnel parameters are shown as
-					<code>$name (tunnel)</code>.</li>
+					<code>$name (tunnel)</code>. A value that Saxon hasn't evaluated yet, and whose evaluation would
+					run stylesheet code - for example, with Saxon 12, the accumulator passed to a
+					<code>fold-left</code> function - is shown as <code>(not evaluated yet)</code>, with a button to
+					evaluate it. Evaluating it runs that code straight away, without stopping at its
+					breakpoints.</li>
 				<li><strong>Context</strong> - the context item (<code>.</code>), <code>position()</code> and
 					<code>last()</code>, and where they apply, <code>current-group()</code>,
 					<code>current-grouping-key()</code> and each <code>regex-group()</code>.</li>
