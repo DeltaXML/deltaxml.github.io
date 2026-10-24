@@ -27,7 +27,7 @@
 					<p>If Java is not already installed, Java 1.8 or later can be downloaded and installed from <a href="https://adoptopenjdk.net/installation.html">here</a></p>
 				</li>
 				<li>
-					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">here</a></p>
+					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://www.saxonica.com/html/download/java.html">here</a></p>
 				</li>
 				<li>
 					<p>Saxon (Java) tasks need the path to the installed Saxon jar file to be included in a property in your Visual Studio Code settings. 
