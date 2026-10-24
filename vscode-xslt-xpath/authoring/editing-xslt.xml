@@ -335,9 +335,5 @@
 		<h3>Auto tag-close</h3>
 		<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed. 
 			Note that this feature is only enabled when the VS Code user-setting <emphasis>Format on Type</emphasis> is set (indentation is fixed at the same time).</p>
-		<h3>GitHub Copilot</h3>
-		<p>New GitHub Copilot features continue to enhance the XSLT editing experience. See the VS Code <a href="https://code.visualstudio.com/docs/copilot/overview">GitHub Copilot</a>
-			documentation for information on edit suggestions and using <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat">Copilot Chat</a> in VS Code.
-			For a summary of selected features that are enhanced by the XSLT/XPath extension, see the <a href="copilot.html">GitHub Copilot and XSLT</a> page .</p>
 	</div>
 </html>
