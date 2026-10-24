@@ -241,6 +241,19 @@ nav li.nav-heading {
   color: #8a8a8a;
 }
 
+/* below the nav's list of pages: the whole guide, to print or as a PDF */
+.nav-footer {
+  margin: 26px 20px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #c8c8c8;
+  font-size: 13px;
+}
+
+.nav-footer a {
+  display: block;
+  margin-bottom: 6px;
+}
+
 /* search: the box at the top of the nav, and its results - shown by search.js */
 .search {
   margin: 0 20px 20px 0;

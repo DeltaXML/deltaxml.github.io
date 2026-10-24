@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(weasyprint --version)",
+      "Read(//Applications/**)",
+      "Bash(pip3 show *)",
+      "Bash(brew list *)",
+      "Bash(grep -v '^\\\\s*$')",
+      "Bash(weasyprint --help)",
+      "Bash(time weasyprint --optimize-images -D 200 --pdf-tags all-pages.html vscode-xslt-xpath-guide.pdf)",
+      "Bash(grep -v -i \"ignored\\\\|^$\")",
+      "Bash(python3 -I -c ' *)",
+      "Bash(mdls -name kMDItemNumberOfPages -raw vscode-xslt-xpath-guide.pdf)",
+      "Bash(python3 -c \"import pypdf\")"
+    ]
+  }
+}

@@ -20,6 +20,115 @@
   <xsl:template match="/">
     <xsl:apply-templates/>
     <xsl:call-template name="searchIndex"/>
+    <xsl:call-template name="allPages"/>
+  </xsl:template>
+
+  <!-- all-pages.html: every page in the nav, in order, after a cover and contents - for printing the whole guide, and
+       for the PDF that WeasyPrint makes from it (the createVSCodePDF task, in .vscode/tasks.json). Pages share some
+       ids, so each id is prefixed with its page's name and a double hyphen, and links between pages are rewritten to
+       point within this page -->
+  <xsl:template name="allPages">
+    <xsl:variable name="navItems" as="element(li)*" select="/html/body//nav/ul/li"/>
+    <xsl:variable name="pages" as="xs:string*" select="$navItems/a/@href ! substring-before(., '.html')"/>
+    <xsl:variable name="guideTitle" as="xs:string" select="'XSLT and XPath for Visual Studio Code'"/>
+    <xsl:result-document href="{resolve-uri('all-pages.html', $siteDir)}">
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8"/>
+          <title>{$guideTitle} - User Guide</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <xsl:copy-of select="/html/head/meta[@name = ('description', 'author')]"/>
+          <xsl:copy-of select="/html/head/link[@rel = ('stylesheet', 'icon')]"/>
+          <link rel="stylesheet" href="./resources/all-pages.css"/>
+        </head>
+        <body class="all-pages">
+          <div class="all-pages-bar">
+            <a href="index.html">Back to the guide</a>
+            <a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+            <button type="button" onclick="window.print()">Print or save as PDF</button>
+          </div>
+          <section class="cover">
+            <img src="../resources/tiny-white-logo.png" alt="DeltaXignia"/>
+            <h1>{$guideTitle}</h1>
+            <p class="cover-subtitle">User Guide</p>
+          </section>
+          <nav class="contents">
+            <h2>Contents</h2>
+            <ul>
+              <xsl:for-each select="$navItems">
+                <xsl:choose>
+                  <xsl:when test="contains-token(@class, 'nav-heading')">
+                    <li class="contents-group">{normalize-space(.)}</li>
+                  </xsl:when>
+                  <xsl:when test="a">
+                    <xsl:variable name="page" as="xs:string" select="substring-before(a/@href, '.html')"/>
+                    <xsl:variable name="sections" as="element()*" select="f:page-content($page)//h3"/>
+                    <li class="contents-page">
+                      <a href="#{$page}">{normalize-space(a)}</a>
+                      <xsl:if test="exists($sections)">
+                        <ul>
+                          <xsl:for-each select="$sections">
+                            <li><a href="#{$page}--{f:heading-id(.)}">{normalize-space(.)}</a></li>
+                          </xsl:for-each>
+                        </ul>
+                      </xsl:if>
+                    </li>
+                  </xsl:when>
+                </xsl:choose>
+              </xsl:for-each>
+            </ul>
+          </nav>
+          <xsl:for-each select="$navItems/a">
+            <xsl:variable name="page" as="xs:string" select="substring-before(@href, '.html')"/>
+            <article class="main doc-page" id="{$page}">
+              <h2 class="pageTitle">{normalize-space(.)}</h2>
+              <xsl:apply-templates select="f:page-content($page)/node()" mode="combined">
+                <xsl:with-param name="page" as="xs:string" select="$page" tunnel="yes"/>
+                <xsl:with-param name="pages" as="xs:string*" select="$pages" tunnel="yes"/>
+              </xsl:apply-templates>
+            </article>
+          </xsl:for-each>
+        </body>
+      </html>
+    </xsl:result-document>
+  </xsl:template>
+
+  <!-- a page's content: the main div of authoring/<page>.xml -->
+  <xsl:function name="f:page-content" as="element()?">
+    <xsl:param name="page" as="xs:string"/>
+    <xsl:sequence select="doc(resolve-uri('authoring/' || $page || '.xml', $siteDir))//div[@class eq 'main']"/>
+  </xsl:function>
+
+  <!-- a page's content in all-pages.html: ids prefixed with the page's name, and links between pages within it -->
+  <xsl:mode name="combined" on-no-match="shallow-copy"/>
+
+  <xsl:template match="h3 | h4 | h5" mode="combined">
+    <xsl:param name="page" as="xs:string" tunnel="yes"/>
+    <xsl:copy>
+      <xsl:apply-templates select="@* except @id" mode="#current"/>
+      <xsl:attribute name="id" select="$page || '--' || f:heading-id(.)"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="@id" mode="combined">
+    <xsl:param name="page" as="xs:string" tunnel="yes"/>
+    <xsl:attribute name="id" select="$page || '--' || ."/>
+  </xsl:template>
+
+  <!-- a link to a section - e.g. debugger.html#xpath, or #xpath on the debugger page - goes to the section's prefixed
+       id, and a link to a page - e.g. debugger.html - to #debugger; links to other sites, and to pages that aren't in
+       the nav, are unchanged -->
+  <xsl:template match="a/@href" mode="combined">
+    <xsl:param name="page" as="xs:string" tunnel="yes"/>
+    <xsl:param name="pages" as="xs:string*" tunnel="yes"/>
+    <xsl:variable name="toPage" as="xs:boolean" select="matches(., '^[a-z0-9\-]+\.html(#.+)?$')"/>
+    <xsl:variable name="toSection" as="xs:boolean" select="matches(., '^#.+$')"/>
+    <xsl:variable name="target" as="xs:string" select="if ($toPage) then substring-before(., '.html') else $page"/>
+    <xsl:variable name="fragment" as="xs:string?" select="substring-after(., '#')[. ne '']"/>
+    <xsl:attribute name="href" select="
+      if (($toPage or $toSection) and $target = $pages) then '#' || $target || ($fragment ! ('--' || .))
+      else ."/>
   </xsl:template>
 
   <!-- resources/search-index.js, for search.js: an entry for each section of each page in the nav - the text before
