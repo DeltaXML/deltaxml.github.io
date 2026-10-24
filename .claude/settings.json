@@ -24,7 +24,12 @@
       "Bash(/opt/homebrew/opt/weasyprint/libexec/bin/python -c \"import weasyprint; print\\(weasyprint.__version__\\)\")",
       "Bash(/opt/homebrew/opt/weasyprint/libexec/bin/python xsl/make-pdf.py all-pages.html vscode-xslt-xpath-guide.pdf)",
       "Bash(mutool show *)",
-      "Bash(python3 -I -c \"import json,re; s=open\\('../.vscode/tasks.json'\\).read\\(\\); print\\('tasks.json ok' if '\\\\\"createVSCodePDF\\\\\"' in s else 'missing'\\)\")"
+      "Bash(python3 -I -c \"import json,re; s=open\\('../.vscode/tasks.json'\\).read\\(\\); print\\('tasks.json ok' if '\\\\\"createVSCodePDF\\\\\"' in s else 'missing'\\)\")",
+      "Bash(grep -n '<code[^>]*style=' *.xml)",
+      "Bash(grep -n 'style=\"[^\"]*height' *.xml)",
+      "Bash(sed -i '' 's#<code class=\"block\" style=\"height: 300px\">#<code class=\"block scroll\">#' run-xslt.xml xslt-tasks.xml)",
+      "Bash(grep -n '<code class=\"block scroll\">' run-xslt.xml xslt-tasks.xml)",
+      "Bash(grep -c 'height: 300px' run-xslt.xml xslt-tasks.xml)"
     ]
   }
 }

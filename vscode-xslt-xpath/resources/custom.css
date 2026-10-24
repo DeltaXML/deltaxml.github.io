@@ -58,6 +58,12 @@ code.block {
   overflow-x: scroll;
 }
 
+/* a long code block, on screen: scrolls within a box up to 300px high - printed, it's shown in full */
+code.block.scroll {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 /* an image is never wider than what it's in - the content column, a figure or a list item - and is never enlarged,
    on screen or printed (code blocks are the same, above) */
 .main img {
@@ -638,7 +644,9 @@ figcaption {
   }
 
   /* code blocks wrap, as they can't scroll on paper */
-  code.block {
+  code.block,
+  code.block.scroll {
+    max-height: none;
     overflow: visible;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
