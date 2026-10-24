@@ -2,12 +2,48 @@
 command converts it - and set to open with its bookmarks, the outline of pages and sections, in a PDF viewer's sidebar,
 which the command can't do.
 
+WeasyPrint's warnings are shown, except those about the site's screen CSS - media queries for screens, and properties
+and selectors it doesn't support - which are expected, and don't affect the PDF. A missing image or stylesheet, or a
+link to an anchor that doesn't exist, is still reported.
+
 Run by the createVSCodePDF task (.vscode/tasks.json), with WeasyPrint's Python - for Homebrew's WeasyPrint:
     /opt/homebrew/opt/weasyprint/libexec/bin/python make-pdf.py all-pages.html vscode-xslt-xpath-guide.pdf
 """
+import logging
 import sys
+import time
 
 from weasyprint import HTML
+
+# the start of each warning about CSS that WeasyPrint skips, as the site's screen styles are meant to be skipped
+SCREEN_CSS_WARNINGS = ('Expected a media type', 'Invalid media type', 'Ignored `', 'Invalid or unsupported selector')
+
+
+MISSING_ALT = 'has no required alt description'
+
+
+class NotScreenCss(logging.Filter):
+    """Drops the screen-CSS warnings, and collects the images without alt text, to report once at the end"""
+
+    def __init__(self):
+        super().__init__()
+        self.images_without_alt = []
+
+    def filter(self, record):
+        message = record.getMessage()
+        if MISSING_ALT in message:
+            self.images_without_alt.append(message.split('"')[1])
+            return False
+        return not message.startswith(SCREEN_CSS_WARNINGS)
+
+
+def show_warnings():
+    handler = logging.StreamHandler(sys.stderr)
+    handler.setFormatter(logging.Formatter('%(levelname)s: %(message)s'))
+    warnings = NotScreenCss()
+    handler.addFilter(warnings)
+    logging.getLogger('weasyprint').addHandler(handler)
+    return warnings
 
 
 def open_with_outline(document, pdf):
@@ -15,5 +51,14 @@ def open_with_outline(document, pdf):
 
 
 source, target = sys.argv[1], sys.argv[2]
+warnings = show_warnings()
+start = time.monotonic()
 # as weasyprint --optimize-images -D 200 --pdf-tags: screenshots are limited to 200 dpi, to keep the PDF small
-HTML(source).write_pdf(target, optimize_images=True, dpi=200, pdf_tags=True, finisher=open_with_outline)
+options = {'optimize_images': True, 'dpi': 200, 'pdf_tags': True}
+document = HTML(source).render(**options)
+document.write_pdf(target, finisher=open_with_outline, **options)
+print(f'Wrote {target}: {len(document.pages)} pages in {time.monotonic() - start:.1f}s')
+if warnings.images_without_alt:
+    images = sorted(set(warnings.images_without_alt))
+    print(f'Note: {len(images)} images have no alt text, which the tagged PDF needs for screen readers - e.g. '
+          + ', '.join(images[:3]))

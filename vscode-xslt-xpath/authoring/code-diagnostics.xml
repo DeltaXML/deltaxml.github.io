@@ -51,7 +51,7 @@
 			</p>
 			<p>Two Quick Fix options are offered:</p>
 			<ul>
-				<li><strong>Include XSLT module for xdm:debug</strong> (the default, preferred option) - inserts the
+				<li><strong>Include XSLT module for xdm:debug and xdm:trace</strong> (the default, preferred option) - inserts the
 					<strong>xdm</strong> namespace declaration (<code>http://deltaxignia.com/ns/xdm-persistence</code>) and an
 					<strong>xsl:include</strong> instruction referencing a workspace-local copy of <strong>xdm-view.xsl</strong>
 					if one is found, otherwise the copy of the <strong>xdm-viewer</strong> library bundled with this extension.
@@ -102,6 +102,46 @@ xdm:debug($title as xs:string, $labels as map(xs:string, item()*), $level as xs:
 				<li>Syntax highlighting helps identify types and map keys etc.</li>
 				<li>Values are annotated with their type where this is non-obvious</li>
 				<li>The optional <code>$level</code> argument adds indentation proportional to this value - helpful for recursive calls</li>
+			</ul>
+			<h3 id="xdm-trace">Tracing a value within an expression: xdm:trace()</h3>
+			<p>To see a value part-way through an XPath expression, without taking the expression apart, wrap it in
+				<strong>xdm:trace()</strong>. Like XPath's built-in <code>trace()</code>, it returns the value unchanged, so
+				the expression gives the same result, and writes it with <code>xsl:message</code>, after a label. Where
+				<code>trace()</code>'s output is up to the processor - Saxon writes one line per item, with a map on one
+				line - <code>xdm:trace()</code> writes the value as <code>xdm:debug()</code> does: formatted over several
+				lines where it has structure, and in color.</p>
+			<code class="block">&lt;xsl:variable name="total" select="sum(xdm:trace($order/line ! (@qty * @price), 'line totals'))"/&gt;
+&lt;xsl:variable name="customer" select="xdm:trace($customers?($id), 'customer')"/&gt;</code>
+			<code class="block">line totals: (7.5, 12, 17.5)
+customer: {
+            'name': 'Ada',
+            'langs': ['xslt', 'xpath']
+          }</code>
+			<p>To trace an existing expression, select it and choose <strong>Wrap with xdm:trace()</strong> (or
+				<strong>Wrap with trace()</strong>) from the refactoring code actions, e.g. with
+				<span class="shortcut">⌘.</span>. The call's label is the expression itself, selected so you can type
+				another. When you've finished debugging, put the cursor on a call's name - <code>xdm:trace</code>,
+				<code>trace</code> or <code>fn:trace</code> - and choose <strong>Remove xdm:trace() - keep the
+				expression</strong> to leave just the expression traced. It's kept in brackets only where it needs them to
+				keep its meaning, e.g. <code>(1 + 2) * 2</code> from <code>xdm:trace(1 + 2, 'x') * 2</code>.</p>
+			<p>At the start of an XPath expression, auto-completion offers <strong>xdm:trace(…, label)</strong>. It's from
+				the same xdm-viewer library as <code>xdm:debug()</code>, so it's marked as a problem until the library is
+				included, with the same Quick Fix. The function signatures are:</p>
+			<code class="block">
+xdm:trace($value as item()*) as item()*
+xdm:trace($value as item()*, $label as xs:string?) as item()*
+xdm:trace($value as item()*, $label as xs:string?, $useColor as xs:boolean) as item()*
+			</code>
+			<ul>
+				<li>Color is on by default. To turn it off for every call - e.g. when messages are written to a log
+					file - set the <code>NO_COLOR</code> environment variable, to any value. To turn it off for one call,
+					pass <code>false()</code> as the third argument.</li>
+				<li>Node values are shown with their location path and a pruned rendering, as with
+					<code>xdm:debug()</code>.</li>
+				<li><code>xdm:trace()</code> reads the whole value before returning it, to format it. <code>trace()</code>
+					may instead report the items of a lazily evaluated value one at a time as they're used - so, for example,
+					<code>head(xdm:trace($items))</code> reads all of <code>$items</code>.</li>
+				<li>In the <a href="debugger.html">debugger</a>, the output is written to the Debug Console, in color.</li>
 			</ul>
 		</div>
 
