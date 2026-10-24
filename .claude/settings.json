@@ -11,7 +11,14 @@
       "Bash(grep -v -i \"ignored\\\\|^$\")",
       "Bash(python3 -I -c ' *)",
       "Bash(mdls -name kMDItemNumberOfPages -raw vscode-xslt-xpath-guide.pdf)",
-      "Bash(python3 -c \"import pypdf\")"
+      "Bash(python3 -c \"import pypdf\")",
+      "Bash(grep -n -A22 '^  \\\\.cover {' resources/all-pages.css)",
+      "Bash(grep -n '<h1>' xsl/createPages.xsl)",
+      "Bash(awk -F: '{f=$1; $1=\"\"; print f\": \"$0}')",
+      "Bash(mutool trace *)",
+      "Bash(python3 -I - /private/tmp/claude-502/-Users-phil-fearon-Documents-github-deltaxml-github-io/46adec6b-6cdb-4eeb-b99a-942c27fd4b5b/scratchpad/trace.xml)",
+      "Bash(python3 -I - authoring/*.xml)",
+      "Bash(grep -n -B1 -A4 'code.block {\\\\|li code.block\\\\|li img.scale' resources/custom.css)"
     ]
   }
 }

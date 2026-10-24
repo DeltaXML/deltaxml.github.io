@@ -49,7 +49,7 @@
           </div>
           <section class="cover">
             <img src="../resources/tiny-white-logo.png" alt="DeltaXignia"/>
-            <h1>{$guideTitle}</h1>
+            <h1>XSLT and XPath<br/>for Visual Studio Code</h1>
             <p class="cover-subtitle">User Guide</p>
           </section>
           <nav class="contents">

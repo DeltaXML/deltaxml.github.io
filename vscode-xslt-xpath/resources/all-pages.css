@@ -182,10 +182,10 @@
     display: none;
   }
 
+  /* a band across the cover, for the logo and title - the rest of the sheet is left white, to save ink */
   .cover {
-    height: 296mm;
-    margin: 0;
-    padding: 80mm 22mm 0;
+    margin: 75mm 0 0;
+    padding: 16mm 22mm 18mm;
     border-radius: 0;
     break-after: page;
     -webkit-print-color-adjust: exact;

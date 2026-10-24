@@ -53,18 +53,16 @@ code.block {
   padding: 5px 5px;
   margin: 5px 0px;
   white-space: pre;
-  max-width: calc(100vw - 20px);
   width: 100%;
+  max-width: 100%;
   overflow-x: scroll;
 }
 
-li code.block {
-  max-width: calc(100vw - 250px);
-}
-
-li img.scale-with-grid {
-  max-width: calc(100vw - 50px);
-  width: 100%;
+/* an image is never wider than what it's in - the content column, a figure or a list item - and is never enlarged,
+   on screen or printed (code blocks are the same, above) */
+.main img {
+  max-width: 100%;
+  height: auto;
 }
 
 body {
@@ -529,7 +527,7 @@ figcaption {
     max-width: none;
     background: #fff;
     color: #222;
-    font-size: 10.5pt;
+    font-size: 10pt;
     line-height: 1.45;
   }
 
@@ -563,8 +561,15 @@ figcaption {
     font-size: 9pt;
   }
 
+  /* text uses the page's full width - the limit on its line length is for screens */
   .main .two-thirds.column,
-  .main .two-thirds.column > * {
+  .main .two-thirds.column > p,
+  .main .two-thirds.column > ul,
+  .main .two-thirds.column > ol,
+  .main .two-thirds.column > aside,
+  .main .two-thirds.column > h3,
+  .main .two-thirds.column > h4,
+  .main .two-thirds.column > h5 {
     max-width: none;
   }
 
@@ -572,8 +577,39 @@ figcaption {
     margin-top: 0;
   }
 
+  /* heading sizes for paper - the screen sizes, from base.css, are too large beside 10pt text */
+  h2 {
+    margin-bottom: 8pt;
+    font-size: 20pt;
+    line-height: 24pt;
+  }
+
+  h3,
   .main h3 {
-    margin-top: 18pt;
+    margin: 16pt 0 5pt;
+    font-size: 14pt;
+    line-height: 18pt;
+  }
+
+  h4,
+  .main h4 {
+    margin: 12pt 0 4pt;
+    font-size: 11.5pt;
+    line-height: 15pt;
+    font-weight: bold;
+  }
+
+  h5,
+  .main h5 {
+    margin: 10pt 0 3pt;
+    font-size: 10pt;
+    line-height: 14pt;
+    font-weight: bold;
+  }
+
+  code,
+  code.block {
+    font-size: 8.5pt;
   }
 
   h2,
@@ -594,22 +630,15 @@ figcaption {
     break-inside: avoid;
   }
 
-  img,
-  li img.scale-with-grid {
-    max-width: 100%;
-  }
-
-  /* a tall screenshot is scaled down to fit on a page */
-  figure img {
+  /* a tall screenshot is scaled down to fit on a page - in a figure or not */
+  .main img {
     width: auto;
     max-height: 125mm;
     object-fit: contain;
   }
 
   /* code blocks wrap, as they can't scroll on paper */
-  code.block,
-  li code.block {
-    max-width: none;
+  code.block {
     overflow: visible;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
