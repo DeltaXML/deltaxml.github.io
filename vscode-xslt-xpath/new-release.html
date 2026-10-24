@@ -100,23 +100,28 @@
         
         <div class="two-thirds column">
             <p>
-                Highlights of the features added in release 2.0 and later:
+                Highlights of the features added in releases 2.0 and 2.1:
             </p>
+            <h3 id="2-1">2.1</h3>
             <ul>
                 <li><strong><a href="debugger.html">Step-through debugging</a></strong> - debug stylesheets with SaxonJ
                     (any edition, including Saxon-HE): breakpoints with conditions, hit counts and logpoints, stepping
                     through templates, functions and multi-line XPath expressions - including inline functions - and the
                     variables, context item and output so far, as you go</li>
+            </ul>
+            <h3 id="2-0">2.0</h3>
+            <ul>
                 <li><strong><a href="xslt40.html">Full language support for XSLT 4.0 in Saxon 13</a></strong> - type-aware
                     auto-completion, checks, hover help and refactoring for the XSLT 4.0 and XPath 4.0 features Saxon 13
                     implements: new syntax and item types, keyword arguments and optional parameters, <code>xsl:switch</code>,
                     and <a href="xslt40-notes.html">documentation notes</a> with <code>xsl:note</code></li>
-                <li><strong><a href="xslt40-notes.html">Code Documentation</a></strong> (for Saxon PE/EE versions 12.8+) -  
+                <li><strong><a href="xslt40-notes.html">Code Documentation</a></strong> -
                     documentation within <code>xsl:note</code> elements provides
-                    hover assistance using tags based on <a href="https://xqdoc.org/xqdoc_comments_doc.html">xqdoc</a> 
-                    along with Markdown descriptions.
+                    hover assistance using tags based on <a href="https://xqdoc.org/xqdoc_comments_doc.html">xqdoc</a>
+                    along with Markdown descriptions. In an XSLT 3.0 stylesheet, <code>xsl:note</code> needs Saxon PE/EE
+                    12.8 or later and the <code>XSLT.validation.xslt30ItemTypesAndNotes</code> setting.
                 </li>
-                <li><strong><a href="xslt40-records.html">Records and enums</a></strong> - auto-completion, checks, hover
+                <li><strong><a href="xslt40-records.html">Records and Enums</a></strong> - auto-completion, checks, hover
                     help and refactoring for XPath 4.0 record and enumeration types, from map constructors to
                     <code>xsl:switch</code> cases</li>
                 <li><strong><a href="xslt40-jnodes.html">JSON and JNodes</a></strong> - XPath 4.0 path expressions
@@ -127,7 +132,7 @@
                     <a href="run-xslt.html#saxonc-tasks">SaxonC</a> support</li>
                 <li><strong><a href="editing-xslt.html#inferred-imports">Inferred imports</a></strong> - the top-level
                     stylesheet of a module is found from the workspace, without opening it first, and the new
-                    <strong>XSLT Imports Panel</strong> shows its tree of imports and includes</li>
+                    <strong>XSLT Imports</strong> view shows its tree of imports and includes</li>
                 <li><strong><a href="xml-catalogs.html">XML Catalogs</a></strong> - resolve the <code>href</code> of
                     <code>xsl:import</code> and <code>xsl:include</code>, e.g. the <code>http:</code> URI of a shared library, to a
                     local file with an OASIS XML catalog - also passed to Saxon when a stylesheet is run</li>
@@ -140,7 +145,7 @@
             </ul>
         </div>
     </div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#2-1">2.1</a></li><li><a href="#2-0">2.0</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

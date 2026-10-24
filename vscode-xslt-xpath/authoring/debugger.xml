@@ -10,7 +10,7 @@
 				<a href="https://code.visualstudio.com/docs/debugtest/debugging">Debugging</a> in the VS Code
 				documentation for the debug toolbar, views and keyboard shortcuts.</p>
 			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
-				<a href="code-diagnostics.html">Debugging with xsl:message</a>.</p>
+				<a href="code-diagnostics.html">Print Debugging</a>.</p>
 			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
 				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Debugging with SaxonJS or
 				SaxonC isn't supported. For XPath 4.0 syntax in an XSLT 4.0 stylesheet, Saxon-PE or Saxon-EE is
@@ -43,7 +43,7 @@
 			<h4 id="launch-json">Launch configurations</h4>
 			<p>With no <code>launch.json</code>, the <strong>Run and Debug</strong> view offers <strong>Debug Active
 				Stylesheet</strong>, and a <strong>Debug <em>task label</em></strong> configuration for each
-				<code>xslt</code> task in <code>tasks.json</code> (see <a href="run-xslt.html">XSLT: Tasks</a>).
+				<code>xslt</code> task in <code>tasks.json</code> (see <a href="run-xslt.html">Tasks</a>).
 				<strong>create a launch.json file</strong> adds these to a new <code>launch.json</code>.</p>
 			<p>To debug a task without a <code>launch.json</code>, choose <strong>XSLT (Saxon)...</strong> in the
 				<strong>Run and Debug</strong> view's dropdown, or use <strong>Debug: Select and Start Debugging</strong>
@@ -86,7 +86,7 @@
 				<li><strong>Expression</strong> - an XPath expression, evaluated where the breakpoint is, with its
 					variables and context item, e.g. <code>@customer = 'Grace'</code> or <code>$total gt 30</code>. If
 					the expression raises an error, execution pauses and the error is shown.</li>
-				<li><strong>Hit Count</strong> - <code>5</code> (the 5th hit), <code>&gt;5</code>,
+				<li><strong>Hit Count</strong> - <code>5</code> or <code>==5</code> (the 5th hit), <code>&gt;5</code>,
 					<code>&gt;=5</code>, <code>&lt;5</code>, <code>&lt;=5</code> or <code>%5</code> (every 5th hit).
 					With an expression too, only the hits where the expression is true are counted.</li>
 				<li><strong>Log Message</strong> - a logpoint writes the message to the Debug Console without
@@ -180,7 +180,8 @@
 				<code>select</code> is stopped at for each item, as its sort key is computed - before the first item
 				is processed - with that item as the context item. Use <strong>Step Into</strong> at the instruction, or set a
 				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
-				starts.</p>
+				starts. A breakpoint on a line with only keywords such as <code>then</code>, <code>else</code> or
+				<code>return</code>, and no expression starting on it, is unverified.</p>
 			<p><strong>Step Into</strong> goes through an expression when that shows more than its result: when it
 				binds variables (<code>for</code>, <code>let</code>, <code>some</code> or <code>every</code>), calls a
 				stylesheet function or an inline function, or has an <code>if</code> whose branches are on lines of their
@@ -235,7 +236,8 @@
 					run stylesheet code - for example, with Saxon 12, the accumulator passed to a
 					<code>fold-left</code> function - is shown as <code>(not evaluated yet)</code>, with a button to
 					evaluate it. Evaluating it runs that code straight away, without stopping at its
-					breakpoints.</li>
+					breakpoints. Inside an inline function, only the function's parameters, the variables from
+					outside it that it uses, and its own range variables are shown.</li>
 				<li><strong>Context</strong> - the context item (<code>.</code>), <code>position()</code> and
 					<code>last()</code>, and where they apply, <code>current-group()</code>,
 					<code>current-grouping-key()</code> and each <code>regex-group()</code>.</li>
@@ -283,9 +285,19 @@
 					choose.</li>
 				<li>To open the output automatically, at the first pause where there is some, turn on the
 					<code>XSLT.debug.openOutput</code> setting - it's off by default.</li>
+				<li><strong>Show Output</strong>, on the context menu of an output in the Variables view's
+					<strong>Output</strong> section, opens that output.</li>
 				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
 					written to the Debug Console.</li>
 			</ul>
+			<p>XML output can be traced back to the stylesheet. With the cursor on a line of the output, a hint at the
+				end of the line - e.g. <code>→ report.xsl:4</code> - shows where that part of the output was written.
+				To go there, use <strong>Go to XSLT Source</strong> on the output's context menu,
+				<span class="shortcut">Cmd/Ctrl</span>-click, or <span class="shortcut">F12</span> - or
+				<span class="shortcut">Option/Alt</span>-click, when <code>editor.multiCursorModifier</code> is
+				<code>ctrlCmd</code>. The stylesheet is shown in another editor group from the output's. For HTML, JSON
+				or text output, <strong>Go to XSLT Source</strong> reports that only XML output can be traced back to
+				the stylesheet.</p>
 			<p>When the session ends, a notification offers to <strong>Open</strong> the result file - or, for HTML,
 				to <strong>Open in Browser</strong>.</p>
 			<h4 id="saxon-errors">Saxon errors</h4>

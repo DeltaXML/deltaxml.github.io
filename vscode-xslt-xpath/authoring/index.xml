@@ -75,7 +75,7 @@
 					expressions, showing variables, the context item and the output written so far. Where Saxon's
 					standard tracing stops at XSLT instructions, this debugger uses Saxon's own APIs to inject extra
 					trace points and re-parse XPath to locate sub-expressions, so it can stop deep inside multi-line
-					expressions and inline functions. See <a href="debugger.html">XSLT Debugger</a>.
+					expressions and inline functions. See <a href="debugger.html">Debugger</a>.
 				</p>
 				<figure>
 					<img src="resources/debugger-xpath-step.jpg" class="scale-with-grid" />
@@ -108,7 +108,7 @@
 				</p>
 				<h4 id="the-user-interface">The User Interface</h4>
 				<p>
-					Visual Studio Code's <a href="https://code.visualstudio.com/docs/getstarted/userinterface">user
+					Visual Studio Code's <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface">user
 						interface</a>
 					has a different look and feel to that of legacy XSLT editors. The Command Palette, along with
 					keybindings to
@@ -127,7 +127,7 @@
 				</p>
 				<h4 id="the-command-palette">The Command Palette</h4>
 				<p>A principal part of Visual Studio Code's <a
-						href="https://code.visualstudio.com/docs/getstarted/userinterface">user interface</a> is the
+						href="https://code.visualstudio.com/docs/editing/getting-started/userinterface">user interface</a> is the
 					Command
 					Palette,
 					triggered
@@ -159,7 +159,7 @@
 					have key bindings, but these can be configured using the command
 					<code>Preferences: Open Keyboard Shortcuts</code>
 					(<span class="shortcut">⌘K⌘S</span>). See: <a
-						href="https://code.visualstudio.com/docs/getstarted/keybindings">
+						href="https://code.visualstudio.com/docs/configure/keybindings">
 						Key Bindings for Visual Studio Code</a>
 				</p>
 				<h4 id="settings">Settings</h4>
@@ -172,10 +172,9 @@
 				</p>
 				<h4 id="install-the-xslt-xpath-extension">Install the XSLT/XPath Extension</h4>
 				<p>Extensions are managed in the Extensions view (<span class="shortcut">⇧⌘X</span>) of the Side Bar.
-					Type <code>XSLT XPath</code> in the Extensions view search bar and, on the <strong>XSLT/Path for
+					Type <code>XSLT XPath</code> in the Extensions view search bar and, on the <strong>XSLT/XPath for
 						Visual Studio
-						Code</strong> entry, press the <code>install</code> button
-					.</p>
+						Code</strong> entry, press the <code>install</code> button.</p>
 				<p>
 					<img src="resources/extension-view.png" class="scale-with-grid" />
 				</p>
@@ -216,15 +215,14 @@
 				<p>
 					For a comprehensive guide to the Visual Studio Code editor features see the Microsoft Visual Studio
 					Code
-					<a href="https://code.visualstudio.com/docs/editor/codebasics">User Guide</a>.
+					<a href="https://code.visualstudio.com/docs/editing/codebasics">User Guide</a>.
 				</p>
 				<h4>Language Specific Features</h4>
 				<p>XSLT and XPath specific editing features are described in the <a href="editing-xslt.html">Editing
 						XSLT/XPath</a> page
-					of the documentation that your are reading now. More general XML editing features are described in
+					of the documentation that you are reading now. More general XML editing features are described in
 					the <a href="editing.html">Editing XML</a> section.</p>
 				<p>The features described at <a href="editing-xslt.html">Editing XSLT/XPath</a> include:</p>
-				<p>
 				<ul>
 					<li><a href="editing-xslt.html#intellisense">IntelliSense (Auto Complete)</a></li>
 					<li><a href="editing-xslt.html#highlighting">Syntax Highlighting</a></li>
@@ -234,26 +232,25 @@
 					<li><a href="editing-xslt.html#hover">Hover Help and Signature Help</a></li>
 					<li><a href="editing-xslt.html#checking">XSLT/XPath Linter</a></li>
 				</ul>
-				</p>
 
 				<h3 id="run-xslt-quick-start">Run XSLT - Quick Start</h3>
 				<p>The quickest way to run the stylesheet in the active editor is <a href="quick-run.html">Quick Run</a>:
 					press <span class="shortcut">⌘⌥R</span> (<span class="shortcut">Ctrl+Alt+R</span> on Windows/Linux) or click
 					the play button in the editor title bar. The first run creates an XSLT task for you, which later runs reuse.</p>
 				<p>To step through the stylesheet instead, set a breakpoint and click the debug button in the editor title
-					bar, or press <span class="shortcut">F5</span> - see the <a href="debugger.html">XSLT Debugger</a>.</p>
+					bar, or press <span class="shortcut">F5</span> when there's no <code>launch.json</code> - see the <a href="debugger.html">Debugger</a>.</p>
 				<p>XSLT transforms are run using Visual Studio Code Tasks.
 					Before configuring an XSLT task you should ensure that you open a
-					<a href="https://code.visualstudio.com/docs/editor/workspaces">Workspace</a> folder (<span
+					<a href="https://code.visualstudio.com/docs/editing/workspaces/workspaces">Workspace</a> folder (<span
 						class="shortcut">⌘O</span>) from Visual Studio Code.
 					The configuration is saved in a <code>tasks.json</code> file in this workspace folder.
 				</p>
 				<p>To create your first task, use the <code>Run Build Task</code> command (<span
 						class="shortcut">⇧⌘B</span>).
 					As there is no currently configured task, you should be prompted to configure one
-					(if another extension inhibits this, run <span class="shortcut">Configure Task</span> instead). You
-					can then,
-					select either the <code>Saxon</code> or <code>Saxon-JS</code> task.</p>
+					(if another extension inhibits this, run <strong>Configure Task</strong> instead). You
+					can then select the <strong>Saxon Transform (New)</strong> (SaxonJ), <strong>Saxon-JS Transform (New)</strong>
+					(SaxonJS) or <strong>SaxonC Transform (New)</strong> (SaxonC) task.</p>
 				<p>A task will be added to the <code>tasks.json</code> task with default properties. To further
 					configure the
 					task, these properties can be changed or other properties added. Auto-completion and hints are
@@ -264,10 +261,10 @@
 						class="shortcut">⌘J</span>).
 				</p>
 				<h4>More on running XSLT</h4>
-				<p>XSLT Tasks are explained in full in the <a href="run-xslt.html">Running XSLT</a> section. More
+				<p>XSLT tasks are explained in full on the <a href="run-xslt.html">Tasks</a> page. More
 					general
 					information can be found in the Visual Studio Code <a
-						href="https://code.visualstudio.com/docs/editor/tasks">Tasks</a>
+						href="https://code.visualstudio.com/docs/debugtest/tasks">Tasks</a>
 					documentation.</p>
 			</div>
 

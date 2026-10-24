@@ -4,7 +4,7 @@
 		
 		<div class="two-thirds column">
 			<p>Visual Studio Code includes a compelling set of features for code navigation, 
-				the language-neutral details are outlined <a href="https://code.visualstudio.com/docs/editor/editingevolved">here</a>.</p>
+				the language-neutral details are outlined <a href="https://code.visualstudio.com/docs/editing/editingevolved">here</a>.</p>
 			<p>This page outlines code navigation from an XSLT and XPath development perspective.</p>
 			<h3>File Navigation</h3>
 			<p>
@@ -14,13 +14,13 @@
 			<p>File tabs are arranged in one or more Editor Groups. Editor Groups are arranged either adjacent or above/below other Editor groups.
 			The same file may be open in more than one Editor Group. There are settings to control whether file tabs are scrollable or wrapped
 				within an Editor Group.</p>
-			<p>Hold <span class="shortcut">Ctrl</span> and press <span class="shortcut">Tab</span> for a list of files in an Editor Group. Keep pressing
-			<span class="shortcut">Tab</span> until you reach the file you want and then release <span class="shortcut">Ctrl</span> to open it.</p>
+			<p>Hold <span class="shortcut">⌃</span> and press <span class="shortcut">Tab</span> for a list of files in an Editor Group. Keep pressing
+			<span class="shortcut">Tab</span> until you reach the file you want and then release <span class="shortcut">⌃</span> to open it.</p>
 			<h4>Previous/Next Location</h4>
 			<p>Many actions can be used to navigate you to a new location. Press <span class="shortcut">⌃-</span> for <strong>Previous Location</strong> and <span class="shortcut">⌃⇧-</span> for
 			<strong>Next Location</strong>. Locations may be in the same file or different files.</p>
 			<h4>File Links</h4>
-			<p>In XSLT, The <code>href</code> attribute values of <code>xsl:import</code>, <code>xsl:include</code> and <code>xsl:use-package</code> have a solid underline if the file path is resolved.
+			<p>In XSLT, the <code>href</code> attribute values of <code>xsl:import</code>, <code>xsl:include</code> and <code>xsl:use-package</code> have a solid underline if the file path is resolved.
 			Press <span class="shortcut">⌘+Click</span> on the file path to navigate to that file.</p>
 			<h3>XSLT/XML Breadcrumbs</h3>
 			<p>
@@ -39,13 +39,14 @@
 				Use the <span class="shortcut">←</span> and <span class="shortcut">→</span> keys to select a Breadcrumb item or the
 				<span class="shortcut">↓</span> for the dropdown outline.
 			</p>
-			<aside>Note: You can toggle the Breadcrumbs view on/off but if the Breadcrumbs view is disabled this will also disable XML, XSLT or XPath Warnings and Errors.
-				The Code Checker depends on the symbol name provider that Breadcrumbs invokes.</aside>
+			<aside>Note: You can toggle the Breadcrumbs view on/off, but warnings and errors for XML and XSLT files are reported by the
+				symbol provider that Breadcrumbs (and the Outline view) invokes. If Breadcrumbs is disabled, these may not be reported
+				unless the Outline view is shown. Problems in XPath files are reported whether or not Breadcrumbs is enabled.</aside>
 			<h3>Outline View</h3>
 			<img src="resources/navigation.png" class="scale-with-grid" />
 			
 			<p>
-				The <a href="https://code.visualstudio.com/docs/getstarted/userinterface#_outline-view">Outline View</a> (see right-hand panel) is a panel
+				The <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface#_outline-view">Outline View</a> (see right-hand panel) is a panel
 				that, by default, is positioned below
 				the File Explorer in the Primary Side Bar. This can be moved however into other panels such as the Secondary Side Bar (see <a href="https://code.visualstudio.com/api/ux-guidelines/sidebars">Sidebars</a>).
 				The Outline view renders the XML or XSLT document element hierarchy as a tree, symbol names in the tree include element identifiers such
@@ -96,17 +97,30 @@
 				Use the cursor keys to move through the references and press <span class="shortcut">Enter</span> to open the editor in
 				the reference location.
 			</p>
-			<p>After navigating to a reference or definition, you can quickly navigate to the location you were in using <span class="shortcut">Ctrl-</span></p>
+			<p>After navigating to a reference or definition, you can quickly navigate to the location you were in using <span class="shortcut">⌃-</span></p>
 			<!-- end -->
 			
 			<h3>Goto Symbol</h3>
-			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">Shift⌘O</span> for a filtered quick-pick list of symbols used
+			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">⇧⌘O</span> for a filtered quick-pick list of symbols used
 			in the current editor.
 				The text you enter filters the list, the <span class="shortcut">↑</span> and <span class="shortcut">↓</span> keys navigate you through the symbol list, with the
 				current symbol item highlighted in the editor. Press <span class="shortcut">Enter</span> to navigate to the symbol in the current editor
 				or <span class="shortcut">⌘Enter</span> to open an adjacent editor and navigate to the symbol there.
 			</p>
 			<img src="resources/goto-symbol.png" class="scale-with-grid" />
+			<h3>Goto XPath</h3>
+			<p>In an XML or XSLT file, the <strong>XML: Goto XPath</strong> command navigates to the element, or attribute, at a path
+				such as <code>/root/section[2]/para[3]</code> or <code>/root/section/@id</code>. Run it from the Command Palette
+				(<span class="shortcut">⇧⌘P</span>), from the <strong>XML Selection</strong> submenu of the editor's context menu,
+				or from the <strong>XML: Select Element...</strong> quick pick (<span class="shortcut">⇧⌘2</span>). The prompt initially
+				shows the path of the element at the cursor. Each step is an element name with an optional position, starting from the
+				root element; the matching element is selected, or the message 'No matching elements' is shown.
+				See <a href="editing.html">Editing XML</a> for the other XML selection commands.</p>
+			<h3>XSLT Imports View</h3>
+			<p>For the XSLT module in the active editor, the <strong>XSLT Imports</strong> view in the Explorer shows its top-level
+				stylesheet with its tree of imports and includes, expanded down to the active module. Click a module in the tree to open it.
+				The view is collapsed initially - click its title in the Explorer to expand it. See
+				<a href="editing-xslt.html#the-xslt-imports-view">The XSLT Imports view</a> for details.</p>
 		
 		</div>
 		

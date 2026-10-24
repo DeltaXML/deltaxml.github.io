@@ -4,9 +4,9 @@
 		
 		<div class="two-thirds column">
 			<p>
-				<strong>XSLT 3.0</strong>, <a href="https://www.w3.org/TR/2017/REC-xslt-30-20170608/">published by W3c on 8 June 2017</a>,
-				is the latest stable version of XSLT. As such, it is the target version for  
-				XSLT in this extension, alongside <strong>XPath 3.1</strong>.
+				<strong>XSLT 3.0</strong>, <a href="https://www.w3.org/TR/2017/REC-xslt-30-20170608/">published by W3C on 8 June 2017</a>,
+				is the current W3C Recommendation for XSLT, alongside <strong>XPath 3.1</strong>. This extension
+				supports XSLT 3.0, and also <a href="xslt40.html">XSLT 4.0</a> as implemented in Saxon 13.
 			</p>
 			<h3>Learning XSLT 3.0</h3>
 			<p>The online W3C documentation for XSLT 3.0, along with its XPath 3.1 sub-language, comprises 3 main parts:</p>
@@ -23,7 +23,7 @@
 			<h4>Offline Reading Material</h4>
 			<p>There are no published books for XSLT 3.0, but the <a href="https://isbnsearch.org/isbn/9780470192740">XSLT 2.0 and XPath 2.0 Programmer's Reference</a>
 				by Michael Kay
-				is frequently recommended. XSLT 3.0 is a significant enhancement to XSLT 2.0 but it builds on the fundamental principals and language in XSLT 2.0.
+				is frequently recommended. XSLT 3.0 is a significant enhancement to XSLT 2.0 but it builds on the fundamental principles and language in XSLT 2.0.
 			</p>
 			<h4>Video Tutorials</h4>
 			<p>A set of video tutorials by Dimitre Novatchev is available:</p>
@@ -32,13 +32,15 @@
 				<li><a href="https://www.pluralsight.com/courses/xpath-3-0-whats-new">The Evolution of XPath: What’s New in XPath 3.0</a>.</li>
 			</ul>
 			<h3>Supporting XSLT Processors</h3>
-			<p>This extension integrates with the Saxon XSLT processor by Saxonica via XSLT tasks through the Saxon command-line interface. 
+			<p>This extension integrates with the Saxon XSLT processor by Saxonica. Stylesheets are run with
+				<a href="run-xslt.html">XSLT tasks</a> or <a href="quick-run.html">Quick Run</a>, using the command-line
+				interface of SaxonJ (Java), SaxonJS (JavaScript) or SaxonC (C/C++).
 				Saxon is probably the most popular/ubiquitous XSLT 3.0 processor. 
-				It publishes specification <a href="https://www.saxonica.com/documentation11/#!conformance/xslt30">conformance data</a> 
+				It publishes specification <a href="https://www.saxonica.com/html/documentation13/conformance/xslt30.html">conformance data</a> 
 				and supports <a href="https://www.saxonica.com/products/platforms.xml">many platforms</a>.
-				A free open source version <a href="https://github.com/Saxonica/Saxon-HE">Saxon-HE</a> is available along with 
-				paid-for 'Professional' and 'Enterprise' variants are also available. These are
-				summarised in a <a href="https://www.saxonica.com/products/feature-matrix-12.xml">feature matrix</a>.</p>
+				A free open source version, <a href="https://github.com/Saxonica/Saxon-HE">Saxon-HE</a>, is available along with
+				paid-for 'Professional' and 'Enterprise' variants. These are
+				summarised in a <a href="https://www.saxonica.com/products/feature-matrix-13.xml">feature matrix</a>.</p>
 			<p>Saxon PE and EE 12.8 or later, run with syntax extensions, also accept some XSLT 4.0 features in an
 				XSLT 3.0 stylesheet: named item types - with record and enumeration types - and <code>xsl:note</code>.
 				To edit such stylesheets with the same support as for XSLT 4.0, enable the
@@ -47,7 +49,7 @@
 				For the full set of XSLT 4.0 features implemented in Saxon 13, see <a href="xslt40.html">XSLT 4.0</a>.</p>
 			<hr/>
 			<p>Altova's <a href="https://www.altova.com/raptorxml">RaptorXML</a> server supports XSLT 3.0 - no integration with
-				Visual Studio Code is available as ALtova offer their own paid-for 
+				Visual Studio Code is available as Altova offer their own paid-for 
 				<a href="https://www.altova.com/xmlspy-xml-editor/xslt-editor">XML/XSLT development solution</a>. No XSLT standards conformance
 				data is published for this processor.
 			</p>

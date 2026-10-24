@@ -99,23 +99,24 @@
 		<div class="main"><h2 class="pageTitle">Tasks</h2>
 		
 		<div class="two-thirds column">
-			<p>Visual Studio Code's Tasks include custom task types for configuring and running Saxon (Java)
-				or Saxon-JS (JavaScript) XSLT transforms. The Saxon XSLT processor is called via its command-line interface
-				from the <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>
-				in Visual Studio code.
+			<aside>Just want to run a stylesheet without configuring a task first? See <a href="quick-run.html">Quick Run</a>.</aside>
+			<p>Visual Studio Code's Tasks include custom task types for configuring and running XSLT transforms with
+				SaxonJ (Java), SaxonJS (JavaScript) or SaxonC (C/C++). The Saxon XSLT processor is called via its command-line interface
+				from the <a href="https://code.visualstudio.com/docs/terminal/basics">Integrated Terminal</a>
+				in Visual Studio Code.
 				Task configurations effectively control command-line arguments for the XSLT Processor. An attempt is made to parse any error messages
 				returned from Saxon, so that the position of any Saxon-reported errors in the XSLT can be highlighted.
 			</p>
 			
 			<p>XSLT is run or debugged using custom <code>xslt</code>,  <code>xslt-c</code> or <code>xslt-js</code>
-				<a href="https://code.visualstudio.com/Docs/editor/tasks">Visual Studio Code Tasks</a>
+				<a href="https://code.visualstudio.com/docs/debugtest/tasks">Visual Studio Code Tasks</a>
 				for SaxonJ (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
 				<a href="https://www.saxonica.com/html/download/java.html">Saxon</a> installation), SaxonC
 				or SaxonJS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
 			<h3 id="saxonj-tasks">Saxon (Java) setup</h3>
 			<ol>
 				<li><p>
-						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
+						Ensure that you have a <a href="https://code.visualstudio.com/docs/editing/workspaces/workspaces">workspace folder</a>
 						open in Visual Studio Code (use <strong>File &gt; open...</strong> from the menu).
 						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
 					</p></li>
@@ -123,7 +124,7 @@
 					<p>If Java is not already installed, Java 1.8 or later can be downloaded and installed from <a href="https://adoptopenjdk.net/installation.html">here</a></p>
 				</li>
 				<li>
-					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://sourceforge.net/projects/saxon/files/Saxon-HE/10/Java/">here</a></p>
+					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://www.saxonica.com/html/download/java.html">here</a></p>
 				</li>
 				<li>
 					<p>Saxon (Java) tasks need the path to the installed Saxon jar file to be included in a property in your Visual Studio Code settings. 
@@ -138,7 +139,7 @@
 			<h3 id="saxonjs-tasks">Saxon-JS Tasks</h3>
 			<ol>
 				<li><p>
-						Ensure that you have a <a href="https://code.visualstudio.com/docs/editor/workspaces">workspace folder</a>
+						Ensure that you have a <a href="https://code.visualstudio.com/docs/editing/workspaces/workspaces">workspace folder</a>
 						open in Visual Studio Code (use <strong>File &gt; open...</strong> from the menu).
 						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
 					</p></li>
@@ -157,9 +158,8 @@ npm install --save-dev xslt3</code>
 				NPX will download the Saxon-JS package if you choose not to follow the previous step and it can't find the Saxon-JS package in your global space.</aside>
 			<h3 id="saxonc-tasks">SaxonC Tasks</h3>
 			<p>
-				A new <code>xslt-c</code> task type runs XSLT transforms using
-				<a href="https://www.saxonica.com/products/products.xml">SaxonC</a>, Saxonica's native C/C++ port of Saxon,
-				alongside the existing <code>xslt</code> (Saxon Java) and <code>xslt-js</code> (Saxon-JS) task types. Its
+				The <code>xslt-c</code> task type runs XSLT transforms using
+				<a href="https://www.saxonica.com/products/products.xml">SaxonC</a>, Saxonica's native C/C++ port of Saxon. Its
 				command-line arguments mirror the Saxon (Java) task closely, since SaxonC's <code>Transform</code>
 				command-line tool follows the same conventions.
 			</p>
@@ -212,14 +212,16 @@ npm install --save-dev xslt3</code>
 					<img src="resources/tasks/select-task.png" class="scale-with-grid">
 				</li>
 				<li><p>
-						Select from the list (shown above) the task type you require (you may see more task types in the list), for either Saxon or Saxon-JS.
+						Select from the list (shown above) the template task for the processor you require:
+						<strong>Saxon Transform (New)</strong> for SaxonJ, <strong>Saxon-JS Transform (New)</strong> for SaxonJS
+						or <strong>SaxonC Transform (New)</strong> for SaxonC (you may see more task types in the list).
 					</p>
 					<img src="resources/tasks/edit-task.png" class="scale-with-grid">
 				</li>
 				<li>
 					<p>
 						The <code>tasks.json</code> file will then be opened with a template task added for the task type specified. 
-						The task shown above is for the Saxon task. Edit this task to fit your XSLT transform requirement.
+						The task shown above is for a SaxonJ (<code>xslt</code>) task. Edit this task to fit your XSLT transform requirement.
 						It's a good idea to change the <code>label</code> property (the value shown in the tasks list) to describe your XSLT transform.
 						Auto-completion with hints is available as you type. 
 						The actual file type is 'JSON with Comments' so you can add comments and leave trailing commas etc.
@@ -228,12 +230,12 @@ npm install --save-dev xslt3</code>
 				<li>
 					<p>
 						You can create any number of tasks for different XSLT transform scenarios. Note that the <code>group.isDefault</code>
-						property controls that task that is automatically launched when you next invoke 
+						property controls which task is automatically launched when you next invoke 
 						<code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.
 					</p>
 				</li>
 				<li>
-					<pi>Save any changes to the <code>tasks.json</code> file <span class="shortcut">⌘S</span></pi>
+					<p>Save any changes to the <code>tasks.json</code> file <span class="shortcut">⌘S</span></p>
 				</li>
 				<li>
 					<p>Run the newly configured XSLT transform by invoking <code>Run Build Task</code> from the Command Palette or when using <span class="shortcut">⇧⌘B</span>.</p>
@@ -292,25 +294,24 @@ npm install --save-dev xslt3</code>
 				</tbody>
 			</table>
 			<p>A full list of variable references is given in Visual Studio Code's
-				<a href="https://code.visualstudio.com/docs/editor/variables-reference">Variables Reference</a></p>
+				<a href="https://code.visualstudio.com/docs/reference/variables-reference">Variables Reference</a></p>
 			<h4 id="the-pickfile-command">The 'pickFile' command</h4>
-			<p>The general purpose command 'xslt-xpath.pickFile' is the base commands for specific 'pick file' commands like 'pickXsltFile'.
-			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 5 ways:
+			<p>The general purpose command 'xslt-xpath.pickFile' is the base command for specific 'pick file' commands like 'pickXsltFile'.
+			After a task is invoked, the user is prompted to select a file for opening or saving. A Pick List is shown with options to select files in up to 5 ways:</p>
 				<ul>
-					<li>the current file (if it's extension is compatible with the extensions list)</li>
+					<li>the current file (if its extension is compatible with the extensions list)</li>
 					<li>from recently used (current stage) files - from list for the current label e.g. 'Select XSLT File'</li>
 					<li>from recently used (previous stage result) files - shows result files from a previous task</li>
 					<li>from the <code>&lt;?xml-stylesheet href="...?&gt;</code> href in the current file</li>
 					<li>from an 'Open File' or 'Save File' dialog</li>
 				</ul>
-			</p>
 			<p>The 'recently used' file data is maintained per workspace and is restored when VS Code is closed and reopened. A 'clear recently used' option
 				is also listed when there are files already in the list. 
 			</p>
 			<p>The 'pickFile' command must be invoked from an 'input' property of a task, as it requires an 'args' argument. A sample 'inputs' property
 			can be added to the 'tasks.json' file with the <strong>XSLT: Add XSLT Inputs to Tasks File</strong> command.</p>
 			<h3 id="command-options-for-pickfile">Command Options for 'pickFile'</h3>
-				<p>The 'pickFile' command's 'args' object has the following properties:
+				<p>The 'pickFile' command's 'args' object has the following properties:</p>
 				<ul>
 					<li>label - the prompt message for the user, also the identifier for the 'recently' used list</li>
 					<li>extensions? - an array of filter file-extensions (when set, a '*' option can also be selected from the dialog)</li>
@@ -319,8 +320,7 @@ npm install --save-dev xslt3</code>
 					<li>prevStageGroup? - the group-name for the 'previous stage' files - default: 'recent files from previous stage'</li>
 					<li>xmlStylesheetPI? - set 'true' for pick-list to include a <code>&lt;?xml-stylesheet?&gt;</code> href from current editor</li>
 				</ul>
-				<strong>Sample input property definitions for the 'pickFile' command are listed below:</strong>
-			</p>
+				<p><strong>Sample input property definitions for the 'pickFile' command are listed below:</strong></p>
 			<code class="block scroll">
 "inputs": [
 /*
@@ -374,11 +374,11 @@ npm install --save-dev xslt3</code>
 			<h3 id="configuring-more-tasks">Configuring more tasks</h3>
 			<p>To create more tasks, just invoke <code>Tasks: Run Build Task</code> from the Command Palette 
 				and choose the task type you need. Provided you've changed the <code>label</code> property from the template
-				task for that type, a new task will created from the template task.
+				task for that type, a new task will be created from the template task.
 			</p>
-			<p>Visual Studio Tasks are very flexible. You can combine XSLT tasks with other task types, for example, to run a shell command.
+			<p>Visual Studio Code tasks are very flexible. You can combine XSLT tasks with other task types, for example, to run a shell command.
 				The <code>dependsOn</code> task property is used to chain tasks together. The <strong>Compound Tasks</strong>
-				section of the Visual Studio Code <a href="https://code.visualstudio.com/Docs/editor/tasks">Tasks documentation</a>
+				section of the Visual Studio Code <a href="https://code.visualstudio.com/docs/debugtest/tasks">Tasks documentation</a>
 				covers this concept in more detail.				
 			</p>
 			<h3 id="catalogs">XML catalogs</h3>
@@ -410,8 +410,8 @@ npm install --save-dev xslt3</code>
 				its prefix to the <code>XSLT.validation.externalFunctionPrefixes</code> setting - the quick fix for a
 				function that isn't found does this - and calls of functions with that prefix aren't checked.</p>
 			<h3 id="the-visual-studio-code-terminal">The Visual Studio Code terminal</h3>
-			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal</a>,
-				the Pane hosting the Terminal view is toggle with <span class="shortcut">⌘J</span>. 
+			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/terminal/basics">Integrated Terminal</a>,
+				the Pane hosting the Terminal view is toggled with <span class="shortcut">⌘J</span>. 
 				The tab label reflects the Task configuration <code>label</code> property. 
 				When a Saxon XSLT task is run, <code>xsl:message</code> output and any Saxon errors will be shown in the terminal window.
 			</p>
@@ -420,7 +420,7 @@ npm install --save-dev xslt3</code>
 			</p>
 			<aside>
 			The above screenshot shows formatted and colorised xsl:message output available through
-			special auto-completion options. See the <a href="code-diagnostics.html">Debugging</a> section for more detail.	
+			special auto-completion options. See <a href="code-diagnostics.html">Print Debugging</a> for more detail.	
 			</aside>
 
 		</div>

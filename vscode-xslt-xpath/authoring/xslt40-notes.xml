@@ -49,7 +49,7 @@
 				<code>@field 'unit name' e.g. cm</code>.</p>
 			<figure>
 				<img src="resources/xsl-note-field-tags.png" class="scale-with-grid" />
-				<figcaption style="margin:auto"><i>The xdoc-md tags and Markdown are highlighted within an <code>xsl:note</code>.</i></figcaption>
+				<figcaption style="margin:auto"><i>A note on an <code>xsl:item-type</code>, with an <code>@field</code> tag for each field of its record type.</i></figcaption>
 			</figure>
 			<h4>Markdown</h4>
 			<p>The description and tag text can use Markdown: <code>**bold**</code>, <code>*italics*</code>,
@@ -83,10 +83,13 @@
 			</ul>
 			<p>Within the start tag of an <code>xsl:note</code>, <code>format</code> is offered as an attribute, and
 				<code>xdoc-md</code> as its value.</p>
-			<p>Within a note, typing <code>@</code> offers the tags that apply: <code>@field</code> for an
+			<p>Within a note, typing <code>@</code> offers the tags that apply: <code>@see</code>, <code>@since</code>
+				and <code>@deprecated</code> for every note, with <code>@field</code> for an
 				<code>xsl:item-type</code>; <code>@param</code>, <code>@return</code> and <code>@error</code> for a
 				function or template; and <code>@param</code>, <code>@variable</code>, <code>@author</code> and
-				<code>@version</code> for a module note. After <code>@param</code>, the parameter names without an
+				<code>@version</code> for a module note. The note of a global <code>xsl:param</code> or
+				<code>xsl:variable</code> is offered only <code>@see</code>, <code>@since</code> and
+				<code>@deprecated</code>. After <code>@param</code>, the parameter names without an
 				<code>@param</code> yet are offered - and likewise after <code>@field</code> and <code>@variable</code>.</p>
 			<figure>
 				<img src="resources/add-documentation.png" class="scale-with-grid" />
@@ -211,7 +214,7 @@
 			</p>
 
 			<h3 id="xslt30">Notes in XSLT 3.0</h3>
-			<p>Unless you're using a compatible Saxon version with Saxon extensions enabled (see note below),
+			<p>Unless you're using a compatible Saxon version with syntax extensions enabled (see note below),
 				an XSLT 3.0 processor reports <code>XTSE0010</code> for <code>xsl:note</code>, as an unknown XSLT
 				element - the workaround is just to exclude this with <code>use-when="false()"</code>, which works with any processor.
 				In a stylesheet with <code>version="3.0"</code>:</p>
@@ -222,9 +225,9 @@
 					with <code>use-when="false()"</code></li>
 				<li>documentation notes are shown, highlighted and checked, as in XSLT 4.0</li>
 			</ul>
-			<aside>Saxon PE and EE 12.8 or later, run with Saxon extensions, accept <code>xsl:note</code> in an XSLT 3.0
+			<aside>Saxon PE and EE 12.8 or later, run with syntax extensions, accept <code>xsl:note</code> in an XSLT 3.0
 				stylesheet. With the setting <code>XSLT.validation.xslt30ItemTypesAndNotes</code>, the linter recognises notes so they need no
-				<code>use-when</code>, XSLT 4.0 <code>xsl:item-type</code> instructions are fully supported too - see
+				<code>use-when</code>, and XSLT 4.0 <code>xsl:item-type</code> declarations are fully supported too - see
 				<a href="settings.html#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a>.</aside>
 
 			<h3 id="highlighting">Highlighting Details</h3>
@@ -260,8 +263,10 @@
 					warning - but not other text, e.g. a URL, or a built-in function or type, e.g. <code>fn:sum#1</code></li>
 			</ul>
 			<p>In a module note, the <code>@param</code> and <code>@variable</code> tags are checked against the global
-				parameters and variables in the same way. A global parameter or variable with a note of its own isn't
-				reported as missing from the module note. <code>@return</code> and <code>@error</code> in a module note,
+				parameters and variables in the same way: when the note has <code>@variable</code> tags, global variables
+				without one are reported as information, with an <strong>Add missing @variable</strong> quick fix - as
+				for <code>@param</code>, with <strong>Add missing @param</strong>. A global parameter or variable with a
+				note of its own isn't reported as missing from the module note. <code>@return</code> and <code>@error</code> in a module note,
 				and <code>@param</code>, <code>@variable</code>, <code>@return</code> and <code>@error</code> in the note
 				of a global parameter or variable, are warnings.</p>
 		</div>

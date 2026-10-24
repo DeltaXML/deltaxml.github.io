@@ -133,8 +133,16 @@
 			<p>The syntax highlighter, linter and auto-completion support:</p>
 			<ul>
 				<li><strong>New XPath 4.0 syntax</strong> - the pipeline <code>-&gt;</code> and mapping arrow
-					<code>=!&gt;</code> operators, braced <code>if</code> expressions, map constructors without the
+					<code>=!&gt;</code> operators, the method call operator <code>=?&gt;</code>, e.g.
+					<code>$shape =?&gt; area()</code> - with the fields of a record type suggested after it - the
+					<code>×</code> and <code>÷</code> operators, braced <code>if</code> expressions, map constructors without the
 					<code>map</code> keyword, string templates, and the new <code>-or-self</code> axes</li>
+				<li><strong>Literals and bindings</strong> - hexadecimal and binary numeric literals, and <code>_</code>
+					digit separators, e.g. <code>0xFF_FF</code>, <code>0b101</code> and <code>1_000_000</code>; QName
+					literals, e.g. <code>#xs:integer</code>; positional variables, e.g.
+					<code>for $x at $i in $items return ...</code>; <code>for key</code> and <code>value</code> map
+					bindings, e.g. <code>for key $k value $v in $map return ...</code>; and typed <code>for</code>,
+					<code>let</code> and <code>some</code> bindings, e.g. <code>let $n as xs:integer := 3</code></li>
 				<li><strong>New item types</strong> - choice types, such as <code>(xs:date | xs:time)</code>, and the
 					<code>enum</code>, <code>record</code>, <code>fn</code> and <code>jnode</code> types</li>
 				<li><strong>Named item types</strong> - declared with <code>xsl:item-type</code>, with checks on the
@@ -149,8 +157,9 @@
 				<li><strong><a href="xslt40-jnodes.html">JNodes</a></strong> - path expressions on trees of maps and arrays, with <code>jtree()</code>,
 					<code>jkey()</code>, <code>jvalue()</code> and <code>get(...)</code> steps</li>
 				<li><strong>New instructions</strong> - snippets for <code>xsl:switch</code>, <code>xsl:array</code> and
-					<code>xsl:select</code>, and template rules declared within an <code>xsl:mode</code> (enclosed
-					modes)</li>
+					<code>xsl:select</code>, template rules declared within an <code>xsl:mode</code> (enclosed
+					modes), and <code>xsl:record</code>, with its attributes completed and checked against the record
+					type - see <a href="xslt40-records.html#building-records">Building records</a></li>
 			</ul>
 			<p>Features in the XSLT 4.0 draft that Saxon 13 doesn't implement - such as extensible record types
 				- are reported by the linter.</p>

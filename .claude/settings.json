@@ -47,7 +47,9 @@
       "Bash(sed -n 1,12p package.json)",
       "Bash(grep -n 'Saxon-HE\\\\|saxonJar' README.md)",
       "Skill(update-config)",
-      "Skill(update-config:*)"
+      "Skill(update-config:*)",
+      "Bash(sed -n 60,140p Values.java)",
+      "Bash(grep -n '==\\\\|hitCondition\\\\|hit' Debugger.java)"
     ]
   }
 }

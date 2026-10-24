@@ -99,12 +99,14 @@
 		<div class="main"><h2 class="pageTitle">Print Debugging</h2>
 
 		<div class="two-thirds column">
-			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">XSLT Debugger</a>.
-				The debugger also supports logpoints for printing debug values and text to the debug console - this
-				avoids the need to modify your XSLT but provides less flexibility than <code>xsl:message</code></p>
+			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">Debugger</a>.
+				The debugger also supports logpoints for printing debug values and text to the Debug Console - this
+				avoids the need to modify your XSLT but provides less flexibility than <code>xsl:message</code>.</p>
 			<p>Adding <strong>xsl:message</strong> instructions is another way to debug XSLT - one that works with
 				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
-				output is sent to the terminal window.
+				output is written to the terminal when the stylesheet runs as a <a href="run-xslt.html">task</a> or with
+				<a href="quick-run.html">Quick Run</a>, and to the <strong>Debug Console</strong> when it's
+				<a href="debugger.html">debugged</a>, with ANSI colors kept in both.
 				Diagnostics are added using the <strong>xdm:debug()</strong> function, from the
 				<a href="https://github.com/pgfearo/xdm-viewer">xdm-viewer</a> XSLT library, which renders one or more
 				named in-scope variables to a formatted string for use in an xsl:message.
@@ -112,22 +114,24 @@
 			<h3 id="diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</h3>
 			<p>There is special provision for conveniently reviewing the state of in-scope XSLT variables. This approach is outlined here.</p>
 			<h4 id="1-use-auto-complete-for-xsl-message">1. Use Auto-complete for xsl:message</h4>
-			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction. Four completion items are offered when in-scope variables are found:</p>
+			<p>To assist with debugging, the XSLT editor has special auto-completion for the xsl:message instruction. Four completion items are offered when in-scope variables are found - otherwise, only <strong>xsl:message (blank)</strong>:</p>
 			<ul>
-				<li><strong>(blank)</strong> - inserts a simple placeholder, for entering your own xsl:message content</li>
-				<li><strong>adaptive serialization</strong> - serializes last declared variable using <code>serialize()</code> with the <code>adaptive</code> method</li>
-				<li><strong>xdm:debug variables</strong> - lists all in-scope variables in a single <strong>xdm:debug()</strong> call</li>
-				<li><strong>xdm:debug-color variables</strong> - as above, with ANSI-colored terminal output</li>
+				<li><strong>xsl:message (blank)</strong> - inserts a simple placeholder, for entering your own xsl:message content</li>
+				<li><strong>xsl:message - adaptive serialization</strong> - serializes the last declared variable using <code>serialize()</code> with the <code>adaptive</code> method</li>
+				<li><strong>xsl:message - xdm:debug variables</strong> - lists all in-scope variables in a single <strong>xdm:debug()</strong> call</li>
+				<li><strong>xsl:message - xdm:debug-color variables</strong> - as above, with ANSI-colored output</li>
 			</ul>
 			<figure>
 				<img src="resources/xsl-message-list.png" class="scale-with-grid">
 				<figcaption style="margin:auto"><i>The auto-complete list for xsl:message when variables or parameters are in context.</i></figcaption>
 			</figure>
 			<h4 id="2-review-inserted-xsl-message">2. Review Inserted xsl:message</h4>
-			<p>When <strong>xdm:debug variables</strong> (or <strong>xdm:debug-color variables</strong>) is selected from the auto-complete list,
+			<p>When <strong>xsl:message - xdm:debug variables</strong> (or <strong>xsl:message - xdm:debug-color variables</strong>) is selected from the auto-complete list,
 				an xsl:message snippet is inserted at the cursor with all in-scope variables collected into a single XPath map,
-				passed as the second argument to <strong>xdm:debug()</strong>. A title, defaulting to the name of the enclosing
-				xsl:function or the mode of an enclosing xsl:template, is inserted as the first argument.
+				passed as the second argument to <strong>xdm:debug()</strong>. A title is inserted as the first argument:
+				<code>Watch: </code> followed by the name of the element that the xsl:message is in - e.g. an xsl:function or
+				named template - or the mode of an xsl:template. If that element has neither, the title is
+				<code>Watch Variables</code>.
 			</p>
 			<p>
 				<code class="block">&lt;xsl:message select="xdm:debug('Watch: my-function', map {
@@ -142,17 +146,18 @@
 			<h4 id="3-quick-fix-include-the-xdm-view-library">3. Quick Fix: Include the xdm-view Library</h4>
 			<p>
 				As can be seen above, the <code>xdm:debug()</code> function is not initially resolvable - it will be marked
-				as a 'problem' until its defining library is included. Hover over the problem function and accept the
-				'QuickFix' by pressing <span class="shortcut">Enter</span>.
+				as a 'problem' until its defining library is included. Put the cursor on the problem function and open
+				<strong>Quick Fix</strong> with <span class="shortcut">Cmd/Ctrl+.</span> - or choose <strong>Quick
+				Fix...</strong> when hovering over it.
 			</p>
 			<p>Two Quick Fix options are offered:</p>
 			<ul>
-				<li><strong>Include XSLT module for xdm:debug and xdm:trace</strong> (the default, preferred option) - inserts the
+				<li><strong>include XSLT module for xdm:debug and xdm:trace</strong> (the preferred option) - inserts the
 					<strong>xdm</strong> namespace declaration (<code>http://deltaxignia.com/ns/xdm-persistence</code>) and an
 					<strong>xsl:include</strong> instruction referencing a workspace-local copy of <strong>xdm-view.xsl</strong>
 					if one is found, otherwise the copy of the <strong>xdm-viewer</strong> library bundled with this extension.
 				</li>
-				<li><strong>Copy xdm-view library into workspace</strong> - copies the bundled <strong>xdm-viewer</strong> library
+				<li><strong>copy xdm-view library into workspace</strong> - copies the bundled <strong>xdm-viewer</strong> library
 					(and its <strong>xdm-persistence</strong> dependency) into an <code>xslt-resources/xdm-view</code> folder in
 					your workspace, then applies the same include as above. Use this if you want the library files available
 					locally, for example to inspect or version them alongside your own stylesheets.
@@ -172,9 +177,9 @@
 				<img src="resources/xdm-debug-output.png" style="width:480px" class="scale-with-grid">
 				<figcaption style="margin:auto"><i><code>xsl:message</code> output <code>xdm:debug-color()</code>.</i></figcaption>
 			</figure>
-			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VSCode with all SaxonJ, SaxonC and SaxonJS versions.
+			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VS Code with all SaxonJ, SaxonC and SaxonJS versions.
 				Because later SaxonJ versions don't support use of a built-in
-				TextEmitter command-line option, an extension class is used instead of `net.sf.saxon.Transform` when invoking
+				TextEmitter command-line option, an extension class is used instead of <code>net.sf.saxon.Transform</code> when invoking
 				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br>
 				For this same reason, in SaxonC, the XML output from SaxonC is decoded prior to output to the terminal.
 			</aside>
@@ -185,6 +190,8 @@
 			<code class="block">
 xdm:debug($title as xs:string, $labels as map(xs:string, item()*)) as xs:string
 xdm:debug($title as xs:string, $labels as map(xs:string, item()*), $level as xs:integer) as xs:string
+xdm:debug-color($title as xs:string, $labels as map(xs:string, item()*)) as xs:string
+xdm:debug-color($title as xs:string, $labels as map(xs:string, item()*), $level as xs:integer) as xs:string
 			</code>
 			<ul>
 			    <li>The output begins with a title to help locate the xsl:message in the code</li>

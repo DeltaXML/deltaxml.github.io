@@ -8,12 +8,12 @@
 			</p>
 			<h3>XML Elements</h3>
 			<h4>Rename Tag</h4>
-		  As you edit the start tag name of an element, the corresponding end tag name is changed at the same time to
-			keep the XML well-nested.
+			<p>As you edit the start tag name of an element, the corresponding end tag name is changed at the same time to
+			keep the XML well-nested.</p>
 			<h4>Self-Close Element</h4>
 			<p>
 				To convert an element with a start-tag and end-tag to a self-closed element: With the cursor immediately to the
-				left of the <code>&gt;</code>at the end of the start-tag, type 
+				left of the <code>&gt;</code> at the end of the start-tag, type 
 				<code>/</code>. Any element contents and the
 				end tag will be deleted automatically:
 			</p>
@@ -23,17 +23,27 @@
 			<p>
 				Select the element tag name you want to rename by double-clicking it, then press (<span class="shortcut">⇧⌘L</span>). This selects
 				all matching tag names so you're in a multi-cursor edit mode. As you edit the tag name you selected all
-				matching tag names are edited also. When done, press <span class="shortcut">Escape to exit multi-cursor edit</span>.
+				matching tag names are edited also. When done, press <span class="shortcut">Escape</span> to exit multi-cursor edit.
 			</p>
 			<h3>Auto-Completion</h3>
 			<p>Outside of the auto-complete (intellisense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
 			from the auto-completion list:</p>
 			<img src="resources/suggestions.png" class="scale-with-grid" />
+			<p>After a <code>&lt;</code> within an element, the tag snippets insert an element with a placeholder for its name,
+				which is used for both the start and end tags:</p>
+			<ul>
+				<li><code>block-start-end-tag</code> - start and end tags on separate lines, with the cursor on the indented line between them</li>
+				<li><code>inline-start-end-tag</code> - start and end tags on the same line, with a placeholder for the text between them</li>
+				<li><code>self-closed-tag</code> - a self-closed element</li>
+			</ul>
+			<p>Each has a <code>-with</code> variant, such as <code>block-start-end-tag-with</code>, that also inserts an attribute.
+				Before the root element of a file, the <code>XML Root Element Snippet</code> inserts an XML declaration and a root element
+				with an attribute and a child element.</p>
 			<p>
 				With the cursor in the element start tag where you wish to add the attribute, press <span class="shortcut">⌃Space</span>
 				and select <code>attribute</code> to insert the code snippet:
 			</p>
-			<code class="block"><bold>name</bold>="<bold>value</bold>"</code>
+			<code class="block"><strong>name</strong>="<strong>value</strong>"</code>
 			<p>Edit the <code>name</code> and then press <span class="shortcut">Tab</span> to edit the <code>value</code>.</p>
 			<h3>Emmet</h3>
 			<p>Emmet can be used to insert XML snippets using a shorthand notation. Emmet should be enabled in user settings.
@@ -41,19 +51,29 @@
 			</p>
 			<h3>Well-Formed XML Checks</h3>
 			<img src="resources/problems.png" class="scale-with-grid" />
-			<p>As you edit an XML file, the syntax is checked for any well-formedness errors. Any problems tokens are highlighted with
+			<p>As you edit an XML file, the syntax is checked for any well-formedness errors. Any problem tokens are highlighted with
 				a squiggly underline in the editor. To see a description of the problem, hover over a highlighted token. To help navigate
-			between problems, the Problems View (press <span class="shortcut">⇧⌘M</span> to toggle) shows a list of XML syntax
-			problems. Problems are also highlighted in the Outline View. Selecting a Problem View list item, or Outline View node will
+			between problems, the Problems view (press <span class="shortcut">⇧⌘M</span> to toggle) shows a list of XML syntax
+			problems. Problems are also highlighted in the Outline View. Selecting a Problems view list item, or Outline View node will
 				navigate you to the corresponding token in the XML editor.</p>	
 			<h3 id="xmlformatting">XML Formatting</h3>
-			<p>When you have an XML file open, normal XML formatting features are available. With typical hand-edited XML, it is
-			only indentation that is correct by the formatting. However, if no newline characters are found at the start of the XML file,
-				it is assumed the contents is system generated and newline characters are added for elements that are not mixed content.</p>
+			<p>When you have an XML file open, normal XML formatting features are available. With typical hand-edited XML,
+			only the indentation is changed by the formatting. However, if no newline characters are found at the start of the XML file,
+				it is assumed the contents are system generated and newline characters are added for elements that are not mixed content.</p>
 			<p>The formatter observes the normal rules for whitespace preservation in XML. So <code>xml:space</code> attributes affect
 			whether indentation is preserved. Whitespace in <code>CDATA</code> sections and 'significant' whitespace in content inferred
 				to be <em>mixed content</em> is also preserved.</p>
 			<p>XML attributes on newlines and multi-line attribute value are indented by the XML formatting provider to reflect the level of nesting.</p>
+			<p>The <strong>XML: Format XML with newlines inside mixed-content</strong> command, from the Command Palette
+				(<span class="shortcut">⇧⌘P</span>), formats the whole file with a newline added before each start tag and end tag that
+				doesn't already start a line, and indents the result - including inside mixed content, where whitespace is otherwise preserved.</p>
+			<h4>Tab on an Empty Line</h4>
+			<p>In an XML or XSLT file, pressing <span class="shortcut">Tab</span> on an empty or whitespace-only line, such as one you've
+				clicked on, indents the line for its context, as if you had just pressed <span class="shortcut">Enter</span>, with the
+				cursor at the end of the indentation. Elsewhere, or where the line is already indented that far,
+				<span class="shortcut">Tab</span> works as normal. The key binding is for the
+				<strong>Tab: Indent an Empty Line for Its Context</strong> command, and can be changed in the
+				<a href="https://code.visualstudio.com/docs/configure/keybindings">Keyboard Shortcuts</a> editor.</p>
 			<h3>XML Element Selection</h3>
 			<p>The XSLT/XPath extension provides a set of commands for selecting an element. 
 				These commands can be invoked from the Command Palette (<span class="shortcut">⇧⌘P</span>), or from the
