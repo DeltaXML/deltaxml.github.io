@@ -36,9 +36,9 @@
 				doesn't define, the session doesn't start, and you're offered <strong>Open tasks.json</strong>.</p>
 			<figure>
 				<img src="resources/debugger-start.png" class="scale-with-grid" />
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">The Run and Debug View provides options for how to launch the debugger.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h4 id="launch-json">Launch configurations</h4>
 			<p>With no <code>launch.json</code>, the <strong>Run and Debug</strong> view offers <strong>Debug Active
@@ -100,9 +100,9 @@
 			</ul>
 			<figure>
 				<img src="resources/debugger-conditional.png" class="scale-with-grid" />
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h4 id="function-breakpoints">Function and named-template breakpoints</h4>
 			<p>To stop whenever a stylesheet function or named template is called, without finding where it's
@@ -137,9 +137,9 @@
 			</ul>
 			<figure>
 				<img src="resources/debugger-error.png" class="scale-with-grid" />
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">The debugger paused on a dynamic error.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<p>A <em>static</em> error - one Saxon finds when it compiles the stylesheet - can't be paused at, as the
 				stylesheet never runs. This includes a type error that Saxon can tell will always happen: for example,
@@ -207,9 +207,9 @@
 				<code>fold-left()</code>.</p>
 			<figure>
 				<img src="resources/debugger-xpath-step.jpg" class="scale-with-grid" />
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">Evaluation context and call stack in the Run and Debug view when execution is paused.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h3 id="call-stack">Call stack</h3>
 			<p>The <strong>Call Stack</strong> view has a frame for each:</p>

@@ -12,9 +12,9 @@
 			</p>
 			<figure>
 			<img src="resources/quick-run.png" class="scale-with-grid" />
-				<figurecaption>
+				<figcaption>
 						<p><i style="font-style: italic">(1) XSLT in active editor, (2) the Saxon processor, (3) the XML context file - Click the play button to run</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h3>Running a stylesheet</h3>
 			<p>

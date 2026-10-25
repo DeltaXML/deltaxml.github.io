@@ -101,9 +101,7 @@
 					and Node.js and has a
 					rich ecosystem of extensions for other languages...
 				</blockquote>
-				<p>
-					<img src="resources/vscode-xslt.png" class="scale-with-grid">
-				</p>
+
 				<h4 id="index--the-user-interface">The User Interface</h4>
 				<p>
 					Visual Studio Code's <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface">user
@@ -133,6 +131,11 @@
 					list. The list of commands is
 					filtered as you type. The most recently used commands are shown at the top of the list.
 				</p>
+				<figure>
+					<img src="resources/command-palette.png" class="scale-with-grid">
+					<figcaption><i>VS Code's command palette - built in commands are supplemented by specialist XSLT/XML commands.</i></figcaption>
+				</figure>
+			
 				<h4 id="index--opening-workspace-files">Opening Workspace Files</h4>
 				<p>
 					The <strong>File: Open Folder</strong> command is used to select the starting 'Workspace' folder to
@@ -172,7 +175,7 @@
 						Visual Studio
 						Code</strong> entry, press the <code>install</code> button.</p>
 				<p>
-					<img src="resources/extension-view.png" class="scale-with-grid">
+					<img src="resources/install-extension.png" class="scale-with-grid">
 				</p>
 				<h5 id="index--color-theme-extensions">Color Theme Extensions</h5>
 				<p>Visual Studio Code includes a small set of light and dark color themes. Alternative color themes are
@@ -1765,9 +1768,9 @@
 			</p>
 			<figure>
 			<img src="resources/quick-run.png" class="scale-with-grid">
-				<figurecaption>
+				<figcaption>
 						<p><i style="font-style: italic">(1) XSLT in active editor, (2) the Saxon processor, (3) the XML context file - Click the play button to run</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h3 id="quick-run--running-a-stylesheet">Running a stylesheet</h3>
 			<p>
@@ -2393,9 +2396,9 @@ npm install --save-dev xslt3</code>
 				doesn't define, the session doesn't start, and you're offered <strong>Open tasks.json</strong>.</p>
 			<figure>
 				<img src="resources/debugger-start.png" class="scale-with-grid">
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">The Run and Debug View provides options for how to launch the debugger.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h4 id="debugger--launch-json">Launch configurations</h4>
 			<p>With no <code>launch.json</code>, the <strong>Run and Debug</strong> view offers <strong>Debug Active
@@ -2457,9 +2460,9 @@ npm install --save-dev xslt3</code>
 			</ul>
 			<figure>
 				<img src="resources/debugger-conditional.png" class="scale-with-grid">
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h4 id="debugger--function-breakpoints">Function and named-template breakpoints</h4>
 			<p>To stop whenever a stylesheet function or named template is called, without finding where it's
@@ -2494,9 +2497,9 @@ npm install --save-dev xslt3</code>
 			</ul>
 			<figure>
 				<img src="resources/debugger-error.png" class="scale-with-grid">
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">The debugger paused on a dynamic error.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<p>A <em>static</em> error - one Saxon finds when it compiles the stylesheet - can't be paused at, as the
 				stylesheet never runs. This includes a type error that Saxon can tell will always happen: for example,
@@ -2564,9 +2567,9 @@ npm install --save-dev xslt3</code>
 				<code>fold-left()</code>.</p>
 			<figure>
 				<img src="resources/debugger-xpath-step.jpg" class="scale-with-grid">
-				<figurecaption>
+				<figcaption>
 					<p><i style="font-style: italic">Evaluation context and call stack in the Run and Debug view when execution is paused.</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h3 id="debugger--call-stack">Call stack</h3>
 			<p>The <strong>Call Stack</strong> view has a frame for each:</p>
