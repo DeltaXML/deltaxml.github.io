@@ -153,7 +153,27 @@
 				a squiggly underline in the editor. To see a description of the problem, hover over a highlighted token. To help navigate
 			between problems, the Problems view (press <span class="shortcut">⇧⌘M</span> to toggle) shows a list of XML syntax
 			problems. Problems are also highlighted in the Outline View. Selecting a Problems view list item, or Outline View node will
-				navigate you to the corresponding token in the XML editor.</p>	
+				navigate you to the corresponding token in the XML editor.</p>
+			<h3 id="entities">Entities</h3>
+			<p>An XML or XSLT file can declare entities in its DOCTYPE's internal subset, to use as references such as
+				<code>&amp;company;</code>:</p>
+			<code class="block">&lt;!DOCTYPE xsl:stylesheet [
+  &lt;!ENTITY company "DeltaXignia Ltd"&gt;
+]&gt;</code>
+			<p>Each reference is checked: it must be one of the predefined entities - <code>&amp;lt;</code>,
+				<code>&amp;gt;</code>, <code>&amp;amp;</code>, <code>&amp;quot;</code> and <code>&amp;apos;</code> - a
+				character reference such as <code>&amp;#160;</code>, or an entity the internal subset declares. When the
+				DOCTYPE names an external DTD, or the subset uses a parameter entity reference such as
+				<code>%chars;</code>, any entity name is allowed, as its declarations can't all be seen.</p>
+			<ul>
+				<li>Type <code>&amp;</code> to auto-complete an entity name: the declared entities, with their values, and the
+					predefined entities</li>
+				<li>Hover over a reference to see its entity's value, or the file of an external entity - or, for a
+					character reference, the character's code point, such as U+00A0</li>
+				<li>Go to Definition (<span class="shortcut">F12</span>) on a reference goes to its
+					<code>&lt;!ENTITY&gt;</code> declaration</li>
+			</ul>
+			<p>In the DOCTYPE, the names of declared entities are colored as references are, and quoted values as strings.</p>
 			<h3 id="xmlformatting">XML Formatting</h3>
 			<p>When you have an XML file open, normal XML formatting features are available. With typical hand-edited XML,
 			only the indentation is changed by the formatting. However, if no newline characters are found at the start of the XML file,
@@ -192,7 +212,7 @@
 		</div>
 		
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#xml-elements">XML Elements</a><ul><li><a href="#rename-tag">Rename Tag</a></li><li><a href="#self-close-element">Self-Close Element</a></li><li><a href="#rename-all-elements-with-selected-name">Rename all elements with selected name</a></li></ul></li><li><a href="#auto-completion">Auto-Completion</a></li><li><a href="#emmet">Emmet</a></li><li><a href="#well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#xmlformatting">XML Formatting</a><ul><li><a href="#tab-on-an-empty-line">Tab on an Empty Line</a></li></ul></li><li><a href="#xml-element-selection">XML Element Selection</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#xml-elements">XML Elements</a><ul><li><a href="#rename-tag">Rename Tag</a></li><li><a href="#self-close-element">Self-Close Element</a></li><li><a href="#rename-all-elements-with-selected-name">Rename all elements with selected name</a></li></ul></li><li><a href="#auto-completion">Auto-Completion</a></li><li><a href="#emmet">Emmet</a></li><li><a href="#well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#entities">Entities</a></li><li><a href="#xmlformatting">XML Formatting</a><ul><li><a href="#tab-on-an-empty-line">Tab on an Empty Line</a></li></ul></li><li><a href="#xml-element-selection">XML Element Selection</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
