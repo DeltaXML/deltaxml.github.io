@@ -104,127 +104,189 @@
 			<p>The extension's features at a glance, grouped by task. Each one links to the part of this guide that
 				describes it.</p>
 
-			<h3 id="languages">XSLT and XPath languages</h3>
-			<ul>
-				<li><a href="xslt30.html">XSLT 3.0</a> and XPath 3.1</li>
-				<li><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0, as implemented in Saxon 13</li>
-				<li>SaxonJS interactive extensions (IXSL)</li>
-				<li><code>.xpath</code> files, as XPath 4.0</li>
-				<li><a href="editing-xslt.html#highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
-			</ul>
+			<div class="feature-cards">
 
-			<h3 id="xslt40">XSLT 4.0</h3>
-			<ul>
-				<li><a href="xslt40-records.html">Record and enum types</a>, with type-aware checks</li>
-				<li>Named item types: <code>xsl:item-type</code></li>
-				<li><a href="xslt40-records.html#switch"><code>xsl:switch</code></a>, with quick fixes for missing cases</li>
-				<li>Keyword arguments and optional parameters</li>
-				<li>Functions in no namespace</li>
-				<li><a href="xslt40-jnodes.html">Path expressions on JSON</a> (JNodes)</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<path d="M8 4c-2 0-3 1-3 3v2c0 1.5-.8 2.5-2 3 1.2.5 2 1.5 2 3v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1.5.8 2.5 2 3-1.2.5-2 1.5-2 3v2c0 2-1 3-3 3"></path>
+					</svg>
+					<h3 id="languages">XSLT and XPath languages</h3>
+					<ul>
+						<li><a href="xslt30.html">XSLT 3.0</a> and XPath 3.1</li>
+						<li><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0, as implemented in Saxon 13</li>
+						<li>SaxonJS interactive extensions (IXSL)</li>
+						<li><code>.xpath</code> files, as XPath 4.0</li>
+						<li><a href="editing-xslt.html#highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
+					</ul>
+				</section>
 
-			<h3 id="editing">Editing</h3>
-			<ul>
-				<li><a href="editing-xslt.html#intellisense">Context-aware auto-completion</a>, including node names from
-					the XML context file</li>
-				<li><a href="editing-xslt.html#hover">Signature help and hover help</a></li>
-				<li><a href="editing-xslt.html#xslt-instruction-snippets">Snippets</a>, including new stylesheets for 3.0
-					and 4.0</li>
-				<li><a href="editing-xslt.html#formatting">Formatting</a> of instructions and multi-line XPath</li>
-				<li><a href="editing-xslt.html#renaming">Rename symbol</a>, across imported modules</li>
-				<li><a href="editing-xslt.html#quick-fixes">Code actions</a> for quick fixes and refactoring</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"></path>
+						<path d="M19 15v5M16.5 17.5h5"></path>
+					</svg>
+					<h3 id="xslt40">XSLT 4.0</h3>
+					<ul>
+						<li><a href="xslt40-records.html">Record and enum types</a>, with type-aware checks</li>
+						<li>Named item types: <code>xsl:item-type</code></li>
+						<li><a href="xslt40-records.html#switch"><code>xsl:switch</code></a>, with quick fixes for missing cases</li>
+						<li>Keyword arguments and optional parameters</li>
+						<li>Functions in no namespace</li>
+						<li><a href="xslt40-jnodes.html">Path expressions on JSON</a> (JNodes)</li>
+					</ul>
+				</section>
 
-			<h3 id="linter">Linter</h3>
-			<ul>
-				<li><a href="editing-xslt.html#checking">XPath syntax and XSLT instructions</a>, checked as you type</li>
-				<li>Types, records, enums and function arguments</li>
-				<li><a href="editing-xslt.html#unused-variables">Unused XSLT and XPath variables or parameters</a></li>
-				<li>References across imported modules</li>
-				<li><a href="editing-xslt.html#compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
-					Problems view</li>
-				<li><a href="editing-xslt.html#quick-fixes">Quick fixes</a> for common problems</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<path d="M4 20h4L19 9l-4-4L4 16z"></path>
+						<path d="M13 7l4 4"></path>
+					</svg>
+					<h3 id="editing">Editing</h3>
+					<ul>
+						<li><a href="editing-xslt.html#intellisense">Context-aware auto-completion</a>, including node names from
+							the XML context file</li>
+						<li><a href="editing-xslt.html#hover">Signature help and hover help</a></li>
+						<li><a href="editing-xslt.html#xslt-instruction-snippets">Snippets</a>, including new stylesheets for 3.0
+							and 4.0</li>
+						<li><a href="editing-xslt.html#formatting">Formatting</a> of instructions and multi-line XPath</li>
+						<li><a href="editing-xslt.html#renaming">Rename symbol</a>, across imported modules</li>
+						<li><a href="editing-xslt.html#quick-fixes">Code actions</a> for quick fixes and refactoring</li>
+					</ul>
+				</section>
 
-			<h3 id="navigation">Navigation</h3>
-			<ul>
-				<li><a href="navigation.html#peek-goto-definition">Go to (or peek) definition</a>, and
-					<a href="navigation.html#goto-peek-references-find-all-references">find references</a></li>
-				<li><a href="xslt40-records.html#hover-and-navigation">Go to the declarations of record fields</a></li>
-				<li><a href="navigation.html#outline-view">Outline</a>,
-					<a href="navigation.html#xslt-xml-breadcrumbs">breadcrumbs</a> and
-					<a href="navigation.html#goto-symbol">Go to Symbol</a></li>
-				<li><a href="navigation.html#file-links">Links</a> for <code>xsl:import</code> and
-					<code>xsl:include</code></li>
-				<li><a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>, with
-					<a href="editing-xslt.html#inferred-imports">inferred top-level stylesheets</a></li>
-				<li><a href="xpath-queries.html">Find nodes with XPath</a> in XML files</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<circle cx="12" cy="12" r="9"></circle>
+						<path d="M8 12.5l2.7 2.7L16 9.5"></path>
+					</svg>
+					<h3 id="linter">Linter</h3>
+					<ul>
+						<li><a href="editing-xslt.html#checking">XPath syntax and XSLT instructions</a>, checked as you type</li>
+						<li>Types, records, enums and function arguments</li>
+						<li><a href="editing-xslt.html#unused-variables">Unused XSLT and XPath variables or parameters</a></li>
+						<li>References across imported modules</li>
+						<li><a href="editing-xslt.html#compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
+							Problems view</li>
+						<li><a href="editing-xslt.html#quick-fixes">Quick fixes</a> for common problems</li>
+					</ul>
+				</section>
 
-			<h3 id="refactoring">Refactoring</h3>
-			<ul>
-				<li><a href="editing-xslt.html#renaming">Safe symbol renaming</a></li>
-				<li><a href="refactoring-xslt.html">Extract <code>xsl:function</code> or <code>xsl:template</code></a></li>
-				<li><a href="refactoring-xslt.html">Extract <code>xsl:variable</code></a> from an XPath expression</li>
-				<li><a href="xslt40-records.html#record-refactoring">Extract a record type</a> from a map</li>
-				<li><a href="editing-xslt.html#refactoring"><strong>Wrap with...</strong></a> an instruction
-					(<span class="shortcut">⌥⇧W</span> / <span class="shortcut">Alt+Shift+W</span>)</li>
-				<li><a href="xslt40-notes.html#adding">Add a documentation note</a></li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<circle cx="12" cy="12" r="9"></circle>
+						<path d="M15.5 8.5l-2 5-5 2 2-5z"></path>
+					</svg>
+					<h3 id="navigation">Navigation</h3>
+					<ul>
+						<li><a href="navigation.html#peek-goto-definition">Go to (or peek) definition</a>, and
+							<a href="navigation.html#goto-peek-references-find-all-references">find references</a></li>
+						<li><a href="xslt40-records.html#hover-and-navigation">Go to the declarations of record fields</a></li>
+						<li><a href="navigation.html#outline-view">Outline</a>,
+							<a href="navigation.html#xslt-xml-breadcrumbs">breadcrumbs</a> and
+							<a href="navigation.html#goto-symbol">Go to Symbol</a></li>
+						<li><a href="navigation.html#file-links">Links</a> for <code>xsl:import</code> and
+							<code>xsl:include</code></li>
+						<li><a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>, with
+							<a href="editing-xslt.html#inferred-imports">inferred top-level stylesheets</a></li>
+						<li><a href="xpath-queries.html">Find nodes with XPath</a> in XML files</li>
+					</ul>
+				</section>
 
-			<h3 id="running">Running XSLT</h3>
-			<ul>
-				<li><a href="quick-run.html"><strong>Quick Run</strong></a> (<span class="shortcut">⌘⌥R</span> /
-					<span class="shortcut">Ctrl+Alt+R</span>)</li>
-				<li><a href="run-xslt.html">Tasks</a> for <a href="run-xslt.html#saxonj-tasks">SaxonJ</a>,
-					<a href="run-xslt.html#saxonjs-tasks">SaxonJS</a> and <a href="run-xslt.html#saxonc-tasks">SaxonC</a></li>
-				<li><a href="quick-run.html#required-parameters">Required <code>xsl:param</code> values</a> asked for when
-					a task runs</li>
-				<li><code>xsl:param</code> values controlled by tasks</li>
-				<li><a href="xml-catalogs.html">XML catalogs</a> for <code>xsl:import</code> URIs</li>
-				<li><a href="run-xslt.html#user-input-for-file-selection-within-a-task">File pickers</a> for task
-					inputs</li>
-				<li><a href="run-xslt.html#java-extension-functions">Java extension functions</a></li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<path d="M4 8h13M14 5l3 3-3 3"></path>
+						<path d="M20 16H7M10 13l-3 3 3 3"></path>
+					</svg>
+					<h3 id="refactoring">Refactoring</h3>
+					<ul>
+						<li><a href="editing-xslt.html#renaming">Safe symbol renaming</a></li>
+						<li><a href="refactoring-xslt.html">Extract <code>xsl:function</code> or <code>xsl:template</code></a></li>
+						<li><a href="refactoring-xslt.html">Extract <code>xsl:variable</code></a> from an XPath expression</li>
+						<li><a href="xslt40-records.html#record-refactoring">Extract a record type</a> from a map</li>
+						<li><a href="editing-xslt.html#refactoring"><strong>Wrap with...</strong></a> an instruction
+							(<span class="shortcut">⌥⇧W</span> / <span class="shortcut">Alt+Shift+W</span>)</li>
+						<li><a href="xslt40-notes.html#adding">Add a documentation note</a></li>
+					</ul>
+				</section>
 
-			<h3 id="debugging">Debugging</h3>
-			<ul>
-				<li><a href="debugger.html">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
-				<li><a href="debugger.html#xpath">Stepping through multi-line XPath</a>, including inline functions</li>
-				<li><a href="debugger.html#conditional">Conditional breakpoints, hit counts and logpoints</a></li>
-				<li><a href="debugger.html#variables">Views of the locals, globals, context and output</a></li>
-				<li><a href="debugger.html#evaluating">Watch expressions, hovers and the Debug Console</a></li>
-				<li><a href="debugger.html#output">The output so far</a>, mapped back to the XSLT that wrote it</li>
-				<li><a href="code-diagnostics.html">Formatted and colored print debugging</a> with
-					<code>xdm:debug()</code></li>
-				<li><a href="code-diagnostics.html#xdm-trace"><code>xdm:trace()</code></a> - a formatted
-					<code>trace()</code>, with code actions to add and remove it</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<circle cx="12" cy="12" r="9"></circle>
+						<path d="M10 8.5v7l5.5-3.5z"></path>
+					</svg>
+					<h3 id="running">Running XSLT</h3>
+					<ul>
+						<li><a href="quick-run.html"><strong>Quick Run</strong></a> (<span class="shortcut">⌘⌥R</span> /
+							<span class="shortcut">Ctrl+Alt+R</span>)</li>
+						<li><a href="run-xslt.html">Tasks</a> for <a href="run-xslt.html#saxonj-tasks">SaxonJ</a>,
+							<a href="run-xslt.html#saxonjs-tasks">SaxonJS</a> and <a href="run-xslt.html#saxonc-tasks">SaxonC</a></li>
+						<li><a href="quick-run.html#required-parameters">Required <code>xsl:param</code> values</a> asked for when
+							a task runs</li>
+						<li><code>xsl:param</code> values controlled by tasks</li>
+						<li><a href="xml-catalogs.html">XML catalogs</a> for <code>xsl:import</code> URIs</li>
+						<li><a href="run-xslt.html#user-input-for-file-selection-within-a-task">File pickers</a> for task
+							inputs</li>
+						<li><a href="run-xslt.html#java-extension-functions">Java extension functions</a></li>
+					</ul>
+				</section>
 
-			<h3 id="code-documentation">Code documentation</h3>
-			<ul>
-				<li><a href="xslt40-notes.html#writing"><code>xsl:note</code></a> with
-					<a href="xslt40-notes.html#markdown">Markdown</a> and <a href="xslt40-notes.html#tags">xqDoc-style
-					tags</a></li>
-				<li><a href="xslt40-notes.html#where-shown">Shown in hover and signature help</a></li>
-				<li><a href="xslt40-notes.html#references"><code>@see</code> references</a>, with navigation and
-					rename</li>
-				<li><a href="xslt40-notes.html#checks">Checks</a> of <code>@param</code> and <code>@field</code> tags</li>
-				<li><a href="xslt40-notes.html#module-notes">Module notes</a> for stylesheets</li>
-				<li><a href="xslt40-notes.html#highlighting">Highlighting</a> and auto-completion for tags and
-					references</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<rect x="8" y="8" width="8" height="12" rx="4"></rect>
+						<path d="M9.5 8a2.5 2.5 0 0 1 5 0M12 12v8M8 13H4M20 13h-4M8 17l-3 2M16 17l3 2M8.5 10L5 7.5M15.5 10L19 7.5"></path>
+					</svg>
+					<h3 id="debugging">Debugging</h3>
+					<ul>
+						<li><a href="debugger.html">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
+						<li><a href="debugger.html#xpath">Stepping through multi-line XPath</a>, including inline functions</li>
+						<li><a href="debugger.html#conditional">Conditional breakpoints, hit counts and logpoints</a></li>
+						<li><a href="debugger.html#variables">Views of the locals, globals, context and output</a></li>
+						<li><a href="debugger.html#evaluating">Watch expressions, hovers and the Debug Console</a></li>
+						<li><a href="debugger.html#output">The output so far</a>, mapped back to the XSLT that wrote it</li>
+						<li><a href="code-diagnostics.html">Formatted and colored print debugging</a> with
+							<code>xdm:debug()</code></li>
+						<li><a href="code-diagnostics.html#xdm-trace"><code>xdm:trace()</code></a> - a formatted
+							<code>trace()</code>, with code actions to add and remove it</li>
+					</ul>
+				</section>
 
-			<h3 id="xml-editing">XML editing</h3>
-			<ul>
-				<li><a href="editing.html#well-formed-xml-checks">Well-formedness and namespace checks</a></li>
-				<li><a href="editing.html#xmlformatting">Formatting</a> and a tree-view outline</li>
-				<li><a href="editing.html#xml-elements">Auto tag-close</a>, <a href="editing.html#rename-tag">tag
-					rename</a> and <a href="editing.html#self-close-element">self-close</a></li>
-				<li><a href="editing.html#xml-element-selection">Element selection commands</a></li>
-				<li>Comment command (<span class="shortcut">⌘/</span>)</li>
-				<li>XML snippets, breadcrumbs and sticky scroll</li>
-			</ul>
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<path d="M6 3h8l4 4v14H6z"></path>
+						<path d="M14 3v4h4M9 12h6M9 16h6"></path>
+					</svg>
+					<h3 id="code-documentation">Code documentation</h3>
+					<ul>
+						<li><a href="xslt40-notes.html#writing"><code>xsl:note</code></a> with
+							<a href="xslt40-notes.html#markdown">Markdown</a> and <a href="xslt40-notes.html#tags">xqDoc-style
+							tags</a></li>
+						<li><a href="xslt40-notes.html#where-shown">Shown in hover and signature help</a></li>
+						<li><a href="xslt40-notes.html#references"><code>@see</code> references</a>, with navigation and
+							rename</li>
+						<li><a href="xslt40-notes.html#checks">Checks</a> of <code>@param</code> and <code>@field</code> tags</li>
+						<li><a href="xslt40-notes.html#module-notes">Module notes</a> for stylesheets</li>
+						<li><a href="xslt40-notes.html#highlighting">Highlighting</a> and auto-completion for tags and
+							references</li>
+					</ul>
+				</section>
+
+				<section class="feature-card">
+					<svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+						<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"></path>
+					</svg>
+					<h3 id="xml-editing">XML editing</h3>
+					<ul>
+						<li><a href="editing.html#well-formed-xml-checks">Well-formedness and namespace checks</a></li>
+						<li><a href="editing.html#xmlformatting">Formatting</a> and a tree-view outline</li>
+						<li><a href="editing.html#xml-elements">Auto tag-close</a>, <a href="editing.html#rename-tag">tag
+							rename</a> and <a href="editing.html#self-close-element">self-close</a></li>
+						<li><a href="editing.html#xml-element-selection">Element selection commands</a></li>
+						<li>Comment command (<span class="shortcut">⌘/</span>)</li>
+						<li>XML snippets, breadcrumbs and sticky scroll</li>
+					</ul>
+				</section>
+
+			</div>
 		</div>
 
 	</div>

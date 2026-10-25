@@ -141,7 +141,7 @@
         <xsl:variable name="mainDiv" as="element()?" select="doc(resolve-uri('authoring/' || substring-before($href, '.') || '.xml', $siteDir))//div[@class eq 'main']"/>
         <xsl:variable name="column" as="element()?" select="($mainDiv/div[contains-token(@class, 'two-thirds')], $mainDiv)[1]"/>
         <xsl:variable name="page" as="xs:string" select="normalize-space(.)"/>
-        <xsl:for-each-group select="$column/node()" group-starting-with="h3 | h4 | h5">
+        <xsl:for-each-group select="f:section-flow($column/node())" group-starting-with="h3 | h4 | h5">
           <xsl:variable name="heading" as="element()?" select="current-group()[1][self::h3 | self::h4 | self::h5]"/>
           <xsl:variable name="text" as="xs:string"
                         select="normalize-space(string-join((current-group() except $heading) ! string(), ' '))"/>
@@ -163,6 +163,13 @@
       <xsl:text>;&#10;</xsl:text>
     </xsl:result-document>
   </xsl:template>
+
+  <!-- a column's content with the elements that only group its sections - e.g. the features page's cards - replaced by
+       their contents, so that each heading is followed by the content up to the next one -->
+  <xsl:function name="f:section-flow" as="node()*">
+    <xsl:param name="nodes" as="node()*"/>
+    <xsl:sequence select="$nodes ! (if (.//(h3 | h4 | h5)) then f:section-flow(node()) else .)"/>
+  </xsl:function>
 
   <xsl:template match="nav//ul" mode="#default">
     <xsl:apply-templates select="li/a/@href"/>    
