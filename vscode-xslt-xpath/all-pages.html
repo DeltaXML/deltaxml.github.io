@@ -1,4 +1,4 @@
-<!DOCTYPE HTML><html lang="en"><head><meta charset="UTF-8"><title>XSLT and XPath for Visual Studio Code - User Guide</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code."><meta name="author" content="Philip Fearon"><link rel="stylesheet" href="./resources/base.css"><link rel="stylesheet" href="./resources/skeleton.css"><link rel="stylesheet" href="./resources/layout.css"><link rel="stylesheet" href="./resources/custom.css"><link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"><link rel="stylesheet" href="./resources/all-pages.css"></head><body class="all-pages"><div class="all-pages-bar"><a href="index.html">Back to the guide</a><a href="vscode-xslt-xpath-guide.pdf">Download PDF</a><button type="button" onclick="window.print()">Print or save as PDF</button></div><section class="cover"><img src="../resources/tiny-white-logo.png" alt="DeltaXignia"><h1>XSLT and XPath<br>for Visual Studio Code</h1><p class="cover-subtitle">User Guide</p></section><nav class="contents"><h2>Contents</h2><ul><li class="contents-page"><a href="#index">Overview</a><ul><li><a href="#index--getting-started">Getting started</a></li><li><a href="#index--writing">Writing XSLT</a></li><li><a href="#index--reviewing">Reviewing XSLT</a></li><li><a href="#index--running">Running XSLT</a></li><li><a href="#index--debugging">Debugging XSLT</a></li><li><a href="#index--scope">Scope</a></li><li><a href="#index--new-to-vs-code">New to Visual Studio Code?</a></li><li><a href="#index--edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</a></li><li><a href="#index--run-xslt-quick-start">Run XSLT - Quick Start</a></li></ul></li><li class="contents-page"><a href="#new-release">What's New</a><ul><li><a href="#new-release--2-1">2.1</a></li><li><a href="#new-release--2-0">2.0</a></li></ul></li><li class="contents-page"><a href="#features">Features</a><ul><li><a href="#features--languages">XSLT and XPath languages</a></li><li><a href="#features--xslt40">XSLT 4.0</a></li><li><a href="#features--editing">Editing</a></li><li><a href="#features--linter">Linter</a></li><li><a href="#features--navigation">Navigation</a></li><li><a href="#features--refactoring">Refactoring</a></li><li><a href="#features--running">Running XSLT</a></li><li><a href="#features--debugging">Debugging</a></li><li><a href="#features--code-documentation">Code documentation</a></li><li><a href="#features--xml-editing">XML editing</a></li></ul></li><li class="contents-page"><a href="#settings">Settings</a><ul><li><a href="#settings--creating">Creating User and Workspace Settings</a></li><li><a href="#settings--xslt-settings">XSLT/XPath Extension Settings</a></li><li><a href="#settings--general-settings">General Settings For XSLT</a></li></ul></li><li class="contents-group">Editing</li><li class="contents-page"><a href="#editing">Editing XML</a><ul><li><a href="#editing--xml-elements">XML Elements</a></li><li><a href="#editing--auto-completion">Auto-Completion</a></li><li><a href="#editing--emmet">Emmet</a></li><li><a href="#editing--well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#editing--xmlformatting">XML Formatting</a></li><li><a href="#editing--xml-element-selection">XML Element Selection</a></li></ul></li><li class="contents-page"><a href="#editing-xslt">Editing XSLT/XPath</a><ul><li><a href="#editing-xslt--highlighting">Syntax Highlighting</a></li><li><a href="#editing-xslt--formatting">Formatting</a></li><li><a href="#editing-xslt--folding">Folding</a></li><li><a href="#editing-xslt--intellisense">Intellisense (Auto Complete)</a></li><li><a href="#editing-xslt--bracket-matching">Bracket Matching</a></li><li><a href="#editing-xslt--renaming">Symbol Renaming</a></li><li><a href="#editing-xslt--refactoring">Code Refactoring</a></li><li><a href="#editing-xslt--checking">XSLT Linter</a></li><li><a href="#editing-xslt--auto-tag-close">Auto tag-close</a></li></ul></li><li class="contents-page"><a href="#navigation">Code Navigation</a><ul><li><a href="#navigation--file-navigation">File Navigation</a></li><li><a href="#navigation--xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a></li><li><a href="#navigation--outline-view">Outline View</a></li><li><a href="#navigation--peek-goto-definition">Peek/Goto Definition</a></li><li><a href="#navigation--goto-peek-references-find-all-references">Goto (Peek) References/Find All References</a></li><li><a href="#navigation--goto-symbol">Goto Symbol</a></li><li><a href="#navigation--goto-xpath">Goto XPath</a></li><li><a href="#navigation--xslt-imports-view">XSLT Imports View</a></li></ul></li><li class="contents-page"><a href="#refactoring-xslt">Refactoring</a><ul><li><a href="#refactoring-xslt--intro">Introduction</a></li><li><a href="#refactoring-xslt--example">A Sample Refactor</a></li><li><a href="#refactoring-xslt--restrictions">Known Restrictions</a></li><li><a href="#refactoring-xslt--context-properties">Context Properties</a></li></ul></li><li class="contents-page"><a href="#xml-catalogs">XML Catalogs</a><ul><li><a href="#xml-catalogs--setup">Setting up a catalog</a></li><li><a href="#xml-catalogs--catalog-files">Catalog files</a></li><li><a href="#xml-catalogs--editing">In the editor</a></li><li><a href="#xml-catalogs--running">Running stylesheets with the catalog</a></li><li><a href="#xml-catalogs--limitations">Limitations</a></li><li><a href="#xml-catalogs--demo">Catalog demo</a></li></ul></li><li class="contents-group">Running and Debugging</li><li class="contents-page"><a href="#quick-run">Quick Run</a><ul><li><a href="#quick-run--running-a-stylesheet">Running a stylesheet</a></li><li><a href="#quick-run--modules">Running a module that another stylesheet imports</a></li><li><a href="#quick-run--choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#quick-run--first-use-a-task-is-created-for-you">First use: a task is created for you</a></li><li><a href="#quick-run--subsequent-runs">Subsequent runs</a></li><li><a href="#quick-run--initial-template">Starting from xsl:initial-template</a></li><li><a href="#quick-run--running-from-an-xml-file">Running from an XML file</a></li><li><a href="#quick-run--the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></li><li class="contents-page"><a href="#run-xslt">Tasks</a><ul><li><a href="#run-xslt--saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#run-xslt--saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#run-xslt--saxonc-tasks">SaxonC Tasks</a></li><li><a href="#run-xslt--to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#run-xslt--references">Variable References in Tasks</a></li><li><a href="#run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#run-xslt--configuring-more-tasks">Configuring more tasks</a></li><li><a href="#run-xslt--catalogs">XML catalogs</a></li><li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li><li><a href="#run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></li><li class="contents-page"><a href="#debugger">Debugger</a><ul><li><a href="#debugger--starting">Starting a debug session</a></li><li><a href="#debugger--breakpoints">Breakpoints</a></li><li><a href="#debugger--stepping">Stepping</a></li><li><a href="#debugger--call-stack">Call stack</a></li><li><a href="#debugger--variables">Variables</a></li><li><a href="#debugger--evaluating">Watch, hover and the Debug Console</a></li><li><a href="#debugger--output">Output while debugging</a></li><li><a href="#debugger--demo">Sample: stepping through XPath</a></li><li><a href="#debugger--limitations">Limitations</a></li><li><a href="#debugger--troubleshooting">Troubleshooting</a></li></ul></li><li class="contents-page"><a href="#code-diagnostics">Print Debugging</a><ul><li><a href="#code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a></li><li><a href="#code-diagnostics--xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></li><li class="contents-group">Tools</li><li class="contents-page"><a href="#xpath-notebook">XPath Notebooks</a><ul><li><a href="#xpath-notebook--why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#xpath-notebook--quick-start">Quick Start</a></li></ul></li><li class="contents-page"><a href="#ai-assistants">AI Assistants</a><ul><li><a href="#ai-assistants--problems">Fixing problems</a></li><li><a href="#ai-assistants--notes">Documentation notes</a></li><li><a href="#ai-assistants--debugging">Debugging output</a></li><li><a href="#ai-assistants--running">Running XSLT</a></li><li><a href="#ai-assistants--limitations">Current limitations</a></li></ul></li><li class="contents-group">XSLT Language</li><li class="contents-page"><a href="#xslt30">XSLT 3.0</a><ul><li><a href="#xslt30--learning-xslt-3-0">Learning XSLT 3.0</a></li><li><a href="#xslt30--supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></li><li class="contents-page"><a href="#xslt40">XSLT 4.0</a><ul><li><a href="#xslt40--editing-xslt-4-0">Editing XSLT 4.0</a></li><li><a href="#xslt40--running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#xslt40--other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></li><li class="contents-page"><a href="#xslt40-records">Records and Enums</a><ul><li><a href="#xslt40-records--declaring">Declaring types</a></li><li><a href="#xslt40-records--building-records">Building records</a></li><li><a href="#xslt40-records--using-records">Using records</a></li><li><a href="#xslt40-records--record-refactoring">Refactoring: Extract record type</a></li><li><a href="#xslt40-records--enums">Enumeration types</a></li></ul></li><li class="contents-page"><a href="#xslt40-jnodes">JSON and JNodes</a><ul><li><a href="#xslt40-jnodes--navigating">Navigating JSON with JNodes</a></li><li><a href="#xslt40-jnodes--typed-jnodes">JNodes with a record type</a></li><li><a href="#xslt40-jnodes--debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#xslt40-jnodes--limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#xslt40-jnodes--sample">Sample: JSON Schema to record types</a></li></ul></li><li class="contents-page"><a href="#xslt40-notes">Code Documentation</a><ul><li><a href="#xslt40-notes--writing">Writing a documentation note</a></li><li><a href="#xslt40-notes--adding">Adding a note</a></li><li><a href="#xslt40-notes--where-shown">Where notes are shown</a></li><li><a href="#xslt40-notes--references">References to other declarations</a></li><li><a href="#xslt40-notes--module-notes">Module notes</a></li><li><a href="#xslt40-notes--xslt30">Notes in XSLT 3.0</a></li><li><a href="#xslt40-notes--highlighting">Highlighting Details</a></li><li><a href="#xslt40-notes--xml">Notes as XML</a></li><li><a href="#xslt40-notes--checks">Tag Checks</a></li></ul></li></ul></nav><article class="main doc-page" id="index"><h2 class="pageTitle">Overview</h2>
+<!DOCTYPE HTML><html lang="en"><head><meta charset="UTF-8"><title>XSLT and XPath for Visual Studio Code - User Guide</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code."><meta name="author" content="Philip Fearon"><link rel="stylesheet" href="./resources/base.css"><link rel="stylesheet" href="./resources/skeleton.css"><link rel="stylesheet" href="./resources/layout.css"><link rel="stylesheet" href="./resources/custom.css"><link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"><link rel="stylesheet" href="./resources/all-pages.css"></head><body class="all-pages"><div class="all-pages-bar"><a href="index.html">Back to the guide</a><a href="vscode-xslt-xpath-guide.pdf">Download PDF</a><button type="button" onclick="window.print()">Print or save as PDF</button></div><section class="cover"><img src="../resources/tiny-white-logo.png" alt="DeltaXignia"><h1>XSLT and XPath<br>for Visual Studio Code</h1><p class="cover-subtitle">User Guide</p></section><nav class="contents"><h2>Contents</h2><ul><li class="contents-page"><a href="#index">Overview</a><ul><li><a href="#index--getting-started">Getting started</a></li><li><a href="#index--writing">Writing XSLT</a></li><li><a href="#index--reviewing">Reviewing XSLT</a></li><li><a href="#index--running">Running XSLT</a></li><li><a href="#index--debugging">Debugging XSLT</a></li><li><a href="#index--scope">Scope</a></li><li><a href="#index--new-to-vs-code">New to Visual Studio Code?</a></li><li><a href="#index--edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</a></li><li><a href="#index--run-xslt-quick-start">Run XSLT - Quick Start</a></li></ul></li><li class="contents-page"><a href="#new-release">What's New</a><ul><li><a href="#new-release--2-1">2.1</a></li><li><a href="#new-release--2-0">2.0</a></li></ul></li><li class="contents-page"><a href="#features">Features</a><ul><li><a href="#features--languages">XSLT and XPath languages</a></li><li><a href="#features--xslt40">XSLT 4.0</a></li><li><a href="#features--editing">Editing</a></li><li><a href="#features--linter">Linter</a></li><li><a href="#features--navigation">Navigation</a></li><li><a href="#features--refactoring">Refactoring</a></li><li><a href="#features--running">Running XSLT</a></li><li><a href="#features--debugging">Debugging</a></li><li><a href="#features--code-documentation">Code documentation</a></li><li><a href="#features--xml-editing">XML editing</a></li></ul></li><li class="contents-page"><a href="#settings">Settings</a><ul><li><a href="#settings--creating">Creating User and Workspace Settings</a></li><li><a href="#settings--xslt-settings">XSLT/XPath Extension Settings</a></li><li><a href="#settings--general-settings">General Settings For XSLT</a></li></ul></li><li class="contents-group">Editing</li><li class="contents-page"><a href="#editing">Editing XML</a><ul><li><a href="#editing--xml-elements">XML Elements</a></li><li><a href="#editing--auto-completion">Auto-Completion</a></li><li><a href="#editing--emmet">Emmet</a></li><li><a href="#editing--well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#editing--xmlformatting">XML Formatting</a></li><li><a href="#editing--xml-element-selection">XML Element Selection</a></li></ul></li><li class="contents-page"><a href="#editing-xslt">Editing XSLT/XPath</a><ul><li><a href="#editing-xslt--highlighting">Syntax Highlighting</a></li><li><a href="#editing-xslt--formatting">Formatting</a></li><li><a href="#editing-xslt--folding">Folding</a></li><li><a href="#editing-xslt--intellisense">Intellisense (Auto Complete)</a></li><li><a href="#editing-xslt--bracket-matching">Bracket Matching</a></li><li><a href="#editing-xslt--renaming">Symbol Renaming</a></li><li><a href="#editing-xslt--refactoring">Code Refactoring</a></li><li><a href="#editing-xslt--checking">XSLT Linter</a></li><li><a href="#editing-xslt--auto-tag-close">Auto tag-close</a></li></ul></li><li class="contents-page"><a href="#navigation">Code Navigation</a><ul><li><a href="#navigation--file-navigation">File Navigation</a></li><li><a href="#navigation--xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a></li><li><a href="#navigation--outline-view">Outline View</a></li><li><a href="#navigation--peek-goto-definition">Peek/Goto Definition</a></li><li><a href="#navigation--goto-peek-references-find-all-references">Goto (Peek) References/Find All References</a></li><li><a href="#navigation--goto-symbol">Goto Symbol</a></li><li><a href="#navigation--find-nodes-with-xpath">Find Nodes with XPath</a></li><li><a href="#navigation--xslt-imports-view">XSLT Imports View</a></li></ul></li><li class="contents-page"><a href="#refactoring-xslt">Refactoring</a><ul><li><a href="#refactoring-xslt--intro">Introduction</a></li><li><a href="#refactoring-xslt--example">A Sample Refactor</a></li><li><a href="#refactoring-xslt--restrictions">Known Restrictions</a></li><li><a href="#refactoring-xslt--context-properties">Context Properties</a></li></ul></li><li class="contents-page"><a href="#xml-catalogs">XML Catalogs</a><ul><li><a href="#xml-catalogs--setup">Setting up a catalog</a></li><li><a href="#xml-catalogs--catalog-files">Catalog files</a></li><li><a href="#xml-catalogs--editing">In the editor</a></li><li><a href="#xml-catalogs--running">Running stylesheets with the catalog</a></li><li><a href="#xml-catalogs--limitations">Limitations</a></li><li><a href="#xml-catalogs--demo">Catalog demo</a></li></ul></li><li class="contents-group">Running and Debugging</li><li class="contents-page"><a href="#quick-run">Quick Run</a><ul><li><a href="#quick-run--running-a-stylesheet">Running a stylesheet</a></li><li><a href="#quick-run--modules">Running a module that another stylesheet imports</a></li><li><a href="#quick-run--choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#quick-run--first-use-a-task-is-created-for-you">First use: a task is created for you</a></li><li><a href="#quick-run--subsequent-runs">Subsequent runs</a></li><li><a href="#quick-run--initial-template">Starting from xsl:initial-template</a></li><li><a href="#quick-run--running-from-an-xml-file">Running from an XML file</a></li><li><a href="#quick-run--the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></li><li class="contents-page"><a href="#run-xslt">Tasks</a><ul><li><a href="#run-xslt--saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#run-xslt--saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#run-xslt--saxonc-tasks">SaxonC Tasks</a></li><li><a href="#run-xslt--to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#run-xslt--references">Variable References in Tasks</a></li><li><a href="#run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#run-xslt--configuring-more-tasks">Configuring more tasks</a></li><li><a href="#run-xslt--catalogs">XML catalogs</a></li><li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li><li><a href="#run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></li><li class="contents-page"><a href="#debugger">Debugger</a><ul><li><a href="#debugger--starting">Starting a debug session</a></li><li><a href="#debugger--breakpoints">Breakpoints</a></li><li><a href="#debugger--stepping">Stepping</a></li><li><a href="#debugger--call-stack">Call stack</a></li><li><a href="#debugger--variables">Variables</a></li><li><a href="#debugger--evaluating">Watch, hover and the Debug Console</a></li><li><a href="#debugger--output">Output while debugging</a></li><li><a href="#debugger--demo">Sample: stepping through XPath</a></li><li><a href="#debugger--limitations">Limitations</a></li><li><a href="#debugger--troubleshooting">Troubleshooting</a></li></ul></li><li class="contents-page"><a href="#code-diagnostics">Print Debugging</a><ul><li><a href="#code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a></li><li><a href="#code-diagnostics--xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></li><li class="contents-group">Tools</li><li class="contents-page"><a href="#xpath-queries">Find Nodes with XPath</a><ul><li><a href="#xpath-queries--opening">Opening the query file</a></li><li><a href="#xpath-queries--writing">Writing expressions</a></li><li><a href="#xpath-queries--running">Running an expression</a></li><li><a href="#xpath-queries--results">Results</a></li><li><a href="#xpath-queries--switching">Switching between XML files</a></li><li><a href="#xpath-queries--limitations">Limitations</a></li></ul></li><li class="contents-page"><a href="#xpath-notebook">XPath Notebooks</a><ul><li><a href="#xpath-notebook--why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#xpath-notebook--quick-start">Quick Start</a></li></ul></li><li class="contents-page"><a href="#ai-assistants">AI Assistants</a><ul><li><a href="#ai-assistants--problems">Fixing problems</a></li><li><a href="#ai-assistants--notes">Documentation notes</a></li><li><a href="#ai-assistants--debugging">Debugging output</a></li><li><a href="#ai-assistants--running">Running XSLT</a></li><li><a href="#ai-assistants--limitations">Current limitations</a></li></ul></li><li class="contents-group">XSLT Language</li><li class="contents-page"><a href="#xslt30">XSLT 3.0</a><ul><li><a href="#xslt30--learning-xslt-3-0">Learning XSLT 3.0</a></li><li><a href="#xslt30--supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></li><li class="contents-page"><a href="#xslt40">XSLT 4.0</a><ul><li><a href="#xslt40--editing-xslt-4-0">Editing XSLT 4.0</a></li><li><a href="#xslt40--running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#xslt40--other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></li><li class="contents-page"><a href="#xslt40-records">Records and Enums</a><ul><li><a href="#xslt40-records--declaring">Declaring types</a></li><li><a href="#xslt40-records--building-records">Building records</a></li><li><a href="#xslt40-records--using-records">Using records</a></li><li><a href="#xslt40-records--record-refactoring">Refactoring: Extract record type</a></li><li><a href="#xslt40-records--enums">Enumeration types</a></li></ul></li><li class="contents-page"><a href="#xslt40-jnodes">JSON and JNodes</a><ul><li><a href="#xslt40-jnodes--navigating">Navigating JSON with JNodes</a></li><li><a href="#xslt40-jnodes--typed-jnodes">JNodes with a record type</a></li><li><a href="#xslt40-jnodes--debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#xslt40-jnodes--limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#xslt40-jnodes--sample">Sample: JSON Schema to record types</a></li></ul></li><li class="contents-page"><a href="#xslt40-notes">Code Documentation</a><ul><li><a href="#xslt40-notes--writing">Writing a documentation note</a></li><li><a href="#xslt40-notes--adding">Adding a note</a></li><li><a href="#xslt40-notes--where-shown">Where notes are shown</a></li><li><a href="#xslt40-notes--references">References to other declarations</a></li><li><a href="#xslt40-notes--module-notes">Module notes</a></li><li><a href="#xslt40-notes--xslt30">Notes in XSLT 3.0</a></li><li><a href="#xslt40-notes--highlighting">Highlighting Details</a></li><li><a href="#xslt40-notes--xml">Notes as XML</a></li><li><a href="#xslt40-notes--checks">Tag Checks</a></li></ul></li></ul></nav><article class="main doc-page" id="index"><h2 class="pageTitle">Overview</h2>
 			<div class="two-thirds column">
 				<p>
 					DeltaXignia's
@@ -275,6 +275,10 @@
                     unchanged, but writes it formatted as <code>xdm:debug()</code> does. <strong>Wrap with
                     xdm:trace()</strong> adds it around a selected expression, and <strong>Remove xdm:trace() - keep the
                     expression</strong> removes the call and its other arguments, leaving just the expression</li>
+                <li><strong><a href="#xpath-queries">Find Nodes with XPath</a></strong> - run XPath expressions on
+                    an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
+                    found are listed to step through, and values are shown after each expression. Replaces Goto
+                    XPath</li>
             </ul>
             <h3 id="new-release--2-0">2.0</h3>
             <ul>
@@ -371,7 +375,7 @@
 					<code>xsl:include</code></li>
 				<li><a href="#editing-xslt--the-xslt-imports-view">XSLT Imports view</a>, with
 					<a href="#editing-xslt--inferred-imports">inferred top-level stylesheets</a></li>
-				<li><a href="#navigation--goto-xpath">Go to XPath</a> in XML files</li>
+				<li><a href="#xpath-queries">Find nodes with XPath</a> in XML files</li>
 			</ul>
 
 			<h3 id="features--refactoring">Refactoring</h3>
@@ -961,13 +965,15 @@
 				shows the same commands in a quick pick. On Windows and Linux, the shortcuts use <span class="shortcut">Ctrl+Shift</span> instead
 				of <span class="shortcut">⇧⌘</span>, for example <span class="shortcut">Ctrl+Shift+0</span>.</p>
 			<ul>
-				<li><strong>Goto XPath</strong> - navigate to the element/attribute given by the XPath </li>
 				<li><strong>Select current element</strong> - <span class="shortcut">⇧⌘0</span> extend selection to include containing element's start/end tags</li>
 				<li><strong>Select parent element</strong> - <span class="shortcut">⇧⌘9</span> extend selection to include parent element's start/end tags</li>
 				<li><strong>Select first child element</strong> - <span class="shortcut">⇧⌘8</span> select the first child element's start/end tags</li>
 				<li><strong>Select following element</strong> - <span class="shortcut">⇧⌘7</span> select next sibling's start/end tags</li>
 				<li><strong>Select preceding element</strong> - <span class="shortcut">⇧⌘6</span> select previous sibling's start/end tags</li>
-			</ul>			
+			</ul>
+			<p>The submenu and quick pick also have <strong>Find Nodes with XPath...</strong> and <strong>Add XPath
+				Location to Queries</strong> (<span class="shortcut">⌥G</span> / <span class="shortcut">Alt+G</span>) -
+				see <a href="#xpath-queries">Find Nodes with XPath</a>.</p>
 		</div>
 		
 	</article><article class="main doc-page" id="editing-xslt"><h2 class="pageTitle">Editing XSLT/XPath</h2>
@@ -1434,14 +1440,12 @@
 				or <span class="shortcut">⌘Enter</span> to open an adjacent editor and navigate to the symbol there.
 			</p>
 			<img src="resources/goto-symbol.png" class="scale-with-grid">
-			<h3 id="navigation--goto-xpath">Goto XPath</h3>
-			<p>In an XML or XSLT file, the <strong>XML: Goto XPath</strong> command navigates to the element, or attribute, at a path
-				such as <code>/root/section[2]/para[3]</code> or <code>/root/section/@id</code>. Run it from the Command Palette
-				(<span class="shortcut">⇧⌘P</span>), from the <strong>XML Selection</strong> submenu of the editor's context menu,
-				or from the <strong>XML: Select Element...</strong> quick pick (<span class="shortcut">⇧⌘2</span>). The prompt initially
-				shows the path of the element at the cursor. Each step is an element name with an optional position, starting from the
-				root element; the matching element is selected, or the message 'No matching elements' is shown.
-				See <a href="#editing">Editing XML</a> for the other XML selection commands.</p>
+			<h3 id="navigation--find-nodes-with-xpath">Find Nodes with XPath</h3>
+			<p>In an XML file, to go to the nodes an XPath expression finds - such as <code>//section[@id]</code> or
+				<code>/root/section[2]/para[3]</code> - write it in the query file and run it: the nodes are listed as
+				references are, to step through. <span class="shortcut">⌥G</span> / <span class="shortcut">Alt+G</span>
+				adds the location of the node at the cursor to the query file. See
+				<a href="#xpath-queries">Find Nodes with XPath</a>.</p>
 			<h3 id="navigation--xslt-imports-view">XSLT Imports View</h3>
 			<p>For the XSLT module in the active editor, the <strong>XSLT Imports</strong> view in the Explorer shows its top-level
 				stylesheet with its tree of imports and includes, expanded down to the active module. Click a module in the tree to open it.
@@ -2870,6 +2874,116 @@ xdm:trace($value as item()*, $label as xs:string?, $useColor as xs:boolean) as i
 			</ul>
 		</div>
 
+	</article><article class="main doc-page" id="xpath-queries"><h2 class="pageTitle">Find Nodes with XPath</h2>
+
+		<div class="two-thirds column">
+			<p>To find nodes in an XML file with XPath, write expressions in a query file, an XPath editor below the XML
+				file, and run them one at a time. The nodes an expression finds are listed as VS Code lists references, to
+				step through in the XML file. Other results, such as a count or a list of strings, are shown after the
+				expression.</p>
+			<aside><strong>Requirements:</strong> SaxonJ - any edition, including Saxon-HE - set with the
+				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. With Saxon-PE or Saxon-EE,
+				expressions can use XPath 4.0 syntax. With Saxon-HE, they're XPath 3.1.</aside>
+
+			<h3 id="xpath-queries--opening">Opening the query file</h3>
+			<p>In the editor of an XML file, click the search button in the editor's title bar, or run
+				<strong>XML: Find Nodes with XPath...</strong> - from the Command Palette, the <strong>XML
+				Selection</strong> submenu of the editor's context menu, or the <strong>XML: Select Element...</strong>
+				quick pick (<span class="shortcut">⇧⌘2</span> / <span class="shortcut">Ctrl+Shift+2</span>).</p>
+			<p>The query file, <code>queries.xpath</code>, opens in an editor group below the XML file, a quarter of its
+				height. A new query file starts with an expression for the XML file's root element, such as
+				<code>/orders</code>. There's one query file for each workspace, kept by VS Code, so your expressions are
+				there next time.</p>
+			<aside>With no folder open, there's one query file shared by all the VS Code windows without a folder.</aside>
+
+			<h3 id="xpath-queries--writing">Writing expressions</h3>
+			<p>The query file has several expressions, separated by blank lines. An expression can take several lines,
+				with no blank line within it, and can have comments, <code>(: like this :)</code>.</p>
+			<code class="block">/orders
+
+//order[@status = 'late']/@id
+
+count(//item)
+
+//order
+  [item = 'ink']
+  /@id</code>
+			<p>As in any XPath file, expressions are highlighted and checked as you type, and auto-completion includes
+				the names of the elements and attributes in the XML file. Each expression is checked on its own.</p>
+			<h4 id="xpath-queries--namespaces">Namespaces</h4>
+			<p>The namespaces declared on the XML file's root element can be used without declaring them:</p>
+			<ul>
+				<li>a name without a prefix matches an element in the root element's default namespace - so for
+					<code>&lt;orders xmlns="urn:orders"&gt;</code>, <code>//order</code> finds its <code>order</code>
+					elements</li>
+				<li>a prefix declared on the root element, e.g. <code>xmlns:x="urn:extra"</code>, can be used as it is:
+					<code>//x:note</code></li>
+			</ul>
+			<p>For another namespace - one first declared further down, or with a prefix of your choosing - start the
+				expression with a <code>declare namespace</code> line:</p>
+			<code class="block">declare namespace svg = "http://www.w3.org/2000/svg";
+//svg:rect</code>
+			<p>A declaration applies only to its own expression.</p>
+			<h4 id="xpath-queries--locations">Inserting the location of a node</h4>
+			<p>To start from a node in the XML file, put the cursor on it - on an element or an attribute - and press
+				<span class="shortcut">⌥G</span> / <span class="shortcut">Alt+G</span>
+				(<strong>XML: Add XPath Location to Queries</strong>). Its location, such as
+				<code>/orders/order[2]/@id</code>, is added to the end of the query file, with the cursor on it, ready to
+				run or change. If it's already in the query file, the cursor moves to it. With the cursor on no node, the
+				query file is just opened.</p>
+			<p>In the query file, at the start of an expression, the same location is offered by auto-completion - type
+				<code>/</code>, or press <span class="shortcut">⌃Space</span> / <span class="shortcut">Ctrl+Space</span>.
+				It's the first suggestion, marked <em>cursor in orders.xml</em>. The XML file must be shown in an
+				editor.</p>
+
+			<h3 id="xpath-queries--running">Running an expression</h3>
+			<p>Above each expression, on the blank line before it, is <strong>▶ Run on orders.xml</strong>, naming the
+				XML file it runs on. Click it to run the expression, or press <span class="shortcut">⌘Enter</span> /
+				<span class="shortcut">Ctrl+Enter</span> to run the expression at the cursor. The text in the XML
+				file's editor is used, including any changes not yet saved.</p>
+			<aside>With no blank line before an expression, e.g. on the first line, <strong>▶ Run</strong> is a
+				CodeLens above it - or, with CodeLens turned off (<code>editor.codeLens</code>), at the start of the
+				expression's line.</aside>
+			<p>If Saxon reports an error, such as a syntax error, it's shown in the Problems panel, at the place in the
+				expression where Saxon found it.</p>
+
+			<h3 id="xpath-queries--results">Results</h3>
+			<p>After each expression run, its result is shown in brief, at the end of its last line:</p>
+			<ul>
+				<li><code>→ /orders/order[1]/@id  (1 of 3)</code> - the location of the first node found, and how many
+					there are</li>
+				<li><code>= 3</code>, or <code>= ('pen', 'ink', 'pad')</code> - values, written as XPath literals and cut
+					short if they're long</li>
+				<li><code>= ()  nothing found</code> - an empty sequence</li>
+			</ul>
+			<p>Click it to see the whole result in the <strong>XPath Query</strong> output panel, with each item on a
+				line of its own. A map, array or function is written on one line, e.g.
+				<code>map{"a":[1,"two",true()]}</code> or <code>fn:count#1</code> - to see part of a large map, change
+				the expression to select it.</p>
+			<p>When the result has nodes, the XML file's editor shows the first, with the nodes listed beside it, as
+				VS Code lists references. Click one to go to it, or press <span class="shortcut">F4</span> /
+				<span class="shortcut">⇧F4</span> to go to the next or previous node. The name of an element or
+				attribute is selected, and for a text node, its text.</p>
+			<aside>At most 5000 items of a result are shown.</aside>
+
+			<h3 id="xpath-queries--switching">Switching between XML files</h3>
+			<p>Expressions run on the XML file you were last in. Click into another XML file's editor, and
+				<strong>▶ Run</strong> names that file: run the same expressions on it, as you would search it with
+				Find. The checks and auto-completion in the query file follow the switch, for the new file's names and
+				namespaces.</p>
+			<p>The results shown after the expressions are those for the file they'd run on. Switch back to an
+				earlier file to see its results again.</p>
+			<p>This is separate from the XML context file shown in the status bar for <a href="#quick-run">Quick
+				Run</a> and tasks: switching between XML files doesn't change it.</p>
+
+			<h3 id="xpath-queries--limitations">Limitations</h3>
+			<ul>
+				<li>Each run starts Java, so it takes about a second.</li>
+				<li>Results shown after the expressions aren't kept when VS Code is closed.</li>
+				<li>Nodes are located in the XML file by its outline - so if the file isn't well-formed, they may not be
+					found.</li>
+			</ul>
+		</div>
 	</article><article class="main doc-page" id="xpath-notebook"><h2 class="pageTitle">XPath Notebooks</h2>
 		
 		<div class="two-thirds column">

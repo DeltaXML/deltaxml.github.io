@@ -60,7 +60,7 @@
 					<code>xsl:include</code></li>
 				<li><a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>, with
 					<a href="editing-xslt.html#inferred-imports">inferred top-level stylesheets</a></li>
-				<li><a href="navigation.html#goto-xpath">Go to XPath</a> in XML files</li>
+				<li><a href="xpath-queries.html">Find nodes with XPath</a> in XML files</li>
 			</ul>
 
 			<h3 id="refactoring">Refactoring</h3>

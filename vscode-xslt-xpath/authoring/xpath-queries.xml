@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>To find nodes in an XML file with XPath, write expressions in a query file, an XPath editor below the XML
+				file, and run them one at a time. The nodes an expression finds are listed as VS Code lists references, to
+				step through in the XML file. Other results, such as a count or a list of strings, are shown after the
+				expression.</p>
+			<aside><strong>Requirements:</strong> SaxonJ - any edition, including Saxon-HE - set with the
+				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. With Saxon-PE or Saxon-EE,
+				expressions can use XPath 4.0 syntax. With Saxon-HE, they're XPath 3.1.</aside>
+
+			<h3 id="opening">Opening the query file</h3>
+			<p>In the editor of an XML file, click the search button in the editor's title bar, or run
+				<strong>XML: Find Nodes with XPath...</strong> - from the Command Palette, the <strong>XML
+				Selection</strong> submenu of the editor's context menu, or the <strong>XML: Select Element...</strong>
+				quick pick (<span class="shortcut">⇧⌘2</span> / <span class="shortcut">Ctrl+Shift+2</span>).</p>
+			<p>The query file, <code>queries.xpath</code>, opens in an editor group below the XML file, a quarter of its
+				height. A new query file starts with an expression for the XML file's root element, such as
+				<code>/orders</code>. There's one query file for each workspace, kept by VS Code, so your expressions are
+				there next time.</p>
+			<aside>With no folder open, there's one query file shared by all the VS Code windows without a folder.</aside>
+
+			<h3 id="writing">Writing expressions</h3>
+			<p>The query file has several expressions, separated by blank lines. An expression can take several lines,
+				with no blank line within it, and can have comments, <code>(: like this :)</code>.</p>
+			<code class="block">/orders
+
+//order[@status = 'late']/@id
+
+count(//item)
+
+//order
+  [item = 'ink']
+  /@id</code>
+			<p>As in any XPath file, expressions are highlighted and checked as you type, and auto-completion includes
+				the names of the elements and attributes in the XML file. Each expression is checked on its own.</p>
+			<h4 id="namespaces">Namespaces</h4>
+			<p>The namespaces declared on the XML file's root element can be used without declaring them:</p>
+			<ul>
+				<li>a name without a prefix matches an element in the root element's default namespace - so for
+					<code>&lt;orders xmlns="urn:orders"&gt;</code>, <code>//order</code> finds its <code>order</code>
+					elements</li>
+				<li>a prefix declared on the root element, e.g. <code>xmlns:x="urn:extra"</code>, can be used as it is:
+					<code>//x:note</code></li>
+			</ul>
+			<p>For another namespace - one first declared further down, or with a prefix of your choosing - start the
+				expression with a <code>declare namespace</code> line:</p>
+			<code class="block">declare namespace svg = "http://www.w3.org/2000/svg";
+//svg:rect</code>
+			<p>A declaration applies only to its own expression.</p>
+			<h4 id="locations">Inserting the location of a node</h4>
+			<p>To start from a node in the XML file, put the cursor on it - on an element or an attribute - and press
+				<span class="shortcut">⌥G</span> / <span class="shortcut">Alt+G</span>
+				(<strong>XML: Add XPath Location to Queries</strong>). Its location, such as
+				<code>/orders/order[2]/@id</code>, is added to the end of the query file, with the cursor on it, ready to
+				run or change. If it's already in the query file, the cursor moves to it. With the cursor on no node, the
+				query file is just opened.</p>
+			<p>In the query file, at the start of an expression, the same location is offered by auto-completion - type
+				<code>/</code>, or press <span class="shortcut">⌃Space</span> / <span class="shortcut">Ctrl+Space</span>.
+				It's the first suggestion, marked <em>cursor in orders.xml</em>. The XML file must be shown in an
+				editor.</p>
+
+			<h3 id="running">Running an expression</h3>
+			<p>Above each expression, on the blank line before it, is <strong>▶ Run on orders.xml</strong>, naming the
+				XML file it runs on. Click it to run the expression, or press <span class="shortcut">⌘Enter</span> /
+				<span class="shortcut">Ctrl+Enter</span> to run the expression at the cursor. The text in the XML
+				file's editor is used, including any changes not yet saved.</p>
+			<aside>With no blank line before an expression, e.g. on the first line, <strong>▶ Run</strong> is a
+				CodeLens above it - or, with CodeLens turned off (<code>editor.codeLens</code>), at the start of the
+				expression's line.</aside>
+			<p>If Saxon reports an error, such as a syntax error, it's shown in the Problems panel, at the place in the
+				expression where Saxon found it.</p>
+
+			<h3 id="results">Results</h3>
+			<p>After each expression run, its result is shown in brief, at the end of its last line:</p>
+			<ul>
+				<li><code>→ /orders/order[1]/@id  (1 of 3)</code> - the location of the first node found, and how many
+					there are</li>
+				<li><code>= 3</code>, or <code>= ('pen', 'ink', 'pad')</code> - values, written as XPath literals and cut
+					short if they're long</li>
+				<li><code>= ()  nothing found</code> - an empty sequence</li>
+			</ul>
+			<p>Click it to see the whole result in the <strong>XPath Query</strong> output panel, with each item on a
+				line of its own. A map, array or function is written on one line, e.g.
+				<code>map{"a":[1,"two",true()]}</code> or <code>fn:count#1</code> - to see part of a large map, change
+				the expression to select it.</p>
+			<p>When the result has nodes, the XML file's editor shows the first, with the nodes listed beside it, as
+				VS Code lists references. Click one to go to it, or press <span class="shortcut">F4</span> /
+				<span class="shortcut">⇧F4</span> to go to the next or previous node. The name of an element or
+				attribute is selected, and for a text node, its text.</p>
+			<aside>At most 5000 items of a result are shown.</aside>
+
+			<h3 id="switching">Switching between XML files</h3>
+			<p>Expressions run on the XML file you were last in. Click into another XML file's editor, and
+				<strong>▶ Run</strong> names that file: run the same expressions on it, as you would search it with
+				Find. The checks and auto-completion in the query file follow the switch, for the new file's names and
+				namespaces.</p>
+			<p>The results shown after the expressions are those for the file they'd run on. Switch back to an
+				earlier file to see its results again.</p>
+			<p>This is separate from the XML context file shown in the status bar for <a href="quick-run.html">Quick
+				Run</a> and tasks: switching between XML files doesn't change it.</p>
+
+			<h3 id="limitations">Limitations</h3>
+			<ul>
+				<li>Each run starts Java, so it takes about a second.</li>
+				<li>Results shown after the expressions aren't kept when VS Code is closed.</li>
+				<li>Nodes are located in the XML file by its outline - so if the file isn't well-formed, they may not be
+					found.</li>
+			</ul>
+		</div>
+	</div>
+</html>

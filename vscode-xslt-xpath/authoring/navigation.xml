@@ -108,14 +108,12 @@
 				or <span class="shortcut">⌘Enter</span> to open an adjacent editor and navigate to the symbol there.
 			</p>
 			<img src="resources/goto-symbol.png" class="scale-with-grid" />
-			<h3>Goto XPath</h3>
-			<p>In an XML or XSLT file, the <strong>XML: Goto XPath</strong> command navigates to the element, or attribute, at a path
-				such as <code>/root/section[2]/para[3]</code> or <code>/root/section/@id</code>. Run it from the Command Palette
-				(<span class="shortcut">⇧⌘P</span>), from the <strong>XML Selection</strong> submenu of the editor's context menu,
-				or from the <strong>XML: Select Element...</strong> quick pick (<span class="shortcut">⇧⌘2</span>). The prompt initially
-				shows the path of the element at the cursor. Each step is an element name with an optional position, starting from the
-				root element; the matching element is selected, or the message 'No matching elements' is shown.
-				See <a href="editing.html">Editing XML</a> for the other XML selection commands.</p>
+			<h3 id="find-nodes-with-xpath">Find Nodes with XPath</h3>
+			<p>In an XML file, to go to the nodes an XPath expression finds - such as <code>//section[@id]</code> or
+				<code>/root/section[2]/para[3]</code> - write it in the query file and run it: the nodes are listed as
+				references are, to step through. <span class="shortcut">⌥G</span> / <span class="shortcut">Alt+G</span>
+				adds the location of the node at the cursor to the query file. See
+				<a href="xpath-queries.html">Find Nodes with XPath</a>.</p>
 			<h3>XSLT Imports View</h3>
 			<p>For the XSLT module in the active editor, the <strong>XSLT Imports</strong> view in the Explorer shows its top-level
 				stylesheet with its tree of imports and includes, expanded down to the active module. Click a module in the tree to open it.
