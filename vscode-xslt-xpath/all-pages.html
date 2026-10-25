@@ -2881,6 +2881,12 @@ xdm:trace($value as item()*, $label as xs:string?, $useColor as xs:boolean) as i
 				file, and run them one at a time. The nodes an expression finds are listed as VS Code lists references, to
 				step through in the XML file. Other results, such as a count or a list of strings, are shown after the
 				expression.</p>
+
+			<figure>
+				<img src="resources/find-xpath-nodes.png" class="scale-with-grid">
+				<figcaption style="margin:auto"><i>Enter XPaths in the query window to navigate the matching nodes.</i></figcaption>
+			</figure>
+
 			<aside><strong>Requirements:</strong> SaxonJ - any edition, including Saxon-HE - set with the
 				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. With Saxon-PE or Saxon-EE,
 				expressions can use XPath 4.0 syntax. With Saxon-HE, they're XPath 3.1.</aside>
