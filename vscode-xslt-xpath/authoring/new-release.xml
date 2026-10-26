@@ -6,7 +6,7 @@
             <p>
                 Highlights of the features added in releases 2.0 and 2.1:
             </p>
-            <h3>2.1</h3>
+            <h3>Release 2.1</h3>
             <ul>
                 <li><strong><a href="debugger.html">Step-through debugging</a></strong> - debug stylesheets with SaxonJ
                     (any edition, including Saxon-HE): breakpoints with conditions, hit counts and logpoints, stepping
@@ -22,7 +22,7 @@
                     found are listed to step through, and values are shown after each expression. Replaces Goto
                     XPath</li>
             </ul>
-            <h3>2.0</h3>
+            <h3>Release 2.0</h3>
             <ul>
                 <li><strong><a href="xslt40.html">Full language support for XSLT 4.0 in Saxon 13</a></strong> - type-aware
                     auto-completion, checks, hover help and refactoring for the XSLT 4.0 and XPath 4.0 features Saxon 13

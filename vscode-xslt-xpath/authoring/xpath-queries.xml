@@ -26,7 +26,7 @@
 				height. A new query file starts with an expression for the XML file's root element, such as
 				<code>/orders</code>. There's one query file for each workspace, kept by VS Code, so your expressions are
 				there next time.</p>
-			<aside>With no folder open, there's one query file shared by all the VS Code windows without a folder.</aside>
+			<aside>With no workspace folder open, there's one query file shared by all the VS Code windows without a folder.</aside>
 
 			<h3 id="writing">Writing expressions</h3>
 			<p>The query file has several expressions, separated by blank lines. An expression can take several lines,

@@ -247,8 +247,6 @@
 				<a href="xslt40-notes.html#xslt30">Notes in XSLT 3.0</a></li>
 		</ul>
 		<h3 id="checking">XSLT Linter</h3>
-		<aside>Note: The linter uses a Symbol Provider. To ensure checks are performed you should keep the
-			<a href="https://code.visualstudio.com/docs/editing/editingevolved#_breadcrumbs">Breadcrumbs</a> view enabled.</aside>
 		<p>
 			The XSLT/XPath linter performs checks on your code as you type, performing symbol reference tests across all included modules. 
 			Any problems are shown in the Problems Panel and also highlighted inline with a squiggly

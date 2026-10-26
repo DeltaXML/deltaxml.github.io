@@ -39,9 +39,6 @@
 				Use the <span class="shortcut">←</span> and <span class="shortcut">→</span> keys to select a Breadcrumb item or the
 				<span class="shortcut">↓</span> for the dropdown outline.
 			</p>
-			<aside>Note: You can toggle the Breadcrumbs view on/off, but warnings and errors for XML and XSLT files are reported by the
-				symbol provider that Breadcrumbs (and the Outline view) invokes. If Breadcrumbs is disabled, these may not be reported
-				unless the Outline view is shown. Problems in XPath files are reported whether or not Breadcrumbs is enabled.</aside>
 			<h3>Outline View</h3>
 			<img src="resources/navigation.png" class="scale-with-grid" />
 			

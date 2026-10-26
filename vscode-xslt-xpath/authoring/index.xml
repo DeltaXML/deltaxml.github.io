@@ -78,7 +78,7 @@
 					expressions and inline functions. See <a href="debugger.html">Debugger</a>.
 				</p>
 				<figure>
-					<img src="resources/debugger-xpath-step.jpg" class="scale-with-grid" />
+					<img src="resources/debugger-xpath-step.png" class="scale-with-grid" />
 					<figcaption>Paused within an XPath expression, with its range variable, the context, global
 						variables, inline values and the call stack</figcaption>
 				</figure>
