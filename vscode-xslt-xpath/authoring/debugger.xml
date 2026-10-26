@@ -211,6 +211,20 @@
 					<p><i style="font-style: italic">Evaluation context and call stack in the Run and Debug view when execution is paused.</i></p>
 				</figcaption>
 			</figure>
+			<h4 id="step-back">Going back</h4>
+			<p>The debug toolbar also has <strong>Step Back</strong> and <strong>Reverse Continue</strong>, for
+				going back to an earlier point in the transform without starting a new debug session:</p>
+			<ul>
+				<li><strong>Step Back</strong> goes to the line reached before, in the current template or
+					function - or, at its first line, to the line that called it.</li>
+				<li><strong>Reverse Continue</strong> goes back to the last line with a breakpoint that was reached
+					(breakpoint conditions aren't checked), or to the start of the transform if there's none.</li>
+			</ul>
+			<p>To go back, the debugger runs the transform again, from the start, to that point - quietly, and
+				stepping as before - then pauses there. Variables, the context item, Watch expressions and the call
+				stack are then as they were at that point, and stepping or continuing goes on from there.
+				<code>xsl:message</code> output and logpoint messages already shown in the Debug Console aren't
+				shown again.</p>
 			<h3 id="call-stack">Call stack</h3>
 			<p>The <strong>Call Stack</strong> view has a frame for each:</p>
 			<ul>
@@ -329,6 +343,11 @@
 					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
 					only constant values - and an instruction removed that way can't be stopped at.</li>
 				<li>Values can't be changed in the Variables view.</li>
+				<li>Going back relies on the transform running the same way again; <code>current-dateTime()</code>
+					is kept the same. A transform that reads a document that changes in the meantime, or calls an
+					extension function with side effects, may not - then it runs to the end, with a notification.
+					Breakpoint hit counts aren't wound back, and the output view keeps any output written after the
+					point gone back to until it's written again.</li>
 				<li>An expression that's stepped through is evaluated in full - except a test, e.g. an
 					<code>xsl:if</code>'s, which is evaluated only as far as needed for true or false, as Saxon does.
 					Where Saxon itself would evaluate only part of it - e.g. an <code>xsl:iterate</code>'s
