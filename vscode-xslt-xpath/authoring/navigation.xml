@@ -96,6 +96,25 @@
 			</p>
 			<p>After navigating to a reference or definition, you can quickly navigate to the location you were in using <span class="shortcut">⌃-</span></p>
 			<!-- end -->
+
+			<h3 id="call-hierarchy">Call Hierarchy</h3>
+			<p>Use the <strong>Show Call Hierarchy</strong> command (<span class="shortcut">⇧⌥H</span>, or from the editor's
+				context menu) on a call of a stylesheet function or named template, or anywhere within a template or
+				function, to see what calls it and what it calls. The <strong>Call Hierarchy</strong> view, in the Side
+				Bar, shows either:</p>
+			<ul>
+				<li><strong>Incoming calls</strong> - the template rules, named templates, functions and other
+					declarations (e.g. global variables) that call the function or named template, in all the stylesheet's
+					modules - each with its calls, to go to</li>
+				<li><strong>Outgoing calls</strong> - the stylesheet functions and named templates that a template or
+					function calls, with <code>xsl:call-template</code>, a function call, or a named function reference
+					such as <code>f:double#1</code></li>
+			</ul>
+			<p>Expand an entry to see its own calls, and so on. Use the button at the top of the view to switch between
+				incoming and outgoing calls. Where functions or templates with the same name are declared in more than
+				one module, calls go to the one with the highest import precedence - the one Saxon uses.</p>
+			<p>A template rule is called by <code>xsl:apply-templates</code>, which depends on the node being processed
+				when the stylesheet runs, so template rules are shown as callers, but not as being called.</p>
 			
 			<h3>Goto Symbol</h3>
 			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">⇧⌘O</span> for a filtered quick-pick list of symbols used

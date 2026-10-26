@@ -127,7 +127,9 @@
 				<code>match</code> attribute - aren't stopped at this way, even when they also have a
 				<code>name</code>: use a line breakpoint instead.</p>
 			<h4 id="errors">Pausing on errors</h4>
-			<p>The <strong>Breakpoints</strong> view has two options for errors:</p>
+			<p>The <strong>Breakpoints</strong> view has two options for errors. Like the
+				<a href="#no-template-matched">No Template Matched</a> option, they're listed once a debug session
+				has been started in the workspace:</p>
 			<ul>
 				<li><strong>Dynamic Errors</strong> (on by default) - pauses where a dynamic error that ends the
 					transform is raised, including <code>xsl:message</code> with <code>terminate="yes"</code>. The
@@ -147,6 +149,25 @@
 				<code>count(...)</code>, which is always an <code>xs:integer</code>. The session then ends with a
 				notification that gives the first error and its line, and the errors are listed in the
 				<strong>Problems</strong> view.</p>
+			<h4 id="no-template-matched">Elements no template matched</h4>
+			<p>When no template rule matches an element processed by <code>xsl:apply-templates</code>, XSLT's
+				built-in template rules apply: the element's text is written to the output, and its children are
+				processed. This is often intended - e.g. for a wrapper element - but it's also what happens when a
+				template's <code>match</code> pattern is wrong, e.g. for an element in another namespace, so the
+				expected template is never used.</p>
+			<p>With the <strong>No Template Matched</strong> option in the <strong>Breakpoints</strong> view (off by
+				default), execution pauses at the first element of each name, in each mode, that no template rule
+				matched. It pauses at the <code>xsl:apply-templates</code> instruction, in a call stack frame such as
+				<code>no template matched: item (mode #default)</code>, whose context item is the element - so the
+				<strong>Context</strong> view, Watch and the Debug Console show and evaluate that element. If no
+				template has matched yet, from the start of the transform, the frame has no line.</p>
+			<p>Whether or not the option is on, when the transform ends the Debug Console lists the elements no
+				template matched, e.g. <code>&#x25B8; Built-in template rules applied to 37 elements no template
+				matched: item &#xD7;30 (mode #default), o:note &#xD7;7 (mode summary)</code>. Elements dropped by
+				a mode with <code>on-no-match="deep-skip"</code> are listed on a line of their own. Modes whose
+				<code>on-no-match</code> copies or skips elements otherwise - e.g. <code>shallow-copy</code> -
+				aren't included, as there that's the intent; with <code>on-no-match="fail"</code>, it's a dynamic
+				error.</p>
 			<h3 id="stepping">Stepping</h3>
 			<p>The debug toolbar has the usual <strong>Continue</strong> (<span class="shortcut">F5</span>),
 				<strong>Step Over</strong> (<span class="shortcut">F10</span>), <strong>Step Into</strong>
@@ -275,6 +296,28 @@
 				<code>xsl:param</code>, and in XPath, to <code>let</code>, <code>for</code>, <code>some</code> and
 				<code>every</code> variables and inline function parameters. The VS Code setting
 				<code>debug.inlineValues</code> turns this off.</p>
+			<h4 id="empty-steps">Empty steps in paths</h4>
+			<p>While paused, in the paths and lookups before the line paused at, the first step whose result is
+				empty is faded - like an unused variable - so it's easy to see where a path stops matching. For
+				<code>$doc/orders/order/item</code>, when <code>$doc</code> has no <code>orders</code> element,
+				<code>orders</code> is faded. A step (after <code>/</code> or <code>//</code>), a predicate
+				(<code>[...]</code>) and a map or array lookup (<code>?key</code>) can each be faded. Hovering over
+				it says why it's empty:</p>
+			<ul>
+				<li>for a step, how many nodes there were to select from, and any with the same name in another
+					namespace, or the same name with different case - otherwise their names</li>
+				<li>for a predicate, how many items it removed</li>
+				<li>for a lookup, the map's keys, or the array's size</li>
+			</ul>
+			<p>The paths checked are those in the template or function paused in (or the global variable, if
+				paused while it's evaluated), on lines up to the one paused at. A relative path is checked when it's
+				evaluated with the same context item as the instruction paused at - not within an
+				<code>xsl:for-each</code> that's ended, for example, or a predicate. A path is evaluated as a Watch
+				expression is, each step once, from the variable, root (<code>/</code>), parenthesized expression or
+				function call it starts with. A path that starts with a call of a stylesheet function calls it once
+				more, which may write <code>xsl:message</code> output again; a path isn't checked beyond a
+				stylesheet function called after its start. Checking stops after about 300ms at each pause, so a slow
+				path doesn't slow down stepping.</p>
 			<h3 id="evaluating">Watch, hover and the Debug Console</h3>
 			<p>While paused, type an XPath expression at the prompt at the bottom of the <strong>Debug
 				Console</strong> and press <span class="shortcut">Enter</span> to evaluate it - for example,
