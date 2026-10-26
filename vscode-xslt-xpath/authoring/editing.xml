@@ -7,6 +7,9 @@
 			These general purpose features are described here.	
 			</p>
 			<h3>XML Elements</h3>
+			<h3>Auto tag-close</h3>
+			<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed. 
+				<i>Note that this feature is only enabled when the VS Code user-setting <em>Format on Type</em> is set (indentation is fixed at the same time).</i></p>
 			<h4>Rename Tag</h4>
 			<p>As you edit the start tag name of an element, the corresponding end tag name is changed at the same time to
 			keep the XML well-nested.</p>
