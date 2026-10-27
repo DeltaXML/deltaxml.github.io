@@ -189,11 +189,17 @@
 					With an expression too, only the hits where the expression is true are counted.</li>
 				<li><strong>Log Message</strong> - a logpoint writes the message to the Debug Console without
 					pausing. Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, e.g.
-					<code>{$line/@product} costs {f:line-total($line)}</code>.
+					<code>{$line/@product} costs {f:line-total($line)}</code>. Each value is formatted and colored as
+					<code>xdm:trace()</code> writes it, without the stylesheet including the xdm-view library: a node or
+					JNode with its path above it, showing where it's from; a string quoted, and a value's type where it
+					isn't obvious, e.g. <code>2026-10-27 (xs:date)</code>; and a map or array over several lines, e.g.
+					<code>order: {$order}</code>. An expression can't contain braces, as in a map constructor.
 					<aside><strong>Logging all variables:</strong> <code>{$*}</code> is a special case - it's replaced by
-						the name and value of each local variable in scope at the logpoint, one per line, e.g.
-						<code>order {@id}: {$*}</code>. It's like an <code>xsl:message</code> with <code>xdm:debug()</code>,
-						but without changing the stylesheet.</aside>
+						the local variables in scope at the logpoint, as <code>xdm:debug-color()</code> writes them: a
+						banner with the name of the template, function or instruction, then each variable's name and
+						value, e.g. <code>order {@id}: {$*}</code>. It's like an <code>xsl:message</code> with
+						<code>xdm:debug-color()</code>, but without changing the stylesheet. With Saxon 12, whose maps
+						don't keep their order, the variables may not be in the order they're declared.</aside>
 				</li>
 			</ul>
 			<figure>
@@ -279,8 +285,12 @@
 				<li><strong>Step Into</strong> stops in each template rule, named template or function called, and
 					in a global variable when it's evaluated.</li>
 				<li><strong>Step Out</strong> continues until the current template or function returns.</li>
-				<li>The bodies of <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and
-					<code>xsl:iterate</code> are stepped through, not over, for each item.</li>
+				<li><code>xsl:for-each</code>, <code>xsl:for-each-group</code>, <code>xsl:iterate</code> and
+					<code>xsl:analyze-string</code> have their own entry in the call stack, and are stepped like calls:
+					<strong>Step Over</strong> runs all their iterations, <strong>Step Into</strong> stops in their body
+					for each item, and <strong>Step Out</strong> from their body goes to the line after them. A
+					breakpoint in the body still stops; after stepping over one by mistake, <strong>Step Back</strong>
+					goes back to it.</li>
 			</ul>
 			<p>Stepping goes line by line: execution stops once each time it reaches a line, not once for each
 				instruction on it. A breakpoint in a loop stops once for each iteration.</p>
@@ -442,6 +452,15 @@
 			</ul>
 			<p>Results are shown, and can be expanded, as in the Variables view. Hovering over a variable reference
 				such as <code>$total</code>, or the name in a variable declaration, shows its value.</p>
+			<h4 id="xdm-trace">Formatted values with xdm:trace()</h4>
+			<p>If the stylesheet includes the xdm-view library - see <a href="code-diagnostics.html">Print
+				Debugging</a> - its <code>xdm:trace()</code> function can also be used while debugging, to see a value
+				formatted and colored over several lines, as in a terminal. In the Debug Console, for example,
+				<code>xdm:trace($order, 'order')</code> writes the formatted value, and gives the value as its result.
+				A logpoint doesn't need it: its message formats values in the same way already.</p>
+			<p>Use <code>xdm:trace()</code> rather than <code>xdm:debug()</code> or <code>xdm:debug-color()</code>
+				here: those give the formatted text as a string, which the Debug Console shows as a short, quoted
+				value, without color.</p>
 			<h3 id="output">Output while debugging</h3>
 			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - can be
 				shown beside the stylesheet while paused, and is updated at each pause. It's serialized by Saxon as the
@@ -539,7 +558,7 @@
 		</div>
 
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints, hit counts and logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li><li><a href="#no-template-matched">Elements no template matched</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li><li><a href="#step-back">Going back</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li><li><a href="#empty-steps">Empty steps in paths</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints, hit counts and logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li><li><a href="#no-template-matched">Elements no template matched</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li><li><a href="#step-back">Going back</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li><li><a href="#empty-steps">Empty steps in paths</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a><ul><li><a href="#xdm-trace">Formatted values with xdm:trace()</a></li></ul></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
