@@ -521,6 +521,15 @@
         characters like <code>-</code> and <code>.</code> treated as word separators, as these characters are valid
         within a QName like an attribute name or a variable name.</p>
 
+      <h4 id="agents-window">The Agents Window</h4>
+      <p>Visual Studio Code's Agents window only runs the extensions on a list chosen by Microsoft, and the
+        XSLT/XPath extension isn't on it yet - so, there, XSLT files have plain XML highlighting, with none of the
+        extension's features. To run the extension in the Agents window, add this to your user settings:</p>
+      <code class="block">"extensions.supportAgentsWindow": { "deltaxml.xslt-xpath": true }</code>
+      <p>The Agents window uses its own profile of extensions, so an extension you've disabled elsewhere - such as
+        Red Hat's XML extension - may be enabled there. See <a href="ai-assistants.html#agents-window">AI
+        Assistants</a>.</p>
+
       <h4 id="emmet">Emmet Snippets</h4>
       <p><a href="https://code.visualstudio.com/docs/languages/emmet">Emmet Snippets</a> provide a convenient
         shorthand for inserting a number of literal result elements and attributes into your XSLT in one go. For
@@ -538,7 +547,7 @@
     </div>
 
   </div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings For XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings For XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

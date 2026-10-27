@@ -423,6 +423,15 @@
         characters like <code>-</code> and <code>.</code> treated as word separators, as these characters are valid
         within a QName like an attribute name or a variable name.</p>
 
+      <h4 id="agents-window">The Agents Window</h4>
+      <p>Visual Studio Code's Agents window only runs the extensions on a list chosen by Microsoft, and the
+        XSLT/XPath extension isn't on it yet - so, there, XSLT files have plain XML highlighting, with none of the
+        extension's features. To run the extension in the Agents window, add this to your user settings:</p>
+      <code class="block">"extensions.supportAgentsWindow": { "deltaxml.xslt-xpath": true }</code>
+      <p>The Agents window uses its own profile of extensions, so an extension you've disabled elsewhere - such as
+        Red Hat's XML extension - may be enabled there. See <a href="ai-assistants.html#agents-window">AI
+        Assistants</a>.</p>
+
       <h4 id="emmet">Emmet Snippets</h4>
       <p><a href="https://code.visualstudio.com/docs/languages/emmet">Emmet Snippets</a> provide a convenient
         shorthand for inserting a number of literal result elements and attributes into your XSLT in one go. For

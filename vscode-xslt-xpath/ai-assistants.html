@@ -132,6 +132,15 @@
 				file, and each task shows the Saxon command line it runs in the terminal. An assistant that can run commands
 				can run a transform in the same way.</p>
 
+			<h3 id="agents-window">The Agents window</h3>
+			<p>Visual Studio Code's Agents window, for running agent sessions and reviewing their changes, only runs the
+				extensions on a list chosen by Microsoft, and the XSLT/XPath extension isn't on it yet. Without the extension,
+				XSLT files in the Agents window have plain XML highlighting, with none of the extension's features - and if
+				Red Hat's XML extension is installed, it may report errors against its XSLT 3.0 schema. To run the extension
+				in the Agents window, add this to your user settings - see
+				<a href="settings.html#agents-window">Settings</a>:</p>
+			<code class="block">"extensions.supportAgentsWindow": { "deltaxml.xslt-xpath": true }</code>
+
 			<h3 id="limitations">Current limitations</h3>
 			<p>The extension doesn't yet provide an MCP server or language model tools, so an assistant can't ask it directly
 				for information - for example, to check a file that isn't open, to find where a symbol is declared, to list the
@@ -141,7 +150,7 @@
 		</div>
 
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#problems">Fixing problems</a></li><li><a href="#notes">Documentation notes</a></li><li><a href="#debugging">Debugging output</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#limitations">Current limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#problems">Fixing problems</a></li><li><a href="#notes">Documentation notes</a></li><li><a href="#debugging">Debugging output</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#agents-window">The Agents window</a></li><li><a href="#limitations">Current limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
