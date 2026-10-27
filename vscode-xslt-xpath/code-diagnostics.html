@@ -101,9 +101,22 @@
 		<div class="main"><h2 class="pageTitle">Print Debugging</h2>
 
 		<div class="two-thirds column">
-			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">Debugger</a>.
-				The debugger also supports logpoints for printing debug values and text to the Debug Console - this
-				avoids the need to modify your XSLT but provides less flexibility than <code>xsl:message</code>.</p>
+			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">Debugger</a>.</p>
+			<p>While debugging, a <a href="debugger.html#logpoints">logpoint</a> can do much of what an
+				<code>xsl:message</code> with <code>xdm:debug-color()</code> does, without changing the stylesheet or
+				including the xdm-view library. Its message can include XPath values, formatted and colored in the same
+				way, and <code>{$*}</code> writes all the local variables, with a banner. A logpoint has less
+				flexibility, though:</p>
+			<ul>
+				<li>Messages are only written while debugging, with SaxonJ - not when the stylesheet runs as a task or
+					with Quick Run, or with SaxonJS or SaxonC.</li>
+				<li>There's less control over formatting: the banner always names the template, function or
+					instruction, there's no <code>$level</code> indentation, and <code>{$*}</code> writes every local
+					variable, not a chosen set.</li>
+				<li>An expression in the message can't contain braces, as in a map constructor.</li>
+				<li>Logpoints aren't saved with the code. VS Code keeps them for the workspace, so they can't be
+					committed or shared with the stylesheet.</li>
+			</ul>
 			<p>Adding <strong>xsl:message</strong> instructions is another way to debug XSLT - one that works with
 				any Saxon processor, including SaxonJS and SaxonC, and shows how values change over a whole run. The
 				output is written to the terminal when the stylesheet runs as a <a href="run-xslt.html">task</a> or with
