@@ -142,7 +142,8 @@
 					<ul>
 						<li><a href="debugger.html">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
 						<li><a href="debugger.html#xpath">Stepping through multi-line XPath</a>, including inline functions</li>
-						<li><a href="debugger.html#conditional">Conditional breakpoints, hit counts and logpoints</a></li>
+						<li><a href="debugger.html#conditional">Conditional breakpoints and hit counts</a></li>
+						<li><a href="debugger.html#logpoints">Logpoints</a>, with formatted and colored values</li>
 						<li><a href="debugger.html#variables">Views of the locals, globals, context and output</a></li>
 						<li><a href="debugger.html#evaluating">Watch expressions, hovers and the Debug Console</a></li>
 						<li><a href="debugger.html#output">The output so far</a>, mapped back to the XSLT that wrote it</li>

@@ -78,10 +78,9 @@
 				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
 			<p>Breakpoints can also be set inside a multi-line XPath expression - see
 				<a href="#xpath">Stepping through XPath</a>.</p>
-			<h4 id="conditional">Conditional breakpoints, hit counts and logpoints</h4>
-			<p>Right-click in the margin and choose <strong>Add Conditional Breakpoint...</strong> or <strong>Add
-				Logpoint...</strong> - or right-click an existing breakpoint and choose <strong>Edit
-				Breakpoint</strong>:</p>
+			<h4 id="conditional">Conditional breakpoints and hit counts</h4>
+			<p>Right-click in the margin and choose <strong>Add Conditional Breakpoint...</strong> - or right-click an
+				existing breakpoint and choose <strong>Edit Breakpoint</strong>:</p>
 			<ul>
 				<li><strong>Expression</strong> - an XPath expression, evaluated where the breakpoint is, with its
 					variables and context item, e.g. <code>@customer = 'Grace'</code> or <code>$total gt 30</code>. If
@@ -89,25 +88,42 @@
 				<li><strong>Hit Count</strong> - <code>5</code> or <code>==5</code> (the 5th hit), <code>&gt;5</code>,
 					<code>&gt;=5</code>, <code>&lt;5</code>, <code>&lt;=5</code> or <code>%5</code> (every 5th hit).
 					With an expression too, only the hits where the expression is true are counted.</li>
-				<li><strong>Log Message</strong> - a logpoint writes the message to the Debug Console without
-					pausing. Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, e.g.
-					<code>{$line/@product} costs {f:line-total($line)}</code>. Each value is formatted and colored as
-					<code>xdm:trace()</code> writes it, without the stylesheet including the xdm-view library: a node or
-					JNode with its path above it, showing where it's from; a string quoted, and a value's type where it
-					isn't obvious, e.g. <code>2026-10-27 (xs:date)</code>; and a map or array over several lines, e.g.
-					<code>order: {$order}</code>. An expression can't contain braces, as in a map constructor.
-					<aside><strong>Logging all variables:</strong> <code>{$*}</code> is a special case - it's replaced by
-						the local variables in scope at the logpoint, as <code>xdm:debug-color()</code> writes them: a
-						banner with the name of the template, function or instruction, then each variable's name and
-						value, e.g. <code>order {@id}: {$*}</code>. It's like an <code>xsl:message</code> with
-						<code>xdm:debug-color()</code>, but without changing the stylesheet. With Saxon 12, whose maps
-						don't keep their order, the variables may not be in the order they're declared.</aside>
-				</li>
 			</ul>
+			<p>An expression and a hit count can be given for a <a href="#logpoints">logpoint</a> too, to choose when
+				it writes its message.</p>
 			<figure>
 				<img src="resources/debugger-conditional.png" class="scale-with-grid" />
 				<figcaption>
 					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
+				</figcaption>
+			</figure>
+			<h4 id="logpoints">Logpoints</h4>
+			<p>A logpoint writes a message to the Debug Console without pausing - print debugging without changing
+				the stylesheet. Right-click in the margin and choose <strong>Add Logpoint...</strong>, or edit a
+				breakpoint and choose <strong>Log Message</strong>.</p>
+			<p>Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, evaluated where the
+				logpoint is, e.g. <code>{$line/@product} costs {f:line-total($line)}</code>. Values are formatted and
+				colored as <code>xdm:trace()</code> writes them, without the stylesheet including the xdm-view
+				library:</p>
+			<ul>
+				<li>a node or JNode with its path above it, showing where it's from</li>
+				<li>a string quoted, and a value's type where it isn't obvious, e.g.
+					<code>2026-10-27 (xs:date)</code></li>
+				<li>a map or array over several lines, e.g. <code>order: {$order}</code></li>
+			</ul>
+			<p>An expression can't contain braces, as in a map constructor.</p>
+			<p><strong>Logging all variables:</strong> <code>{$*}</code> is a special case - it's replaced by the local
+				variables in scope at the logpoint, as <code>xdm:debug-color()</code> writes them: a banner with the
+				name of the template, function or instruction, then each variable's name and value, e.g.
+				<code>order {@id}: {$*}</code>. It's like an <code>xsl:message</code> with
+				<code>xdm:debug-color()</code>, but without changing the stylesheet. With Saxon 12, whose maps don't
+				keep their order, the variables may not be in the order they're declared.</p>
+			<figure>
+				<img src="resources/debug-logpoints.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">A logpoint with the message <code>{$*}</code>, and what it writes
+						to the Debug Console: a banner naming the template, then each local variable - JNodes with
+						their paths, maps over one or several lines, and an empty sequence as <code>()</code>.</i></p>
 				</figcaption>
 			</figure>
 			<h4 id="function-breakpoints">Function and named-template breakpoints</h4>
@@ -359,7 +375,7 @@
 				Debugging</a> - its <code>xdm:trace()</code> function can also be used while debugging, to see a value
 				formatted and colored over several lines, as in a terminal. In the Debug Console, for example,
 				<code>xdm:trace($order, 'order')</code> writes the formatted value, and gives the value as its result.
-				A logpoint doesn't need it: its message formats values in the same way already.</p>
+				A <a href="#logpoints">logpoint</a> doesn't need it: its message formats values in the same way already.</p>
 			<p>Use <code>xdm:trace()</code> rather than <code>xdm:debug()</code> or <code>xdm:debug-color()</code>
 				here: those give the formatted text as a string, which the Debug Console shows as a short, quoted
 				value, without color.</p>
@@ -407,7 +423,8 @@
 					calls</li>
 				<li>a breakpoint inside an expression in <code>xsl:for-each-group</code>, with
 					<code>count(current-group())</code> in the Watch view</li>
-				<li>conditional breakpoints, hit counts and a logpoint</li>
+				<li><a href="#conditional">conditional breakpoints, hit counts</a> and a
+					<a href="#logpoints">logpoint</a></li>
 				<li>pausing at a dynamic error, after changing a price in <code>orders.xml</code> to
 					<code>n/a</code></li>
 			</ul>
