@@ -294,8 +294,9 @@
 			<p>While paused, the value of each variable declared earlier in the current template or function is shown
 				at the end of the line where it's declared. This applies to <code>xsl:variable</code> and
 				<code>xsl:param</code>, and in XPath, to <code>let</code>, <code>for</code>, <code>some</code> and
-				<code>every</code> variables and inline function parameters. The VS Code setting
-				<code>debug.inlineValues</code> turns this off.</p>
+				<code>every</code> variables and inline function parameters.</p>
+			<p>The VS Code user setting <code>debug.inlineValues</code> turns inline values on or off. A change
+				applies from the next debug session, not the one that's running.</p>
 			<h4 id="empty-steps">Empty steps in paths</h4>
 			<p>While paused, in the paths and lookups before the line paused at, the first step whose result is
 				empty is faded - like an unused variable - so it's easy to see where a path stops matching. For
@@ -303,6 +304,15 @@
 				<code>orders</code> is faded. A step (after <code>/</code> or <code>//</code>), a predicate
 				(<code>[...]</code>) and a map or array lookup (<code>?key</code>) can each be faded. Hovering over
 				it says why it's empty:</p>
+			<figure>
+				<img src="resources/debug-faded-nodes.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">Paused at line 17, the first empty step of each path is faded: <code>shipments</code>,
+						which has no prefix for the shipping namespace; <code>s:items</code>; a predicate that no
+						shipment matches; and the lookup <code>?Express</code>, as the map's key is
+						<code>express</code>.</i></p>
+				</figcaption>
+			</figure>
 			<ul>
 				<li>for a step, how many nodes there were to select from, and any with the same name in another
 					namespace, or the same name with different case - otherwise their names</li>
