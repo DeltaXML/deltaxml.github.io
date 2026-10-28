@@ -14,6 +14,11 @@
 				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
 				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a
 				problem from its Quick Fix menu, and Claude Code reads them through its Visual Studio Code integration.</p>
+			<p>The problems are kept up to date for every stylesheet open in an editor - not only the active one. An
+				assistant usually changes files while your cursor is in another, so a stylesheet it changes is checked again,
+				whether it's shown beside the active editor or in a tab that isn't shown, and the assistant sees the problems
+				its change caused. When it changes several stylesheets at once, each is checked with its own declarations,
+				XSLT version and imports, so no problems are reported that aren't there.</p>
 
 			<h3 id="notes">Documentation notes</h3>
 			<p>XSLT 4.0 <a href="xslt40-notes.html">documentation notes</a> - <code>xsl:note format="xdoc-md"</code> - use
@@ -48,7 +53,9 @@
 				for information - for example, to check a file that isn't open, to find where a symbol is declared, to list the
 				fields of a record type, or to show the imports of a module. Assistants that run outside Visual Studio Code, such
 				as command-line agents, only see the extension's problems if they can read Visual Studio Code's diagnostics.
-				Tools for assistants may be added in a future release.</p>
+				Problems are only reported for files open in an editor, as by most language extensions: a stylesheet an
+				assistant changes that isn't open has none until it's opened. Tools for assistants may be added in a future
+				release.</p>
 		</div>
 
 	</div>
