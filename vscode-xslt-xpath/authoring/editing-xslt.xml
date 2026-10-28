@@ -245,6 +245,9 @@
 				variable, see <a href="xslt40-notes.html#checks">Code Documentation</a></li>
 			<li><strong>Exclude with use-when="false()"</strong> - for an <code>xsl:note</code> in an XSLT 3.0 stylesheet, see
 				<a href="xslt40-notes.html#xslt30">Notes in XSLT 3.0</a></li>
+			<li><strong>Add mode="#current"</strong> (preferred) and <strong>Add mode="#default"</strong> - for an
+				<code>xsl:apply-templates</code> without a <code>mode</code> in a template rule with a mode, see
+				<a href="#mode-checks">Checks on modes</a></li>
 		</ul>
 		<h3 id="checking">XSLT Linter</h3>
 		<p>
@@ -276,10 +279,28 @@
 				<li>Duplicate keys in map constructors and in the <code>xsl:map-entry</code> children of an <code>xsl:map</code></li>
 				<li>Braced URI literals, for example <code>Q{http://example.com}name</code></li>
 				<li>The order of <code>xsl:param</code>, <code>xsl:on-completion</code> and <code>xsl:next-iteration</code> within <code>xsl:iterate</code></li>
+				<li>Modes - see <a href="#mode-checks">Checks on modes</a></li>
 				<li>XSLT 4.0: record and enumeration types, see <a href="xslt40-records.html">Records and Enums</a></li>
 				<li>XSLT 4.0: the <code>@param</code> tags of documentation notes, see <a href="xslt40-notes.html#checks">Code Documentation</a></li>
 			</ol>
 		</details>
+		<h4 id="mode-checks">Checks on modes</h4>
+		<p>A large transform may run in many modes, and a template rule applied in the wrong mode fails silently. The linter
+			warns about:</p>
+		<ul>
+			<li><strong>An unknown mode</strong> - an <code>xsl:apply-templates</code> whose <code>mode</code> isn't declared
+				by an <code>xsl:mode</code> or used by any template rule, in all the stylesheet's modules - often a typo in the
+				mode name.</li>
+			<li><strong>An <code>xsl:apply-templates</code> without a mode in a template rule with a mode</strong> - it applies
+				the default mode, not the template rule's mode. This commonly happens when a template rule is added for a new mode
+				and <code>mode="#current"</code> is forgotten. The quick fixes add <code>mode="#current"</code>, or
+				<code>mode="#default"</code> to show that the default mode is intended. There's no warning when the template
+				rule's modes include the default mode - the unnamed mode, or the mode named by the innermost
+				<code>[xsl:]default-mode</code> attribute - or <code>#all</code>, nor for a template rule within an XSLT 4.0
+				<code>xsl:mode</code>, where the enclosing mode is the default.</li>
+			<li>XSLT 4.0: an <code>xsl:mode</code> with enclosed template rules but no <code>name</code>, and an enclosed
+				template rule with a <code>mode</code> or <code>name</code> attribute, or without a <code>match</code>.</li>
+		</ul>
 		<h4 id="inferred-imports">Inferred Imports for 'Non-Standalone' Stylesheets</h4>
 		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
 			that declares the required imports. If no knowledge of the parent module is available, spurious problems
