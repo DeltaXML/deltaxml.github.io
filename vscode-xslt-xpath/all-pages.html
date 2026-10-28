@@ -1214,7 +1214,11 @@
 		<p>Hovering over a function call shows the function's signature and description. This works for
 			built-in functions, with a link to the function's definition in the W3C specification, and for user-defined
 			<code>xsl:function</code>s, including those in included and imported stylesheets. Hovering over the name of an
-			<code>xsl:call-template</code> shows the named template's parameters.</p>
+			<code>xsl:call-template</code> shows the named template's parameters.
+			Hovering over a mode name, in an <code>xsl:mode</code>, <code>xsl:template</code> or
+			<code>xsl:apply-templates</code>, shows where the mode is applied from across the stylesheet's modules: the template
+			rules of other modes, named templates and functions with an <code>xsl:apply-templates</code> for it - see also
+			<a href="#editing-xslt--mode-checks">Checks on modes</a>.</p>
 		<p>While typing the arguments of a function call, signature help (parameter hints) shows the function's
 			parameters, with the current parameter highlighted. Signature help is also shown for the
 			<code>xsl:with-param</code> children of an <code>xsl:call-template</code>. Signature help can be triggered
