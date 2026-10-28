@@ -84,6 +84,47 @@
 <?endregion modeA?>]]></code>
 		<p>For more detail and a full list of Folding-related actions see the
 			<a href="https://code.visualstudio.com/docs/editing/codebasics#_folding">Folding</a> section in Visual Studio Code's User Guide.</p>
+		<h3 id="inferred-imports">Imports and Top-Level Stylesheets</h3>
+		<p>The functions, templates, variables and other global declarations of a stylesheet's imported and included
+			modules are used throughout the editor: by auto-completion, hover and signature help, go to definition, find
+			references, symbol renaming and the linter.</p>
+		<p>A 'non-standalone' module - one that's imported by a parent stylesheet - often relies on declarations that only
+			the parent imports. Without knowing the parent, those references can't be resolved: they're missing from
+			auto-completion and hover help, and the linter reports spurious problems that may obscure real ones.</p>
+		<p>With <strong>inferred imports</strong>, the top-level ('parent') stylesheet that imports or includes the active
+			module, directly or indirectly, is found and imported along with the module's own imports, so those references can
+			be resolved.
+		</p>
+		<p>A parent stylesheet opened recently in Visual Studio Code is used first. Otherwise, the parent is found from the workspace's
+			XSLT files, which are scanned in the background the first time they're needed, so the parent doesn't have to be opened
+			first. The scan only reads the <code>href</code> attributes of <code>xsl:import</code> and <code>xsl:include</code>
+			instructions, and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
+			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
+			setting.
+		</p>
+		<p>To use a different top-level stylesheet - for example, one of two that import the same modules - run
+			<strong>XSLT: Choose Top-Level Stylesheet...</strong> from the Command Palette, or the button in the title bar of the
+			XSLT Imports view. The list shows the top-level stylesheets that import or include the active module, directly or
+			indirectly: the one chosen is used for all the modules of its tree. <strong>Automatic</strong> goes back to the
+			nearest folder, and <strong>Browse...</strong> picks any stylesheet, for the active module alone. The choices are saved
+			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
+			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
+		</p>
+		<h4 id="the-xslt-imports-view">The XSLT Imports view</h4>
+		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
+			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
+			tree is expanded down to the active module, which is marked <em>current</em>, and clicking a module opens it. The tooltip for
+			a module lists any other stylesheets that import or include it.
+		</p>
+		<p>The ▶ button on the top-level stylesheet runs it with <a href="quick-run.html">Quick Run</a>, using the current XML
+			context file - whichever module of its tree is being edited.
+		</p>
+		<p>
+			<figure>
+				<img src="resources/import-view.png" class="scale-with-grid" />
+				<figcaption style="margin:auto"><i>The XSLT Imports view in the Explorer, with the ▶ Quick Run button for the top-level stylesheet.</i></figcaption>
+			</figure>
+		</p>
 		<h3 id="intellisense">Intellisense (Auto Complete)</h3>
 		<p>Intellisense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
 			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
@@ -255,6 +296,8 @@
 			Any problems are shown in the Problems Panel and also highlighted inline with a squiggly
 			underline for the specific token at issue.
 		</p>
+		<p>A module that relies on its parent stylesheet's imports is checked with those imports too - see
+			<a href="#inferred-imports">Imports and Top-Level Stylesheets</a>.</p>
 		<details>
 			<summary>Checks made by the linter</summary>
 			<ol>
@@ -301,46 +344,6 @@
 			<li>XSLT 4.0: an <code>xsl:mode</code> with enclosed template rules but no <code>name</code>, and an enclosed
 				template rule with a <code>mode</code> or <code>name</code> attribute, or without a <code>match</code>.</li>
 		</ul>
-		<h4 id="inferred-imports">Inferred Imports for 'Non-Standalone' Stylesheets</h4>
-		<p>Non-standalone XSLT stylesheet modules have missing imports because they are imported by a parent module
-			that declares the required imports. If no knowledge of the parent module is available, spurious problems
-			can be reported. In such cases, the spurious problems are annoying and may obscure reported problems that are actually relevant.
-		</p>
-		<p>The <strong>Inferred Imports</strong> feature prevents spurious problems being highlighted in the editor.
-			With this feature, the top-level ('parent') stylesheet that imports or includes the active module, directly or indirectly,
-			is found and imported along with any other imports. Functions, variables etc. used in the active module, but declared in
-			modules that only the parent imports, can therefore be resolved.
-		</p>
-		<p>A parent stylesheet opened recently in Visual Studio Code is used first. Otherwise, the parent is found from the workspace's
-			XSLT files, which are scanned in the background the first time they're needed, so the parent doesn't have to be opened
-			first. The scan only reads the <code>href</code> attributes of <code>xsl:import</code> and <code>xsl:include</code>
-			instructions, and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
-			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
-			setting.
-		</p>
-		<p>To use a different top-level stylesheet - for example, one of two that import the same modules - run
-			<strong>XSLT: Choose Top-Level Stylesheet...</strong> from the Command Palette, or the button in the title bar of the
-			XSLT Imports view. The list shows the top-level stylesheets that import or include the active module, directly or
-			indirectly: the one chosen is used for all the modules of its tree. <strong>Automatic</strong> goes back to the
-			nearest folder, and <strong>Browse...</strong> picks any stylesheet, for the active module alone. The choices are saved
-			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
-			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
-		</p>
-		<h5>The XSLT Imports view</h5>
-		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
-			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
-			tree is expanded down to the active module, which is marked <em>current</em>, and clicking a module opens it. The tooltip for
-			a module lists any other stylesheets that import or include it.
-		</p>
-		<p>The ▶ button on the top-level stylesheet runs it with <a href="quick-run.html">Quick Run</a>, using the current XML
-			context file - whichever module of its tree is being edited.
-		</p>
-		<p>
-			<figure>
-				<img src="resources/import-view.png" class="scale-with-grid" />
-				<figcaption style="margin:auto"><i>The XSLT Imports view in the Explorer, with the ▶ Quick Run button for the top-level stylesheet.</i></figcaption>
-			</figure>
-		</p>
 		<h4>Unused Variables</h4>
 		<p>The linter detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
