@@ -1396,7 +1396,8 @@
 				<li>Order of operators/operands in XPath</li>
 				<li>Matching of brackets in XPath</li>
 				<li>Presence of the context-item for expressions where it is required</li>
-				<li>XSLT instructions and their attributes</li>
+				<li>XSLT instructions and their attributes, and their structure - for example an <code>xsl:choose</code>
+					without an <code>xsl:when</code>, or two <code>xsl:with-param</code> elements with the same name</li>
 				<li>Duplicate global symbol names</li>
 				<li>Attribute Value Template Syntax</li>
 				<li>Text Value Template Syntax</li>
@@ -1411,6 +1412,18 @@
 				<li>XSLT 4.0: record and enumeration types, see <a href="#xslt40-records">Records and Enums</a></li>
 				<li>XSLT 4.0: the <code>@param</code> tags of documentation notes, see <a href="#xslt40-notes--checks">Code Documentation</a></li>
 			</ol>
+			<p>The linter follows the XSLT rules that affect which code is valid:</p>
+			<ul>
+				<li>Names of functions, templates, modes and variables are matched by namespace across modules, so modules
+					may use different prefixes for the same namespace.</li>
+				<li>A module may use a prefix other than <code>xsl</code> for XSLT instructions, for example
+					<code>xslt:template</code>.</li>
+				<li>Forwards compatible mode: for an element with a higher <code>version</code>, an unknown XSLT element with an
+					<code>xsl:fallback</code> child, and an unknown attribute, aren't reported.</li>
+				<li>Simplified stylesheets: a literal result element with <code>xsl:version</code> as the outermost element.</li>
+				<li>A call of a function that isn't known is not reported when it's guarded by
+					<code>use-when="function-available('name')"</code>.</li>
+			</ul>
 		</details>
 		<h4 id="editing-xslt--mode-checks">Checks on modes</h4>
 		<p>A large transform may run in many modes, and a template rule applied in the wrong mode fails silently. The linter
