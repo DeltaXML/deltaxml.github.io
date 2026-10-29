@@ -9,13 +9,17 @@
 					the <a href="xslt40.html">XSLT 4.0</a> and XPath 4.0 features implemented in Saxon 13.
 				</p>
 				<p>
-					The aim is to make writing, reviewing and debugging XSLT easier. The extension understands each XPath
-					expression - which names are variables, functions or node tests, and where each is declared, including
-					in imported modules - so problems show as you type, and you can go from any name to its declaration,
-					rename it safely, or step through the expression in the debugger.
+					The aim is to make writing, reviewing and debugging XSLT and XPath easier.
+				</p>
+				<p>The extension understands XPath semantically,
+					so it can detect problems as you type, navigate directly to declarations across imported modules, safely rename
+					variables, functions and templates, and step through XPath expressions in the debugger. It distinguishes
+					variables, functions and node tests, tracks where each is declared, and uses this information throughout
+					editing, navigation, refactoring and debugging.
 				</p>
 				<aside>
-					For what's new in the latest release, see <a href="new-release.html">What's New</a>.
+				For an overview of the extension's capabilities, see <a href="features.html">Features</a>. 
+				For what's new in the latest release, see <a href="new-release.html">What's New</a>.
 				</aside>
 
 				<h3 id="getting-started">Getting started</h3>
