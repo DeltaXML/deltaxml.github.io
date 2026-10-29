@@ -272,10 +272,22 @@
 	"resultPath": "${command:xslt-xpath.pickResultFile}"
 }</code>
 			</p>
+			<h3 id="context-per-stylesheet">Each stylesheet has its own XML context file</h3>
+			<p>
+				The XML context file you pick from the status bar is for the stylesheet in the active editor, so you can
+				switch between stylesheets that process different documents and each one keeps its own. A module
+				imported or included by a top-level stylesheet shares that stylesheet's context file.
+			</p>
+			<p>
+				For a stylesheet you haven't picked a context file for, the source of its Quick Run task in
+				<code>tasks.json</code> is used - so a stylesheet you've run before keeps the file it was run with. Otherwise,
+				it's the context file you last picked for any stylesheet, or with none picked yet, the first XML file you
+				viewed.
+			</p>
 			<h3>The XML context file is remembered</h3>
 			<p>
-				Your chosen XML context file is now restored automatically when Visual Studio Code is reopened, rather
-				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
+				Your chosen XML context files are restored automatically when Visual Studio Code is reopened, rather
+				than defaulting back to the last XML file you happened to view. They're stored per workspace, separately
 				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
 				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
 			</p>

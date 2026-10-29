@@ -147,15 +147,17 @@
 			template is included in its hover help and signature help.</p>
 		<h4>Intellisense for XPath Locations</h4>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
-			This is initially the last non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
+			This is initially the first non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
 			for the XSLT file editor will show the context filename. The label <strong>[XML context file]</strong>
 			is shown if the context file has not been set, and <strong>[no XML context]</strong> if 'none' was picked.
 			The same file is the XML source for <a href="quick-run.html">Quick Run</a>.
 		</p>
 		<h5>Locking the context file</h5>
-		<p>To lock the auto-completion context file to a specific file, click on the status-bar item 
+		<p>To lock the auto-completion context file to a specific file, click on the status-bar item
 			for the context file. You can then select from the list of recently opened XML files
-			or pick a different file using the system's file explorer dialog.
+			or pick a different file using the system's file explorer dialog. The file you pick is for the stylesheet
+			you're editing (and the modules it imports or includes) - each stylesheet keeps its own, see
+			<a href="quick-run.html#context-per-stylesheet">Each stylesheet has its own XML context file</a>.
 		</p>
 		<p>
 		<img src="resources/xpath-auto-complete.png" class="scale-with-grid" />
