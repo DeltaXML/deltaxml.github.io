@@ -2075,6 +2075,20 @@
 				value, adjust the result path, add Saxon features or additional parameters - and Quick Run will keep
 				using your edits on every subsequent run, just like running any other task.
 			</p>
+			<h4 id="quick-run--edit-task">Editing the task</h4>
+			<p>
+				To go straight to the task for the stylesheet and the current XML context file, use
+				<strong>Edit Quick Run Task</strong> from the drop-down menu beside the editor's Run and Debug button. The
+				same link is in the tooltip of the XML context file in the status bar, and the command
+				<strong>XSLT: Edit Quick Run Task</strong> is in the Command Palette. This opens <code>tasks.json</code>
+				with the task highlighted - if there isn't a task yet, it's created first, as Quick Run would create it.
+			</p>
+			<p>
+				Debugging always uses the SaxonJ (<code>xslt</code>) task, so with SaxonJ selected the menu item is
+				<strong>Edit Quick Run and Debug Task (SaxonJ)</strong>. With SaxonJS or SaxonC selected, there's a
+				separate <strong>Edit Debug Task (SaxonJ)</strong> item. When Quick Run or debugging first creates a task,
+				a notification also offers <strong>Edit Task</strong>.
+			</p>
 			<p>
 				For different sets of parameters, copy the task in <code>tasks.json</code> and give the copy a new
 				label. When more than one task is for the stylesheet/context-file pairing, Quick Run (and debugging)
