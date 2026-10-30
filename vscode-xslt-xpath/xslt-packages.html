@@ -183,13 +183,32 @@
 				<code>-lib</code> option, as the configuration file may declare the packages itself, in its
 				<code>xsltPackages</code> element. SaxonJS tasks don't get it either.</aside>
 
+			<h3 id="not-found">A package that isn't found</h3>
+			<p>An <code>xsl:use-package</code> whose package isn't found - no package with the name, or none with a
+				version in its <code>package-version</code> range - is reported as an error, <code>XTSE3000</code>, as
+				Saxon reports it. Two quick fixes are offered:</p>
+			<ul>
+				<li><strong>Create Package '...'</strong> - choose where to save a new package file, by default beside
+					the stylesheet and named from the package URI's last part. It has the package's name, and the version
+					the <code>package-version</code> asks for (the lowest, for a range such as <code>2+</code>)</li>
+				<li><strong>Add Existing Package File...</strong> - pick a package file, for example outside the
+					workspace, to add to the <code>XSLT.resources.xsltPackages</code> setting. Its
+					<code>xsl:package</code> must have the name, and a version in the range</li>
+			</ul>
+
+			<h3 id="completion">Auto-completion</h3>
+			<p>In the <code>name</code> of an <code>xsl:use-package</code>, auto-completion lists the URIs of the
+				packages found - in the workspace and the <code>XSLT.resources.xsltPackages</code> setting - with each
+				package's versions. In its <code>package-version</code>, it lists <code>*</code> and the versions of the
+				named package, highest first.</p>
+
 			<h3 id="navigation">Navigating to a package</h3>
 			<p>The <code>name</code> of an <code>xsl:use-package</code> is a link to the package's file - press
 				<span class="shortcut">⌘+click</span> to open it. Go to definition, hover help and auto-completion for
 				the package's functions, templates, variables and other declarations work as for an imported module.</p>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#running">Running and debugging</a></li><li><a href="#navigation">Navigating to a package</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
