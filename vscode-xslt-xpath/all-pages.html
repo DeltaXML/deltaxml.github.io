@@ -1933,7 +1933,13 @@
 			<p> The XSLT/XPath extension finds
 				it, so that the package's declarations are known to the linter, auto-completion, hover help and go to
 				definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
-
+			<figure>
+				<img src="resources/package-imports.png" class="scale-with-grid">
+				<figcaption>
+					The XSLT Imports view shows packages used by the current stylesheet, discovered during workspace scanning or declared in workspace settings.
+					Use auto-completion on the <code>name</code> attribute of <code>xsl:use-package</code> to select and import from additional packages available.
+				</figcaption>
+			</figure>
 			<h3 id="xslt-packages--workspace-packages">Packages in the workspace</h3>
 			<p>Every <code>.xsl</code> and <code>.xslt</code> file in the workspace whose root element is
 				<code>xsl:package</code> is found automatically, by the same background scan of the workspace that finds
@@ -1941,9 +1947,6 @@
 				<code>xsl:package</code> element - a package with no <code>package-version</code> is version
 				<code>1</code>. These packages need no setting, and they're read again when saved: change a package's
 				name or version, and the stylesheets using it see the change.</p>
-			<aside>In the XSLT specification, a stylesheet whose root element is <code>xsl:stylesheet</code> or
-				<code>xsl:transform</code> is also a package - but one with no name, so <code>xsl:use-package</code>
-				can't use it. Only modules declared with <code>xsl:package</code> are found here.</aside>
 			<aside>The workspace scan is turned off with the <strong>XSLT.resources.inferParentFromWorkspace</strong>
 				setting. Packages are then found only from the <strong>XSLT.resources.xsltPackages</strong> setting.</aside>
 
