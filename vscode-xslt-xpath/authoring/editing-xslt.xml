@@ -388,9 +388,10 @@
 		<p>You can quickly create a new XSLT file when adding a <code>xsl:import</code>, <code>xsl:use-package</code> or <code>xsl:include</code> XSLT instruction. Simply enter the file path
 			in the href, press <span class="shortcut">⌘+click</span> and then, in the 'Unable to Open...' dialog press the <strong>Create File</strong> button.</p>
 		
-		<aside>Note that for the XSLT <code>xsl:use-package</code> instruction, you first need to map the package
-			name to a file path in the User or Workspace setting <code>XSLT.resources.xsltPackages</code> - see
-			<a href="settings.html#xslt-packages">XSLT packages</a>.</aside>
+		<aside>For <code>xsl:use-package</code>, a package in the workspace is found by its package URI - the
+			<code>name</code> in its <code>xsl:package</code> element - one outside the workspace needs its path in the
+			setting <code>XSLT.resources.xsltPackages</code> - see
+			<a href="xslt-packages.html">XSLT Packages</a>.</aside>
 		<aside>An <code>href</code> can also be a URI that an XML catalog maps to a file, e.g.
 			<code>http://example.com/xslt/strings.xsl</code> - see <a href="xml-catalogs.html">XML Catalogs</a>.</aside>
 		</div>

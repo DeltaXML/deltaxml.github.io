@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>An <strong>XSLT package</strong> is a stylesheet module whose root element is <code>xsl:package</code>,
+				with a <code>name</code> - usually a URI - and optionally a <code>package-version</code>. Another
+				stylesheet uses it by name and version, with <code>xsl:use-package</code>, rather than by its file
+				path:</p>
+			<code class="block">&lt;xsl:package name="http://example.com/strings" package-version="2.1"
+             version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+    ...
+&lt;/xsl:package&gt;
+
+&lt;!-- in a stylesheet that uses it --&gt;
+&lt;xsl:use-package name="http://example.com/strings" package-version="2+"/&gt;</code>
+			<p>The package URI is an identifier, not a location: <code>xsl:use-package</code> matches it exactly
+				against the <code>name</code> of each <code>xsl:package</code>, and it isn't resolved like the
+				<code>href</code> of <code>xsl:import</code>. Neither the XSLT specification nor Saxon fixes where a
+				package's file is.</p>
+			<p> The XSLT/XPath extension finds
+				it, so that the package's declarations are known to the linter, auto-completion, hover help and go to
+				definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
+
+			<h3 id="workspace-packages">Packages in the workspace</h3>
+			<p>Every <code>.xsl</code> and <code>.xslt</code> file in the workspace whose root element is
+				<code>xsl:package</code> is found automatically, by the same background scan of the workspace that finds
+				the top-level stylesheet importing a module. Its name and version are read from its
+				<code>xsl:package</code> element - a package with no <code>package-version</code> is version
+				<code>1</code>. These packages need no setting, and they're read again when saved: change a package's
+				name or version, and the stylesheets using it see the change.</p>
+			<aside>In the XSLT specification, a stylesheet whose root element is <code>xsl:stylesheet</code> or
+				<code>xsl:transform</code> is also a package - but one with no name, so <code>xsl:use-package</code>
+				can't use it. Only modules declared with <code>xsl:package</code> are found here.</aside>
+			<aside>The workspace scan is turned off with the <strong>XSLT.resources.inferParentFromWorkspace</strong>
+				setting. Packages are then found only from the <strong>XSLT.resources.xsltPackages</strong> setting.</aside>
+
+			<h3 id="setting">Packages outside the workspace</h3>
+			<p>For a package kept outside the workspace, for example a library shared between projects, add its path to
+				the <code>XSLT.resources.xsltPackages</code> setting - relative to the workspace folder, or as a
+				<code>file:</code> URI. The name and version are read from the file, so the path is all that's
+				needed:</p>
+			<code class="block">"XSLT.resources.xsltPackages": [
+    { "path": "../shared-xslt/strings.xsl" },
+    { "path": "file:///opt/xslt/dates.xsl" }
+]</code>
+			<p>An entry can also give a <code>name</code> and <code>version</code>, which are then used instead of
+				those in the file - for example, to try a copy of a package under a different version. Packages from the
+				setting come before those found in the workspace when the same version of a package is in both.</p>
+
+			<h3 id="versions">Which version is used</h3>
+			<p>When more than one file declares a package with the same name, the <code>package-version</code> of
+				<code>xsl:use-package</code> chooses between them: the highest version in its range is used. With no
+				<code>package-version</code>, the range is <code>*</code>, so the highest version of all is used.</p>
+			<table>
+				<thead>
+					<tr><th>package-version</th><th>Versions it matches</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>*</code></td><td>any version</td></tr>
+					<tr><td><code>2.1</code></td><td>2.1 only - also written 2.1.0</td></tr>
+					<tr><td><code>2.*</code></td><td>2, 2.0, 2.1, 2.1.5 ...</td></tr>
+					<tr><td><code>2+</code></td><td>2 or higher</td></tr>
+					<tr><td><code>1.5 to 2.9</code></td><td>from 1.5 to 2.9, inclusive</td></tr>
+					<tr><td><code>to 2</code></td><td>2 or lower</td></tr>
+					<tr><td><code>1.0, 3.0</code></td><td>any of the ranges separated by commas</td></tr>
+				</tbody>
+			</table>
+			<p>Versions are compared part by part as numbers, so <code>1.10</code> is higher than <code>1.9</code>,
+				and a missing part counts as 0, so <code>1</code> and <code>1.0.0</code> are the same version. A version
+				with a name part, such as <code>3.0-beta</code>, is lower than the same version without one,
+				<code>3.0</code>.</p>
+
+			<h3 id="running">Running and debugging</h3>
+			<p>When a stylesheet that uses packages is run - with <a href="quick-run.html">Quick Run</a>, an
+				<a href="run-xslt.html">XSLT task</a> for SaxonJ or SaxonC, or the <a href="debugger.html">debugger</a> -
+				the package files are passed to Saxon with its <code>-lib</code> option. These are the packages used
+				by the stylesheet, by the modules it imports or includes, and by the packages themselves - each the
+				version chosen as above. Saxon reads each package's name and version from the file, as the extension
+				does, so packages are only ever declared in one place: the packages themselves.</p>
+			<p>Without this, Saxon reports <code>XTSE3000 Cannot find package</code> for each package used.</p>
+			<aside>A task with a <code>configFilename</code> property - a Saxon configuration file - doesn't get the
+				<code>-lib</code> option, as the configuration file may declare the packages itself, in its
+				<code>xsltPackages</code> element. SaxonJS tasks don't get it either.</aside>
+
+			<h3 id="navigation">Navigating to a package</h3>
+			<p>The <code>name</code> of an <code>xsl:use-package</code> is a link to the package's file - press
+				<span class="shortcut">⌘+click</span> to open it. Go to definition, hover help and auto-completion for
+				the package's functions, templates, variables and other declarations work as for an imported module.</p>
+		</div>
+	</div>
+</html>
