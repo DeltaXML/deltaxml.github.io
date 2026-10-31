@@ -94,6 +94,9 @@
 				Use the cursor keys to move through the references and press <span class="shortcut">Enter</span> to open the editor in
 				the reference location.
 			</p>
+			<p>For XSLT packages, Find All References includes the declarations that override a package component, and
+				<strong>Go to Implementations</strong> and <strong>Go to Declaration</strong> navigate between them - see
+				<a href="xslt-packages.html#override-navigation">Navigating between overrides</a>.</p>
 			<p>After navigating to a reference or definition, you can quickly navigate to the location you were in using <span class="shortcut">⌃-</span></p>
 			<!-- end -->
 

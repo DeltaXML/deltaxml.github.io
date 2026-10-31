@@ -119,8 +119,8 @@
 				<code>href</code> of <code>xsl:import</code>. Neither the XSLT specification nor Saxon fixes where a
 				package's file is.</p>
 			<p> The XSLT/XPath extension finds
-				it, so that the package's declarations are known to the linter, auto-completion, hover help and go to
-				definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
+				it, so that the declarations the package makes public are known to the linter, auto-completion, hover help
+				and go to definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
 			<figure>
 				<img src="resources/package-imports.png" class="scale-with-grid">
 				<figcaption>
@@ -174,6 +174,157 @@
 				with a name part, such as <code>3.0-beta</code>, is lower than the same version without one,
 				<code>3.0</code>.</p>
 
+			<h3 id="visibility">What a stylesheet can use from a package</h3>
+			<p>Unlike an imported module, a package decides which of its declarations - its <em>components</em> - other
+				stylesheets can use. A stylesheet using the package sees its public and final components only, as Saxon
+				does, so the linter reports a reference to anything else, and auto-completion doesn't offer it.</p>
+			<table>
+				<thead>
+					<tr><th>Component</th><th>Visibility, with no <code>visibility</code> attribute</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>Function, named template, global variable, attribute set, mode</td><td>private - unless an
+						<code>xsl:expose</code> in the package matches it</td></tr>
+					<tr><td>Global <code>xsl:param</code></td><td>public (it can't have a <code>visibility</code>
+						attribute)</td></tr>
+					<tr><td>Key, accumulator, character map, template rules in the unnamed mode</td><td>never shared:
+						they're local to the package</td></tr>
+				</tbody>
+			</table>
+			<code class="block">&lt;xsl:package name="http://example.com/strings" package-version="2.1" ...&gt;
+    &lt;!-- functions in the package's namespace are final, unless they say otherwise --&gt;
+    &lt;xsl:expose component="function" names="str:*" visibility="final"/&gt;
+
+    &lt;xsl:function name="str:pad"&gt;...&lt;/xsl:function&gt;                         &lt;!-- final --&gt;
+    &lt;xsl:function name="str:helper" visibility="private"&gt;...&lt;/xsl:function&gt;  &lt;!-- private --&gt;
+    &lt;xsl:function name="str:format" visibility="abstract" as="xs:string"/&gt;   &lt;!-- to be overridden --&gt;
+&lt;/xsl:package&gt;</code>
+			<p>A <code>visibility</code> attribute on a declaration takes precedence over <code>xsl:expose</code>.
+				Where several <code>xsl:expose</code> elements match, the most specific name wins: a name, then a
+				wildcard such as <code>str:*</code> or <code>*:pad</code>, then <code>*</code>.</p>
+			<p>In the stylesheet using the package, <code>xsl:accept</code> can narrow a component's visibility - for
+				example to <code>hidden</code>, so it can't be used at all - and <code>xsl:override</code> replaces a
+				public or abstract component with a declaration of its own. An abstract component can only be used once
+				it's overridden. Within the overriding declaration, <code>xsl:original</code> refers to the package's
+				version.</p>
+			<code class="block">&lt;xsl:use-package name="http://example.com/strings" package-version="2+"&gt;
+    &lt;xsl:accept component="function" names="str:pad#2" visibility="hidden"/&gt;
+    &lt;xsl:override&gt;
+        &lt;xsl:function name="str:format" as="xs:string"&gt;...&lt;/xsl:function&gt;
+    &lt;/xsl:override&gt;
+&lt;/xsl:use-package&gt;</code>
+			<p>A package that uses another package doesn't pass its components on: they're private to it, unless its own
+				<code>xsl:accept</code> or <code>xsl:expose</code> makes them public.</p>
+
+			<h3 id="overriding">Overriding package components</h3>
+			<p>An <code>xsl:override</code> declaration must have the same signature as the component it replaces, so the
+				extension writes it for you - as a Java IDE does for overriding methods - from the package's own
+				declaration, with the stylesheet's prefixes:</p>
+			<ul>
+				<li><strong>Override Package Components...</strong> - with the cursor anywhere in an
+					<code>xsl:use-package</code>, this refactoring (from the 💡 light-bulb, or <span class="shortcut">⌃⇧R</span>)
+					lists the package's public and abstract components that aren't overridden yet, with the abstract ones
+					already ticked. The ones you pick are added to its <code>xsl:override</code>, which is created if
+					needed</li>
+				<li><strong>Auto-completion</strong> - after <code>&lt;</code> in an <code>xsl:override</code>, the list
+					starts with an <em>override ...</em> item for each of those components, abstract ones first, with the
+					package's documentation for it</li>
+				<li><strong>Quick fixes</strong> - for abstract components that aren't overridden, see below</li>
+			</ul>
+			<p>An abstract component is a placeholder, so its declaration has a body that stops the transformation until
+				you implement it, and a <a href="xslt40-notes.html">documentation note</a> with a TODO and an
+				<code>@see</code> link to the package's declaration. In an XSLT 3.0 stylesheet the note is excluded with
+				<code>use-when="false()"</code>:</p>
+			<code class="block">&lt;xsl:use-package name="http://example.com/shapes"&gt;
+    &lt;xsl:override&gt;
+        &lt;xsl:function name="shp:area" as="xs:double"&gt;
+            &lt;xsl:note use-when="false()" format="xdoc-md"&gt;
+                TODO: implement the abstract function of package http://example.com/shapes.
+
+                @see shp:area#1
+            &lt;/xsl:note&gt;
+            &lt;xsl:param name="shape" as="map(*)"/&gt;
+            &lt;xsl:message terminate="yes"&gt;shp:area#1 is not implemented&lt;/xsl:message&gt;
+        &lt;/xsl:function&gt;
+    &lt;/xsl:override&gt;
+&lt;/xsl:use-package&gt;</code>
+			<p>A public component's declaration calls the package's version with <code>xsl:original</code> instead, as Java's
+				<code>super</code> does, so it behaves as before until you change it - for a template, with an
+				<code>xsl:with-param</code> for each parameter. A global parameter keeps the package's default.</p>
+			<h4 id="abstract">Abstract components that aren't overridden</h4>
+			<p>Saxon compiles a stylesheet that doesn't override an abstract component it doesn't call - but calling a
+				component of the package that depends on it stops the transformation, with <code>XTDE3052</code>. So the
+				<code>xsl:use-package</code> has a warning that lists them, with quick fixes to override them all, or each
+				one. A call of one in the stylesheet is reported as an abstract component that isn't overridden, with a
+				quick fix to override it. A package can pass an abstract component on to the stylesheets that use it, with
+				<code>xsl:accept visibility="abstract"</code>: there's no warning then.</p>
+
+			<h3 id="package-problems">Problems with xsl:accept and xsl:override</h3>
+			<p>These static errors, which Saxon reports when it compiles the stylesheet, are reported as you edit - most
+				with quick fixes, shown with the 💡 light-bulb:</p>
+			<table>
+				<thead>
+					<tr><th>Error</th><th>Reported for</th><th>Quick fixes</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>XTSE3020</code></td><td>a function name in <code>xsl:accept</code> without its arity,
+						such as <code>str:pad</code> for <code>str:pad#2</code></td><td>Change to the name with each arity
+						the package has</td></tr>
+					<tr><td><code>XTSE3030</code></td><td>a name in <code>xsl:accept</code> that the package doesn't
+						have</td><td>Change to a similar name, or remove it</td></tr>
+					<tr><td><code>XTSE3040</code></td><td>accepting a private component by name, or accepting a
+						component with a wider visibility - a final component as public</td><td>Change the visibility to the
+						component's, or remove the name</td></tr>
+					<tr><td><code>XTSE3051</code>, <code>XTSE0020</code></td><td>a component both accepted and overridden
+						by the same <code>xsl:use-package</code> - or <code>#unnamed</code>, the unnamed mode, which can't
+						be accepted</td><td>Remove the name</td></tr>
+					<tr><td><code>XTSE3050</code></td><td>a declaration with the name of a component the package
+						gives, outside <code>xsl:override</code></td><td>Move it into the <code>xsl:override</code></td></tr>
+					<tr><td><code>XTSE3058</code></td><td>overriding a component the package doesn't have</td><td>Change
+						to a similar name, or remove the declaration</td></tr>
+					<tr><td><code>XTSE3060</code></td><td>overriding a private or final component</td><td>Remove the
+						declaration</td></tr>
+					<tr><td><code>XTSE3070</code></td><td>an overriding declaration whose types differ from the
+						original's - its <code>as</code>, and its parameters' types. A template must also keep each
+						parameter of the original, with the same <code>required</code> and <code>tunnel</code> values
+						(it may leave out a tunnel parameter), and any parameter it adds must be optional</td><td>Change the
+						signature to match the package's - keeping the names of a function's parameters, and the parameters
+						a template adds, made optional</td></tr>
+				</tbody>
+			</table>
+			<p>A name removed from <code>xsl:accept</code> takes the <code>xsl:accept</code> with it, if it's the only
+				one.</p>
+			<aside>Types are compared as written, with their prefixes' namespaces and ignoring whitespace, because Saxon
+				requires the same type - a subtype, such as <code>xs:NCName</code> for <code>xs:string</code>, isn't
+				allowed. A missing <code>as</code> is <code>item()*</code>.</aside>
+
+			<h3 id="declared-modes">Declared modes</h3>
+			<p>In an <code>xsl:package</code>, each mode used must be declared with <code>xsl:mode</code> - the
+				<code>declared-modes</code> attribute is <code>yes</code> by default for a package, unlike a
+				stylesheet. That includes the unnamed mode: a package with template rules that have no
+				<code>mode</code> attribute needs <code>&lt;xsl:mode/&gt;</code>. An undeclared mode is reported as
+				<code>XTSE3085</code>, once, where it's first used: in the <code>mode</code> of a template rule or
+				<code>xsl:apply-templates</code>, or the <code>default-mode</code> of the package. A mode declared in a
+				module the package includes or imports, or a public mode of a package it uses, is declared.</p>
+			<p>The quick fixes add the declaration - <strong>Add &lt;xsl:mode name="..."/&gt;</strong> or <strong>Add
+				&lt;xsl:mode/&gt;</strong>, after the package's other <code>xsl:mode</code> elements or before its first
+				template - or <strong>Set declared-modes="no" on the xsl:package</strong>.</p>
+
+			<h3 id="hover">Hover help</h3>
+			<p>Hover over the <code>name</code> of an <code>xsl:use-package</code> to see the package's documentation
+				- its <a href="xslt40-notes.html">module note</a>, the <code>xsl:note</code> that's the first child of
+				its <code>xsl:package</code> - the version and file used, and the components the stylesheet can use, by
+				kind. These are after its <code>xsl:accept</code> elements, and without those it overrides, so the list
+				is the package's public interface as this stylesheet sees it.</p>
+			<p>Hover help for a function or named template from a package says which package it's from, and its
+				visibility - for example, <em>Final function of package <code>http://example.com/strings</code> 2.1,
+				declared in strings.xsl</em> - with its documentation note.</p>
+			<p>For a declaration in <code>xsl:override</code>, and the calls of it, the hover help says what it overrides -
+				for example, <em>Overrides the abstract function of package <code>http://example.com/shapes</code>,
+				declared in shapes.xsl</em> - and if it has no documentation note of its own, it has the package
+				declaration's, as an overriding method's documentation is inherited in Java. In the note of an overriding
+				declaration, an <code>@see</code> of the component it overrides links to the package's declaration.</p>
+
 			<h3 id="running">Running and debugging</h3>
 			<p>When a stylesheet that uses packages is run - with <a href="quick-run.html">Quick Run</a>, an
 				<a href="run-xslt.html">XSLT task</a> for SaxonJ or SaxonC, or the <a href="debugger.html">debugger</a> -
@@ -208,10 +359,29 @@
 			<h3 id="navigation">Navigating to a package</h3>
 			<p>The <code>name</code> of an <code>xsl:use-package</code> is a link to the package's file - press
 				<span class="shortcut">⌘+click</span> to open it. Go to definition, hover help and auto-completion for
-				the package's functions, templates, variables and other declarations work as for an imported module.</p>
+				the package's public functions, templates, variables and other components work as for an imported
+				module.</p>
+
+			<h3 id="override-navigation">Navigating between overrides</h3>
+			<p>Between a package's components and the declarations that override them, VS Code's own commands work:</p>
+			<ul>
+				<li><strong>Go to Implementations</strong> (<span class="shortcut">⌘F12</span>) - from a package component, or a
+					call of it, to the declarations in the workspace that override it</li>
+				<li><strong>Go to Declaration</strong> - from an overriding declaration's name, or <code>xsl:original</code>
+					within it, to the package's declaration</li>
+				<li><strong>Find All References</strong> (<span class="shortcut">⌥⇧F12</span>) - for a package component,
+					includes the declarations that override it - and for an overriding declaration, the package's
+					declaration</li>
+			</ul>
+			<p>With code lenses on (the <strong>editor.codeLens</strong> setting), an overriding declaration shows
+				<em>overrides public function str:pad#2 of package http://example.com/strings</em>, which goes to the
+				package's declaration, and a package component shows <em>overridden in 2 modules</em>, which lists the
+				declarations that override it.</p>
+			<aside>Renaming a package component renames it in the package only, not the declarations overriding it in the
+				stylesheets that use the package - nor their calls of it.</aside>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#visibility">What a stylesheet can use from a package</a></li><li><a href="#overriding">Overriding package components</a><ul><li><a href="#abstract">Abstract components that aren't overridden</a></li></ul></li><li><a href="#package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#declared-modes">Declared modes</a></li><li><a href="#hover">Hover help</a></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li><li><a href="#override-navigation">Navigating between overrides</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

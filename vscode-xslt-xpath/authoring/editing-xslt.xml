@@ -240,6 +240,9 @@
 				or <code>xsl:map</code>, see <a href="xslt40-records.html#record-refactoring">Records and Enums</a></li>
 			<li><strong>Add documentation note</strong> - XSLT 4.0, with the cursor on the start tag of an <code>xsl:function</code>
 				or <code>xsl:template</code>, see <a href="xslt40-notes.html#adding">Code Documentation</a></li>
+			<li><strong>Override Package Components...</strong> - with the cursor in an <code>xsl:use-package</code>, adds
+				declarations to its <code>xsl:override</code> for the package components you pick, see
+				<a href="xslt-packages.html#overriding">Overriding package components</a></li>
 		</ul>
 		<p>An available refactoring for a selection is indicated by a light-bulb💡 adjacent to the selection. Clicking on the 💡 will display the available refactorings.
 			The light-bulb is only shown when the code selection is a valid expression or a set of XSLT instructions that would be valid inside the new component.
@@ -295,6 +298,11 @@
 			<li><strong>Add mode="#current"</strong> (preferred) and <strong>Add mode="#default"</strong> - for an
 				<code>xsl:apply-templates</code> without a <code>mode</code> in a template rule with a mode, see
 				<a href="#mode-checks">Checks on modes</a></li>
+			<li><strong>XSLT packages</strong> - for an <code>xsl:use-package</code> whose package isn't found, abstract
+				components that aren't overridden, problems with <code>xsl:accept</code> and <code>xsl:override</code>,
+				and modes a package doesn't declare, see <a href="xslt-packages.html#not-found">a package that isn't found</a>,
+				<a href="xslt-packages.html#abstract">abstract components</a>, <a href="xslt-packages.html#package-problems">problems
+				with xsl:accept and xsl:override</a> and <a href="xslt-packages.html#declared-modes">declared modes</a></li>
 		</ul>
 		<h3 id="checking">XSLT Linter</h3>
 		<p>
