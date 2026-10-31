@@ -133,7 +133,8 @@
 			</ul>
 			<p>An abstract component is a placeholder, so its declaration has a body that stops the transformation until
 				you implement it, and a <a href="xslt40-notes.html">documentation note</a> with a TODO and an
-				<code>@see</code> link to the package's declaration. In an XSLT 3.0 stylesheet the note is excluded with
+				<a href="xslt40-notes.html#references"><code>@see</code></a> link to the package's declaration. In an
+				XSLT 3.0 stylesheet the note is <a href="xslt40-notes.html#xslt30">excluded</a> with
 				<code>use-when="false()"</code>:</p>
 			<code class="block">&lt;xsl:use-package name="http://example.com/shapes"&gt;
     &lt;xsl:override&gt;
@@ -212,7 +213,7 @@
 
 			<h3 id="hover">Hover help</h3>
 			<p>Hover over the <code>name</code> of an <code>xsl:use-package</code> to see the package's documentation
-				- its <a href="xslt40-notes.html">module note</a>, the <code>xsl:note</code> that's the first child of
+				- its <a href="xslt40-notes.html#module-notes">module note</a>, the <code>xsl:note</code> that's the first child of
 				its <code>xsl:package</code> - the version and file used, and the components the stylesheet can use, by
 				kind. These are after its <code>xsl:accept</code> elements, and without those it overrides, so the list
 				is the package's public interface as this stylesheet sees it.</p>

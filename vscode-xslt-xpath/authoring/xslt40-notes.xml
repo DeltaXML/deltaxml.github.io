@@ -123,8 +123,13 @@
 					the <code>@param</code> text for the current parameter.</li>
 				<li><strong>Auto-completion</strong> - the <code>xsl:with-param</code> suggestions within an
 					<code>xsl:call-template</code> show the <code>@param</code> text for each parameter.</li>
+				<li><strong>Packages</strong> - on the <code>name</code> of an <code>xsl:use-package</code>, the package's
+					module note is shown with the components the stylesheet can use - and a declaration in
+					<code>xsl:override</code> without a note of its own has the note of the package component it
+					overrides, see <a href="xslt-packages.html#hover">XSLT Packages</a>.</li>
 			</ul>
-			<p>Notes on functions, templates and item types in included and imported stylesheets are shown too.</p>
+			<p>Notes on functions, templates and item types in included and imported stylesheets, and in the packages a
+				stylesheet uses, are shown too.</p>
 			<figure>
 				<img src="resources/xsl-note-hover.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>To see <code>xdoc-md</code> documentation on the function (or named template) hover over the referring code.</i></figcaption>
@@ -153,6 +158,11 @@
 					are suggested, written so that they refer to them: parameters and variables, e.g. <code>$scale</code>,
 					functions by arity, e.g. <code>my:area#2</code>, then item types and templates.</li>
 			</ul>
+			<p>In the note of a declaration in <code>xsl:override</code>, a reference to the component it overrides is to the
+				package's declaration - so <code>@see shp:area#1</code> in the note of the overriding <code>shp:area</code>
+				goes to the package's <code>shp:area</code>, not to itself. The declarations that the
+				<a href="xslt-packages.html#overriding">override quick fixes and refactoring</a> add have a note with that
+				<code>@see</code>.</p>
 			<figure>
 				<img src="resources/notes-see-hover.png" class="scale-with-grid" />
 				<figcaption style="margin:auto"><i>Hover on a reference in a note to review the referenced item's description.</i></figcaption>
@@ -188,7 +198,9 @@
 					the <code>name</code> of its declaration: its type, its documentation, and for an enumeration type,
 					its values.</li>
 				<li><strong>Hover help on imports</strong> - on the <code>href</code> of an <code>xsl:import</code> or
-					<code>xsl:include</code>: the module's note, and its path.</li>
+					<code>xsl:include</code>: the module's note, and its path - and on the <code>name</code> of an
+					<code>xsl:use-package</code>, the note of the <code>xsl:package</code>, see
+					<a href="xslt-packages.html#hover">XSLT Packages</a>.</li>
 				<li><strong>Preview</strong> - on the start tag of the module note: the note as it's shown for an
 					import of the module.</li>
 				<li><strong>Rename</strong> - renaming a global parameter or variable renames its <code>@param</code>
