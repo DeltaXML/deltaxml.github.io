@@ -127,10 +127,21 @@
                     extension can run in Visual Studio Code's <a href="ai-assistants.html#agents-window">Agents
                     window</a></li>
                 <li><strong><a href="xslt-packages.html">XSLT packages</a></strong> - packages in the workspace are
-                    found by their <code>xsl:package</code> name and version, with no setting, and the packages a
-                    stylesheet uses are passed to Saxon when it's run or debugged. <code>package-version</code> ranges
-                    choose between versions, a package that isn't found is reported - with quick fixes to create it or
-                    add an existing package file - and package names and versions are auto-completed</li>
+                    found by their <code>xsl:package</code> name and version, with no setting, and passed to Saxon when a
+                    stylesheet is run or debugged. A stylesheet sees a package's components as Saxon does - by their
+                    visibility, <code>xsl:expose</code> and <code>xsl:accept</code> - and problems with
+                    <code>xsl:accept</code>, <code>xsl:override</code> and package modes are reported as you edit, most
+                    with quick fixes</li>
+                <li><strong><a href="xslt-packages.html#overriding">Overriding package components</a></strong> - as for
+                    methods in a Java IDE: <strong>Override Package Components...</strong>, auto-completion and quick fixes
+                    write each overriding declaration from the package's signature, abstract components that aren't
+                    overridden are reported, and Go to Implementations, Go to Declaration and Find All References move
+                    between components and their overrides</li>
+                <li><strong><a href="xslt-packages.html#converting">Converting a library to a package</a></strong> -
+                    <strong>Analyse as Package...</strong> reports what would have to change for a library that stylesheets
+                    import to become a package, and <strong>Convert to Package...</strong> makes the changes across the
+                    workspace - the library's visibility, the stylesheets' overrides, even a shared unnamed mode - shown in
+                    the Refactor Preview before they're made</li>
             </ul>
             <h3 id="release-2-0">Release 2.0</h3>
             <ul>
