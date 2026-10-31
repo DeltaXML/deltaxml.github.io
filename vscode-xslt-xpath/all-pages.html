@@ -2022,8 +2022,10 @@
 						<code>xsl:expose</code> in the package matches it</td></tr>
 					<tr><td>Global <code>xsl:param</code></td><td>public (it can't have a <code>visibility</code>
 						attribute)</td></tr>
-					<tr><td>Key, accumulator, character map, template rules in the unnamed mode</td><td>never shared:
-						they're local to the package</td></tr>
+					<tr><td>Key, accumulator, character map, template rules in the unnamed mode</td><td>not exposed as
+						package components: a stylesheet using the package can't refer to them - e.g. name a key in
+						<code>key()</code>, or apply the unnamed mode's template rules - though the package's own code uses
+						them as usual</td></tr>
 				</tbody>
 			</table>
 			<code class="block">&lt;xsl:package name="http://example.com/strings" package-version="2.1" ...&gt;
@@ -2167,7 +2169,7 @@
 			<p>A library that stylesheets use with <code>xsl:import</code> or <code>xsl:include</code> can become a package,
 				but not just by changing its root element: a package's components are private by default, a stylesheet's
 				declaration with the name of the library's must move into <code>xsl:override</code>, and some declarations
-				aren't shared by a package at all. <strong>Analyse as Package...</strong> shows what would have to change
+				aren't exposed as package components at all. <strong>Analyse as Package...</strong> shows what would have to change
 				for the stylesheets to work as before - it changes nothing.</p>
 			<p>Run it from the Command Palette, with the library open, or from the context menu of a module in the
 				<a href="#editing-xslt--the-xslt-imports-view">XSLT Imports view</a>. It checks each top-level stylesheet
@@ -2193,9 +2195,9 @@
 					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, if the library
 					shares it with the stylesheets, which becomes a named mode, as a package keeps its unnamed mode to
 					itself (see <a href="#xslt-packages--unnamed-mode">below</a>)</li>
-				<li><strong>Not shared by a package</strong> - keys, accumulators, decimal formats, character maps,
-					<code>xsl:strip-space</code> and <code>xsl:output</code>, which the stylesheets need their own copies
-					of</li>
+				<li><strong>Not exposed by a package</strong> - keys, accumulators, decimal formats, character maps,
+					<code>xsl:strip-space</code> and <code>xsl:output</code>, which apply only to the package's own code, so
+					the stylesheets need their own copies of those they rely on</li>
 			</ul>
 			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other
