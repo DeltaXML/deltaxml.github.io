@@ -341,8 +341,13 @@
 			<ul>
 				<li><strong>To rework first</strong> - what would fail in a package: a global variable whose value uses the
 					context item, e.g. <code>select="/*"</code>, which has none in a library package (<code>XPDY0002</code>),
-					or an <code>xsl:global-context-item</code> - and a stylesheet's declaration that overrides the library's
-					by import precedence, but with a different type, which an override can't have (<code>XTSE3070</code>)</li>
+					or an <code>xsl:global-context-item</code> - a stylesheet's declaration that overrides the library's
+					by import precedence, but with a different type, which an override can't have (<code>XTSE3070</code>) -
+					and a name the library uses that isn't declared in it or the stylesheets found to use it, e.g. in a module
+					whose import isn't resolved, as a package must declare all it uses. The report lists imports that aren't
+					found: the <a href="xml-catalogs.html">XML catalog setting</a> may resolve them, e.g. DITA-OT's
+					<code>plugin:</code> URIs. And code that would move into <code>xsl:override</code> from a module outside
+					the workspace, or that stylesheets which don't use the library use too, as they'd lose it</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
 					the stylesheets use</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
@@ -350,8 +355,9 @@
 				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but only
 					the stylesheets declare, which the package declares as abstract</li>
 				<li><strong>Modes and template rules</strong> - the library's named modes that the stylesheets use, and their
-					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, which a package
-					keeps to itself</li>
+					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, if the library
+					shares it with the stylesheets, which becomes a named mode, as a package keeps its unnamed mode to
+					itself (see <a href="#unnamed-mode">below</a>)</li>
 				<li><strong>Not shared by a package</strong> - keys, accumulators, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code>, which the stylesheets need their own copies
 					of</li>
@@ -364,8 +370,7 @@
 				uses the context item, the linter checks its value as the body of a function, where there's no context
 				item.</aside>
 			<h4 id="convert">Convert to Package...</h4>
-			<p>When nothing needs reworking first - and the library doesn't share the unnamed mode with the stylesheets -
-				<strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
+			<p>When nothing needs reworking first, <strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
 				module in the XSLT Imports view. It asks for the package's name and version, then shows the changes to
 				every module in the <strong>Refactor Preview</strong>, where you can check them before they're made:</p>
 			<ul>
@@ -385,6 +390,34 @@
 			</ul>
 			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
 				reports what still needs to change, mostly with quick fixes.</p>
+			<h4 id="unnamed-mode">The unnamed mode</h4>
+			<p>A library and the stylesheets that import it often share the unnamed mode: the stylesheets apply the library's
+				template rules, and add rules of their own, which take precedence. A package's unnamed mode is private to it,
+				so the conversion asks for the name of a public mode that it becomes - e.g. <code>lib:default</code>,
+				with a prefix the library declares - and then:</p>
+			<ul>
+				<li>each of the library's modules gets <code>default-mode="lib:default"</code>, so its template rules and
+					<code>xsl:apply-templates</code> without a <code>mode</code> are in the named mode - and its
+					<code>xsl:mode</code> for the unnamed mode, if it has one, gets the name and
+					<code>visibility="public"</code></li>
+				<li>the stylesheets' template rules in the unnamed mode move into <code>xsl:override</code>, with the mode,
+					and their <code>xsl:apply-templates</code> without a mode get it</li>
+				<li>each top-level stylesheet gets a template rule that applies templates in the named mode: the
+					transformation starts in the stylesheet's unnamed mode, as a package's mode can't be the initial
+					mode</li>
+			</ul>
+			<code class="block">&lt;!-- the transformation starts in the unnamed mode: this applies templates in the mode of package urn:lib that it became --&gt;
+&lt;xsl:template match="."&gt;
+    &lt;xsl:apply-templates select="." mode="lib:default"/&gt;
+&lt;/xsl:template&gt;</code>
+			<p>A stylesheet's own <code>xsl:mode</code> for the unnamed mode, e.g. with <code>on-no-match</code>, has to
+				move to the library first, as a mode can't be overridden.</p>
+			<p>A template rule that's also a named template, with both <code>match</code> and <code>name</code>, can't move
+				into <code>xsl:override</code> as it is, where it would also override a named template the package doesn't
+				have. It's split: the named template stays where it is, and a template rule that calls it, passing its
+				parameters, moves into <code>xsl:override</code>. A rule that uses <code>xsl:next-match</code> or
+				<code>xsl:apply-imports</code> can't be split like this, as they depend on the current template rule, so
+				it has to be reworked first.</p>
 
 			<h3 id="running">Running and debugging</h3>
 			<p>When a stylesheet that uses packages is run - with <a href="quick-run.html">Quick Run</a>, an
@@ -442,7 +475,7 @@
 				stylesheets that use the package - nor their calls of it.</aside>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#visibility">What a stylesheet can use from a package</a></li><li><a href="#overriding">Overriding package components</a><ul><li><a href="#abstract">Abstract components that aren't overridden</a></li></ul></li><li><a href="#package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#declared-modes">Declared modes</a></li><li><a href="#hover">Hover help</a></li><li><a href="#converting">Converting a library to a package</a><ul><li><a href="#convert">Convert to Package...</a></li></ul></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li><li><a href="#override-navigation">Navigating between overrides</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#visibility">What a stylesheet can use from a package</a></li><li><a href="#overriding">Overriding package components</a><ul><li><a href="#abstract">Abstract components that aren't overridden</a></li></ul></li><li><a href="#package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#declared-modes">Declared modes</a></li><li><a href="#hover">Hover help</a></li><li><a href="#converting">Converting a library to a package</a><ul><li><a href="#convert">Convert to Package...</a></li><li><a href="#unnamed-mode">The unnamed mode</a></li></ul></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li><li><a href="#override-navigation">Navigating between overrides</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
