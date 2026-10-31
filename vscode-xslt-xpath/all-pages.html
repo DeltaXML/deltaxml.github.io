@@ -2109,6 +2109,8 @@
 						to a similar name, or remove the declaration</td></tr>
 					<tr><td><code>XTSE3060</code></td><td>overriding a private or final component</td><td>Remove the
 						declaration</td></tr>
+					<tr><td><code>XTSE3008</code></td><td>an <code>xsl:use-package</code> in a module that's imported -
+						directly, or through <code>xsl:include</code> - it belongs in the top-level stylesheet</td><td></td></tr>
 					<tr><td><code>XTSE3070</code></td><td>an overriding declaration whose types differ from the
 						original's - its <code>as</code>, and its parameters' types. A template must also keep each
 						parameter of the original, with the same <code>required</code> and <code>tunnel</code> values
@@ -2163,7 +2165,8 @@
 			<ul>
 				<li><strong>To rework first</strong> - what would fail in a package: a global variable whose value uses the
 					context item, e.g. <code>select="/*"</code>, which has none in a library package (<code>XPDY0002</code>),
-					or an <code>xsl:global-context-item</code></li>
+					or an <code>xsl:global-context-item</code> - and a stylesheet's declaration that overrides the library's
+					by import precedence, but with a different type, which an override can't have (<code>XTSE3070</code>)</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
 					the stylesheets use</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
@@ -2181,7 +2184,31 @@
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other
 				modules involved - for a component made public, the stylesheets that use it.</p>
 			<aside>The analysis is lexical, like the linter: it finds names as they're written, with their namespaces, so a
-				name built at run time, e.g. by <code>function-lookup()</code>, isn't found.</aside>
+				name built at run time, e.g. by <code>function-lookup()</code>, isn't found. To find a global variable that
+				uses the context item, the linter checks its value as the body of a function, where there's no context
+				item.</aside>
+			<h4 id="xslt-packages--convert">Convert to Package...</h4>
+			<p>When nothing needs reworking first - and the library doesn't share the unnamed mode with the stylesheets -
+				<strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
+				module in the XSLT Imports view. It asks for the package's name and version, then shows the changes to
+				every module in the <strong>Refactor Preview</strong>, where you can check them before they're made:</p>
+			<ul>
+				<li>the library's root element becomes <code>xsl:package</code>, with the name and version, and
+					<code>declared-modes="no"</code></li>
+				<li>its components that the stylesheets use or override get <code>visibility="public"</code>, its named
+					modes they use a public <code>xsl:mode</code>, and the functions it calls that only the stylesheets
+					declare an abstract declaration</li>
+				<li>in each top-level stylesheet, the <code>xsl:import</code> or <code>xsl:include</code> of the library -
+					in any of its modules - is replaced by an <code>xsl:use-package</code> in the top-level module, after its
+					imports: <code>xsl:use-package</code> can't be in an imported module (<code>XTSE3008</code>)</li>
+				<li>the stylesheet's overriding declarations and template rules move into its <code>xsl:override</code>,
+					named with its prefixes, and <code>xsl:apply-imports</code> in them becomes
+					<code>xsl:next-match</code></li>
+				<li>the stylesheet gets its own copies of the keys, decimal formats, character maps,
+					<code>xsl:strip-space</code> and <code>xsl:output</code> it relied on</li>
+			</ul>
+			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
+				reports what still needs to change, mostly with quick fixes.</p>
 
 			<h3 id="xslt-packages--running">Running and debugging</h3>
 			<p>When a stylesheet that uses packages is run - with <a href="#quick-run">Quick Run</a>, an
