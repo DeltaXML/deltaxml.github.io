@@ -226,6 +226,39 @@
 				declaration's, as an overriding method's documentation is inherited in Java. In the note of an overriding
 				declaration, an <code>@see</code> of the component it overrides links to the package's declaration.</p>
 
+			<h3 id="converting">Converting a library to a package</h3>
+			<p>A library that stylesheets use with <code>xsl:import</code> or <code>xsl:include</code> can become a package,
+				but not just by changing its root element: a package's components are private by default, a stylesheet's
+				declaration with the name of the library's must move into <code>xsl:override</code>, and some declarations
+				aren't shared by a package at all. <strong>Analyse as Package...</strong> shows what would have to change
+				for the stylesheets to work as before - it changes nothing.</p>
+			<p>Run it from the Command Palette, with the library open, or from the context menu of a module in the
+				<a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>. It checks each top-level stylesheet
+				in the workspace that imports or includes the library, directly or indirectly, and opens a report in the
+				Markdown preview, with links to each place:</p>
+			<ul>
+				<li><strong>To rework first</strong> - what would fail in a package: a global variable whose value uses the
+					context item, e.g. <code>select="/*"</code>, which has none in a library package (<code>XPDY0002</code>),
+					or an <code>xsl:global-context-item</code></li>
+				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
+					the stylesheets use</li>
+				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
+					precedence, which move into <code>xsl:override</code></li>
+				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but only
+					the stylesheets declare, which the package declares as abstract</li>
+				<li><strong>Modes and template rules</strong> - the library's named modes that the stylesheets use, and their
+					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, which a package
+					keeps to itself</li>
+				<li><strong>Not shared by a package</strong> - keys, accumulators, decimal formats, character maps,
+					<code>xsl:strip-space</code> and <code>xsl:output</code>, which the stylesheets need their own copies
+					of</li>
+			</ul>
+			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
+				items need a decision or reworking first. Each item has a link to its place, then a list of the other
+				modules involved - for a component made public, the stylesheets that use it.</p>
+			<aside>The analysis is lexical, like the linter: it finds names as they're written, with their namespaces, so a
+				name built at run time, e.g. by <code>function-lookup()</code>, isn't found.</aside>
+
 			<h3 id="running">Running and debugging</h3>
 			<p>When a stylesheet that uses packages is run - with <a href="quick-run.html">Quick Run</a>, an
 				<a href="run-xslt.html">XSLT task</a> for SaxonJ or SaxonC, or the <a href="debugger.html">debugger</a> -
