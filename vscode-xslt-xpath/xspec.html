@@ -295,6 +295,13 @@
 			<aside>With <code>run-as="external"</code>, XSpec runs the stylesheet under test as a separate
 				transformation - its breakpoints pause, as they do otherwise.</aside>
 
+			<h3 id="coverage">Coverage</h3>
+			<p>The Test Explorer's <strong>Run Tests with Coverage</strong> runs the tests and shows which parts of the
+				stylesheet they ran - in the editor's gutter, and in the Test Coverage view: each instruction, and each
+				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the
+				tests, without pausing, so it works with any edition of Saxon. The modules the stylesheet imports or
+				includes have their coverage too - not XSpec's own modules, or the test runner.</p>
+
 			<h3 id="settings">Settings</h3>
 			<table>
 				<thead>
@@ -310,7 +317,7 @@
 				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating a test</a><ul><li><a href="#test-file">A test file for a whole stylesheet or package</a></li></ul></li><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating a test</a><ul><li><a href="#test-file">A test file for a whole stylesheet or package</a></li></ul></li><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#coverage">Coverage</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
