@@ -1,0 +1,245 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>XSpec Tests | VS Code XSLT/XPath</title>
+	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>142K Installs: </span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="xspec.html" class="active">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
+			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+			</div>
+		</nav>
+		<div class="main"><h2 class="pageTitle">XSpec Tests</h2>
+
+		<div class="two-thirds column">
+			<p><a href="https://github.com/xspec/xspec">XSpec</a> is a testing framework for XSLT and Schematron.
+				An XSpec file (<code>.xspec</code>) describes scenarios: each calls a function or a named template, or
+				applies template rules to a context, and its expectations say what the result should be:</p>
+			<code class="block">&lt;x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:example:functions" stylesheet="prices.xsl"&gt;
+    &lt;x:scenario label="a price with VAT"&gt;
+        &lt;x:call function="f:with-vat"&gt;
+            &lt;x:param select="100"/&gt;
+        &lt;/x:call&gt;
+        &lt;x:expect label="adds 20%" select="120"/&gt;
+    &lt;/x:scenario&gt;
+&lt;/x:description&gt;</code>
+			<p>The XSLT/XPath extension checks XSpec files as you edit them - against XSpec's schema, and against the
+				stylesheet they test - and runs and debugs their tests from VS Code's <strong>Test Explorer</strong>.
+				XSpec 4.1.2 is included with the extension, so there's nothing else to install: tests are run with the
+				Saxon jar of the <code>XSLT.tasks.saxonJar</code> setting, as Quick Run uses.</p>
+
+			<h3 id="editing">Editing XSpec files</h3>
+			<p>A <code>.xspec</code> file is checked as you type, as a stylesheet is:</p>
+			<ul>
+				<li><strong>XSpec elements and attributes</strong> are checked against XSpec's schema, including
+					values such as <code>catch="yes"</code> - with the prefix the file uses for XSpec, from its
+					<code>x:description</code>, e.g. <code>t:scenario</code> in a file using <code>t:</code></li>
+				<li><strong>XPath expressions</strong> in <code>select</code>, <code>test</code> and
+					<code>use-when</code> are checked, with the variables in scope: <code>x:variable</code>, a global
+					or scenario <code>x:param</code>, and those XSpec provides - <code>$x:result</code>,
+					<code>$x:context</code> and <code>$x:xspec-uri</code></li>
+				<li><strong>Test data</strong> - the content of <code>x:context</code>, <code>x:expect</code>,
+					<code>x:param</code> and <code>x:variable</code> - may be any XML, including XSLT, and
+					<code>x:text</code>. With <code>expand-text="yes"</code>, the value templates in it are checked</li>
+			</ul>
+			<p>Auto-completion offers the elements, attributes and values XSpec allows where you are, and hover help on
+				an XSpec element's name shows its description from the schema. The Outline view lists the scenarios and
+				expectations by their labels.</p>
+
+			<h3 id="stylesheet-under-test">The stylesheet under test</h3>
+			<p>The stylesheet of <code>x:description</code> - and of each <code>x:helper</code> - is read, as an
+				imported stylesheet is, so the functions, global variables, templates and modes it declares are known in
+				the XSpec file. So are the global variables of the XSpec files it imports with <code>x:import</code>.
+				Hover help shows a function's signature, go to definition opens its declaration, and these are checked,
+				with auto-completion for each:</p>
+			<table>
+				<thead>
+					<tr><th>In the XSpec file</th><th>Checked against the stylesheet</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>x:call function="…"</code></td><td>a function with that name - or a built-in function</td></tr>
+					<tr><td><code>x:call template="…"</code></td><td>a named template</td></tr>
+					<tr><td><code>x:param name="…"</code> in an <code>x:call</code> of a template</td><td>a parameter of the template - unless it's a tunnel parameter</td></tr>
+					<tr><td><code>x:context mode="…"</code></td><td>a mode (a warning)</td></tr>
+					<tr><td>function calls and variable references in XPath</td><td>the stylesheet's functions and global variables</td></tr>
+				</tbody>
+			</table>
+			<aside>When the declarations can't be known, these aren't reported: for the XSpec file of a Schematron or
+				an XQuery module, or when the stylesheet isn't found - or <code>x:description</code> has an
+				<code>xml:base</code>. A function called with <code>call-as="variable"</code> is a variable's value, so
+				it's not checked as a function.</aside>
+
+			<h3 id="running">Running tests</h3>
+			<p>The <strong>Test Explorer</strong> (the beaker icon in the Activity Bar) lists the XSpec files in the
+				workspace, each with its scenarios and expectations. The ▶ button beside an <code>x:scenario</code> or
+				<code>x:expect</code> in the editor, or on an item in the Test Explorer, runs it:</p>
+			<ul>
+				<li><strong>A file</strong> runs all its scenarios - also with the <strong>XSpec: Run Tests</strong>
+					button in the editor's title bar</li>
+				<li><strong>A scenario</strong> runs it alone, with XSpec's <code>force-focus</code> - the others are
+					pending - and <strong>an expectation</strong> runs its scenario</li>
+			</ul>
+			<p>Each expectation and scenario is then marked passed, failed or pending (skipped). For a failed
+				expectation, the Test Explorer's peek view shows the expected and actual results side by side, as a
+				diff. <strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
+				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
+				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
+				<code>xspec</code> folder beside the XSpec file:</p>
+			<table>
+				<thead>
+					<tr><th>File</th><th>What it is</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>name-compiled.xsl</code></td><td>the test runner: the XSpec file compiled to a stylesheet, which imports the stylesheet under test</td></tr>
+					<tr><td><code>name-result.xml</code></td><td>XSpec's result for each scenario and expectation</td></tr>
+					<tr><td><code>name-result.html</code></td><td>the HTML report</td></tr>
+				</tbody>
+			</table>
+
+			<h3 id="schematron">Testing a Schematron</h3>
+			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
+				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
+				XSpec), to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
+				expectations such as <code>x:expect-assert</code> and <code>x:expect-not-report</code> appear in the Test
+				Explorer with the labels XSpec gives them, e.g. <em>not assert a001</em>.</p>
+			<aside>Only a Schematron with an XSLT query binding, e.g. <code>queryBinding="xslt3"</code>, is supported -
+				not one for XQuery.</aside>
+
+			<h3 id="debugging">Debugging a test</h3>
+			<p>The <strong>Debug</strong> button beside a scenario - or the Test Explorer's <strong>Debug Test</strong>
+				- runs the test runner with the <a href="debugger.html">XSLT debugger</a>, and the outcomes are shown in
+				the Test Explorer when it ends. As the runner imports the stylesheet under test, a breakpoint in the
+				stylesheet pauses there, with the scenario's input in the Variables view - so a bug can be reproduced as
+				a scenario, then debugged from it.</p>
+			<p>Breakpoints can also be set in the XSpec file itself, and the debugger pauses at the XSpec file's line -
+				not in the generated test runner:</p>
+			<table>
+				<thead>
+					<tr><th>A breakpoint on</th><th>Pauses</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>x:scenario</code></td><td>as the scenario starts</td></tr>
+					<tr><td><code>x:call</code> or <code>x:context</code></td><td>where the stylesheet under test is called - <strong>Step Into</strong> goes into it</td></tr>
+					<tr><td><code>x:expect</code></td><td>where the expectation is tested, with <code>$x:result</code> in the Variables view</td></tr>
+				</tbody>
+			</table>
+			<p>A breakpoint elsewhere, e.g. on an <code>x:param</code> or in test data, isn't verified, and its hover
+				says where breakpoints can go.</p>
+			<aside>With <code>run-as="external"</code>, XSpec runs the stylesheet under test as a separate
+				transformation, so its breakpoints don't pause.</aside>
+
+			<h3 id="settings">Settings</h3>
+			<table>
+				<thead>
+					<tr><th>Setting</th><th>Used for</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>XSLT.tasks.saxonJar</code></td><td>the Saxon jar the tests are run with - Saxon-HE is enough</td></tr>
+					<tr><td><code>XSLT.xspec.home</code></td><td>another XSpec installation, e.g. a newer release - by default, the XSpec 4.1.2 included</td></tr>
+					<tr><td><code>XSLT.resources.catalog</code></td><td>an XML catalog, passed to Saxon, as for <a href="xml-catalogs.html">tasks</a></td></tr>
+				</tbody>
+			</table>
+			<aside>XSpec files for XQuery modules and XProc steps are checked as you edit them, but their tests aren't
+				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
+		</div>
+	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
+</body>
+
+</html>

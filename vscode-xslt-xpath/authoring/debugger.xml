@@ -72,6 +72,8 @@
 				file) and <strong>Debug from Initial Template</strong>. See
 				<a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug configuration</a>
 				in the VS Code documentation for more on <code>launch.json</code>.</p>
+			<aside>An XSpec test can be debugged from the Test Explorer, with breakpoints in the stylesheet under test
+				and in the XSpec file itself - see <a href="xspec.html#debugging">Debugging a test</a>.</aside>
 
 			<h3 id="breakpoints">Breakpoints</h3>
 			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
