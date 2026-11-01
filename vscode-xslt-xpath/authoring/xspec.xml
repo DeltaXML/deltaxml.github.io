@@ -37,6 +37,30 @@
 				parameters' values and the expected result. It's added to the end of the XSpec file that tests the
 				stylesheet, or a new one beside it, with the stylesheet's name - e.g. <code>prices.xspec</code> for
 				<code>prices.xsl</code>. The namespaces its names use are declared on <code>x:description</code>.</p>
+			<h4 id="test-file">A test file for a whole stylesheet or package</h4>
+			<p><strong>XSpec: Create Test File</strong> - in the command palette, or the editor's context menu, for a
+				stylesheet - or the code action in the start tag of its <code>xsl:stylesheet</code> or
+				<code>xsl:package</code>, makes a skeleton of tests: a scenario, as above, for each function, named
+				template and template rule. Each is pending - <code>pending="to do"</code> - so the file runs, with the
+				scenarios skipped, until you give each its values and expected result and remove its
+				<code>pending</code> attribute. Run the command again after adding declarations to the stylesheet: a
+				scenario is added for each one that has no scenario yet.</p>
+			<p>In the XSpec file, for the functions, templates and template rules added to the stylesheet since:</p>
+			<ul>
+				<li>auto-completion after <code>&lt;</code>, in <code>x:description</code> or an <code>x:scenario</code>,
+					offers <strong>x:scenario for …</strong> for each one with no scenario yet - inserted as a snippet,
+					with the namespaces it uses added to <code>x:description</code></li>
+				<li>the code action in the start tag of <code>x:description</code>, <strong>Add pending scenarios for
+					…</strong>, adds a pending scenario for each of them, as the command does</li>
+			</ul>
+			<p>For an <code>xsl:package</code>, the scenarios are for what a stylesheet using it can call or apply:
+				its public functions and named templates, and its template rules in public modes. By default XSpec
+				imports the stylesheet it tests into its test runner, which a package can't be - so the XSpec file has
+				<code>run-as="external"</code>, and XSpec runs the package as a separate transformation, with its
+				<code>stylesheet</code> the package's relative URI, e.g. <code>stylesheet="shapes.xsl"</code>. Then only
+				the package's public components can be called, and calling another is reported. When tests are run, the
+				packages they use - the package's own, and those of an <code>x:helper package-name="…"</code> - are
+				passed to Saxon with <code>-lib</code>, found as for <a href="xslt-packages.html">XSLT packages</a>.</p>
 			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
 				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
 				its type.</p>
@@ -86,6 +110,10 @@
 				an XQuery module, or when the stylesheet isn't found - or <code>x:description</code> has an
 				<code>xml:base</code>. A function called with <code>call-as="variable"</code> is a variable's value, so
 				it's not checked as a function.</aside>
+			<aside>With <code>run-as="external"</code>, the stylesheet under test isn't imported into the test runner,
+				so its functions and global variables can't be used in the XSpec file's XPath expressions - only called
+				with <code>x:call</code>. A call of one in an expression is reported; those of an
+				<code>x:helper</code> can be used.</aside>
 
 			<h3 id="navigation">Navigating between tests and the stylesheet</h3>
 			<p>From an XSpec file to the stylesheet it tests, <strong>Go to Definition</strong> (<span class="shortcut">F12</span>)
@@ -164,7 +192,7 @@
 			<p>A breakpoint elsewhere, e.g. on an <code>x:param</code> or in test data, isn't verified, and its hover
 				says where breakpoints can go.</p>
 			<aside>With <code>run-as="external"</code>, XSpec runs the stylesheet under test as a separate
-				transformation, so its breakpoints don't pause.</aside>
+				transformation - its breakpoints pause, as they do otherwise.</aside>
 
 			<h3 id="settings">Settings</h3>
 			<table>
