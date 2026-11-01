@@ -391,19 +391,14 @@
 					</svg>
 					<h3 id="features--xspec">Testing with XSpec</h3>
 					<ul>
-						<li><a href="#xspec--running">XSpec tests in the Test Explorer</a> - run a file or one scenario,
-							with expected and actual results compared</li>
-						<li><a href="#xspec--debugging">Debugging a test</a>, with breakpoints in the stylesheet or on
-							<code>x:call</code> and <code>x:expect</code></li>
-						<li><a href="#xspec--schematron">Schematron tests</a>, compiled with SchXslt2</li>
-						<li><a href="#xspec--creating">A test scenario created</a> for a function or template, as a
-							snippet</li>
-						<li><a href="#xspec--editing">Checks, auto-completion and hover help</a> from XSpec's schema</li>
-						<li><a href="#xspec--stylesheet-under-test">Calls checked against the stylesheet under test</a>
+						<li><a href="#xspec--running">Test Explorer</a> for running tests and comparing output</li>
+						<li><a href="#xspec--debugging">Debug tests</a> in the XSpec file or from the XSLT source</li>
+						<li>Run <a href="#xspec--schematron">Schematron tests</a>, compiled with SchXslt2</li>
+						<li><a href="#xspec--creating">Genearate tests</a> for a function or template</li>
+						<li><a href="#xspec--editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
+						<li><a href="#xspec--navigation">Navigate</a> between tests and the underlying code</li>
+						<li><a href="#xspec--stylesheet-under-test">Checks and assistance</a> for component calls
 						</li>
-						<li><a href="#xspec--navigation">Navigation</a> from tests to the stylesheet, and from a function
-							or template to its tests</li>
-						<li>XSpec 4.1.2 included - nothing else to install</li>
 					</ul>
 				</section>
 
@@ -3451,8 +3446,13 @@ npm install --save-dev xslt3</code>
 		</div>
 
 	</article><article class="main doc-page" id="xspec"><h2 class="pageTitle">XSpec Tests</h2>
-
 		<div class="two-thirds column">
+			<figure>
+				<img src="resources/test-running.png" class="scale-with-grid">
+				<figcaption>
+					Tests can be run or debugged from Test Explorer, the XSpec file, or the XSLT component itself.
+				</figcaption>
+			</figure>
 			<p><a href="https://github.com/xspec/xspec">XSpec</a> is a testing framework for XSLT and Schematron.
 				An XSpec file (<code>.xspec</code>) describes scenarios: each calls a function or a named template, or
 				applies template rules to a context, and its expectations say what the result should be:</p>
@@ -3645,6 +3645,12 @@ npm install --save-dev xslt3</code>
 				transformation - its breakpoints pause, as they do otherwise.</aside>
 
 			<h3 id="xspec--coverage">Coverage</h3>
+			<figure>
+				<img src="resources/test-coverage.png" class="scale-with-grid">
+				<figcaption>
+					The Test Coverage view summarises covered components while margin highlights are shown the covered code
+				</figcaption>
+			</figure>
 			<p>The Test Explorer's <strong>Run Tests with Coverage</strong> runs the tests and shows which parts of the
 				stylesheet they ran - in the editor's gutter, and in the Test Coverage view: each instruction, and each
 				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the

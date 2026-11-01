@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<div class="main">
-
 		<div class="two-thirds column">
+			<figure>
+				<img src="resources/test-running.png" class="scale-with-grid" />
+				<figcaption>
+					Tests can be run or debugged from Test Explorer, the XSpec file, or the XSLT component itself.
+				</figcaption>
+			</figure>
 			<p><a href="https://github.com/xspec/xspec">XSpec</a> is a testing framework for XSLT and Schematron.
 				An XSpec file (<code>.xspec</code>) describes scenarios: each calls a function or a named template, or
 				applies template rules to a context, and its expectations say what the result should be:</p>
@@ -195,6 +200,12 @@
 				transformation - its breakpoints pause, as they do otherwise.</aside>
 
 			<h3 id="coverage">Coverage</h3>
+			<figure>
+				<img src="resources/test-coverage.png" class="scale-with-grid" />
+				<figcaption>
+					The Test Coverage view summarises covered components while margin highlights are shown the covered code
+				</figcaption>
+			</figure>
 			<p>The Test Explorer's <strong>Run Tests with Coverage</strong> runs the tests and shows which parts of the
 				stylesheet they ran - in the editor's gutter, and in the Test Coverage view: each instruction, and each
 				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the
