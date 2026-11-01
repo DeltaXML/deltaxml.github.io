@@ -121,6 +121,27 @@
 				XSpec 4.1.2 is included with the extension, so there's nothing else to install: tests are run with the
 				Saxon jar of the <code>XSLT.tasks.saxonJar</code> setting, as Quick Run uses.</p>
 
+			<h3 id="creating">Creating a test</h3>
+			<p>In a stylesheet, with the cursor in the start tag of an <code>xsl:function</code>, a named
+				<code>xsl:template</code> or a template rule, the code action (<span class="shortcut">⌘.</span>)
+				<strong>Create XSpec scenario for …</strong> adds a scenario testing it, to complete:</p>
+			<ul>
+				<li><strong>A function</strong>: an <code>x:call</code>, with an <code>x:param</code> for each of its
+					parameters, in order, with its type - and an <code>x:expect</code> with a <code>select</code> for the
+					expected result</li>
+				<li><strong>A named template</strong>: an <code>x:call</code>, with an <code>x:param</code> for each
+					parameter by name - not tunnel parameters - and an <code>x:expect</code> for the expected content</li>
+				<li><strong>A template rule</strong>: an <code>x:context</code> in its mode, with an element it matches,
+					e.g. <code>&lt;item/&gt;</code> for <code>match="list/item[@id]"</code></li>
+			</ul>
+			<p>The scenario is inserted as a snippet: <span class="shortcut">Tab</span> moves through its label, the
+				parameters' values and the expected result. It's added to the end of the XSpec file that tests the
+				stylesheet, or a new one beside it, with the stylesheet's name - e.g. <code>prices.xspec</code> for
+				<code>prices.xsl</code>. The namespaces its names use are declared on <code>x:description</code>.</p>
+			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
+				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
+				its type.</p>
+
 			<h3 id="editing">Editing XSpec files</h3>
 			<p>A <code>.xspec</code> file is checked as you type, as a stylesheet is:</p>
 			<ul>
@@ -261,7 +282,7 @@
 				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating a test</a></li><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
