@@ -131,6 +131,12 @@
 					<code>use-when</code> are checked, with the variables in scope: <code>x:variable</code>, a global
 					or scenario <code>x:param</code>, and those XSpec provides - <code>$x:result</code>,
 					<code>$x:context</code> and <code>$x:xspec-uri</code></li>
+				<li><strong>Files</strong> - the stylesheet, Schematron, XQuery module or XProc step tested, each
+					<code>x:helper</code> and <code>x:import</code>, and the <code>href</code> of <code>x:context</code>,
+					<code>x:expect</code>, <code>x:param</code>, <code>x:variable</code>, <code>x:input</code> and
+					<code>x:option</code> - are links, and a file that isn't found is reported. They're resolved as XSpec
+					resolves them: relative to the XSpec file, or to an <code>xml:base</code>, or with the XML catalog of
+					the <code>XSLT.resources.catalog</code> setting</li>
 				<li><strong>Test data</strong> - the content of <code>x:context</code>, <code>x:expect</code>,
 					<code>x:param</code> and <code>x:variable</code> - may be any XML, including XSLT, and
 					<code>x:text</code>. With <code>expand-text="yes"</code>, the value templates in it are checked</li>
