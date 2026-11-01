@@ -149,8 +149,7 @@
 			<p>The stylesheet of <code>x:description</code> - and of each <code>x:helper</code> - is read, as an
 				imported stylesheet is, so the functions, global variables, templates and modes it declares are known in
 				the XSpec file. So are the global variables of the XSpec files it imports with <code>x:import</code>.
-				Hover help shows a function's signature, go to definition opens its declaration, and these are checked,
-				with auto-completion for each:</p>
+				Hover help shows a function's signature, and these are checked, with auto-completion for each:</p>
 			<table>
 				<thead>
 					<tr><th>In the XSpec file</th><th>Checked against the stylesheet</th></tr>
@@ -167,6 +166,25 @@
 				an XQuery module, or when the stylesheet isn't found - or <code>x:description</code> has an
 				<code>xml:base</code>. A function called with <code>call-as="variable"</code> is a variable's value, so
 				it's not checked as a function.</aside>
+
+			<h3 id="navigation">Navigating between tests and the stylesheet</h3>
+			<p>From an XSpec file to the stylesheet it tests, <strong>Go to Definition</strong> (<span class="shortcut">F12</span>)
+				and <strong>Peek Definition</strong> (<span class="shortcut">⌥F12</span>) open the declaration of:</p>
+			<ul>
+				<li>the function or template of <code>x:call function="…"</code> or <code>x:call template="…"</code></li>
+				<li>a template parameter, from the <code>name</code> of an <code>x:param</code> in its <code>x:call</code></li>
+				<li>the mode of <code>x:context mode="…"</code></li>
+				<li>a function called, or a global variable used, in an XPath expression, e.g. in an <code>x:expect</code>'s
+					<code>test</code></li>
+			</ul>
+			<p>From the stylesheet back to its tests, <strong>Find All References</strong>
+				(<span class="shortcut">⌥⇧F12</span>) on a function or named template also lists its uses in the XSpec files that test
+				it - in <code>x:call</code>, and its calls in XPath expressions - so you can see which scenarios cover
+				it. An XSpec file tests the stylesheet of its <code>x:description</code> or <code>x:helper</code>, and
+				the modules that stylesheet imports or includes. A name is matched by its namespace, so an XSpec file
+				may use another prefix for it, e.g. <code>g:double</code> for <code>f:double</code>.</p>
+			<p><strong>Rename Symbol</strong> (<span class="shortcut">F2</span>) on a function or named template renames its uses in the
+				XSpec files too, keeping the prefix each file uses.</p>
 
 			<h3 id="running">Running tests</h3>
 			<p>The <strong>Test Explorer</strong> (the beaker icon in the Activity Bar) lists the XSpec files in the
@@ -243,7 +261,7 @@
 				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#settings">Settings</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
