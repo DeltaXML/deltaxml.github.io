@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -143,6 +143,20 @@
 				parameters' values and the expected result. It's added to the end of the XSpec file that tests the
 				stylesheet, or a new one beside it, with the stylesheet's name - e.g. <code>prices.xspec</code> for
 				<code>prices.xsl</code>. The namespaces its names use are declared on <code>x:description</code>.</p>
+			<p>In a new, empty XSpec file, typing <code>&lt;</code> offers the root element, with the XSpec and XML
+				Schema (<code>xs</code>) namespaces, for the stylesheets beside it - or in the folder above, for a file in
+				an <code>xspec</code> folder. The one with the XSpec file's name, the usual convention, e.g.
+				<code>order.xsl</code> for <code>order.xspec</code>, is first and selected:</p>
+			<ul>
+				<li><strong>x:description with pending scenarios for …</strong> - one for each stylesheet: with a
+					pending scenario for each of its functions and templates, as <strong>XSpec: Create Test File</strong>
+					makes - the quickest start</li>
+				<li><strong>x:description for a stylesheet</strong>, with a choice of the stylesheets, or <strong>for a
+					Schematron</strong> - empty. The code action in its start tag (<span class="shortcut">⌘.</span>),
+					<strong>Add pending scenarios for …</strong>, adds the scenarios later.</li>
+			</ul>
+			<p>For a package, it has <code>run-as="external"</code>. In its start tag, completion after
+				<code>xmlns</code> offers the namespaces of the stylesheet under test, then common ones.</p>
 			<h4 id="test-file">A test file for a whole stylesheet or package</h4>
 			<p><strong>XSpec: Create Test File</strong> - in the command palette, or the editor's context menu, for a
 				stylesheet - or the code action in the start tag of its <code>xsl:stylesheet</code> or
