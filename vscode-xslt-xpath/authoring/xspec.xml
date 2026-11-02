@@ -155,9 +155,14 @@
 					A test fail in Test Explorer and the test itself - click any fail label to see the diff. 
 				</figcaption>
 			</figure>
-			<p>Each expectation and scenario is then marked passed, failed or pending (skipped). For a failed
+			<p>Each expectation is then marked passed, failed or pending (skipped), and each scenario by the
+				expectations in it - the expectations are the tests, as XSpec counts them. For a failed
 				expectation, the Test Explorer's peek view shows the expected and actual results side by side, as a
-				diff. <strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+				diff - as XSpec compares them: without namespace declarations, with attributes in name order,
+				without the whitespace between elements and with a map's entries in the expected map's order. What an
+				expected <code>...</code> matches - an attribute's value, text, or an element's content - is shown as
+				<code>...</code> in the actual result too, so only the differences that made it fail are shown.
+				<strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
 			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
 				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
 				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
@@ -170,6 +175,7 @@
 					<tr><td><code>name-compiled.xsl</code></td><td>the test runner: the XSpec file compiled to a stylesheet, which imports the stylesheet under test</td></tr>
 					<tr><td><code>name-result.xml</code></td><td>XSpec's result for each scenario and expectation</td></tr>
 					<tr><td><code>name-result.html</code></td><td>the HTML report</td></tr>
+					<tr><td><code>name-diffs.json</code></td><td>the expected and actual results of each failed expectation, for the diffs</td></tr>
 				</tbody>
 			</table>
 
