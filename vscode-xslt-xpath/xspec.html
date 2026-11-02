@@ -209,6 +209,7 @@
 					<tr><td><code>x:call template="…"</code></td><td>a named template</td></tr>
 					<tr><td><code>x:param name="…"</code> in an <code>x:call</code> of a template</td><td>a parameter of the template - unless it's a tunnel parameter</td></tr>
 					<tr><td><code>x:context mode="…"</code></td><td>a mode (a warning)</td></tr>
+					<tr><td><code>x:param</code> elements of <code>x:description</code></td><td>the stylesheet's global parameters: one with <code>required="yes"</code> that isn't set is a warning, as each test would fail with XTDE0050</td></tr>
 					<tr><td>function calls and variable references in XPath</td><td>the stylesheet's functions and global variables</td></tr>
 				</tbody>
 			</table>
@@ -226,6 +227,7 @@
 				and <strong>Peek Definition</strong> (<span class="shortcut">⌥F12</span>) open the declaration of:</p>
 			<ul>
 				<li>the function or template of <code>x:call function="…"</code> or <code>x:call template="…"</code></li>
+				<li>the global <code>xsl:param</code> an <code>x:param</code> of <code>x:description</code> sets</li>
 				<li>a template parameter, from the <code>name</code> of an <code>x:param</code> in its <code>x:call</code></li>
 				<li>the mode of <code>x:context mode="…"</code></li>
 				<li>a function called, or a global variable used, in an XPath expression, e.g. in an <code>x:expect</code>'s
@@ -334,6 +336,8 @@
 					<tr><td><code>XSLT.tasks.saxonJar</code></td><td>the Saxon jar the tests are run with - Saxon-HE is enough</td></tr>
 					<tr><td><code>XSLT.xspec.home</code></td><td>another XSpec installation, e.g. a newer release - by default, the XSpec 4.1.2 included</td></tr>
 					<tr><td><code>XSLT.resources.catalog</code></td><td>an XML catalog, passed to Saxon, as for <a href="xml-catalogs.html">tasks</a></td></tr>
+					<tr><td><code>XSLT.xspec.emphasiseLabels</code></td><td>scenario labels in bold and expectation labels in italic, so the scenarios read like headings - on by default</td></tr>
+					<tr><td><code>XSLT.xspec.fadePending</code></td><td>pending scenarios and expectations faded, other than the reason they're pending - on by default</td></tr>
 				</tbody>
 			</table>
 			<aside>XSpec files for XQuery modules and XProc steps are checked as you edit them, but their tests aren't
