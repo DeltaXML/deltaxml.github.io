@@ -195,6 +195,11 @@
 					<tr><td><code>name-diffs.json</code></td><td>the expected and actual results of each failed expectation, for the diffs</td></tr>
 				</tbody>
 			</table>
+			<p>They're kept after a run, e.g. to see why a test runner fails, or to take an actual result for an expected
+				one. <strong>XSpec: Delete Generated Files</strong> deletes them in the workspace - all of them, or all but
+				the reports - and an <code>xspec</code> folder left empty. Only files named as a run names them, in the
+				<code>xspec</code> folder beside the XSpec file they're for, are deleted - not the XSpec files, even in a
+				folder named <code>xspec</code>.</p>
 
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
