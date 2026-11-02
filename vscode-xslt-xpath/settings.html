@@ -249,6 +249,52 @@
             <td>Allow XSLT 4.0 named item types and <code>xsl:note</code> in XSLT 3.0 stylesheets, for Saxon PE and
               EE 12.8 or later - see <a href="#xslt30-item-types">below</a>.</td>
           </tr>
+          <tr>
+            <td><code>XSLT.<wbr>validation.<wbr>xslt40UnionPriorities</code></td>
+            <td><code>false</code></td>
+            <td>Warn in every stylesheet before XSLT 4.0 about union patterns whose branches have different default
+              priorities - not only where XSLT 4.0's rule applies already - see
+              <a href="editing-xslt.html#union-priorities">Union patterns and XSLT 4.0</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 id="settings-xspec">XSpec tests</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Default</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>XSLT.<wbr>xspec.<wbr>home</code></td>
+            <td>-</td>
+            <td>The folder of another XSpec installation, e.g. a newer release, to compile and run tests with - by default the XSpec 4.1.2 included. See <a href="xspec.html">XSpec tests</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>xspec.<wbr>allowSyntaxExtensions</code></td>
+            <td><code>"auto"</code></td>
+            <td>Run tests with Saxon's syntax extensions (<code>--allowSyntaxExtensions:on</code>), so the stylesheet tested can use XPath 4.0 syntax, or e.g. record types in an XSLT 3.0 stylesheet: <code>"auto"</code> - on only for tests of a stylesheet that's XSLT 4.0, or uses item types or notes, and not with Saxon-HE, which fails every transform with them on - <code>"on"</code> or <code>"off"</code>. See <a href="xspec.html#settings">XSpec tests</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>xspec.<wbr>legacyCompatibility</code></td>
+            <td><code>false</code></td>
+            <td>Run tests written for XSpec before 1.0 (e.g. 0.5) as that ran them, where XSpec 4 stops the run - see
+              <a href="xspec.html#legacy">Tests written for older XSpec</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>xspec.<wbr>emphasiseLabels</code></td>
+            <td><code>true</code></td>
+            <td>In XSpec files, show scenario labels in bold and expectation labels in italic, so the scenarios read like headings.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>xspec.<wbr>fadePending</code></td>
+            <td><code>true</code></td>
+            <td>In XSpec files, fade the pending scenarios and expectations, other than the reason they're pending.</td>
+          </tr>
         </tbody>
       </table>
 
@@ -315,7 +361,8 @@
       <p>To run the stylesheets, Saxon needs syntax extensions: the <code>--allowSyntaxExtensions:on</code> option on
         the command line, or <code>allowSyntaxExtensions="true"</code> in a Saxon configuration file. The
         extension's <a href="run-xslt.html">XSLT tasks</a> and <a href="quick-run.html">Quick Run</a> enable it
-        with the default <code>"allowSyntaxExtensions40": "auto"</code> task property, for Saxon PE and EE.</p>
+        with the default <code>"allowSyntaxExtensions40": "auto"</code> task property, for Saxon PE and EE, when the
+        stylesheet - or a module it imports, includes or uses - has item types or notes.</p>
 
       <h4 id="saxon-type-aliases">Converting Saxon type aliases</h4>
       <p>Saxon's earlier syntax for named types - <code>saxon:type-alias</code>, <code>tuple(...)</code> types and
@@ -544,7 +591,7 @@
     </div>
 
   </div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings For XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#settings-xspec">XSpec tests</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings For XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

@@ -60,12 +60,27 @@
 			</ul>
 			<p>For an <code>xsl:package</code>, the scenarios are for what a stylesheet using it can call or apply:
 				its public functions and named templates, and its template rules in public modes. By default XSpec
-				imports the stylesheet it tests into its test runner, which a package can't be - so the XSpec file has
-				<code>run-as="external"</code>, and XSpec runs the package as a separate transformation, with its
-				<code>stylesheet</code> the package's relative URI, e.g. <code>stylesheet="shapes.xsl"</code>. Then only
-				the package's public components can be called, and calling another is reported. When tests are run, the
-				packages they use - the package's own, and those of an <code>x:helper package-name="…"</code> - are
-				passed to Saxon with <code>-lib</code>, found as for <a href="xslt-packages.html">XSLT packages</a>.</p>
+				imports the stylesheet it tests into its test runner, which a package can't be, so a package is tested in
+				one of two ways - the code action offers both, and the command asks which:</p>
+			<table>
+				<thead>
+					<tr><th>The XSpec file has</th><th>How XSpec tests the package</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>run-as="external"</code>, with <code>stylesheet</code> the package's relative URI,
+						e.g. <code>stylesheet="shapes.xsl"</code></td><td>as a separate transformation: only its public
+						components can be called, with <code>x:call</code> - not in the XSpec file's XPath
+						expressions</td></tr>
+					<tr><td><code>x:helper package-name="…"</code>, with <code>stylesheet</code> a stylesheet that does
+						nothing - created beside the package, e.g. <code>shapes-xspec-harness.xsl</code> - as XSpec
+						requires one</td><td>used by the test runner, with <code>xsl:use-package</code>, as by a stylesheet
+						using it: its public functions can be called in XPath expressions too, e.g. in an
+						<code>x:expect</code>'s <code>test</code></td></tr>
+				</tbody>
+			</table>
+			<p>Either way, calling a component that isn't public is reported. When tests are run, the packages they
+				use - the package's own, and those of an <code>x:helper package-name="…"</code> - are passed to Saxon
+				with <code>-lib</code>, found as for <a href="xslt-packages.html">XSLT packages</a>.</p>
 			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
 				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
 				its type.</p>
@@ -235,10 +250,64 @@
 					<tr><td><code>XSLT.tasks.saxonJar</code></td><td>the Saxon jar the tests are run with - Saxon-HE is enough</td></tr>
 					<tr><td><code>XSLT.xspec.home</code></td><td>another XSpec installation, e.g. a newer release - by default, the XSpec 4.1.2 included</td></tr>
 					<tr><td><code>XSLT.resources.catalog</code></td><td>an XML catalog, passed to Saxon, as for <a href="xml-catalogs.html">tasks</a></td></tr>
+					<tr><td><code>XSLT.xspec.allowSyntaxExtensions</code></td><td>Saxon's syntax extensions for the tests: <code>"auto"</code> (the default) - on only for tests that need them, unless Saxon-HE - <code>"on"</code> or <code>"off"</code></td></tr>
+					<tr><td><code>XSLT.xspec.legacyCompatibility</code></td><td>tests written for XSpec before 1.0 run as that ran them - see <a href="#legacy">below</a></td></tr>
 					<tr><td><code>XSLT.xspec.emphasiseLabels</code></td><td>scenario labels in bold and expectation labels in italic, so the scenarios read like headings - on by default</td></tr>
 					<tr><td><code>XSLT.xspec.fadePending</code></td><td>pending scenarios and expectations faded, other than the reason they're pending - on by default</td></tr>
 				</tbody>
 			</table>
+			<aside>By default, tests are run with Saxon's syntax extensions on (<code>--allowSyntaxExtensions:on</code>)
+				only when they're needed: when the stylesheet tested - or a module it imports, includes or uses, or a
+				helper - is XSLT 4.0, or uses item types or notes, e.g. record types with <code>version="3.0"</code>,
+				with <code>run-as="external"</code> too. Not otherwise, as with them on, Saxon 13 runs a stylesheet
+				before XSLT 4.0 with some of 4.0's rules - e.g. a union pattern's priority, which can change the
+				template rule chosen (Saxon's warning SXWN9052). Never with Saxon-HE, which fails every transform with
+				them on. The <code>XSLT.xspec.allowSyntaxExtensions</code> setting turns them on or off.</aside>
+			<h3 id="legacy">Tests written for older XSpec</h3>
+			<p>XSpec 4 stops the run for some tests that XSpec before 1.0 (e.g. 0.5) ran. With the
+				<code>XSLT.xspec.legacyCompatibility</code> setting, they're run as that did - without changing the
+				XSpec files:</p>
+			<table>
+				<thead>
+					<tr><th>In the XSpec file</th><th>XSpec 4</th><th>With the setting</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>an <code>x:expect</code> whose <code>test</code> is boolean, with <code>select</code>,
+						<code>as</code>, <code>href</code> or content</td><td>stops: <em>Boolean @test must not be
+						accompanied by…</em></td><td>the boolean decides</td></tr>
+					<tr><td>an <code>x:expect</code> whose <code>test</code> isn't boolean, with no expected
+						value</td><td>stops: <em>Non-boolean @test must be accompanied by…</em></td><td>passes if the
+						<code>test</code> returns nothing - it's compared with the empty sequence</td></tr>
+					<tr><td>the <code>xs</code> prefix, e.g. <code>xs:integer(6)</code>, not declared</td><td>stops:
+						XPST0081</td><td>declared for the test runner</td></tr>
+				</tbody>
+			</table>
+			<p>Each <code>x:expect</code> run as XSpec before 1.0 ran it is listed in the <strong>XSpec</strong> output
+				when it's run, e.g. <em>XSpec legacy compatibility: x:expect ('…') has a boolean @test and an expected
+				value…</em>, so the tests can be updated for XSpec 4 over time. That includes a <code>test</code> that's
+				boolean as written but returns nothing when it's run - e.g. <code>@colname eq 'colA'</code> for an
+				element without the attribute - which passed before.</p>
+			<p>As you edit, a warning marks an <code>x:expect</code> whose <code>test</code> is clearly of the wrong
+				kind for XSpec 4 - from the expression, whatever the setting - with quick fixes for the form XSpec 4
+				runs:</p>
+			<table>
+				<thead>
+					<tr><th>Warning</th><th>Quick fixes</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>a boolean <code>test</code>, e.g. <code>exists(…)</code>, a comparison or
+						<code>and</code>, with <code>select</code>, <code>as</code>, <code>href</code> or
+						content</td><td>remove <code>select</code>, <code>as</code> and <code>href</code> - the boolean
+						decides, as before</td></tr>
+					<tr><td>a <code>test</code> that isn't boolean, e.g. a path such as <code>$x:result/p[@a]</code>, or
+						<code>distinct-values(…)</code>, with no expected value</td><td>wrap it in
+						<code>empty()</code> - it passes if the test returns nothing, as before - or in
+						<code>exists()</code></td></tr>
+				</tbody>
+			</table>
+			<p>A <code>test</code> that may be either, e.g. <code>$x:result</code> or a call of a function of the
+				stylesheet, isn't marked. The <code>xs</code> prefix used without a declaration is an error already.</p>
+
 			<aside>XSpec files for XQuery modules and XProc steps are checked as you edit them, but their tests aren't
 				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
 		</div>

@@ -371,6 +371,24 @@
 			<li>XSLT 4.0: an <code>xsl:mode</code> with enclosed template rules but no <code>name</code>, and an enclosed
 				template rule with a <code>mode</code> or <code>name</code> attribute, or without a <code>match</code>.</li>
 		</ul>
+		<h4 id="union-priorities">Union patterns and XSLT 4.0</h4>
+		<p>The linter warns about a template rule without a <code>priority</code> attribute whose <code>match</code> is a
+			union with branches of different default priorities, e.g. <code>match="@d:* | @other"</code> (-0.25 and 0).
+			XSLT 3.0 makes a rule for each branch, with its own priority, but XSLT 4.0 one rule, with the highest - as
+			Saxon reports with its warning SXWN9052. So another template rule may be chosen: here,
+			<code>match="@d:keep"</code> would no longer win over the union. The warning lists each branch's priority. Give
+			the template a <code>priority</code>, or split it into a template for each branch, so it runs the same either
+			way.</p>
+		<p>It's shown where XSLT 4.0's rule applies:</p>
+		<ul>
+			<li>in an XSLT 4.0 stylesheet</li>
+			<li>in a stylesheet before 4.0 that's run with Saxon's syntax extensions, as it - or a module of its
+				stylesheet - uses item types or notes: Saxon 13 then uses 4.0's rule</li>
+			<li>in any stylesheet before 4.0, with the setting <code>XSLT.validation.xslt40UnionPriorities</code> - e.g.
+				to prepare for XSLT 4.0</li>
+		</ul>
+		<p>Other stylesheets before 4.0 are run without the syntax extensions by default, so they keep XSLT 3.0's
+			rule.</p>
 		<h4>Unused Variables</h4>
 		<p>The linter detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by

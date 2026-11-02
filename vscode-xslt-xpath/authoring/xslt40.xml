@@ -83,7 +83,10 @@
 				configuration property for XPath 4.0 syntax. This is controlled by the <strong>allowSyntaxExtensions40</strong>
 				task property:</p>
 			<ul>
-				<li><strong>auto</strong> (the default) - on, unless the Saxon jar file, or SaxonC path, is for Saxon-HE</li>
+				<li><strong>auto</strong> (the default) - on for a stylesheet that needs it: XSLT 4.0, or one that uses item
+					types or notes, in it or a module it imports, includes or uses - unless the Saxon jar file, or SaxonC path,
+					is for Saxon-HE. Not for other stylesheets, as with it, Saxon 13 runs a stylesheet before XSLT 4.0 with
+					some of 4.0's rules, e.g. <a href="editing-xslt.html#union-priorities">a union pattern's priority</a></li>
 				<li><strong>on</strong> - always on</li>
 				<li><strong>off</strong> - never on</li>
 			</ul>
