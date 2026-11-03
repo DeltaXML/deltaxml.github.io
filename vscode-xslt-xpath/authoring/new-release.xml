@@ -31,6 +31,10 @@
                     such as Claude Code or GitHub Copilot sees the problems of the stylesheets it changes - and the
                     extension can run in Visual Studio Code's <a href="ai-assistants.html#agents-window">Agents
                     window</a></li>
+                <li><strong><a href="ai-assistants.html#mcp">MCP server for AI assistants</a></strong> (experimental) -
+                    tools an assistant such as Claude Code or GitHub Copilot can call to check stylesheets that aren't
+                    open, find declarations and references, show a module's imports, and describe item types and
+                    built-in functions</li>
                 <li><strong><a href="xslt-packages.html">XSLT packages</a></strong> - packages in the workspace are
                     found by their <code>xsl:package</code> name and version, with no setting, and passed to Saxon when a
                     stylesheet is run or debugged. A stylesheet sees a package's components as Saxon does - by their

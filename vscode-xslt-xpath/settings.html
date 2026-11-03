@@ -298,6 +298,31 @@
         </tbody>
       </table>
 
+      <h4 id="settings-ai">AI assistants</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Default</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>XSLT.<wbr>mcp.<wbr>enabled</code></td>
+            <td><code>false</code></td>
+            <td>Run the extension's MCP server, with tools for AI assistants such as GitHub Copilot and Claude Code -
+              see <a href="ai-assistants.html#mcp">The MCP server</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>mcp.<wbr>port</code></td>
+            <td><code>6745</code></td>
+            <td>The port the MCP server listens at, on <code>127.0.0.1</code>. With more than one window open, the first
+              one opened has the server.</td>
+          </tr>
+        </tbody>
+      </table>
+
       <h4 id="saxon-jar">The Saxon jar</h4>
       <p>To run or debug stylesheets with SaxonJ - Saxon for Java - set <code>XSLT.tasks.saxonJar</code> to the full
         path of your Saxon jar file, usually as a user setting, since the path is specific to your computer. Any
@@ -591,7 +616,7 @@
     </div>
 
   </div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#settings-xspec">XSpec tests</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings For XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#settings-xspec">XSpec tests</a></li><li><a href="#settings-ai">AI assistants</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings For XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

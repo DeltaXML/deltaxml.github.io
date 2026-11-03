@@ -197,6 +197,31 @@
         </tbody>
       </table>
 
+      <h4 id="settings-ai">AI assistants</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Default</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>XSLT.<wbr/>mcp.<wbr/>enabled</code></td>
+            <td><code>false</code></td>
+            <td>Run the extension's MCP server, with tools for AI assistants such as GitHub Copilot and Claude Code -
+              see <a href="ai-assistants.html#mcp">The MCP server</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr/>mcp.<wbr/>port</code></td>
+            <td><code>6745</code></td>
+            <td>The port the MCP server listens at, on <code>127.0.0.1</code>. With more than one window open, the first
+              one opened has the server.</td>
+          </tr>
+        </tbody>
+      </table>
+
       <h4 id="saxon-jar">The Saxon jar</h4>
       <p>To run or debug stylesheets with SaxonJ - Saxon for Java - set <code>XSLT.tasks.saxonJar</code> to the full
         path of your Saxon jar file, usually as a user setting, since the path is specific to your computer. Any
