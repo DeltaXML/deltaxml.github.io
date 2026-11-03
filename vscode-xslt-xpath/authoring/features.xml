@@ -71,6 +71,7 @@
 						<li><a href="editing-xslt.html#compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
 							Problems view</li>
 						<li><a href="editing-xslt.html#quick-fixes">Quick fixes</a> for common problems</li>
+						<li><a href="ai-assistants.html">MCP server</a> for AI assistants (experimental)</li>
 					</ul>
 				</section>
 
