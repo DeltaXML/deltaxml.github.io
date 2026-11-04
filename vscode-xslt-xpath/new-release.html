@@ -118,16 +118,11 @@
                     side, and breakpoints in the stylesheet or the XSpec file. XSpec files are checked as you edit them,
                     against XSpec's schema and the stylesheet they test, with auto-completion, hover help and navigation
                     between the tests and the stylesheet. XSpec 4.1.2 is included</li>
-                <li><strong><a href="xslt-packages.html">XSLT packages</a></strong> - packages in the workspace are
-                    found by their <code>xsl:package</code> name and version, with no setting, and passed to Saxon when a
-                    stylesheet is run or debugged. A stylesheet sees a package's components as Saxon does - by their
-                    visibility, <code>xsl:expose</code> and <code>xsl:accept</code> - and problems with
-                    <code>xsl:accept</code>, <code>xsl:override</code> and package modes are reported as you edit, most
-                    with quick fixes</li>
-                <li><strong><a href="xslt-packages.html#overriding">Overriding package components</a></strong> - auto-completion and quick fixes
-                    write each overriding declaration from the package's signature, abstract components that aren't
-                    overridden are reported, and Go to Implementations, Go to Declaration and Find All References move
-                    between components and their overrides</li>
+                <li><strong><a href="xslt-packages.html">XSLT packages</a></strong> - Workspace packages are automatically
+                    discovered from their xsl:package name and version and supplied to Saxon when running or debugging stylesheets.
+                    Component visibility, <code>xsl:expose</code>, and <code>xsl:accept</code> are handled exactly as Saxon does. 
+                    Issues with <code>xsl:accept</code>, <code>xsl:override</code>, and package modes are flagged 
+                    while you edit, with quick fixes available.</li>
                 <li><strong><a href="xpath-queries.html">Find Nodes with XPath</a></strong> - run XPath expressions on
                     an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
                     found are listed to step through, and values are shown after each expression. Replaces Goto

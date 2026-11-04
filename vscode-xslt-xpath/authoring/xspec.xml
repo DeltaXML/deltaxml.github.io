@@ -214,7 +214,17 @@
 				the reports - and an <code>xspec</code> folder left empty. Only files named as a run names them, in the
 				<code>xspec</code> folder beside the XSpec file they're for, are deleted - not the XSpec files, even in a
 				folder named <code>xspec</code>.</p>
-
+			<h4 id="timeline">XSpec Timeline</h4>
+			<figure>
+				<img src="resources/xspec-timeline.png" class="scale-with-grid" />
+				<figcaption>
+					The XSpec file's Timeline view, below the file editor shows XSpec run events along with git events.
+				</figcaption>
+			</figure>
+			<p>Once a test run for an XSpec file completes, the file's timeline is updated with the test run details.
+				The Timeline view for the selected XSpec file shows these time line events, along with other events for
+				this file such as git commits.
+			</p>
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
 				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
@@ -230,6 +240,12 @@
 				the Test Explorer when it ends. As the runner imports the stylesheet under test, a breakpoint in the
 				stylesheet pauses there, with the scenario's input in the Variables view - so a bug can be reproduced as
 				a scenario, then debugged from it.</p>
+			<figure>
+				<img src="resources/xspec-debug.png" class="scale-with-grid" />
+				<figcaption>
+					The code pauses at breakpoints within an XSpec test, allowing the XSpec context to be inspected. 
+				</figcaption>
+			</figure>
 			<p>Breakpoints can also be set in the XSpec file itself, and the debugger pauses at the XSpec file's line -
 				not in the generated test runner:</p>
 			<table>

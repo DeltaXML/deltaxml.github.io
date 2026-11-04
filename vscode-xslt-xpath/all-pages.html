@@ -163,16 +163,11 @@
                     side, and breakpoints in the stylesheet or the XSpec file. XSpec files are checked as you edit them,
                     against XSpec's schema and the stylesheet they test, with auto-completion, hover help and navigation
                     between the tests and the stylesheet. XSpec 4.1.2 is included</li>
-                <li><strong><a href="#xslt-packages">XSLT packages</a></strong> - packages in the workspace are
-                    found by their <code>xsl:package</code> name and version, with no setting, and passed to Saxon when a
-                    stylesheet is run or debugged. A stylesheet sees a package's components as Saxon does - by their
-                    visibility, <code>xsl:expose</code> and <code>xsl:accept</code> - and problems with
-                    <code>xsl:accept</code>, <code>xsl:override</code> and package modes are reported as you edit, most
-                    with quick fixes</li>
-                <li><strong><a href="#xslt-packages--overriding">Overriding package components</a></strong> - auto-completion and quick fixes
-                    write each overriding declaration from the package's signature, abstract components that aren't
-                    overridden are reported, and Go to Implementations, Go to Declaration and Find All References move
-                    between components and their overrides</li>
+                <li><strong><a href="#xslt-packages">XSLT packages</a></strong> - Workspace packages are automatically
+                    discovered from their xsl:package name and version and supplied to Saxon when running or debugging stylesheets.
+                    Component visibility, <code>xsl:expose</code>, and <code>xsl:accept</code> are handled exactly as Saxon does. 
+                    Issues with <code>xsl:accept</code>, <code>xsl:override</code>, and package modes are flagged 
+                    while you edit, with quick fixes available.</li>
                 <li><strong><a href="#xpath-queries">Find Nodes with XPath</a></strong> - run XPath expressions on
                     an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
                     found are listed to step through, and values are shown after each expression. Replaces Goto
@@ -3731,7 +3726,17 @@ npm install --save-dev xslt3</code>
 				the reports - and an <code>xspec</code> folder left empty. Only files named as a run names them, in the
 				<code>xspec</code> folder beside the XSpec file they're for, are deleted - not the XSpec files, even in a
 				folder named <code>xspec</code>.</p>
-
+			<h4 id="xspec--timeline">XSpec Timeline</h4>
+			<figure>
+				<img src="resources/xspec-timeline.png" class="scale-with-grid">
+				<figcaption>
+					The XSpec file's Timeline view, below the file editor shows XSpec run events along with git events.
+				</figcaption>
+			</figure>
+			<p>Once a test run for an XSpec file completes, the file's timeline is updated with the test run details.
+				The Timeline view for the selected XSpec file shows these time line events, along with other events for
+				this file such as git commits.
+			</p>
 			<h3 id="xspec--schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
 				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
@@ -3747,6 +3752,12 @@ npm install --save-dev xslt3</code>
 				the Test Explorer when it ends. As the runner imports the stylesheet under test, a breakpoint in the
 				stylesheet pauses there, with the scenario's input in the Variables view - so a bug can be reproduced as
 				a scenario, then debugged from it.</p>
+			<figure>
+				<img src="resources/xspec-debug.png" class="scale-with-grid">
+				<figcaption>
+					The code pauses at breakpoints within an XSpec test, allowing the XSpec context to be inspected. 
+				</figcaption>
+			</figure>
 			<p>Breakpoints can also be set in the XSpec file itself, and the debugger pauses at the XSpec file's line -
 				not in the generated test runner:</p>
 			<table>
