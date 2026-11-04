@@ -17,35 +17,29 @@
                     side, and breakpoints in the stylesheet or the XSpec file. XSpec files are checked as you edit them,
                     against XSpec's schema and the stylesheet they test, with auto-completion, hover help and navigation
                     between the tests and the stylesheet. XSpec 4.1.2 is included</li>
-                <li><strong><a href="code-diagnostics.html#xdm-trace">Tracing values with xdm:trace()</a></strong> -
-                    trace a value anywhere within an XPath expression: like <code>trace()</code>, it returns the value
-                    unchanged, but writes it formatted as <code>xdm:debug()</code> does. <strong>Wrap with
-                    xdm:trace()</strong> adds it around a selected expression, and <strong>Remove xdm:trace() - keep the
-                    expression</strong> removes the call and its other arguments, leaving just the expression</li>
-                <li><strong><a href="xpath-queries.html">Find Nodes with XPath</a></strong> - run XPath expressions on
-                    an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
-                    found are listed to step through, and values are shown after each expression. Replaces Goto
-                    XPath</li>
-                <li><strong><a href="ai-assistants.html#problems">AI assistants</a></strong> - the problems of every
-                    stylesheet open in an editor are kept up to date, not only those of the active one, so an assistant
-                    such as Claude Code or GitHub Copilot sees the problems of the stylesheets it changes - and the
-                    extension can run in Visual Studio Code's <a href="ai-assistants.html#agents-window">Agents
-                    window</a></li>
-                <li><strong><a href="ai-assistants.html#mcp">MCP server for AI assistants</a></strong> (experimental) -
-                    tools an assistant such as Claude Code or GitHub Copilot can call to check stylesheets that aren't
-                    open, find declarations and references, show a module's imports, and describe item types and
-                    built-in functions</li>
                 <li><strong><a href="xslt-packages.html">XSLT packages</a></strong> - packages in the workspace are
                     found by their <code>xsl:package</code> name and version, with no setting, and passed to Saxon when a
                     stylesheet is run or debugged. A stylesheet sees a package's components as Saxon does - by their
                     visibility, <code>xsl:expose</code> and <code>xsl:accept</code> - and problems with
                     <code>xsl:accept</code>, <code>xsl:override</code> and package modes are reported as you edit, most
                     with quick fixes</li>
-                <li><strong><a href="xslt-packages.html#overriding">Overriding package components</a></strong> - as for
-                    methods in a Java IDE: <strong>Override Package Components...</strong>, auto-completion and quick fixes
+                <li><strong><a href="xslt-packages.html#overriding">Overriding package components</a></strong> - auto-completion and quick fixes
                     write each overriding declaration from the package's signature, abstract components that aren't
                     overridden are reported, and Go to Implementations, Go to Declaration and Find All References move
                     between components and their overrides</li>
+                <li><strong><a href="xpath-queries.html">Find Nodes with XPath</a></strong> - run XPath expressions on
+                    an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
+                    found are listed to step through, and values are shown after each expression. Replaces Goto
+                    XPath</li>
+                <li><strong><a href="ai-assistants.html#mcp">MCP server for AI assistants</a></strong> (experimental) -
+                    tools an assistant such as Claude Code or GitHub Copilot can call to check stylesheets that aren't
+                    open, find declarations and references, show a module's imports, and describe item types and
+                    built-in functions</li>
+                <li><strong><a href="code-diagnostics.html#xdm-trace">Tracing values with xdm:trace()</a></strong> -
+                    trace a value anywhere within an XPath expression: like <code>trace()</code>, it returns the value
+                    unchanged, but writes it formatted as <code>xdm:debug()</code> does. <strong>Wrap with
+                        xdm:trace()</strong> adds it around a selected expression, and <strong>Remove xdm:trace() - keep the
+                        expression</strong> removes the call and its other arguments, leaving just the expression</li>
                 <li><strong><a href="xslt-packages.html#converting">Converting a library to a package</a></strong> -
                     <strong>Analyse as Package...</strong> reports what would have to change for a library that stylesheets
                     import to become a package, and <strong>Convert to Package...</strong> makes the changes across the
