@@ -383,6 +383,16 @@
 				before XSLT 4.0 with some of 4.0's rules - e.g. a union pattern's priority, which can change the
 				template rule chosen (Saxon's warning SXWN9052). Never with Saxon-HE, which fails every transform with
 				them on. The <code>XSLT.xspec.allowSyntaxExtensions</code> setting turns them on or off.</aside>
+			<h3 id="task-settings">The stylesheet's task</h3>
+			<p>When the stylesheet tested has a Saxon task in <code>.vscode/tasks.json</code> - e.g. its Quick Run task -
+				the tests are run and debugged with the task's Saxon settings: <code>classPathEntries</code>, e.g. for
+				extension functions, <code>configFilename</code>, <code>catalogFilenames</code> (instead of the
+				<code>XSLT.resources.catalog</code> setting), <code>features</code>, <code>dtd</code>,
+				<code>enableAssertions</code> and <code>expandValues</code>. Not the settings of the transform, e.g. its
+				source, parameters or initial template, as XSpec's test runner has its own - or the task's
+				<code>saxonJar</code>: the tests use the <code>XSLT.tasks.saxonJar</code> setting.</p>
+			<p>With more than one task for the stylesheet, and different Saxon settings, you pick the task, once in each
+				run of the tests - the one picked last is first in the list.</p>
 			<h3 id="legacy">Tests written for older XSpec</h3>
 			<p>XSpec 4 stops the run for some tests that XSpec before 1.0 (e.g. 0.5) ran. With the
 				<code>XSLT.xspec.legacyCompatibility</code> setting, they're run as that did - without changing the
@@ -432,7 +442,7 @@
 				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating a test</a><ul><li><a href="#test-file">A test file for a whole stylesheet or package</a></li></ul></li><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#coverage">Coverage</a></li><li><a href="#settings">Settings</a></li><li><a href="#legacy">Tests written for older XSpec</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating a test</a><ul><li><a href="#test-file">A test file for a whole stylesheet or package</a></li></ul></li><li><a href="#editing">Editing XSpec files</a></li><li><a href="#stylesheet-under-test">The stylesheet under test</a></li><li><a href="#navigation">Navigating between tests and the stylesheet</a></li><li><a href="#running">Running tests</a></li><li><a href="#schematron">Testing a Schematron</a></li><li><a href="#debugging">Debugging a test</a></li><li><a href="#coverage">Coverage</a></li><li><a href="#settings">Settings</a></li><li><a href="#task-settings">The stylesheet's task</a></li><li><a href="#legacy">Tests written for older XSpec</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
