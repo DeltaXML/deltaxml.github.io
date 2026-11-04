@@ -223,7 +223,7 @@
 			</figure>
 			<p>Once a test run for an XSpec file completes, the file's timeline is updated with the test run details.
 				The Timeline view for the selected XSpec file shows these time line events, along with other events for
-				this file such as git commits.
+				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps

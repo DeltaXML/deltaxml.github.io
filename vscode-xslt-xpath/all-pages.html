@@ -3735,7 +3735,7 @@ npm install --save-dev xslt3</code>
 			</figure>
 			<p>Once a test run for an XSpec file completes, the file's timeline is updated with the test run details.
 				The Timeline view for the selected XSpec file shows these time line events, along with other events for
-				this file such as git commits.
+				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
 			<h3 id="xspec--schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
@@ -3770,8 +3770,10 @@ npm install --save-dev xslt3</code>
 					<tr><td><code>x:expect</code></td><td>where the expectation is tested, with <code>$x:result</code> in the Variables view</td></tr>
 				</tbody>
 			</table>
-			<p>A breakpoint elsewhere, e.g. on an <code>x:param</code> or in test data, isn't verified, and its hover
-				says where breakpoints can go.</p>
+			<p>A breakpoint added elsewhere is moved to the line it belongs to, and the status bar says where: on an
+				<code>x:param</code> or in test data, to its <code>x:call</code> or <code>x:context</code>; on a
+				scenario's end tag, to the <code>x:scenario</code>. A breakpoint outside the scenarios, e.g. on a
+				comment, is removed. A moved breakpoint keeps its condition, hit count or log message.</p>
 			<aside>With <code>run-as="external"</code>, XSpec runs the stylesheet under test as a separate
 				transformation - its breakpoints pause, as they do otherwise.</aside>
 
