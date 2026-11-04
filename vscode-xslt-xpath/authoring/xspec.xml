@@ -258,8 +258,10 @@
 					<tr><td><code>x:expect</code></td><td>where the expectation is tested, with <code>$x:result</code> in the Variables view</td></tr>
 				</tbody>
 			</table>
-			<p>A breakpoint elsewhere, e.g. on an <code>x:param</code> or in test data, isn't verified, and its hover
-				says where breakpoints can go.</p>
+			<p>A breakpoint added elsewhere is moved to the line it belongs to, and the status bar says where: on an
+				<code>x:param</code> or in test data, to its <code>x:call</code> or <code>x:context</code>; on a
+				scenario's end tag, to the <code>x:scenario</code>. A breakpoint outside the scenarios, e.g. on a
+				comment, is removed. A moved breakpoint keeps its condition, hit count or log message.</p>
 			<aside>With <code>run-as="external"</code>, XSpec runs the stylesheet under test as a separate
 				transformation - its breakpoints pause, as they do otherwise.</aside>
 
