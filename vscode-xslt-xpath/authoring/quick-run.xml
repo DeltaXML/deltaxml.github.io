@@ -12,9 +12,9 @@
 			</p>
 			<figure>
 			<img src="resources/quick-run.png" class="scale-with-grid" />
-				<figurecaption>
+				<figcaption>
 						<p><i style="font-style: italic">(1) XSLT in active editor, (2) the Saxon processor, (3) the XML context file - Click the play button to run</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
 			<h3>Running a stylesheet</h3>
 			<p>
@@ -44,10 +44,10 @@
 					Tasks</a> page.</li>
 				<li><strong>SaxonJS</strong> - requires a <a href="https://nodejs.org/en/">NodeJS</a> installation; the
 					<code>xslt3</code> package is run using NPX. See the <strong>Saxon-JS Tasks</strong> section on the
-					<a href="run-xslt.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
+					<a href="run-xslt.html#saxonjs-tasks">Tasks</a> page.</li>
 				<li><strong>SaxonC</strong> - the <strong>XSLT.tasks.saxonCPath</strong> setting must point at the folder
 					containing the SaxonC <code>Transform</code> executable (<code>Transform.exe</code> on Windows). See the
-					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">XSLT Tasks</a> page for
+					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">Tasks</a> page for
 					setup details, including native library paths and licensing.</li>
 			</ul>
 			<aside>Tasks for each processor can be turned off with the <strong>XSLT.tasks.java.enabled</strong>,
@@ -122,21 +122,67 @@
 					<a href="run-xslt.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
 				<li>refers to the processor's setting (for example <code>${config:XSLT.tasks.saxonCPath}</code>) rather
 					than copying its current value, so the task keeps working if you later change the setting</li>
-				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
-					declared with a <code>select</code> default - including params declared in imported or included
-					stylesheets - ready for you to edit</li>
+				<li>includes an entry in its <code>parameters</code> array for each stylesheet parameter that must be
+					set - including those declared in imported or included stylesheets. Parameters with a default are
+					left out, so the stylesheet's own defaults apply</li>
 			</ul>
-			<aside>Parameter values generated this way are prefixed with <code>?</code>, for example <code>?title</code>.
-				This tells Saxon to evaluate the value as an XPath expression rather than a literal string, so the
-				generated entry reproduces the parameter's own default exactly - it does not silently override it with
-				an empty value.
-			</aside>
+			<h4 id="required-parameters">Required parameters</h4>
+			<p>A stylesheet parameter must be set when it has <code>required="yes"</code>, or when it has no default
+				(no <code>select</code> attribute or content) and an <code>as</code> type that doesn't allow an empty
+				sequence - for example <code>as="xs:string"</code> or <code>as="element()+"</code>, but not
+				<code>as="xs:string?"</code>. A parameter without an <code>as</code> attribute defaults to a
+				zero-length string, so it isn't added.</p>
+			<p>The value of each one comes from an input that's added to the <code>inputs</code> of
+				<code>tasks.json</code>, so you're asked for it each time the task runs:</p>
+			<code class="block">"parameters": [
+    { "name": "title", "value": "${input:xsltParam-title}" },
+    { "name": "?config", "value": "${input:xsltParam-config}" }
+]
+...
+"inputs": [
+    {
+        "id": "xsltParam-title",
+        "type": "command",
+        "command": "xslt-xpath.enterParameterValue",
+        "args": { "name": "title", "type": "xs:string", "xpath": false }
+    },
+    ...
+]</code>
+			<p>You can type a value, or pick one you've used before for a parameter of that name - the last one used
+				is first, so <span class="shortcut">Enter</span> uses it again. Press <span class="shortcut">Escape</span>
+				to cancel the run. Once you've settled on a value, you can replace the <code>${input:...}</code>
+				reference with the value itself. Parameters with the same name, in different tasks, share an input.</p>
+			<aside>For an atomic type, such as <code>xs:string</code>, <code>xs:integer</code> or
+				<code>xs:anyURI</code>, the value is typed as it is, without quotes - Saxon converts it to the declared
+				type. For other types, such as maps, arrays and nodes, the parameter name is prefixed with
+				<code>?</code>, for example <code>?config</code>, which tells Saxon to evaluate the value as an XPath
+				expression: <code>map{'a': 1}</code>, <code>doc('data.xml')</code>, or <code>'text'</code> for a
+				string.</aside>
 			<h3>Subsequent runs</h3>
 			<p>
 				Once a task exists for a stylesheet/context-file pairing, Quick Run re-runs that same task rather than
 				creating another one. This means you can freely edit the generated task afterwards - change a parameter
 				value, adjust the result path, add Saxon features or additional parameters - and Quick Run will keep
 				using your edits on every subsequent run, just like running any other task.
+			</p>
+			<h4 id="edit-task">Editing the task</h4>
+			<p>
+				To go straight to the task for the stylesheet and the current XML context file, use the command
+				<strong>XSLT: Edit Quick Run Task</strong> in the Command Palette, or the <strong>Edit Quick Run Task</strong>
+				link in the tooltip of the XML context file in the status bar. This opens <code>tasks.json</code>
+				with the task highlighted - if there isn't a task yet, it's created first, as Quick Run would create it.
+			</p>
+			<p>
+				Debugging always uses the SaxonJ (<code>xslt</code>) task. The <strong>Edit Debug/Run Task (SaxonJ)</strong>
+				button in the editor's title bar, beside the Run and Debug buttons, opens that task whichever processor is
+				selected. With SaxonJS or SaxonC selected, the editor's <strong>...</strong> menu also has
+				<strong>Edit Quick Run Task (SaxonJS)</strong> or <strong>Edit Quick Run Task (SaxonC)</strong>.
+				When Quick Run or debugging first creates a task, a notification also offers <strong>Edit Task</strong>.
+			</p>
+			<p>
+				For different sets of parameters, copy the task in <code>tasks.json</code> and give the copy a new
+				label. When more than one task is for the stylesheet/context-file pairing, Quick Run (and debugging)
+				asks which task to run - the tasks you've used most recently are listed first.
 			</p>
 			<p>
 				Tasks are kept separately for each processor. If you switch processor, the next Quick Run for the same
@@ -226,15 +272,31 @@
 	"resultPath": "${command:xslt-xpath.pickResultFile}"
 }</code>
 			</p>
+			<h3 id="context-per-stylesheet">Each stylesheet has its own XML context file</h3>
+			<p>
+				The XML context file you pick from the status bar is for the stylesheet in the active editor, so you can
+				switch between stylesheets that process different documents and each one keeps its own. A module
+				imported or included by a top-level stylesheet shares that stylesheet's context file.
+			</p>
+			<p>
+				For a stylesheet you haven't picked a context file for, the source of its Quick Run task in
+				<code>tasks.json</code> is used - so a stylesheet you've run before keeps the file it was run with. Otherwise,
+				it's the context file you last picked for any stylesheet, or with none picked yet, the first XML file you
+				viewed.
+			</p>
 			<h3>The XML context file is remembered</h3>
 			<p>
-				Your chosen XML context file is now restored automatically when Visual Studio Code is reopened, rather
-				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
+				Your chosen XML context files are restored automatically when Visual Studio Code is reopened, rather
+				than defaulting back to the last XML file you happened to view. They're stored per workspace, separately
 				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
 				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
 			</p>
+			<p>
+				If the context file has since been deleted or moved, Quick Run - and debugging - say so instead of
+				running, with a <strong>Pick XML Context File</strong> button to choose another.
+			</p>
 			<aside>For custom parameters and features beyond what's auto-populated, chaining tasks together, or any
-				other task configuration in detail, see the <a href="run-xslt.html">XSLT Tasks</a> page - a task Quick
+				other task configuration in detail, see the <a href="run-xslt.html">Tasks</a> page - a task Quick
 				Run creates is a normal task, so everything described there still applies to it.
 			</aside>
 		</div>

@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -21,7 +21,7 @@
 
 	<!-- Mobile Specific Metas
 							==================================================-->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS
 							==================================================-->
@@ -56,32 +56,50 @@
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
-				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="xspec.html">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html" class="active">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+			</div>
 		</nav>
 		<div class="main"><h2 class="pageTitle">Records and Enums</h2>
 
@@ -113,7 +131,7 @@
 			<p>In an attribute value, quotes within a type can be written as references, as Saxon allows - for example
 				<code>as="enum(&amp;quot;it's&amp;quot;, 'is')"</code> or a field name quoted with
 				<code>&amp;#39;</code> - and the extension reads them as the quotes they stand for.</p>
-			<h5>Auto-completion for types</h5>
+			<h4 id="auto-completion-for-types">Auto-completion for types</h4>
 			<ul>
 				<li>Within an <code>as</code> attribute, and after <code>instance of</code>, <code>castable as</code>
 					and the other type operators, the names of declared item types are offered with the built-in
@@ -121,7 +139,7 @@
 				<li>The <code>record(...)</code> and <code>enum(...)</code> suggestions insert a snippet with
 					placeholders for the fields or values.</li>
 			</ul>
-			<h5>Checks on declarations</h5>
+			<h4 id="checks-on-declarations">Checks on declarations</h4>
 			<ul>
 				<li>An item type name that isn't declared is reported, as are duplicate declarations and a type that
 					refers to itself (directly or through other named types).</li>
@@ -131,12 +149,13 @@
 					and are reported as an error.</li>
 			</ul>
 			<p>Go to Definition (<span class="shortcut">F12</span>) and Find All References
-				(<span class="shortcut">⇧⌥F12</span>) work for item type names.</p>
+				(<span class="shortcut">⌥⇧F12</span>) work for item type names.</p>
 
 			<h3 id="building-records">Building records</h3>
-			<p>A record is built with a map constructor, or with the <code>xsl:map</code> instruction. Wherever the
+			<p>A record is built with a map constructor, or with the <code>xsl:map</code> or <code>xsl:record</code>
+				instruction. Wherever the
 				record type is known, the extension helps you complete the map and checks it against the type.</p>
-			<h5>Map constructors</h5>
+			<h4 id="map-constructors">Map constructors</h4>
 			<p>In the <code>select</code> attribute of a declaration with a record type, type <code>{</code> (or
 				<code>map {</code>) and accept the suggestion to insert a complete map constructor, with an entry for
 				each required field - when the record has optional fields, a second suggestion includes them too:</p>
@@ -151,7 +170,7 @@
 				with a value. A double-click selects the whole placeholder, ready to type over.</p>
 			<p>After typing <code>,</code> at the end of an entry, the suggestions list the fields that aren't in
 				the map yet, including optional fields.</p>
-			<h5>The xsl:map instruction</h5>
+			<h4 id="the-xsl-map-instruction">The xsl:map instruction</h4>
 			<p>Where a record is built with <code>xsl:map</code>, for example in the content of an
 				<code>xsl:variable</code> with a record type, typing <code>&lt;</code> offers an
 				<code>xsl:map</code> suggestion with an <code>xsl:map-entry</code> for each required field (or, as a
@@ -159,19 +178,44 @@
 				existing <code>xsl:map</code>, the <code>xsl:map-entry</code> suggestions are named after the fields not
 				yet added, for example <code>xsl:map-entry 'age'</code>, and the <code>key</code> attribute offers the
 				field names.</p>
-			<h5>Checks on records</h5>
+			<h4 id="the-xsl-record-instruction">The xsl:record instruction</h4>
+			<p>The XSLT 4.0 <code>xsl:record</code> instruction builds a record from its attributes: each attribute
+				in no namespace is a field, with an XPath expression as its value. Its record type is the type in its
+				own <code>xsl:as</code> attribute, or else the declared type of its value, as for <code>xsl:map</code>:</p>
+			<code class="block">&lt;xsl:variable name="p" as="person"&gt;
+  &lt;xsl:record name="'Ann'" age="42" address="{ 'city': 'Oxford' }"/&gt;
+&lt;/xsl:variable&gt;</code>
+			<ul>
+				<li><strong>Auto-completion</strong> - typing <code>&lt;</code> offers an <code>xsl:record</code>
+					suggestion with an attribute for each required field, e.g. <code>xsl:record person: required
+					fields</code>, and a second suggestion with all fields. Within the start tag, the fields not yet
+					added are offered as attributes, required fields first, and within the content, typing
+					<code>&lt;</code> offers an <code>xsl:map-entry</code> for each field not yet added. A field whose name
+					isn't an NCName, e.g. <code>'first name'</code>, is added as an <code>xsl:map-entry</code> child.</li>
+				<li><strong>Checks</strong> - as for a map: an attribute that isn't a field is a warning, a literal
+					value of the wrong type is an error, and a missing required field is an error, with the <strong>Add
+					missing record fields</strong> quick fix. A field can also be added by an <code>xsl:map-entry</code>
+					child - and when other content may add fields, missing fields aren't reported.</li>
+				<li><strong>Renaming</strong> - renaming a field renames its <code>xsl:record</code> attributes, and Find
+					All References lists them.</li>
+			</ul>
+			<h4 id="checks-on-records">Checks on records</h4>
 			<ul>
 				<li><strong>Missing fields</strong> - a required field that's missing is an error, with an
 					<strong>Add missing record fields</strong> quick fix that adds an entry, with a placeholder, for
 					each one.</li>
 				<li><strong>Unknown fields</strong> - an entry for a field that isn't in the record type is a
-					warning.</li>
+					warning. For a map constructor key, or an <code>xsl:record</code> attribute, there's a
+					<strong>Change to '<em>name</em>'</strong> quick fix for each field not yet in the map, closest
+					name first - e.g. <strong>Change to 'name'</strong> for <code>'nam'</code>.</li>
 				<li><strong>Field values</strong> - a literal value of the wrong type, such as a string for an
 					<code>xs:integer</code> field, is an error.</li>
 				<li><strong>Duplicate keys</strong> - two entries with the same literal key are an error, in any map
-					constructor or <code>xsl:map</code>, whether or not it has a record type.</li>
+					constructor or <code>xsl:map</code>, whether or not it has a record type - except in an
+					<code>xsl:map</code> with a <code>duplicates</code> attribute, which handles them, where they're a
+					warning.</li>
 			</ul>
-			<h5>Where the record type comes from</h5>
+			<h4 id="where-the-record-type-comes-from">Where the record type comes from</h4>
 			<p>Maps are checked, and completed, where their type is declared:</p>
 			<ul>
 				<li>the <code>select</code> or content of an <code>xsl:variable</code>, <code>xsl:param</code> or
@@ -186,12 +230,12 @@
 			</ul>
 
 			<h3 id="using-records">Using records</h3>
-			<h5>Lookups</h5>
+			<h4 id="lookups">Lookups</h4>
 			<p>After the <code>?</code> lookup operator on a value with a record type, the suggestions list the
 				record's fields. This works for variables, calls to functions with a declared record result, and
 				chains of lookups such as <code>$p?address?city</code>. A lookup of a field that isn't in the record
 				type is a warning.</p>
-			<h5>Hover and navigation</h5>
+			<h4 id="hover-and-navigation">Hover and navigation</h4>
 			<p>Hovering over a field name - in a lookup, a map constructor key or the <code>key</code> of an
 				<code>xsl:map-entry</code> - shows the field's declaration. Go to Definition on a field name goes to
 				the field in the record type.</p>
@@ -207,11 +251,12 @@
 			     declaration and its @field text from the xsl:item-type's documentation note.</i></figcaption>
 				</figure>
 			</p>
-			<h5 id="rename-field">Renaming a field</h5>
+			<h4 id="rename-field">Renaming a field</h4>
 			<p>Rename Symbol (<span class="shortcut">F2</span>) on a field name - in the record type, a lookup, a map
-				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, or an <code>@field</code> tag
+				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, an <code>xsl:record</code>
+				attribute, or an <code>@field</code> tag
 				of a documentation note - renames the field, and all its references. Find All References
-				(<span class="shortcut">⇧⌥F12</span>) lists them.</p>
+				(<span class="shortcut">⌥⇧F12</span>) lists them.</p>
 			<ul>
 				<li>Only the field of that record type is renamed - not a field with the same name in another
 					record type.</li>
@@ -221,15 +266,17 @@
 				<li>A quoted field name keeps its quotes, e.g. <code>'unit name'</code>. A new name must be an NCName,
 					unless the field's name isn't one.</li>
 			</ul>
-			<h5>Path steps on records (JNodes)</h5>
+			<h4 id="path-steps-on-records-jnodes">Path steps on records (JNodes)</h4>
 			<p>XPath 4.0 path expressions can navigate maps and arrays as trees of <strong>JNodes</strong>, e.g.
 				<code>jtree($p)/address/city</code>. Field names are suggested, and checked, for steps after
 				<code>jtree($p)/</code>, and after a variable declared as a JNode for a record type, such as
 				<code>jnode(*, person)</code>. See <a href="xslt40-jnodes.html">JSON and JNodes</a>.</p>
 
 			<h3 id="record-refactoring">Refactoring: Extract record type</h3>
-			<p>When updating XSLT 3.0 code that builds maps, the <strong>Extract record type</strong> refactoring
-				creates a record type from an existing map:</p>
+			<p>The <strong>Extract record type</strong> refactoring creates a record type from an existing map - for
+				example, when updating code written for XSLT 3.0. It's offered when the stylesheet has
+				<strong>version="4.0"</strong>, or with the <code>XSLT.validation.xslt30ItemTypesAndNotes</code>
+				setting:</p>
 			<ol>
 				<li>Select a map constructor or <code>xsl:map</code> whose keys are string literals - or simply
 					place the cursor on the start tag of the <code>xsl:variable</code>, <code>xsl:param</code>,
@@ -246,6 +293,15 @@
 				type '<em>name</em>'</strong> refactoring is also offered, in the <strong>Rewrite</strong> section of
 				the list. It sets the <code>as</code> attribute to the existing type without adding a
 				declaration.</p>
+			<p><strong>Extract record type</strong> is also offered for a <code>record(...)</code> type written
+				inline in an <code>as</code> attribute - with the cursor on it, or a selection within it - except
+				the whole type of an <code>xsl:item-type</code>. The innermost record type is replaced by the name of a
+				new <code>xsl:item-type</code>, named after the field whose type it is, if any, and Rename Symbol is
+				started:</p>
+			<code class="block">&lt;xsl:item-type name="person" as="record(name as xs:string, address as record(city as xs:string))"/&gt;</code>
+			<p>becomes:</p>
+			<code class="block">&lt;xsl:item-type name="address" as="record(city as xs:string)"/&gt;
+&lt;xsl:item-type name="person" as="record(name as xs:string, address as address)"/&gt;</code>
 			<figure>
 				<img src="resources/extract-record-type-menu.png" class="scale-with-grid">
 				<figcaption style="margin:auto"><i><b>Before refactor:</b> The two 💡 refactorings for a candidate record-type variable.</i></figcaption>
@@ -256,7 +312,7 @@
 			</figure>
 
 			<h3 id="enums">Enumeration types</h3>
-			<h5>Auto-completion for values</h5>
+			<h4 id="auto-completion-for-values">Auto-completion for values</h4>
 			<p>Where an enumeration type is expected, typing a quote character offers the enumeration's values. This
 				applies to:</p>
 			<ul>
@@ -278,7 +334,20 @@
 					<figcaption style="margin:auto"><i>Hover over the name of an enumeration type, showing its values</i></figcaption>
 				</figure>
 			</p>
-			<h5 id="switch">xsl:switch on an enumeration</h5>
+			<h4 id="renaming-a-value">Renaming a value</h4>
+			<p>Rename Symbol (<span class="shortcut">F2</span>) on an enumeration value - in its <code>enum(...)</code>
+				declaration, or a string literal for it - renames the value and the string literals that refer to it:
+				variable values, function arguments (including keyword arguments), record field values in
+				map constructors, typed <code>let</code> bindings and <code>xsl:switch</code> cases. Find All References
+				(<span class="shortcut">⌥⇧F12</span>) lists them.</p>
+			<ul>
+				<li>Only the values of that type are renamed - not the same value in another enumeration type. An
+					inline <code>enum(...)</code> type is identified by its values.</li>
+				<li>The value is renamed in imported modules too.</li>
+				<li>A new name that's already a value of the type is rejected. A quote in the new value must be
+					doubled, e.g. <code>don''t</code>.</li>
+			</ul>
+			<h4 id="switch">xsl:switch on an enumeration</h4>
 			<p>The XSLT 4.0 <code>xsl:switch</code> instruction selects an <code>xsl:when</code> by comparing a
 				value with each <code>test</code>. When the <code>select</code> has an enumeration type - a variable,
 				function call or record field lookup with a declared type - the extension works with its values.</p>
@@ -289,17 +358,29 @@
 				</figure>
 			</p>
 			<ul>
-				<li>A Quick Fix options are shown on any selected xsl:switch element with a (detected) enum type:</li>
-				<ul>
-					<li><b>Add missing xsl:when cases with select</b> (self-closing <code>&lt;xsl:when select=""/&gt;</code>)</li>
-					<li><b>Add missing xsl:when cases with content</b> ( <code>&lt;xsl:when&gt;\n&lt;xsl:when/&gt;</code>)</li>
-				</ul>
-				<li>If using auto-complete inside xsl:switch, all xsl:when options remaining for that enum are in the completion-list</li>
+				<li><strong>Missing values</strong> - when an enumeration value has no <code>xsl:when</code>, and there's
+					no <code>xsl:otherwise</code>, the <code>xsl:switch</code> is marked with the information message
+					<em>xsl:switch has no xsl:when or xsl:otherwise for the enumeration values: ...</em>. Its two quick
+					fixes add an <code>xsl:when</code> for each missing value:
+					<ul>
+						<li><strong>Add missing xsl:when cases with select</strong> - e.g.
+							<code>&lt;xsl:when test="'green'" select=""/&gt;</code></li>
+						<li><strong>Add missing xsl:when cases with content</strong> - e.g.
+							<code>&lt;xsl:when test="'green'"&gt;...&lt;/xsl:when&gt;</code></li>
+					</ul>
+				</li>
+				<li><strong>Values that never match</strong> - a <code>test</code> value that isn't one of the
+					enumeration's values, or that an earlier <code>xsl:when</code> already tests, is a warning, as the
+					<code>xsl:when</code> never matches it.</li>
+				<li><strong>Auto-completion</strong> - inside an <code>xsl:switch</code>, the completion list offers an
+					<code>xsl:when</code> for each value not yet tested.</li>
 			</ul>
 		</div>
 
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#declaring">Declaring types</a><ul><li><a href="#auto-completion-for-types">Auto-completion for types</a></li><li><a href="#checks-on-declarations">Checks on declarations</a></li></ul></li><li><a href="#building-records">Building records</a><ul><li><a href="#map-constructors">Map constructors</a></li><li><a href="#the-xsl-map-instruction">The xsl:map instruction</a></li><li><a href="#the-xsl-record-instruction">The xsl:record instruction</a></li><li><a href="#checks-on-records">Checks on records</a></li><li><a href="#where-the-record-type-comes-from">Where the record type comes from</a></li></ul></li><li><a href="#using-records">Using records</a><ul><li><a href="#lookups">Lookups</a></li><li><a href="#hover-and-navigation">Hover and navigation</a></li><li><a href="#rename-field">Renaming a field</a></li><li><a href="#path-steps-on-records-jnodes">Path steps on records (JNodes)</a></li></ul></li><li><a href="#record-refactoring">Refactoring: Extract record type</a></li><li><a href="#enums">Enumeration types</a><ul><li><a href="#auto-completion-for-values">Auto-completion for values</a></li><li><a href="#renaming-a-value">Renaming a value</a></li><li><a href="#switch">xsl:switch on an enumeration</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
 </body>
 
 </html>

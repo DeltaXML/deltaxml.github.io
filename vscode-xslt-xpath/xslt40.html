@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -15,13 +15,13 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT 4.0 Introduction | VS Code XSLT/XPath</title>
+	<title>XSLT 4.0 | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
 	<!-- Mobile Specific Metas
 							==================================================-->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS
 							==================================================-->
@@ -56,34 +56,52 @@
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
-				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="xspec.html">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html" class="active">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html" class="active">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT 4.0 Introduction</h2>
+		<div class="main"><h2 class="pageTitle">XSLT 4.0</h2>
 
 		<div class="two-thirds column">
 			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by
@@ -102,7 +120,7 @@
 			Earlier versions of XSLT 4.0 will not be supported for auto-completion and linting.
 			</p>
 
-			<h3>Editing XSLT 4.0</h3>
+			<h3 id="editing-xslt-4-0">Editing XSLT 4.0</h3>
 			<p>The <strong>version</strong> attribute on the stylesheet root element controls the
 				XSLT version supported by the linter and for auto-completion. When the
 				version attribute on the stylesheet root element is set to <strong>4.0</strong>,
@@ -116,12 +134,20 @@
 				<img src="resources/xslt40-completion.png" class="scale-with-grid">
 			</p>
 			<p>XPath files, with the <code>.xpath</code> extension, are always treated as XPath 4.0.</p>
-			<h5>XSLT 4.0 support</h5>
+			<h4 id="xslt-4-0-support">XSLT 4.0 support</h4>
 			<p>The syntax highlighter, linter and auto-completion support:</p>
 			<ul>
 				<li><strong>New XPath 4.0 syntax</strong> - the pipeline <code>-&gt;</code> and mapping arrow
-					<code>=!&gt;</code> operators, braced <code>if</code> expressions, map constructors without the
+					<code>=!&gt;</code> operators, the method call operator <code>=?&gt;</code>, e.g.
+					<code>$shape =?&gt; area()</code> - with the fields of a record type suggested after it - the
+					<code>×</code> and <code>÷</code> operators, braced <code>if</code> expressions, map constructors without the
 					<code>map</code> keyword, string templates, and the new <code>-or-self</code> axes</li>
+				<li><strong>Literals and bindings</strong> - hexadecimal and binary numeric literals, and <code>_</code>
+					digit separators, e.g. <code>0xFF_FF</code>, <code>0b101</code> and <code>1_000_000</code>; QName
+					literals, e.g. <code>#xs:integer</code>; positional variables, e.g.
+					<code>for $x at $i in $items return ...</code>; <code>for key</code> and <code>value</code> map
+					bindings, e.g. <code>for key $k value $v in $map return ...</code>; and typed <code>for</code>,
+					<code>let</code> and <code>some</code> bindings, e.g. <code>let $n as xs:integer := 3</code></li>
 				<li><strong>New item types</strong> - choice types, such as <code>(xs:date | xs:time)</code>, and the
 					<code>enum</code>, <code>record</code>, <code>fn</code> and <code>jnode</code> types</li>
 				<li><strong>Named item types</strong> - declared with <code>xsl:item-type</code>, with checks on the
@@ -136,8 +162,9 @@
 				<li><strong><a href="xslt40-jnodes.html">JNodes</a></strong> - path expressions on trees of maps and arrays, with <code>jtree()</code>,
 					<code>jkey()</code>, <code>jvalue()</code> and <code>get(...)</code> steps</li>
 				<li><strong>New instructions</strong> - snippets for <code>xsl:switch</code>, <code>xsl:array</code> and
-					<code>xsl:select</code>, and template rules declared within an <code>xsl:mode</code> (enclosed
-					modes)</li>
+					<code>xsl:select</code>, template rules declared within an <code>xsl:mode</code> (enclosed
+					modes), and <code>xsl:record</code>, with its attributes completed and checked against the record
+					type - see <a href="xslt40-records.html#building-records">Building records</a></li>
 			</ul>
 			<p>Features in the XSLT 4.0 draft that Saxon 13 doesn't implement - such as extensible record types
 				- are reported by the linter.</p>
@@ -151,13 +178,16 @@
 				<li><a href="xslt40-notes.html">Code Documentation</a> - documenting functions and
 					templates with <code>xsl:note</code>, for hover help and signature help</li>
 			</ul>
-			<h3>Running XSLT 4.0</h3>
+			<h3 id="running-xslt-4-0">Running XSLT 4.0</h3>
 			<p>XSLT 4.0 stylesheets run with <a href="quick-run.html">Quick Run</a>, or with an
 				<a href="run-xslt.html">XSLT task</a>. Saxon needs the <code>--allowSyntaxExtensions:on</code>
 				configuration property for XPath 4.0 syntax. This is controlled by the <strong>allowSyntaxExtensions40</strong>
 				task property:</p>
 			<ul>
-				<li><strong>auto</strong> (the default) - on, unless the Saxon jar file, or SaxonC path, is for Saxon-HE</li>
+				<li><strong>auto</strong> (the default) - on for a stylesheet that needs it: XSLT 4.0, or one that uses item
+					types or notes, in it or a module it imports, includes or uses - unless the Saxon jar file, or SaxonC path,
+					is for Saxon-HE. Not for other stylesheets, as with it, Saxon 13 runs a stylesheet before XSLT 4.0 with
+					some of 4.0's rules, e.g. <a href="editing-xslt.html#union-priorities">a union pattern's priority</a></li>
 				<li><strong>on</strong> - always on</li>
 				<li><strong>off</strong> - never on</li>
 			</ul>
@@ -167,7 +197,7 @@
 				in the <strong>saxonJar</strong> property of the task definition, or the equivalent SaxonC edition.
 			</aside>
 			<hr>
-			<h3>Other Editors for XSLT 4.0</h3>
+			<h3 id="other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</h3>
             <p>The <a href="https://www.oxygenxml.com/xml_editor/whats_new.html">Oxygen XML editor</a> also provides
 				language support for XSLT 4.0, with its own bundled Saxon implementation.</p>
 
@@ -179,7 +209,9 @@
 		</div>
 
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#editing-xslt-4-0">Editing XSLT 4.0</a><ul><li><a href="#xslt-4-0-support">XSLT 4.0 support</a></li></ul></li><li><a href="#running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
 </body>
 
 </html>

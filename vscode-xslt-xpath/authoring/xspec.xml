@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+		<div class="two-thirds column">
+			<figure>
+				<img src="resources/test-running.png" class="scale-with-grid" />
+				<figcaption>
+					Tests can be run or debugged from Test Explorer, the XSpec file, or the XSLT component itself.
+				</figcaption>
+			</figure>
+			<p><a href="https://github.com/xspec/xspec">XSpec</a> is a testing framework for XSLT and Schematron.
+				An XSpec file (<code>.xspec</code>) describes scenarios: each calls a function or a named template, or
+				applies template rules to a context, and its expectations say what the result should be:</p>
+			<code class="block">&lt;x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:example:functions" stylesheet="prices.xsl"&gt;
+    &lt;x:scenario label="a price with VAT"&gt;
+        &lt;x:call function="f:with-vat"&gt;
+            &lt;x:param select="100"/&gt;
+        &lt;/x:call&gt;
+        &lt;x:expect label="adds 20%" select="120"/&gt;
+    &lt;/x:scenario&gt;
+&lt;/x:description&gt;</code>
+			<p>The XSLT/XPath extension checks XSpec files as you edit them - against XSpec's schema, and against the
+				stylesheet they test - and runs and debugs their tests from VS Code's <strong>Test Explorer</strong>.
+				XSpec 4.1.2 is included with the extension, so there's nothing else to install: tests are run with the
+				Saxon jar of the <code>XSLT.tasks.saxonJar</code> setting, as Quick Run uses.</p>
+
+			<h3 id="creating">Creating a test</h3>
+			<p>In a stylesheet, with the cursor in the start tag of an <code>xsl:function</code>, a named
+				<code>xsl:template</code> or a template rule, the code action (<span class="shortcut">⌘.</span>)
+				<strong>Create XSpec scenario for …</strong> adds a scenario testing it, to complete:</p>
+			<ul>
+				<li><strong>A function</strong>: an <code>x:call</code>, with an <code>x:param</code> for each of its
+					parameters, in order, with its type - and an <code>x:expect</code> with a <code>select</code> for the
+					expected result</li>
+				<li><strong>A named template</strong>: an <code>x:call</code>, with an <code>x:param</code> for each
+					parameter by name - not tunnel parameters - and an <code>x:expect</code> for the expected content</li>
+				<li><strong>A template rule</strong>: an <code>x:context</code> in its mode, with an element it matches,
+					e.g. <code>&lt;item/&gt;</code> for <code>match="list/item[@id]"</code></li>
+			</ul>
+			<p>The scenario is inserted as a snippet: <span class="shortcut">Tab</span> moves through its label, the
+				parameters' values and the expected result. It's added to the end of the XSpec file that tests the
+				stylesheet, or a new one beside it, with the stylesheet's name - e.g. <code>prices.xspec</code> for
+				<code>prices.xsl</code>. The namespaces its names use are declared on <code>x:description</code>.</p>
+			<p>In a new, empty XSpec file, typing <code>&lt;</code> offers the root element, with the XSpec and XML
+				Schema (<code>xs</code>) namespaces, for the stylesheets beside it - or in the folder above, for a file in
+				an <code>xspec</code> folder. The one with the XSpec file's name, the usual convention, e.g.
+				<code>order.xsl</code> for <code>order.xspec</code>, is first and selected:</p>
+			<ul>
+				<li><strong>x:description with pending scenarios for …</strong> - one for each stylesheet: with a
+					pending scenario for each of its functions and templates, as <strong>XSpec: Create Test File</strong>
+					makes - the quickest start</li>
+				<li><strong>x:description for a stylesheet</strong>, with a choice of the stylesheets, or <strong>for a
+					Schematron</strong> - empty. The code action in its start tag (<span class="shortcut">⌘.</span>),
+					<strong>Add pending scenarios for …</strong>, adds the scenarios later.</li>
+			</ul>
+			<p>For a package, it has <code>run-as="external"</code>. In its start tag, completion after
+				<code>xmlns</code> offers the namespaces of the stylesheet under test, then common ones.</p>
+			<h4 id="test-file">A test file for a whole stylesheet or package</h4>
+			<p><strong>XSpec: Create Test File</strong> - in the Command Palette, or the editor's context menu, for a
+				stylesheet - or the code action in the start tag of its <code>xsl:stylesheet</code> or
+				<code>xsl:package</code>, makes a skeleton of tests: a scenario, as above, for each function, named
+				template and template rule. Each is pending - <code>pending="to do"</code> - so the file runs, with the
+				scenarios skipped, until you give each its values and expected result and remove its
+				<code>pending</code> attribute. Run the command again after adding declarations to the stylesheet: a
+				scenario is added for each one that has no scenario yet.</p>
+			<p>In the XSpec file, for the functions, templates and template rules added to the stylesheet since:</p>
+			<ul>
+				<li>auto-completion after <code>&lt;</code>, in <code>x:description</code> or an <code>x:scenario</code>,
+					offers <strong>x:scenario for …</strong> for each one with no scenario yet - inserted as a snippet,
+					with the namespaces it uses added to <code>x:description</code></li>
+				<li>the code action in the start tag of <code>x:description</code>, <strong>Add pending scenarios for
+					…</strong>, adds a pending scenario for each of them, as the command does</li>
+			</ul>
+			<p>For an <code>xsl:package</code>, the scenarios are for what a stylesheet using it can call or apply:
+				its public functions and named templates, and its template rules in public modes. By default XSpec
+				imports the stylesheet it tests into its test runner, which a package can't be, so a package is tested in
+				one of two ways - the code action offers both, and the command asks which:</p>
+			<table>
+				<thead>
+					<tr><th>The XSpec file has</th><th>How XSpec tests the package</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>run-as="external"</code>, with <code>stylesheet</code> the package's relative URI,
+						e.g. <code>stylesheet="shapes.xsl"</code></td><td>as a separate transformation: only its public
+						components can be called, with <code>x:call</code> - not in the XSpec file's XPath
+						expressions</td></tr>
+					<tr><td><code>x:helper package-name="…"</code>, with <code>stylesheet</code> a stylesheet that does
+						nothing - created beside the package, e.g. <code>shapes-xspec-harness.xsl</code> - as XSpec
+						requires one</td><td>used by the test runner, with <code>xsl:use-package</code>, as by a stylesheet
+						using it: its public functions can be called in XPath expressions too, e.g. in an
+						<code>x:expect</code>'s <code>test</code></td></tr>
+				</tbody>
+			</table>
+			<p>Either way, calling a component that isn't public is reported. When tests are run, the packages they
+				use - the package's own, and those of an <code>x:helper package-name="…"</code> - are passed to Saxon
+				with <code>-lib</code>, found as for <a href="xslt-packages.html">XSLT packages</a>.</p>
+			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
+				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
+				its type.</p>
+
+			<h3 id="editing">Editing XSpec files</h3>
+			<p>A <code>.xspec</code> file is checked as you type, as a stylesheet is:</p>
+			<ul>
+				<li><strong>XSpec elements and attributes</strong> are checked against XSpec's schema, including
+					values such as <code>catch="yes"</code> - with the prefix the file uses for XSpec, from its
+					<code>x:description</code>, e.g. <code>t:scenario</code> in a file using <code>t:</code></li>
+				<li><strong>XPath expressions</strong> in <code>select</code>, <code>test</code> and
+					<code>use-when</code> are checked, with the variables in scope: <code>x:variable</code>, a global
+					or scenario <code>x:param</code>, and those XSpec provides - <code>$x:result</code>,
+					<code>$x:context</code> and <code>$x:xspec-uri</code></li>
+				<li><strong>Files</strong> - the stylesheet, Schematron, XQuery module or XProc step tested, each
+					<code>x:helper</code> and <code>x:import</code>, and the <code>href</code> of <code>x:context</code>,
+					<code>x:expect</code>, <code>x:param</code>, <code>x:variable</code>, <code>x:input</code> and
+					<code>x:option</code> - are links, and a file that isn't found is reported. They're resolved as XSpec
+					resolves them: relative to the XSpec file, or to an <code>xml:base</code>, or with the XML catalog of
+					the <code>XSLT.resources.catalog</code> setting</li>
+				<li><strong>Test data</strong> - the content of <code>x:context</code>, <code>x:expect</code>,
+					<code>x:param</code> and <code>x:variable</code> - may be any XML, including XSLT, and
+					<code>x:text</code>. With <code>expand-text="yes"</code>, the value templates in it are checked</li>
+			</ul>
+			<p>Auto-completion offers the elements, attributes and values XSpec allows where you are, and hover help on
+				an XSpec element's name shows its description from the schema. The Outline view lists the scenarios and
+				expectations by their labels.</p>
+
+			<h3 id="stylesheet-under-test">The stylesheet under test</h3>
+			<p>The stylesheet of <code>x:description</code> - and of each <code>x:helper</code> - is read, as an
+				imported stylesheet is, so the functions, global variables, templates and modes it declares are known in
+				the XSpec file. So are the global variables of the XSpec files it imports with <code>x:import</code>.
+				Hover help shows a function's signature, and these are checked, with auto-completion for each:</p>
+			<table>
+				<thead>
+					<tr><th>In the XSpec file</th><th>Checked against the stylesheet</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>x:call function="…"</code></td><td>a function with that name - or a built-in function</td></tr>
+					<tr><td><code>x:call template="…"</code></td><td>a named template</td></tr>
+					<tr><td><code>x:param name="…"</code> in an <code>x:call</code> of a template</td><td>a parameter of the template - unless it's a tunnel parameter</td></tr>
+					<tr><td><code>x:context mode="…"</code></td><td>a mode (a warning)</td></tr>
+					<tr><td><code>x:param</code> elements of <code>x:description</code></td><td>the stylesheet's global parameters: one with <code>required="yes"</code> that isn't set is a warning, as each test would fail with XTDE0050</td></tr>
+					<tr><td>function calls and variable references in XPath</td><td>the stylesheet's functions and global variables</td></tr>
+				</tbody>
+			</table>
+			<aside>When the declarations can't be known, these aren't reported: for the XSpec file of a Schematron or
+				an XQuery module, or when the stylesheet isn't found - or <code>x:description</code> has an
+				<code>xml:base</code>. A function called with <code>call-as="variable"</code> is a variable's value, so
+				it's not checked as a function.</aside>
+			<aside>With <code>run-as="external"</code>, the stylesheet under test isn't imported into the test runner,
+				so its functions and global variables can't be used in the XSpec file's XPath expressions - only called
+				with <code>x:call</code>. A call of one in an expression is reported; those of an
+				<code>x:helper</code> can be used.</aside>
+
+			<h3 id="navigation">Navigating between tests and the stylesheet</h3>
+			<p>From an XSpec file to the stylesheet it tests, <strong>Go to Definition</strong> (<span class="shortcut">F12</span>)
+				and <strong>Peek Definition</strong> (<span class="shortcut">⌥F12</span>) open the declaration of:</p>
+			<ul>
+				<li>the function or template of <code>x:call function="…"</code> or <code>x:call template="…"</code></li>
+				<li>the global <code>xsl:param</code> an <code>x:param</code> of <code>x:description</code> sets</li>
+				<li>a template parameter, from the <code>name</code> of an <code>x:param</code> in its <code>x:call</code></li>
+				<li>the mode of <code>x:context mode="…"</code></li>
+				<li>a function called, or a global variable used, in an XPath expression, e.g. in an <code>x:expect</code>'s
+					<code>test</code></li>
+			</ul>
+			<p>From the stylesheet back to its tests, <strong>Find All References</strong>
+				(<span class="shortcut">⌥⇧F12</span>) on a function or named template also lists its uses in the XSpec files that test
+				it - in <code>x:call</code>, and its calls in XPath expressions - so you can see which scenarios cover
+				it. An XSpec file tests the stylesheet of its <code>x:description</code> or <code>x:helper</code>, and
+				the modules that stylesheet imports or includes. A name is matched by its namespace, so an XSpec file
+				may use another prefix for it, e.g. <code>g:double</code> for <code>f:double</code>.</p>
+			<p><strong>Rename Symbol</strong> (<span class="shortcut">F2</span>) on a function or named template renames its uses in the
+				XSpec files too, keeping the prefix each file uses.</p>
+
+			<h3 id="running">Running tests</h3>
+			<p>The <strong>Test Explorer</strong> (the beaker icon in the Activity Bar) lists the XSpec files in the
+				workspace, each with its scenarios and expectations. The ▶ button beside an <code>x:scenario</code> or
+				<code>x:expect</code> in the editor, or on an item in the Test Explorer, runs it:</p>
+			<ul>
+				<li><strong>A file</strong> runs all its scenarios - also with the <strong>XSpec: Run Tests</strong>
+					button in the editor's title bar</li>
+				<li><strong>A scenario</strong> runs it alone, with XSpec's <code>force-focus</code> - the others are
+					pending - and <strong>an expectation</strong> runs its scenario</li>
+			</ul>
+			<figure>
+				<img src="resources/test-failure.png" class="scale-with-grid" />
+				<figcaption>
+					A test failure in Test Explorer and the test itself - click any failure label to see the diff. 
+				</figcaption>
+			</figure>
+			<p>Each expectation is then marked passed, failed or pending (skipped), and each scenario by the
+				expectations in it - the expectations are the tests, as XSpec counts them. For a failed
+				expectation, the Test Explorer's peek view shows the expected and actual results side by side, as a
+				diff - as XSpec compares them: without namespace declarations, with attributes in name order,
+				without the whitespace between elements and with a map's entries in the expected map's order. What an
+				expected <code>...</code> matches - an attribute's value, text, or an element's content - is shown as
+				<code>...</code> in the actual result too, so only the differences that made it fail are shown.
+				<strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
+				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
+				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
+				<code>xspec</code> folder beside the XSpec file:</p>
+			<table>
+				<thead>
+					<tr><th>File</th><th>What it is</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>name-compiled.xsl</code></td><td>the test runner: the XSpec file compiled to a stylesheet, which imports the stylesheet under test</td></tr>
+					<tr><td><code>name-result.xml</code></td><td>XSpec's result for each scenario and expectation</td></tr>
+					<tr><td><code>name-result.html</code></td><td>the HTML report</td></tr>
+					<tr><td><code>name-diffs.json</code></td><td>the expected and actual results of each failed expectation, for the diffs</td></tr>
+				</tbody>
+			</table>
+			<p>They're kept after a run, e.g. to see why a test runner fails, or to take an actual result for an expected
+				one. <strong>XSpec: Delete Generated Files</strong> deletes them in the workspace - all of them, or all but
+				the reports - and an <code>xspec</code> folder left empty. Only files named as a run names them, in the
+				<code>xspec</code> folder beside the XSpec file they're for, are deleted - not the XSpec files, even in a
+				folder named <code>xspec</code>.</p>
+			<h4 id="timeline">XSpec Timeline</h4>
+			<figure>
+				<img src="resources/xspec-timeline.png" class="scale-with-grid" />
+				<figcaption>
+					The XSpec file's Timeline view, below the file editor, shows XSpec run events along with git events.
+				</figcaption>
+			</figure>
+			<p>Once a test run for an XSpec file completes, the file's timeline is updated with the test run details.
+				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
+				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
+			</p>
+			<h3 id="schematron">Testing a Schematron</h3>
+			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
+				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
+				XSpec), to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
+				expectations such as <code>x:expect-assert</code> and <code>x:expect-not-report</code> appear in the Test
+				Explorer with the labels XSpec gives them, e.g. <em>not assert a001</em>.</p>
+			<aside>Only a Schematron with an XSLT query binding, e.g. <code>queryBinding="xslt3"</code>, is supported -
+				not one for XQuery.</aside>
+
+			<h3 id="debugging">Debugging a test</h3>
+			<p>The <strong>Debug</strong> button beside a scenario - or the Test Explorer's <strong>Debug Test</strong>
+				- runs the test runner with the <a href="debugger.html">XSLT debugger</a>, and the outcomes are shown in
+				the Test Explorer when it ends. As the runner imports the stylesheet under test, a breakpoint in the
+				stylesheet pauses there, with the scenario's input in the Variables view - so a bug can be reproduced as
+				a scenario, then debugged from it.</p>
+			<figure>
+				<img src="resources/xspec-debug.png" class="scale-with-grid" />
+				<figcaption>
+					The code pauses at breakpoints within an XSpec test, allowing the XSpec context to be inspected. 
+				</figcaption>
+			</figure>
+			<p>Breakpoints can also be set in the XSpec file itself, and the debugger pauses at the XSpec file's line -
+				not in the generated test runner:</p>
+			<table>
+				<thead>
+					<tr><th>A breakpoint on</th><th>Pauses</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>x:scenario</code></td><td>as the scenario starts</td></tr>
+					<tr><td><code>x:call</code> or <code>x:context</code></td><td>where the stylesheet under test is called - <strong>Step Into</strong> goes into it</td></tr>
+					<tr><td><code>x:expect</code></td><td>where the expectation is tested, with <code>$x:result</code> in the Variables view</td></tr>
+				</tbody>
+			</table>
+			<p>A breakpoint added elsewhere is moved to the line it belongs to, and the status bar says where: on an
+				<code>x:param</code> or in test data, to its <code>x:call</code> or <code>x:context</code>; on a
+				scenario's end tag, to the <code>x:scenario</code>. A breakpoint outside the scenarios, e.g. on a
+				comment, is removed. A moved breakpoint keeps its condition, hit count or log message.</p>
+			<aside>With <code>run-as="external"</code>, XSpec runs the stylesheet under test as a separate
+				transformation - its breakpoints pause, as they do otherwise.</aside>
+
+			<h3 id="coverage">Coverage</h3>
+			<figure>
+				<img src="resources/test-coverage.png" class="scale-with-grid" />
+				<figcaption>
+					The Test Coverage view summarises covered components while margin highlights show the covered code
+				</figcaption>
+			</figure>
+			<p>The Test Explorer's <strong>Run Tests with Coverage</strong> runs the tests and shows which parts of the
+				stylesheet they ran - in the editor's gutter, and in the Test Coverage view: each instruction, and each
+				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the
+				tests, without pausing, so it works with any edition of Saxon. The modules the stylesheet imports or
+				includes have their coverage too - not XSpec's own modules, or the test runner.</p>
+
+			<h3 id="settings">Settings</h3>
+			<table>
+				<thead>
+					<tr><th>Setting</th><th>Used for</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>XSLT.tasks.saxonJar</code></td><td>the Saxon jar the tests are run with - Saxon-HE is enough</td></tr>
+					<tr><td><code>XSLT.xspec.home</code></td><td>another XSpec installation, e.g. a newer release - by default, the XSpec 4.1.2 included</td></tr>
+					<tr><td><code>XSLT.resources.catalog</code></td><td>an XML catalog, passed to Saxon, as for <a href="xml-catalogs.html">tasks</a></td></tr>
+					<tr><td><code>XSLT.xspec.allowSyntaxExtensions</code></td><td>Saxon's syntax extensions for the tests: <code>"auto"</code> (the default) - on only for tests that need them, unless Saxon-HE - <code>"on"</code> or <code>"off"</code></td></tr>
+					<tr><td><code>XSLT.xspec.legacyCompatibility</code></td><td>tests written for XSpec before 1.0 run as that ran them - see <a href="#legacy">below</a></td></tr>
+					<tr><td><code>XSLT.xspec.emphasiseLabels</code></td><td>scenario labels in bold and expectation labels in italic, so the scenarios read like headings - on by default</td></tr>
+					<tr><td><code>XSLT.xspec.fadePending</code></td><td>pending scenarios and expectations faded, other than the reason they're pending - on by default</td></tr>
+				</tbody>
+			</table>
+			<aside>By default, tests are run with Saxon's syntax extensions on (<code>--allowSyntaxExtensions:on</code>)
+				only when they're needed: when the stylesheet tested - or a module it imports, includes or uses, or a
+				helper - is XSLT 4.0, or uses item types or notes, e.g. record types with <code>version="3.0"</code>,
+				with <code>run-as="external"</code> too. Not otherwise, as with them on, Saxon 13 runs a stylesheet
+				before XSLT 4.0 with some of 4.0's rules - e.g. a union pattern's priority, which can change the
+				template rule chosen (Saxon's warning SXWN9052). Never with Saxon-HE, which fails every transform with
+				them on. The <code>XSLT.xspec.allowSyntaxExtensions</code> setting turns them on or off.</aside>
+			<h3 id="task-settings">The stylesheet's task</h3>
+			<p>When the stylesheet tested has a Saxon task in <code>.vscode/tasks.json</code> - e.g. its Quick Run task -
+				the tests are run and debugged with the task's Saxon settings: <code>classPathEntries</code>, e.g. for
+				extension functions, <code>configFilename</code>, <code>catalogFilenames</code> (instead of the
+				<code>XSLT.resources.catalog</code> setting), <code>features</code>, <code>dtd</code>,
+				<code>enableAssertions</code> and <code>expandValues</code>. Not the settings of the transform, e.g. its
+				source, parameters or initial template, as XSpec's test runner has its own - or the task's
+				<code>saxonJar</code>: the tests use the <code>XSLT.tasks.saxonJar</code> setting.</p>
+			<p>With more than one task for the stylesheet, and different Saxon settings, you pick the task, once in each
+				run of the tests - the one picked last is first in the list.</p>
+			<h3 id="legacy">Tests written for older XSpec</h3>
+			<p>XSpec 4 stops the run for some tests that XSpec before 1.0 (e.g. 0.5) ran. With the
+				<code>XSLT.xspec.legacyCompatibility</code> setting, they're run as that did - without changing the
+				XSpec files:</p>
+			<table>
+				<thead>
+					<tr><th>In the XSpec file</th><th>XSpec 4</th><th>With the setting</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>an <code>x:expect</code> whose <code>test</code> is boolean, with <code>select</code>,
+						<code>as</code>, <code>href</code> or content</td><td>stops: <em>Boolean @test must not be
+						accompanied by…</em></td><td>the boolean decides</td></tr>
+					<tr><td>an <code>x:expect</code> whose <code>test</code> isn't boolean, with no expected
+						value</td><td>stops: <em>Non-boolean @test must be accompanied by…</em></td><td>passes if the
+						<code>test</code> returns nothing - it's compared with the empty sequence</td></tr>
+					<tr><td>the <code>xs</code> prefix, e.g. <code>xs:integer(6)</code>, not declared</td><td>stops:
+						XPST0081</td><td>declared for the test runner</td></tr>
+				</tbody>
+			</table>
+			<p>Each <code>x:expect</code> run as XSpec before 1.0 ran it is listed in the <strong>XSpec</strong> output
+				when it's run, e.g. <em>XSpec legacy compatibility: x:expect ('…') has a boolean @test and an expected
+				value…</em>, so the tests can be updated for XSpec 4 over time. That includes a <code>test</code> that's
+				boolean as written but returns nothing when it's run - e.g. <code>@colname eq 'colA'</code> for an
+				element without the attribute - which passed before.</p>
+			<p>As you edit, a warning marks an <code>x:expect</code> whose <code>test</code> is clearly of the wrong
+				kind for XSpec 4 - from the expression, whatever the setting - with quick fixes for the form XSpec 4
+				runs:</p>
+			<table>
+				<thead>
+					<tr><th>Warning</th><th>Quick fixes</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>a boolean <code>test</code>, e.g. <code>exists(…)</code>, a comparison or
+						<code>and</code>, with <code>select</code>, <code>as</code>, <code>href</code> or
+						content</td><td>remove <code>select</code>, <code>as</code> and <code>href</code> - the boolean
+						decides, as before</td></tr>
+					<tr><td>a <code>test</code> that isn't boolean, e.g. a path such as <code>$x:result/p[@a]</code>, or
+						<code>distinct-values(…)</code>, with no expected value</td><td>wrap it in
+						<code>empty()</code> - it passes if the test returns nothing, as before - or in
+						<code>exists()</code></td></tr>
+				</tbody>
+			</table>
+			<p>A <code>test</code> that may be either, e.g. <code>$x:result</code> or a call of a function of the
+				stylesheet, isn't marked. The <code>xs</code> prefix used without a declaration is an error already.</p>
+
+			<aside>XSpec files for XQuery modules and XProc steps are checked as you edit them, but their tests aren't
+				run from the Test Explorer, which needs Saxon's XQuery processor or an XProc processor.</aside>
+		</div>
+	</div>
+</html>

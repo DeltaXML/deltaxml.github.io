@@ -53,23 +53,29 @@ code.block {
   padding: 5px 5px;
   margin: 5px 0px;
   white-space: pre;
-  max-width: calc(100vw - 20px);
   width: 100%;
+  max-width: 100%;
   overflow-x: scroll;
 }
 
-li code.block {
-  max-width: calc(100vw - 250px);
+/* a long code block, on screen: scrolls within a box up to 300px high - printed, it's shown in full */
+code.block.scroll {
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-li img.scale-with-grid {
-  max-width: calc(100vw - 50px);
-  width: 100%;
+/* an image is never wider than what it's in - the content column, a figure or a list item - and is never enlarged,
+   on screen or printed (code blocks are the same, above) */
+.main img {
+  max-width: 100%;
+  height: auto;
 }
 
 body {
-  max-width: 1000px;
+  max-width: 1500px;
   margin: auto;
+  font-size: 15px;
+  line-height: 23px;
 }
 
 aside {
@@ -79,7 +85,7 @@ aside {
   background-color: lightgray;
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   body {
     background: #333;
     color: #cacaca;
@@ -137,6 +143,39 @@ aside {
   height: 100px;
   background-color: #3b495b;
   width: 100%;
+  overflow: hidden;
+}
+
+/* the header's background, behind the logo and title: a faint dot grid, fading in towards the right ... */
+.colorBar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1.6px);
+  background-size: 14px 14px;
+  -webkit-mask-image: linear-gradient(to right, transparent 35%, #000 80%);
+  mask-image: linear-gradient(to right, transparent 35%, #000 80%);
+}
+
+/* ... and at the right, a node tree, like an XML document's, with a path through it picked out in blue, as an XPath
+   expression selects it */
+.colorBar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 640px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 100'%3E%3Cpath d='M40 50H95V18H150M40 50H95V82H150M150 18H205V10H260M150 18H205V28H260M150 82H205V70H260M150 82H205V90H260M260 10H315V10H370M260 50H315V59H370M260 70H315V76H370M370 10H425V14H480M370 41H425V49H480M370 76H425V70H480M370 76H425V84H480M480 33H535V39H590M480 70H535V77H590' fill='none' stroke='%23aaeaaa' stroke-opacity='.22' stroke-width='1.2'/%3E%3Cpath d='M40 50H95V50H150M150 50H205V50H260M260 50H315V41H370M370 41H425V33H480M480 33H535V27H590' fill='none' stroke='%2300b2fe' stroke-opacity='.75' stroke-width='1.6'/%3E%3Ccircle cx='40' cy='50' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='150' cy='18' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='150' cy='50' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='150' cy='82' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='10' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='28' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='50' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='260' cy='70' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='260' cy='90' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='370' cy='10' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='370' cy='41' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='370' cy='59' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='370' cy='76' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='14' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='33' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='480' cy='49' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='70' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='480' cy='84' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='590' cy='27' r='3.5' fill='%2300b2fe'/%3E%3Ccircle cx='590' cy='39' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3Ccircle cx='590' cy='77' r='3' fill='%233b495b' stroke='%23aaeaaa' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E") right center / auto 100% no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 35%);
+  mask-image: linear-gradient(to right, transparent, #000 35%);
+}
+
+/* narrower screens: the title needs the space */
+@media only screen and (max-width: 1100px) {
+  .colorBar::after {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 750px) {
@@ -164,17 +203,27 @@ aside {
   padding: 10px 8px 0px 20px;
 }
 
+/* the logo lines up with the nav, rather than being centred in skeleton's 960px container */
+@media only screen and (min-width: 960px) {
+  .topbar .container {
+    width: auto;
+    margin: 0;
+  }
+}
+
+/* three columns: the nav, the page content, and 'On this page' - the nav and 'On this page' stay put, as the content
+   scrolls within .main */
 .wrapper {
-  /* background-color: #cacaca; */
-  top: 210px;
+  clear: both;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 230px;
+  column-gap: 32px;
   height: calc(100vh - 100px);
 }
 
 nav {
-  width: 180px;
-  float: left;
-  padding: 15px 5px 5px 25px;
-  margin-top: 30px;
+  padding: 45px 0 20px 25px;
+  overflow-y: auto;
 }
 
 nav ul {
@@ -182,11 +231,143 @@ nav ul {
   margin-left: 0px;
 }
 
-/* separates a group of related pages, e.g. the XSLT 4.0 pages, from the pages above */
-nav li.nav-group {
+nav li {
+  margin-bottom: 7px;
+}
+
+/* a heading for a group of pages in the nav, e.g. 'Running and Debugging' - a list item with no link */
+nav li.nav-heading {
+  margin: 22px 0 8px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+/* below the nav's list of pages: the whole guide, to print or as a PDF */
+.nav-footer {
+  margin: 26px 20px 0 0;
+  padding-top: 14px;
   border-top: 1px solid #c8c8c8;
-  margin-top: 10px;
-  padding-top: 10px;
+  font-size: 13px;
+}
+
+.nav-footer a {
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* search: the box at the top of the nav, and its results - shown by search.js */
+.search {
+  margin: 0 20px 20px 0;
+}
+
+.search input {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 7px 10px;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font: inherit;
+  font-size: 14px;
+}
+
+.search input:focus {
+  border-color: #00b2fe;
+  outline: 1px solid #00b2fe;
+}
+
+.search-results {
+  position: fixed;
+  z-index: 100;
+  box-sizing: border-box;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.search-results[hidden] {
+  display: none;
+}
+
+.search-result {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.search-result[aria-selected="true"] {
+  background: #e8f4fb;
+}
+
+.search-result-title {
+  display: block;
+  color: #0071BC;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.search-result-text {
+  display: block;
+  margin-top: 2px;
+  color: #555;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.search-results mark {
+  background: #fff1a8;
+  color: inherit;
+}
+
+.search-empty {
+  margin: 8px 10px;
+  color: #777;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .search input {
+    border-color: #555;
+    background: #232323;
+    color: #e0e0e0;
+  }
+
+  .search-results {
+    border-color: #4a4a4a;
+    background: #2b2b2b;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .search-result[aria-selected="true"] {
+    background: #3a4650;
+  }
+
+  .search-result-title {
+    color: #00b2fe;
+  }
+
+  .search-result-text,
+  .search-empty {
+    color: #b0b0b0;
+  }
+
+  .search-results mark {
+    background: #6b5d1a;
+    color: #fff;
+  }
 }
 
 ul {
@@ -195,17 +376,27 @@ ul {
 }
 
 .main {
-  top: 0px;
-  left: 300px;
   height: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  max-width: 700px;
-  float: left;
-  padding: 10px 10px;
+  padding: 10px 0 40px;
 }
 
+/* figures and code blocks use the column's full width; text keeps a readable line length */
+.main .two-thirds.column {
+  max-width: 780px;
+}
 
+.main h3 {
+  margin-top: 36px;
+}
+
+.main h4,
+.main h5 {
+  margin-top: 22px;
+}
+
+/* a figure's image and caption are centred in the column */
 figure {
   display: flex;
   flex-direction: column;
@@ -214,6 +405,396 @@ figure {
 }
 
 figcaption {
-  text-align: center;
   font-style: italic;
+  text-align: center;
+}
+
+/* the features page: on screen, each section is a card, with an icon beside its heading - in all-pages.html, the
+   icons are hidden and the sections are a two-column table, below */
+.feature-icon {
+  display: none;
+}
+
+@media screen {
+  /* a wider column than other pages, so that less of the cards' text wraps */
+  body:not(.all-pages) .two-thirds.column:has(> .feature-cards) {
+    max-width: 850px;
+  }
+
+  body:not(.all-pages) .feature-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    gap: 16px;
+    margin: 24px 0 20px;
+  }
+
+  body:not(.all-pages) .feature-card {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: center;
+    align-content: start;
+    padding: 16px 18px 6px;
+    border: 1px solid #e3e6ea;
+    border-radius: 10px;
+    background: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  body:not(.all-pages) .feature-card:hover {
+    border-color: #b9d6ee;
+    box-shadow: 0 4px 14px rgba(0, 113, 188, 0.08);
+  }
+
+  body:not(.all-pages) .feature-icon {
+    display: block;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border-radius: 8px;
+    background: #eef5fb;
+    color: #0071BC;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  body:not(.all-pages) .feature-card h3 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  body:not(.all-pages) .feature-card ul {
+    grid-column: 1 / -1;
+    margin: 14px 0 0 18px;
+    font-size: 14px;
+  }
+
+  body:not(.all-pages) .feature-card li {
+    line-height: 19px;
+    margin-bottom: 9px;
+  }
+
+  body:not(.all-pages) .feature-card li::marker {
+    color: #9cc6e6;
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  body:not(.all-pages) .feature-card {
+    border-color: #4a4a4a;
+    background: #3a3a3a;
+  }
+
+  body:not(.all-pages) .feature-card:hover {
+    border-color: #3d6a88;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  }
+
+  body:not(.all-pages) .feature-icon {
+    background: rgba(0, 178, 254, 0.12);
+    color: #00b2fe;
+  }
+
+  body:not(.all-pages) .feature-card li::marker {
+    color: #3d6a88;
+  }
+}
+
+/* in all-pages.html, and so the PDF: a compact two-column table of the sections, in smaller text, so that the
+   features fit on one sheet - the greys are translucent to suit both light and dark colour schemes */
+.all-pages .feature-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 12px 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.4);
+  border-left: 1px solid rgba(128, 128, 128, 0.4);
+  font-size: 0.85em;
+  line-height: 1.35;
+}
+
+.all-pages .feature-card {
+  padding: 0 0.7em 0.45em;
+  border-right: 1px solid rgba(128, 128, 128, 0.4);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+  break-inside: avoid;
+}
+
+.all-pages .feature-card h3 {
+  margin: 0 -0.7em 0.35em;
+  padding: 0.3em 0.7em;
+  background: rgba(128, 128, 128, 0.12);
+  font-size: 1.05em;
+  line-height: 1.3;
+  font-weight: bold;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.all-pages .feature-card ul {
+  margin: 0 0 0 1.1em;
+  padding: 0;
+}
+
+.all-pages .feature-card li {
+  margin: 0 0 0.15em;
+}
+
+/* 'On this page': the page's sections, generated by createPages.xsl - the current one is marked by page-toc.js */
+.page-toc {
+  padding: 50px 20px 20px 0;
+  overflow-y: auto;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.page-toc-title {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.page-toc ul {
+  margin: 0;
+  list-style: none;
+  border-left: 2px solid #e2e2e2;
+}
+
+.page-toc ul ul {
+  border-left: none;
+}
+
+.page-toc li {
+  margin: 0;
+}
+
+.page-toc a {
+  display: block;
+  margin-left: -2px;
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid transparent;
+  color: #555;
+  text-decoration: none;
+}
+
+.page-toc ul ul a {
+  padding-left: 24px;
+  font-size: 12px;
+  color: #888;
+}
+
+.page-toc a:hover {
+  color: #0071BC;
+}
+
+.page-toc a.current {
+  border-left-color: #00b2fe;
+  color: #0071BC;
+  font-weight: bold;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .page-toc ul {
+    border-left-color: #4a4a4a;
+  }
+
+  .page-toc a {
+    color: #b0b0b0;
+  }
+
+  .page-toc ul ul a {
+    color: #8a8a8a;
+  }
+
+  .page-toc a.current,
+  .page-toc a:hover {
+    color: #00b2fe;
+  }
+}
+
+/* narrower screens: no 'On this page' column */
+@media only screen and (max-width: 1199px) {
+  .wrapper {
+    grid-template-columns: 220px minmax(0, 1fr);
+    column-gap: 24px;
+  }
+
+  .page-toc {
+    display: none;
+  }
+}
+
+/* phones: the nav above the content, and the whole page scrolls */
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    display: block;
+    height: auto;
+  }
+
+  nav {
+    padding: 20px 16px;
+  }
+
+  .main {
+    height: auto;
+    overflow: visible;
+    padding: 10px 16px 40px;
+  }
+}
+
+/* printing, e.g. to PDF: the page's content only - in light colours, whatever the colour scheme, and flowing over
+   as many pages as it needs, rather than scrolling within .main */
+@page {
+  margin: 16mm 15mm;
+}
+
+@media print {
+  body {
+    max-width: none;
+    background: #fff;
+    color: #222;
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+
+  .colorBar,
+  .topbar,
+  nav,
+  .page-toc,
+  .search-results {
+    display: none !important;
+  }
+
+  .wrapper {
+    display: block;
+    height: auto;
+  }
+
+  .main {
+    height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+
+  /* the product name above each page's title, in place of the header */
+  .main::before {
+    content: "XSLT and XPath for Visual Studio Code";
+    display: block;
+    margin-bottom: 10pt;
+    padding-bottom: 4pt;
+    border-bottom: 1px solid #ccc;
+    color: #777;
+    font-size: 9pt;
+  }
+
+  /* text uses the page's full width - the limit on its line length is for screens */
+  .main .two-thirds.column,
+  .main .two-thirds.column > p,
+  .main .two-thirds.column > ul,
+  .main .two-thirds.column > ol,
+  .main .two-thirds.column > aside,
+  .main .two-thirds.column > h3,
+  .main .two-thirds.column > h4,
+  .main .two-thirds.column > h5 {
+    max-width: none;
+  }
+
+  .pageTitle {
+    margin-top: 0;
+  }
+
+  /* heading sizes for paper - the screen sizes, from base.css, are too large beside 10pt text */
+  h2 {
+    margin-bottom: 8pt;
+    font-size: 20pt;
+    line-height: 24pt;
+  }
+
+  h3,
+  .main h3 {
+    margin: 16pt 0 5pt;
+    font-size: 14pt;
+    line-height: 18pt;
+  }
+
+  h4,
+  .main h4 {
+    margin: 12pt 0 4pt;
+    font-size: 11.5pt;
+    line-height: 15pt;
+    font-weight: bold;
+  }
+
+  h5,
+  .main h5 {
+    margin: 10pt 0 3pt;
+    font-size: 10pt;
+    line-height: 14pt;
+    font-weight: bold;
+  }
+
+  code,
+  code.block {
+    font-size: 8.5pt;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  figure,
+  code.block,
+  aside {
+    break-inside: avoid;
+  }
+
+  /* a tall screenshot is scaled down to fit on a page - in a figure or not */
+  .main img {
+    width: auto;
+    max-height: 125mm;
+    object-fit: contain;
+  }
+
+  /* code blocks wrap, as they can't scroll on paper */
+  code.block,
+  code.block.scroll {
+    max-height: none;
+    overflow: visible;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    border: 1px solid #ddd;
+  }
+
+  code,
+  .shortcut,
+  aside {
+    background-color: #f3f3f3;
+    color: #222;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  aside {
+    margin: 10pt 0;
+    border-left: 3px solid #bbb;
+  }
+
+  a,
+  a:visited {
+    color: #0057a0;
+  }
 }

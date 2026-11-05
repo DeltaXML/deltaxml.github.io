@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>XSLT stylesheets can be debugged with SaxonJ in VS Code's debugger: set breakpoints, step through
+				templates, functions and multi-line XPath expressions, and inspect variables, the context item and the
+				output written so far.</p>
+			<p>If you're new to debugging in VS Code, see
+				<a href="https://code.visualstudio.com/docs/debugtest/debugging">Debugging</a> in the VS Code
+				documentation for the debug toolbar, views and keyboard shortcuts.</p>
+			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
+				<a href="code-diagnostics.html">Print Debugging</a>.</p>
+			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
+				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Debugging with SaxonJS or
+				SaxonC isn't supported. For XPath 4.0 syntax in an XSLT 4.0 stylesheet, Saxon-PE or Saxon-EE is
+				needed.</aside>
+
+			<h3 id="starting">Starting a debug session</h3>
+			<p>Open the stylesheet and set a breakpoint - click in the margin to the left of a line number, or press
+				<span class="shortcut">F9</span>. Then start debugging in any of these ways:</p>
+			<ul>
+				<li>the <strong>Debug Stylesheet with SaxonJ</strong> button in the editor title bar</li>
+				<li><strong>XSLT: Debug Stylesheet with SaxonJ</strong> from the Command Palette</li>
+				<li><span class="shortcut">F5</span>, when there's no <code>launch.json</code> - or the
+					<strong>Debug Stylesheet</strong> link in the <strong>Run and Debug</strong> view</li>
+			</ul>
+			<p>The stylesheet runs as <a href="quick-run.html">Quick Run</a> runs it: with the XML context file, or
+				from <code>xsl:initial-template</code> when there's no context file. It uses the same Quick Run task, so
+				parameters added to that task also apply when debugging - if there's more than one task for the
+				stylesheet and context file, you pick which. When the stylesheet is imported or included by another,
+				you're offered the choice of running the parent stylesheet instead.</p>
+			<p>A Quick Run task includes the stylesheet's <a href="quick-run.html#required-parameters">required
+				parameters</a>, with values from <code>tasks.json</code> inputs. You're asked for these values when the
+				debug session starts, as when the task runs. If a task refers to an input that <code>tasks.json</code>
+				doesn't define, the session doesn't start, and you're offered <strong>Open tasks.json</strong>.</p>
+			<figure>
+				<img src="resources/debugger-start.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">The Run and Debug View provides options for how to launch the debugger.</i></p>
+				</figcaption>
+			</figure>
+			<h4 id="launch-json">Launch configurations</h4>
+			<p>With no <code>launch.json</code>, the <strong>Run and Debug</strong> view offers <strong>Debug Active
+				Stylesheet</strong>, and a <strong>Debug <em>task label</em></strong> configuration for each
+				<code>xslt</code> task in <code>tasks.json</code> (see <a href="run-xslt.html">Tasks</a>).
+				<strong>create a launch.json file</strong> adds these to a new <code>launch.json</code>.</p>
+			<p>To debug a task without a <code>launch.json</code>, choose <strong>XSLT (Saxon)...</strong> in the
+				<strong>Run and Debug</strong> view's dropdown, or use <strong>Debug: Select and Start Debugging</strong>
+				from the Command Palette, then the task's <strong>Debug <em>task label</em></strong>. The configuration
+				stays selected in the dropdown, so <span class="shortcut">F5</span> debugs that task again - whichever
+				file is open.</p>
+			<p>A launch configuration uses the <code>xslt-saxon</code> debugger type, with one of:</p>
+			<ul>
+				<li><code>"quickRun": true</code> - the stylesheet in the active editor, as Quick Run runs it</li>
+				<li><code>"task"</code> - the label of an <code>xslt</code> task in <code>tasks.json</code>, whose
+					properties are used; properties set in the configuration override them</li>
+				<li>the same properties as an <code>xslt</code> task, such as <code>xsltFile</code>,
+					<code>xmlSource</code>, <code>initialTemplate</code>, <code>resultPath</code> and
+					<code>parameters</code></li>
+			</ul>
+			<code class="block">{
+    "type": "xslt-saxon",
+    "request": "launch",
+    "name": "Debug report",
+    "task": "report with books.xml",
+    "stopOnEntry": false
+}</code>
+			<p><code>"stopOnEntry": true</code> pauses at the first instruction executed. In <code>launch.json</code>,
+				<strong>Add Configuration...</strong> offers four snippets: <strong>XSLT (Saxon): Debug Active
+				Stylesheet</strong>, <strong>Debug a Task</strong>, <strong>Debug Stylesheet</strong> (with a source
+				file) and <strong>Debug from Initial Template</strong>. See
+				<a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug configuration</a>
+				in the VS Code documentation for more on <code>launch.json</code>.</p>
+			<aside>An XSpec test can be debugged from the Test Explorer, with breakpoints in the stylesheet under test
+				and in the XSpec file itself - see <a href="xspec.html#debugging">Debugging a test</a>.</aside>
+
+			<h3 id="breakpoints">Breakpoints</h3>
+			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
+				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
+			<p>Breakpoints can also be set inside a multi-line XPath expression - see
+				<a href="#xpath">Stepping through XPath</a>.</p>
+			<h4 id="conditional">Conditional breakpoints and hit counts</h4>
+			<p>Right-click in the margin and choose <strong>Add Conditional Breakpoint...</strong> - or right-click an
+				existing breakpoint and choose <strong>Edit Breakpoint</strong>:</p>
+			<ul>
+				<li><strong>Expression</strong> - an XPath expression, evaluated where the breakpoint is, with its
+					variables and context item, e.g. <code>@customer = 'Grace'</code> or <code>$total gt 30</code>. If
+					the expression raises an error, execution pauses and the error is shown.</li>
+				<li><strong>Hit Count</strong> - <code>5</code> or <code>==5</code> (the 5th hit), <code>&gt;5</code>,
+					<code>&gt;=5</code>, <code>&lt;5</code>, <code>&lt;=5</code> or <code>%5</code> (every 5th hit).
+					With an expression too, only the hits where the expression is true are counted.</li>
+			</ul>
+			<p>An expression and a hit count can be given for a <a href="#logpoints">logpoint</a> too, to choose when
+				it writes its message.</p>
+			<figure>
+				<img src="resources/debugger-conditional.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">Setting a conditional breakpoint with an XPath expression.</i></p>
+				</figcaption>
+			</figure>
+			<h4 id="logpoints">Logpoints</h4>
+			<p>A logpoint writes a message to the Debug Console without pausing - print debugging without changing
+				the stylesheet. Right-click in the margin and choose <strong>Add Logpoint...</strong>, or edit a
+				breakpoint and choose <strong>Log Message</strong>.</p>
+			<p>Each <code>{<em>xpath</em>}</code> in the message is replaced by its value, evaluated where the
+				logpoint is, e.g. <code>{$line/@product} costs {f:line-total($line)}</code>. Values are formatted and
+				colored as <code>xdm:trace()</code> writes them, without the stylesheet including the xdm-view
+				library:</p>
+			<ul>
+				<li>a node or JNode with its path above it, showing where it's from</li>
+				<li>a string quoted, and a value's type where it isn't obvious, e.g.
+					<code>2026-10-27 (xs:date)</code></li>
+				<li>a map or array over several lines, e.g. <code>order: {$order}</code></li>
+			</ul>
+			<p>An expression can't contain braces, as in a map constructor.</p>
+			<p><strong>Logging all variables:</strong> <code>{$*}</code> is a special case - it's replaced by the local
+				variables in scope at the logpoint, as <code>xdm:debug-color()</code> writes them: a banner with the
+				name of the template, function or instruction, then each variable's name and value, e.g.
+				<code>order {@id}: {$*}</code>. It's like an <code>xsl:message</code> with
+				<code>xdm:debug-color()</code>, but without changing the stylesheet. With Saxon 12, whose maps don't
+				keep their order, the variables may not be in the order they're declared.</p>
+			<figure>
+				<img src="resources/debug-logpoints.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">A logpoint with the message <code>{$*}</code>, and what it writes
+						to the Debug Console: a banner naming the template, then each local variable - JNodes with
+						their paths, maps over one or several lines, and an empty sequence as <code>()</code>.</i></p>
+				</figcaption>
+			</figure>
+			<h4 id="function-breakpoints">Function and named-template breakpoints</h4>
+			<p>To stop whenever a stylesheet function or named template is called, without finding where it's
+				declared, click <strong>+</strong> (<strong>Add Function Breakpoint</strong>) in the
+				<strong>Breakpoints</strong> view and enter its name. The function or template can be in any module of
+				the stylesheet, including imported and included modules. Execution stops at the start of the function
+				or template, where the Variables view shows its parameters - for a named template, these are the
+				values passed to it.</p>
+			<ul>
+				<li><strong>The name</strong> is written as it is where the function or template is declared, with
+					the same prefix, e.g. <code>f:total</code> or <code>cell</code> - or as an EQName, e.g.
+					<code>Q{urn:f}total</code>. A <code>()</code> after the name is allowed.</li>
+				<li><strong>An arity</strong> selects one version of a function, e.g. <code>f:total#2</code>. With no
+					arity, every version of the function stops.</li>
+				<li><strong>Conditions and hit counts</strong> work as for line breakpoints - right-click the
+					breakpoint and choose <strong>Edit Condition</strong> or <strong>Edit Hit Count</strong>. The
+					condition can use the parameters, e.g. <code>$n = 2</code>.</li>
+			</ul>
+			<p>A name that isn't valid is shown as unverified straight away. A function or template that isn't in the
+				stylesheet - or a function with no version of the arity given - is shown as unverified once the
+				stylesheet has compiled; hover over the breakpoint for the reason. Template rules - templates with a
+				<code>match</code> attribute - aren't stopped at this way, even when they also have a
+				<code>name</code>: use a line breakpoint instead.</p>
+			<h4 id="errors">Pausing on errors</h4>
+			<p>The <strong>Breakpoints</strong> view has two options for errors. Like the
+				<a href="#no-template-matched">No Template Matched</a> option, they're listed once a debug session
+				has been started in the workspace:</p>
+			<ul>
+				<li><strong>Dynamic Errors</strong> (on by default) - pauses where a dynamic error that ends the
+					transform is raised, including <code>xsl:message</code> with <code>terminate="yes"</code>. The
+					error's code and message are shown, and the variables at that point can be inspected.</li>
+				<li><strong>Errors Caught by xsl:try</strong> (off by default) - also pauses at errors that an
+					<code>xsl:try</code> catches. This needs Saxon 12.5 or later.</li>
+			</ul>
+			<figure>
+				<img src="resources/debugger-error.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">The debugger paused on a dynamic error.</i></p>
+				</figcaption>
+			</figure>
+			<p>A <em>static</em> error - one Saxon finds when it compiles the stylesheet - can't be paused at, as the
+				stylesheet never runs. This includes a type error that Saxon can tell will always happen: for example,
+				an <code>xsl:variable</code> with <code>as="xs:string"</code> whose <code>select</code> is
+				<code>count(...)</code>, which is always an <code>xs:integer</code>. The session then ends with a
+				notification that gives the first error and its line, and the errors are listed in the
+				<strong>Problems</strong> view.</p>
+			<h4 id="no-template-matched">Elements no template matched</h4>
+			<p>When no template rule matches an element processed by <code>xsl:apply-templates</code>, XSLT's
+				built-in template rules apply: the element's text is written to the output, and its children are
+				processed. This is often intended - e.g. for a wrapper element - but it's also what happens when a
+				template's <code>match</code> pattern is wrong, e.g. for an element in another namespace, so the
+				expected template is never used.</p>
+			<p>With the <strong>No Template Matched</strong> option in the <strong>Breakpoints</strong> view (off by
+				default), execution pauses at the first element of each name, in each mode, that no template rule
+				matched. It pauses at the <code>xsl:apply-templates</code> instruction, in a call stack frame such as
+				<code>no template matched: item (mode #default)</code>, whose context item is the element - so the
+				<strong>Context</strong> view, Watch and the Debug Console show and evaluate that element. If no
+				template has matched yet, from the start of the transform, the frame has no line.</p>
+			<p>Whether or not the option is on, when the transform ends the Debug Console lists the elements no
+				template matched, e.g. <code>&#x25B8; Built-in template rules applied to 37 elements no template
+				matched: item &#xD7;30 (mode #default), o:note &#xD7;7 (mode summary)</code>. Elements dropped by
+				a mode with <code>on-no-match="deep-skip"</code> are listed on a line of their own. Modes whose
+				<code>on-no-match</code> copies or skips elements otherwise - e.g. <code>shallow-copy</code> -
+				aren't included, as there that's the intent; with <code>on-no-match="fail"</code>, it's a dynamic
+				error.</p>
+			<h3 id="stepping">Stepping</h3>
+			<p>The debug toolbar has the usual <strong>Continue</strong> (<span class="shortcut">F5</span>),
+				<strong>Step Over</strong> (<span class="shortcut">F10</span>), <strong>Step Into</strong>
+				(<span class="shortcut">F11</span>), <strong>Step Out</strong>
+				(<span class="shortcut">⇧F11</span>), <strong>Pause</strong> and <strong>Stop</strong> commands. In
+				XSLT terms:</p>
+			<ul>
+				<li><strong>Step Over</strong> goes to the next line in the current template or function, without
+					stopping in the templates and functions it calls - for example, with
+					<code>xsl:apply-templates</code> or <code>xsl:call-template</code>.</li>
+				<li><strong>Step Into</strong> stops in each template rule, named template or function called, and
+					in a global variable when it's evaluated.</li>
+				<li><strong>Step Out</strong> continues until the current template or function returns.</li>
+				<li><code>xsl:for-each</code>, <code>xsl:for-each-group</code>, <code>xsl:iterate</code> and
+					<code>xsl:analyze-string</code> have their own entry in the call stack, and are stepped like calls:
+					<strong>Step Over</strong> runs all their iterations, <strong>Step Into</strong> stops in their body
+					for each item, and <strong>Step Out</strong> from their body goes to the line after them. A
+					breakpoint in the body still stops; after stepping over one by mistake, <strong>Step Back</strong>
+					goes back to it.</li>
+			</ul>
+			<p>Stepping goes line by line: execution stops once each time it reaches a line, not once for each
+				instruction on it. A breakpoint in a loop stops once for each iteration.</p>
+			<p>The debug toolbar also has <strong>Step Back</strong> and <strong>Reverse Continue</strong> - see
+				<a href="#step-back">Going back</a> - and <strong>Show Debug Output</strong> - see
+				<a href="#output">Output while debugging</a>.</p>
+			<h4 id="xpath">Stepping through XPath</h4>
+			<p>A multi-line XPath expression in a <code>select</code>, <code>test</code> or <code>value</code>
+				attribute - or in <code>xsl:map-entry</code>'s <code>key</code>, <code>xsl:evaluate</code>'s
+				<code>xpath</code>, <code>context-item</code> or <code>with-params</code>, or the content of an XSLT
+				4.0 <code>xsl:select</code> - can be stepped through. An <code>xsl:when</code>'s <code>test</code> is
+				stopped at where it's evaluated: only the tests reached, in order, until one is true. In XSLT 4.0, the
+				<code>select</code> of an <code>xsl:when</code> or <code>xsl:otherwise</code>, and an
+				<code>xsl:if</code>'s <code>then</code> and <code>else</code>, are stepped through only when that branch
+				is taken; an <code>xsl:record</code>'s attributes - its fields' expressions - are stepped through as the
+				record is built. Within
+				<code>xsl:catch</code>, the <code>$err:</code> variables can be used, as in Watch. An <code>xsl:with-param</code>'s <code>select</code> is stepped through as part of the
+				instruction it's in, e.g. <code>xsl:call-template</code>. An <code>xsl:sort</code>'s
+				<code>select</code> is stopped at for each item, as its sort key is computed - before the first item
+				is processed - with that item as the context item. Use <strong>Step Into</strong> at the instruction, or set a
+				breakpoint on a line of the expression. Execution stops on each line where a part of the expression
+				starts. A breakpoint on a line with only keywords such as <code>then</code>, <code>else</code> or
+				<code>return</code>, and no expression starting on it, is unverified.</p>
+			<p><strong>Step Into</strong> goes through an expression when that shows more than its result: when it
+				binds variables (<code>for</code>, <code>let</code>, <code>some</code> or <code>every</code>), calls a
+				stylesheet function or an inline function, or has an <code>if</code> whose branches are on lines of their
+				own - execution then stops at the branch taken. Otherwise - for example, for comparisons joined by
+				<code>or</code> - <strong>Step Into</strong> steps over it, and the variable's value is shown when it's
+				in scope. A breakpoint on a line of the expression still stops there.</p>
+			<p>A simple map (<code>!</code>), a path step (<code>/</code>) or a predicate (<code>[...]</code>) is
+				evaluated for each item of the expression before it. A breakpoint on a line of its right-hand side, or
+				predicate, stops for each item, with that item as the context item and its <code>position()</code> and
+				<code>last()</code> in the <strong>Context</strong> section. <strong>Step Into</strong> goes through such
+				a loop only when what's evaluated for each item has something to show, as above - e.g. a function
+				call - so that it doesn't stop for each item of a long path. A function argument that Saxon evaluates
+				lazily - within the function, when it's first used - shows its context item, but
+				<code>position()</code> and <code>last()</code> as <code>(not known)</code>.</p>
+			<p>The expression is evaluated separately, in the instruction's context, so that each part reports its
+				own line. It appears in the call stack as, for example, <code>xsl:variable/@select (XPath)</code>, and
+				its result is shown in the Debug Console, e.g. <code>&#x25B8; $line-totals (xsl:variable/@select, lines
+				25-28) returned (6.75, 10.8, 15.75)</code> - or the dynamic error it raised, e.g. one an
+				<code>xsl:try</code> catches. The instruction itself then runs as usual, but without stopping again in
+				the functions the expression calls, or writing their <code>xsl:message</code> output again - so each is
+				stopped in, and its messages written, once. The body of an
+				inline function is stepped through each time it's called - for example, by
+				<code>fold-left()</code>.</p>
+			<figure>
+				<img src="resources/debugger-xpath-step.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">Evaluation context, the call stack and the debug toolbar are shown when execution is paused.</i></p>
+				</figcaption>
+			</figure>
+			<h4 id="step-back">Going back</h4>
+			<p>The debug toolbar also has <strong>Step Back</strong> and <strong>Reverse Continue</strong>, for
+				going back to an earlier point in the transform without starting a new debug session:</p>
+			<ul>
+				<li><strong>Step Back</strong> goes to the line reached before, in the current template or
+					function - or, at its first line, to the line that called it.</li>
+				<li><strong>Reverse Continue</strong> goes back to the last line with a breakpoint that was reached
+					(breakpoint conditions aren't checked), or to the start of the transform if there's none.</li>
+			</ul>
+			<p>To go back, the debugger runs the transform again, from the start, to that point - quietly, and
+				stepping as before - then pauses there. Variables, the context item, Watch expressions and the call
+				stack are then as they were at that point, and stepping or continuing goes on from there.
+				<code>xsl:message</code> output and logpoint messages already shown in the Debug Console aren't
+				shown again.</p>
+			<h3 id="call-stack">Call stack</h3>
+			<p>The <strong>Call Stack</strong> view has a frame for each:</p>
+			<ul>
+				<li>template rule, with its match pattern and mode, e.g.
+					<code>xsl:template match="order" mode="summary"</code></li>
+				<li>named template, e.g. <code>xsl:template name="header"</code></li>
+				<li>function, by name and arity, e.g. <code>f:line-total#1</code></li>
+				<li>global variable or parameter being evaluated, e.g. <code>xsl:variable $orders</code></li>
+				<li><code>xsl:for-each</code>, <code>xsl:for-each-group</code>, <code>xsl:iterate</code> or
+					<code>xsl:analyze-string</code>
+					instruction, with its <code>select</code> expression</li>
+				<li>XPath expression being stepped through, e.g. <code>xsl:variable/@select (XPath)</code></li>
+			</ul>
+			<p>Selecting a frame shows its location in the editor, and its variables in the Variables view.</p>
+			<h3 id="variables">Variables</h3>
+			<p>The <strong>Variables</strong> view has four sections:</p>
+			<ul>
+				<li><strong>Locals</strong> - the parameters of the template, function or
+					<code>xsl:iterate</code>, then the variables in scope - from <code>xsl:variable</code>, and from
+					XPath <code>for</code>, <code>let</code>, <code>some</code> and <code>every</code> expressions,
+					including a positional <code>at $pos</code> variable. Tunnel parameters are shown as
+					<code>$name (tunnel)</code>. A value that Saxon hasn't evaluated yet, and whose evaluation would
+					run stylesheet code - for example, with Saxon 12, the accumulator passed to a
+					<code>fold-left</code> function - is shown as <code>(not evaluated yet)</code>, with a button to
+					evaluate it. Evaluating it runs that code straight away, without stopping at its
+					breakpoints. Inside an inline function, only the function's parameters, the variables from
+					outside it that it uses, and its own range variables are shown.</li>
+				<li><strong>Context</strong> - the context item (<code>.</code>), <code>position()</code> and
+					<code>last()</code>, and where they apply, <code>current-group()</code>,
+					<code>current-grouping-key()</code> and each <code>regex-group()</code>.</li>
+				<li><strong>Globals</strong> - the global variables and parameters, sorted by name. A global variable
+					that hasn't been used yet is evaluated when it's shown. While a global variable is being
+					evaluated, one that might use it - directly, or through a function - isn't evaluated, and is shown
+					as <code>(not evaluated yet)</code>: evaluating it would be a circular reference. When an XSpec
+					test is debugged, the test runner's own globals, such as <code>$x:xspec-uri</code>, aren't shown,
+					but they can still be evaluated in the Debug Console.</li>
+				<li><strong>Output</strong> - which result is being written to, or that a temporary tree is being built
+					(for example, an <code>xsl:variable</code>'s content), and the end of each output written so
+					far.</li>
+			</ul>
+			<p>Nodes, maps, arrays and sequences can be expanded. An element shows its attributes, then its child
+				nodes, with the line number of the element in its source document. Long values are truncated, and an
+				expanded value shows at most 1000 items.</p>
+			<h4 id="inline-values">Inline values</h4>
+			<p>While paused, the value of each variable declared earlier in the current template or function is shown
+				at the end of the line where it's declared. This applies to <code>xsl:variable</code> and
+				<code>xsl:param</code>, and in XPath, to <code>let</code>, <code>for</code>, <code>some</code> and
+				<code>every</code> variables and inline function parameters.</p>
+			<p>The VS Code user setting <code>debug.inlineValues</code> turns inline values on or off. A change
+				applies from the next debug session, not the one that's running.</p>
+			<h4 id="empty-steps">Empty steps in paths</h4>
+			<p>While paused, in the paths and lookups before the line paused at, the first step whose result is
+				empty is faded - like an unused variable - so it's easy to see where a path stops matching. For
+				<code>$doc/orders/order/item</code>, when <code>$doc</code> has no <code>orders</code> element,
+				<code>orders</code> is faded. A step (after <code>/</code> or <code>//</code>), a predicate
+				(<code>[...]</code>) and a map or array lookup (<code>?key</code>) can each be faded. Hovering over
+				it says why it's empty:</p>
+			<figure>
+				<img src="resources/debug-faded-nodes.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">Paused at line 17, the first empty step of each path is faded: <code>shipments</code>,
+						which has no prefix for the shipping namespace; <code>s:items</code>; a predicate that no
+						shipment matches; and the lookup <code>?Express</code>, as the map's key is
+						<code>express</code>.</i></p>
+				</figcaption>
+			</figure>
+			<ul>
+				<li>for a step, how many nodes there were to select from, and any with the same name in another
+					namespace, or the same name with different case - otherwise their names</li>
+				<li>for a predicate, how many items it removed</li>
+				<li>for a lookup, the map's keys, or the array's size</li>
+			</ul>
+			<p>The paths checked are those in the template or function paused in (or the global variable, if
+				paused while it's evaluated), on lines up to the one paused at. A relative path is checked when it's
+				evaluated with the same context item as the instruction paused at - not within an
+				<code>xsl:for-each</code> that's ended, for example, or a predicate. A path is evaluated as a Watch
+				expression is, each step once, from the variable, root (<code>/</code>), parenthesized expression or
+				function call it starts with. A path that starts with a call of a stylesheet function calls it once
+				more, which may write <code>xsl:message</code> output again; a path isn't checked beyond a
+				stylesheet function called after its start. Checking stops after about 300ms at each pause, so a slow
+				path doesn't slow down stepping.</p>
+			<h3 id="evaluating">Watch, hover and the Debug Console</h3>
+			<p>While paused, type an XPath expression at the prompt at the bottom of the <strong>Debug
+				Console</strong> and press <span class="shortcut">Enter</span> to evaluate it - for example,
+				<code>line[@qty gt 1]/@product</code> on an <code>order</code> element, or
+				<code>count(current-group())</code> in <code>xsl:for-each-group</code>. Expressions added to the
+				<strong>Watch</strong> view are evaluated in the same way, and again each time execution pauses.</p>
+			<p>Expressions are evaluated in the context of the call stack frame selected in the <strong>Call
+				Stack</strong> view, with:</p>
+			<ul>
+				<li>the variables in scope, and the context item</li>
+				<li>the stylesheet's namespace declarations and functions, e.g. <code>f:line-total($line)</code></li>
+				<li><code>current()</code>, <code>current-group()</code>, <code>current-grouping-key()</code> and
+					<code>regex-group()</code>, which give their values where execution is paused</li>
+			</ul>
+			<p>Results are shown, and can be expanded, as in the Variables view. Hovering over a variable reference
+				such as <code>$total</code>, or the name in a variable declaration, shows its value.</p>
+			<h4 id="xdm-trace">Formatted values with xdm:trace()</h4>
+			<p>If the stylesheet includes the xdm-view library - see <a href="code-diagnostics.html">Print
+				Debugging</a> - its <code>xdm:trace()</code> function can also be used while debugging, to see a value
+				formatted and colored over several lines, as in a terminal. In the Debug Console, for example,
+				<code>xdm:trace($order, 'order')</code> writes the formatted value, and gives the value as its result.
+				A <a href="#logpoints">logpoint</a> doesn't need it: its message formats values in the same way already.</p>
+			<p>Use <code>xdm:trace()</code> rather than <code>xdm:debug()</code> or <code>xdm:debug-color()</code>
+				here: those give the formatted text as a string, which the Debug Console shows as a short, quoted
+				value, without color.</p>
+			<h3 id="output">Output while debugging</h3>
+			<p>The output written so far - the principal result, and each <code>xsl:result-document</code> - can be
+				shown beside the stylesheet while paused, and is updated at each pause. It's serialized by Saxon as the
+				result is, but indented for readability, and shown in the language of its output method: XML, HTML, JSON
+				or plain text. The result itself is written as the stylesheet specifies.</p>
+			<ul>
+				<li><strong>XSLT: Show Debug Output</strong>, or its button on the debug toolbar, opens the output at
+					any time - the output being written to, or, when none is and there's more than one, the one you
+					choose.</li>
+				<li>To open the output automatically, at the first pause where there is some, turn on the
+					<code>XSLT.debug.openOutput</code> setting - it's off by default.</li>
+				<li><strong>Show Output</strong>, on the context menu of an output in the Variables view's
+					<strong>Output</strong> section, opens that output.</li>
+				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
+					written to the Debug Console.</li>
+			</ul>
+			<p>XML output can be traced back to the stylesheet. With the cursor on a line of the output, a hint at the
+				end of the line - e.g. <code>→ report.xsl:4</code> - shows where that part of the output was written.
+				To go there, use <strong>Go to XSLT Source</strong> on the output's context menu,
+				<span class="shortcut">Cmd/Ctrl</span>-click, or <span class="shortcut">F12</span> - or
+				<span class="shortcut">Option/Alt</span>-click, when <code>editor.multiCursorModifier</code> is
+				<code>ctrlCmd</code>. The stylesheet is shown in another editor group from the output's. For HTML, JSON
+				or text output, <strong>Go to XSLT Source</strong> reports that only XML output can be traced back to
+				the stylesheet.</p>
+			<p>When the session ends, a notification offers to <strong>Open</strong> the result file - or, for HTML,
+				to <strong>Open in Browser</strong>.</p>
+			<h4 id="saxon-errors">Saxon errors</h4>
+			<p>Saxon's error messages in the Debug Console are linked to the location of the error. The errors are
+				also listed in the <strong>Problems</strong> view, as for <a href="run-xslt.html">XSLT tasks</a>. A file's
+				errors are removed from the Problems view when the file is edited, as they may no longer apply.</p>
+			<p>When the transform fails, the notification at the end of the session gives Saxon's reason - for
+				example, that the XML source file doesn't exist - or, for a dynamic error, its message, code and line.
+				For a stylesheet with static errors, which can't be debugged, it gives the first of them.</p>
+
+			<h3 id="demo">Sample: stepping through XPath</h3>
+			<p>The <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/sample/debugger-demo">debugger-demo</a>
+				sample has a stylesheet, <code>debug-xpath.xsl</code>, and an XML file, <code>orders.xml</code>. Open
+				<code>orders.xml</code>, so it becomes the XML context file, then <code>debug-xpath.xsl</code>, and
+				start debugging. Things to try are listed in a comment at the top of the stylesheet, including:</p>
+			<ul>
+				<li>stepping through a multi-line <code>for ... return</code> expression, and into a function it
+					calls</li>
+				<li>a breakpoint inside an expression in <code>xsl:for-each-group</code>, with
+					<code>count(current-group())</code> in the Watch view</li>
+				<li><a href="#conditional">conditional breakpoints, hit counts</a> and a
+					<a href="#logpoints">logpoint</a></li>
+				<li>pausing at a dynamic error, after changing a price in <code>orders.xml</code> to
+					<code>n/a</code></li>
+			</ul>
+
+			<h3 id="limitations">Limitations</h3>
+			<ul>
+				<li>For debugging, the stylesheet is compiled without optimization, so all variables can be inspected. Saxon
+					still evaluates constant expressions when it compiles - e.g. an <code>xsl:if</code> whose test uses
+					only constant values - and an instruction removed that way can't be stopped at.</li>
+				<li>Values can't be changed in the Variables view.</li>
+				<li>Going back relies on the transform running the same way again; <code>current-dateTime()</code>
+					is kept the same. A transform that reads a document that changes in the meantime, or calls an
+					extension function with side effects, may not - then it runs to the end, with a notification.
+					Breakpoint hit counts aren't wound back, and the output view keeps any output written after the
+					point gone back to until it's written again.</li>
+				<li>An expression that's stepped through is evaluated in full - except a test, e.g. an
+					<code>xsl:if</code>'s, which is evaluated only as far as needed for true or false, as Saxon does.
+					Where Saxon itself would evaluate only part of it - e.g. an <code>xsl:iterate</code>'s
+					<code>select</code>, when <code>xsl:break</code> ends the loop, or a variable that's only partly
+					used - stepping through it can call more functions, and so write more <code>xsl:message</code>
+					output, than a normal run.</li>
+				<li>With <code>"messageEscaping": "on"</code> in the <code>xslt</code> task, Saxon writes
+					<code>xsl:message</code> output itself, so a message from a function called by an expression that's
+					stepped through is written twice: once as the expression is stepped through, and again as the
+					instruction runs.</li>
+				<li>Only modules loaded from files can be stopped in.</li>
+				<li>Saxon only evaluates <code>xsl:assert</code> with assertions enabled - <code>"enableAssertions":
+					"on"</code> in the <code>xslt</code> task - so without that, its breakpoints are unverified.</li>
+				<li>Saxon evaluates some instructions lazily - e.g. an <code>xsl:for-each</code> in an
+					<code>xsl:map</code> runs when the map is built - so the call stack may not show them while their
+					content is stopped in. The context item is still the right one.</li>
+				<li>Accumulators: Saxon computes an accumulator's values for the whole document the first time one of
+					them is needed - e.g. by <code>accumulator-before()</code> - so a breakpoint in an
+					<code>xsl:accumulator-rule</code> stops for each node in turn at that point, not as each node is
+					processed. If a breakpoint condition or a Watch expression is the first to need the values, they're
+					computed while it's evaluated, and the rule's breakpoints aren't stopped at. Accumulator rules are
+					reported to the debugger by Saxon 12.8 or later.</li>
+				<li>Keys: Saxon builds a key's index for the whole document the first time <code>key()</code> is
+					called for it - so a breakpoint on an <code>xsl:key</code> stops for each node indexed at that
+					point. As for accumulators, if a breakpoint condition or Watch expression is the first to need the
+					index, it's built while that's evaluated, and the key's breakpoints aren't stopped at.</li>
+			</ul>
+
+			<h3 id="troubleshooting">Troubleshooting</h3>
+			<p>When a debug session doesn't start, a notification gives the reason, with a <strong>Show
+				Output</strong> button - for example, when Java isn't on the PATH, the Saxon jar doesn't exist, or the
+				Java runtime is too old for the Saxon jar.</p>
+			<p>The <strong>XSLT Debugger</strong> log, in the Output panel, shows how each session was launched: the
+				Java command line, the Saxon product, the Java runtime and the Saxon options used.</p>
+		</div>
+
+	</div>
+</html>

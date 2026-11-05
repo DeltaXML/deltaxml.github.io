@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -15,13 +15,13 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT: Quick Run | VS Code XSLT/XPath</title>
+	<title>Quick Run | VS Code XSLT/XPath</title>
 	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
 	<meta name="author" content="Philip Fearon">
 
 	<!-- Mobile Specific Metas
 							==================================================-->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS
 							==================================================-->
@@ -56,34 +56,52 @@
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html" class="active">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
-				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html" class="active">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="xspec.html">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT: Quick Run</h2>
+		<div class="main"><h2 class="pageTitle">Quick Run</h2>
 
 		<div class="two-thirds column">
 			<p>
@@ -95,11 +113,11 @@
 			</p>
 			<figure>
 			<img src="resources/quick-run.png" class="scale-with-grid">
-				<figurecaption>
+				<figcaption>
 						<p><i style="font-style: italic">(1) XSLT in active editor, (2) the Saxon processor, (3) the XML context file - Click the play button to run</i></p>
-				</figurecaption>
+				</figcaption>
 			</figure>
-			<h3>Running a stylesheet</h3>
+			<h3 id="running-a-stylesheet">Running a stylesheet</h3>
 			<p>
 				With an XSLT file open in the active editor, invoke Quick Run in one of three ways:
 			</p>
@@ -127,10 +145,10 @@
 					Tasks</a> page.</li>
 				<li><strong>SaxonJS</strong> - requires a <a href="https://nodejs.org/en/">NodeJS</a> installation; the
 					<code>xslt3</code> package is run using NPX. See the <strong>Saxon-JS Tasks</strong> section on the
-					<a href="run-xslt.html#saxonjs-tasks">XSLT Tasks</a> page.</li>
+					<a href="run-xslt.html#saxonjs-tasks">Tasks</a> page.</li>
 				<li><strong>SaxonC</strong> - the <strong>XSLT.tasks.saxonCPath</strong> setting must point at the folder
 					containing the SaxonC <code>Transform</code> executable (<code>Transform.exe</code> on Windows). See the
-					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">XSLT Tasks</a> page for
+					<strong>SaxonC Tasks</strong> section on the <a href="run-xslt.html#saxonc-tasks">Tasks</a> page for
 					setup details, including native library paths and licensing.</li>
 			</ul>
 			<aside>Tasks for each processor can be turned off with the <strong>XSLT.tasks.java.enabled</strong>,
@@ -158,7 +176,7 @@
 				own is run straight away, with no prompt. The top-level stylesheet can also be run from the ▶ button in the
 				<a href="editing-xslt.html#inferred-imports">XSLT Imports</a> view, whichever of its modules is being edited.
 			</p>
-			<h3>Choosing the processor: SaxonJ, SaxonJS or SaxonC</h3>
+			<h3 id="choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</h3>
 			<p>
 				Quick Run uses SaxonJ by default. When an XSLT or XML file is active, the processor currently selected is
 				shown in the status bar, for example <strong>▶ SaxonJ</strong>. To switch
@@ -188,7 +206,7 @@
 				running a stylesheet on small or medium inputs. For longer transforms, SaxonJ's Java JIT compiler
 				makes it faster: in our tests, SaxonJ was ahead once execution took more than about two seconds.
 			</aside>
-			<h3>First use: a task is created for you</h3>
+			<h3 id="first-use-a-task-is-created-for-you">First use: a task is created for you</h3>
 			<p>
 				The first time Quick Run is used for a given stylesheet/context-file pairing, a real task is added to
 				your workspace's <code>tasks.json</code> file (creating the file if it doesn't exist yet) - not just an
@@ -205,21 +223,67 @@
 					<a href="run-xslt.html#references">Variable References in Tasks</a> section of the XSLT Tasks page</li>
 				<li>refers to the processor's setting (for example <code>${config:XSLT.tasks.saxonCPath}</code>) rather
 					than copying its current value, so the task keeps working if you later change the setting</li>
-				<li>includes an entry in its <code>parameters</code> array for every top-level <code>xsl:param</code>
-					declared with a <code>select</code> default - including params declared in imported or included
-					stylesheets - ready for you to edit</li>
+				<li>includes an entry in its <code>parameters</code> array for each stylesheet parameter that must be
+					set - including those declared in imported or included stylesheets. Parameters with a default are
+					left out, so the stylesheet's own defaults apply</li>
 			</ul>
-			<aside>Parameter values generated this way are prefixed with <code>?</code>, for example <code>?title</code>.
-				This tells Saxon to evaluate the value as an XPath expression rather than a literal string, so the
-				generated entry reproduces the parameter's own default exactly - it does not silently override it with
-				an empty value.
-			</aside>
-			<h3>Subsequent runs</h3>
+			<h4 id="required-parameters">Required parameters</h4>
+			<p>A stylesheet parameter must be set when it has <code>required="yes"</code>, or when it has no default
+				(no <code>select</code> attribute or content) and an <code>as</code> type that doesn't allow an empty
+				sequence - for example <code>as="xs:string"</code> or <code>as="element()+"</code>, but not
+				<code>as="xs:string?"</code>. A parameter without an <code>as</code> attribute defaults to a
+				zero-length string, so it isn't added.</p>
+			<p>The value of each one comes from an input that's added to the <code>inputs</code> of
+				<code>tasks.json</code>, so you're asked for it each time the task runs:</p>
+			<code class="block">"parameters": [
+    { "name": "title", "value": "${input:xsltParam-title}" },
+    { "name": "?config", "value": "${input:xsltParam-config}" }
+]
+...
+"inputs": [
+    {
+        "id": "xsltParam-title",
+        "type": "command",
+        "command": "xslt-xpath.enterParameterValue",
+        "args": { "name": "title", "type": "xs:string", "xpath": false }
+    },
+    ...
+]</code>
+			<p>You can type a value, or pick one you've used before for a parameter of that name - the last one used
+				is first, so <span class="shortcut">Enter</span> uses it again. Press <span class="shortcut">Escape</span>
+				to cancel the run. Once you've settled on a value, you can replace the <code>${input:...}</code>
+				reference with the value itself. Parameters with the same name, in different tasks, share an input.</p>
+			<aside>For an atomic type, such as <code>xs:string</code>, <code>xs:integer</code> or
+				<code>xs:anyURI</code>, the value is typed as it is, without quotes - Saxon converts it to the declared
+				type. For other types, such as maps, arrays and nodes, the parameter name is prefixed with
+				<code>?</code>, for example <code>?config</code>, which tells Saxon to evaluate the value as an XPath
+				expression: <code>map{'a': 1}</code>, <code>doc('data.xml')</code>, or <code>'text'</code> for a
+				string.</aside>
+			<h3 id="subsequent-runs">Subsequent runs</h3>
 			<p>
 				Once a task exists for a stylesheet/context-file pairing, Quick Run re-runs that same task rather than
 				creating another one. This means you can freely edit the generated task afterwards - change a parameter
 				value, adjust the result path, add Saxon features or additional parameters - and Quick Run will keep
 				using your edits on every subsequent run, just like running any other task.
+			</p>
+			<h4 id="edit-task">Editing the task</h4>
+			<p>
+				To go straight to the task for the stylesheet and the current XML context file, use the command
+				<strong>XSLT: Edit Quick Run Task</strong> in the Command Palette, or the <strong>Edit Quick Run Task</strong>
+				link in the tooltip of the XML context file in the status bar. This opens <code>tasks.json</code>
+				with the task highlighted - if there isn't a task yet, it's created first, as Quick Run would create it.
+			</p>
+			<p>
+				Debugging always uses the SaxonJ (<code>xslt</code>) task. The <strong>Edit Debug/Run Task (SaxonJ)</strong>
+				button in the editor's title bar, beside the Run and Debug buttons, opens that task whichever processor is
+				selected. With SaxonJS or SaxonC selected, the editor's <strong>...</strong> menu also has
+				<strong>Edit Quick Run Task (SaxonJS)</strong> or <strong>Edit Quick Run Task (SaxonC)</strong>.
+				When Quick Run or debugging first creates a task, a notification also offers <strong>Edit Task</strong>.
+			</p>
+			<p>
+				For different sets of parameters, copy the task in <code>tasks.json</code> and give the copy a new
+				label. When more than one task is for the stylesheet/context-file pairing, Quick Run (and debugging)
+				asks which task to run - the tasks you've used most recently are listed first.
 			</p>
 			<p>
 				Tasks are kept separately for each processor. If you switch processor, the next Quick Run for the same
@@ -266,7 +330,7 @@
 				from <code>xsl:initial-template</code> with the context file as the global context item, or choose None
 				to run with no source document at all.
 			</aside>
-			<h3>Running from an XML file</h3>
+			<h3 id="running-from-an-xml-file">Running from an XML file</h3>
 			<p>
 				Quick Run can also be started from an XML file, to run a stylesheet on it without opening the stylesheet
 				first. With an XML file open in the active editor, invoke it in one of three ways:
@@ -309,21 +373,39 @@
 	"resultPath": "${command:xslt-xpath.pickResultFile}"
 }</code>
 			</p>
-			<h3>The XML context file is remembered</h3>
+			<h3 id="context-per-stylesheet">Each stylesheet has its own XML context file</h3>
 			<p>
-				Your chosen XML context file is now restored automatically when Visual Studio Code is reopened, rather
-				than defaulting back to the last XML file you happened to view. It's stored per workspace, separately
+				The XML context file you pick from the status bar is for the stylesheet in the active editor, so you can
+				switch between stylesheets that process different documents and each one keeps its own. A module
+				imported or included by a top-level stylesheet shares that stylesheet's context file.
+			</p>
+			<p>
+				For a stylesheet you haven't picked a context file for, the source of its Quick Run task in
+				<code>tasks.json</code> is used - so a stylesheet you've run before keeps the file it was run with. Otherwise,
+				it's the context file you last picked for any stylesheet, or with none picked yet, the first XML file you
+				viewed.
+			</p>
+			<h3 id="the-xml-context-file-is-remembered">The XML context file is remembered</h3>
+			<p>
+				Your chosen XML context files are restored automatically when Visual Studio Code is reopened, rather
+				than defaulting back to the last XML file you happened to view. They're stored per workspace, separately
 				from the 'recently used' file list, so viewing other XML files - for example a transform's result - does
 				not change what gets restored. Choosing <strong>None</strong> is remembered in the same way.
 			</p>
+			<p>
+				If the context file has since been deleted or moved, Quick Run - and debugging - say so instead of
+				running, with a <strong>Pick XML Context File</strong> button to choose another.
+			</p>
 			<aside>For custom parameters and features beyond what's auto-populated, chaining tasks together, or any
-				other task configuration in detail, see the <a href="run-xslt.html">XSLT Tasks</a> page - a task Quick
+				other task configuration in detail, see the <a href="run-xslt.html">Tasks</a> page - a task Quick
 				Run creates is a normal task, so everything described there still applies to it.
 			</aside>
 		</div>
 
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#running-a-stylesheet">Running a stylesheet</a></li><li><a href="#modules">Running a module that another stylesheet imports</a></li><li><a href="#choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#first-use-a-task-is-created-for-you">First use: a task is created for you</a><ul><li><a href="#required-parameters">Required parameters</a></li></ul></li><li><a href="#subsequent-runs">Subsequent runs</a><ul><li><a href="#edit-task">Editing the task</a></li></ul></li><li><a href="#initial-template">Starting from xsl:initial-template</a></li><li><a href="#running-from-an-xml-file">Running from an XML file</a></li><li><a href="#context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
 </body>
 
 </html>

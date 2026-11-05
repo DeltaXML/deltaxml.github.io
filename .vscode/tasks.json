@@ -6,7 +6,7 @@
 			"label": "createVSCodePages",
 			"saxonJar": "${config:XSLT.tasks.saxonJar}",
 			"xsltFile": "${workspaceFolder}/vscode-xslt-xpath/xsl/createPages.xsl",
-			"xmlSource": "${workspaceFolder}/vscode-xslt-xpath/index.html",
+			"xmlSource": "${workspaceFolder}/vscode-xslt-xpath/authoring/layout.xml",
 			"resultPath": "${workspaceFolder}/vscode-xslt-xpath/xslt-out/result1.xml",
 			"group": {
 				"kind": "build",
@@ -15,6 +15,24 @@
 			"problemMatcher": [
 				"$saxon-xslt"
 			]
+		},
+		{
+			// the whole guide as a PDF, from all-pages.html - after building the pages. Needs WeasyPrint
+			// (brew install weasyprint): make-pdf.py runs it with its Python, so the PDF opens with its outline showing
+			"type": "shell",
+			"label": "createVSCodePDF",
+			"command": "/opt/homebrew/opt/weasyprint/libexec/bin/python",
+			"args": [
+				"xsl/make-pdf.py",
+				"all-pages.html",
+				"vscode-xslt-xpath-guide.pdf"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/vscode-xslt-xpath"
+			},
+			"dependsOn": "createVSCodePages",
+			"group": "build",
+			"problemMatcher": []
 		}
 	]
 }

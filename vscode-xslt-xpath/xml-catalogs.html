@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -21,7 +21,7 @@
 
 	<!-- Mobile Specific Metas
 							==================================================-->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS
 							==================================================-->
@@ -56,32 +56,50 @@
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html" class="active">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
-				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="xspec.html">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+			</div>
 		</nav>
 		<div class="main"><h2 class="pageTitle">XML Catalogs</h2>
 
@@ -178,7 +196,7 @@
 					Saxon will try to fetch it when the stylesheet is run</li>
 				<li>another URI, e.g. <code>urn:example:strings</code>, is an error - Saxon can't resolve it either</li>
 			</ul>
-			<p>In the Problems panel, the problem has a link to the catalog - and Cmd/Ctrl+click on the
+			<p>In the Problems view, the problem has a link to the catalog - and Cmd/Ctrl+click on the
 				<code>href</code> opens the catalog, to add an entry for it. With no catalog, the problem suggests
 				using one.</p>
 			<p>
@@ -187,7 +205,7 @@
 					<figcaption style="margin:auto"><i>The warning for an http: href that isn't in the catalog.</i></figcaption>
 				</figure>
 			</p>
-			<h5>Catalog files in the editor</h5>
+			<h4 id="catalog-files-in-the-editor">Catalog files in the editor</h4>
 			<p>In a catalog file - one that the catalog of the setting reads, or any XML file with a
 				<code>catalog</code> root element in the catalog namespace:</p>
 			<ul>
@@ -247,7 +265,7 @@
 					<code>libraries.xml</code></li>
 				<li>so the import is <code>lib/strings/strings.xsl</code></li>
 			</ol>
-			<h5>Try it</h5>
+			<h4 id="try-it">Try it</h4>
 			<ol>
 				<li>Open the <code>catalog-demo</code> folder in VS Code (<strong>File &gt; Open Folder...</strong>), so
 					that its <code>.vscode/settings.json</code> applies</li>
@@ -276,7 +294,9 @@
 			<code class="block">java -cp saxon-he-13.0.jar net.sf.saxon.Transform -xsl:main.xsl -it -catalog:catalog.xml</code>
 		</div>
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#setup">Setting up a catalog</a></li><li><a href="#catalog-files">Catalog files</a></li><li><a href="#editing">In the editor</a><ul><li><a href="#catalog-files-in-the-editor">Catalog files in the editor</a></li></ul></li><li><a href="#running">Running stylesheets with the catalog</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#demo">Catalog demo</a><ul><li><a href="#try-it">Try it</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
 </body>
 
 </html>

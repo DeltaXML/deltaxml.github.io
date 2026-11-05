@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -21,7 +21,7 @@
 
 	<!-- Mobile Specific Metas
 							==================================================-->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS
 							==================================================-->
@@ -56,32 +56,50 @@
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span style="color:lightblue">Installs: </span><span>141k</span></p>
+				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
 		<nav>
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html">Release 2.0 Highlights</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="quick-run.html">XSLT: Quick Run</a></li>
-				<li><a href="run-xslt.html">XSLT: Tasks</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="refactoring-xslt.html">Refactoring: Extract to xsl:function</a></li>
-				<li><a href="code-diagnostics.html">Debugging</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="xspec.html">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="settings.html">Settings</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
-				<li><a href="xslt30.html">XSLT 3.0 Introduction</a></li>
-				<li class="nav-group"><a href="xslt40.html">XSLT 4.0 Introduction</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html" class="active">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
 			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+			</div>
 		</nav>
 		<div class="main"><h2 class="pageTitle">JSON and JNodes</h2>
 
@@ -163,10 +181,10 @@
 					shows the record type, imported from a module of types generated from a JSON Schema: its fields,
 					their types, and each field's description from the schema.</i></figcaption>
 			</figure>
-			<h5 id="jtree-fix">Maps need jtree() before '/'</h5>
+			<h4 id="jtree-fix">Maps need jtree() before '/'</h4>
 			<p>A <code>/</code> step needs a JNode on its left, not a map. Saxon 13 reports XPTY0019 for a step
 				such as <code>$order-value/id</code>, where <code>$order-value</code> is a map with a record type, so
-				the extension reports this as an error, with the suggested fix
+				the extension reports this as an error. The message suggests converting the map first, e.g.
 				<code>jtree($order-value)/id</code>. Alternatives are a lookup, <code>$order-value?id</code>, or a
 				variable declared as a <code>jnode(*, order)</code>, as above. A step after a lookup, such as
 				<code>$p?address/city</code>, is reported in the same way.</p>
@@ -202,7 +220,7 @@ bundle: /lines/*[2]/bundle-items
           {'sku': 'TL-2', 'description': 'Multimeter', 'quantity': 1, 'unit-price': 0}
         ]</code>
 			<p>The <strong>xdm:debug variables</strong> auto-completion for <code>xsl:message</code> inserts a call
-				like this one, with every in-scope variable. See <a href="code-diagnostics.html">Debugging</a>.</p>
+				like this one, with every in-scope variable. See <a href="code-diagnostics.html">Print Debugging</a>.</p>
 
 			<h3 id="limits">Things to know about JNodes and record types in Saxon 13</h3>
 			<ul>
@@ -247,7 +265,7 @@ bundle: /lines/*[2]/bundle-items
 				<li>hovering on <code>unit-price</code> in <code>$line/unit-price</code>, or on <code>line</code>
 					in <code>jnode(*, line)</code>, to see the documentation taken from the schema</li>
 				<li>changing <code>$order/id</code> to <code>$order-value/id</code>, to see the
-					<code>jtree()</code> error and its fix</li>
+					error that suggests <code>jtree()</code></li>
 				<li>adding a property to <code>customer</code> in <code>order.schema.json</code>, running
 					<code>schema-to-records.xsl</code> again, and seeing it offered after
 					<code>$order/customer/</code></li>
@@ -256,7 +274,9 @@ bundle: /lines/*[2]/bundle-items
 		</div>
 
 	</div>
-	</div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#navigating">Navigating JSON with JNodes</a></li><li><a href="#typed-jnodes">JNodes with a record type</a><ul><li><a href="#jtree-fix">Maps need jtree() before '/'</a></li></ul></li><li><a href="#debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#sample">Sample: JSON Schema to record types</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
 </body>
 
 </html>
