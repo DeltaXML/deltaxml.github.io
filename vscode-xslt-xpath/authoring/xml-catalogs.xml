@@ -95,7 +95,7 @@
 					Saxon will try to fetch it when the stylesheet is run</li>
 				<li>another URI, e.g. <code>urn:example:strings</code>, is an error - Saxon can't resolve it either</li>
 			</ul>
-			<p>In the Problems panel, the problem has a link to the catalog - and Cmd/Ctrl+click on the
+			<p>In the Problems view, the problem has a link to the catalog - and Cmd/Ctrl+click on the
 				<code>href</code> opens the catalog, to add an entry for it. With no catalog, the problem suggests
 				using one.</p>
 			<p>

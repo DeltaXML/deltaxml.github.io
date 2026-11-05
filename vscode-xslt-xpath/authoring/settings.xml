@@ -305,7 +305,7 @@
         is one that references it - as XSLT 4.0 has no extensible record types. These are listed after the
         conversion, to convert by hand.</p>
 
-      <h3 id="general-settings">General Settings For XSLT</h3>
+      <h3 id="general-settings">General Settings for XSLT</h3>
       <h4 id="default-settings">Default Editor Settings for XSLT, XPath and XML</h4>
       <p>The extension sets these VS Code editor settings for the <code>xslt</code>, <code>xpath</code> and
         <code>xml</code> languages - for <code>.xsl</code>, <code>.xslt</code>, <code>.xpath</code> and XML files. As

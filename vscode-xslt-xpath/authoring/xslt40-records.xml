@@ -48,7 +48,7 @@
 					and are reported as an error.</li>
 			</ul>
 			<p>Go to Definition (<span class="shortcut">F12</span>) and Find All References
-				(<span class="shortcut">⇧⌥F12</span>) work for item type names.</p>
+				(<span class="shortcut">⌥⇧F12</span>) work for item type names.</p>
 
 			<h3 id="building-records">Building records</h3>
 			<p>A record is built with a map constructor, or with the <code>xsl:map</code> or <code>xsl:record</code>
@@ -155,7 +155,7 @@
 				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, an <code>xsl:record</code>
 				attribute, or an <code>@field</code> tag
 				of a documentation note - renames the field, and all its references. Find All References
-				(<span class="shortcut">⇧⌥F12</span>) lists them.</p>
+				(<span class="shortcut">⌥⇧F12</span>) lists them.</p>
 			<ul>
 				<li>Only the field of that record type is renamed - not a field with the same name in another
 					record type.</li>
@@ -239,7 +239,7 @@
 				declaration, or a string literal for it - renames the value and the string literals that refer to it:
 				variable values, function arguments (including keyword arguments), record field values in
 				map constructors, typed <code>let</code> bindings and <code>xsl:switch</code> cases. Find All References
-				(<span class="shortcut">⇧⌥F12</span>) lists them.</p>
+				(<span class="shortcut">⌥⇧F12</span>) lists them.</p>
 			<ul>
 				<li>Only the values of that type are renamed - not the same value in another enumeration type. An
 					inline <code>enum(...)</code> type is identified by its values.</li>

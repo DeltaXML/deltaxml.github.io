@@ -1,4 +1,4 @@
-<!DOCTYPE HTML><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>XSLT and XPath for Visual Studio Code - User Guide</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code."><meta name="author" content="Philip Fearon"><link rel="stylesheet" href="./resources/base.css"><link rel="stylesheet" href="./resources/skeleton.css"><link rel="stylesheet" href="./resources/layout.css"><link rel="stylesheet" href="./resources/custom.css"><link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"><link rel="stylesheet" href="./resources/all-pages.css"></head><body class="all-pages"><div class="all-pages-bar"><a href="index.html">Back to the guide</a><a href="vscode-xslt-xpath-guide.pdf">Download PDF</a><button type="button" onclick="window.print()">Print or save as PDF</button></div><section class="cover"><img src="../resources/tiny-white-logo.png" alt="DeltaXignia"><h1>XSLT and XPath<br>for Visual Studio Code</h1><p class="cover-subtitle">User Guide</p></section><nav class="contents"><h2>Contents</h2><ul><li class="contents-page"><a href="#index">Overview</a><ul><li><a href="#index--getting-started">Getting started</a></li><li><a href="#index--writing">Writing XSLT</a></li><li><a href="#index--reviewing">Reviewing XSLT</a></li><li><a href="#index--running">Running XSLT</a></li><li><a href="#index--debugging">Debugging XSLT</a></li><li><a href="#index--scope">Scope</a></li><li><a href="#index--edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</a></li><li><a href="#index--run-xslt-quick-start">Run XSLT - Quick Start</a></li></ul></li><li class="contents-page"><a href="#new-release">What's New</a><ul><li><a href="#new-release--release-2-1">Release 2.1</a></li><li><a href="#new-release--release-2-0">Release 2.0</a></li></ul></li><li class="contents-page"><a href="#features">Features</a><ul><li><a href="#features--languages">XSLT and XPath languages</a></li><li><a href="#features--xslt40">XSLT 4.0</a></li><li><a href="#features--editing">Editing</a></li><li><a href="#features--linter">Linter</a></li><li><a href="#features--navigation">Navigation</a></li><li><a href="#features--refactoring">Refactoring</a></li><li><a href="#features--running">Running XSLT</a></li><li><a href="#features--debugging">Debugging</a></li><li><a href="#features--xspec">Testing with XSpec</a></li><li><a href="#features--code-documentation">Code documentation</a></li></ul></li><li class="contents-page"><a href="#vscode">Using VS Code</a><ul><li><a href="#vscode--the-user-interface">The User Interface</a></li><li><a href="#vscode--the-command-palette">The Command Palette</a></li><li><a href="#vscode--opening-workspace-files">Opening Workspace Files</a></li><li><a href="#vscode--keyboard-shortcuts">Keyboard Shortcuts</a></li><li><a href="#vscode--settings">Settings</a></li><li><a href="#vscode--install-the-xslt-xpath-extension">Install the XSLT/XPath Extension</a></li><li><a href="#vscode--color-theme-extensions">Color Theme Extensions</a></li><li><a href="#vscode--viewing-html-output">Viewing HTML Output</a></li></ul></li><li class="contents-page"><a href="#settings">Settings</a><ul><li><a href="#settings--creating">Creating User and Workspace Settings</a></li><li><a href="#settings--xslt-settings">XSLT/XPath Extension Settings</a></li><li><a href="#settings--general-settings">General Settings For XSLT</a></li></ul></li><li class="contents-group">Editing</li><li class="contents-page"><a href="#editing">Editing XML</a><ul><li><a href="#editing--xml-elements">XML Elements</a></li><li><a href="#editing--auto-completion">Auto-Completion</a></li><li><a href="#editing--emmet">Emmet</a></li><li><a href="#editing--well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#editing--entities">Entities</a></li><li><a href="#editing--xmlformatting">XML Formatting</a></li><li><a href="#editing--xml-element-selection">XML Element Selection</a></li></ul></li><li class="contents-page"><a href="#editing-xslt">Editing XSLT/XPath</a><ul><li><a href="#editing-xslt--highlighting">Syntax Highlighting</a></li><li><a href="#editing-xslt--formatting">Formatting</a></li><li><a href="#editing-xslt--folding">Folding</a></li><li><a href="#editing-xslt--inferred-imports">Imports and Top-Level Stylesheets</a></li><li><a href="#editing-xslt--intellisense">Intellisense (Auto Complete)</a></li><li><a href="#editing-xslt--bracket-matching">Bracket Matching</a></li><li><a href="#editing-xslt--renaming">Symbol Renaming</a></li><li><a href="#editing-xslt--refactoring">Code Refactoring</a></li><li><a href="#editing-xslt--checking">XSLT Linter</a></li></ul></li><li class="contents-page"><a href="#navigation">Code Navigation</a><ul><li><a href="#navigation--file-navigation">File Navigation</a></li><li><a href="#navigation--xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a></li><li><a href="#navigation--outline-view">Outline View</a></li><li><a href="#navigation--peek-goto-definition">Peek/Goto Definition</a></li><li><a href="#navigation--goto-peek-references-find-all-references">Goto (Peek) References/Find All References</a></li><li><a href="#navigation--call-hierarchy">Call Hierarchy</a></li><li><a href="#navigation--goto-symbol">Goto Symbol</a></li><li><a href="#navigation--find-nodes-with-xpath">Find Nodes with XPath</a></li><li><a href="#navigation--xslt-imports-view">XSLT Imports View</a></li></ul></li><li class="contents-page"><a href="#refactoring-xslt">Refactoring</a><ul><li><a href="#refactoring-xslt--intro">Introduction</a></li><li><a href="#refactoring-xslt--example">A Sample Refactor</a></li><li><a href="#refactoring-xslt--restrictions">Known Restrictions</a></li><li><a href="#refactoring-xslt--context-properties">Context Properties</a></li></ul></li><li class="contents-page"><a href="#xml-catalogs">XML Catalogs</a><ul><li><a href="#xml-catalogs--setup">Setting up a catalog</a></li><li><a href="#xml-catalogs--catalog-files">Catalog files</a></li><li><a href="#xml-catalogs--editing">In the editor</a></li><li><a href="#xml-catalogs--running">Running stylesheets with the catalog</a></li><li><a href="#xml-catalogs--limitations">Limitations</a></li><li><a href="#xml-catalogs--demo">Catalog demo</a></li></ul></li><li class="contents-page"><a href="#xslt-packages">XSLT Packages</a><ul><li><a href="#xslt-packages--workspace-packages">Packages in the workspace</a></li><li><a href="#xslt-packages--setting">Packages outside the workspace</a></li><li><a href="#xslt-packages--versions">Which version is used</a></li><li><a href="#xslt-packages--visibility">What a stylesheet can use from a package</a></li><li><a href="#xslt-packages--overriding">Overriding package components</a></li><li><a href="#xslt-packages--package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#xslt-packages--declared-modes">Declared modes</a></li><li><a href="#xslt-packages--hover">Hover help</a></li><li><a href="#xslt-packages--converting">Converting a library to a package</a></li><li><a href="#xslt-packages--running">Running and debugging</a></li><li><a href="#xslt-packages--not-found">A package that isn't found</a></li><li><a href="#xslt-packages--completion">Auto-completion</a></li><li><a href="#xslt-packages--navigation">Navigating to a package</a></li><li><a href="#xslt-packages--override-navigation">Navigating between overrides</a></li></ul></li><li class="contents-group">Running and Debugging</li><li class="contents-page"><a href="#quick-run">Quick Run</a><ul><li><a href="#quick-run--running-a-stylesheet">Running a stylesheet</a></li><li><a href="#quick-run--modules">Running a module that another stylesheet imports</a></li><li><a href="#quick-run--choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#quick-run--first-use-a-task-is-created-for-you">First use: a task is created for you</a></li><li><a href="#quick-run--subsequent-runs">Subsequent runs</a></li><li><a href="#quick-run--initial-template">Starting from xsl:initial-template</a></li><li><a href="#quick-run--running-from-an-xml-file">Running from an XML file</a></li><li><a href="#quick-run--context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#quick-run--the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></li><li class="contents-page"><a href="#run-xslt">Tasks</a><ul><li><a href="#run-xslt--saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#run-xslt--saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#run-xslt--saxonc-tasks">SaxonC Tasks</a></li><li><a href="#run-xslt--to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#run-xslt--references">Variable References in Tasks</a></li><li><a href="#run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#run-xslt--configuring-more-tasks">Configuring more tasks</a></li><li><a href="#run-xslt--catalogs">XML catalogs</a></li><li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li><li><a href="#run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></li><li class="contents-page"><a href="#debugger">Debugger</a><ul><li><a href="#debugger--starting">Starting a debug session</a></li><li><a href="#debugger--breakpoints">Breakpoints</a></li><li><a href="#debugger--stepping">Stepping</a></li><li><a href="#debugger--call-stack">Call stack</a></li><li><a href="#debugger--variables">Variables</a></li><li><a href="#debugger--evaluating">Watch, hover and the Debug Console</a></li><li><a href="#debugger--output">Output while debugging</a></li><li><a href="#debugger--demo">Sample: stepping through XPath</a></li><li><a href="#debugger--limitations">Limitations</a></li><li><a href="#debugger--troubleshooting">Troubleshooting</a></li></ul></li><li class="contents-page"><a href="#xspec">XSpec Tests</a><ul><li><a href="#xspec--creating">Creating a test</a></li><li><a href="#xspec--editing">Editing XSpec files</a></li><li><a href="#xspec--stylesheet-under-test">The stylesheet under test</a></li><li><a href="#xspec--navigation">Navigating between tests and the stylesheet</a></li><li><a href="#xspec--running">Running tests</a></li><li><a href="#xspec--schematron">Testing a Schematron</a></li><li><a href="#xspec--debugging">Debugging a test</a></li><li><a href="#xspec--coverage">Coverage</a></li><li><a href="#xspec--settings">Settings</a></li><li><a href="#xspec--task-settings">The stylesheet's task</a></li><li><a href="#xspec--legacy">Tests written for older XSpec</a></li></ul></li><li class="contents-page"><a href="#code-diagnostics">Print Debugging</a><ul><li><a href="#code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a></li><li><a href="#code-diagnostics--xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></li><li class="contents-group">Tools</li><li class="contents-page"><a href="#xpath-queries">Find Nodes with XPath</a><ul><li><a href="#xpath-queries--opening">Opening the query file</a></li><li><a href="#xpath-queries--writing">Writing expressions</a></li><li><a href="#xpath-queries--running">Running an expression</a></li><li><a href="#xpath-queries--results">Results</a></li><li><a href="#xpath-queries--switching">Switching between XML files</a></li><li><a href="#xpath-queries--limitations">Limitations</a></li></ul></li><li class="contents-page"><a href="#xpath-notebook">XPath Notebooks</a><ul><li><a href="#xpath-notebook--why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#xpath-notebook--quick-start">Quick Start</a></li></ul></li><li class="contents-page"><a href="#ai-assistants">AI Assistants</a><ul><li><a href="#ai-assistants--problems">Fixing problems</a></li><li><a href="#ai-assistants--mcp">The MCP server (experimental)</a></li><li><a href="#ai-assistants--notes">Documentation notes</a></li><li><a href="#ai-assistants--debugging">Debugging output</a></li><li><a href="#ai-assistants--running">Running XSLT</a></li><li><a href="#ai-assistants--agents-window">The Agents window</a></li><li><a href="#ai-assistants--limitations">Current limitations</a></li></ul></li><li class="contents-group">XSLT Language</li><li class="contents-page"><a href="#xslt30">XSLT 3.0</a><ul><li><a href="#xslt30--learning-xslt-3-0">Learning XSLT 3.0</a></li><li><a href="#xslt30--supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></li><li class="contents-page"><a href="#xslt40">XSLT 4.0</a><ul><li><a href="#xslt40--editing-xslt-4-0">Editing XSLT 4.0</a></li><li><a href="#xslt40--running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#xslt40--other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></li><li class="contents-page"><a href="#xslt40-records">Records and Enums</a><ul><li><a href="#xslt40-records--declaring">Declaring types</a></li><li><a href="#xslt40-records--building-records">Building records</a></li><li><a href="#xslt40-records--using-records">Using records</a></li><li><a href="#xslt40-records--record-refactoring">Refactoring: Extract record type</a></li><li><a href="#xslt40-records--enums">Enumeration types</a></li></ul></li><li class="contents-page"><a href="#xslt40-jnodes">JSON and JNodes</a><ul><li><a href="#xslt40-jnodes--navigating">Navigating JSON with JNodes</a></li><li><a href="#xslt40-jnodes--typed-jnodes">JNodes with a record type</a></li><li><a href="#xslt40-jnodes--debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#xslt40-jnodes--limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#xslt40-jnodes--sample">Sample: JSON Schema to record types</a></li></ul></li><li class="contents-page"><a href="#xslt40-notes">Code Documentation</a><ul><li><a href="#xslt40-notes--writing">Writing a documentation note</a></li><li><a href="#xslt40-notes--adding">Adding a note</a></li><li><a href="#xslt40-notes--where-shown">Where notes are shown</a></li><li><a href="#xslt40-notes--references">References to other declarations</a></li><li><a href="#xslt40-notes--module-notes">Module notes</a></li><li><a href="#xslt40-notes--xslt30">Notes in XSLT 3.0</a></li><li><a href="#xslt40-notes--highlighting">Highlighting Details</a></li><li><a href="#xslt40-notes--xml">Notes as XML</a></li><li><a href="#xslt40-notes--checks">Tag Checks</a></li></ul></li></ul></nav><article class="main doc-page" id="index"><h2 class="pageTitle">Overview</h2>
+<!DOCTYPE HTML><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>XSLT and XPath for Visual Studio Code - User Guide</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code."><meta name="author" content="Philip Fearon"><link rel="stylesheet" href="./resources/base.css"><link rel="stylesheet" href="./resources/skeleton.css"><link rel="stylesheet" href="./resources/layout.css"><link rel="stylesheet" href="./resources/custom.css"><link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"><link rel="stylesheet" href="./resources/all-pages.css"></head><body class="all-pages"><div class="all-pages-bar"><a href="index.html">Back to the guide</a><a href="vscode-xslt-xpath-guide.pdf">Download PDF</a><button type="button" onclick="window.print()">Print or save as PDF</button></div><section class="cover"><img src="../resources/tiny-white-logo.png" alt="DeltaXignia"><h1>XSLT and XPath<br>for Visual Studio Code</h1><p class="cover-subtitle">User Guide</p></section><nav class="contents"><h2>Contents</h2><ul><li class="contents-page"><a href="#index">Overview</a><ul><li><a href="#index--getting-started">Getting started</a></li><li><a href="#index--writing">Writing XSLT</a></li><li><a href="#index--reviewing">Reviewing XSLT</a></li><li><a href="#index--running">Running XSLT</a></li><li><a href="#index--debugging">Debugging XSLT</a></li><li><a href="#index--scope">Scope</a></li><li><a href="#index--edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</a></li><li><a href="#index--run-xslt-quick-start">Run XSLT - Quick Start</a></li></ul></li><li class="contents-page"><a href="#new-release">What's New</a><ul><li><a href="#new-release--release-2-1">Release 2.1</a></li><li><a href="#new-release--release-2-0">Release 2.0</a></li></ul></li><li class="contents-page"><a href="#features">Features</a><ul><li><a href="#features--languages">XSLT and XPath languages</a></li><li><a href="#features--xslt40">XSLT 4.0</a></li><li><a href="#features--editing">Editing</a></li><li><a href="#features--linter">Linter</a></li><li><a href="#features--navigation">Navigation</a></li><li><a href="#features--refactoring">Refactoring</a></li><li><a href="#features--running">Running XSLT</a></li><li><a href="#features--debugging">Debugging</a></li><li><a href="#features--xspec">Testing with XSpec</a></li><li><a href="#features--code-documentation">Code documentation</a></li></ul></li><li class="contents-page"><a href="#vscode">Using VS Code</a><ul><li><a href="#vscode--the-user-interface">The User Interface</a></li><li><a href="#vscode--the-command-palette">The Command Palette</a></li><li><a href="#vscode--opening-workspace-files">Opening Workspace Files</a></li><li><a href="#vscode--keyboard-shortcuts">Keyboard Shortcuts</a></li><li><a href="#vscode--settings">Settings</a></li><li><a href="#vscode--install-the-xslt-xpath-extension">Install the XSLT/XPath Extension</a></li><li><a href="#vscode--color-theme-extensions">Color Theme Extensions</a></li><li><a href="#vscode--viewing-html-output">Viewing HTML Output</a></li></ul></li><li class="contents-page"><a href="#settings">Settings</a><ul><li><a href="#settings--creating">Creating User and Workspace Settings</a></li><li><a href="#settings--xslt-settings">XSLT/XPath Extension Settings</a></li><li><a href="#settings--general-settings">General Settings for XSLT</a></li></ul></li><li class="contents-group">Editing</li><li class="contents-page"><a href="#editing">Editing XML</a><ul><li><a href="#editing--xml-elements">XML Elements</a></li><li><a href="#editing--auto-completion">Auto-Completion</a></li><li><a href="#editing--emmet">Emmet</a></li><li><a href="#editing--well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#editing--entities">Entities</a></li><li><a href="#editing--xmlformatting">XML Formatting</a></li><li><a href="#editing--xml-element-selection">XML Element Selection</a></li></ul></li><li class="contents-page"><a href="#editing-xslt">Editing XSLT/XPath</a><ul><li><a href="#editing-xslt--highlighting">Syntax Highlighting</a></li><li><a href="#editing-xslt--formatting">Formatting</a></li><li><a href="#editing-xslt--folding">Folding</a></li><li><a href="#editing-xslt--inferred-imports">Imports and Top-Level Stylesheets</a></li><li><a href="#editing-xslt--intellisense">IntelliSense (Auto Complete)</a></li><li><a href="#editing-xslt--bracket-matching">Bracket Matching</a></li><li><a href="#editing-xslt--renaming">Symbol Renaming</a></li><li><a href="#editing-xslt--refactoring">Code Refactoring</a></li><li><a href="#editing-xslt--checking">XSLT Linter</a></li></ul></li><li class="contents-page"><a href="#navigation">Code Navigation</a><ul><li><a href="#navigation--file-navigation">File Navigation</a></li><li><a href="#navigation--xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a></li><li><a href="#navigation--outline-view">Outline View</a></li><li><a href="#navigation--peek-goto-definition">Peek/Go to Definition</a></li><li><a href="#navigation--goto-peek-references-find-all-references">Go to (Peek) References/Find All References</a></li><li><a href="#navigation--call-hierarchy">Call Hierarchy</a></li><li><a href="#navigation--goto-symbol">Go to Symbol</a></li><li><a href="#navigation--find-nodes-with-xpath">Find Nodes with XPath</a></li><li><a href="#navigation--xslt-imports-view">XSLT Imports View</a></li></ul></li><li class="contents-page"><a href="#refactoring-xslt">Refactoring</a><ul><li><a href="#refactoring-xslt--intro">Introduction</a></li><li><a href="#refactoring-xslt--example">A Sample Refactor</a></li><li><a href="#refactoring-xslt--restrictions">Known Restrictions</a></li><li><a href="#refactoring-xslt--context-properties">Context Properties</a></li></ul></li><li class="contents-page"><a href="#xml-catalogs">XML Catalogs</a><ul><li><a href="#xml-catalogs--setup">Setting up a catalog</a></li><li><a href="#xml-catalogs--catalog-files">Catalog files</a></li><li><a href="#xml-catalogs--editing">In the editor</a></li><li><a href="#xml-catalogs--running">Running stylesheets with the catalog</a></li><li><a href="#xml-catalogs--limitations">Limitations</a></li><li><a href="#xml-catalogs--demo">Catalog demo</a></li></ul></li><li class="contents-page"><a href="#xslt-packages">XSLT Packages</a><ul><li><a href="#xslt-packages--workspace-packages">Packages in the workspace</a></li><li><a href="#xslt-packages--setting">Packages outside the workspace</a></li><li><a href="#xslt-packages--versions">Which version is used</a></li><li><a href="#xslt-packages--visibility">What a stylesheet can use from a package</a></li><li><a href="#xslt-packages--overriding">Overriding package components</a></li><li><a href="#xslt-packages--package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#xslt-packages--declared-modes">Declared modes</a></li><li><a href="#xslt-packages--hover">Hover help</a></li><li><a href="#xslt-packages--converting">Converting a library to a package</a></li><li><a href="#xslt-packages--running">Running and debugging</a></li><li><a href="#xslt-packages--not-found">A package that isn't found</a></li><li><a href="#xslt-packages--completion">Auto-completion</a></li><li><a href="#xslt-packages--navigation">Navigating to a package</a></li><li><a href="#xslt-packages--override-navigation">Navigating between overrides</a></li></ul></li><li class="contents-group">Running and Debugging</li><li class="contents-page"><a href="#quick-run">Quick Run</a><ul><li><a href="#quick-run--running-a-stylesheet">Running a stylesheet</a></li><li><a href="#quick-run--modules">Running a module that another stylesheet imports</a></li><li><a href="#quick-run--choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#quick-run--first-use-a-task-is-created-for-you">First use: a task is created for you</a></li><li><a href="#quick-run--subsequent-runs">Subsequent runs</a></li><li><a href="#quick-run--initial-template">Starting from xsl:initial-template</a></li><li><a href="#quick-run--running-from-an-xml-file">Running from an XML file</a></li><li><a href="#quick-run--context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#quick-run--the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></li><li class="contents-page"><a href="#run-xslt">Tasks</a><ul><li><a href="#run-xslt--saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#run-xslt--saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#run-xslt--saxonc-tasks">SaxonC Tasks</a></li><li><a href="#run-xslt--to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#run-xslt--references">Variable References in Tasks</a></li><li><a href="#run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#run-xslt--configuring-more-tasks">Configuring more tasks</a></li><li><a href="#run-xslt--catalogs">XML catalogs</a></li><li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li><li><a href="#run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></li><li class="contents-page"><a href="#debugger">Debugger</a><ul><li><a href="#debugger--starting">Starting a debug session</a></li><li><a href="#debugger--breakpoints">Breakpoints</a></li><li><a href="#debugger--stepping">Stepping</a></li><li><a href="#debugger--call-stack">Call stack</a></li><li><a href="#debugger--variables">Variables</a></li><li><a href="#debugger--evaluating">Watch, hover and the Debug Console</a></li><li><a href="#debugger--output">Output while debugging</a></li><li><a href="#debugger--demo">Sample: stepping through XPath</a></li><li><a href="#debugger--limitations">Limitations</a></li><li><a href="#debugger--troubleshooting">Troubleshooting</a></li></ul></li><li class="contents-page"><a href="#xspec">XSpec Tests</a><ul><li><a href="#xspec--creating">Creating a test</a></li><li><a href="#xspec--editing">Editing XSpec files</a></li><li><a href="#xspec--stylesheet-under-test">The stylesheet under test</a></li><li><a href="#xspec--navigation">Navigating between tests and the stylesheet</a></li><li><a href="#xspec--running">Running tests</a></li><li><a href="#xspec--schematron">Testing a Schematron</a></li><li><a href="#xspec--debugging">Debugging a test</a></li><li><a href="#xspec--coverage">Coverage</a></li><li><a href="#xspec--settings">Settings</a></li><li><a href="#xspec--task-settings">The stylesheet's task</a></li><li><a href="#xspec--legacy">Tests written for older XSpec</a></li></ul></li><li class="contents-page"><a href="#code-diagnostics">Print Debugging</a><ul><li><a href="#code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a></li><li><a href="#code-diagnostics--xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></li><li class="contents-group">Tools</li><li class="contents-page"><a href="#xpath-queries">Find Nodes with XPath</a><ul><li><a href="#xpath-queries--opening">Opening the query file</a></li><li><a href="#xpath-queries--writing">Writing expressions</a></li><li><a href="#xpath-queries--running">Running an expression</a></li><li><a href="#xpath-queries--results">Results</a></li><li><a href="#xpath-queries--switching">Switching between XML files</a></li><li><a href="#xpath-queries--limitations">Limitations</a></li></ul></li><li class="contents-page"><a href="#xpath-notebook">XPath Notebooks</a><ul><li><a href="#xpath-notebook--why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#xpath-notebook--quick-start">Quick Start</a></li></ul></li><li class="contents-page"><a href="#ai-assistants">AI Assistants</a><ul><li><a href="#ai-assistants--problems">Fixing problems</a></li><li><a href="#ai-assistants--mcp">The MCP server (experimental)</a></li><li><a href="#ai-assistants--notes">Documentation notes</a></li><li><a href="#ai-assistants--debugging">Debugging output</a></li><li><a href="#ai-assistants--running">Running XSLT</a></li><li><a href="#ai-assistants--agents-window">The Agents window</a></li><li><a href="#ai-assistants--limitations">Current limitations</a></li></ul></li><li class="contents-group">XSLT Language</li><li class="contents-page"><a href="#xslt30">XSLT 3.0</a><ul><li><a href="#xslt30--learning-xslt-3-0">Learning XSLT 3.0</a></li><li><a href="#xslt30--supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></li><li class="contents-page"><a href="#xslt40">XSLT 4.0</a><ul><li><a href="#xslt40--editing-xslt-4-0">Editing XSLT 4.0</a></li><li><a href="#xslt40--running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#xslt40--other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></li><li class="contents-page"><a href="#xslt40-records">Records and Enums</a><ul><li><a href="#xslt40-records--declaring">Declaring types</a></li><li><a href="#xslt40-records--building-records">Building records</a></li><li><a href="#xslt40-records--using-records">Using records</a></li><li><a href="#xslt40-records--record-refactoring">Refactoring: Extract record type</a></li><li><a href="#xslt40-records--enums">Enumeration types</a></li></ul></li><li class="contents-page"><a href="#xslt40-jnodes">JSON and JNodes</a><ul><li><a href="#xslt40-jnodes--navigating">Navigating JSON with JNodes</a></li><li><a href="#xslt40-jnodes--typed-jnodes">JNodes with a record type</a></li><li><a href="#xslt40-jnodes--debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#xslt40-jnodes--limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#xslt40-jnodes--sample">Sample: JSON Schema to record types</a></li></ul></li><li class="contents-page"><a href="#xslt40-notes">Code Documentation</a><ul><li><a href="#xslt40-notes--writing">Writing a documentation note</a></li><li><a href="#xslt40-notes--adding">Adding a note</a></li><li><a href="#xslt40-notes--where-shown">Where notes are shown</a></li><li><a href="#xslt40-notes--references">References to other declarations</a></li><li><a href="#xslt40-notes--module-notes">Module notes</a></li><li><a href="#xslt40-notes--xslt30">Notes in XSLT 3.0</a></li><li><a href="#xslt40-notes--highlighting">Highlighting Details</a></li><li><a href="#xslt40-notes--xml">Notes as XML</a></li><li><a href="#xslt40-notes--checks">Tag Checks</a></li></ul></li></ul></nav><article class="main doc-page" id="index"><h2 class="pageTitle">Overview</h2>
 			<div class="two-thirds column">
 				<p>
 					DeltaXignia's
@@ -164,14 +164,14 @@
                     against XSpec's schema and the stylesheet they test, with auto-completion, hover help and navigation
                     between the tests and the stylesheet. XSpec 4.1.2 is included</li>
                 <li><strong><a href="#xslt-packages">XSLT packages</a></strong> - Workspace packages are automatically
-                    discovered from their xsl:package name and version and supplied to Saxon when running or debugging stylesheets.
+                    discovered from their <code>xsl:package</code> name and version and supplied to Saxon when running or debugging stylesheets.
                     Component visibility, <code>xsl:expose</code>, and <code>xsl:accept</code> are handled exactly as Saxon does. 
                     Issues with <code>xsl:accept</code>, <code>xsl:override</code>, and package modes are flagged 
                     while you edit, with quick fixes available.</li>
                 <li><strong><a href="#xpath-queries">Find Nodes with XPath</a></strong> - run XPath expressions on
                     an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
-                    found are listed to step through, and values are shown after each expression. Replaces Goto
-                    XPath</li>
+                    found are listed to step through, and values are shown after each expression. Replaces <strong>Goto
+                    XPath</strong></li>
                 <li><strong><a href="#ai-assistants--mcp">MCP server for AI assistants</a></strong> (experimental) -
                     tools an assistant such as Claude Code or GitHub Copilot can call to check stylesheets that aren't
                     open, find declarations and references, show a module's imports, and describe item types and
@@ -461,7 +461,7 @@
             </p>
             <figure>
                 <img src="resources/command-palette.png" class="scale-with-grid">
-                <figcaption><i>VS Code's command palette - built in commands are supplemented by specialist XSLT/XML commands.</i></figcaption>
+                <figcaption><i>VS Code's Command Palette - built-in commands are supplemented by specialist XSLT/XML commands.</i></figcaption>
             </figure>
 
             <h3 id="vscode--opening-workspace-files">Opening Workspace Files</h3>
@@ -837,7 +837,7 @@
         is one that references it - as XSLT 4.0 has no extensible record types. These are listed after the
         conversion, to convert by hand.</p>
 
-      <h3 id="settings--general-settings">General Settings For XSLT</h3>
+      <h3 id="settings--general-settings">General Settings for XSLT</h3>
       <h4 id="settings--default-settings">Default Editor Settings for XSLT, XPath and XML</h4>
       <p>The extension sets these VS Code editor settings for the <code>xslt</code>, <code>xpath</code> and
         <code>xml</code> languages - for <code>.xsl</code>, <code>.xslt</code>, <code>.xpath</code> and XML files. As
@@ -1075,7 +1075,7 @@
 			<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed.
 				<i>Note that this feature is only enabled when the VS Code user-setting <em>Format on Type</em> is set (indentation is fixed at the same time).</i></p>
 			<h3 id="editing--auto-completion">Auto-Completion</h3>
-			<p>Outside of the auto-complete (intellisense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
+			<p>Outside of the auto-complete (IntelliSense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
 			from the auto-completion list:</p>
 			<img src="resources/suggestions.png" class="scale-with-grid">
 			<p>After a <code>&lt;</code> within an element, the tag snippets insert an element with a placeholder for its name,
@@ -1165,14 +1165,14 @@
 	</article><article class="main doc-page" id="editing-xslt"><h2 class="pageTitle">Editing XSLT/XPath</h2>
 		
 		<div class="two-thirds column">
-			<p>With <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">DeltaXignia's XSLT/XPath extension</a>
-				, Visual Studio Code is a fully featured
+			<p>With <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">DeltaXignia's XSLT/XPath extension</a>,
+				Visual Studio Code is a fully featured
 				XSLT 3.0 editor, with support for the <a href="#xslt40">XSLT 4.0</a> and XPath 4.0 features implemented in Saxon 13.
 				Standalone XPath 3.1 and XPath 4.0 files are also fully supported. Visual Studio Code's rich ecosystem
 				is now available to XSLT and XPath developers.</p>
 			
 			<p>Comprehensive, but language-neutral, descriptions of Visual Studio Code can be found in Microsoft's 
-				<a href="https://code.visualstudio.com/docs/editing/codebasics"> Visual Studio Code User Guide. Links to key sections are below:</a></p>
+				<a href="https://code.visualstudio.com/docs/editing/codebasics">Visual Studio Code User Guide</a>. Links to key sections are below:</p>
 			<ul>
 				<li><a href="https://code.visualstudio.com/docs/editing/codebasics#_keyboard-shortcuts">Keyboard shortcuts</a></li>
 				<li><a href="https://code.visualstudio.com/docs/editing/codebasics#_multiple-selections-multi-cursor">Multiple selections (multi-cursor)</a></li>
@@ -1192,7 +1192,7 @@
 				but <a href="https://github.com/microsoft/vscode/issues/77140">problematic TM Grammar</a>.
 				Instead we use Visual Studio Code's
 				<a href="https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide">Semantic Highlighting</a> introduced in 2020.
-				For <a href="https://code.visualstudio.com/docs/configure/themes">color themes</a> extensions you should explicitly enable Semantic Highlighting. See
+				For <a href="https://code.visualstudio.com/docs/configure/themes">color theme</a> extensions you should explicitly enable Semantic Highlighting. See
 				the <a href="#settings">Settings</a> page for more information.
 			</p>
 			
@@ -1287,9 +1287,9 @@
 				<figcaption style="margin:auto"><i>The XSLT Imports view in the Explorer, with the ▶ Quick Run button for the top-level stylesheet.</i></figcaption>
 			</figure>
 		</p>
-		<h3 id="editing-xslt--intellisense">Intellisense (Auto Complete)</h3>
-		<p>Intellisense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
-			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is intellisense
+		<h3 id="editing-xslt--intellisense">IntelliSense (Auto Complete)</h3>
+		<p>IntelliSense suggestions include all in-scope XSLT and XPath symbols from <code>xsl:accumulator</code> names
+			to <code>xsl:variable</code> names, to anonymous XPath function parameters. There is IntelliSense
 			also for XSLT and XPath functions - help for built-in functions is shown alongside the suggestions list. Symbols from
 			included/imported files are included in the suggestions list.</p>
 		<h4 id="editing-xslt--hover">Hover Help and Signature Help</h4>
@@ -1307,7 +1307,7 @@
 			manually with <span class="shortcut">⇧⌘Space</span>.</p>
 		<p>In an XSLT 4.0 stylesheet, a <a href="#xslt40-notes">documentation note</a> on a function or
 			template is included in its hover help and signature help.</p>
-		<h4 id="editing-xslt--intellisense-for-xpath-locations">Intellisense for XPath Locations</h4>
+		<h4 id="editing-xslt--intellisense-for-xpath-locations">IntelliSense for XPath Locations</h4>
 		<p>An XML source file is used for context to provide XML node-names when editing XPath location steps. 
 			This is initially the first non-XSLT file opened in Visual Studio Code. When the context file is set, the status-bar
 			for the XSLT file editor will show the context filename. The label <strong>[XML context file]</strong>
@@ -1331,12 +1331,12 @@
 			is also used to limit the node-names shown in the auto-completion list.
 		</p>
 		<h4 id="editing-xslt--triggering-the-auto-complete-list">Triggering the auto-complete list</h4>
-		<p>For XSLT intellisense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
+		<p>For XSLT IntelliSense, the <span class="shortcut">&lt;</span> character triggers suggestions. XSLT instruction suggestions
 			fit the context of the cursor location. 
 			On accepting a suggestion a <a href="https://code.visualstudio.com/docs/editing/userdefinedsnippets">Code Snippet</a> is inserted
 			which will include common attributes for the selected instruction.
 		</p>
-		<p>Intellisense is manually triggered with <span class="shortcut">⌃Space</span>, with <span class="shortcut">Tab</span> or 
+		<p>IntelliSense is manually triggered with <span class="shortcut">⌃Space</span>, with <span class="shortcut">Tab</span> or 
 			<span class="shortcut">Enter</span> used to accept suggestions. These <a href="https://code.visualstudio.com/docs/configure/keybindings">key bindings</a> are fully customizable.</p>
 		<h4 id="editing-xslt--xpath-expressions-and-operators">XPath Expressions and Operators</h4>
 		<p>At the start of an XPath expression, the suggestions include snippets for the expressions with several
@@ -1356,7 +1356,7 @@
 			<code>name</code> attribute of an <code>xsl:with-param</code> also offers the parameter names.</p>
 		<h4 id="editing-xslt--xslt-instruction-snippets">XSLT Instruction Snippets</h4>
 		<p>In an empty file, the <code>xsl:stylesheet</code> and <code>xsl:package</code> suggestions insert a
-			boiler plate stylesheet complete with namespace declarations, including one for your own functions - an
+			boilerplate stylesheet complete with namespace declarations, including one for your own functions - an
 			'identity transform', or one starting from <code>xsl:initial-template</code>. Each is available for
 			XSLT 3.0 and XSLT 4.0, shown on the right of the suggestion.</p>
 		<p>The <code>xsl:message</code> suggestions include snippets that use the <code>xdm:debug()</code> function to
@@ -1469,7 +1469,7 @@
 		<h3 id="editing-xslt--checking">XSLT Linter</h3>
 		<p>
 			The XSLT/XPath linter performs checks on your code as you type, performing symbol reference tests across all included modules. 
-			Any problems are shown in the Problems Panel and also highlighted inline with a squiggly
+			Any problems are shown in the Problems view and also highlighted inline with a squiggly
 			underline for the specific token at issue.
 		</p>
 		<p>A module that relies on its parent stylesheet's imports is checked with those imports too - see
@@ -1536,7 +1536,7 @@
 		<h4 id="editing-xslt--union-priorities">Union patterns and XSLT 4.0</h4>
 		<p>The linter warns about a template rule without a <code>priority</code> attribute whose <code>match</code> is a
 			union with branches of different default priorities, e.g. <code>match="@d:* | @other"</code> (-0.25 and 0).
-			XSLT 3.0 makes a rule for each branch, with its own priority, but XSLT 4.0 one rule, with the highest - as
+			XSLT 3.0 makes a rule for each branch, with its own priority, but XSLT 4.0 makes one rule, with the highest - as
 			Saxon reports with its warning SXWN9052. So another template rule may be chosen: here,
 			<code>match="@d:keep"</code> would no longer win over the union. The warning lists each branch's priority. Give
 			the template a <code>priority</code>, or split it into a template for each branch, so it runs the same either
@@ -1640,32 +1640,32 @@
 				them in <a href="#settings">Settings</a> with the property: <code>outline.showArrays</code>. 				
 			</aside>
 
-			<h3 id="navigation--peek-goto-definition">Peek/Goto Definition</h3>
+			<h3 id="navigation--peek-goto-definition">Peek/Go to Definition</h3>
 			<p>A symbol, such as a variable or function, is defined in one location in a stylesheet file, but used in other locations.
-			The <strong>Peek</strong> and <strong>Goto</strong>	commands let you either view inline or navigate to the definition of a selected symbol.
+			The <strong>Peek</strong> and <strong>Go to</strong>	commands let you either view inline or navigate to the definition of a selected symbol.
 			</p>
 			<h4 id="navigation--peek-definition">Peek Definition</h4>
 			
 			<p>Invoke the <strong>Peek Definition</strong> command by pressing (<span class="shortcut">⌥F12</span>) on any symbol name such as a variable or function name.
-				This command embeds a view of the definition inline avoiding the context-switch arising from the <strong>Goto Definition</strong> command.
+				This command embeds a view of the definition inline avoiding the context-switch arising from the <strong>Go to Definition</strong> command.
 				The inline definition view permits quick edits of the definition also. Press <span class="shortcut">Escape</span> to close the definition view.
 			</p>
 			<img src="resources/peek-definition.png" class="scale-with-grid">
-			<h4 id="navigation--goto-definition">Goto Definition</h4>
+			<h4 id="navigation--goto-definition">Go to Definition</h4>
 			<p>
-				Invoke the <strong>Goto Definition</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
+				Invoke the <strong>Go to Definition</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
 				This command navigates you to the location of the symbol definition (for example, the corresponding <code>xsl:variable</code> instruction),
 				opening the containing stylesheet file in the editor group if not already open.
 			</p>
 			
 			<!-- start -->			
-			<h3 id="navigation--goto-peek-references-find-all-references">Goto (Peek) References/Find All References</h3>
+			<h3 id="navigation--goto-peek-references-find-all-references">Go to (Peek) References/Find All References</h3>
 			<p>This feature is about navigating to <strong>references</strong> to symbols, in contrast to the previous section that covers navigating to symbol <strong>definitions</strong>.
 				The <strong>Peek</strong> and <strong>Find All</strong>	commands let you either view inline or navigate through all the references (including the definition) of a selected symbol.
 			</p>
-			<h4 id="navigation--goto-peek-references">Goto (Peek) References</h4>
-			
-			<p>Invoke the <strong>Goto (Peek) References</strong> command by pressing (<span class="shortcut">⇧F12</span>) on any symbol name such as a variable or function name.
+			<h4 id="navigation--goto-peek-references">Go to (Peek) References</h4>
+
+			<p>Invoke the <strong>Go to (Peek) References</strong> command by pressing (<span class="shortcut">⇧F12</span>) on any symbol name such as a variable or function name.
 				This command embeds a view of the resolved references inline, use the cursor keys to navigate between each reference listed.
 				The inline view permits quick edits of the reference also. Press <span class="shortcut">Escape</span> to close the references view.
 			</p>
@@ -1705,8 +1705,8 @@
 			<p>A template rule is called by <code>xsl:apply-templates</code>, which depends on the node being processed
 				when the stylesheet runs, so template rules are shown as callers, but not as being called.</p>
 			
-			<h3 id="navigation--goto-symbol">Goto Symbol</h3>
-			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">⇧⌘O</span> for a filtered quick-pick list of symbols used
+			<h3 id="navigation--goto-symbol">Go to Symbol</h3>
+			<p>Use the <strong>Go to Symbol in Editor</strong> command <span class="shortcut">⇧⌘O</span> for a filtered quick-pick list of symbols used
 			in the current editor.
 				The text you enter filters the list, the <span class="shortcut">↑</span> and <span class="shortcut">↓</span> keys navigate you through the symbol list, with the
 				current symbol item highlighted in the editor. Press <span class="shortcut">Enter</span> to navigate to the symbol in the current editor
@@ -1929,7 +1929,7 @@
 					Saxon will try to fetch it when the stylesheet is run</li>
 				<li>another URI, e.g. <code>urn:example:strings</code>, is an error - Saxon can't resolve it either</li>
 			</ul>
-			<p>In the Problems panel, the problem has a link to the catalog - and Cmd/Ctrl+click on the
+			<p>In the Problems view, the problem has a link to the catalog - and Cmd/Ctrl+click on the
 				<code>href</code> opens the catalog, to add an entry for it. With no catalog, the problem suggests
 				using one.</p>
 			<p>
@@ -2046,7 +2046,7 @@
 				package's file is.</p>
 			<p> The XSLT/XPath extension finds
 				it, so that the declarations the package makes public are known to the linter, auto-completion, hover help
-				and go to definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
+				and Go to Definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
 			<figure>
 				<img src="resources/package-imports.png" class="scale-with-grid">
 				<figcaption>
@@ -2267,15 +2267,20 @@
 				in the workspace that imports or includes the library, directly or indirectly, and opens a report in the
 				Markdown preview, with links to each place:</p>
 			<ul>
-				<li><strong>To rework first</strong> - what would fail in a package: a global variable whose value uses the
-					context item, e.g. <code>select="/*"</code>, which has none in a library package (<code>XPDY0002</code>),
-					or an <code>xsl:global-context-item</code> - a stylesheet's declaration that overrides the library's
-					by import precedence, but with a different type, which an override can't have (<code>XTSE3070</code>) -
-					and a name the library uses that isn't declared in it or the stylesheets found to use it, e.g. in a module
-					whose import isn't resolved, as a package must declare all it uses. The report lists imports that aren't
-					found: the <a href="#xml-catalogs">XML catalog setting</a> may resolve them, e.g. DITA-OT's
-					<code>plugin:</code> URIs. And code that would move into <code>xsl:override</code> from a module outside
-					the workspace, or that stylesheets which don't use the library use too, as they'd lose it</li>
+				<li><strong>To rework first</strong> - what would fail in a package:
+					<ul>
+						<li>a global variable whose value uses the context item, e.g. <code>select="/*"</code>, which has none
+							in a library package (<code>XPDY0002</code>)</li>
+						<li>a stylesheet's <code>xsl:global-context-item</code> that overrides the library's by import
+							precedence, but with a different type, which an override can't have (<code>XTSE3070</code>)</li>
+						<li>a name the library uses that isn't declared in it or the stylesheets found to use it, e.g. in a
+							module whose import isn't resolved, as a package must declare all it uses. The report lists imports
+							that aren't found: the <a href="#xml-catalogs">XML catalog setting</a> may resolve them, e.g.
+							DITA-OT's <code>plugin:</code> URIs</li>
+						<li>code that would move into <code>xsl:override</code> from a module outside the workspace, or that
+							stylesheets which don't use the library use too, as they'd lose it</li>
+					</ul>
+				</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
 					the stylesheets use</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
@@ -2380,7 +2385,7 @@
 
 			<h3 id="xslt-packages--navigation">Navigating to a package</h3>
 			<p>The <code>name</code> of an <code>xsl:use-package</code> is a link to the package's file - press
-				<span class="shortcut">⌘+click</span> to open it. Go to definition, hover help and auto-completion for
+				<span class="shortcut">⌘+click</span> to open it. Go to Definition, hover help and auto-completion for
 				the package's public functions, templates, variables and other components work as for an imported
 				module.</p>
 
@@ -2569,17 +2574,17 @@
 			</p>
 			<h4 id="quick-run--edit-task">Editing the task</h4>
 			<p>
-				To go straight to the task for the stylesheet and the current XML context file, use
-				<strong>Edit Quick Run Task</strong> from the drop-down menu beside the editor's Run and Debug button. The
-				same link is in the tooltip of the XML context file in the status bar, and the command
-				<strong>XSLT: Edit Quick Run Task</strong> is in the Command Palette. This opens <code>tasks.json</code>
+				To go straight to the task for the stylesheet and the current XML context file, use the command
+				<strong>XSLT: Edit Quick Run Task</strong> in the Command Palette, or the <strong>Edit Quick Run Task</strong>
+				link in the tooltip of the XML context file in the status bar. This opens <code>tasks.json</code>
 				with the task highlighted - if there isn't a task yet, it's created first, as Quick Run would create it.
 			</p>
 			<p>
-				Debugging always uses the SaxonJ (<code>xslt</code>) task, so with SaxonJ selected the menu item is
-				<strong>Edit Quick Run and Debug Task (SaxonJ)</strong>. With SaxonJS or SaxonC selected, there's a
-				separate <strong>Edit Debug Task (SaxonJ)</strong> item. When Quick Run or debugging first creates a task,
-				a notification also offers <strong>Edit Task</strong>.
+				Debugging always uses the SaxonJ (<code>xslt</code>) task. The <strong>Edit Debug/Run Task (SaxonJ)</strong>
+				button in the editor's title bar, beside the Run and Debug buttons, opens that task whichever processor is
+				selected. With SaxonJS or SaxonC selected, the editor's <strong>...</strong> menu also has
+				<strong>Edit Quick Run Task (SaxonJS)</strong> or <strong>Edit Quick Run Task (SaxonC)</strong>.
+				When Quick Run or debugging first creates a task, a notification also offers <strong>Edit Task</strong>.
 			</p>
 			<p>
 				For different sets of parameters, copy the task in <code>tasks.json</code> and give the copy a new
@@ -2717,7 +2722,7 @@
 			
 			<p>XSLT is run or debugged using custom <code>xslt</code>,  <code>xslt-c</code> or <code>xslt-js</code>
 				<a href="https://code.visualstudio.com/docs/debugtest/tasks">Visual Studio Code Tasks</a>
-				for SaxonJ (requires <a href="https://adoptopenjdk.net/installation.html">Java</a> and 
+				for SaxonJ (requires <a href="https://adoptium.net/">Java</a> and 
 				<a href="https://www.saxonica.com/html/download/java.html">Saxon</a> installation), SaxonC
 				or SaxonJS (requires <a href="https://nodejs.org/en/">NodeJS</a> installation) respectively.</p>
 			<h3 id="run-xslt--saxonj-tasks">Saxon (Java) setup</h3>
@@ -2728,7 +2733,7 @@
 						The configuration will be saved in a <code>tasks.json</code> file in this workspace folder.
 					</p></li>
 				<li>
-					<p>If Java is not already installed, Java 1.8 or later can be downloaded and installed from <a href="https://adoptopenjdk.net/installation.html">here</a></p>
+					<p>If Java is not already installed, Java 1.8 or later can be downloaded and installed from <a href="https://adoptium.net/">here</a></p>
 				</li>
 				<li>
 					<p>If Saxon is not already installed, Saxon-HE can be downloaded and installed from <a href="https://www.saxonica.com/html/download/java.html">here</a></p>
@@ -2851,7 +2856,7 @@ npm install --save-dev xslt3</code>
 			<h3 id="run-xslt--references">Variable References in Tasks</h3>
 			<p>Visual Studio Code supports variable substitutions for Task configuration files.
 				Variable substitution uses the <code>${variableName}</code> syntax. Commands that
-				return a string can be invoked via variable substitution: the boiler plate XSLT task uses the
+				return a string can be invoked via variable substitution: the boilerplate XSLT task uses the
 				<code>${command:xslt-xpath.pickXsltFile}</code> and <code>${command:xslt-xpath.pickXmlSourceFile}</code>
 				variable references, and writes its result to <code>${workspaceFolder}/xsl-out/result1.xml</code>.
 			</p>
@@ -3017,8 +3022,8 @@ npm install --save-dev xslt3</code>
 				its prefix to the <code>XSLT.validation.externalFunctionPrefixes</code> setting - the quick fix for a
 				function that isn't found does this - and calls of functions with that prefix aren't checked.</p>
 			<h3 id="run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</h3>
-			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/terminal/basics">Integrated Terminal</a>,
-				the Pane hosting the Terminal view is toggled with <span class="shortcut">⌘J</span>. 
+			<p>When you start a Task, it is run in a <em>Task</em> tab in Visual Studio Code's <a href="https://code.visualstudio.com/docs/terminal/basics">Integrated Terminal</a>.
+				The panel hosting the Terminal view is toggled with <span class="shortcut">⌘J</span>. 
 				The tab label reflects the Task configuration <code>label</code> property. 
 				When a Saxon XSLT task is run, <code>xsl:message</code> output and any Saxon errors will be shown in the terminal window.
 			</p>
@@ -3026,7 +3031,7 @@ npm install --save-dev xslt3</code>
 			<img src="resources/printed-map.png" class="scale-with-grid">
 			</p>
 			<aside>
-			The above screenshot shows formatted and colorised xsl:message output available through
+			The above screenshot shows formatted and colorized xsl:message output available through
 			special auto-completion options. See <a href="#code-diagnostics">Print Debugging</a> for more detail.	
 			</aside>
 
@@ -3569,7 +3574,7 @@ npm install --save-dev xslt3</code>
 			<p>For a package, it has <code>run-as="external"</code>. In its start tag, completion after
 				<code>xmlns</code> offers the namespaces of the stylesheet under test, then common ones.</p>
 			<h4 id="xspec--test-file">A test file for a whole stylesheet or package</h4>
-			<p><strong>XSpec: Create Test File</strong> - in the command palette, or the editor's context menu, for a
+			<p><strong>XSpec: Create Test File</strong> - in the Command Palette, or the editor's context menu, for a
 				stylesheet - or the code action in the start tag of its <code>xsl:stylesheet</code> or
 				<code>xsl:package</code>, makes a skeleton of tests: a scenario, as above, for each function, named
 				template and template rule. Each is pending - <code>pending="to do"</code> - so the file runs, with the
@@ -3695,7 +3700,7 @@ npm install --save-dev xslt3</code>
 			<figure>
 				<img src="resources/test-failure.png" class="scale-with-grid">
 				<figcaption>
-					A test fail in Test Explorer and the test itself - click any fail label to see the diff. 
+					A test failure in Test Explorer and the test itself - click any failure label to see the diff. 
 				</figcaption>
 			</figure>
 			<p>Each expectation is then marked passed, failed or pending (skipped), and each scenario by the
@@ -3730,11 +3735,11 @@ npm install --save-dev xslt3</code>
 			<figure>
 				<img src="resources/xspec-timeline.png" class="scale-with-grid">
 				<figcaption>
-					The XSpec file's Timeline view, below the file editor shows XSpec run events along with git events.
+					The XSpec file's Timeline view, below the file editor, shows XSpec run events along with git events.
 				</figcaption>
 			</figure>
 			<p>Once a test run for an XSpec file completes, the file's timeline is updated with the test run details.
-				The Timeline view for the selected XSpec file shows these time line events, along with other events for
+				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
 				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
 			<h3 id="xspec--schematron">Testing a Schematron</h3>
@@ -3781,7 +3786,7 @@ npm install --save-dev xslt3</code>
 			<figure>
 				<img src="resources/test-coverage.png" class="scale-with-grid">
 				<figcaption>
-					The Test Coverage view summarises covered components while margin highlights are shown the covered code
+					The Test Coverage view summarises covered components while margin highlights show the covered code
 				</figcaption>
 			</figure>
 			<p>The Test Explorer's <strong>Run Tests with Coverage</strong> runs the tests and shows which parts of the
@@ -3964,7 +3969,7 @@ npm install --save-dev xslt3</code>
 				<img src="resources/xdm-debug-output.png" style="width:480px" class="scale-with-grid">
 				<figcaption style="margin:auto"><i><code>xsl:message</code> output <code>xdm:debug-color()</code>.</i></figcaption>
 			</figure>
-			<aside>Colorising for <strong>xdm:debug-color()</strong> should work from VS Code with all SaxonJ, SaxonC and SaxonJS versions.
+			<aside>Colorizing for <strong>xdm:debug-color()</strong> should work from VS Code with all SaxonJ, SaxonC and SaxonJS versions.
 				Because later SaxonJ versions don't support use of a built-in
 				TextEmitter command-line option, an extension class is used instead of <code>net.sf.saxon.Transform</code> when invoking
 				a transform via an XSLT task. This prevents escaping of ANSI codes used for coloring the output.<br>
@@ -4111,7 +4116,7 @@ count(//item)
 			<aside>With no blank line before an expression, e.g. on the first line, <strong>▶ Run</strong> is a
 				CodeLens above it - or, with CodeLens turned off (<code>editor.codeLens</code>), at the start of the
 				expression's line.</aside>
-			<p>If Saxon reports an error, such as a syntax error, it's shown in the Problems panel, at the place in the
+			<p>If Saxon reports an error, such as a syntax error, it's shown in the Problems view, at the place in the
 				expression where Saxon found it.</p>
 
 			<h3 id="xpath-queries--results">Results</h3>
@@ -4207,7 +4212,7 @@ count(//item)
 
 			<h3 id="ai-assistants--problems">Fixing problems</h3>
 			<p>The problems reported by the extension's <a href="#editing-xslt--checking">linter</a> are standard Visual
-				Studio Code diagnostics, shown in the Problems panel. They identify the exact symbol at issue - an unresolved
+				Studio Code diagnostics, shown in the Problems view. They identify the exact symbol at issue - an unresolved
 				variable, a function called with the wrong number of arguments, a record field that doesn't exist - so an
 				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
 				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a
@@ -4234,7 +4239,7 @@ count(//item)
 				<tbody>
 					<tr>
 						<td><code>lint_file</code></td>
-						<td>The problems in an XSLT module or XSpec file - as the Problems panel shows them, checked with its
+						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
 							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
 							worse.</td>
 					</tr>
@@ -4333,7 +4338,7 @@ count(//item)
 			<p>The MCP server's tools only read files: an assistant can't yet ask the extension to run a stylesheet, an
 				XSpec test or an XPath expression, though it can run a Quick Run task's Saxon command itself. Tools for these
 				may be added in a future release.</p>
-			<p>In the Problems panel, problems are only shown for files open in an editor, as by most language extensions:
+			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
 				a stylesheet an assistant changes that isn't open has none there until it's opened. With the MCP server on, an
 				assistant can check such a file with <code>lint_file</code>.</p>
 		</div>
@@ -4353,7 +4358,7 @@ count(//item)
 				<li><a href="https://www.w3.org/TR/xpath-31/">XML Path Language (XPath) 3.1</a></li>
 				<li><a href="https://www.w3.org/TR/xpath-functions-31/">XPath and XQuery Functions and Operators 3.1</a></li>
 			</ul>
-			<aside>Note: The <a href="https://www.w3.org/TR/xslt-xquery-serialization-31/">XSLT 3.1 Serialization</a> specification 
+			<aside>Note: The <a href="https://www.w3.org/TR/xslt-xquery-serialization-31/">XSLT and XQuery Serialization 3.1</a> specification 
 				is published separately as this is shared with XQuery.</aside>
 			<p>While the size of each part of the XSLT specifications may appear daunting at first, each part is well-structured, with a Table of Contents
 			panel that makes it easy to navigate. Many code samples are included with the specification.	
@@ -4548,7 +4553,7 @@ count(//item)
 					and are reported as an error.</li>
 			</ul>
 			<p>Go to Definition (<span class="shortcut">F12</span>) and Find All References
-				(<span class="shortcut">⇧⌥F12</span>) work for item type names.</p>
+				(<span class="shortcut">⌥⇧F12</span>) work for item type names.</p>
 
 			<h3 id="xslt40-records--building-records">Building records</h3>
 			<p>A record is built with a map constructor, or with the <code>xsl:map</code> or <code>xsl:record</code>
@@ -4655,7 +4660,7 @@ count(//item)
 				constructor key, the <code>key</code> of an <code>xsl:map-entry</code>, an <code>xsl:record</code>
 				attribute, or an <code>@field</code> tag
 				of a documentation note - renames the field, and all its references. Find All References
-				(<span class="shortcut">⇧⌥F12</span>) lists them.</p>
+				(<span class="shortcut">⌥⇧F12</span>) lists them.</p>
 			<ul>
 				<li>Only the field of that record type is renamed - not a field with the same name in another
 					record type.</li>
@@ -4738,7 +4743,7 @@ count(//item)
 				declaration, or a string literal for it - renames the value and the string literals that refer to it:
 				variable values, function arguments (including keyword arguments), record field values in
 				map constructors, typed <code>let</code> bindings and <code>xsl:switch</code> cases. Find All References
-				(<span class="shortcut">⇧⌥F12</span>) lists them.</p>
+				(<span class="shortcut">⌥⇧F12</span>) lists them.</p>
 			<ul>
 				<li>Only the values of that type are renamed - not the same value in another enumeration type. An
 					inline <code>enum(...)</code> type is identified by its values.</li>

@@ -112,7 +112,7 @@
 
 			<h3 id="problems">Fixing problems</h3>
 			<p>The problems reported by the extension's <a href="editing-xslt.html#checking">linter</a> are standard Visual
-				Studio Code diagnostics, shown in the Problems panel. They identify the exact symbol at issue - an unresolved
+				Studio Code diagnostics, shown in the Problems view. They identify the exact symbol at issue - an unresolved
 				variable, a function called with the wrong number of arguments, a record field that doesn't exist - so an
 				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
 				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a
@@ -139,7 +139,7 @@
 				<tbody>
 					<tr>
 						<td><code>lint_file</code></td>
-						<td>The problems in an XSLT module or XSpec file - as the Problems panel shows them, checked with its
+						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
 							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
 							worse.</td>
 					</tr>
@@ -238,7 +238,7 @@
 			<p>The MCP server's tools only read files: an assistant can't yet ask the extension to run a stylesheet, an
 				XSpec test or an XPath expression, though it can run a Quick Run task's Saxon command itself. Tools for these
 				may be added in a future release.</p>
-			<p>In the Problems panel, problems are only shown for files open in an editor, as by most language extensions:
+			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
 				a stylesheet an assistant changes that isn't open has none there until it's opened. With the MCP server on, an
 				assistant can check such a file with <code>lint_file</code>.</p>
 		</div>

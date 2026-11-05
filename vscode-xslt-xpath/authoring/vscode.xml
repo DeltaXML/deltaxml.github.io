@@ -45,7 +45,7 @@
             </p>
             <figure>
                 <img src="resources/command-palette.png" class="scale-with-grid" />
-                <figcaption><i>VS Code's command palette - built in commands are supplemented by specialist XSLT/XML commands.</i></figcaption>
+                <figcaption><i>VS Code's Command Palette - built-in commands are supplemented by specialist XSLT/XML commands.</i></figcaption>
             </figure>
 
             <h3 id="opening-workspace-files">Opening Workspace Files</h3>

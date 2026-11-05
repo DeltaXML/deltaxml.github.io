@@ -57,32 +57,32 @@
 				them in <a href="settings.html">Settings</a> with the property: <code>outline.showArrays</code>. 				
 			</aside>
 
-			<h3>Peek/Goto Definition</h3>
+			<h3 id="peek-goto-definition">Peek/Go to Definition</h3>
 			<p>A symbol, such as a variable or function, is defined in one location in a stylesheet file, but used in other locations.
-			The <strong>Peek</strong> and <strong>Goto</strong>	commands let you either view inline or navigate to the definition of a selected symbol.
+			The <strong>Peek</strong> and <strong>Go to</strong>	commands let you either view inline or navigate to the definition of a selected symbol.
 			</p>
 			<h4>Peek Definition</h4>
 			
 			<p>Invoke the <strong>Peek Definition</strong> command by pressing (<span class="shortcut">⌥F12</span>) on any symbol name such as a variable or function name.
-				This command embeds a view of the definition inline avoiding the context-switch arising from the <strong>Goto Definition</strong> command.
+				This command embeds a view of the definition inline avoiding the context-switch arising from the <strong>Go to Definition</strong> command.
 				The inline definition view permits quick edits of the definition also. Press <span class="shortcut">Escape</span> to close the definition view.
 			</p>
 			<img src="resources/peek-definition.png" class="scale-with-grid" />
-			<h4>Goto Definition</h4>
+			<h4 id="goto-definition">Go to Definition</h4>
 			<p>
-				Invoke the <strong>Goto Definition</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
+				Invoke the <strong>Go to Definition</strong> command by pressing (<span class="shortcut">F12</span>) on any symbol name such as a variable or function name.
 				This command navigates you to the location of the symbol definition (for example, the corresponding <code>xsl:variable</code> instruction),
 				opening the containing stylesheet file in the editor group if not already open.
 			</p>
 			
 			<!-- start -->			
-			<h3>Goto (Peek) References/Find All References</h3>
+			<h3 id="goto-peek-references-find-all-references">Go to (Peek) References/Find All References</h3>
 			<p>This feature is about navigating to <strong>references</strong> to symbols, in contrast to the previous section that covers navigating to symbol <strong>definitions</strong>.
 				The <strong>Peek</strong> and <strong>Find All</strong>	commands let you either view inline or navigate through all the references (including the definition) of a selected symbol.
 			</p>
-			<h4>Goto (Peek) References</h4>
-			
-			<p>Invoke the <strong>Goto (Peek) References</strong> command by pressing (<span class="shortcut">⇧F12</span>) on any symbol name such as a variable or function name.
+			<h4 id="goto-peek-references">Go to (Peek) References</h4>
+
+			<p>Invoke the <strong>Go to (Peek) References</strong> command by pressing (<span class="shortcut">⇧F12</span>) on any symbol name such as a variable or function name.
 				This command embeds a view of the resolved references inline, use the cursor keys to navigate between each reference listed.
 				The inline view permits quick edits of the reference also. Press <span class="shortcut">Escape</span> to close the references view.
 			</p>
@@ -122,8 +122,8 @@
 			<p>A template rule is called by <code>xsl:apply-templates</code>, which depends on the node being processed
 				when the stylesheet runs, so template rules are shown as callers, but not as being called.</p>
 			
-			<h3>Goto Symbol</h3>
-			<p>Use the <strong>Goto Symbol in Editor</strong> command <span class="shortcut">⇧⌘O</span> for a filtered quick-pick list of symbols used
+			<h3 id="goto-symbol">Go to Symbol</h3>
+			<p>Use the <strong>Go to Symbol in Editor</strong> command <span class="shortcut">⇧⌘O</span> for a filtered quick-pick list of symbols used
 			in the current editor.
 				The text you enter filters the list, the <span class="shortcut">↑</span> and <span class="shortcut">↓</span> keys navigate you through the symbol list, with the
 				current symbol item highlighted in the editor. Press <span class="shortcut">Enter</span> to navigate to the symbol in the current editor

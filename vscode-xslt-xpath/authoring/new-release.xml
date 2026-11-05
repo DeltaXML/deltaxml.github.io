@@ -18,14 +18,14 @@
                     against XSpec's schema and the stylesheet they test, with auto-completion, hover help and navigation
                     between the tests and the stylesheet. XSpec 4.1.2 is included</li>
                 <li><strong><a href="xslt-packages.html">XSLT packages</a></strong> - Workspace packages are automatically
-                    discovered from their xsl:package name and version and supplied to Saxon when running or debugging stylesheets.
+                    discovered from their <code>xsl:package</code> name and version and supplied to Saxon when running or debugging stylesheets.
                     Component visibility, <code>xsl:expose</code>, and <code>xsl:accept</code> are handled exactly as Saxon does. 
                     Issues with <code>xsl:accept</code>, <code>xsl:override</code>, and package modes are flagged 
                     while you edit, with quick fixes available.</li>
                 <li><strong><a href="xpath-queries.html">Find Nodes with XPath</a></strong> - run XPath expressions on
                     an XML file from a query file below it, with the XPath editor's checks and auto-completion: the nodes
-                    found are listed to step through, and values are shown after each expression. Replaces Goto
-                    XPath</li>
+                    found are listed to step through, and values are shown after each expression. Replaces <strong>Goto
+                    XPath</strong></li>
                 <li><strong><a href="ai-assistants.html#mcp">MCP server for AI assistants</a></strong> (experimental) -
                     tools an assistant such as Claude Code or GitHub Copilot can call to check stylesheets that aren't
                     open, find declarations and references, show a module's imports, and describe item types and

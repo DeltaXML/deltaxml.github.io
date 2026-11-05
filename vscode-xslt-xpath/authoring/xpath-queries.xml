@@ -76,7 +76,7 @@ count(//item)
 			<aside>With no blank line before an expression, e.g. on the first line, <strong>▶ Run</strong> is a
 				CodeLens above it - or, with CodeLens turned off (<code>editor.codeLens</code>), at the start of the
 				expression's line.</aside>
-			<p>If Saxon reports an error, such as a syntax error, it's shown in the Problems panel, at the place in the
+			<p>If Saxon reports an error, such as a syntax error, it's shown in the Problems view, at the place in the
 				expression where Saxon found it.</p>
 
 			<h3 id="results">Results</h3>

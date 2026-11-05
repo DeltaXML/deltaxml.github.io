@@ -29,7 +29,7 @@
 			<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed.
 				<i>Note that this feature is only enabled when the VS Code user-setting <em>Format on Type</em> is set (indentation is fixed at the same time).</i></p>
 			<h3>Auto-Completion</h3>
-			<p>Outside of the auto-complete (intellisense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
+			<p>Outside of the auto-complete (IntelliSense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
 			from the auto-completion list:</p>
 			<img src="resources/suggestions.png" class="scale-with-grid" />
 			<p>After a <code>&lt;</code> within an element, the tag snippets insert an element with a placeholder for its name,

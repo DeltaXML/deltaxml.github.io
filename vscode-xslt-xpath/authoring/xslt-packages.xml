@@ -20,7 +20,7 @@
 				package's file is.</p>
 			<p> The XSLT/XPath extension finds
 				it, so that the declarations the package makes public are known to the linter, auto-completion, hover help
-				and go to definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
+				and Go to Definition - and when a stylesheet is run, passes the packages it uses to Saxon.</p>
 			<figure>
 				<img src="resources/package-imports.png" class="scale-with-grid" />
 				<figcaption>
@@ -241,15 +241,20 @@
 				in the workspace that imports or includes the library, directly or indirectly, and opens a report in the
 				Markdown preview, with links to each place:</p>
 			<ul>
-				<li><strong>To rework first</strong> - what would fail in a package: a global variable whose value uses the
-					context item, e.g. <code>select="/*"</code>, which has none in a library package (<code>XPDY0002</code>),
-					or an <code>xsl:global-context-item</code> - a stylesheet's declaration that overrides the library's
-					by import precedence, but with a different type, which an override can't have (<code>XTSE3070</code>) -
-					and a name the library uses that isn't declared in it or the stylesheets found to use it, e.g. in a module
-					whose import isn't resolved, as a package must declare all it uses. The report lists imports that aren't
-					found: the <a href="xml-catalogs.html">XML catalog setting</a> may resolve them, e.g. DITA-OT's
-					<code>plugin:</code> URIs. And code that would move into <code>xsl:override</code> from a module outside
-					the workspace, or that stylesheets which don't use the library use too, as they'd lose it</li>
+				<li><strong>To rework first</strong> - what would fail in a package:
+					<ul>
+						<li>a global variable whose value uses the context item, e.g. <code>select="/*"</code>, which has none
+							in a library package (<code>XPDY0002</code>)</li>
+						<li>a stylesheet's <code>xsl:global-context-item</code> that overrides the library's by import
+							precedence, but with a different type, which an override can't have (<code>XTSE3070</code>)</li>
+						<li>a name the library uses that isn't declared in it or the stylesheets found to use it, e.g. in a
+							module whose import isn't resolved, as a package must declare all it uses. The report lists imports
+							that aren't found: the <a href="xml-catalogs.html">XML catalog setting</a> may resolve them, e.g.
+							DITA-OT's <code>plugin:</code> URIs</li>
+						<li>code that would move into <code>xsl:override</code> from a module outside the workspace, or that
+							stylesheets which don't use the library use too, as they'd lose it</li>
+					</ul>
+				</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
 					the stylesheets use</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
@@ -354,7 +359,7 @@
 
 			<h3 id="navigation">Navigating to a package</h3>
 			<p>The <code>name</code> of an <code>xsl:use-package</code> is a link to the package's file - press
-				<span class="shortcut">⌘+click</span> to open it. Go to definition, hover help and auto-completion for
+				<span class="shortcut">⌘+click</span> to open it. Go to Definition, hover help and auto-completion for
 				the package's public functions, templates, variables and other components work as for an imported
 				module.</p>
 
