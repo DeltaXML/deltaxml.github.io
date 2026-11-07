@@ -98,7 +98,8 @@
 		<p>A parent stylesheet opened recently in Visual Studio Code is used first. Otherwise, the parent is found from the workspace's
 			XSLT files, which are scanned in the background the first time they're needed, so the parent doesn't have to be opened
 			first. The scan only reads the <code>href</code> attributes of <code>xsl:import</code> and <code>xsl:include</code>
-			instructions, and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
+			instructions - and their <code>_href</code> attributes, where they can be resolved (see
+			<a href="#shadow-href">below</a>) - and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
 			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
 			setting.
 		</p>
@@ -110,6 +111,18 @@
 			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
 			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
 		</p>
+		<h4 id="shadow-href">Imports with a _href shadow attribute</h4>
+		<p>An <code>xsl:import</code> or <code>xsl:include</code> can have its location set when the stylesheet is compiled,
+			with a <code>_href</code> shadow attribute that uses static parameters. The module it refers to is used, as for
+			<code>href</code>, when each expression in <code>_href</code> is a static parameter or variable of the same module
+			with a string literal value:</p>
+		<code class="block">&lt;xsl:param name="dir" static="yes" select="'lib'"/&gt;
+&lt;xsl:import _href="{$dir}/common.xsl"/&gt;</code>
+		<p>The module is found with the default value, here <code>lib/common.xsl</code>. A different value given when the
+			stylesheet is compiled isn't known to the editor.</p>
+		<p>Any other <code>_href</code> - for example, one with a function call, or a parameter that isn't static - can't be
+			resolved. Then a template, function or other declaration that isn't found is reported as a warning, not an error,
+			as it may be declared in the module that's imported or included.</p>
 		<h4 id="the-xslt-imports-view">The XSLT Imports view</h4>
 		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
 			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
