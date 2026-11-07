@@ -14,8 +14,8 @@
 			</figure>
 
 			<aside><strong>Requirements:</strong> SaxonJ - any edition, including Saxon-HE - set with the
-				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. With Saxon-PE or Saxon-EE,
-				expressions can use XPath 4.0 syntax. With Saxon-HE, they're XPath 3.1.</aside>
+				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Expressions are XPath 4.0 or
+				XPath 3.1 - see <a href="#version">XPath version</a>. XPath 4.0 needs Saxon-PE or Saxon-EE.</aside>
 
 			<h3 id="opening">Opening the query file</h3>
 			<p>In the editor of an XML file, click the search button in the editor's title bar, or run
@@ -42,6 +42,24 @@ count(//item)
   /@id</code>
 			<p>As in any XPath file, expressions are highlighted and checked as you type, and auto-completion includes
 				the names of the elements and attributes in the XML file. Each expression is checked on its own.</p>
+			<h4 id="version">XPath version</h4>
+			<p>While the query file is in the editor, the status bar shows the XPath version of its expressions:
+				<strong>XPath 4.0</strong> or <strong>XPath 3.1</strong>. Click it to switch between them, or run
+				<strong>XML: Switch XPath Version of Queries (3.1 / 4.0)</strong>. The version is kept for the
+				workspace.</p>
+			<p>Expressions are checked, auto-completed and run as that version:</p>
+			<ul>
+				<li><strong>XPath 4.0</strong> - with XPath 4.0's syntax and functions, e.g. <code>{ 'a': 1 }</code> or
+					<code>characters('abc')</code>, as Saxon-PE and Saxon-EE run them</li>
+				<li><strong>XPath 3.1</strong> - as in XSLT 3.0: XPath 4.0 syntax and functions are reported as problems
+					and aren't offered by auto-completion, and Saxon runs the expression without its syntax extensions -
+					so an expression that works here works in an XSLT 3.0 stylesheet</li>
+			</ul>
+			<p>The version starts as XPath 4.0 - or XPath 3.1 if the <code>XSLT.tasks.saxonJar</code> setting is a
+				Saxon-HE jar. Other XPath files, such as XPath notebooks, are always XPath 4.0.</p>
+			<aside>Saxon-HE runs XPath 3.1 only. If XPath 4.0 is chosen with Saxon-HE, the status bar item shows a
+				warning, and the <strong>XPath Query</strong> output panel says the expression was run as XPath
+				3.1.</aside>
 			<h4 id="namespaces">Namespaces</h4>
 			<p>The namespaces declared on the XML file's root element can be used without declaring them:</p>
 			<ul>
@@ -88,10 +106,23 @@ count(//item)
 					short if they're long</li>
 				<li><code>= ()  nothing found</code> - an empty sequence</li>
 			</ul>
-			<p>Click it to see the whole result in the <strong>XPath Query</strong> output panel, with each item on a
-				line of its own. A map, array or function is written on one line, e.g.
-				<code>map{"a":[1,"two",true()]}</code> or <code>fn:count#1</code> - to see part of a large map, change
-				the expression to select it.</p>
+			<p>Click it to see the whole result in the <strong>XPath Query</strong> output panel. The panel is cleared
+				each time an expression runs, so it shows only the latest result - or Saxon's error. The result is
+				written as <code>xdm:debug()</code> writes values, with each sequence item, map entry and array member on
+				a line of its own:</p>
+			<code class="block">(
+  {
+    'name': 'Ada',
+    'tags': (
+      'a',
+      'b'
+    )
+  },
+  /orders/order[1]/@id
+  @id="A1"
+)</code>
+			<p>A node is shown as its location above a copy of it, with long text cut short. At most 100 items are
+				shown in the panel - to see part of a large result, change the expression to select it.</p>
 			<p>When the result has nodes, the XML file's editor shows the first, with the nodes listed beside it, as
 				VS Code lists references. Click one to go to it, or press <span class="shortcut">F4</span> /
 				<span class="shortcut">⇧F4</span> to go to the next or previous node. The name of an element or
@@ -110,7 +141,10 @@ count(//item)
 
 			<h3 id="limitations">Limitations</h3>
 			<ul>
-				<li>Each run starts Java, so it takes about a second.</li>
+				<li>The first run starts Java, so it takes about a second. Later runs reuse it and are quicker, until no
+					expression has run for 5 minutes.</li>
+				<li>In the output panel, a result with a function item, e.g. <code>fn:count#1</code>, is listed with each
+					item on one line, as Saxon writes it.</li>
 				<li>Results shown after the expressions aren't kept when VS Code is closed.</li>
 			</ul>
 		</div>
