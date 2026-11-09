@@ -151,6 +151,8 @@
 						<li><a href="debugger.html#evaluating">Watch expressions, hovers and the Debug Console</a></li>
 						<li><a href="debugger.html#output">The output so far</a>, mapped back to the XSLT that wrote it</li>
 						<li><a href="code-diagnostics.html">Formatted and colored print debugging</a></li>
+						<li><a href="profiler.html">Profiler</a>, with times in the editor and earlier profiles in the
+							Timeline (Saxon-PE/EE)</li>
 					</ul>
 				</section>
 

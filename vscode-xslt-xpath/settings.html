@@ -82,6 +82,7 @@
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
 				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="profiler.html">Profiler</a></li>
 				<li><a href="xspec.html">XSpec Tests</a></li>
 				<li><a href="code-diagnostics.html">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
@@ -149,6 +150,13 @@
             <td>The processor <a href="quick-run.html">Quick Run</a> uses: <code>"xslt"</code> (SaxonJ),
               <code>"xslt-js"</code> (SaxonJS) or <code>"xslt-c"</code> (SaxonC). Switching processor in Quick Run
               saves the choice here.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>tasks.<wbr>profileRuns</code></td>
+            <td><code>1</code></td>
+            <td>How many times <a href="profiler.html">Profile Stylesheet</a> runs the transform. With more than one,
+              the first is a warm-up run, left out, and the Profile view shows the average of the others - see
+              <a href="profiler.html#runs">Warm-up runs</a>.</td>
           </tr>
           <tr>
             <td><code>XSLT.<wbr>tasks.<wbr>java.<wbr>enabled</code></td>

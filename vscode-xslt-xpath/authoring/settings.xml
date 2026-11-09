@@ -50,6 +50,13 @@
               saves the choice here.</td>
           </tr>
           <tr>
+            <td><code>XSLT.<wbr/>tasks.<wbr/>profileRuns</code></td>
+            <td><code>1</code></td>
+            <td>How many times <a href="profiler.html">Profile Stylesheet</a> runs the transform. With more than one,
+              the first is a warm-up run, left out, and the Profile view shows the average of the others - see
+              <a href="profiler.html#runs">Warm-up runs</a>.</td>
+          </tr>
+          <tr>
             <td><code>XSLT.<wbr/>tasks.<wbr/>java.<wbr/>enabled</code></td>
             <td><code>true</code></td>
             <td>Offer SaxonJ (<code>xslt</code>) tasks - see <a href="#task-types">Task types</a>.</td>

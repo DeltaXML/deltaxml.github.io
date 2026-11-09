@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>To find where a stylesheet spends its time, profile it: the stylesheet runs as <a
+				href="quick-run.html">Quick Run</a> runs it, with Saxon timing each template, function and global
+				variable, and the times are shown in the <strong>Profile</strong> view - the slowest first - and above
+				each declaration in the editor.</p>
+
+			<aside><strong>Requirements:</strong> Saxon-PE or Saxon-EE - SaxonJ, set with the
+				<code>XSLT.tasks.saxonJar</code> setting, or SaxonC, set with the <code>XSLT.tasks.saxonCPath</code>
+				setting. Profiling uses Saxon's timing profile (its <code>-TP</code> option), a feature of Saxon-PE and
+				Saxon-EE, so it isn't available with Saxon-HE. SaxonJS has no timing profile: when Quick Run uses
+				SaxonJS, SaxonJ is used instead.</aside>
+
+			<h3 id="profiling">Profiling a stylesheet</h3>
+			<p>With the stylesheet in the editor, run <strong>XSLT: Profile Stylesheet</strong> - from the Command
+				Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title bar.</p>
+			<p>The stylesheet runs as <a href="quick-run.html">Quick Run</a> runs it, using the same Quick Run task:
+				with the XML context file, or from <code>xsl:initial-template</code> when there's no context file, and
+				with the task's parameters - you're asked for the values of any <a
+				href="quick-run.html#required-parameters">required parameters</a>, as when the task runs. When the
+				stylesheet is imported or included by another, you're offered the choice of profiling the parent
+				stylesheet instead.</p>
+			<p>The processor is the one Quick Run uses: SaxonJ or SaxonC. The run's output appears in the terminal as
+				for a task, and its result file is written as usual. When the run ends, the <strong>Profile</strong> view opens beside the editor.</p>
+
+			<h3 id="view">The Profile view</h3>
+			<p>The view has a row for each template, function and global variable or parameter that ran, sorted by net
+				time, the slowest first:</p>
+			<ul>
+				<li><strong>Template / function</strong> - its kind, and a match template's pattern as written in the
+					stylesheet, with its mode, or the name of a named template or function, or <code>$name</code> for a
+					global variable or parameter</li>
+				<li><strong>Module</strong> - the module and line of the declaration</li>
+				<li><strong>Calls</strong> - how many times it ran</li>
+				<li><strong>Net (ms)</strong> - the time spent in it, leaving out the templates and functions it
+					called</li>
+				<li><strong>Net %</strong> - its share of the time spent in all the templates, functions and globals,
+					with a bar to compare at a glance</li>
+				<li><strong>Gross (ms)</strong> - the time spent in it, including the templates and functions it
+					called</li>
+				<li><strong>Avg net (ms)</strong> - the net time for each call</li>
+			</ul>
+			<p>Net times add up to the time spent in the templates, functions and globals, so the rows with the most
+				net time are where the time goes. Gross times overlap - a template's gross time includes the gross time
+				of everything it calls - so the template the run starts from has the largest gross time.</p>
+			<p>Click a column heading to sort by it, and again to reverse the order. Click a row, or press
+				<span class="shortcut">Enter</span> on it, to go to its declaration, with its name or match pattern
+				selected; the up and down arrow keys move between rows. <strong>Run Again</strong> profiles the
+				stylesheet again.</p>
+			<p>The view's header shows the total time of the run, and how much of it was spent in the templates,
+				functions and globals. The rest is time Saxon spends outside them, e.g. reading the XML source and
+				writing the result.</p>
+
+			<h4 id="run-settings">Run settings</h4>
+			<p>The times depend on the XML source and the parameters as much as on the stylesheet, so the view shows
+				what the run used: the Quick Run task, the XML source and its size (or the initial template, with no
+				source), the initial mode, each stylesheet parameter with its value - for a parameter you're asked for,
+				the value you entered - and the number of runs. Click the <strong>Run settings</strong> line to show or
+				hide them.</p>
+
+			<h3 id="codelens">Times in the editor</h3>
+			<p>While the Profile view is open, each profiled template, function and global shows its times above its
+				declaration, in the stylesheet and the modules it imports or includes - for example:</p>
+			<code class="block">3 calls · 1.20 ms net (13%) · 4.50 ms gross
+&lt;xsl:template match="order"&gt;</code>
+			<p>Click the times to show the declaration's row in the Profile view. As you edit a module, the times stay
+				with their declarations, found by name, or by match pattern and mode. Close the Profile view to remove
+				them.</p>
+
+			<h3 id="runs">Warm-up runs</h3>
+			<p>The first time a stylesheet runs, the Java VM is still starting up and compiling code, so the first
+				run's times include this warm-up. For a transform that takes a second or less, the warm-up can be most
+				of the time: in one small example, the first run took 17 ms and later runs about 1 ms.</p>
+			<p>For times without the warm-up, set <code>XSLT.tasks.profileRuns</code> to the number of times to run the
+				transform, e.g. <code>5</code>. The first run is then a warm-up run, left out, and the times shown are
+				the average of the other runs - the view's run settings say, e.g., <strong>average of runs
+				2-5</strong>. Each run takes as long as a Quick Run, so for a long transform, where the warm-up is a
+				small part of the time, one run is enough.</p>
+
+			<h3 id="timeline">Earlier profiles</h3>
+			<p>Each profile is kept, and listed in the stylesheet's <strong>Timeline</strong> view, in the Explorer - or
+				right-click the stylesheet and choose <strong>Open Timeline</strong>. An item shows the time spent in
+				the templates, functions and globals, the XML source and the runs; hover over it for the slowest rows.
+				Click an item to show that profile in the Profile view again, e.g. to compare the times before and after
+				a change.</p>
+			<p>The last 20 profiles are kept for each stylesheet, for each workspace.</p>
+			<aside>The Timeline view's profiles need VS Code 1.145 or later, and a folder open in VS Code.</aside>
+
+			<h3 id="accuracy">What the times show</h3>
+			<ul>
+				<li>Saxon times the run with tracing on, which turns off some of its optimisations, so the times are
+					longer than in a normal run. Compare them with each other, rather than as timings of the
+					stylesheet.</li>
+				<li>Only templates, functions and global variables and parameters are timed - not each instruction or
+					expression within them. An instruction's time is part of the net time of the template, function or
+					global it's in.</li>
+				<li>A global variable is evaluated when it's first used, so its time is also part of the gross time of
+					the template or function that first used it.</li>
+				<li>Times vary a little from run to run. For a small difference between two profiles, profile each
+					version with several runs - see <a href="#runs">Warm-up runs</a>.</li>
+			</ul>
+		</div>
+
+	</div>
+</html>
