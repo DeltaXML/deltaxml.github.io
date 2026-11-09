@@ -12,6 +12,9 @@
                     Saxon-EE to see where its time goes: the time of each template, function and global variable, the
                     slowest first, with times above the declarations in the editor, warm-up runs left out, and earlier
                     profiles in the Timeline view to compare</li>
+                <li><strong><a href="xspec.html#times">XSpec test times</a></strong> (2.1.1) - with Saxon-PE or
+                    Saxon-EE, the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
+                    long its tests took on each run</li>
                 <li><strong><a href="debugger.html">Step-through debugging</a></strong> - debug stylesheets with SaxonJ
                     (any edition, including Saxon-HE): breakpoints with conditions, hit counts and logpoints, stepping
                     through templates, functions and multi-line XPath expressions - including inline functions - and the

@@ -194,6 +194,14 @@
 				expected <code>...</code> matches - an attribute's value, text, or an element's content - is shown as
 				<code>...</code> in the actual result too, so only the differences that made it fail are shown.
 				<strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+			<h4 id="times">Test times</h4>
+			<p>With Saxon-PE or Saxon-EE, the Test Explorer shows how long each test took, beside it. The tests are
+				compiled with XSpec's <code>measure-time</code> option, which times each scenario - so the expectations
+				in a scenario all have its time, and a scenario's time includes the scenarios in it. The HTML report
+				shows the times too.</p>
+			<p>The first scenario run includes the Java VM's warm-up, so on a quick test file it may be the slowest
+				for that reason alone. Tests aren't timed with Saxon-HE, as XSpec times them with a Saxon extension
+				function, or when debugging, or with coverage.</p>
 			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
 				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
 				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
@@ -225,6 +233,10 @@
 				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
 				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
+			<p>With <a href="#times">test times</a>, an event also shows how long the file's tests took to run, e.g.
+				<strong>tests 36.7 ms</strong> - just running the tests, not starting Java, compiling or reporting - so
+				you can see when a change made them slower. The workspace's timeline shows each run's time in all,
+				with each file's test time when you hover over it.</p>
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
 				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with

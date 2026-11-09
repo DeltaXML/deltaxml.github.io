@@ -158,6 +158,9 @@
                     Saxon-EE to see where its time goes: the time of each template, function and global variable, the
                     slowest first, with times above the declarations in the editor, warm-up runs left out, and earlier
                     profiles in the Timeline view to compare</li>
+                <li><strong><a href="#xspec--times">XSpec test times</a></strong> (2.1.1) - with Saxon-PE or
+                    Saxon-EE, the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
+                    long its tests took on each run</li>
                 <li><strong><a href="#debugger">Step-through debugging</a></strong> - debug stylesheets with SaxonJ
                     (any edition, including Saxon-HE): breakpoints with conditions, hit counts and logpoints, stepping
                     through templates, functions and multi-line XPath expressions - including inline functions - and the
@@ -395,6 +398,7 @@
 						<li><a href="#xspec--creating">Generate tests</a> for a function or template</li>
 						<li><a href="#xspec--editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
 						<li><a href="#xspec--coverage">Test coverage</a> percentages and line margin highlights</li>
+						<li><a href="#xspec--times">Test times</a> in the Test Explorer and Timeline (Saxon-PE/EE)</li>
 						<li><a href="#xspec--navigation">Navigate</a> between tests and the underlying code</li>
 						<li><a href="#xspec--stylesheet-under-test">Checks and assistance</a> for component calls</li>
 					</ul>
@@ -3845,6 +3849,14 @@ npm install --save-dev xslt3</code>
 				expected <code>...</code> matches - an attribute's value, text, or an element's content - is shown as
 				<code>...</code> in the actual result too, so only the differences that made it fail are shown.
 				<strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+			<h4 id="xspec--times">Test times</h4>
+			<p>With Saxon-PE or Saxon-EE, the Test Explorer shows how long each test took, beside it. The tests are
+				compiled with XSpec's <code>measure-time</code> option, which times each scenario - so the expectations
+				in a scenario all have its time, and a scenario's time includes the scenarios in it. The HTML report
+				shows the times too.</p>
+			<p>The first scenario run includes the Java VM's warm-up, so on a quick test file it may be the slowest
+				for that reason alone. Tests aren't timed with Saxon-HE, as XSpec times them with a Saxon extension
+				function, or when debugging, or with coverage.</p>
 			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
 				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
 				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
@@ -3876,6 +3888,10 @@ npm install --save-dev xslt3</code>
 				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
 				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
+			<p>With <a href="#xspec--times">test times</a>, an event also shows how long the file's tests took to run, e.g.
+				<strong>tests 36.7 ms</strong> - just running the tests, not starting Java, compiling or reporting - so
+				you can see when a change made them slower. The workspace's timeline shows each run's time in all,
+				with each file's test time when you hover over it.</p>
 			<h3 id="xspec--schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
 				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
