@@ -15,6 +15,12 @@
 				SaxonJS, SaxonJ is used instead.</aside>
 
 			<h3 id="profiling">Profiling a stylesheet</h3>
+			<figure>
+				<img src="resources/profiler-report.png" class="scale-with-grid" />
+				<figcaption>
+					The profiler report. Click on an entry to navigate to the corresponding code.
+				</figcaption>
+			</figure>
 			<p>With the stylesheet in the editor, run <strong>XSLT: Profile Stylesheet</strong> - from the Command
 				Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title bar.</p>
 			<p>The stylesheet runs as <a href="quick-run.html">Quick Run</a> runs it, using the same Quick Run task:
