@@ -339,6 +339,12 @@
 				<strong>tests 36.7 ms</strong> - just running the tests, not starting Java, compiling or reporting - so
 				you can see when a change made them slower. The workspace's timeline shows each run's time in all,
 				with each file's test time when you hover over it.</p>
+			<p>To remove a run, right-click it in the Timeline view and choose <strong>Delete</strong>. To remove all
+				of a file's runs, use <strong>Clear Profiles and XSpec Runs from Timeline (Current File)</strong> from
+				the Timeline view's <strong>...</strong> menu or the Command Palette - or <strong>(All Files)</strong>,
+				for every XSpec file and stylesheet in the workspace. For a run of more than one XSpec file, only the
+				current file's results are removed - the run is kept for the others. Other entries, such as Git
+				commits, aren't removed.</p>
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
 				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
