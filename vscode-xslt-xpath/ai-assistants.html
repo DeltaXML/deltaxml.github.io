@@ -187,8 +187,9 @@
 			<p>Run <strong>XSLT: Set Up MCP Server for Claude Code</strong> from the Command Palette - it offers to turn the
 				server on, if it isn't, and asks whether to set it up for all your projects or only this one. It runs
 				Claude Code's <code>claude mcp add</code> command for you. A Claude Code session started after that can use
-				the tools, whether it runs in Visual Studio Code or in a terminal of its own; in a session already running,
-				run <code>/mcp</code> to connect.</p>
+				the tools, whether it runs in Visual Studio Code or in a terminal of its own. A session already running keeps
+				the settings it started with, so <code>/mcp</code> doesn't connect it: start a new one - in Visual Studio
+				Code, a new conversation in the Claude panel.</p>
 			<p>If the <code>claude</code> command isn't found - for example, it isn't on the path Visual Studio Code
 				uses - the <code>claude mcp add</code> command is copied instead: run it in a terminal - for one project, in
 				that project's folder.</p>
@@ -199,7 +200,7 @@
 				keep the command private. To make a new token - for example, if the old one has been shared - run
 				<strong>XSLT: Reset MCP Server Token</strong>. Copilot uses the new token straight away, and Claude Code is
 				set up again with it - for all projects, or for a project in the workspace - where it was set up with the
-				old one.</p>
+				old one. A Claude Code session already running keeps the old token: start a new one.</p>
 			<p>The server listens at the port of <code>XSLT.mcp.port</code> (6745 by default). With more than one Visual
 				Studio Code window open, the first one opened has the server. Its tools work best for the files of that window's
 				workspace: a relative path is taken from its first folder, and a module's top-level stylesheet is found from
