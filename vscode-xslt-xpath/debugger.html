@@ -179,7 +179,9 @@
 
 			<h3 id="breakpoints">Breakpoints</h3>
 			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
-				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
+				breakpoint anywhere in a multi-line start tag is moved to the tag's first line. A breakpoint in an XML
+				comment is moved to the first instruction after the comment, if there's one before the end of the
+				element the comment is in.</p>
 			<p>Breakpoints can also be set inside a multi-line XPath expression - see
 				<a href="#xpath">Stepping through XPath</a>.</p>
 			<h4 id="conditional">Conditional breakpoints and hit counts</h4>

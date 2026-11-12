@@ -224,6 +224,10 @@
 			<p>Auto-completion offers the elements, attributes and values XSpec allows where you are, and hover help on
 				an XSpec element's name shows its description from the schema. The Outline view lists the scenarios and
 				expectations by their labels.</p>
+			<p>In XPath, e.g. an <code>x:expect</code>'s <code>test</code>, auto-completion of element and attribute
+				names offers those of the test data: the content of <code>x:context</code>, <code>x:expect</code>,
+				<code>x:param</code> and <code>x:variable</code>, and of the documents their <code>href</code> attributes
+				refer to - not XSpec's own elements and attributes.</p>
 
 			<h3 id="stylesheet-under-test">The stylesheet under test</h3>
 			<p>The stylesheet of <code>x:description</code> - and of each <code>x:helper</code> - is read, as an
