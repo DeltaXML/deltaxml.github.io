@@ -162,6 +162,9 @@
 				message, and <code>sch:let</code> with <code>name</code> and <code>value</code>, or its content - as are
 				the XSLT declarations SchXslt2 copies, e.g. <code>xsl:function</code> with <code>name</code> and
 				<code>as</code>.</p>
+			<p>In XPath, auto-completion offers the variables in scope - the schema's, the pattern's and the rule's -
+				and element and attribute names from the data the schema validates: the XML file last validated with it,
+				else an open file whose <code>xml-model</code> names it, else the last XML file viewed.</p>
 			<p>XPath expressions are highlighted and checked in <code>context</code>, <code>test</code>,
 				<code>subject</code>, <code>select</code>, <code>path</code>, <code>value</code>,
 				<code>visit-each</code>, <code>documents</code>, and a phase's <code>from</code> and <code>when</code>.
@@ -229,6 +232,10 @@
 				<li><strong>Files</strong> - the <code>href</code> of <code>sch:include</code>, <code>sch:extends</code>,
 					<code>xsl:include</code> and <code>xsl:import</code> is a link to the file - and a file that isn't
 					found is reported, as SchXslt2 stops</li>
+				<li><strong>Rules that never fire</strong> - a node is handled only by the first rule of a pattern whose
+					context matches it, so a rule with the same context as an earlier one, or one for elements after a
+					rule for every element, e.g. <code>context="*"</code>, is reported - not in a group, where every
+					matching rule is used</li>
 				<li><strong>Required attributes</strong> - an element without an attribute ISO Schematron requires is
 					reported, with a quick fix that adds it: an error where SchXslt2 fails without it, e.g. a rule's
 					<code>context</code>, an assertion's <code>test</code> or <code>sch:ns</code>'s <code>uri</code>, and a
