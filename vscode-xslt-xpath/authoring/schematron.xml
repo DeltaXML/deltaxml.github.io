@@ -13,17 +13,81 @@
 				4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
 				it.</aside>
 
+			<h3 id="validating">Validating an XML file</h3>
+			<p>With an XML file in the editor, run <strong>XSLT: Validate with Schematron</strong> - from the Command
+				Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title bar. The
+				file is validated as SchXslt2 validates it, with the Saxon of the <code>XSLT.tasks.saxonJar</code>
+				setting - any edition - and each failed assertion and successful report is shown in the
+				<strong>Problems</strong> view, at the element or attribute it's about, with its message and diagnostics.
+				Its severity is the assertion's <code>severity</code> or <code>role</code> - e.g. <code>warning</code>
+				or <code>info</code> - and otherwise an error, and it links to the assertion in the schema.</p>
+			<p>The schema is the one an <code>xml-model</code> processing instruction in the file associates with it,
+				e.g. <code>&lt;?xml-model href="rules.sch"
+				schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</code> - otherwise the one last used for the
+				file, or one you choose from the workspace's. <strong>XSLT: Validate with Schematron (Choose
+				Schema)...</strong> chooses again. With a schema in the editor, the command validates the file last
+				validated with it.</p>
+			<p>Once a file is validated, it's validated again each time it, or the schema, is saved - so you can edit
+				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
+				the <strong>Schematron</strong> output channel.</p>
+			<aside>The schema's default phase is used. Saxon's syntax extensions are turned on as for the schema's
+				XSpec tests, e.g. for <code>xsl:note</code> or <code>queryBinding="xslt4"</code>, and the
+				<code>XSLT.resources.catalog</code> setting is used for the files it refers to.</aside>
+
 			<h3 id="editing">Editing</h3>
 			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
 				e.g. <code>sch:group</code>, <code>sch:param</code>, an assertion's <code>severity</code>, and a phase's
 				<code>from</code> and <code>when</code> - with a description of each element. It works whatever prefix
 				the schema uses for Schematron - <code>sch</code>, another, or none, with the Schematron namespace as the
 				default. In a new file, it offers a schema with a pattern.</p>
+			<p>An element is inserted with the attributes it requires, in each form it's commonly written - e.g.
+				<code>sch:rule</code> with <code>context</code>, <code>sch:rule (abstract)</code> with
+				<code>abstract="true"</code> and <code>id</code>, <code>sch:assert</code> with <code>test</code> and its
+				message, and <code>sch:let</code> with <code>name</code> and <code>value</code>, or its content - as are
+				the XSLT declarations SchXslt2 copies, e.g. <code>xsl:function</code> with <code>name</code> and
+				<code>as</code>.</p>
 			<p>XPath expressions are highlighted and checked in <code>context</code>, <code>test</code>,
 				<code>subject</code>, <code>select</code>, <code>path</code>, <code>value</code>,
 				<code>visit-each</code>, <code>documents</code>, and a phase's <code>from</code> and <code>when</code>.
 				<code>role</code>, <code>flag</code> and <code>severity</code> are attribute value templates, e.g.
 				<code>role="{$level}"</code>, as SchXslt2 copies them into its report.</p>
+
+			<h3 id="navigation">Navigation</h3>
+			<ul>
+				<li><strong>Ids</strong> - in a reference - <code>is-a</code>, <code>extends</code>'s <code>rule</code>, a
+					phase's <code>active</code>, <code>defaultPhase</code>, and an assertion's <code>diagnostics</code> and
+					<code>properties</code> - auto-completion offers the ids it can refer to, e.g. the abstract rules for
+					<code>extends</code>, and in a pattern with <code>is-a</code>, a parameter's <code>name</code> offers
+					the abstract pattern's parameters. Go to Definition, Find All References and Rename work on an id,
+					in the schema and the files it includes</li>
+				<li><strong>Variables</strong> - Go to Definition, Find All References and Rename on a variable reference
+					or an <code>sch:let</code> or <code>sch:param</code>, with the variable's scope as SchXslt2 has it - and
+					for an abstract pattern's parameter, the <code>sch:param</code> of each pattern with
+					<code>is-a</code> for it</li>
+				<li><strong>Outline</strong> - each element by what identifies it: a pattern by its id, a rule by its
+					context, an assertion or report by its id, else its test</li>
+			</ul>
+
+			<h3 id="hover">Hover help</h3>
+			<p>Hover help is for reviewing a schema as much as for editing it:</p>
+			<ul>
+				<li><strong>A pattern's <code>is-a</code></strong> - the abstract pattern's title, its parameters with the
+					values this pattern gives - or their defaults - and its rules and their tests with those values in
+					place, as SchXslt2 instantiates them</li>
+				<li><strong><code>extends</code></strong> - the abstract rule's variables and tests, as they're copied into
+					the rule</li>
+				<li><strong>A rule</strong> - its context, variables and assertions, and the earlier rules of its pattern:
+					a node is handled only by the first rule whose context matches it, so a rule that comes after a rule
+					that matches the same nodes is never used</li>
+				<li><strong>An assertion or report</strong> - when it's reported, its severity, role and flag, its
+					message, and the text of its diagnostics</li>
+				<li><strong>A variable</strong> - its <code>sch:let</code> or <code>sch:param</code>, with its value and
+					where it's declared - or in an abstract pattern, its parameter and the value each pattern gives it</li>
+				<li><strong>A phase's <code>active</code></strong>, and an assertion's <code>diagnostics</code> and
+					<code>properties</code> - the pattern's title and rules, and the diagnostic's or property's text</li>
+				<li><strong>Functions</strong> - as in a stylesheet: the signature of a built-in function, and of a
+					function declared in the schema or a module it includes, with its documentation</li>
+			</ul>
 
 			<h3 id="checks">Checks</h3>
 			<p>The problems are shown in the <strong>Problems</strong> view, as for a stylesheet:</p>
@@ -49,6 +113,11 @@
 				<li><strong>Files</strong> - the <code>href</code> of <code>sch:include</code>, <code>sch:extends</code>,
 					<code>xsl:include</code> and <code>xsl:import</code> is a link to the file - and a file that isn't
 					found is reported, as SchXslt2 stops</li>
+				<li><strong>Required attributes</strong> - an element without an attribute ISO Schematron requires is
+					reported, with a quick fix that adds it: an error where SchXslt2 fails without it, e.g. a rule's
+					<code>context</code>, an assertion's <code>test</code> or <code>sch:ns</code>'s <code>uri</code>, and a
+					warning where it carries on, but the element can't be referred to or does nothing, e.g. a phase with
+					no <code>id</code></li>
 				<li><strong>Elements and attributes</strong> - those that ISO Schematron doesn't allow where they are.
 					Elements in other namespaces, e.g. Schematron QuickFix's <code>sqf:fix</code>, aren't checked against
 					Schematron's schema, and a file that <code>sch:include</code> includes may start with any Schematron
@@ -78,6 +147,13 @@
 						value</td><td></td></tr>
 				</tbody>
 			</table>
+			<p>An <code>xsl:note</code> in a declaration SchXslt2 copies, e.g. <code>xsl:function</code>, is copied
+				with it, and its stylesheet is XSLT 3.0: Saxon runs it only with its syntax extensions, which XSpec turns on
+				for the tests of the schema - with the default <code>XSLT.xspec.allowSyntaxExtensions</code> setting,
+				<code>auto</code> - as it does for <code>queryBinding="xslt4"</code>. A note is reported when the Saxon of
+				the <code>XSLT.tasks.saxonJar</code> setting can't run it - Saxon-HE, or a Saxon before 13 - or the setting
+				is <code>off</code>, with a quick fix that adds <code>use-when="false()"</code>, with which Saxon leaves
+				the note out.</p>
 			<p>SchXslt2 also declares the unnamed mode, with the schema's own accumulators. An included or imported
 				module that declares the unnamed mode with <code>use-accumulators</code> is reported, as Saxon reports
 				XTSE0545 for the two, and so is one that declares accumulators, as SchXslt2's modes don't use

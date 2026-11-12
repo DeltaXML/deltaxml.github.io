@@ -318,7 +318,9 @@
 			<aside>By default, tests are run with Saxon's syntax extensions on (<code>--allowSyntaxExtensions:on</code>)
 				only when they're needed: when the stylesheet tested - or a module it imports, includes or uses, or a
 				helper - is XSLT 4.0, or uses item types or notes, e.g. record types with <code>version="3.0"</code>,
-				with <code>run-as="external"</code> too. Not otherwise, as with them on, Saxon 13 runs a stylesheet
+				with <code>run-as="external"</code> too - or for a Schematron, when it has <code>xsl:note</code> in an
+				<code>xsl:function</code> or other declaration SchXslt2 copies, <code>queryBinding="xslt4"</code>, or a
+				module it includes that needs them (see <a href="schematron.html#xslt">XSLT in a schema</a>). Not otherwise, as with them on, Saxon 13 runs a stylesheet
 				before XSLT 4.0 with some of 4.0's rules - e.g. a union pattern's priority, which can change the
 				template rule chosen (Saxon's warning SXWN9052). Never with Saxon-HE, which fails every transform with
 				them on. The <code>XSLT.xspec.allowSyntaxExtensions</code> setting turns them on or off.</aside>
