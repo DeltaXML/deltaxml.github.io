@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>Schematron files (<code>.sch</code>) are checked as you edit them, with auto-completion and
+				formatting. They're checked as <a href="https://codeberg.org/dmaus/schxslt2">SchXslt2</a> runs them:
+				SchXslt2 is the ISO Schematron processor included with XSpec, which compiles a schema to an XSLT 3.0
+				stylesheet - see <a href="xspec.html#schematron">Testing a Schematron</a>.</p>
+
+			<aside>A schema is checked as ISO Schematron 2025 with an XSLT query binding, e.g.
+				<code>queryBinding="xslt3"</code> - with <code>queryBinding="xslt4"</code>, its XPath is checked as XPath
+				4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
+				it.</aside>
+
+			<h3 id="editing">Editing</h3>
+			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
+				e.g. <code>sch:group</code>, <code>sch:param</code>, an assertion's <code>severity</code>, and a phase's
+				<code>from</code> and <code>when</code> - with a description of each element. It works whatever prefix
+				the schema uses for Schematron - <code>sch</code>, another, or none, with the Schematron namespace as the
+				default. In a new file, it offers a schema with a pattern.</p>
+			<p>XPath expressions are highlighted and checked in <code>context</code>, <code>test</code>,
+				<code>subject</code>, <code>select</code>, <code>path</code>, <code>value</code>,
+				<code>visit-each</code>, <code>documents</code>, and a phase's <code>from</code> and <code>when</code>.
+				<code>role</code>, <code>flag</code> and <code>severity</code> are attribute value templates, e.g.
+				<code>role="{$level}"</code>, as SchXslt2 copies them into its report.</p>
+
+			<h3 id="checks">Checks</h3>
+			<p>The problems are shown in the <strong>Problems</strong> view, as for a stylesheet:</p>
+			<ul>
+				<li><strong>Variables</strong> - <code>sch:let</code> and <code>sch:param</code> are in scope as
+					SchXslt2 declares them: the schema's and a phase's are global, a pattern's are in scope in its
+					rules, and a rule's in its assertions and reports</li>
+				<li><strong>Namespace prefixes</strong> - SchXslt2 declares only the prefixes of
+					<code>sch:ns</code> in its stylesheet, so a prefix declared only with <code>xmlns</code> - or not at
+					all - is reported, e.g. <code>xs</code> in <code>xs:integer(@n)</code>, with a quick fix that adds the
+					<code>sch:ns</code>. Within an XSLT element, e.g. <code>xsl:function</code>, its
+					<code>xmlns</code> declarations apply too</li>
+				<li><strong>Abstract patterns and rules</strong> - an abstract pattern's parameters aren't variables,
+					so they aren't reported, and an abstract rule and the rules that extend it share their
+					<code>sch:let</code>, as SchXslt2 copies its content into each of them</li>
+				<li><strong>References</strong> - as SchXslt2 resolves them, with the files <code>sch:include</code>
+					brings in: an error where it stops - <code>is-a</code> that isn't the id of an abstract pattern (or
+					group), or doesn't supply a parameter the abstract pattern declares with no value, and
+					<code>extends</code> whose <code>rule</code> isn't the id of an abstract rule - and a warning where it
+					ignores the reference: a phase's <code>active</code> for a pattern that isn't declared, or is abstract,
+					<code>diagnostics</code> or <code>properties</code> that aren't declared, and ids that aren't unique.
+					Go to Definition on a reference goes to its declaration, also in an included file</li>
+				<li><strong>Files</strong> - the <code>href</code> of <code>sch:include</code>, <code>sch:extends</code>,
+					<code>xsl:include</code> and <code>xsl:import</code> is a link to the file - and a file that isn't
+					found is reported, as SchXslt2 stops</li>
+				<li><strong>Elements and attributes</strong> - those that ISO Schematron doesn't allow where they are.
+					Elements in other namespaces, e.g. Schematron QuickFix's <code>sqf:fix</code>, aren't checked against
+					Schematron's schema, and a file that <code>sch:include</code> includes may start with any Schematron
+					element, e.g. <code>sch:pattern</code></li>
+			</ul>
+
+			<h3 id="xslt">XSLT in a schema</h3>
+			<p>An <code>xsl:function</code>, <code>xsl:key</code> or <code>xsl:accumulator</code> in the schema is
+				checked as in a stylesheet, and its functions can be called in the schema's XPath. So can the
+				functions of the modules that <code>xsl:include</code> and <code>xsl:import</code> bring in.</p>
+			<p>SchXslt2 copies only these XSLT declarations of a schema into its stylesheet:
+				<code>xsl:accumulator</code>, <code>xsl:function</code>, <code>xsl:include</code>,
+				<code>xsl:import</code>, <code>xsl:import-schema</code>, <code>xsl:key</code> and
+				<code>xsl:use-package</code>. Other XSLT isn't used as written, so it's reported:</p>
+			<table>
+				<thead>
+					<tr><th>In the schema</th><th>With SchXslt2</th><th>Quick fix</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>another XSLT declaration, e.g. <code>xsl:param</code>, <code>xsl:variable</code> or
+						<code>xsl:template</code></td><td>ignored</td><td><code>sch:param</code>, or
+						<code>sch:let</code></td></tr>
+					<tr><td>XSLT in a rule, e.g. <code>xsl:variable</code></td><td>ignored</td><td><code>sch:let</code></td></tr>
+					<tr><td>XSLT in a message, e.g. <code>xsl:value-of</code> in <code>sch:assert</code></td><td>not run -
+						copied into the report as it is</td><td><code>sch:value-of</code></td></tr>
+					<tr><td>XSLT in the content of <code>sch:let</code></td><td>not run - copied into the
+						value</td><td></td></tr>
+				</tbody>
+			</table>
+			<p>SchXslt2 also declares the unnamed mode, with the schema's own accumulators. An included or imported
+				module that declares the unnamed mode with <code>use-accumulators</code> is reported, as Saxon reports
+				XTSE0545 for the two, and so is one that declares accumulators, as SchXslt2's modes don't use
+				them: declare them in the schema instead.</p>
+		</div>
+	</div>
+</html>
