@@ -256,6 +256,16 @@
 			<aside>Only a Schematron with an XSLT query binding, e.g. <code>queryBinding="xslt3"</code>, is supported -
 				not one for XQuery.</aside>
 
+						<p>In the XSpec file, the expectations' ids are linked to the schema - in it and the files it includes:
+				auto-completion of <code>id</code> offers its assertions' ids for <code>x:expect-assert</code> and
+				<code>x:expect-not-assert</code>, its reports' for <code>x:expect-report</code> and
+				<code>x:expect-not-report</code>, and its rules' for <code>x:expect-rule</code> - as well as its roles for
+				<code>role</code>, and its rules' contexts for <code>x:expect-rule</code>'s <code>context</code>. Go to
+				Definition and hover go from an id to the assertion, report or rule, and an id the schema doesn't have is
+				reported, as the expectation always fails - or, for <code>x:expect-not-assert</code> and
+				<code>x:expect-not-report</code>, always passes. From the schema, Find All References and Rename on an
+				assertion's, report's or rule's id include the XSpec tests that use it.</p>
+
 			<h3 id="debugging">Debugging a test</h3>
 			<p>The <strong>Debug</strong> button beside a scenario - or the Test Explorer's <strong>Debug Test</strong>
 				- runs the test runner with the <a href="debugger.html">XSLT debugger</a>, and the outcomes are shown in
