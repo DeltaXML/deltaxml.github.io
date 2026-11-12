@@ -2467,17 +2467,30 @@
 				setting - any edition - and each failed assertion and successful report is shown in the
 				<strong>Problems</strong> view, at the element or attribute it's about, with its message and diagnostics.
 				Its severity is the assertion's <code>severity</code> or <code>role</code> - e.g. <code>warning</code>
-				or <code>info</code> - and otherwise an error, and it links to the assertion in the schema.</p>
+				or <code>info</code> - and otherwise an error. To go to the assertion in the schema that reported a problem,
+				click its id - or <code>assert</code> or <code>report</code> - in the problem's hover or the
+				<strong>Problems</strong> view, use the <strong>Show the assertion</strong> quick fix
+				(<span class="shortcut">⌘.</span>), or the link below the problem in the <strong>Problems</strong>
+				view.</p>
 			<p>The schema is the one an <code>xml-model</code> processing instruction in the file associates with it,
 				e.g. <code>&lt;?xml-model href="rules.sch"
 				schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</code> - otherwise the one last used for the
 				file, or one you choose from the workspace's. <strong>XSLT: Validate with Schematron (Choose
 				Schema)...</strong> chooses again. With a schema in the editor, the command validates the file last
 				validated with it.</p>
+			<p>In the schema, the validation is shown above each rule: the nodes it fired for, with its failed assertions
+				and reports - the nodes it was suppressed for, as an earlier rule of its pattern matched them first - or
+				that it <strong>never fired</strong>, which usually means its <code>context</code> isn't what was meant.
+				Above each pattern is how many of its rules fired, or that it wasn't active in the phase. Click one to open
+				the XML file.</p>
 			<p>Once a file is validated, it's validated again each time it, or the schema, is saved - so you can edit
 				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
 				the <strong>Schematron</strong> output channel.</p>
-			<aside>The schema's default phase is used. Saxon's syntax extensions are turned on as for the schema's
+			<p>The schema's default phase is used - its <code>defaultPhase</code>, or all its patterns without one.
+				<strong>XSLT: Validate with Schematron (Choose Phase)...</strong> chooses another: one of the schema's
+				phases, with its title, or <code>#ALL</code> for all its patterns. The phase is kept for the file and the
+				schema, and shown with the result - and above a pattern that wasn't active in it.</p>
+			<aside>Saxon's syntax extensions are turned on as for the schema's
 				XSpec tests, e.g. for <code>xsl:note</code> or <code>queryBinding="xslt4"</code>, and the
 				<code>XSLT.resources.catalog</code> setting is used for the files it refers to.</aside>
 
