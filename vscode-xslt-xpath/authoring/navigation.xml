@@ -141,6 +141,8 @@
 				stylesheet with its tree of imports and includes, expanded down to the active module. Click a module in the tree to open it.
 				The view is collapsed initially - click its title in the Explorer to expand it. See
 				<a href="editing-xslt.html#the-xslt-imports-view">The XSLT Imports view</a> for details.</p>
+			<p>For a Schematron file, the same view - <strong>Schematron Includes</strong> - shows the schema that includes
+				it, with the files the schema brings in - see <a href="schematron.html#navigation">Schematron</a>.</p>
 		
 		</div>
 		

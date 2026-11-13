@@ -186,6 +186,13 @@
 					or an <code>sch:let</code> or <code>sch:param</code>, with the variable's scope as SchXslt2 has it - and
 					for an abstract pattern's parameter, the <code>sch:param</code> of each pattern with
 					<code>is-a</code> for it</li>
+				<li><strong>Schematron Includes</strong> - for a Schematron file, the Imports view in the Explorer -
+					<strong>XSLT Imports</strong> for a stylesheet - shows the schema that includes it, found from the
+					workspace's <code>.sch</code> files, with the files the schema brings in: with <code>sch:include</code>,
+					<code>sch:extends</code>'s <code>href</code>, and <code>xsl:include</code> and <code>xsl:import</code> -
+					each XSLT module with its own imports and includes - expanded down to the file in the editor. Click a
+					file to open it. A file that <code>sch:include</code> brings in, e.g. one whose outermost element is a
+					pattern, is checked for the XSLT SchXslt2 ignores, as a schema is</li>
 				<li><strong>Outline</strong> - each element by what identifies it: a pattern by its id, a rule by its
 					context, an assertion or report by its id, else its test</li>
 			</ul>
