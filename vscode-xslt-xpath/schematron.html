@@ -116,7 +116,9 @@
 				4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
 				it - with a quick fix, <strong>Convert to ISO Schematron</strong>, that changes the namespace, a
 				pattern's <code>name</code> to its <code>title</code>, and <code>sch:key</code> to
-				<code>xsl:key</code>.</aside>
+				<code>xsl:key</code>. A pattern in ISO Schematron's namespace with Schematron 1.5's <code>name</code> -
+				e.g. once the namespace is changed by hand - has quick fixes that replace it with a title, for the pattern
+				or each one.</aside>
 
 			<h3 id="validating">Validating an XML file</h3>
 			<p>With an XML file in the editor, run <strong>Schematron: Validate</strong> from the Command
@@ -200,6 +202,11 @@
 					<code>sch:include</code>, and the XSLT functions the schema declares or includes - and for the XSLT
 					SchXslt2 ignores, as a schema is. A schema's variable used only in a file it includes isn't reported
 					as unused</li>
+				<li><strong>Functions</strong> - Go to Definition, Find All References and Rename for a call of an XSLT
+					function: declared with <code>xsl:function</code> in the schema, or in a module its
+					<code>xsl:include</code> or <code>xsl:import</code> brings in - also from a file the schema includes.
+					From the declaration in a stylesheet, its references and Rename include the calls in the Schematron
+					files that use its module</li>
 				<li><strong>Outline</strong> - each element by what identifies it: a pattern by its id, a rule by its
 					context, an assertion or report by its id, else its test</li>
 			</ul>
