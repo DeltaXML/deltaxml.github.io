@@ -117,8 +117,9 @@
 				it.</aside>
 
 			<h3 id="validating">Validating an XML file</h3>
-			<p>With an XML file in the editor, run <strong>XSLT: Validate with Schematron</strong> - from the Command
-				Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title bar. The
+			<p>With an XML file in the editor, run <strong>Schematron: Validate</strong> from the Command
+				Palette - or <strong>Validate with Schematron</strong> from the <strong>More Actions</strong>
+				(<strong>...</strong>) menu in the editor's title bar. The
 				file is validated as SchXslt2 validates it, with the Saxon of the <code>XSLT.tasks.saxonJar</code>
 				setting - any edition - and each failed assertion and successful report is shown in the
 				<strong>Problems</strong> view, at the element or attribute it's about, with its message and diagnostics.
@@ -131,7 +132,7 @@
 			<p>The schema is the one an <code>xml-model</code> processing instruction in the file associates with it,
 				e.g. <code>&lt;?xml-model href="rules.sch"
 				schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</code> - otherwise the one last used for the
-				file, or one you choose from the workspace's. <strong>XSLT: Validate with Schematron (Choose
+				file, or one you choose from the workspace's. <strong>Schematron: Validate (Choose
 				Schema)...</strong> chooses again. With a schema in the editor, the command validates the file last
 				validated with it.</p>
 			<p>In the schema, the validation is shown above each rule: the nodes it fired for, with its failed assertions
@@ -143,7 +144,7 @@
 				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
 				the <strong>Schematron</strong> output channel.</p>
 			<p>The schema's default phase is used - its <code>defaultPhase</code>, or all its patterns without one.
-				<strong>XSLT: Validate with Schematron (Choose Phase)...</strong> chooses another: one of the schema's
+				<strong>Schematron: Validate (Choose Phase)...</strong> chooses another: one of the schema's
 				phases, with its title, or <code>#ALL</code> for all its patterns. The phase is kept for the file and the
 				schema, and shown with the result - and above a pattern that wasn't active in it.</p>
 			<aside>Saxon's syntax extensions are turned on as for the schema's
