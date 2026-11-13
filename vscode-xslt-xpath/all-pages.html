@@ -2548,7 +2548,11 @@
 					<code>sch:extends</code>'s <code>href</code>, and <code>xsl:include</code> and <code>xsl:import</code> -
 					each XSLT module with its own imports and includes - expanded down to the file in the editor. Click a
 					file to open it. A file that <code>sch:include</code> brings in, e.g. one whose outermost element is a
-					pattern, is checked for the XSLT SchXslt2 ignores, as a schema is</li>
+					pattern, is checked with what's in scope where it's included: the schema's <code>sch:ns</code>
+					prefixes, the variables of the schema, its phases and the elements containing the
+					<code>sch:include</code>, and the XSLT functions the schema declares or includes - and for the XSLT
+					SchXslt2 ignores, as a schema is. A schema's variable used only in a file it includes isn't reported
+					as unused</li>
 				<li><strong>Outline</strong> - each element by what identifies it: a pattern by its id, a rule by its
 					context, an assertion or report by its id, else its test</li>
 			</ul>
