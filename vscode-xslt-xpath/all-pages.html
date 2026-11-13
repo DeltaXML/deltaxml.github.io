@@ -2541,7 +2541,10 @@
 				<li><strong>Variables</strong> - Go to Definition, Find All References and Rename on a variable reference
 					or an <code>sch:let</code> or <code>sch:param</code>, with the variable's scope as SchXslt2 has it - and
 					for an abstract pattern's parameter, the <code>sch:param</code> of each pattern with
-					<code>is-a</code> for it</li>
+					<code>is-a</code> for it. Across files, as SchXslt2 assembles them: a variable used in a file that
+					<code>sch:include</code> brings in, but declared in the schema, goes to the schema's declaration - with
+					its hover - and a declaration's references and Rename include those in the files the schema includes
+					in its scope, unless a file declares the name itself</li>
 				<li><strong>Schematron Includes</strong> - for a Schematron file, the Imports view in the Explorer -
 					<strong>XSLT Imports</strong> for a stylesheet - shows the schema that includes it, found from the
 					workspace's <code>.sch</code> files, with the files the schema brings in: with <code>sch:include</code>,
