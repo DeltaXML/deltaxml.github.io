@@ -162,6 +162,13 @@
               priorities - not only where XSLT 4.0's rule applies already - see
               <a href="editing-xslt.html#union-priorities">Union patterns and XSLT 4.0</a>.</td>
           </tr>
+          <tr>
+            <td><code>XSLT.<wbr/>schematron.<wbr/>allowExpandText</code></td>
+            <td><code>false</code></td>
+            <td>Allow text value templates in Schematron messages with <code>xsl:expand-text="yes"</code> - a
+              non-standard extension, for every Schematron file - see
+              <a href="schematron.html#text-value-templates">Text value templates in messages</a>.</td>
+          </tr>
         </tbody>
       </table>
 

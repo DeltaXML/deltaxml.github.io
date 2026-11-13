@@ -114,7 +114,9 @@
 			<aside>A schema is checked as ISO Schematron 2025 with an XSLT query binding, e.g.
 				<code>queryBinding="xslt3"</code> - with <code>queryBinding="xslt4"</code>, its XPath is checked as XPath
 				4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
-				it.</aside>
+				it - with a quick fix, <strong>Convert to ISO Schematron</strong>, that changes the namespace, a
+				pattern's <code>name</code> to its <code>title</code>, and <code>sch:key</code> to
+				<code>xsl:key</code>.</aside>
 
 			<h3 id="validating">Validating an XML file</h3>
 			<p>With an XML file in the editor, run <strong>Schematron: Validate</strong> from the Command
@@ -269,6 +271,9 @@
 						copied into the report as it is</td><td><code>sch:value-of</code></td></tr>
 					<tr><td>XSLT in the content of <code>sch:let</code></td><td>not run - copied into the
 						value</td><td></td></tr>
+					<tr><td>an XSLT attribute of a Schematron element, e.g. <code>xsl:use-when</code> - or
+						<code>xsl:expand-text</code>, unless it's <a href="#text-value-templates">allowed</a></td>
+						<td>ignored</td><td>remove it</td></tr>
 				</tbody>
 			</table>
 			<p>An <code>xsl:note</code> in a declaration SchXslt2 copies, e.g. <code>xsl:function</code>, is copied
@@ -282,9 +287,49 @@
 				module that declares the unnamed mode with <code>use-accumulators</code> is reported, as Saxon reports
 				XTSE0545 for the two, and so is one that declares accumulators, as SchXslt2's modes don't use
 				them: declare them in the schema instead.</p>
+
+			<h3 id="text-value-templates">Text value templates in messages</h3>
+			<p>A message can use text value templates instead of <code>sch:value-of</code>, as in XSLT: with
+				<code>xsl:expand-text="yes"</code>, <code>Order {@id} has an invalid date: {@date}</code> is
+				<code>Order &lt;value-of select="@id"/&gt; has an invalid date: &lt;value-of select="@date"/&gt;</code>.
+				It's a non-standard extension - ISO Schematron doesn't have it - so it's allowed only with the
+				<code>XSLT.schematron.allowExpandText</code> setting, which is off by default. For a Schematron file,
+				the status bar shows <strong>tvt:on</strong> or <strong>tvt:off</strong> for the setting; click it to open
+				the setting - it's for every Schematron file, not just the one in the editor.</p>
+			<ul>
+				<li><strong>Where</strong> - <code>xsl:expand-text</code> is inherited, as in XSLT: on the schema, it's for
+					every message; on a pattern, rule or assertion, for those within it - and <code>"no"</code> turns it
+					off within. The <code>xsl</code> prefix is the one the schema declares for XSLT</li>
+				<li><strong>Messages</strong> - the text of <code>sch:assert</code>, <code>sch:report</code>,
+					<code>sch:diagnostic</code> and <code>sch:property</code>, and of <code>sch:emph</code>,
+					<code>sch:span</code> and <code>sch:dir</code> within them: where <code>sch:value-of</code> is allowed.
+					A title or <code>sch:p</code> is text</li>
+				<li><strong>Braces</strong> - <code>{{</code> and <code>}}</code> are braces in the text. Within an
+					expression, braces and quotes are the expression's - e.g. <code>{map { 'a': 1 }?a}</code> or
+					<code>{"it's {fine}"}</code></li>
+				<li><strong>Included files</strong> - a file <code>sch:include</code> brings in has its own
+					<code>xsl:expand-text</code>: a file without it is unchanged, so a library's braces, e.g. in
+					<code>[A-Z]{2}</code>, are still text</li>
+				<li><strong>Abstract patterns</strong> - a parameter in a text value template is replaced, as in an
+					attribute, e.g. <code>{$attribute}</code></li>
+			</ul>
+			<p>In the editor, text value templates are highlighted and checked as XPath, with auto-completion, and Go to
+				Definition, Find All References, Rename and hover for their variables.
+				<strong>Schematron: Validate</strong>, and the <a href="xspec.html#schematron">XSpec tests</a> of a
+				schema, rewrite them as <code>sch:value-of</code> before SchXslt2 compiles the schema - with the space
+				between two of them, e.g. <code>{@first} {@last}</code>, kept. Without the setting,
+				<code>xsl:expand-text</code> is reported as ignored, with quick fixes to remove it or to open the
+				setting.</p>
+			<p>Other Schematron processors ignore <code>xsl:expand-text</code>, so the braces would be in their reports
+				as written. For them, <strong>Schematron: Export Standard Copy...</strong> writes a copy of the schema as
+				standard ISO Schematron: its text value templates as <code>sch:value-of</code>, with the files it includes
+				in it, and paths relative to the copy. The stylesheet it uses, <code>expand-text.xsl</code> - in the
+				extension's <code>xslt-resources/schematron</code> folder - can also be run on its own, e.g. before
+				another processor: <code>java -jar saxon.jar -s:schema.sch -xsl:expand-text.xsl
+				-o:schema-standard.sch</code>.</p>
 		</div>
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li><li><a href="#text-value-templates">Text value templates in messages</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

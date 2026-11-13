@@ -13,7 +13,10 @@
                     prefixes, the XSLT in them - including the functions of the modules they include - and the XSLT
                     that SchXslt2 ignores or doesn't run, with quick fixes. Auto-completion follows ISO Schematron 2025,
                     whatever prefix the schema uses - and <strong>Schematron: Validate</strong> validates an XML file
-                    with a schema, with its failed assertions in the Problems view</li>
+                    with a schema, with its failed assertions in the Problems view. Messages can use
+                    <a href="schematron.html#text-value-templates">text value templates</a> - a non-standard extension,
+                    with a setting - and <strong>Schematron: Export Standard Copy...</strong> writes a standard copy for
+                    other processors</li>
                 <li><strong><a href="profiler.html">Profiler</a></strong> - profile a stylesheet with Saxon-PE or
                     Saxon-EE to see where its time goes: the time of each template, function and global variable, the
                     slowest first, with times above the declarations in the editor, warm-up runs left out, and earlier
