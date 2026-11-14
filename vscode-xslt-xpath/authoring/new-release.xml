@@ -25,6 +25,11 @@
                 <li><strong><a href="xspec.html#times">XSpec test times</a></strong> - with Saxon-PE or
                     Saxon-EE, the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
                     long its tests took on each run</li>
+                <li><strong><a href="debugger.html#input-nodes">From the input to the templates</a></strong> - after
+                    a debug session, hover over an element in the input file to see the template rules that processed
+                    it, its attributes and its text - or the Schematron rules that fired for it - and go to them; above
+                    each template, the nodes it processed. From the output view, go to the input that part of the
+                    output was written for, as well as to the instruction that wrote it</li>
             </ul>
             <h3>Release 2.1</h3>
             <ul>

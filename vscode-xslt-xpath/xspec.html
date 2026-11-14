@@ -432,6 +432,10 @@
 				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the
 				tests, without pausing, so it works with any edition of Saxon. The modules the stylesheet imports or
 				includes have their coverage too - not XSpec's own modules, or the test runner.</p>
+			<p>After a coverage run, or debugging a test, a scenario's context file - <code>x:context href="..."</code>
+				- is linked to the templates that processed its nodes, as after a <a href="debugger.html#input-nodes">debug
+				session</a>: hover over an element's start tag in it. Not an inline <code>x:context</code>, whose nodes
+				are constructed by the test.</p>
 
 			<h3 id="settings">Settings</h3>
 			<table>

@@ -200,7 +200,9 @@
 				<li><strong>Variables</strong> are the schema's: the rule's <code>let</code>s, and the schema's and
 					pattern's in <strong>Globals</strong> - SchXslt2's own variables are hidden. In the rule of an abstract
 					pattern, the call stack names the pattern that uses it - e.g. <strong>rule order - order-dates (is-a
-					required)</strong> - and its <code>param</code> values are in a <strong>Parameters</strong> scope. A
+					required)</strong> - and its <code>param</code> values are in a <strong>Parameters</strong> scope. In
+					<strong>Watch</strong>, the <strong>Debug Console</strong> and a hover, a parameter, e.g.
+					<code>$required</code>, is replaced by its value, as SchXslt2 replaces it in the pattern's copy. A
 					breakpoint in an abstract pattern pauses in each pattern that uses it - one on the line of a pattern
 					with <code>is-a</code> pauses in that one alone.</li>
 				<li><strong>Watch</strong> and the <strong>Debug Console</strong> evaluate XPath with the rule's node as
@@ -209,11 +211,15 @@
 				<li><strong><a href="debugger.html#empty-steps">Empty steps</a></strong> - while paused in a rule, the
 					first step in a path of its lets, tests and messages after which the path is empty is faded, with why
 					in its hover - e.g. <code>line</code> in <code>test="line"</code>, for an <code>order</code> that has
-					no lines. Not the rule's <code>context</code>, and not a path with an abstract pattern's
-					parameter.</li>
+					no lines. Not the rule's <code>context</code>. In an abstract pattern's rule, a path that starts
+					with a parameter is checked with the parameter's value - and the parameter alone too, as its value is
+					often a path, e.g. <code>@name</code>.</li>
 			</ul>
 			<p>When the session ends, its result is shown as a validation's: in the <strong>Problems</strong> view and
-				above the schema's rules.</p>
+				above the schema's rules. And in the XML file, hovering over an element's start tag shows the rules that
+				fired for it, and its attributes and text, with a link to each - <strong>Go to Definition</strong>
+				(<span class="shortcut">F12</span>) goes to them - see <a href="debugger.html#input-nodes">From the input
+				to the templates</a>.</p>
 
 			<h3 id="editing">Editing</h3>
 			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
