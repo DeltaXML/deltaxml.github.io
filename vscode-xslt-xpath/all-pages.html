@@ -4212,6 +4212,26 @@ npm install --save-dev xslt3</code>
 				<code>x:expect-not-report</code>, always passes. From the schema, Find All References and Rename on an
 				assertion's, report's or rule's id include the XSpec tests that use it.</p>
 
+			<h4 id="xspec--schematron-generated">Creating tests from the XML context file</h4>
+			<p>In a Schematron file, code actions (<span class="shortcut">⌘.</span>) create XSpec scenarios from the
+				schema's <a href="#schematron--validating">XML context file</a> - in the XSpec file whose
+				<code>schematron</code> attribute names the schema, or a new one beside it:</p>
+			<ul>
+				<li><strong>On a rule</strong> - a scenario for a node it fires for, with an expectation for each of its
+					assertions and reports</li>
+				<li><strong>On an assertion or report</strong> - a scenario for a node where it fails (or is reported),
+					and one for a node where it passes (or isn't)</li>
+				<li><strong>On the schema's outermost element</strong> - a scenario for each rule that has none yet</li>
+			</ul>
+			<p>A scenario's <code>x:context</code> is the node, with its ancestors - and its expectations are the
+				schema's results for that data, found by running the schema on it: the tests pass when they're made,
+				describing what the schema does now, for you to review. When the node with its ancestors alone doesn't
+				give the result a scenario is for - e.g. an id that must be unique, with no other node to share it - the
+				data has the siblings at its level too, or the whole document, and the expectations name the node with
+				<code>location</code>. An assertion with no id is expected by its message. A rule that no node of the
+				context file fires for - or a schema with no context file, or no Saxon - has a pending scenario, to be
+				completed.</p>
+
 			<h3 id="xspec--debugging">Debugging a test</h3>
 			<p>The <strong>Debug</strong> button beside a scenario - or the Test Explorer's <strong>Debug Test</strong>
 				- runs the test runner with the <a href="#debugger">XSLT debugger</a>, and the outcomes are shown in
