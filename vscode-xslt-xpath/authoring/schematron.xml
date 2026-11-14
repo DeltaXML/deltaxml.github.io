@@ -62,12 +62,55 @@
 				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
 				the <strong>Schematron</strong> output channel.</p>
 			<p>The schema's default phase is used - its <code>defaultPhase</code>, or all its patterns without one.
-				<strong>Schematron: Validate (Choose Phase)...</strong> chooses another: one of the schema's
-				phases, with its title, or <code>#ALL</code> for all its patterns. The phase is kept for the file and the
-				schema, and shown with the result - and above a pattern that wasn't active in it.</p>
+				The phase is shown in the status bar for a Schematron file - and for an XML file with a schema - e.g.
+				<strong>phase: books (default)</strong>: click it, or run <strong>Schematron: Choose Phase...</strong>, to
+				choose another: one of the schema's phases, with its title, or <code>#ALL</code> for all its patterns. The
+				phase is kept for the XML file and the schema, and Quick Run, Validate and Debug all use it - a file already
+				validated is validated again with it. It's shown with the result, and above a pattern that wasn't active
+				in it.</p>
 			<aside>Saxon's syntax extensions are turned on as for the schema's
 				XSpec tests, e.g. for <code>xsl:note</code> or <code>queryBinding="xslt4"</code>, and the
 				<code>XSLT.resources.catalog</code> setting is used for the files it refers to.</aside>
+
+			<h3 id="debugging">Debugging a schema</h3>
+			<p>With a Schematron file in the editor, the debug button in the editor's title bar - or
+				<strong>Schematron: Debug: the XML Context File</strong> - validates the schema's
+				<a href="#validating">XML context file</a> in the <a href="debugger.html">XSLT debugger</a>, with the
+				schema's phase. SchXslt2 compiles the schema to a stylesheet, which the debugger runs - but breakpoints,
+				pauses and stepping are at the schema's own lines, so you don't see the compiled stylesheet.</p>
+			<ul>
+				<li><strong>Breakpoints</strong> - set them on a rule, a <code>let</code>, an <code>assert</code> or
+					<code>report</code>, or a <code>value-of</code> in a message, in the schema or a file it includes. On a
+					rule, it pauses each time the rule fires, with the node it fired for as the context item - on a pattern,
+					at each of its rules. A breakpoint where there's nothing to pause at, e.g. on a title, isn't
+					verified - nor is one in a pattern that isn't active in the phase, which says so.
+					<a href="debugger.html#conditional">Conditions</a> and <a href="debugger.html#logpoints">logpoints</a>
+					work as in a stylesheet, e.g. a condition <code>@id = 'B2'</code>.</li>
+				<li><strong>Failed assertions</strong> - check <strong>Failed Assertions</strong>, or
+					<strong>Successful Reports</strong>, in the <strong>Breakpoints</strong> view to pause at each one, on
+					the node it's for, with its message shown at the assertion - without a breakpoint on each. To pause
+					only for some, edit its condition (the pencil button) to the roles or severities to pause for, e.g.
+					<code>error fatal</code>: one with neither is an error, as in the <strong>Problems</strong> view.
+					For one node, use a conditional breakpoint on the assertion.</li>
+				<li><strong>Stepping</strong> goes from one of the schema's steps to the next - a rule, its lets, then its
+					assertions and reports - not through SchXslt2's own code.</li>
+				<li><strong>Variables</strong> are the schema's: the rule's <code>let</code>s, and the schema's and
+					pattern's in <strong>Globals</strong> - SchXslt2's own variables are hidden. In the rule of an abstract
+					pattern, the call stack names the pattern that uses it - e.g. <strong>rule order - order-dates (is-a
+					required)</strong> - and its <code>param</code> values are in a <strong>Parameters</strong> scope. A
+					breakpoint in an abstract pattern pauses in each pattern that uses it - one on the line of a pattern
+					with <code>is-a</code> pauses in that one alone.</li>
+				<li><strong>Watch</strong> and the <strong>Debug Console</strong> evaluate XPath with the rule's node as
+					the context item - e.g. to try out a test before you change it - and hovering a variable shows its
+					value.</li>
+				<li><strong><a href="debugger.html#empty-steps">Empty steps</a></strong> - while paused in a rule, the
+					first step in a path of its lets, tests and messages after which the path is empty is faded, with why
+					in its hover - e.g. <code>line</code> in <code>test="line"</code>, for an <code>order</code> that has
+					no lines. Not the rule's <code>context</code>, and not a path with an abstract pattern's
+					parameter.</li>
+			</ul>
+			<p>When the session ends, its result is shown as a validation's: in the <strong>Problems</strong> view and
+				above the schema's rules.</p>
 
 			<h3 id="editing">Editing</h3>
 			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
