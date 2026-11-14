@@ -2493,8 +2493,25 @@
 				e.g. <code>&lt;?xml-model href="rules.sch"
 				schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</code> - otherwise the one last used for the
 				file, or one you choose from the workspace's. <strong>Schematron: Validate (Choose
-				Schema)...</strong> chooses again. With a schema in the editor, the command validates the file last
-				validated with it.</p>
+				Schema)...</strong> chooses again.</p>
+			<p>A schema has an <strong>XML context file</strong>, as a stylesheet does: the XML file you develop it
+				for. It's shown in the status bar for a Schematron file - click it to choose one, or run
+				<strong>Schematron: Choose XML Context File...</strong>: the files whose <code>xml-model</code> names the
+				schema are listed first. Until you choose one, it's inferred: the file last validated with the schema,
+				else an open file whose <code>xml-model</code> names it. Validating another file with the schema, from
+				its own editor, doesn't change one you've chosen. A file that <code>sch:include</code> brings in has the
+				context file of the schema that includes it.</p>
+			<p>A file that more than one schema includes belongs to the one in the nearest folder - unless you choose
+				another with <strong>Schematron: Choose Including Schema...</strong>, or the button in the title of the
+				<strong>Schematron Includes</strong> view. The schema chosen is then used for the files it includes, as a
+				chosen top-level stylesheet is for its modules. It gives the file's XML context file, and what's in scope
+				where it's included - for checking it, and for navigation. <strong>XSLT: Reset Top-Level Stylesheet
+				Choices</strong> clears these choices too.</p>
+			<p>With a Schematron file in the editor, <strong>Quick Run</strong> - the ▶ button in the editor's title
+				bar, or <strong>Schematron: Quick Run: Validate the XML Context File</strong> - validates the context
+				file with the schema, and so does <strong>Schematron: Validate</strong>. The problems are shown for the
+				XML file, and above the schema's rules, while the schema stays in the editor: edit a rule, run, and see
+				what it reports.</p>
 			<p>In the schema, the validation is shown above each rule: the nodes it fired for, with its failed assertions
 				and reports - the nodes it was suppressed for, as an earlier rule of its pattern matched them first - or
 				that it <strong>never fired</strong>, which usually means its <code>context</code> isn't what was meant.
@@ -2524,8 +2541,7 @@
 				the XSLT declarations SchXslt2 copies, e.g. <code>xsl:function</code> with <code>name</code> and
 				<code>as</code>.</p>
 			<p>In XPath, auto-completion offers the variables in scope - the schema's, the pattern's and the rule's -
-				and element and attribute names from the data the schema validates: the XML file last validated with it,
-				else an open file whose <code>xml-model</code> names it, else the last XML file viewed.</p>
+				and element and attribute names from the schema's <a href="#schematron--validating">XML context file</a>.</p>
 			<p>XPath expressions are highlighted and checked in <code>context</code>, <code>test</code>,
 				<code>subject</code>, <code>select</code>, <code>path</code>, <code>value</code>,
 				<code>visit-each</code>, <code>documents</code>, and a phase's <code>from</code> and <code>when</code>.
