@@ -75,15 +75,25 @@
 						<td>The signature and description of a built-in XPath or XSLT function, for XPath 3.1 or 4.0 - for a
 							function declared in a stylesheet, the assistant uses <code>find_declaration</code>.</td>
 					</tr>
+					<tr>
+						<td><code>run_configuration</code></td>
+						<td>How you run stylesheets: the Saxon jar, with its edition, version and licence, the XML catalog, the
+							XSpec installation and the XSLT packages - and for a stylesheet, its Quick Run: the XML context file,
+							the parameters, and the exact <code>java</code> command line, with the options the extension adds,
+							such as <code>-catalog</code> and <code>-lib</code>. An assistant that runs Saxon itself then gets
+							the same result as you.</td>
+					</tr>
 				</tbody>
 			</table>
-			<p>The tools only read files: they don't change them, or run stylesheets or tests.</p>
+			<p>The tools only read files: they don't change them, or run stylesheets or tests - an assistant runs
+				<code>run_configuration</code>'s command itself, if you allow it.</p>
 			<h4 id="mcp-copilot">GitHub Copilot</h4>
 			<p>With the server on, Copilot finds it by itself: its tools are listed with the other MCP tools in Copilot
 				Chat's agent mode.</p>
 			<h4 id="mcp-claude-code">Claude Code</h4>
 			<p>Run <strong>XSLT: Set Up MCP Server for Claude Code</strong> from the Command Palette - it offers to turn the
-				server on, if it isn't, and asks whether to set it up for all your projects or only this one. It runs
+				server on, if it isn't, and asks whether to set it up for this project - recommended, with a window for each
+				project - or for all your projects, which then use this window's server. Run it in each project's window. It runs
 				Claude Code's <code>claude mcp add</code> command for you. A Claude Code session started after that can use
 				the tools, whether it runs in Visual Studio Code or in a terminal of its own. A session already running keeps
 				the settings it started with, so <code>/mcp</code> doesn't connect it: start a new one - in Visual Studio
@@ -99,12 +109,15 @@
 				<strong>XSLT: Reset MCP Server Token</strong>. Copilot uses the new token straight away, and Claude Code is
 				set up again with it - for all projects, or for a project in the workspace - where it was set up with the
 				old one. A Claude Code session already running keeps the old token: start a new one.</p>
-			<p>The server listens at the port of <code>XSLT.mcp.port</code> (6745 by default). With more than one Visual
-				Studio Code window open, the first one opened has the server. Its tools work best for the files of that window's
-				workspace: a relative path is taken from its first folder, and a module's top-level stylesheet is found from
-				the workspace's modules. The
-				<strong>XSLT MCP Server</strong> output channel shows whether the server started, or why it didn't - for
-				example, because another program uses the port.</p>
+			<p id="mcp-windows">Each Visual Studio Code window has a server of its own, for its workspace, so with a window
+				for each project, an assistant started in a project's folder uses that project's window. Its tools work
+				best for the files of that workspace: a relative path is taken from its first folder, and a module's
+				top-level stylesheet is found from the workspace's modules. A window's port is the same each time its
+				workspace is opened - one of the 999 after <code>XSLT.mcp.port</code> (6745 by default), chosen for the
+				workspace, or the next free one if another program has it; if it ever changes, Claude Code set up for the
+				project is set up again with it. A window with no folder open uses <code>XSLT.mcp.port</code> itself. The
+				<strong>XSLT MCP Server</strong> output channel shows each window's address, or why its server didn't
+				start.</p>
 
 			<h3 id="notes">Documentation notes</h3>
 			<p>XSLT 4.0 <a href="xslt40-notes.html">documentation notes</a> - <code>xsl:note format="xdoc-md"</code> - use
