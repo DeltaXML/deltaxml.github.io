@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Step-through XSLT debugger for VS Code with SaxonJ: breakpoints and stepping inside multi-line XPath, step back, variables, and output mapped to its XSLT."/>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

@@ -16,7 +16,7 @@
 							==================================================-->
 
 	<title>Features | VS Code XSLT/XPath</title>
-	<meta name="description" content="The extension's features at a glance, grouped by task. Each one links to the part of this guide that describes it."><link rel="canonical" href="https://deltaxml.github.io/vscode-xslt-xpath/features.html"><meta property="og:type" content="article"><meta property="og:site_name" content="VS Code XSLT/XPath"><meta property="og:title" content="Features | VS Code XSLT/XPath"><meta property="og:description" content="The extension's features at a glance, grouped by task. Each one links to the part of this guide that describes it."><meta property="og:url" content="https://deltaxml.github.io/vscode-xslt-xpath/features.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/deltaxml-logo.png"><meta name="twitter:card" content="summary">
+	<meta name="description" content="Features of the XSLT/XPath extension for VS Code: XSLT 4.0, checks that understand XPath, a debugger that steps into XPath, XSpec, Schematron and profiling."><link rel="canonical" href="https://deltaxml.github.io/vscode-xslt-xpath/features.html"><meta property="og:type" content="article"><meta property="og:site_name" content="VS Code XSLT/XPath"><meta property="og:title" content="Features | VS Code XSLT/XPath"><meta property="og:description" content="Features of the XSLT/XPath extension for VS Code: XSLT 4.0, checks that understand XPath, a debugger that steps into XPath, XSpec, Schematron and profiling."><meta property="og:url" content="https://deltaxml.github.io/vscode-xslt-xpath/features.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/deltaxml-logo.png"><meta name="twitter:card" content="summary">
 	<meta name="author" content="Philip Fearon">
 
 	<!-- Mobile Specific Metas
@@ -108,6 +108,47 @@
 		<div class="two-thirds column">
 			<p>The extension's features at a glance, grouped by task. Each one links to the part of this guide that
 				describes it.</p>
+
+			<h3 id="further">Where it goes further</h3>
+			<ul>
+				<li><strong>Debugging inside XPath.</strong> The <a href="debugger.html">debugger</a> stops within
+					<a href="debugger.html#xpath">multi-line XPath expressions</a> and inline functions, not only at XSLT
+					instructions - and can <a href="debugger.html#step-back">step back</a>.</li>
+				<li><strong>Schematron debugging.</strong> <a href="schematron.html#debugging">Breakpoints and stepping</a>
+					at a schema's rules, lets and assertions.</li>
+				<li><strong>XSpec in the editor.</strong> <a href="xspec.html#debugging">Debug a test</a> from the XSpec
+					file or the XSLT, with <a href="xspec.html#coverage">coverage</a> in the editor's margin and
+					<a href="xspec.html#times">test times</a> in the Test Explorer.</li>
+				<li><strong>XSLT 4.0 as Saxon 13 implements it.</strong> <a href="xslt40-records.html">Record and enum
+					types</a> checked as you type, and <a href="xslt40-jnodes.html">path expressions on JSON</a>.</li>
+				<li><strong>Checks that understand XPath.</strong> Every variable, function and template reference is
+					<a href="editing-xslt.html#checking">checked as you type</a>, across imported modules, without
+					compiling the stylesheet.</li>
+				<li><strong>Profiling in the editor.</strong> <a href="profiler.html#codelens">Times shown at each
+					template and function</a>, with <a href="profiler.html#timeline">earlier profiles</a> to compare
+					(Saxon-PE/EE).</li>
+				<li><strong>Documentation in the code.</strong> <a href="xslt40-notes.html">Notes</a> in Markdown, with
+					Javadoc-style tags such as <code>@param</code> and <code>@see</code>, shown in hover help wherever a
+					function or template is used, and <a href="xslt40-notes.html#checks">checked</a> against its parameters -
+					<a href="xslt40-notes.html#xslt30">in XSLT 3.0</a> too.</li>
+				<li><strong>Help moving to packages.</strong> <a href="xslt-packages.html#converting">Analyse as
+					Package</a> shows what would change before a library becomes a package. Packages in the workspace are
+					<a href="xslt-packages.html#workspace-packages">found with no setup</a>, and
+					<a href="xslt-packages.html#overriding"><code>xsl:override</code> declarations</a> are written for
+					you.</li>
+				<li><strong>Ready for AI assistants.</strong> GitHub Copilot, Claude Code and other assistants in VS Code
+					<a href="ai-assistants.html#problems">see the extension's problems</a> and fix them.</li>
+				<li><strong>Free and open source.</strong> MIT licensed, and running and debugging work with the free
+					Saxon-HE.</li>
+			</ul>
+
+			<aside><strong>XML schema validation:</strong> the extension checks that XML files are
+				<a href="editing.html#well-formed-xml-checks">well-formed</a>, but doesn't validate them against an XML
+				Schema, RELAX NG schema or DTD - for that, install
+				<a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's XML
+				extension</a> alongside it. The two work together: XSLT, XSpec and Schematron files are handled by this
+				extension, and while Red Hat's extension is validating XML files, this one doesn't report the same
+				well-formedness problems again. Schema-aware XSLT isn't supported.</aside>
 
 			<div class="feature-cards">
 
@@ -248,6 +289,8 @@
 					<ul>
 						<li><a href="debugger.html">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
 						<li><a href="debugger.html#xpath">Stepping through multi-line XPath</a></li>
+						<li><a href="debugger.html#step-back">Step Back and Reverse Continue</a></li>
+						<li><a href="schematron.html#debugging">Debugging a Schematron schema</a></li>
 						<li><a href="debugger.html#conditional">Conditional breakpoints and hit counts</a></li>
 						<li><a href="debugger.html#logpoints">Logpoints</a>, with formatted and colored values</li>
 						<li><a href="debugger.html#variables">Views of the locals, globals, context and output</a></li>
@@ -302,7 +345,7 @@
 		</div>
 
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#languages">XSLT and XPath languages</a></li><li><a href="#xslt40">XSLT 4.0</a></li><li><a href="#editing">Editing</a></li><li><a href="#linter">Linter</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#refactoring">Refactoring</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#xspec">Testing with XSpec</a></li><li><a href="#code-documentation">Code documentation</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#further">Where it goes further</a></li><li><a href="#languages">XSLT and XPath languages</a></li><li><a href="#xslt40">XSLT 4.0</a></li><li><a href="#editing">Editing</a></li><li><a href="#linter">Linter</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#refactoring">Refactoring</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#xspec">Testing with XSpec</a></li><li><a href="#code-documentation">Code documentation</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Schematron in VS Code: checked as SchXslt2 runs it, with quick fixes and completion, validation of XML files, and a debugger for rules and assertions."/>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

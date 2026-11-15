@@ -162,6 +162,11 @@
 			between problems, the Problems view (press <span class="shortcut">⇧⌘M</span> to toggle) shows a list of XML syntax
 			problems. Problems are also highlighted in the Outline View. Selecting a Problems view list item, or Outline View node will
 				navigate you to the corresponding token in the XML editor.</p>
+			<p>XML files aren't validated against an XML Schema, RELAX NG schema or DTD. For that, install
+				<a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's XML extension</a>
+				alongside this one. While its validation is on (the <code>xml.validation.enabled</code> setting), it
+				reports the well-formedness problems in XML files too, so this extension doesn't report them again. XSLT,
+				XSpec and Schematron files are still checked by this extension.</p>
 			<h3 id="entities">Entities</h3>
 			<p>An XML or XSLT file can declare entities in its DOCTYPE's internal subset, to use as references such as
 				<code>&amp;company;</code>:</p>
