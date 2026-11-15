@@ -164,6 +164,13 @@
 			<p>Once a file is validated, it's validated again each time it, or the schema, is saved - so you can edit
 				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
 				the <strong>Schematron</strong> output channel.</p>
+			<p>The result of the last validation is shown in the status bar while the XML file - or the schema, for its
+				context file - is in the editor: <strong>✓ rules.sch</strong> when the file is valid, or the number of
+				problems, e.g. <strong>⊗ 3 · rules.sch</strong> - with an error icon when any is an error, else a warning
+				or info icon - and the time it was validated in the hover. Click it to validate again - or, with problems,
+				to show them in the <strong>Problems</strong> view. When the file, the schema or a file the schema includes is edited after the validation, the icon is
+				an empty circle until it's validated again, as the result may be out of date. A validation at the end of a
+				<a href="#debugging">debug session</a> is shown too.</p>
 			<p>The schema's default phase is used - its <code>defaultPhase</code>, or all its patterns without one.
 				The phase is shown in the status bar for a Schematron file - and for an XML file with a schema - e.g.
 				<strong>phase: books (default)</strong>: click it, or run <strong>Schematron: Choose Phase...</strong>, to
