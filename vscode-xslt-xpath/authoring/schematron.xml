@@ -8,16 +8,25 @@
 				SchXslt2 is the ISO Schematron processor included with XSpec, which compiles a schema to an XSLT 3.0
 				stylesheet - see <a href="xspec.html#schematron">Testing a Schematron</a>.</p>
 
-			<aside>A schema is checked as ISO Schematron 2025 with an XSLT query binding, e.g.
-				<code>queryBinding="xslt3"</code> - with <code>queryBinding="xslt4"</code>, its XPath is checked as XPath
-				4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
-				it - with a quick fix, <strong>Convert to ISO Schematron</strong>, that changes the namespace, a
-				pattern's <code>name</code> to its <code>title</code>, and <code>sch:key</code> to
-				<code>xsl:key</code>. A pattern in ISO Schematron's namespace with Schematron 1.5's <code>name</code> -
-				e.g. once the namespace is changed by hand - has quick fixes that replace it with a title, for the pattern
-				or each one.</aside>
+			<details style="margin-bottom: 0">
+				<summary>About legacy Schematron versions</summary>
+				<p>A schema is checked as ISO Schematron 2025 with an XSLT query binding, e.g.
+					<code>queryBinding="xslt3"</code> - with <code>queryBinding="xslt4"</code>, its XPath is checked as XPath
+					4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
+					it - with a quick fix, <strong>Convert to ISO Schematron</strong>, that changes the namespace, a
+					pattern's <code>name</code> to its <code>title</code>, and <code>sch:key</code> to
+					<code>xsl:key</code>. A pattern in ISO Schematron's namespace with Schematron 1.5's <code>name</code> -
+					e.g. once the namespace is changed by hand - has quick fixes that replace it with a title, for the pattern
+					or each one.</p>
+			</details>
 
 			<h3 id="validating">Validating an XML file</h3>
+			<figure>
+				<img src="resources/schematron-validate.png" class="scale-with-grid" />
+				<figcaption>
+					Schematron validation problems are highlighted inline in the XML and listed in the problems view.
+				</figcaption>
+			</figure>
 			<p>With an XML file in the editor, run <strong>Schematron: Validate</strong> from the Command
 				Palette - or <strong>Validate with Schematron</strong> from the <strong>More Actions</strong>
 				(<strong>...</strong>) menu in the editor's title bar. The
@@ -81,17 +90,27 @@
 				<code>XSLT.resources.catalog</code> setting is used for the files it refers to.</aside>
 
 			<h3 id="debugging">Debugging a schema</h3>
+			<figure>
+				<img src="resources/schematron-debugging.png" class="scale-with-grid" />
+				<figcaption>
+					For debugging, set breakpoints in a Schema or enable a rule to, for example, break on failed assertions.
+				</figcaption>
+			</figure>
 			<p>With a Schematron file in the editor, the debug button in the editor's title bar - or
 				<strong>Schematron: Debug: the XML Context File</strong> - validates the schema's
 				<a href="#validating">XML context file</a> in the <a href="debugger.html">XSLT debugger</a>, with the
 				schema's phase. SchXslt2 compiles the schema to a stylesheet, which the debugger runs - but breakpoints,
 				pauses and stepping are at the schema's own lines, so you don't see the compiled stylesheet.</p>
 			<ul>
-				<li><strong>Breakpoints</strong> - set them on a rule, a <code>let</code>, an <code>assert</code> or
+				<li><strong>Breakpoints</strong> - set them on a rule, a rule's <code>let</code>, an <code>assert</code> or
 					<code>report</code>, or a <code>value-of</code> in a message, in the schema or a file it includes. On a
 					rule, it pauses each time the rule fires, with the node it fired for as the context item - on a pattern,
-					at each of its rules. A breakpoint where there's nothing to pause at, e.g. on a title, isn't
-					verified - nor is one in a pattern that isn't active in the phase, which says so.
+					at each of its rules. A breakpoint where there's nothing to pause at is moved when you add it, keeping its
+					condition, to the step it's in - e.g. from a line of an assertion's message to the assertion, or from a
+					pattern's <code>param</code>, which SchXslt2 replaces with its value, to the pattern - or removed if
+					there's none, e.g. on the schema's title, or a global <code>let</code>, whose value is in
+					<strong>Globals</strong>. The status bar says which. A breakpoint in a pattern that isn't active in the
+					phase isn't verified, and says so.
 					<a href="debugger.html#conditional">Conditions</a> and <a href="debugger.html#logpoints">logpoints</a>
 					work as in a stylesheet, e.g. a condition <code>@id = 'B2'</code>.</li>
 				<li><strong>Failed assertions</strong> - check <strong>Failed Assertions</strong>, or
@@ -182,6 +201,12 @@
 			</ul>
 
 			<h3 id="hover">Hover help</h3>
+			<figure>
+				<img src="resources/schematron-is-a.png" class="scale-with-grid" />
+				<figcaption>
+					Hover help provides additional information forx a schema's components.
+				</figcaption>
+			</figure>
 			<p>Hover help is for reviewing a schema as much as for editing it:</p>
 			<ul>
 				<li><strong>A pattern's <code>is-a</code></strong> - the abstract pattern's title, its parameters with the
@@ -280,6 +305,12 @@
 				them: declare them in the schema instead.</p>
 
 			<h3 id="text-value-templates">Text value templates in messages</h3>
+			<figure>
+				<img src="resources/schematron-tvt.png" class="scale-with-grid" />
+				<figcaption>
+					Text value templates allow text to include values from XPath enclosed within curly braces.
+				</figcaption>
+			</figure>
 			<p>A message can use text value templates instead of <code>sch:value-of</code>, as in XSLT: with
 				<code>xsl:expand-text="yes"</code>, <code>Order {@id} has an invalid date: {@date}</code> is
 				<code>Order &lt;value-of select="@id"/&gt; has an invalid date: &lt;value-of select="@date"/&gt;</code>.
