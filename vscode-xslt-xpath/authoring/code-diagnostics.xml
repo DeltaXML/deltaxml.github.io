@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Print debugging for XSLT: xsl:message completions that write in-scope variables with xdm:debug(), in color, and xdm:trace() for a value within an expression."/>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

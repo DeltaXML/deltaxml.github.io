@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="What's new in the XSLT/XPath extension for VS Code: the features of releases 2.0, 2.1 and 2.2, from the debugger and XSpec to Schematron and profiling."/>
+	</head>
     <div class="main">
         
         <div class="two-thirds column">

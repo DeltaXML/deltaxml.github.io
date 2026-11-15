@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Extract selected XSLT or XPath code to a new xsl:function, in full or partial mode, with the context properties it needs passed as parameters."/>
+	</head>
 	<div class="main">
 		
 		<div class="two-thirds column">

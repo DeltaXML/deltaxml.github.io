@@ -16,6 +16,8 @@
        each page's content is authoring/<page>.xml, and the page is written to <page>.html in the site folder -->
   <xsl:variable name="siteDir" as="xs:string" select="resolve-uri('../', static-base-uri())"/>
   <xsl:variable name="indexTitle" as="xs:string" select="normalize-space(/html/head/title)"/>
+  <!-- the guide's public URL, for each page's canonical link and Open Graph tags - also the base URL in xsl/make-sitemap.sh -->
+  <xsl:variable name="siteUrl" as="xs:string" select="'https://deltaxml.github.io/vscode-xslt-xpath/'"/>
 
   <xsl:template match="/">
     <xsl:apply-templates/>
@@ -38,6 +40,8 @@
           <title>{$guideTitle} - User Guide</title>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <xsl:copy-of select="/html/head/meta[@name = ('description', 'author')]"/>
+          <!-- not for search engines: it repeats every other page, which would compete with them -->
+          <meta name="robots" content="noindex"/>
           <xsl:copy-of select="/html/head/link[@rel = ('stylesheet', 'icon')]"/>
           <link rel="stylesheet" href="./resources/all-pages.css"/>
         </head>
@@ -198,9 +202,53 @@
     <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
     <xsl:param name="filePart" as="xs:string" tunnel="yes"/>
     <xsl:copy>
-      <xsl:value-of select="if ($filePart eq 'index.html') then $indexTitle else $pageTitle || ' | ' || $indexTitle"/>
+      <xsl:value-of select="f:page-title($pageTitle, $filePart)"/>
     </xsl:copy>
   </xsl:template>
+
+  <xsl:function name="f:page-title" as="xs:string">
+    <xsl:param name="pageTitle" as="xs:string"/>
+    <xsl:param name="filePart" as="xs:string"/>
+    <xsl:sequence select="if ($filePart eq 'index.html') then $indexTitle else $pageTitle || ' | ' || $indexTitle"/>
+  </xsl:function>
+
+  <!-- the page's own description - from its first paragraph - in place of the one in layout.xml, which every page would
+       otherwise share, then its canonical URL and the Open Graph and Twitter tags that links to it are previewed with -->
+  <xsl:template match="meta[@name eq 'description']" mode="copyPage">
+    <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
+    <xsl:param name="filePart" as="xs:string" tunnel="yes"/>
+    <xsl:param name="mainDiv" as="element()?" tunnel="yes"/>
+    <xsl:variable name="description" as="xs:string" select="f:page-description($mainDiv, string(@content))"/>
+    <xsl:variable name="title" as="xs:string" select="f:page-title($pageTitle, $filePart)"/>
+    <xsl:variable name="url" as="xs:string" select="$siteUrl || $filePart[. ne 'index.html']"/>
+    <meta name="description" content="{$description}"/>
+    <link rel="canonical" href="{$url}"/>
+    <meta property="og:type" content="{if ($filePart eq 'index.html') then 'website' else 'article'}"/>
+    <meta property="og:site_name" content="{$indexTitle}"/>
+    <meta property="og:title" content="{$title}"/>
+    <meta property="og:description" content="{$description}"/>
+    <meta property="og:url" content="{$url}"/>
+    <meta property="og:image" content="{$siteUrl}resources/deltaxml-logo.png"/>
+    <meta name="twitter:card" content="summary"/>
+  </xsl:template>
+
+  <!-- the description in the page's own head, if authoring/<page>.xml has one - for a page whose first paragraph
+       doesn't describe it - otherwise its first paragraph: whole, if it's at most 160 characters - what search results
+       show - otherwise its sentences that fit, or if the first sentence doesn't fit, the words that do; the fallback when
+       there's neither is the layout's description -->
+  <xsl:function name="f:page-description" as="xs:string">
+    <xsl:param name="mainDiv" as="element()?"/>
+    <xsl:param name="fallback" as="xs:string"/>
+    <xsl:variable name="own" as="xs:string?" select="root($mainDiv)//head/meta[@name eq 'description']/@content ! normalize-space()"/>
+    <xsl:variable name="column" as="element()?" select="($mainDiv/div[contains-token(@class, 'two-thirds')], $mainDiv)[1]"/>
+    <xsl:variable name="text" as="xs:string" select="normalize-space(($column/p)[1])"/>
+    <xsl:sequence select="
+      if ($own) then $own
+      else if ($text eq '') then $fallback
+      else if (string-length($text) le 160) then $text
+      else if (matches($text, '^.{0,159}[.!?]\s')) then replace($text, '^(.{0,159}[.!?])\s.*$', '$1')
+      else replace($text, '^(.{0,156})\s.*$', '$1') || '…'"/>
+  </xsl:function>
   
   <xsl:template match="div[@class eq 'main']" mode="copyPage">
     <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
