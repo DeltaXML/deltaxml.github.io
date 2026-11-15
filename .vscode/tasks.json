@@ -33,6 +33,18 @@
 			"dependsOn": "createVSCodePages",
 			"group": "build",
 			"problemMatcher": []
+		},
+		{
+			// regenerates /sitemap.xml for Google Search Console from the user guide pages. lastmod comes from
+			// git, so run this on master after the built pages have been committed, then commit the sitemap
+			"type": "shell",
+			"label": "createSitemap",
+			"command": "zsh",
+			"args": [
+				"${workspaceFolder}/vscode-xslt-xpath/xsl/make-sitemap.sh"
+			],
+			"group": "build",
+			"problemMatcher": []
 		}
 	]
 }
