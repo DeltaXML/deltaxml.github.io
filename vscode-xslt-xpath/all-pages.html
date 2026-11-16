@@ -3921,9 +3921,9 @@ npm install --save-dev xslt3</code>
 				For a stylesheet with static errors, which can't be debugged, it gives the first of them.</p>
 
 			<h3 id="debugger--input-nodes">From the input to the templates</h3>
-			<p>When a debug session ends - including <strong>Run Without Debugging</strong>
-				(<span class="shortcut">Ctrl+F5</span>), which runs the stylesheet in the debugger without pausing, but
-				not Quick Run or an XSLT task - each node of the input files is linked to the
+			<p>When a debug session ends - including debugger runs without pausing using <strong>Debug: Start Without Debugging</strong>
+				(<span class="shortcut">Ctrl+F5</span>, or <strong>Run › Run Without Debugging</strong>)
+				- each node of the input files is linked to the
 				template rules that processed it: the one <code>xsl:apply-templates</code> chose, those
 				<code>xsl:next-match</code> or <code>xsl:apply-imports</code> went on to, or the built-in rules, when no
 				template matched it.</p>
