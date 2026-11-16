@@ -14,8 +14,8 @@
             <ul>
                 <li><strong><a href="schematron.html">Schematron</a></strong> - For editing, Schematron files are checked as
                     SchXslt2, the processor XSpec uses. There are quick fixes for any XSLT instructions
-                    that SchXslt2 ignores or doesn't run. Auto-completion follows ISO Schematron 2025,
-                    - and <strong>Schematron: Validate</strong> validates an XML file
+                    that SchXslt2 ignores or doesn't run. Auto-completion follows ISO Schematron 2025.
+                    <strong>Schematron: Validate</strong> validates an XML file
                     with a schema, with failed assertions shown in the Problems view. Messages in Schematron can use
                     <a href="schematron.html#text-value-templates">text value templates</a> - a non-standard extension,
                     with a setting - and <strong>Schematron: Export Standard Copy...</strong> writes a standardised copy that
