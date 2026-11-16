@@ -2518,7 +2518,7 @@
 		<div class="two-thirds column">
 			<p>Schematron files (<code>.sch</code>) are checked as you edit them, with auto-completion and
 				formatting. They're checked as <a href="https://codeberg.org/dmaus/schxslt2">SchXslt2</a> runs them:
-				SchXslt2 is the ISO Schematron processor included with XSpec, which compiles a schema to an XSLT 3.0
+				SchXslt2 1.11.3 - the ISO Schematron processor XSpec uses, as a patch update to XSpec's own copy - which compiles a schema to an XSLT 3.0
 				stylesheet - see <a href="#xspec--schematron">Testing a Schematron</a>.</p>
 
 			<details style="margin-bottom: 0">
@@ -4396,8 +4396,9 @@ npm install --save-dev xslt3</code>
 				commits, aren't removed.</p>
 			<h3 id="xspec--schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
-				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
-				XSpec), to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
+				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (1.11.3 
+				- a patch update to XSpec's own copy),
+				to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
 				expectations such as <code>x:expect-assert</code> and <code>x:expect-not-report</code> appear in the Test
 				Explorer with the labels XSpec gives them, e.g. <em>not assert a001</em>.</p>
 			<aside>Only a Schematron with an XSLT query binding, e.g. <code>queryBinding="xslt3"</code>, is supported -

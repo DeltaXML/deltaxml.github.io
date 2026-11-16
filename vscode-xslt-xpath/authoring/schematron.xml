@@ -9,7 +9,7 @@
 		<div class="two-thirds column">
 			<p>Schematron files (<code>.sch</code>) are checked as you edit them, with auto-completion and
 				formatting. They're checked as <a href="https://codeberg.org/dmaus/schxslt2">SchXslt2</a> runs them:
-				SchXslt2 is the ISO Schematron processor included with XSpec, which compiles a schema to an XSLT 3.0
+				SchXslt2 1.11.3 - the ISO Schematron processor XSpec uses, as a patch update to XSpec's own copy - which compiles a schema to an XSLT 3.0
 				stylesheet - see <a href="xspec.html#schematron">Testing a Schematron</a>.</p>
 
 			<details style="margin-bottom: 0">
