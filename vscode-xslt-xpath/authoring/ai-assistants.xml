@@ -40,12 +40,15 @@
 						<td><code>lint_file</code></td>
 						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
 							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
-							worse.</td>
+							worse. A module that another stylesheet imports or includes is checked with that top-level
+							stylesheet's declarations too, as in the editor: the one found for it in the workspace, or one the
+							assistant gives - for example, a stylesheet outside the workspace.</td>
 					</tr>
 					<tr>
 						<td><code>lint_files</code></td>
 						<td>The problems in each XSLT and XSpec file in a folder: a summary, then only the files with problems.
-							By default, warnings and errors - not hints, such as unused variables.</td>
+							By default, warnings and errors - not hints, such as unused variables. Files in hidden folders, such as
+								<code>.git</code>, and those the <code>files.exclude</code> setting hides aren't checked.</td>
 					</tr>
 					<tr>
 						<td><code>module_imports</code></td>
@@ -57,7 +60,9 @@
 						<td>Where a function, named template, global variable or parameter, mode, key, attribute set, accumulator,
 							item type or character map is declared, as seen from a module - with its parameters and types, and its
 							documentation: its <a href="xslt40-notes.html">documentation note</a>, or a comment just before it.
-							When more than one module declares it, the one used, with the highest import precedence, is first.</td>
+							When more than one module declares it, the one used, with the highest import precedence, is first.
+							As for <code>lint_file</code>, the assistant can give the top-level stylesheet the module is seen
+							from.</td>
 					</tr>
 					<tr>
 						<td><code>find_references</code></td>
@@ -68,7 +73,8 @@
 					<tr>
 						<td><code>describe_type</code></td>
 						<td>An XSLT 4.0 named item type: a record type's fields, with their types and <code>@field</code>
-							documentation, or an enumeration type's values.</td>
+							documentation, or an enumeration type's values - with a top-level stylesheet given, as for
+							<code>find_declaration</code>.</td>
 					</tr>
 					<tr>
 						<td><code>xpath_function</code></td>
