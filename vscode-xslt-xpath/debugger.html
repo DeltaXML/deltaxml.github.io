@@ -506,6 +506,12 @@
 				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
 					written to the Debug Console.</li>
 			</ul>
+			<figure>
+				<img src="resources/debug-output-mapping.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">Trace XSLT output back to the XSLT that created it - <strong>Peek Definition</strong> shows the instruction.</i></p>
+				</figcaption>
+			</figure>
 			<p>XML output can be traced back to the stylesheet. With the cursor on a line of the output, a hint at the
 				end of the line - e.g. <code>→ report.xsl:4</code> - shows where that part of the output was written.
 				To go there, use <strong>Go to XSLT Source</strong> on the output's context menu,
@@ -531,24 +537,40 @@
 				example, that the XML source file doesn't exist - or, for a dynamic error, its message, code and line.
 				For a stylesheet with static errors, which can't be debugged, it gives the first of them.</p>
 
-			<h3 id="input-nodes">From the input to the templates</h3>
+			<h3 id="input-nodes">From the input XML to the XSLT instruction</h3>
+			<figure>
+				<img src="resources/debug-xslt-mapping.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">XML input gutter highlights elements processed by XSLT instructions - <strong>Peek Definition</strong> shows the instruction.</i></p>
+				</figcaption>
+			</figure>
 			<p>When a debug session ends - including debugger runs without pausing using <strong>Debug: Start Without Debugging</strong>
 				(<span class="shortcut">Ctrl+F5</span>, or <strong>Run › Run Without Debugging</strong>)
 				- each node of the input files is linked to the
 				template rules that processed it: the one <code>xsl:apply-templates</code> chose, those
 				<code>xsl:next-match</code> or <code>xsl:apply-imports</code> went on to, or the built-in rules, when no
-				template matched it.</p>
+				template matched it - and the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and
+				<code>xsl:iterate</code> instructions that processed it. For <code>xsl:for-each-group</code>, that's
+				each member of each group, not only the first: a node in two groups is counted twice.</p>
 			<ul>
+				<li><strong>Markers</strong> - a bar in the gutter of the input file, and in its scrollbar - show the elements
+					there's something for: green for those a template rule or an instruction processed (or whose
+					attributes or text it did), amber for those only the built-in rules processed - no template matched
+					them. Elements with no marker weren't processed by either, e.g. only read by an XPath expression.</li>
 				<li><strong>Hover</strong> over an element's start tag in the input file: the templates that processed
 					it, and its attributes and text - e.g. <code>@product: match="@product" mode="attr"</code> - with the
 					number of times, if more than once, and a link to each template. Whitespace between elements that only
 					the built-in rules processed isn't listed.</li>
 				<li><strong>Go to Definition</strong> (<span class="shortcut">F12</span>) on the start tag goes to those
 					templates.</li>
-				<li>Above each template rule in the stylesheet: the number of nodes it processed - click it for the
+				<li>Above each template rule, <code>xsl:for-each</code>, <code>xsl:for-each-group</code> or
+					<code>xsl:iterate</code> in the stylesheet: the number of nodes it processed - click it for the
 					list.</li>
 			</ul>
-			<p>It's for the last run only, and for documents read from files - the XML source, and those read with
+			<p>Nodes that only an XPath expression reads aren't included: e.g. the steps of a path such as
+				<code>orders/order/line</code>, the items of <code>for $line in $lines return ...</code> or
+				<code>$lines ! ...</code>, or a node passed to a function.</p>
+			<p>It's for the last run only (<strong>XSLT: Clear Input Mapping</strong> removes it), and for documents read from files - the XML source, and those read with
 				<code>doc()</code> or <code>document()</code> - not trees the stylesheet constructs. The input file can
 				be edited, or formatted, after the run: an element is found again by its position among the file's
 				elements - but not once elements are added or removed before it.</p>
@@ -621,7 +643,7 @@
 		</div>
 
 	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints and hit counts</a></li><li><a href="#logpoints">Logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li><li><a href="#no-template-matched">Elements no template matched</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li><li><a href="#step-back">Going back</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li><li><a href="#empty-steps">Empty steps in paths</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a><ul><li><a href="#xdm-trace">Formatted values with xdm:trace()</a></li></ul></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#input-nodes">From the input to the templates</a></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints and hit counts</a></li><li><a href="#logpoints">Logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li><li><a href="#no-template-matched">Elements no template matched</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li><li><a href="#step-back">Going back</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li><li><a href="#empty-steps">Empty steps in paths</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a><ul><li><a href="#xdm-trace">Formatted values with xdm:trace()</a></li></ul></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#input-nodes">From the input XML to the XSLT instruction</a></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
