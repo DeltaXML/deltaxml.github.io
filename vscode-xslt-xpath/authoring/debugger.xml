@@ -474,7 +474,9 @@
 			<p>It's for the last run only (<strong>XSLT: Clear Input Mapping</strong> removes it), and for documents read from files - the XML source, and those read with
 				<code>doc()</code> or <code>document()</code> - not trees the stylesheet constructs. The input file can
 				be edited, or formatted, after the run: an element is found again by its position among the file's
-				elements - but not once elements are added or removed before it.</p>
+				elements - but not once elements are added or removed before it. An input file changed or replaced
+				outside VS Code, e.g. by a script or a git checkout, is taken to be another file: what was recorded
+				for it is removed.</p>
 			<p>Recording this, and the input each part of the output was written for, costs little time - with an input
 				of 400,000 nodes, about half a second more - but memory and data in proportion to the input and output. To
 				turn both off, e.g. for very large inputs, set <code>XSLT.debug.mapInputNodes</code> to
