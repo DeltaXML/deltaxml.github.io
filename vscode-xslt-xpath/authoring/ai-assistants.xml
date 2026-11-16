@@ -89,7 +89,12 @@
 				<code>run_configuration</code>'s command itself, if you allow it.</p>
 			<h4 id="mcp-copilot">GitHub Copilot</h4>
 			<p>With the server on, Copilot finds it by itself: its tools are listed with the other MCP tools in Copilot
-				Chat's agent mode.</p>
+				Chat's agent mode. There's no need to add it to an <code>mcp.json</code> file - it would then be listed
+					twice, and with a token that <strong>XSLT: Reset MCP Server Token</strong> would make out of date.</p>
+				<p>Visual Studio Code's <strong>MCP: List Servers</strong> command lists the server as
+					<strong>XSLT/XPath</strong>: choose it to start, stop or restart it, to see its tools, or to show its output.
+					The first time it starts, Visual Studio Code may ask you to trust it. When a new release of the extension
+					adds tools, Visual Studio Code finds them the next time the server starts.</p>
 			<h4 id="mcp-claude-code">Claude Code</h4>
 			<p>Run <strong>XSLT: Set Up MCP Server for Claude Code</strong> from the Command Palette - it offers to turn the
 				server on, if it isn't, and asks whether to set it up for this project - recommended, with a window for each
