@@ -8,8 +8,7 @@
 
 		<div class="two-thirds column">
 			<p>The extension's features, grouped by task, each linking to the part of this guide that describes it. Those
-				marked <span class="notable-key">★</span> are rarely found in other XML development environments.</p>
-
+				marked <span class="notable-key">★</span> are rarely found in other XML development environments.</p>			
 			<div class="feature-cards">
 
 				<section class="feature-card">
@@ -20,8 +19,8 @@
 					<ul>
 						<li><a href="xslt30.html">XSLT 3.0</a> and XPath 3.1</li>
 						<li class="notable"><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0 - as in Saxon 13</li>
-						<li><a href="xpath-queries.html">XPath</a>, <a href="xspec.html">XSpec</a> and <a href="schematron.html">Schematron</a></li>
-						<li><a href="editing-xslt.html#highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
+						<li class="notable"><a href="xspec.html">XSpec</a> testing and coverage</li>
+						<li class="notable"><a href="schematron.html">Schematron</a> with debugging</li>
 						<li><a href="editing.html">XML</a> editing, formatting and navigation</li>
 						<li><a href="xml-catalogs.html">XML catalogs</a> and <a href="xslt-packages.html#workspace-packages">package indexing</a> for imports</li>
 					</ul>
@@ -93,7 +92,7 @@
 							<a href="navigation.html#goto-symbol">Go to Symbol</a></li>
 						<li><a href="navigation.html#file-links">Links</a> for <code>xsl:import</code> and
 							<code>xsl:include</code></li>
-						<li class="notable"><a href="editing-xslt.html#inferred-imports">Inferred top-level stylesheets</a>,
+						<li class="notable"><a href="editing-xslt.html#inferred-imports">Inferred top-level modules</a>,
 							with <a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a></li>
 					</ul>
 				</section>
@@ -148,7 +147,7 @@
 						<li><a href="debugger.html#conditional">Conditional breakpoints and hit counts</a></li>
 						<li><a href="debugger.html#logpoints">Logpoints</a>, with formatted and colored values</li>
 						<li><a href="debugger.html#input-nodes">Inputs</a> and <a href="debugger.html#output">Outputs</a> map to the XSLT</li>
-						<li class="notable"><a href="profiler.html">Profiler</a> (Saxon-PE/EE) timings in the editor and Timeline</li>
+						<li class="notable"><a href="profiler.html">Profiler</a> timings in the editor and Timeline*</li>
 					</ul>
 				</section>
 
@@ -164,7 +163,7 @@
 						<li><a href="xspec.html#creating">Generate tests</a></li>
 						<li><a href="xspec.html#editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
 						<li class="notable"><a href="xspec.html#coverage">Test coverage</a> percentages and line margin highlights</li>
-						<li><a href="xspec.html#times">Timings</a> in Test Explorer and <a href="xspec.html#timeline">Timeline</a> (Saxon-PE/EE)</li>
+						<li><a href="xspec.html#times">Timings</a> in Test Explorer and <a href="xspec.html#timeline">Timeline</a>*</li>
 					</ul>
 				</section>
 
@@ -188,6 +187,8 @@
 					</ul>
 				</section>
 			</div>
+
+			<p class="feature-note">* Needs Saxon-PE or Saxon-EE. Everything else works with the free Saxon-HE.</p>
 		</div>
 
 	</div>

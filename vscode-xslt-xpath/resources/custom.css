@@ -526,6 +526,17 @@ body .feature-card li.notable::marker {
   }
 }
 
+.feature-note {
+  font-size: 0.85em;
+  color: #6b6b6b;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .feature-note {
+    color: #a0a0a0;
+  }
+}
+
 /* in all-pages.html, and so the PDF: a compact two-column table of the sections, in smaller text, so that the
    features fit on one sheet - the greys are translucent to suit both light and dark colour schemes */
 .all-pages .feature-cards {
