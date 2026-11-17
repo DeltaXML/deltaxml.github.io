@@ -34,6 +34,11 @@
                     instructions - that processed it, its attributes and its text - or the Schematron rules that fired
                     for it - and go to them; above each template or instruction, the nodes it processed. From the output view, go to the input that part of the
                     output was written for, as well as to the instruction that wrote it</li>
+                <li><strong><a href="ai-assistants.html#mcp">AI assistants that run your stylesheets</a></strong> (MCP,
+                    experimental) - the new <code>run_configuration</code> tool gives an assistant the exact Saxon command
+                    Quick Run would use for a stylesheet - your Saxon jar, XML context file, parameters, catalog and
+                    workspace packages - so what it runs gives the same result as yours. Each VS Code window now has its
+                    own server, so an assistant in a project's folder uses that project's window</li>
             </ul>
             <h3>Release 2.1</h3>
             <ul>
