@@ -50,7 +50,7 @@
 					</svg>
 					<h3 id="editing">Editing</h3>
 					<ul>
-						<li><a href="editing-xslt.html#intellisense">Context-aware auto-completion</a>, including node names from
+						<li class="notable"><a href="editing-xslt.html#intellisense">Context-aware auto-completion</a>, including node names from
 							the XML context file</li>
 						<li><a href="editing-xslt.html#hover">Signature help and hover help</a></li>
 						<li><a href="editing-xslt.html#xslt-instruction-snippets">Snippets</a>, including new stylesheets for 3.0
