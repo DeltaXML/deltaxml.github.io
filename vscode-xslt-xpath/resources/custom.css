@@ -504,6 +504,28 @@ figcaption {
   }
 }
 
+/* the features page: bullets for features rarely found in other XML environments are marked with a star, which is
+   a marker, so it also shows in all-pages.html and the PDF */
+.notable-key {
+  color: #d98200;
+}
+
+.feature-card li.notable {
+  font-weight: 600;
+}
+
+body .feature-card li.notable::marker {
+  content: "\2605  ";
+  color: #d98200;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .notable-key,
+  body .feature-card li.notable::marker {
+    color: #ffb340;
+  }
+}
+
 /* in all-pages.html, and so the PDF: a compact two-column table of the sections, in smaller text, so that the
    features fit on one sheet - the greys are translucent to suit both light and dark colour schemes */
 .all-pages .feature-cards {
