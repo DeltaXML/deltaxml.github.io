@@ -303,11 +303,11 @@
 					<h3 id="features--languages">XSLT and XPath languages</h3>
 					<ul>
 						<li><a href="#xslt30">XSLT 3.0</a> and XPath 3.1</li>
-						<li><a href="#xslt40">XSLT 4.0</a> and XPath 4.0, as implemented in Saxon 13</li>
-						<li>Advanced <a href="#xslt-packages">XSLT 3.0 package</a> features</li>
-						<li>SaxonJS interactive extensions (IXSL)</li>
+						<li><a href="#xslt40">XSLT 4.0</a> and XPath 4.0 - as in Saxon 13</li>
+						<li><a href="#xpath-queries">XPath</a>, <a href="#xspec">XSpec</a> and <a href="#schematron">Schematron</a> </li>
 						<li><a href="#editing-xslt--highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
 						<li><a href="#editing">XML</a> editing, formatting and navigation</li>
+						<li><a href="#xml-catalogs">XML catalogs</a> and <a href="#xslt-packages--workspace-packages">package indexing</a> for imports</li>
 					</ul>
 				</section>
 
@@ -356,10 +356,8 @@
 						<li>Types, records, enums and function arguments</li>
 						<li><a href="#editing-xslt--unused-variables">Unused XSLT and XPath variables or parameters</a></li>
 						<li>References across imported modules</li>
-						<li><a href="#editing-xslt--compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
-							Problems view</li>
 						<li><a href="#editing-xslt--quick-fixes">Quick fixes</a> for common problems</li>
-						<li><a href="#ai-assistants">MCP server</a> for AI assistants (experimental)</li>
+						<li><a href="#ai-assistants">MCP server</a> lint tools for AI assistants</li>
 					</ul>
 				</section>
 
@@ -381,7 +379,6 @@
 							<code>xsl:include</code></li>
 						<li><a href="#editing-xslt--the-xslt-imports-view">XSLT Imports view</a>, with
 							<a href="#editing-xslt--inferred-imports">inferred top-level stylesheets</a></li>
-						<li><a href="#xpath-queries">Find nodes with XPath</a> in XML files</li>
 					</ul>
 				</section>
 
@@ -413,9 +410,7 @@
 							<span class="shortcut">Ctrl+Alt+R</span>)</li>
 						<li><a href="#run-xslt">Tasks</a> for <a href="#run-xslt--saxonj-tasks">SaxonJ</a>,
 							<a href="#run-xslt--saxonjs-tasks">SaxonJS</a> and <a href="#run-xslt--saxonc-tasks">SaxonC</a></li>
-						<li><a href="#quick-run--required-parameters">Required <code>xsl:param</code> values</a> asked for when
-							a task runs</li>
-						<li><code>xsl:param</code> values controlled by tasks</li>
+						<li><code>xsl:param</code> values set by tasks or user prompts</li>
 						<li><a href="#xml-catalogs">XML catalogs</a> for <code>xsl:import</code> URIs</li>
 						<li><a href="#xslt-packages">XSLT Packages</a> - no configuration needed</li>
 						<li><a href="#run-xslt--user-input-for-file-selection-within-a-task">File pickers</a> for task
@@ -431,18 +426,13 @@
 					</svg>
 					<h3 id="features--debugging">Debugging</h3>
 					<ul>
-						<li><a href="#debugger">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
+						<li>Debug from <a href="#debugger">XSLT</a>, <a href="#schematron--debugging">Schematron</a> and <a href="#xspec--debugging">Xspec</a></li>
 						<li><a href="#debugger--xpath">Stepping through multi-line XPath</a></li>
 						<li><a href="#debugger--step-back">Step Back and Reverse Continue</a></li>
-						<li><a href="#schematron--debugging">Debugging a Schematron schema</a></li>
 						<li><a href="#debugger--conditional">Conditional breakpoints and hit counts</a></li>
 						<li><a href="#debugger--logpoints">Logpoints</a>, with formatted and colored values</li>
-						<li><a href="#debugger--variables">Views of the locals, globals, context and output</a></li>
-						<li><a href="#debugger--evaluating">Watch expressions, hovers and the Debug Console</a></li>
-						<li><a href="#debugger--output">The output so far</a>, mapped back to the XSLT that wrote it</li>
-						<li><a href="#code-diagnostics">Formatted and colored print debugging</a></li>
-						<li><a href="#profiler">Profiler</a>, with times in the editor and earlier profiles in the
-							Timeline (Saxon-PE/EE)</li>
+						<li><a href="#debugger--input-nodes">Inputs</a> and <a href="#debugger--output">Outputs</a> map to the XSLT</li>
+						<li><a href="#profiler">Profiler</a> (Saxon-PE/EE) timings in the editor and Timeline </li>
 					</ul>
 				</section>
 
@@ -454,15 +444,11 @@
 					<h3 id="features--xspec">Testing with XSpec</h3>
 					<ul>
 						<li><a href="#xspec--running">Test Explorer</a> for running tests and comparing output</li>
-						<li><a href="#xspec--debugging">Debug tests</a> in the XSpec file or from the XSLT source</li>
-						<li>Run <a href="#xspec--schematron">Schematron tests</a>, compiled with SchXslt2</li>
-						<li><a href="#schematron">Check Schematron</a> as SchXslt2 runs it, with quick fixes</li>
-						<li><a href="#xspec--creating">Generate tests</a> for a function or template</li>
+						<li>Debug <a href="#xspec--debugging">XSLT</a> or <a href="#xspec--schematron">Schematron</a> from test or source</li>
+						<li><a href="#xspec--creating">Generate tests</a></li>
 						<li><a href="#xspec--editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
 						<li><a href="#xspec--coverage">Test coverage</a> percentages and line margin highlights</li>
-						<li><a href="#xspec--times">Test times</a> in the Test Explorer and Timeline (Saxon-PE/EE)</li>
-						<li><a href="#xspec--navigation">Navigate</a> between tests and the underlying code</li>
-						<li><a href="#xspec--stylesheet-under-test">Checks and assistance</a> for component calls</li>
+						<li><a href="#xspec--times">Timings</a> in Test Explorer and <a href="#xspec--timeline">Timeline</a> (Saxon-PE/EE)</li>
 					</ul>
 				</section>
 
@@ -4964,12 +4950,15 @@ count(//item)
 						<td><code>lint_file</code></td>
 						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
 							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
-							worse.</td>
+							worse. A module that another stylesheet imports or includes is checked with that top-level
+							stylesheet's declarations too, as in the editor: the one found for it in the workspace, or one the
+							assistant gives - for example, a stylesheet outside the workspace.</td>
 					</tr>
 					<tr>
 						<td><code>lint_files</code></td>
 						<td>The problems in each XSLT and XSpec file in a folder: a summary, then only the files with problems.
-							By default, warnings and errors - not hints, such as unused variables.</td>
+							By default, warnings and errors - not hints, such as unused variables. Files in hidden folders, such as
+								<code>.git</code>, and those the <code>files.exclude</code> setting hides aren't checked.</td>
 					</tr>
 					<tr>
 						<td><code>module_imports</code></td>
@@ -4981,7 +4970,9 @@ count(//item)
 						<td>Where a function, named template, global variable or parameter, mode, key, attribute set, accumulator,
 							item type or character map is declared, as seen from a module - with its parameters and types, and its
 							documentation: its <a href="#xslt40-notes">documentation note</a>, or a comment just before it.
-							When more than one module declares it, the one used, with the highest import precedence, is first.</td>
+							When more than one module declares it, the one used, with the highest import precedence, is first.
+							As for <code>lint_file</code>, the assistant can give the top-level stylesheet the module is seen
+							from.</td>
 					</tr>
 					<tr>
 						<td><code>find_references</code></td>
@@ -4992,7 +4983,8 @@ count(//item)
 					<tr>
 						<td><code>describe_type</code></td>
 						<td>An XSLT 4.0 named item type: a record type's fields, with their types and <code>@field</code>
-							documentation, or an enumeration type's values.</td>
+							documentation, or an enumeration type's values - with a top-level stylesheet given, as for
+							<code>find_declaration</code>.</td>
 					</tr>
 					<tr>
 						<td><code>xpath_function</code></td>

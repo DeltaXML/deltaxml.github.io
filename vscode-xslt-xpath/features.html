@@ -159,11 +159,11 @@
 					<h3 id="languages">XSLT and XPath languages</h3>
 					<ul>
 						<li><a href="xslt30.html">XSLT 3.0</a> and XPath 3.1</li>
-						<li><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0, as implemented in Saxon 13</li>
-						<li>Advanced <a href="xslt-packages.html">XSLT 3.0 package</a> features</li>
-						<li>SaxonJS interactive extensions (IXSL)</li>
+						<li><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0 - as in Saxon 13</li>
+						<li><a href="xpath-queries.html">XPath</a>, <a href="xspec.html">XSpec</a> and <a href="schematron.html">Schematron</a> </li>
 						<li><a href="editing-xslt.html#highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
 						<li><a href="editing.html">XML</a> editing, formatting and navigation</li>
+						<li><a href="xml-catalogs.html">XML catalogs</a> and <a href="xslt-packages.html#workspace-packages">package indexing</a> for imports</li>
 					</ul>
 				</section>
 
@@ -212,10 +212,8 @@
 						<li>Types, records, enums and function arguments</li>
 						<li><a href="editing-xslt.html#unused-variables">Unused XSLT and XPath variables or parameters</a></li>
 						<li>References across imported modules</li>
-						<li><a href="editing-xslt.html#compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
-							Problems view</li>
 						<li><a href="editing-xslt.html#quick-fixes">Quick fixes</a> for common problems</li>
-						<li><a href="ai-assistants.html">MCP server</a> for AI assistants (experimental)</li>
+						<li><a href="ai-assistants.html">MCP server</a> lint tools for AI assistants</li>
 					</ul>
 				</section>
 
@@ -237,7 +235,6 @@
 							<code>xsl:include</code></li>
 						<li><a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>, with
 							<a href="editing-xslt.html#inferred-imports">inferred top-level stylesheets</a></li>
-						<li><a href="xpath-queries.html">Find nodes with XPath</a> in XML files</li>
 					</ul>
 				</section>
 
@@ -269,9 +266,7 @@
 							<span class="shortcut">Ctrl+Alt+R</span>)</li>
 						<li><a href="run-xslt.html">Tasks</a> for <a href="run-xslt.html#saxonj-tasks">SaxonJ</a>,
 							<a href="run-xslt.html#saxonjs-tasks">SaxonJS</a> and <a href="run-xslt.html#saxonc-tasks">SaxonC</a></li>
-						<li><a href="quick-run.html#required-parameters">Required <code>xsl:param</code> values</a> asked for when
-							a task runs</li>
-						<li><code>xsl:param</code> values controlled by tasks</li>
+						<li><code>xsl:param</code> values set by tasks or user prompts</li>
 						<li><a href="xml-catalogs.html">XML catalogs</a> for <code>xsl:import</code> URIs</li>
 						<li><a href="xslt-packages.html">XSLT Packages</a> - no configuration needed</li>
 						<li><a href="run-xslt.html#user-input-for-file-selection-within-a-task">File pickers</a> for task
@@ -287,18 +282,13 @@
 					</svg>
 					<h3 id="debugging">Debugging</h3>
 					<ul>
-						<li><a href="debugger.html">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
+						<li>Debug from <a href="debugger.html">XSLT</a>, <a href="schematron.html#debugging">Schematron</a> and <a href="xspec.html#debugging">Xspec</a></li>
 						<li><a href="debugger.html#xpath">Stepping through multi-line XPath</a></li>
 						<li><a href="debugger.html#step-back">Step Back and Reverse Continue</a></li>
-						<li><a href="schematron.html#debugging">Debugging a Schematron schema</a></li>
 						<li><a href="debugger.html#conditional">Conditional breakpoints and hit counts</a></li>
 						<li><a href="debugger.html#logpoints">Logpoints</a>, with formatted and colored values</li>
-						<li><a href="debugger.html#variables">Views of the locals, globals, context and output</a></li>
-						<li><a href="debugger.html#evaluating">Watch expressions, hovers and the Debug Console</a></li>
-						<li><a href="debugger.html#output">The output so far</a>, mapped back to the XSLT that wrote it</li>
-						<li><a href="code-diagnostics.html">Formatted and colored print debugging</a></li>
-						<li><a href="profiler.html">Profiler</a>, with times in the editor and earlier profiles in the
-							Timeline (Saxon-PE/EE)</li>
+						<li><a href="debugger.html#input-nodes">Inputs</a> and <a href="debugger.html#output">Outputs</a> map to the XSLT</li>
+						<li><a href="profiler.html">Profiler</a> (Saxon-PE/EE) timings in the editor and Timeline </li>
 					</ul>
 				</section>
 
@@ -310,15 +300,11 @@
 					<h3 id="xspec">Testing with XSpec</h3>
 					<ul>
 						<li><a href="xspec.html#running">Test Explorer</a> for running tests and comparing output</li>
-						<li><a href="xspec.html#debugging">Debug tests</a> in the XSpec file or from the XSLT source</li>
-						<li>Run <a href="xspec.html#schematron">Schematron tests</a>, compiled with SchXslt2</li>
-						<li><a href="schematron.html">Check Schematron</a> as SchXslt2 runs it, with quick fixes</li>
-						<li><a href="xspec.html#creating">Generate tests</a> for a function or template</li>
+						<li>Debug <a href="xspec.html#debugging">XSLT</a> or <a href="xspec.html#schematron">Schematron</a> from test or source</li>
+						<li><a href="xspec.html#creating">Generate tests</a></li>
 						<li><a href="xspec.html#editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
 						<li><a href="xspec.html#coverage">Test coverage</a> percentages and line margin highlights</li>
-						<li><a href="xspec.html#times">Test times</a> in the Test Explorer and Timeline (Saxon-PE/EE)</li>
-						<li><a href="xspec.html#navigation">Navigate</a> between tests and the underlying code</li>
-						<li><a href="xspec.html#stylesheet-under-test">Checks and assistance</a> for component calls</li>
+						<li><a href="xspec.html#times">Timings</a> in Test Explorer and <a href="xspec.html#timeline">Timeline</a> (Saxon-PE/EE)</li>
 					</ul>
 				</section>
 
