@@ -20,7 +20,7 @@
 				<li><strong>XSpec in the editor.</strong> <a href="xspec.html#debugging">Debug a test</a> from the XSpec
 					file or the XSLT, with <a href="xspec.html#coverage">coverage</a> in the editor's margin and
 					<a href="xspec.html#times">test times</a> in the Test Explorer.</li>
-				<li><strong>XSLT 4.0 as in Saxon 13.</strong> <a href="xslt40-records.html">Record and enum
+				<li><strong>XSLT 4.0 with Saxon 13.</strong> <a href="xslt40-records.html">Record and enum
 					types</a> checked as you type, and <a href="xslt40-jnodes.html">path expressions on JSON</a>.</li>
 				<li><strong>Checks that understand XPath.</strong> Every variable, function and template reference is
 					<a href="editing-xslt.html#checking">checked as you type</a>, across imported modules, without
