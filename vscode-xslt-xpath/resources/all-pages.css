@@ -232,11 +232,6 @@
     break-before: page;
   }
 
-  /* the Features page's cards start on a new sheet, after its 'Where it goes further' list */
-  #features .feature-cards {
-    break-before: page;
-  }
-
   .doc-page > .pageTitle {
     string-set: page-title content();
   }
