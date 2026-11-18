@@ -100,6 +100,11 @@
 				removed, not other entries such as Git commits.</p>
 			<aside>The Timeline view's profiles need VS Code 1.145 or later, and a folder open in VS Code.</aside>
 
+			<h3 id="schematron">Profiling a Schematron schema</h3>
+			<p>A Schematron schema is profiled in the same view: <strong>Schematron: Profile: the XML Context File</strong>
+				times each rule and global <code>let</code> - see <a href="schematron.html#profiling">Profiling a
+				schema</a>.</p>
+
 			<h3 id="accuracy">What the times show</h3>
 			<ul>
 				<li>Saxon times the run with tracing on, which turns off some of its optimisations, so the times are

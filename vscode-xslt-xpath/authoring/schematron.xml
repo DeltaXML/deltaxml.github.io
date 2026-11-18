@@ -149,6 +149,40 @@
 				(<span class="shortcut">F12</span>) goes to them - see <a href="debugger.html#input-nodes">From the input
 				to the templates</a>.</p>
 
+			<h3 id="profiling">Profiling a schema</h3>
+			<figure>
+				<img src="resources/schematron-profiler.png" class="scale-with-grid" />
+				<figcaption>
+					A profiled schema: each rule's time in the Profile view, and above the rule in the schema - click a
+					row to go to the rule. Each profile is also kept in the schema's Timeline.
+				</figcaption>
+			</figure>
+			<p>To find which rules take the time, run <strong>Schematron: Profile: the XML Context File</strong> - from the
+				Command Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title
+				bar. The schema runs as it does for <a href="#debugging">debugging</a> - SchXslt2 compiles it, with its
+				phase, and Saxon runs the result on the schema's <a href="#validating">XML context file</a>, timing each
+				template, function and global variable - and the times are shown in the <a
+				href="profiler.html#view">Profile view</a>, as for a stylesheet.</p>
+			<ul>
+				<li><strong>Rows</strong> - each rule, with its pattern, the number of times it fired, and its net and
+					gross time - and each global <code>sch:let</code> and <code>sch:param</code>. The rules of an abstract
+					pattern are added up over each rule that extends it. A click goes to the rule in the schema, or the
+					file it's in.</li>
+				<li><strong>Functions</strong> of the XSLT modules the schema uses, e.g. with <code>xsl:include</code>,
+					are rows as in a stylesheet's profile. SchXslt2's own templates and functions are left out.</li>
+				<li><strong>In the editor</strong> - while the view is open, each rule and global <code>let</code> shows
+					its times above it in the schema, and in the files it includes.</li>
+				<li><strong>Timeline</strong> - each profile is kept in the schema's Timeline view, to show again and
+					compare, as for a stylesheet.</li>
+			</ul>
+			<p>A rule's time is that of its template: its <code>let</code>s, assertions and reports, and what they call.
+				Saxon times templates, functions and globals, not each instruction, so there's a time for a rule but not
+				for an assertion in it - to find a slow assertion, try removing or simplifying one at a time, or step
+				through the rule in the <a href="#debugging">debugger</a>. The times are from a run with tracing on:
+				<a href="profiler.html#accuracy">compare them with each other</a>. It needs Saxon-PE or Saxon-EE, and
+				uses the same <code>XSLT.tasks.profileRuns</code> setting for <a href="profiler.html#runs">warm-up
+				runs</a>.</p>
+
 			<h3 id="editing">Editing</h3>
 			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
 				e.g. <code>sch:group</code>, <code>sch:param</code>, an assertion's <code>severity</code>, and a phase's

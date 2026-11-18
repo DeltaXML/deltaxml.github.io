@@ -24,7 +24,8 @@
                 <li><strong><a href="profiler.html">Profiler</a></strong> - profile any XSLT with Saxon-PE/EE 
                     to see a breakdown on performance: the time of each template, function and global variable, the
                     slowest first, with times above the declarations in the editor, warm-up runs left out, and earlier
-                    profiles appear in the Timeline view for comparison</li>
+                    profiles appear in the Timeline view for comparison. A <a href="schematron.html#profiling">Schematron
+                    schema</a> is profiled the same way, with the time of each rule</li>
                 <li><strong><a href="xspec.html#times">XSpec test times</a></strong> - with Saxon-PE/EE,
                     the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
                     long its tests took on each run</li>
