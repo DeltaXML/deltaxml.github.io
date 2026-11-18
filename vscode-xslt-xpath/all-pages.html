@@ -3929,7 +3929,10 @@ npm install --save-dev xslt3</code>
 				<li><strong>Markers</strong> - a bar in the gutter of the input file, and in its scrollbar - show the elements
 					there's something for: green for those a template rule or an instruction processed (or whose
 					attributes or text it did), amber for those only the built-in rules processed - no template matched
-					them. Elements with no marker weren't processed by either, e.g. only read by an XPath expression.</li>
+					them. Elements with no marker weren't processed by either, e.g. only read by an XPath expression. When
+					debugging a <a href="#schematron--debugging">Schematron schema</a>, the bar is blue, not green: a rule
+					checked the element - which isn't that it's valid, as an assertion may have failed. The problems say
+					that.</li>
 				<li><strong>Hover</strong> over an element's start tag in the input file: the templates that processed
 					it, and its attributes and text - e.g. <code>@product: match="@product" mode="attr"</code> - with the
 					number of times, if more than once, and a link to each template. Whitespace between elements that only
