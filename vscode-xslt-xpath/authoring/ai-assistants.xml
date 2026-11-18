@@ -112,6 +112,16 @@
 			<p>If the <code>claude</code> command isn't found - for example, it isn't on the path Visual Studio Code
 				uses - the <code>claude mcp add</code> command is copied instead: run it in a terminal - for one project, in
 				that project's folder.</p>
+			<p>In a workspace with several folders, choose the folder that Claude Code is started in. The server can see
+				all the folders, and the tools' relative paths - and the paths they show - are from that folder, not the
+				workspace's first. The set-up is for one folder: to use Claude Code in another folder of the workspace, run
+				the command again and choose it. A folder added to the workspace later needs the same - the server itself
+				doesn't change. The assistant is told the paths of the workspace's folders when it connects - and
+				<code>run_configuration</code> lists them - so it can check a file in any of them.</p>
+			<aside>These choices are about which Claude Code sessions use the server, and where its relative paths start - not
+				what it can reach. The window's server serves all of its workspace folders however it's set up, and a tool given an
+				absolute path can check any file. What protects your files is the token and the local-only connection, described
+				below.</aside>
 			<h4 id="mcp-security">Security</h4>
 			<p>The server only accepts connections from your own computer (<code>127.0.0.1</code>), and each request needs
 				a token that the extension makes once and keeps in Visual Studio Code's secret storage - it doesn't expire.
