@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -75,7 +77,7 @@
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
-				<li><a href="refactoring-xslt.html" class="active">Refactoring</a></li>
+				<li><a href="refactoring-xslt.html" class="active" aria-current="page">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="xslt-packages.html">XSLT Packages</a></li>
 				<li><a href="schematron.html">Schematron</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Refactoring</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Refactoring</h2>
 		
 		<div class="two-thirds column">
 			<p>The <a href="editing-xslt.html#refactoring">Refactoring</a> section of the Editing XSLT/XPath part
@@ -210,8 +212,8 @@
 			</table>
 		</div>
 		
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#intro">Introduction</a><ul><li><a href="#partial-mode">Partial Mode</a></li><li><a href="#full-mode">Full Mode</a></li></ul></li><li><a href="#example">A Sample Refactor</a></li><li><a href="#restrictions">Known Restrictions</a></li><li><a href="#context-properties">Context Properties</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#intro">Introduction</a><ul><li><a href="#partial-mode">Partial Mode</a></li><li><a href="#full-mode">Full Mode</a></li></ul></li><li><a href="#example">A Sample Refactor</a></li><li><a href="#restrictions">Known Restrictions</a></li><li><a href="#context-properties">Context Properties</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

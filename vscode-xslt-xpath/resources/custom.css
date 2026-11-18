@@ -242,7 +242,7 @@ nav li.nav-heading {
   font-weight: bold;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: #6b6b6b;
 }
 
 /* below the nav's list of pages: the whole guide, to print or as a PDF */
@@ -590,7 +590,7 @@ body .feature-card li.notable::marker {
   font-weight: bold;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: #6b6b6b;
 }
 
 .page-toc ul {
@@ -829,5 +829,34 @@ body .feature-card li.notable::marker {
   a,
   a:visited {
     color: #0057a0;
+  }
+}
+/* off-screen until it takes keyboard focus, so keyboard and screen-reader users can jump past the nav */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 8px 14px;
+  background: #fff;
+  color: #0071BC;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+/* the main region takes focus from the skip link, which needs no outline */
+main:focus {
+  outline: none;
+}
+
+/* the nav's group headings and 'On this page' title: dark enough to read on white, light enough on the dark theme */
+@media screen and (prefers-color-scheme: dark) {
+  nav li.nav-heading,
+  .page-toc-title {
+    color: #a0a0a0;
   }
 }

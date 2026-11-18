@@ -254,10 +254,10 @@
     <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
     <xsl:param name="mainDiv" as="element()" tunnel="yes"/>
 
-    <div class="main">
+    <main class="main" id="main" tabindex="-1">
       <h2 class="pageTitle">{$pageTitle}</h2>
       <xsl:apply-templates select="$mainDiv/node()" mode="content"/>
-    </div>
+    </main>
   </xsl:template>
 
   <!-- the page's content, with an id on each heading listed in 'On this page' -->
@@ -284,7 +284,7 @@
       <xsl:apply-templates select="@* | node()" mode="#current"/>
       <xsl:variable name="headings" as="element()*" select="$mainDiv//(h3 | h4 | h5)"/>
       <xsl:if test="count($headings[self::h3]) ge 2">
-        <div class="page-toc">
+        <div class="page-toc" role="navigation" aria-label="On this page">
           <p class="page-toc-title">On this page</p>
           <ul>
             <xsl:for-each-group select="$headings" group-starting-with="h3">
@@ -313,6 +313,7 @@
       
       <xsl:if test="$filePart eq @href">
         <xsl:attribute name="class" select="'active'"/>
+        <xsl:attribute name="aria-current" select="'page'"/>
       </xsl:if>
       <xsl:apply-templates select="node()" mode="#current"/>
     </xsl:copy>

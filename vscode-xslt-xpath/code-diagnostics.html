@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -85,7 +87,7 @@
 				<li><a href="debugger.html">Debugger</a></li>
 				<li><a href="profiler.html">Profiler</a></li>
 				<li><a href="xspec.html">XSpec Tests</a></li>
-				<li><a href="code-diagnostics.html" class="active">Print Debugging</a></li>
+				<li><a href="code-diagnostics.html" class="active" aria-current="page">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Print Debugging</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Print Debugging</h2>
 
 		<div class="two-thirds column">
 			<p>To set breakpoints and step through a stylesheet, see the <a href="debugger.html">Debugger</a>.</p>
@@ -268,8 +270,8 @@ xdm:trace($value as item()*, $label as xs:string?, $useColor as xs:boolean) as i
 			</ul>
 		</div>
 
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a><ul><li><a href="#1-use-auto-complete-for-xsl-message">1. Use Auto-complete for xsl:message</a></li><li><a href="#2-review-inserted-xsl-message">2. Review Inserted xsl:message</a></li><li><a href="#3-quick-fix-include-the-xdm-view-library">3. Quick Fix: Include the xdm-view Library</a></li><li><a href="#4-run-xslt-and-review-state-in-terminal">4. Run XSLT and Review State in Terminal</a></li><li><a href="#5-benefits-of-xdm-debug-over-fn-serialize">5. Benefits of xdm:debug() over fn:serialize()</a></li></ul></li><li><a href="#xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a><ul><li><a href="#1-use-auto-complete-for-xsl-message">1. Use Auto-complete for xsl:message</a></li><li><a href="#2-review-inserted-xsl-message">2. Review Inserted xsl:message</a></li><li><a href="#3-quick-fix-include-the-xdm-view-library">3. Quick Fix: Include the xdm-view Library</a></li><li><a href="#4-run-xslt-and-review-state-in-terminal">4. Run XSLT and Review State in Terminal</a></li><li><a href="#5-benefits-of-xdm-debug-over-fn-serialize">5. Benefits of xdm:debug() over fn:serialize()</a></li></ul></li><li><a href="#xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

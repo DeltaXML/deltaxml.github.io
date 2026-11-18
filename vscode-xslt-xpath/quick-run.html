@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -80,7 +82,7 @@
 				<li><a href="xslt-packages.html">XSLT Packages</a></li>
 				<li><a href="schematron.html">Schematron</a></li>
 				<li class="nav-heading">Running and Debugging</li>
-				<li><a href="quick-run.html" class="active">Quick Run</a></li>
+				<li><a href="quick-run.html" class="active" aria-current="page">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
 				<li><a href="debugger.html">Debugger</a></li>
 				<li><a href="profiler.html">Profiler</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Quick Run</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Quick Run</h2>
 
 		<div class="two-thirds column">
 			<p>
@@ -404,8 +406,8 @@
 			</aside>
 		</div>
 
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#running-a-stylesheet">Running a stylesheet</a></li><li><a href="#modules">Running a module that another stylesheet imports</a></li><li><a href="#choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#first-use-a-task-is-created-for-you">First use: a task is created for you</a><ul><li><a href="#required-parameters">Required parameters</a></li></ul></li><li><a href="#subsequent-runs">Subsequent runs</a><ul><li><a href="#edit-task">Editing the task</a></li></ul></li><li><a href="#initial-template">Starting from xsl:initial-template</a></li><li><a href="#running-from-an-xml-file">Running from an XML file</a></li><li><a href="#context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#running-a-stylesheet">Running a stylesheet</a></li><li><a href="#modules">Running a module that another stylesheet imports</a></li><li><a href="#choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#first-use-a-task-is-created-for-you">First use: a task is created for you</a><ul><li><a href="#required-parameters">Required parameters</a></li></ul></li><li><a href="#subsequent-runs">Subsequent runs</a><ul><li><a href="#edit-task">Editing the task</a></li></ul></li><li><a href="#initial-template">Starting from xsl:initial-template</a></li><li><a href="#running-from-an-xml-file">Running from an XML file</a></li><li><a href="#context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

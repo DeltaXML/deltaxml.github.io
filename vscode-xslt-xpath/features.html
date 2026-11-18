@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,14 +63,14 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
 				<li><a href="new-release.html">What's New</a></li>
-				<li><a href="features.html" class="active">Features</a></li>
+				<li><a href="features.html" class="active" aria-current="page">Features</a></li>
 				<li><a href="vscode.html">Using VS Code</a></li>
 				<li><a href="settings.html">Settings</a></li>
 				<li class="nav-heading">Editing</li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Features</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Features</h2>
 
 		<div class="two-thirds column">
 			<p>The extension's features, grouped by task, each linking to the part of this guide that describes it. Those
@@ -290,8 +292,8 @@
 			<p class="feature-note">* Timings need Saxon-PE or Saxon-EE. Everything else works with the free Saxon-HE.</p>
 		</div>
 
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#languages">XSLT and XPath languages</a></li><li><a href="#xslt40">XSLT 4.0</a></li><li><a href="#editing">Editing</a></li><li><a href="#linter">Linter</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#refactoring">Refactoring</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#debugging">Debugging and Profiling</a></li><li><a href="#xspec">Testing with XSpec</a></li><li><a href="#code-documentation">Code documentation</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#languages">XSLT and XPath languages</a></li><li><a href="#xslt40">XSLT 4.0</a></li><li><a href="#editing">Editing</a></li><li><a href="#linter">Linter</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#refactoring">Refactoring</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#debugging">Debugging and Profiling</a></li><li><a href="#xspec">Testing with XSpec</a></li><li><a href="#code-documentation">Code documentation</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

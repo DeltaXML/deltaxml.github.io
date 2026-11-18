@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -89,7 +91,7 @@
 				<li class="nav-heading">Tools</li>
 				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
-				<li><a href="ai-assistants.html" class="active">AI Assistants</a></li>
+				<li><a href="ai-assistants.html" class="active" aria-current="page">AI Assistants</a></li>
 				<li class="nav-heading">XSLT Language</li>
 				<li><a href="xslt30.html">XSLT 3.0</a></li>
 				<li><a href="xslt40.html">XSLT 4.0</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">AI Assistants</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">AI Assistants</h2>
 
 		<div class="two-thirds column">
 			<p>AI coding assistants in Visual Studio Code - such as GitHub Copilot or Claude Code - can make good use of the
@@ -270,8 +272,8 @@
 				assistant can check such a file with <code>lint_file</code>.</p>
 		</div>
 
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#problems">Fixing problems</a></li><li><a href="#mcp">The MCP server (experimental)</a><ul><li><a href="#mcp-copilot">GitHub Copilot</a></li><li><a href="#mcp-claude-code">Claude Code</a></li><li><a href="#mcp-security">Security</a></li></ul></li><li><a href="#notes">Documentation notes</a></li><li><a href="#debugging">Debugging output</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#agents-window">The Agents window</a></li><li><a href="#limitations">Current limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#problems">Fixing problems</a></li><li><a href="#mcp">The MCP server (experimental)</a><ul><li><a href="#mcp-copilot">GitHub Copilot</a></li><li><a href="#mcp-claude-code">Claude Code</a></li><li><a href="#mcp-security">Security</a></li></ul></li><li><a href="#notes">Documentation notes</a></li><li><a href="#debugging">Debugging output</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#agents-window">The Agents window</a></li><li><a href="#limitations">Current limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

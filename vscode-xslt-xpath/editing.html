@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -72,7 +74,7 @@
 				<li><a href="vscode.html">Using VS Code</a></li>
 				<li><a href="settings.html">Settings</a></li>
 				<li class="nav-heading">Editing</li>
-				<li><a href="editing.html" class="active">Editing XML</a></li>
+				<li><a href="editing.html" class="active" aria-current="page">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Editing XML</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Editing XML</h2>
 		
 		<div class="two-thirds column">
 			<p>XSLT developers benefit from a set of XML editing features that are also available for any XML file.
@@ -224,8 +226,8 @@
 				see <a href="xpath-queries.html">Find Nodes with XPath</a>.</p>
 		</div>
 		
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#xml-elements">XML Elements</a><ul><li><a href="#rename-tag">Rename Tag</a></li><li><a href="#self-close-element">Self-Close Element</a></li><li><a href="#rename-all-elements-with-selected-name">Rename all elements with selected name</a></li><li><a href="#auto-tag-close">Auto tag-close</a></li></ul></li><li><a href="#auto-completion">Auto-Completion</a></li><li><a href="#emmet">Emmet</a></li><li><a href="#well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#entities">Entities</a></li><li><a href="#xmlformatting">XML Formatting</a><ul><li><a href="#tab-on-an-empty-line">Tab on an Empty Line</a></li></ul></li><li><a href="#xml-element-selection">XML Element Selection</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#xml-elements">XML Elements</a><ul><li><a href="#rename-tag">Rename Tag</a></li><li><a href="#self-close-element">Self-Close Element</a></li><li><a href="#rename-all-elements-with-selected-name">Rename all elements with selected name</a></li><li><a href="#auto-tag-close">Auto tag-close</a></li></ul></li><li><a href="#auto-completion">Auto-Completion</a></li><li><a href="#emmet">Emmet</a></li><li><a href="#well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#entities">Entities</a></li><li><a href="#xmlformatting">XML Formatting</a><ul><li><a href="#tab-on-an-empty-line">Tab on an Empty Line</a></li></ul></li><li><a href="#xml-element-selection">XML Element Selection</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

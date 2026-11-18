@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -78,7 +80,7 @@
 				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="xslt-packages.html">XSLT Packages</a></li>
-				<li><a href="schematron.html" class="active">Schematron</a></li>
+				<li><a href="schematron.html" class="active" aria-current="page">Schematron</a></li>
 				<li class="nav-heading">Running and Debugging</li>
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Schematron</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Schematron</h2>
 
 		<div class="two-thirds column">
 			<p>Schematron files (<code>.sch</code>) are checked as you edit them, with auto-completion and
@@ -453,8 +455,8 @@
 				another processor: <code>java -jar saxon.jar -s:schema.sch -xsl:expand-text.xsl
 				-o:schema-standard.sch</code>.</p>
 		</div>
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#debugging">Debugging a schema</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li><li><a href="#text-value-templates">Text value templates in messages</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#debugging">Debugging a schema</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li><li><a href="#text-value-templates">Text value templates in messages</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -73,7 +75,7 @@
 				<li><a href="settings.html">Settings</a></li>
 				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
-				<li><a href="editing-xslt.html" class="active">Editing XSLT/XPath</a></li>
+				<li><a href="editing-xslt.html" class="active" aria-current="page">Editing XSLT/XPath</a></li>
 				<li><a href="navigation.html">Code Navigation</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Editing XSLT/XPath</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Editing XSLT/XPath</h2>
 		
 		<div class="two-thirds column">
 			<p>With <a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">DeltaXignia's XSLT/XPath extension</a>,
@@ -537,8 +539,8 @@
 		<aside>An <code>href</code> can also be a URI that an XML catalog maps to a file, e.g.
 			<code>http://example.com/xslt/strings.xsl</code> - see <a href="xml-catalogs.html">XML Catalogs</a>.</aside>
 		</div>
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#highlighting">Syntax Highlighting</a><ul><li><a href="#xslt-xpath-dark-color-themes">XSLT/XPath Dark Color Themes</a></li></ul></li><li><a href="#formatting">Formatting</a></li><li><a href="#folding">Folding</a></li><li><a href="#inferred-imports">Imports and Top-Level Stylesheets</a><ul><li><a href="#shadow-href">Imports with a _href shadow attribute</a></li><li><a href="#the-xslt-imports-view">The XSLT Imports view</a></li></ul></li><li><a href="#intellisense">IntelliSense (Auto Complete)</a><ul><li><a href="#hover">Hover Help and Signature Help</a></li><li><a href="#intellisense-for-xpath-locations">IntelliSense for XPath Locations</a></li><li><a href="#locking-the-context-file">Locking the context file</a></li><li><a href="#variables-and-xpath-locations">Variables and XPath Locations</a></li><li><a href="#triggering-the-auto-complete-list">Triggering the auto-complete list</a></li><li><a href="#xpath-expressions-and-operators">XPath Expressions and Operators</a></li><li><a href="#parameters-for-xsl-call-template">Parameters for xsl:call-template</a></li><li><a href="#xslt-instruction-snippets">XSLT Instruction Snippets</a></li><li><a href="#more-snippets">More Snippets</a></li></ul></li><li><a href="#bracket-matching">Bracket Matching</a></li><li><a href="#renaming">Symbol Renaming</a></li><li><a href="#refactoring">Code Refactoring</a><ul><li><a href="#quick-fixes">Quick Fixes</a></li></ul></li><li><a href="#checking">XSLT Linter</a><ul><li><a href="#mode-checks">Checks on modes</a></li><li><a href="#union-priorities">Union patterns and XSLT 4.0</a></li><li><a href="#unused-variables">Unused Variables</a></li><li><a href="#compile-time-and-run-time-problems">Compile-time and Run-time problems</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#highlighting">Syntax Highlighting</a><ul><li><a href="#xslt-xpath-dark-color-themes">XSLT/XPath Dark Color Themes</a></li></ul></li><li><a href="#formatting">Formatting</a></li><li><a href="#folding">Folding</a></li><li><a href="#inferred-imports">Imports and Top-Level Stylesheets</a><ul><li><a href="#shadow-href">Imports with a _href shadow attribute</a></li><li><a href="#the-xslt-imports-view">The XSLT Imports view</a></li></ul></li><li><a href="#intellisense">IntelliSense (Auto Complete)</a><ul><li><a href="#hover">Hover Help and Signature Help</a></li><li><a href="#intellisense-for-xpath-locations">IntelliSense for XPath Locations</a></li><li><a href="#locking-the-context-file">Locking the context file</a></li><li><a href="#variables-and-xpath-locations">Variables and XPath Locations</a></li><li><a href="#triggering-the-auto-complete-list">Triggering the auto-complete list</a></li><li><a href="#xpath-expressions-and-operators">XPath Expressions and Operators</a></li><li><a href="#parameters-for-xsl-call-template">Parameters for xsl:call-template</a></li><li><a href="#xslt-instruction-snippets">XSLT Instruction Snippets</a></li><li><a href="#more-snippets">More Snippets</a></li></ul></li><li><a href="#bracket-matching">Bracket Matching</a></li><li><a href="#renaming">Symbol Renaming</a></li><li><a href="#refactoring">Code Refactoring</a><ul><li><a href="#quick-fixes">Quick Fixes</a></li></ul></li><li><a href="#checking">XSLT Linter</a><ul><li><a href="#mode-checks">Checks on modes</a></li><li><a href="#union-priorities">Union patterns and XSLT 4.0</a></li><li><a href="#unused-variables">Unused Variables</a></li><li><a href="#compile-time-and-run-time-problems">Compile-time and Run-time problems</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -92,7 +94,7 @@
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
 				<li class="nav-heading">XSLT Language</li>
 				<li><a href="xslt30.html">XSLT 3.0</a></li>
-				<li><a href="xslt40.html" class="active">XSLT 4.0</a></li>
+				<li><a href="xslt40.html" class="active" aria-current="page">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
 				<li><a href="xslt40-notes.html">Code Documentation</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT 4.0</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">XSLT 4.0</h2>
 
 		<div class="two-thirds column">
 			<p>XSLT 4.0 currently comprises a set of draft proposals maintained by
@@ -210,8 +212,8 @@
 			</p>
 		</div>
 
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#editing-xslt-4-0">Editing XSLT 4.0</a><ul><li><a href="#xslt-4-0-support">XSLT 4.0 support</a></li></ul></li><li><a href="#running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#editing-xslt-4-0">Editing XSLT 4.0</a><ul><li><a href="#xslt-4-0-support">XSLT 4.0 support</a></li></ul></li><li><a href="#running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

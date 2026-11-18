@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,13 +63,13 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
 			<ul>
 				<li><a href="index.html">Overview</a></li>
-				<li><a href="new-release.html" class="active">What's New</a></li>
+				<li><a href="new-release.html" class="active" aria-current="page">What's New</a></li>
 				<li><a href="features.html">Features</a></li>
 				<li><a href="vscode.html">Using VS Code</a></li>
 				<li><a href="settings.html">Settings</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">What's New</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">What's New</h2>
         
         <div class="two-thirds column">
             <p>
@@ -209,8 +211,8 @@
                     <code>xdm:debug()</code></li>
             </ul>
         </div>
-    </div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#release-2-2">Release 2.2</a></li><li><a href="#release-2-1">Release 2.1</a></li><li><a href="#release-2-0">Release 2.0</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+    </main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#release-2-2">Release 2.2</a></li><li><a href="#release-2-1">Release 2.1</a></li><li><a href="#release-2-0">Release 2.0</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

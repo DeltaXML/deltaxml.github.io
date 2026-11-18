@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -87,7 +89,7 @@
 				<li><a href="xspec.html">XSpec Tests</a></li>
 				<li><a href="code-diagnostics.html">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
-				<li><a href="xpath-queries.html" class="active">Find Nodes with XPath</a></li>
+				<li><a href="xpath-queries.html" class="active" aria-current="page">Find Nodes with XPath</a></li>
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
 				<li class="nav-heading">XSLT Language</li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Find Nodes with XPath</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Find Nodes with XPath</h2>
 
 		<div class="two-thirds column">
 			<p>To find nodes in an XML file with XPath, write expressions in a query file, an XPath editor below the XML
@@ -251,8 +253,8 @@ count(//item)
 				<li>Results shown after the expressions aren't kept when VS Code is closed.</li>
 			</ul>
 		</div>
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#opening">Opening the query file</a></li><li><a href="#writing">Writing expressions</a><ul><li><a href="#version">XPath version</a></li><li><a href="#namespaces">Namespaces</a></li><li><a href="#locations">Inserting the location of a node</a></li></ul></li><li><a href="#running">Running an expression</a></li><li><a href="#results">Results</a></li><li><a href="#switching">Switching between XML files</a></li><li><a href="#limitations">Limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#opening">Opening the query file</a></li><li><a href="#writing">Writing expressions</a><ul><li><a href="#version">XPath version</a></li><li><a href="#namespaces">Namespaces</a></li><li><a href="#locations">Inserting the location of a node</a></li></ul></li><li><a href="#running">Running an expression</a></li><li><a href="#results">Results</a></li><li><a href="#switching">Switching between XML files</a></li><li><a href="#limitations">Limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

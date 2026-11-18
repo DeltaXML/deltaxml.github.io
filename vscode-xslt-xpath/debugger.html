@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -82,7 +84,7 @@
 				<li class="nav-heading">Running and Debugging</li>
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
-				<li><a href="debugger.html" class="active">Debugger</a></li>
+				<li><a href="debugger.html" class="active" aria-current="page">Debugger</a></li>
 				<li><a href="profiler.html">Profiler</a></li>
 				<li><a href="xspec.html">XSpec Tests</a></li>
 				<li><a href="code-diagnostics.html">Print Debugging</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Debugger</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Debugger</h2>
 
 		<div class="two-thirds column">
 			<p>XSLT stylesheets can be debugged with SaxonJ in VS Code's debugger: set breakpoints, step through
@@ -644,8 +646,8 @@
 				Java command line, the Saxon product, the Java runtime and the Saxon options used.</p>
 		</div>
 
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints and hit counts</a></li><li><a href="#logpoints">Logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li><li><a href="#no-template-matched">Elements no template matched</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li><li><a href="#step-back">Going back</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li><li><a href="#empty-steps">Empty steps in paths</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a><ul><li><a href="#xdm-trace">Formatted values with xdm:trace()</a></li></ul></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#input-nodes">From the input XML to the XSLT instruction</a></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#starting">Starting a debug session</a><ul><li><a href="#launch-json">Launch configurations</a></li></ul></li><li><a href="#breakpoints">Breakpoints</a><ul><li><a href="#conditional">Conditional breakpoints and hit counts</a></li><li><a href="#logpoints">Logpoints</a></li><li><a href="#function-breakpoints">Function and named-template breakpoints</a></li><li><a href="#errors">Pausing on errors</a></li><li><a href="#no-template-matched">Elements no template matched</a></li></ul></li><li><a href="#stepping">Stepping</a><ul><li><a href="#xpath">Stepping through XPath</a></li><li><a href="#step-back">Going back</a></li></ul></li><li><a href="#call-stack">Call stack</a></li><li><a href="#variables">Variables</a><ul><li><a href="#inline-values">Inline values</a></li><li><a href="#empty-steps">Empty steps in paths</a></li></ul></li><li><a href="#evaluating">Watch, hover and the Debug Console</a><ul><li><a href="#xdm-trace">Formatted values with xdm:trace()</a></li></ul></li><li><a href="#output">Output while debugging</a><ul><li><a href="#saxon-errors">Saxon errors</a></li></ul></li><li><a href="#input-nodes">From the input XML to the XSLT instruction</a></li><li><a href="#demo">Sample: stepping through XPath</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

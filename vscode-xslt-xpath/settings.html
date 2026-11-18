@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,7 +52,7 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
@@ -61,7 +63,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -70,7 +72,7 @@
 				<li><a href="new-release.html">What's New</a></li>
 				<li><a href="features.html">Features</a></li>
 				<li><a href="vscode.html">Using VS Code</a></li>
-				<li><a href="settings.html" class="active">Settings</a></li>
+				<li><a href="settings.html" class="active" aria-current="page">Settings</a></li>
 				<li class="nav-heading">Editing</li>
 				<li><a href="editing.html">Editing XML</a></li>
 				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
@@ -103,7 +105,7 @@
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">Settings</h2>
+		<main class="main" id="main" tabindex="-1"><h2 class="pageTitle">Settings</h2>
 
     <div class="two-thirds column">
       <p>Visual Studio Code's settings let you tailor your working environment to fit requirements for specific
@@ -631,8 +633,8 @@
 }</code>
     </div>
 
-  </div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#settings-xspec">XSpec tests</a></li><li><a href="#settings-ai">AI assistants</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings for XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+  </main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#creating">Creating User and Workspace Settings</a></li><li><a href="#xslt-settings">XSLT/XPath Extension Settings</a><ul><li><a href="#settings-running">Running and debugging</a></li><li><a href="#settings-editing">Editing and checking</a></li><li><a href="#settings-xspec">XSpec tests</a></li><li><a href="#settings-ai">AI assistants</a></li><li><a href="#saxon-jar">The Saxon jar</a></li><li><a href="#xslt-packages">XSLT packages</a></li><li><a href="#xml-catalog">XML catalog</a></li><li><a href="#task-types">Task types</a></li><li><a href="#xslt30-item-types">XSLT 4.0 Item Types and Notes in XSLT 3.0</a></li><li><a href="#saxon-type-aliases">Converting Saxon type aliases</a></li></ul></li><li><a href="#general-settings">General Settings for XSLT</a><ul><li><a href="#default-settings">Default Editor Settings for XSLT, XPath and XML</a></li><li><a href="#language-behaviour">Built-in Editing Behaviour for XSLT</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax-highlighting">Syntax Highlighting</a></li><li><a href="#word-separators">Word Separators</a></li><li><a href="#agents-window">The Agents Window</a></li><li><a href="#emmet">Emmet Snippets</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
