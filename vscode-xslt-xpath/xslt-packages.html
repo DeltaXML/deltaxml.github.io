@@ -348,6 +348,10 @@
 			<ul>
 				<li><strong>To rework first</strong> - what would fail in a package:
 					<ul>
+						<li>an error in a module the conversion reads: the library's modules, and those of each stylesheet that
+							uses it, in every workspace folder, are checked first, with the linter's errors. The conversion
+							starts from modules without them, so that a problem after it is one it made. Warnings don't
+							block it</li>
 						<li>a global variable whose value uses the context item, e.g. <code>select="/*"</code>, which has none
 							in a library package (<code>XPDY0002</code>)</li>
 						<li>a stylesheet's <code>xsl:global-context-item</code> that overrides the library's by import
@@ -364,8 +368,14 @@
 					the stylesheets use</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
 					precedence, which move into <code>xsl:override</code></li>
-				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but only
-					the stylesheets declare, which the package declares as abstract</li>
+				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but one of
+					the stylesheets declares, which the package declares as abstract</li>
+				<li><strong>Modules included in the package</strong> - a module that several of the stylesheets share, and
+					declares what the library uses, e.g. a module of helper functions. It belongs with the library, so the
+					package includes it, with the modules it imports, and the stylesheets don't import it any more. Otherwise
+					each stylesheet would have a copy of its code in its <code>xsl:override</code>. A module that imports
+					the library is a decision instead: convert it, not the library. One that stylesheets that don't use the
+					library import too needs reworking first, as they'd lose it</li>
 				<li><strong>Modes and template rules</strong> - the library's named modes that the stylesheets use, and their
 					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, if the library
 					shares it with the stylesheets, which becomes a named mode, as a package keeps its unnamed mode to
@@ -383,14 +393,18 @@
 				item.</aside>
 			<h4 id="convert">Convert to Package...</h4>
 			<p>When nothing needs reworking first, <strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
-				module in the XSLT Imports view. It asks for the package's name and version, then shows the changes to
+				module in the XSLT Imports view. It asks for the package's name and version - the name proposed is the namespace of
+				the library's own functions, with the module's name added when it's a part of a larger library, or a placeholder,
+				<code>http://example.com/packages/</code> and the module's name, where it declares none: replace it with
+				one of your own - then shows the changes to
 				every module in the <strong>Refactor Preview</strong>, where you can check them before they're made:</p>
 			<ul>
 				<li>the library's root element becomes <code>xsl:package</code>, with the name and version, and
 					<code>declared-modes="no"</code></li>
 				<li>its components that the stylesheets use or override get <code>visibility="public"</code>, its named
-					modes they use a public <code>xsl:mode</code>, and the functions it calls that only the stylesheets
-					declare an abstract declaration</li>
+					modes they use a public <code>xsl:mode</code>, and the functions it calls that a stylesheet declares
+					an abstract declaration. The shared modules it uses are included with <code>xsl:include</code>,
+					at the end of its root element</li>
 				<li>in each top-level stylesheet, the <code>xsl:import</code> or <code>xsl:include</code> of the library -
 					in any of its modules - is replaced by an <code>xsl:use-package</code> in the top-level module, after its
 					imports: <code>xsl:use-package</code> can't be in an imported module (<code>XTSE3008</code>)</li>
