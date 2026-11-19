@@ -272,8 +272,11 @@
     <meta property="og:title" content="{$title}"/>
     <meta property="og:description" content="{$description}"/>
     <meta property="og:url" content="{$url}"/>
-    <meta property="og:image" content="{$siteUrl}resources/deltaxml-logo.png"/>
-    <meta name="twitter:card" content="summary"/>
+    <meta property="og:image" content="{$siteUrl}resources/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"/>
+    <meta name="twitter:card" content="summary_large_image"/>
     <script type="application/ld+json">{f:json-ld($filePart, $title, $description, $url)}</script>
   </xsl:template>
 
@@ -308,7 +311,7 @@
         'description': $description,
         'url': $url,
         'mainEntityOfPage': $url,
-        'image': $siteUrl || 'resources/deltaxml-logo.png',
+        'image': $siteUrl || 'resources/og-image.png',
         'about': map { '@type': 'SoftwareApplication', 'name': 'XSLT/XPath for Visual Studio Code', 'url': $siteUrl },
         'isPartOf': map { '@type': 'WebSite', 'name': $indexTitle, 'url': $siteUrl },
         'author': $publisher,
