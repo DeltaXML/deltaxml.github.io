@@ -353,6 +353,14 @@
 				declaration with the name of the library's must move into <code>xsl:override</code>, and some declarations
 				aren't exposed as package components at all. <strong>Analyse as Package...</strong> shows what would have to change
 				for the stylesheets to work as before - it changes nothing.</p>
+			<figure>
+				<img src="resources/package-convert.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The report from <strong>Analyse as Package...</strong> for a library of three
+						modules: the proposed package name and version, the stylesheets that use it, and the verdict - it can
+						be converted, with one decision.</i></p>
+				</figcaption>
+			</figure>
 			<p>Run it from the Command Palette, with the library open, or from the context menu of a module in the
 				<a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>. It checks each top-level stylesheet
 				in the workspace that imports or includes the library, directly or indirectly, and opens a report in the
@@ -406,6 +414,15 @@
 				uses the context item, the linter checks its value as the body of a function, where there's no context
 				item.</aside>
 			<h4 id="convert">Convert to Package...</h4>
+			<figure>
+				<img src="resources/package-refactor.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The changes <strong>Convert to Package...</strong> makes, in the Refactor Preview:
+						the stylesheets' imports replaced by <code>xsl:use-package</code>, the functions they use made public,
+						and the library's root element becoming <code>xsl:package</code>. Untick a change to leave it out, then
+						<strong>Apply</strong>.</i></p>
+				</figcaption>
+			</figure>
 			<p>When nothing needs reworking first, <strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
 				module in the XSLT Imports view. It asks for the package's name and version - the name proposed is the namespace of
 				the library's own functions, with the module's name added when it's a part of a larger library, or a placeholder,
