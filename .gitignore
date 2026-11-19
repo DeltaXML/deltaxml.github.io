@@ -1,3 +1,7 @@
 monaco-xslt-demo/.DS_Store
 .claude/
 xslt/xslt-out/result1.xml
+
+# one-page PDFs from the createVSCodePagePDF task, made to send to someone
+vscode-xslt-xpath/*-guide.pdf
+!vscode-xslt-xpath/vscode-xslt-xpath-guide.pdf

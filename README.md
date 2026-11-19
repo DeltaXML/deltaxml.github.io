@@ -39,6 +39,8 @@ page's heading should differ from its nav label (only the home page does). Witho
 The other tasks in [.vscode/tasks.json](.vscode/tasks.json):
 
 - `createVSCodePDF` - the guide as a PDF, from `all-pages.html`. Needs WeasyPrint (`brew install weasyprint`).
+- `createVSCodePagePDF` - one page of the guide as a PDF, e.g. `schematron`: it asks for the page's id. Run
+  `createVSCodePages` first. Written to `vscode-xslt-xpath/<page>-guide.pdf`, to send to someone - not committed.
 - `createSitemap` - `/sitemap.xml`, for Google Search Console. See the release checklist below.
 
 ### The XSLT overview section

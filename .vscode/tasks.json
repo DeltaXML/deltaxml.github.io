@@ -30,6 +30,24 @@
 			]
 		},
 		{
+			// one page of the guide as a PDF, e.g. schematron - asks for the page's id, as in its file name. Made from
+			// all-pages.html, so run createVSCodePages first. Written to vscode-xslt-xpath/<page>-guide.pdf
+			"type": "shell",
+			"label": "createVSCodePagePDF",
+			"command": "/opt/homebrew/opt/weasyprint/libexec/bin/python",
+			"args": [
+				"xsl/make-pdf.py",
+				"all-pages.html",
+				"${input:guidePage}-guide.pdf",
+				"${input:guidePage}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/vscode-xslt-xpath"
+			},
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
 			// the whole guide as a PDF, from all-pages.html - after building the pages. Needs WeasyPrint
 			// (brew install weasyprint): make-pdf.py runs it with its Python, so the PDF opens with its outline showing
 			"type": "shell",
@@ -58,6 +76,15 @@
 			],
 			"group": "build",
 			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			// the page's id: its file name without .html, e.g. schematron, debugger, xspec
+			"id": "guidePage",
+			"type": "promptString",
+			"description": "Page of the guide to make a PDF of (its file name without .html)",
+			"default": "schematron"
 		}
 	]
 }

@@ -6,14 +6,28 @@ WeasyPrint's warnings are shown, except those about the site's screen CSS - medi
 and selectors it doesn't support - which are expected, and don't affect the PDF. A missing image or stylesheet, or a
 link to an anchor that doesn't exist, is still reported.
 
+With a third argument, a page's id (e.g. schematron), only that page is made into a PDF, without the cover
+and contents. Its links to other pages of the guide go to those pages on the website. Run by the
+createVSCodePagePDF task, which asks for the page.
+
 Run by the createVSCodePDF task (.vscode/tasks.json), with WeasyPrint's Python - for Homebrew's WeasyPrint:
     /opt/homebrew/opt/weasyprint/libexec/bin/python make-pdf.py all-pages.html vscode-xslt-xpath-guide.pdf
 """
 import logging
+import re
 import sys
 import time
 
 from weasyprint import HTML
+
+# without the cover, the first sheet has the margins, headers and page number of the others
+NO_COVER_CSS = '''@page :first {
+  margin: 18mm 16mm 20mm;
+  @top-left { content: "XSLT and XPath for Visual Studio Code"; }
+  @top-right { content: string(page-title); }
+  @bottom-center { content: counter(page); }
+}'''
+SITE = 'https://deltaxml.github.io/vscode-xslt-xpath/'
 
 # the start of each warning about CSS that WeasyPrint skips, as the site's screen styles are meant to be skipped
 SCREEN_CSS_WARNINGS = ('Expected a media type', 'Invalid media type', 'Ignored `', 'Invalid or unsupported selector')
@@ -50,12 +64,38 @@ def open_with_outline(document, pdf):
     pdf.catalog['PageMode'] = '/UseOutlines'
 
 
+def one_page(html, page):
+    """all-pages.html with only the page's article, without the cover and contents"""
+    articles = {m.group(1): m for m in re.finditer(r'<article class="main doc-page" id="([^"]+)">.*?</article>', html, re.S)}
+    if page not in articles:
+        sys.exit(f'No page "{page}" in the guide - the pages are: ' + ', '.join(articles))
+    first, last = next(iter(articles.values())), list(articles.values())[-1]
+    # no cover or contents: the head of the file, up to the cover, then the page
+    cover = html.index('<section class="cover">')
+    html = html[:cover] + articles[page].group(0) + html[last.end():]
+    # a style after the guide's own, which makes the first sheet's margins for the cover
+    html = html.replace('</head>', '<style>' + NO_COVER_CSS + '</style></head>', 1)
+
+    # a link to a page that isn't in this PDF goes to the page on the website: #page--section is page.html#section
+    def link(m):
+        target = m.group(1)
+        if target == page or target.startswith(page + '--'):
+            return m.group(0)
+        name, _, section = target.partition('--')
+        return 'href="%s%s.html%s"' % (SITE, name, '#' + section if section else '')
+    return re.sub(r'href="#([^"]+)"', link, html)
+
+
 source, target = sys.argv[1], sys.argv[2]
 warnings = show_warnings()
 start = time.monotonic()
 # as weasyprint --optimize-images -D 200 --pdf-tags: screenshots are limited to 200 dpi, to keep the PDF small
 options = {'optimize_images': True, 'dpi': 200, 'pdf_tags': True}
-document = HTML(source).render(**options)
+if len(sys.argv) > 3:
+    with open(source, encoding='utf-8') as f:
+        document = HTML(string=one_page(f.read(), sys.argv[3]), base_url=source).render(**options)
+else:
+    document = HTML(source).render(**options)
 document.write_pdf(target, finisher=open_with_outline, **options)
 print(f'Wrote {target}: {len(document.pages)} pages in {time.monotonic() - start:.1f}s')
 if warnings.images_without_alt:
