@@ -117,6 +117,18 @@
 &lt;/xsl:use-package&gt;</code>
 			<p>A package that uses another package doesn't pass its components on: they're private to it, unless its own
 				<code>xsl:accept</code> or <code>xsl:expose</code> makes them public.</p>
+			<h4 id="check-users">Using a private component</h4>
+			<p>A reference to a function, named template, variable or attribute set that's private in the package is reported
+				as that - e.g. <em>The function str:helper#1 is private in package 'http://example.com/strings', so it can't be
+				used here</em> - in the module with the <code>xsl:use-package</code>, the modules it imports or includes, and
+				XSpec files with the package as a helper. The quick fix <strong>Make … public in package …</strong> adds
+				<code>visibility="public"</code> to its declaration in the package.</p>
+			<p>So you can narrow a package's API - e.g. change a function's visibility to <code>private</code> - and then see
+				which uses now fail. Modules that aren't open aren't checked as you edit the package: the
+				<strong>used by … modules - check for problems</strong> CodeLens above the <code>xsl:package</code>, or
+				<strong>XSLT: Check Modules Using Package</strong>, checks the modules that use it, and those they import or
+				include, and shows their problems in the Problems view - see
+				<a href="editing-xslt.html#check-files">Checking files that aren't open</a>.</p>
 
 			<h3 id="overriding">Overriding package components</h3>
 			<p>An <code>xsl:override</code> declaration must have the same signature as the component it replaces, so the
@@ -260,7 +272,9 @@
 					</ul>
 				</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
-					the stylesheets use</li>
+					the stylesheets use. Any stylesheet in the workspace that uses one makes it public, so some may not
+					belong in the package's API: after converting, narrow those - the uses that then fail are reported (see
+					<a href="#check-users">Using a private component</a>)</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
 					precedence, which move into <code>xsl:override</code></li>
 				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but one of
@@ -311,6 +325,10 @@
 			</ul>
 			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
 				reports what still needs to change, mostly with quick fixes.</p>
+			<p>Only the stylesheets in the workspace are converted. A stylesheet elsewhere - e.g. in another repository - that
+				imports or includes the library must be changed to use the package with <code>xsl:use-package</code>: an
+				<code>xsl:package</code> module can't be imported or included, and Saxon reports <code>XTSE0165</code>. The
+				linter reports this too.</p>
 			<h4 id="unnamed-mode">The unnamed mode</h4>
 			<p>A library and the stylesheets that import it often share the unnamed mode: the stylesheets apply the library's
 				template rules, and add rules of their own, which take precedence. A package's unnamed mode is private to it,

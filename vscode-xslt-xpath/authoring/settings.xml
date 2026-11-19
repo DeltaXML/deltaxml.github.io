@@ -127,6 +127,13 @@
             <td>-</td>
             <td>The files for <code>xsl:use-package</code> names - see <a href="#xslt-packages">XSLT packages</a>.</td>
           </tr>
+          <tr id="workspace-check">
+            <td><code>XSLT.<wbr/>workspaceCheck.<wbr/>includeWarnings</code></td>
+            <td><code>false</code></td>
+            <td>Show warnings too, not only errors, for the files that <strong>Check Problems in Workspace</strong>,
+              <strong>Check Problems in Folder</strong> and <strong>Check Modules Using Package</strong> check - see
+              <a href="editing-xslt.html#check-files">Checking files that aren't open</a>.</td>
+          </tr>
           <tr>
             <td><code>XSLT.<wbr/>resources.<wbr/>inferParentFromWorkspace</code></td>
             <td><code>true</code></td>

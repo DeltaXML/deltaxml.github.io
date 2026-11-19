@@ -681,6 +681,13 @@
             <td>-</td>
             <td>The files for <code>xsl:use-package</code> names - see <a href="#settings--xslt-packages">XSLT packages</a>.</td>
           </tr>
+          <tr id="settings--workspace-check">
+            <td><code>XSLT.<wbr>workspaceCheck.<wbr>includeWarnings</code></td>
+            <td><code>false</code></td>
+            <td>Show warnings too, not only errors, for the files that <strong>Check Problems in Workspace</strong>,
+              <strong>Check Problems in Folder</strong> and <strong>Check Modules Using Package</strong> check - see
+              <a href="#editing-xslt--check-files">Checking files that aren't open</a>.</td>
+          </tr>
           <tr>
             <td><code>XSLT.<wbr>resources.<wbr>inferParentFromWorkspace</code></td>
             <td><code>true</code></td>
@@ -1570,6 +1577,28 @@
 					<code>use-when="function-available('name')"</code>.</li>
 			</ul>
 		</details>
+		<h4 id="editing-xslt--check-files">Checking files that aren't open</h4>
+		<p>The linter checks the files open in editors. A change in one file can break others that aren't open - e.g.
+			renaming a function, or making a <a href="#xslt-packages--check-users">package component private</a>. To see
+			those problems without opening each file, check the files that aren't open:</p>
+		<ul>
+			<li><strong>XSLT: Check Problems in Workspace</strong>, from the Command Palette - the XSLT and XSpec files in
+				every workspace folder</li>
+			<li><strong>XSLT: Check Problems in Folder</strong>, from a folder's context menu in the Explorer - the files in
+				that folder and its subfolders</li>
+			<li><strong>XSLT: Check Modules Using Package</strong>, from the Command Palette with an
+				<code>xsl:package</code> module open, or the <strong>used by … modules - check for problems</strong> CodeLens
+				above its <code>xsl:package</code> - the modules that use the package, and those they import or include</li>
+		</ul>
+		<p>The problems are shown in the Problems view, from <em>XSLT (workspace check)</em>. Only errors are shown, unless the
+			<a href="#settings--workspace-check"><code>XSLT.workspaceCheck.includeWarnings</code></a> setting is on.
+			Files in <code>node_modules</code>, hidden folders, XSpec's generated test runners and the
+			<code>files.exclude</code> setting's folders aren't checked. A progress notification shows the check, which can
+			be cancelled - with more than 1000 files, you're asked first.</p>
+		<p>A file's problems from a check are removed when it's opened in an editor - the editor's checks then show its
+			problems - and when it's changed or deleted outside VS Code, as they may no longer apply. Checking a folder again
+			replaces its results. To remove them all, use <strong>Clear</strong> in the notification at the end of a
+			check, or <strong>XSLT: Clear Workspace Check Problems</strong>.</p>
 		<h4 id="editing-xslt--mode-checks">Checks on modes</h4>
 		<p>A large transform may run in many modes, and a template rule applied in the wrong mode fails silently. The linter
 			warns about:</p>
@@ -2199,6 +2228,18 @@
 &lt;/xsl:use-package&gt;</code>
 			<p>A package that uses another package doesn't pass its components on: they're private to it, unless its own
 				<code>xsl:accept</code> or <code>xsl:expose</code> makes them public.</p>
+			<h4 id="xslt-packages--check-users">Using a private component</h4>
+			<p>A reference to a function, named template, variable or attribute set that's private in the package is reported
+				as that - e.g. <em>The function str:helper#1 is private in package 'http://example.com/strings', so it can't be
+				used here</em> - in the module with the <code>xsl:use-package</code>, the modules it imports or includes, and
+				XSpec files with the package as a helper. The quick fix <strong>Make … public in package …</strong> adds
+				<code>visibility="public"</code> to its declaration in the package.</p>
+			<p>So you can narrow a package's API - e.g. change a function's visibility to <code>private</code> - and then see
+				which uses now fail. Modules that aren't open aren't checked as you edit the package: the
+				<strong>used by … modules - check for problems</strong> CodeLens above the <code>xsl:package</code>, or
+				<strong>XSLT: Check Modules Using Package</strong>, checks the modules that use it, and those they import or
+				include, and shows their problems in the Problems view - see
+				<a href="#editing-xslt--check-files">Checking files that aren't open</a>.</p>
 
 			<h3 id="xslt-packages--overriding">Overriding package components</h3>
 			<p>An <code>xsl:override</code> declaration must have the same signature as the component it replaces, so the
@@ -2342,7 +2383,9 @@
 					</ul>
 				</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
-					the stylesheets use</li>
+					the stylesheets use. Any stylesheet in the workspace that uses one makes it public, so some may not
+					belong in the package's API: after converting, narrow those - the uses that then fail are reported (see
+					<a href="#xslt-packages--check-users">Using a private component</a>)</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
 					precedence, which move into <code>xsl:override</code></li>
 				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but one of
@@ -2393,6 +2436,10 @@
 			</ul>
 			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
 				reports what still needs to change, mostly with quick fixes.</p>
+			<p>Only the stylesheets in the workspace are converted. A stylesheet elsewhere - e.g. in another repository - that
+				imports or includes the library must be changed to use the package with <code>xsl:use-package</code>: an
+				<code>xsl:package</code> module can't be imported or included, and Saxon reports <code>XTSE0165</code>. The
+				linter reports this too.</p>
 			<h4 id="xslt-packages--unnamed-mode">The unnamed mode</h4>
 			<p>A library and the stylesheets that import it often share the unnamed mode: the stylesheets apply the library's
 				template rules, and add rules of their own, which take precedence. A package's unnamed mode is private to it,

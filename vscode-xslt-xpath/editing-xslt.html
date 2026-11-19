@@ -472,6 +472,28 @@
 					<code>use-when="function-available('name')"</code>.</li>
 			</ul>
 		</details>
+		<h4 id="check-files">Checking files that aren't open</h4>
+		<p>The linter checks the files open in editors. A change in one file can break others that aren't open - e.g.
+			renaming a function, or making a <a href="xslt-packages.html#check-users">package component private</a>. To see
+			those problems without opening each file, check the files that aren't open:</p>
+		<ul>
+			<li><strong>XSLT: Check Problems in Workspace</strong>, from the Command Palette - the XSLT and XSpec files in
+				every workspace folder</li>
+			<li><strong>XSLT: Check Problems in Folder</strong>, from a folder's context menu in the Explorer - the files in
+				that folder and its subfolders</li>
+			<li><strong>XSLT: Check Modules Using Package</strong>, from the Command Palette with an
+				<code>xsl:package</code> module open, or the <strong>used by … modules - check for problems</strong> CodeLens
+				above its <code>xsl:package</code> - the modules that use the package, and those they import or include</li>
+		</ul>
+		<p>The problems are shown in the Problems view, from <em>XSLT (workspace check)</em>. Only errors are shown, unless the
+			<a href="settings.html#workspace-check"><code>XSLT.workspaceCheck.includeWarnings</code></a> setting is on.
+			Files in <code>node_modules</code>, hidden folders, XSpec's generated test runners and the
+			<code>files.exclude</code> setting's folders aren't checked. A progress notification shows the check, which can
+			be cancelled - with more than 1000 files, you're asked first.</p>
+		<p>A file's problems from a check are removed when it's opened in an editor - the editor's checks then show its
+			problems - and when it's changed or deleted outside VS Code, as they may no longer apply. Checking a folder again
+			replaces its results. To remove them all, use <strong>Clear</strong> in the notification at the end of a
+			check, or <strong>XSLT: Clear Workspace Check Problems</strong>.</p>
 		<h4 id="mode-checks">Checks on modes</h4>
 		<p>A large transform may run in many modes, and a template rule applied in the wrong mode fails silently. The linter
 			warns about:</p>
@@ -540,7 +562,7 @@
 			<code>http://example.com/xslt/strings.xsl</code> - see <a href="xml-catalogs.html">XML Catalogs</a>.</aside>
 		</div>
 	</main>
-	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#highlighting">Syntax Highlighting</a><ul><li><a href="#xslt-xpath-dark-color-themes">XSLT/XPath Dark Color Themes</a></li></ul></li><li><a href="#formatting">Formatting</a></li><li><a href="#folding">Folding</a></li><li><a href="#inferred-imports">Imports and Top-Level Stylesheets</a><ul><li><a href="#shadow-href">Imports with a _href shadow attribute</a></li><li><a href="#the-xslt-imports-view">The XSLT Imports view</a></li></ul></li><li><a href="#intellisense">IntelliSense (Auto Complete)</a><ul><li><a href="#hover">Hover Help and Signature Help</a></li><li><a href="#intellisense-for-xpath-locations">IntelliSense for XPath Locations</a></li><li><a href="#locking-the-context-file">Locking the context file</a></li><li><a href="#variables-and-xpath-locations">Variables and XPath Locations</a></li><li><a href="#triggering-the-auto-complete-list">Triggering the auto-complete list</a></li><li><a href="#xpath-expressions-and-operators">XPath Expressions and Operators</a></li><li><a href="#parameters-for-xsl-call-template">Parameters for xsl:call-template</a></li><li><a href="#xslt-instruction-snippets">XSLT Instruction Snippets</a></li><li><a href="#more-snippets">More Snippets</a></li></ul></li><li><a href="#bracket-matching">Bracket Matching</a></li><li><a href="#renaming">Symbol Renaming</a></li><li><a href="#refactoring">Code Refactoring</a><ul><li><a href="#quick-fixes">Quick Fixes</a></li></ul></li><li><a href="#checking">XSLT Linter</a><ul><li><a href="#mode-checks">Checks on modes</a></li><li><a href="#union-priorities">Union patterns and XSLT 4.0</a></li><li><a href="#unused-variables">Unused Variables</a></li><li><a href="#compile-time-and-run-time-problems">Compile-time and Run-time problems</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#highlighting">Syntax Highlighting</a><ul><li><a href="#xslt-xpath-dark-color-themes">XSLT/XPath Dark Color Themes</a></li></ul></li><li><a href="#formatting">Formatting</a></li><li><a href="#folding">Folding</a></li><li><a href="#inferred-imports">Imports and Top-Level Stylesheets</a><ul><li><a href="#shadow-href">Imports with a _href shadow attribute</a></li><li><a href="#the-xslt-imports-view">The XSLT Imports view</a></li></ul></li><li><a href="#intellisense">IntelliSense (Auto Complete)</a><ul><li><a href="#hover">Hover Help and Signature Help</a></li><li><a href="#intellisense-for-xpath-locations">IntelliSense for XPath Locations</a></li><li><a href="#locking-the-context-file">Locking the context file</a></li><li><a href="#variables-and-xpath-locations">Variables and XPath Locations</a></li><li><a href="#triggering-the-auto-complete-list">Triggering the auto-complete list</a></li><li><a href="#xpath-expressions-and-operators">XPath Expressions and Operators</a></li><li><a href="#parameters-for-xsl-call-template">Parameters for xsl:call-template</a></li><li><a href="#xslt-instruction-snippets">XSLT Instruction Snippets</a></li><li><a href="#more-snippets">More Snippets</a></li></ul></li><li><a href="#bracket-matching">Bracket Matching</a></li><li><a href="#renaming">Symbol Renaming</a></li><li><a href="#refactoring">Code Refactoring</a><ul><li><a href="#quick-fixes">Quick Fixes</a></li></ul></li><li><a href="#checking">XSLT Linter</a><ul><li><a href="#check-files">Checking files that aren't open</a></li><li><a href="#mode-checks">Checks on modes</a></li><li><a href="#union-priorities">Union patterns and XSLT 4.0</a></li><li><a href="#unused-variables">Unused Variables</a></li><li><a href="#compile-time-and-run-time-problems">Compile-time and Run-time problems</a></li></ul></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
