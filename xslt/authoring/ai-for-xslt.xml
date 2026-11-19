@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>AI for XSLT: Using Copilot and Claude Code with XSLT and XPath</title>
+		<h1>AI for XSLT and XPath</h1>
+		<meta name="description" content="Can AI write XSLT? How AI coding assistants such as GitHub Copilot and Claude Code can write and fix XSLT in VS Code, checked by a linter, tests and an MCP server."/>
+	</head>
+	<div class="main">
+		<div class="two-thirds column">
+			<p>AI coding assistants can draft XSLT, explain a stylesheet, and fix a bug - and, like any author, they make
+				mistakes: a function that doesn't exist, a variable that is out of scope, an XPath that is subtly wrong.
+				The question isn't only whether an assistant can write XSLT, but how quickly its mistakes are caught.
+				That is where the editor helps.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/linting-of-the-as-attribute.png" alt="An xsl:variable whose as attribute misspells xs:integer as xs:ineger, underlined as a problem in the editor" loading="lazy"/>
+				<figcaption>The kind of mistake an assistant can make, and the editor reports as a problem it can read and fix.</figcaption>
+			</figure>
+
+			<h3>Problems an assistant can read</h3>
+			<p>The XSLT/XPath extension reports its findings as standard Visual Studio Code problems. They name the exact
+				symbol at issue - an unresolved variable, a function called with the wrong number of arguments, a record
+				field that doesn't exist - so an assistant such as GitHub Copilot or Claude Code can read them, explain
+				them and fix them, then check its own change the same way. They are kept up to date for every stylesheet open
+				in an editor, including the ones the assistant changes while your cursor is elsewhere.</p>
+
+			<h3>Tests as a safety net</h3>
+			<p>Checking catches what is wrong in the code; <a href="testing-xslt.html">XSpec tests</a> catch what is wrong
+				in the behavior. An assistant that can run tests - or that is asked to write them first - has a way to know
+				its XSLT does what was intended. The <a href="debugging-xslt.html">debugger and print debugging</a> give it,
+				and you, a way to see what a stylesheet did.</p>
+
+			<h3>An MCP server (experimental)</h3>
+			<p>The extension can also run a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server,
+				so that an assistant can ask it questions directly, with the same answers the editor gives: the problems in
+				a stylesheet or a whole folder - even for files that aren't open - the tree of imports, and where a function,
+				template, variable or other component is declared. It is off by default, and turned on with a setting.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/ai-assistants.html">AI assistants</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>Can AI write XSLT?</h3>
+				<p>AI coding assistants can draft and explain XSLT. Their output needs checking: in VS Code, the XSLT/XPath
+					extension's problems and XSpec tests show quickly whether the code is right.</p>
+				<h3>Does it work with GitHub Copilot and Claude Code?</h3>
+				<p>Yes. Both can read the extension's problems in VS Code, and the extension's MCP server can be used by
+					assistants that support the Model Context Protocol.</p>
+				<h3>What is the MCP server for?</h3>
+				<p>It lets an assistant ask the extension about your stylesheets - their problems, their imports and where
+					things are declared - using the same code as the editor.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</div>
+</html>

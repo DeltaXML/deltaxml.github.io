@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>How to Test XSLT: XSpec Unit Tests in VS Code</title>
+		<h1>Testing XSLT with XSpec</h1>
+		<meta name="description" content="How to unit test XSLT with XSpec: scenarios and expectations, running tests from VS Code's Test Explorer, seeing why a test failed, and measuring test coverage."/>
+	</head>
+	<div class="main">
+		<div class="two-thirds column">
+			<p>A stylesheet that works on today's sample file may fail on tomorrow's. The way to find out is to test it:
+				give a function, a template or a set of template rules an input, and say what the result should be.
+				For XSLT - and for Schematron - the usual framework for this is <a href="https://github.com/xspec/xspec">XSpec</a>.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/test-failure.png" alt="A failed XSpec test in the Test Explorer, with the expected and actual output side by side and the difference highlighted" loading="lazy"/>
+				<figcaption>A failed expectation: the expected and actual output side by side, with the difference marked.</figcaption>
+			</figure>
+
+			<h3>What an XSpec test looks like</h3>
+			<p>An XSpec file describes <em>scenarios</em>. Each scenario calls a function or a named template, or applies
+				template rules to a context, and its <em>expectations</em> say what the result should be - written in XML,
+				so the expected output can be a node tree as well as a value. Scenarios are named in plain language, so a
+				test file also documents what a stylesheet is meant to do.</p>
+
+			<h3>Running tests in the editor</h3>
+			<p>With the XSLT/XPath extension, XSpec tests appear in Visual Studio Code's Test Explorer. Run all of them,
+				one file, or one scenario; see the pass and fail status next to the tests and in the margin of the XSpec file;
+				and when an expectation fails, see the expected and actual results side by side. XSpec itself is included
+				with the extension, so there is nothing else to install.</p>
+
+			<h3>Writing tests faster</h3>
+			<p>With the cursor in a function, a named template or a template rule, a code action creates a scenario for
+				it, with the parameters laid out to fill in. A new XSpec file can start with a pending scenario for each of
+				a stylesheet's functions and templates. XSpec files are themselves checked as you edit them, against
+				XSpec's schema and against the stylesheet they test.</p>
+
+			<h3>Debugging a test and measuring coverage</h3>
+			<p>A failing test can be <a href="debugging-xslt.html">debugged</a>: set a breakpoint in the stylesheet or in
+				the test, run the scenario, and step through the code it runs. Test coverage shows percentages for the code the
+				tests exercised, and highlights covered and uncovered lines in the editor margin,
+				so you can see what isn't tested yet.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/xspec.html">XSpec tests</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>How do you unit test XSLT?</h3>
+				<p>Write an XSpec file: scenarios that call a function or template, or apply template rules to some input,
+					each with expectations for the result. Run it from VS Code's Test Explorer or from the XSpec file.</p>
+				<h3>What is XSpec?</h3>
+				<p>XSpec is a testing framework for XSLT and Schematron, in the style of behavior-driven development. Tests
+					are written as XML and describe a scenario and what is expected of it.</p>
+				<h3>Can I see test coverage for XSLT?</h3>
+				<p>Yes. After a test run, the extension shows coverage percentages and highlights covered lines in the editor
+					margin.</p>
+				<h3>Can I test Schematron too?</h3>
+				<p>Yes. XSpec tests for Schematron run and debug in the same way. See
+					<a href="schematron-editor.html">Schematron in VS Code</a>.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</div>
+</html>

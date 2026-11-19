@@ -1,0 +1,80 @@
+/* Styles for the XSLT overview section, in addition to the user guide's (../../vscode-xslt-xpath/resources/custom.css) */
+
+/* the overview's gallery: a figure for each screenshot - linked to the page about it - two to a row, and one on a phone */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
+  margin: 24px 0 8px;
+}
+
+.gallery figure {
+  margin: 0;
+}
+
+.gallery figure a {
+  display: block;
+}
+
+.gallery figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #c8c8d0;
+  border-radius: 6px;
+}
+
+.gallery figcaption {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: left;
+}
+
+.gallery figcaption strong {
+  display: block;
+}
+
+@media only screen and (max-width: 767px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* the closing 'get the extension' call to action */
+.get-extension {
+  margin: 32px 0 8px;
+  padding: 14px 18px;
+  border-left: 4px solid #0071BC;
+  background: #f4f2f9;
+}
+
+.get-extension p {
+  margin: 0;
+}
+
+/* questions and answers, marked up as a FAQ */
+.faq h3 {
+  margin-top: 22px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gallery figure img {
+    border-color: #444;
+  }
+
+  .get-extension {
+    background: #26262e;
+  }
+}
+
+@media print {
+  .gallery {
+    display: block;
+  }
+
+  .gallery figure {
+    break-inside: avoid;
+    margin-bottom: 14pt;
+  }
+}

@@ -41,6 +41,23 @@ The other tasks in [.vscode/tasks.json](.vscode/tasks.json):
 - `createVSCodePDF` - the guide as a PDF, from `all-pages.html`. Needs WeasyPrint (`brew install weasyprint`).
 - `createSitemap` - `/sitemap.xml`, for Google Search Console. See the release checklist below.
 
+### The XSLT overview section
+
+`/xslt/` is a separate section of the site: high-level pages and a gallery of screenshots about editing, testing,
+debugging, refactoring and reviewing XSLT in general, for people who aren't yet users of the extension. It links
+into the user guide for how-to detail, and shares the guide's styles and images (`../vscode-xslt-xpath/resources/`).
+It's built in the same way as the guide, but separately:
+
+- `xslt/authoring/layout.xml` is the page shell and its nav; `xslt/authoring/<page>.xml` is each page's content, with
+  its `<title>`, `<h1>` and description in a `<head>` as in the guide.
+- Run the build task `createXsltPages` to run `xslt/xsl/createPages.xsl`, which writes each page's HTML to
+  `xslt/<page>.html`, with the same title, canonical, Open Graph and JSON-LD tags as the guide's pages.
+- A `<div class="faq">` holding an `<h3>` for each question, each followed by the paragraphs that answer it, is also
+  written as `FAQPage` structured data.
+- A page is added in the same way as one of the guide: add `authoring/<page>.xml` and a nav entry in `layout.xml`.
+- `createSitemap` and `/llms.txt` list this section's pages as well as the guide's - `llms.txt` is written by the
+  guide's `createVSCodePages`, so run that after changing this section's titles or descriptions.
+
 ### Adding a page
 
 1. Add `authoring/<page>.xml` with the content in a `<div class="main">`.

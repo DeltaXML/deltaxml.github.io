@@ -112,6 +112,19 @@
           <xsl:sequence select="'- [' || $title || '](' || $siteUrl || @href[. ne 'index.html'] || ')' || (': ' || $description)[$description ne '']"/>
         </xsl:for-each>
       </xsl:for-each-group>
+      <!-- the XSLT overview section (../xslt), built by its own stylesheet: its pages, under their own heading -->
+      <xsl:variable name="xsltDir" as="xs:string" select="resolve-uri('../xslt/', $siteDir)"/>
+      <xsl:variable name="xsltLayout" as="document-node()?" select="
+        if (doc-available($xsltDir || 'authoring/layout.xml')) then doc($xsltDir || 'authoring/layout.xml') else ()"/>
+      <xsl:if test="exists($xsltLayout)">
+        <xsl:sequence select="'', '## Overview: editing, testing, debugging and reviewing XSLT', ''"/>
+        <xsl:for-each select="$xsltLayout/html/body//nav/ul/li/a">
+          <xsl:variable name="page" as="document-node()" select="doc($xsltDir || 'authoring/' || substring-before(@href, '.html') || '.xml')"/>
+          <xsl:variable name="title" as="xs:string" select="($page//head/title ! normalize-space(), normalize-space(.))[1]"/>
+          <xsl:variable name="description" as="xs:string" select="string(($page//head/meta[@name eq 'description']/@content ! normalize-space(), '')[1])"/>
+          <xsl:sequence select="'- [' || $title || '](https://deltaxml.github.io/xslt/' || @href[. ne 'index.html'] || ')' || (': ' || $description)[$description ne '']"/>
+        </xsl:for-each>
+      </xsl:if>
     </xsl:variable>
     <xsl:result-document href="{resolve-uri('../llms.txt', $siteDir)}" method="text" encoding="UTF-8">
       <xsl:text># XSLT and XPath for Visual Studio Code&#10;&#10;</xsl:text>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- the site's name, used in titles and link previews. Each page's own title and description are in its
+	     authoring/<page>.xml - these are the fallbacks -->
+	<title>XSLT Debugger and Profiler for VS Code</title>
+	<meta name="description" content="How to debug XSLT with breakpoints and stepping into XPath, use print debugging, and profile a stylesheet to find its slow templates - in Visual Studio Code with Saxon."><link rel="canonical" href="https://deltaxml.github.io/xslt/debugging-xslt.html"><meta property="og:type" content="article"><meta property="og:site_name" content="XSLT in VS Code"><meta property="og:title" content="XSLT Debugger and Profiler for VS Code"><meta property="og:description" content="How to debug XSLT with breakpoints and stepping into XPath, use print debugging, and profile a stylesheet to find its slow templates - in Visual Studio Code with Saxon."><meta property="og:url" content="https://deltaxml.github.io/xslt/debugging-xslt.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"XSLT Debugger and Profiler for VS Code","name":"XSLT Debugger and Profiler for VS Code","description":"How to debug XSLT with breakpoints and stepping into XPath, use print debugging, and profile a stylesheet to find its slow templates - in Visual Studio Code with Saxon.","url":"https://deltaxml.github.io/xslt/debugging-xslt.html","mainEntityOfPage":"https://deltaxml.github.io/xslt/debugging-xslt.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","installUrl":"https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath","applicationCategory":"DeveloperApplication"},"isPartOf":{"@type":"WebSite","name":"XSLT in VS Code","url":"https://deltaxml.github.io/xslt/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can you debug XSLT in VS Code?","acceptedAnswer":{"@type":"Answer","text":"Yes. The XSLT/XPath extension provides a step-through debugger for XSLT, XSpec tests and Schematron, with breakpoints, stepping through multi-line XPath, step back, watch expressions and output mapped to the XSLT."}},{"@type":"Question","name":"How do I find slow templates in XSLT?","acceptedAnswer":{"@type":"Answer","text":"Profile the stylesheet. The profiler lists each template, function and global variable with its time, call count and share of the total. It needs Saxon-PE or Saxon-EE."}},{"@type":"Question","name":"How do I print a variable's value in XSLT?","acceptedAnswer":{"@type":"Answer","text":"Use xsl:message - the extension offers completions that write the variables in scope - or the tracing functions, which show a value inside an expression without changing the result."}}]}]</script>
+	<meta name="author" content="Philip Fearon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- the section shares the user guide's styles and images, so that they look alike and aren't duplicated -->
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/base.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/skeleton.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/layout.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/custom.css">
+	<link rel="stylesheet" href="resources/section.css">
+	<link rel="icon" href="../vscode-xslt-xpath/resources/tiny-white-logo.png" sizes="32x32">
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="XSLT in VS Code">
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li class="nav-heading">Working with XSLT</li>
+				<li><a href="editing-xslt.html">Editing XSLT</a></li>
+				<li><a href="testing-xslt.html">Testing XSLT</a></li>
+				<li><a href="debugging-xslt.html" class="active" aria-current="page">Debugging and Profiling</a></li>
+				<li><a href="refactoring-reviewing-xslt.html">Refactoring and Reviewing</a></li>
+				<li class="nav-heading">Related</li>
+				<li><a href="schematron-editor.html">Schematron</a></li>
+				<li><a href="ai-for-xslt.html">AI for XSLT</a></li>
+			</ul>
+			<!-- outside the list, as these aren't pages of this section -->
+			<div class="nav-footer">
+				<a href="../vscode-xslt-xpath/">User guide</a>
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Get the extension</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">Debugging and Profiling XSLT</h1>
+		<div class="two-thirds column">
+			<p>When a transformation gives the wrong result, the question is always the same: what did the stylesheet
+				actually do with this input? XSLT is declarative, so the answer isn't a line of code that ran first - it
+				is which templates matched, what the variables held, and what each XPath expression returned. Debugging
+				XSLT means being able to see those things.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/debugger-xpath-step.png" alt="The XSLT debugger in Visual Studio Code, stopped at a breakpoint, showing the variables, context item and an XPath watch for the running stylesheet" loading="lazy">
+				<figcaption>Stopped at a breakpoint: the context item and variables, an XPath expression being watched, and
+					the call stack of templates.</figcaption>
+			</figure>
+
+			<h3>A step-through debugger</h3>
+			<p>The extension's debugger runs a stylesheet with Saxon and stops at breakpoints you set in it. It shows
+				the variables in scope, the context item with its position and size, and the call stack of templates and
+				functions. You can step into, over and out of code - including <em>inside</em> a multi-line XPath
+				expression - and step <em>back</em> or reverse-continue to see how you got there. Breakpoints can be
+				conditional or use hit counts, and logpoints write values without stopping.</p>
+			<p>The values you want are easy to ask for: add an XPath expression to the Watch view or evaluate one in the
+				Debug Console, and see the result as nodes, not just text. The output a stylesheet writes is mapped back to
+				the XSLT that wrote it.</p>
+
+			<h3 id="print">Print debugging</h3>
+			<p>Sometimes the quickest tool is a message. The extension completes <code>xsl:message</code> instructions
+				that write the variables in scope in color, and has functions for tracing a value inside an expression
+				without changing its result.</p>
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/xdm-debug-output.png" alt="Print debugging output for an XSLT function: the items of a sequence shown with their paths, and a total" loading="lazy">
+				<figcaption>The items a function worked on, written to the terminal with their paths.</figcaption>
+			</figure>
+
+			<h3 id="profiling">Profiling: finding the slow template</h3>
+			<p>If a stylesheet is correct but slow, profile it. The profiler runs the stylesheet with Saxon timing each
+				template, function and global variable, and shows them in a view, slowest first, with the time spent in
+				each, how often it was called, and its share of the total. Click a row to go to the code, and the times are
+				shown above each declaration in the editor. Profiling needs Saxon-PE or Saxon-EE.</p>
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/profiler-report.png" alt="The profiler report for a stylesheet, listing its templates and functions with the share of the time each took" loading="lazy">
+				<figcaption>The profiler report: each template and function, with the share of the time it took.</figcaption>
+			</figure>
+
+			<h3>Debugging tests and Schematron</h3>
+			<p>The same debugger works for <a href="testing-xslt.html">XSpec tests</a> and for
+				<a href="schematron-editor.html">Schematron</a> rules and assertions, so a failing test or a failed assertion
+				leads straight to the code that caused it.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/debugger.html">the debugger</a>,
+				<a href="../vscode-xslt-xpath/code-diagnostics.html">print debugging</a> and
+				<a href="../vscode-xslt-xpath/profiler.html">the profiler</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>Can you debug XSLT in VS Code?</h3>
+				<p>Yes. The XSLT/XPath extension provides a step-through debugger for XSLT, XSpec tests and Schematron, with
+					breakpoints, stepping through multi-line XPath, step back, watch expressions and output mapped to the
+					XSLT.</p>
+				<h3>How do I find slow templates in XSLT?</h3>
+				<p>Profile the stylesheet. The profiler lists each template, function and global variable with its time,
+					call count and share of the total. It needs Saxon-PE or Saxon-EE.</p>
+				<h3>How do I print a variable's value in XSLT?</h3>
+				<p>Use <code>xsl:message</code> - the extension offers completions that write the variables in scope - or
+					the tracing functions, which show a value inside an expression without changing the result.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</main>
+	</div>
+</body>
+
+</html>

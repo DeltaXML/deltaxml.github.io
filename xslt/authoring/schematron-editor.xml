@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Schematron Editor for VS Code: Validate, Fix and Debug Rules</title>
+		<h1>Schematron in VS Code</h1>
+		<meta name="description" content="Write Schematron rules, validate XML files against them, see failed assertions in the Problems view, and debug and test the rules - in Visual Studio Code."/>
+	</head>
+	<div class="main">
+		<div class="two-thirds column">
+			<p>Schematron checks the things a schema language like XML Schema cannot easily say: that an order's date is
+				a real date, that an identifier is unique, that if one element is present another must be. A Schematron
+				schema is a set of rules, each with assertions written in XPath - which makes it a natural companion to XSLT,
+				and to the same editor.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/schematron-validate.png" alt="An XML file validated with a Schematron schema, with failed assertions shown in the Problems view and on the rules in the schema" loading="lazy"/>
+				<figcaption>An XML file (left) validated against a Schematron schema (right): each failed assertion is a
+					problem at the element it is about, and the schema shows how many rules fired.</figcaption>
+			</figure>
+
+			<h3>Writing a schema</h3>
+			<p>Schematron files are checked as you edit them, with auto-completion and formatting. They are checked as
+				<a href="https://github.com/schxslt/schxslt2">SchXslt2</a> runs them - the ISO Schematron processor that XSpec
+				uses - as ISO Schematron with an XSLT query binding, so with <code>queryBinding="xslt4"</code> the XPath in
+				a rule is checked as XPath 4.0. A schema written for Schematron 1.5 is reported, with a quick fix that
+				converts it to ISO Schematron.</p>
+
+			<h3>Validating an XML file</h3>
+			<p>With an XML file open, run Schematron: Validate. Each failed assertion and successful report is shown in
+				the Problems view and as a highlight in the XML, at the element or attribute it is about, with its message.
+				Its severity is the one the assertion gives, such as warning or info, and otherwise an error. A quick fix
+				takes you from a problem to the assertion in the schema that reported it. The schema used is the one an
+				<code>xml-model</code> processing instruction in the file names, or one you choose.</p>
+
+			<h3>Debugging and testing rules</h3>
+			<p>When a rule does not fire, or fires too often, the <a href="debugging-xslt.html">debugger</a> can step through
+				the rules and assertions as they run against an XML file. And Schematron rules, like XSLT, can be tested with
+				<a href="testing-xslt.html">XSpec</a>: scenarios that check which assertions fail for a given input.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/schematron.html">Schematron</a> and
+				<a href="../vscode-xslt-xpath/xspec.html">XSpec tests</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>Is there a Schematron editor for VS Code?</h3>
+				<p>Yes. The XSLT/XPath extension edits Schematron with auto-completion, formatting and checking, validates
+					XML files against a schema, and debugs and tests rules and assertions.</p>
+				<h3>How do I validate XML with Schematron in VS Code?</h3>
+				<p>Open the XML file and run Schematron: Validate from the Command Palette. Failed assertions appear in the
+					Problems view and in the editor. The schema is the one named by an <code>xml-model</code> processing
+					instruction in the file, or one you choose.</p>
+				<h3>Which Schematron processor does it use?</h3>
+				<p>SchXslt2, the ISO Schematron processor XSpec uses, run with the Saxon you configure.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</div>
+</html>

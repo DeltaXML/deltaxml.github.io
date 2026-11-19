@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>XSLT Editor, Tester and Debugger for VS Code</title>
+		<h1>XSLT Editing, Testing and Debugging in VS Code</h1>
+		<meta name="description" content="How to edit, test, debug, refactor and review XSLT, XPath and Schematron in Visual Studio Code, with screenshots of the XSLT/XPath extension at work."/>
+	</head>
+	<div class="main">
+		<div class="two-thirds column">
+			<p>XSLT is a language that rewards good tooling. A stylesheet is made of many small templates and functions
+				that call each other, and an XPath expression buried in an attribute can be wrong in ways that only show up
+				on the right input. Working well with it means seeing problems as you type, trying changes quickly,
+				testing what you've written, and finding out what a stylesheet actually did.</p>
+			<p>These pages describe what that looks like in Visual Studio Code with DeltaXignia's free
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath extension</a>,
+				for XSLT 3.0 and XPath 3.1 and the XSLT 4.0 and XPath 4.0 features of Saxon 13. For step-by-step instructions
+				on each feature, see the <a href="../vscode-xslt-xpath/">user guide</a>.</p>
+
+			<div class="gallery">
+				<figure>
+					<a href="debugging-xslt.html"><img src="../vscode-xslt-xpath/resources/debugger-xpath-step.png" alt="The XSLT debugger in Visual Studio Code, stopped at a breakpoint, showing the variables, context item and an XPath watch for the running stylesheet" loading="lazy"/></a>
+					<figcaption><strong>Debug XSLT</strong> Stop at a breakpoint and see the variables, the context item and
+						the values of XPath expressions you choose to watch.</figcaption>
+				</figure>
+				<figure>
+					<a href="testing-xslt.html"><img src="../vscode-xslt-xpath/resources/test-failure.png" alt="A failed XSpec test in the Test Explorer, with the expected and actual output side by side and the difference highlighted" loading="lazy"/></a>
+					<figcaption><strong>Test XSLT</strong> Run XSpec tests from the Test Explorer, and see the expected and
+						actual results side by side when one fails.</figcaption>
+				</figure>
+				<figure>
+					<a href="schematron-editor.html"><img src="../vscode-xslt-xpath/resources/schematron-validate.png" alt="An XML file validated with a Schematron schema, with failed assertions shown in the Problems view and on the rules in the schema" loading="lazy"/></a>
+					<figcaption><strong>Validate with Schematron</strong> See the failed assertions in the Problems view,
+						and which rules fired, beside the schema.</figcaption>
+				</figure>
+				<figure>
+					<a href="debugging-xslt.html#profiling"><img src="../vscode-xslt-xpath/resources/profiler-report.png" alt="The profiler report for a stylesheet, listing its templates and functions with the share of the time each took" loading="lazy"/></a>
+					<figcaption><strong>Profile XSLT</strong> Find the templates and functions where a stylesheet spends its
+						time, and click through to the code.</figcaption>
+				</figure>
+				<figure>
+					<a href="editing-xslt.html"><img src="../vscode-xslt-xpath/resources/linting-of-the-as-attribute.png" alt="An xsl:variable whose as attribute misspells xs:integer as xs:ineger, underlined as a problem in the editor" loading="lazy"/></a>
+					<figcaption><strong>Catch mistakes as you type</strong> Types, XPath syntax and function arguments are
+						checked in the editor, down to a misspelled <code>xs:integer</code>.</figcaption>
+				</figure>
+				<figure>
+					<a href="refactoring-reviewing-xslt.html"><img src="../vscode-xslt-xpath/resources/full-refactor.png" alt="An xsl:function created by the Extract function refactoring, with the context it needs passed in as parameters" loading="lazy"/></a>
+					<figcaption><strong>Refactor XSLT</strong> Extract selected code to a function, with the context it
+						uses passed as parameters.</figcaption>
+				</figure>
+				<figure>
+					<a href="refactoring-reviewing-xslt.html#imports"><img src="../vscode-xslt-xpath/resources/import-view.png" alt="The XSLT Imports view, showing a stylesheet and the modules it imports and includes, with the current module marked" loading="lazy"/></a>
+					<figcaption><strong>Understand a stylesheet's structure</strong> See the tree of imports and includes,
+						and which module you are in.</figcaption>
+				</figure>
+				<figure>
+					<a href="debugging-xslt.html#print"><img src="../vscode-xslt-xpath/resources/xdm-debug-output.png" alt="Print debugging output for an XSLT function: the items of a sequence shown with their paths, and a total" loading="lazy"/></a>
+					<figcaption><strong>Print debugging</strong> Write the values of variables to the terminal, in color,
+						as a stylesheet runs.</figcaption>
+				</figure>
+			</div>
+
+			<h3>Where to start</h3>
+			<ul>
+				<li><a href="editing-xslt.html">Editing XSLT</a> - completion, checking and navigation in the editor.</li>
+				<li><a href="testing-xslt.html">Testing XSLT</a> - unit tests with XSpec, and test coverage.</li>
+				<li><a href="debugging-xslt.html">Debugging and profiling XSLT</a> - breakpoints, stepping and timings.</li>
+				<li><a href="refactoring-reviewing-xslt.html">Refactoring and reviewing XSLT</a> - changing a stylesheet safely, and finding your way around someone else's.</li>
+				<li><a href="schematron-editor.html">Schematron</a> - rules for XML, written, validated and debugged in the same editor.</li>
+				<li><a href="ai-for-xslt.html">AI for XSLT</a> - using AI assistants such as GitHub Copilot or Claude Code with XSLT.</li>
+			</ul>
+
+			<h3>Frequently asked questions</h3>
+			<div class="faq">
+				<h3>Can Visual Studio Code be used as an XSLT editor?</h3>
+				<p>Yes. With the XSLT/XPath extension, VS Code checks XSLT and XPath as you type, completes and navigates
+					code, runs stylesheets with Saxon, debugs and profiles them, and runs XSpec tests - for XSLT 3.0 and the
+					XSLT 4.0 features of Saxon 13.</p>
+				<h3>Does it work with Saxon-HE?</h3>
+				<p>Yes. Everything works with the free Saxon-HE except the profiler's timings, which need Saxon-PE or
+					Saxon-EE.</p>
+				<h3>Is there an XPath editor or tester?</h3>
+				<p>Yes. XPath expressions are checked and completed wherever they appear in a stylesheet, and the guide
+					describes how to <a href="../vscode-xslt-xpath/xpath-queries.html">find nodes with XPath</a> in an XML file and
+					how to use <a href="../vscode-xslt-xpath/xpath-notebook.html">XPath notebooks</a>.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace, then read the <a href="../vscode-xslt-xpath/">user guide</a>.</p>
+			</div>
+		</div>
+	</div>
+</html>

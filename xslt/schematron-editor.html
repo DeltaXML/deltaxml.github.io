@@ -1,0 +1,125 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- the site's name, used in titles and link previews. Each page's own title and description are in its
+	     authoring/<page>.xml - these are the fallbacks -->
+	<title>Schematron Editor for VS Code: Validate, Fix and Debug Rules</title>
+	<meta name="description" content="Write Schematron rules, validate XML files against them, see failed assertions in the Problems view, and debug and test the rules - in Visual Studio Code."><link rel="canonical" href="https://deltaxml.github.io/xslt/schematron-editor.html"><meta property="og:type" content="article"><meta property="og:site_name" content="XSLT in VS Code"><meta property="og:title" content="Schematron Editor for VS Code: Validate, Fix and Debug Rules"><meta property="og:description" content="Write Schematron rules, validate XML files against them, see failed assertions in the Problems view, and debug and test the rules - in Visual Studio Code."><meta property="og:url" content="https://deltaxml.github.io/xslt/schematron-editor.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Schematron Editor for VS Code: Validate, Fix and Debug Rules","name":"Schematron Editor for VS Code: Validate, Fix and Debug Rules","description":"Write Schematron rules, validate XML files against them, see failed assertions in the Problems view, and debug and test the rules - in Visual Studio Code.","url":"https://deltaxml.github.io/xslt/schematron-editor.html","mainEntityOfPage":"https://deltaxml.github.io/xslt/schematron-editor.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","installUrl":"https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath","applicationCategory":"DeveloperApplication"},"isPartOf":{"@type":"WebSite","name":"XSLT in VS Code","url":"https://deltaxml.github.io/xslt/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is there a Schematron editor for VS Code?","acceptedAnswer":{"@type":"Answer","text":"Yes. The XSLT/XPath extension edits Schematron with auto-completion, formatting and checking, validates XML files against a schema, and debugs and tests rules and assertions."}},{"@type":"Question","name":"How do I validate XML with Schematron in VS Code?","acceptedAnswer":{"@type":"Answer","text":"Open the XML file and run Schematron: Validate from the Command Palette. Failed assertions appear in the Problems view and in the editor. The schema is the one named by an xml-model processing instruction in the file, or one you choose."}},{"@type":"Question","name":"Which Schematron processor does it use?","acceptedAnswer":{"@type":"Answer","text":"SchXslt2, the ISO Schematron processor XSpec uses, run with the Saxon you configure."}}]}]</script>
+	<meta name="author" content="Philip Fearon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- the section shares the user guide's styles and images, so that they look alike and aren't duplicated -->
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/base.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/skeleton.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/layout.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/custom.css">
+	<link rel="stylesheet" href="resources/section.css">
+	<link rel="icon" href="../vscode-xslt-xpath/resources/tiny-white-logo.png" sizes="32x32">
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="XSLT in VS Code">
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li class="nav-heading">Working with XSLT</li>
+				<li><a href="editing-xslt.html">Editing XSLT</a></li>
+				<li><a href="testing-xslt.html">Testing XSLT</a></li>
+				<li><a href="debugging-xslt.html">Debugging and Profiling</a></li>
+				<li><a href="refactoring-reviewing-xslt.html">Refactoring and Reviewing</a></li>
+				<li class="nav-heading">Related</li>
+				<li><a href="schematron-editor.html" class="active" aria-current="page">Schematron</a></li>
+				<li><a href="ai-for-xslt.html">AI for XSLT</a></li>
+			</ul>
+			<!-- outside the list, as these aren't pages of this section -->
+			<div class="nav-footer">
+				<a href="../vscode-xslt-xpath/">User guide</a>
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Get the extension</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">Schematron in VS Code</h1>
+		<div class="two-thirds column">
+			<p>Schematron checks the things a schema language like XML Schema cannot easily say: that an order's date is
+				a real date, that an identifier is unique, that if one element is present another must be. A Schematron
+				schema is a set of rules, each with assertions written in XPath - which makes it a natural companion to XSLT,
+				and to the same editor.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/schematron-validate.png" alt="An XML file validated with a Schematron schema, with failed assertions shown in the Problems view and on the rules in the schema" loading="lazy">
+				<figcaption>An XML file (left) validated against a Schematron schema (right): each failed assertion is a
+					problem at the element it is about, and the schema shows how many rules fired.</figcaption>
+			</figure>
+
+			<h3>Writing a schema</h3>
+			<p>Schematron files are checked as you edit them, with auto-completion and formatting. They are checked as
+				<a href="https://github.com/schxslt/schxslt2">SchXslt2</a> runs them - the ISO Schematron processor that XSpec
+				uses - as ISO Schematron with an XSLT query binding, so with <code>queryBinding="xslt4"</code> the XPath in
+				a rule is checked as XPath 4.0. A schema written for Schematron 1.5 is reported, with a quick fix that
+				converts it to ISO Schematron.</p>
+
+			<h3>Validating an XML file</h3>
+			<p>With an XML file open, run Schematron: Validate. Each failed assertion and successful report is shown in
+				the Problems view and as a highlight in the XML, at the element or attribute it is about, with its message.
+				Its severity is the one the assertion gives, such as warning or info, and otherwise an error. A quick fix
+				takes you from a problem to the assertion in the schema that reported it. The schema used is the one an
+				<code>xml-model</code> processing instruction in the file names, or one you choose.</p>
+
+			<h3>Debugging and testing rules</h3>
+			<p>When a rule does not fire, or fires too often, the <a href="debugging-xslt.html">debugger</a> can step through
+				the rules and assertions as they run against an XML file. And Schematron rules, like XSLT, can be tested with
+				<a href="testing-xslt.html">XSpec</a>: scenarios that check which assertions fail for a given input.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/schematron.html">Schematron</a> and
+				<a href="../vscode-xslt-xpath/xspec.html">XSpec tests</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>Is there a Schematron editor for VS Code?</h3>
+				<p>Yes. The XSLT/XPath extension edits Schematron with auto-completion, formatting and checking, validates
+					XML files against a schema, and debugs and tests rules and assertions.</p>
+				<h3>How do I validate XML with Schematron in VS Code?</h3>
+				<p>Open the XML file and run Schematron: Validate from the Command Palette. Failed assertions appear in the
+					Problems view and in the editor. The schema is the one named by an <code>xml-model</code> processing
+					instruction in the file, or one you choose.</p>
+				<h3>Which Schematron processor does it use?</h3>
+				<p>SchXslt2, the ISO Schematron processor XSpec uses, run with the Saxon you configure.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</main>
+	</div>
+</body>
+
+</html>

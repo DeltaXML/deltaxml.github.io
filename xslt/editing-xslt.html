@@ -1,0 +1,132 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- the site's name, used in titles and link previews. Each page's own title and description are in its
+	     authoring/<page>.xml - these are the fallbacks -->
+	<title>XSLT Editor for VS Code: Completion, Checking and Navigation</title>
+	<meta name="description" content="What a good XSLT editor does: checks XPath and types as you type, completes names from your XML, and navigates between templates, functions and imported modules. In VS Code."><link rel="canonical" href="https://deltaxml.github.io/xslt/editing-xslt.html"><meta property="og:type" content="article"><meta property="og:site_name" content="XSLT in VS Code"><meta property="og:title" content="XSLT Editor for VS Code: Completion, Checking and Navigation"><meta property="og:description" content="What a good XSLT editor does: checks XPath and types as you type, completes names from your XML, and navigates between templates, functions and imported modules. In VS Code."><meta property="og:url" content="https://deltaxml.github.io/xslt/editing-xslt.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"XSLT Editor for VS Code: Completion, Checking and Navigation","name":"XSLT Editor for VS Code: Completion, Checking and Navigation","description":"What a good XSLT editor does: checks XPath and types as you type, completes names from your XML, and navigates between templates, functions and imported modules. In VS Code.","url":"https://deltaxml.github.io/xslt/editing-xslt.html","mainEntityOfPage":"https://deltaxml.github.io/xslt/editing-xslt.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","installUrl":"https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath","applicationCategory":"DeveloperApplication"},"isPartOf":{"@type":"WebSite","name":"XSLT in VS Code","url":"https://deltaxml.github.io/xslt/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Visual Studio Code edit XSLT?","acceptedAnswer":{"@type":"Answer","text":"Yes. VS Code edits any XML, and the XSLT/XPath extension adds XSLT-aware checking, completion, hover help, navigation and refactoring for XSLT 3.0 and the XSLT 4.0 features of Saxon 13."}},{"@type":"Question","name":"Does the editor check XPath expressions?","acceptedAnswer":{"@type":"Answer","text":"Yes. The XPath in attributes and text value templates is checked for syntax, types, function arguments and unused or unresolved variables as you type."}},{"@type":"Question","name":"Does it support XSLT 4.0?","acceptedAnswer":{"@type":"Answer","text":"It supports the XSLT 4.0 and XPath 4.0 features implemented in Saxon 13, such as records, enums, xsl:switch, keyword arguments and JSON path expressions."}}]}]</script>
+	<meta name="author" content="Philip Fearon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- the section shares the user guide's styles and images, so that they look alike and aren't duplicated -->
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/base.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/skeleton.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/layout.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/custom.css">
+	<link rel="stylesheet" href="resources/section.css">
+	<link rel="icon" href="../vscode-xslt-xpath/resources/tiny-white-logo.png" sizes="32x32">
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="XSLT in VS Code">
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li class="nav-heading">Working with XSLT</li>
+				<li><a href="editing-xslt.html" class="active" aria-current="page">Editing XSLT</a></li>
+				<li><a href="testing-xslt.html">Testing XSLT</a></li>
+				<li><a href="debugging-xslt.html">Debugging and Profiling</a></li>
+				<li><a href="refactoring-reviewing-xslt.html">Refactoring and Reviewing</a></li>
+				<li class="nav-heading">Related</li>
+				<li><a href="schematron-editor.html">Schematron</a></li>
+				<li><a href="ai-for-xslt.html">AI for XSLT</a></li>
+			</ul>
+			<!-- outside the list, as these aren't pages of this section -->
+			<div class="nav-footer">
+				<a href="../vscode-xslt-xpath/">User guide</a>
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Get the extension</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">Editing XSLT in VS Code</h1>
+		<div class="two-thirds column">
+			<p>Most XSLT mistakes are small: a misspelled type, a variable that isn't in scope, a function called with
+				the wrong number of arguments, an element name that doesn't exist in the input. A good XSLT editor finds
+				these while you type, not when a transformation fails - or worse, quietly produces the wrong output.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/linting-of-the-as-attribute.png" alt="An xsl:variable whose as attribute misspells xs:integer as xs:ineger, underlined as a problem in the editor" loading="lazy">
+				<figcaption>A misspelled type in an <code>as</code> attribute, underlined as you type.</figcaption>
+			</figure>
+
+			<h3>Checking as you type</h3>
+			<p>In Visual Studio Code the XSLT/XPath extension checks a stylesheet continuously. It looks at the XSLT
+				instructions and at the XPath inside attributes and text value templates, and reports unresolved variables,
+				wrong types, record fields that don't exist, wrong numbers of function arguments, and unused variables and
+				parameters. Problems appear as squiggles in the editor and in the Problems view, many with a quick fix.
+				Because references are followed across <code>xsl:import</code> and <code>xsl:include</code>, a function
+				declared in another module is found.</p>
+
+			<h3>Completion and help that know your XML</h3>
+			<p>Auto-completion is context-aware: it offers the instructions and attributes that are valid where you are,
+				the functions and variables in scope, and - when you tell the editor which XML file you are developing
+				the stylesheet for - the node names that actually occur in that file. Hover and signature
+				help show a function's parameters and types, and the documentation notes you or your team have written.</p>
+
+			<h3>Finding your way around</h3>
+			<p>Stylesheets grow. Go to Definition, Peek and Find All References work for templates, functions, variables,
+				modes, keys and more, across modules; a call hierarchy shows what calls a function or template, and the
+				outline and breadcrumbs show where you are. Import and include hrefs are links, and a view shows the whole
+				tree of modules for a stylesheet. See <a href="refactoring-reviewing-xslt.html">Refactoring and
+				reviewing XSLT</a> for more on reading and changing a large stylesheet.</p>
+
+			<h3>XSLT 3.0 and the XSLT 4.0 draft</h3>
+			<p>XSLT 3.0 and XPath 3.1 are fully supported. Features of the XSLT 4.0 and XPath 4.0 drafts that Saxon 13
+				implements are supported too: record and enum types with type-aware checks, <code>xsl:switch</code> with
+				quick fixes for missing cases, keyword arguments, and path expressions that navigate JSON.</p>
+
+			<p>Everything described here is in the user guide: <a href="../vscode-xslt-xpath/editing-xslt.html">editing
+				XSLT and XPath</a>, <a href="../vscode-xslt-xpath/navigation.html">code navigation</a>,
+				<a href="../vscode-xslt-xpath/xml-catalogs.html">XML catalogs</a> and
+				<a href="../vscode-xslt-xpath/xslt-packages.html">XSLT packages</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>Can Visual Studio Code edit XSLT?</h3>
+				<p>Yes. VS Code edits any XML, and the XSLT/XPath extension adds XSLT-aware checking, completion, hover help,
+					navigation and refactoring for XSLT 3.0 and the XSLT 4.0 features of Saxon 13.</p>
+				<h3>Does the editor check XPath expressions?</h3>
+				<p>Yes. The XPath in attributes and text value templates is checked for syntax, types, function arguments and
+					unused or unresolved variables as you type.</p>
+				<h3>Does it support XSLT 4.0?</h3>
+				<p>It supports the XSLT 4.0 and XPath 4.0 features implemented in Saxon 13, such as records, enums,
+					<code>xsl:switch</code>, keyword arguments and JSON path expressions.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</main>
+	</div>
+</body>
+
+</html>

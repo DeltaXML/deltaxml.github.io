@@ -1,0 +1,130 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- the site's name, used in titles and link previews. Each page's own title and description are in its
+	     authoring/<page>.xml - these are the fallbacks -->
+	<title>How to Test XSLT: XSpec Unit Tests in VS Code</title>
+	<meta name="description" content="How to unit test XSLT with XSpec: scenarios and expectations, running tests from VS Code's Test Explorer, seeing why a test failed, and measuring test coverage."><link rel="canonical" href="https://deltaxml.github.io/xslt/testing-xslt.html"><meta property="og:type" content="article"><meta property="og:site_name" content="XSLT in VS Code"><meta property="og:title" content="How to Test XSLT: XSpec Unit Tests in VS Code"><meta property="og:description" content="How to unit test XSLT with XSpec: scenarios and expectations, running tests from VS Code's Test Explorer, seeing why a test failed, and measuring test coverage."><meta property="og:url" content="https://deltaxml.github.io/xslt/testing-xslt.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Test XSLT: XSpec Unit Tests in VS Code","name":"How to Test XSLT: XSpec Unit Tests in VS Code","description":"How to unit test XSLT with XSpec: scenarios and expectations, running tests from VS Code's Test Explorer, seeing why a test failed, and measuring test coverage.","url":"https://deltaxml.github.io/xslt/testing-xslt.html","mainEntityOfPage":"https://deltaxml.github.io/xslt/testing-xslt.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","installUrl":"https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath","applicationCategory":"DeveloperApplication"},"isPartOf":{"@type":"WebSite","name":"XSLT in VS Code","url":"https://deltaxml.github.io/xslt/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do you unit test XSLT?","acceptedAnswer":{"@type":"Answer","text":"Write an XSpec file: scenarios that call a function or template, or apply template rules to some input, each with expectations for the result. Run it from VS Code's Test Explorer or from the XSpec file."}},{"@type":"Question","name":"What is XSpec?","acceptedAnswer":{"@type":"Answer","text":"XSpec is a testing framework for XSLT and Schematron, in the style of behavior-driven development. Tests are written as XML and describe a scenario and what is expected of it."}},{"@type":"Question","name":"Can I see test coverage for XSLT?","acceptedAnswer":{"@type":"Answer","text":"Yes. After a test run, the extension shows coverage percentages and highlights covered lines in the editor margin."}},{"@type":"Question","name":"Can I test Schematron too?","acceptedAnswer":{"@type":"Answer","text":"Yes. XSpec tests for Schematron run and debug in the same way. See Schematron in VS Code."}}]}]</script>
+	<meta name="author" content="Philip Fearon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- the section shares the user guide's styles and images, so that they look alike and aren't duplicated -->
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/base.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/skeleton.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/layout.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/custom.css">
+	<link rel="stylesheet" href="resources/section.css">
+	<link rel="icon" href="../vscode-xslt-xpath/resources/tiny-white-logo.png" sizes="32x32">
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="XSLT in VS Code">
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li class="nav-heading">Working with XSLT</li>
+				<li><a href="editing-xslt.html">Editing XSLT</a></li>
+				<li><a href="testing-xslt.html" class="active" aria-current="page">Testing XSLT</a></li>
+				<li><a href="debugging-xslt.html">Debugging and Profiling</a></li>
+				<li><a href="refactoring-reviewing-xslt.html">Refactoring and Reviewing</a></li>
+				<li class="nav-heading">Related</li>
+				<li><a href="schematron-editor.html">Schematron</a></li>
+				<li><a href="ai-for-xslt.html">AI for XSLT</a></li>
+			</ul>
+			<!-- outside the list, as these aren't pages of this section -->
+			<div class="nav-footer">
+				<a href="../vscode-xslt-xpath/">User guide</a>
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Get the extension</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">Testing XSLT with XSpec</h1>
+		<div class="two-thirds column">
+			<p>A stylesheet that works on today's sample file may fail on tomorrow's. The way to find out is to test it:
+				give a function, a template or a set of template rules an input, and say what the result should be.
+				For XSLT - and for Schematron - the usual framework for this is <a href="https://github.com/xspec/xspec">XSpec</a>.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/test-failure.png" alt="A failed XSpec test in the Test Explorer, with the expected and actual output side by side and the difference highlighted" loading="lazy">
+				<figcaption>A failed expectation: the expected and actual output side by side, with the difference marked.</figcaption>
+			</figure>
+
+			<h3>What an XSpec test looks like</h3>
+			<p>An XSpec file describes <em>scenarios</em>. Each scenario calls a function or a named template, or applies
+				template rules to a context, and its <em>expectations</em> say what the result should be - written in XML,
+				so the expected output can be a node tree as well as a value. Scenarios are named in plain language, so a
+				test file also documents what a stylesheet is meant to do.</p>
+
+			<h3>Running tests in the editor</h3>
+			<p>With the XSLT/XPath extension, XSpec tests appear in Visual Studio Code's Test Explorer. Run all of them,
+				one file, or one scenario; see the pass and fail status next to the tests and in the margin of the XSpec file;
+				and when an expectation fails, see the expected and actual results side by side. XSpec itself is included
+				with the extension, so there is nothing else to install.</p>
+
+			<h3>Writing tests faster</h3>
+			<p>With the cursor in a function, a named template or a template rule, a code action creates a scenario for
+				it, with the parameters laid out to fill in. A new XSpec file can start with a pending scenario for each of
+				a stylesheet's functions and templates. XSpec files are themselves checked as you edit them, against
+				XSpec's schema and against the stylesheet they test.</p>
+
+			<h3>Debugging a test and measuring coverage</h3>
+			<p>A failing test can be <a href="debugging-xslt.html">debugged</a>: set a breakpoint in the stylesheet or in
+				the test, run the scenario, and step through the code it runs. Test coverage shows percentages for the code the
+				tests exercised, and highlights covered and uncovered lines in the editor margin,
+				so you can see what isn't tested yet.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/xspec.html">XSpec tests</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>How do you unit test XSLT?</h3>
+				<p>Write an XSpec file: scenarios that call a function or template, or apply template rules to some input,
+					each with expectations for the result. Run it from VS Code's Test Explorer or from the XSpec file.</p>
+				<h3>What is XSpec?</h3>
+				<p>XSpec is a testing framework for XSLT and Schematron, in the style of behavior-driven development. Tests
+					are written as XML and describe a scenario and what is expected of it.</p>
+				<h3>Can I see test coverage for XSLT?</h3>
+				<p>Yes. After a test run, the extension shows coverage percentages and highlights covered lines in the editor
+					margin.</p>
+				<h3>Can I test Schematron too?</h3>
+				<p>Yes. XSpec tests for Schematron run and debug in the same way. See
+					<a href="schematron-editor.html">Schematron in VS Code</a>.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</main>
+	</div>
+</body>
+
+</html>

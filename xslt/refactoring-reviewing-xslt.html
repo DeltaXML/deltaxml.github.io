@@ -1,0 +1,141 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- the site's name, used in titles and link previews. Each page's own title and description are in its
+	     authoring/<page>.xml - these are the fallbacks -->
+	<title>XSLT Refactoring and Code Review in VS Code</title>
+	<meta name="description" content="How to refactor XSLT safely - rename, extract a function or variable, convert to a package - and how to read and review an unfamiliar stylesheet, in Visual Studio Code."><link rel="canonical" href="https://deltaxml.github.io/xslt/refactoring-reviewing-xslt.html"><meta property="og:type" content="article"><meta property="og:site_name" content="XSLT in VS Code"><meta property="og:title" content="XSLT Refactoring and Code Review in VS Code"><meta property="og:description" content="How to refactor XSLT safely - rename, extract a function or variable, convert to a package - and how to read and review an unfamiliar stylesheet, in Visual Studio Code."><meta property="og:url" content="https://deltaxml.github.io/xslt/refactoring-reviewing-xslt.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"XSLT Refactoring and Code Review in VS Code","name":"XSLT Refactoring and Code Review in VS Code","description":"How to refactor XSLT safely - rename, extract a function or variable, convert to a package - and how to read and review an unfamiliar stylesheet, in Visual Studio Code.","url":"https://deltaxml.github.io/xslt/refactoring-reviewing-xslt.html","mainEntityOfPage":"https://deltaxml.github.io/xslt/refactoring-reviewing-xslt.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","installUrl":"https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath","applicationCategory":"DeveloperApplication"},"isPartOf":{"@type":"WebSite","name":"XSLT in VS Code","url":"https://deltaxml.github.io/xslt/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I rename an XSLT template or function safely?","acceptedAnswer":{"@type":"Answer","text":"Use Rename Symbol. The extension updates every reference, including those in the modules the stylesheet imports and includes."}},{"@type":"Question","name":"How do I extract a function from XSLT code?","acceptedAnswer":{"@type":"Answer","text":"Select the XSLT or XPath code and run the Extract refactoring. The extension creates an xsl:function or xsl:template with the variables and context it uses as parameters."}},{"@type":"Question","name":"How do I understand a large XSLT stylesheet?","acceptedAnswer":{"@type":"Answer","text":"Use Go to Definition and Find All References, the call hierarchy, the outline, and the XSLT Imports view, which shows how a stylesheet's modules fit together."}}]}]</script>
+	<meta name="author" content="Philip Fearon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- the section shares the user guide's styles and images, so that they look alike and aren't duplicated -->
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/base.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/skeleton.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/layout.css">
+	<link rel="stylesheet" href="../vscode-xslt-xpath/resources/custom.css">
+	<link rel="stylesheet" href="resources/section.css">
+	<link rel="icon" href="../vscode-xslt-xpath/resources/tiny-white-logo.png" sizes="32x32">
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="XSLT in VS Code">
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li class="nav-heading">Working with XSLT</li>
+				<li><a href="editing-xslt.html">Editing XSLT</a></li>
+				<li><a href="testing-xslt.html">Testing XSLT</a></li>
+				<li><a href="debugging-xslt.html">Debugging and Profiling</a></li>
+				<li><a href="refactoring-reviewing-xslt.html" class="active" aria-current="page">Refactoring and Reviewing</a></li>
+				<li class="nav-heading">Related</li>
+				<li><a href="schematron-editor.html">Schematron</a></li>
+				<li><a href="ai-for-xslt.html">AI for XSLT</a></li>
+			</ul>
+			<!-- outside the list, as these aren't pages of this section -->
+			<div class="nav-footer">
+				<a href="../vscode-xslt-xpath/">User guide</a>
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Get the extension</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">Refactoring and Reviewing XSLT</h1>
+		<div class="two-thirds column">
+			<p>Stylesheets outlive the people who wrote them. Names that made sense become misleading, a template grows
+				until nobody wants to touch it, and a library of functions is copied from one project to the next. Changing
+				a stylesheet safely, and understanding one you did not write, are two sides of the same skill.</p>
+
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/full-refactor.png" alt="An xsl:function created by the Extract function refactoring, with the context it needs passed in as parameters" loading="lazy">
+				<figcaption>The result of Extract function: the selected code is now an <code>xsl:function</code>, with the
+					context it used passed in as parameters.</figcaption>
+			</figure>
+
+			<h3>Refactoring</h3>
+			<p>Refactoring changes how code is organized without changing what it does. The XSLT/XPath extension has
+				refactorings that understand XSLT - not just text:</p>
+			<ul>
+				<li><strong>Rename</strong> a variable, parameter, function, template or other symbol, with every
+					reference updated - across the modules a stylesheet imports and includes.</li>
+				<li><strong>Extract</strong> selected XSLT or XPath to a new <code>xsl:function</code> or
+					<code>xsl:template</code>, with the variables and context it needs passed as parameters, or extract an
+					<code>xsl:variable</code> from an XPath expression.</li>
+				<li><strong>Convert a library to an XSLT package</strong>, so that it exposes a public interface.</li>
+				<li><strong>Wrap</strong> code with an instruction, such as <code>xsl:if</code>, in one step.</li>
+			</ul>
+			<p>Refactoring is safest with tests behind it: run your <a href="testing-xslt.html">XSpec tests</a> before and
+				after, and the checking described in <a href="editing-xslt.html">Editing XSLT</a> will flag a reference
+				that no longer resolves.</p>
+
+			<h3 id="imports">Reviewing and understanding a stylesheet</h3>
+			<p>To review a stylesheet, you first need to find your way round it. Go to Definition and Find All References
+				answer "where is this declared?" and "who uses it?"; a call hierarchy shows what calls a function or
+				template; the outline and Go to Symbol list what a module contains. The XSLT Imports view shows the tree of
+				modules, imports, includes and packages for the top-level stylesheet, with the module you are in marked.</p>
+			<figure>
+				<img src="../vscode-xslt-xpath/resources/import-view.png" alt="The XSLT Imports view, showing a stylesheet and the modules it imports and includes, with the current module marked" loading="lazy">
+				<figcaption>The XSLT Imports view: a top-level stylesheet and the modules below it.</figcaption>
+			</figure>
+			<p>The checking the extension does is a reviewer's first pass: unused variables and parameters, calls with the
+				wrong arguments, wrong types, references that don't resolve.</p>
+
+			<h3>Leaving notes for the next reader</h3>
+			<p>XSLT 4.0 adds <code>xsl:note</code>, for documentation inside a stylesheet. The extension shows a note in
+				hover and signature help, with Markdown and tags such as <code>@param</code> that are checked against the
+				code, so the documentation a reviewer needs is at hand where the code is used.</p>
+
+			<p>The details are in the user guide: <a href="../vscode-xslt-xpath/refactoring-xslt.html">refactoring</a>,
+				<a href="../vscode-xslt-xpath/navigation.html">code navigation</a>,
+				<a href="../vscode-xslt-xpath/xslt-packages.html">XSLT packages</a> and
+				<a href="../vscode-xslt-xpath/xslt40-notes.html">code documentation</a>.</p>
+
+			<h3>Common questions</h3>
+			<div class="faq">
+				<h3>How do I rename an XSLT template or function safely?</h3>
+				<p>Use Rename Symbol. The extension updates every reference, including those in the modules the stylesheet
+					imports and includes.</p>
+				<h3>How do I extract a function from XSLT code?</h3>
+				<p>Select the XSLT or XPath code and run the Extract refactoring. The extension creates an
+					<code>xsl:function</code> or <code>xsl:template</code> with the variables and context it uses as
+					parameters.</p>
+				<h3>How do I understand a large XSLT stylesheet?</h3>
+				<p>Use Go to Definition and Find All References, the call hierarchy, the outline, and the XSLT Imports view,
+					which shows how a stylesheet's modules fit together.</p>
+			</div>
+			<div class="get-extension">
+				<p><strong>Get the extension.</strong> Install
+					<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">XSLT/XPath for Visual Studio Code</a>
+					from the Marketplace.</p>
+			</div>
+		</div>
+	</main>
+	</div>
+</body>
+
+</html>

@@ -44,3 +44,13 @@ The pages below are the extension's user guide. The whole guide is also availabl
 - [XPath 4.0 Records and Enums in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-records.html): XPath 4.0 adds record types, for maps with a known set of fields, and enumeration types, for strings with a known set of values.
 - [XSLT 4.0 JSON and JNodes in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-jnodes.html): XPath 4.0 path expressions can navigate JSON - maps and arrays - as they do XML.
 - [XSLT 4.0 Code Documentation with xsl:note in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-notes.html): XSLT 4.0 adds the xsl:note element, for documentation within a stylesheet.
+
+## Overview: editing, testing, debugging and reviewing XSLT
+
+- [XSLT Editor, Tester and Debugger for VS Code](https://deltaxml.github.io/xslt/): How to edit, test, debug, refactor and review XSLT, XPath and Schematron in Visual Studio Code, with screenshots of the XSLT/XPath extension at work.
+- [XSLT Editor for VS Code: Completion, Checking and Navigation](https://deltaxml.github.io/xslt/editing-xslt.html): What a good XSLT editor does: checks XPath and types as you type, completes names from your XML, and navigates between templates, functions and imported modules. In VS Code.
+- [How to Test XSLT: XSpec Unit Tests in VS Code](https://deltaxml.github.io/xslt/testing-xslt.html): How to unit test XSLT with XSpec: scenarios and expectations, running tests from VS Code's Test Explorer, seeing why a test failed, and measuring test coverage.
+- [XSLT Debugger and Profiler for VS Code](https://deltaxml.github.io/xslt/debugging-xslt.html): How to debug XSLT with breakpoints and stepping into XPath, use print debugging, and profile a stylesheet to find its slow templates - in Visual Studio Code with Saxon.
+- [XSLT Refactoring and Code Review in VS Code](https://deltaxml.github.io/xslt/refactoring-reviewing-xslt.html): How to refactor XSLT safely - rename, extract a function or variable, convert to a package - and how to read and review an unfamiliar stylesheet, in Visual Studio Code.
+- [Schematron Editor for VS Code: Validate, Fix and Debug Rules](https://deltaxml.github.io/xslt/schematron-editor.html): Write Schematron rules, validate XML files against them, see failed assertions in the Problems view, and debug and test the rules - in Visual Studio Code.
+- [AI for XSLT: Using Copilot and Claude Code with XSLT and XPath](https://deltaxml.github.io/xslt/ai-for-xslt.html): Can AI write XSLT? How AI coding assistants such as GitHub Copilot and Claude Code can write and fix XSLT in VS Code, checked by a linter, tests and an MCP server.
