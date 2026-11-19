@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT Profiler for VS Code</title>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

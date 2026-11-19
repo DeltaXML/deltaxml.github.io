@@ -34,6 +34,13 @@ a:focus {
   color: #0071BC;
 }
 
+/* the page heading is an h1, for search engines, but looks as the h2 it was */
+h1.pageTitle {
+  font-size: 35px;
+  line-height: 40px;
+  margin-bottom: 10px;
+}
+
 code {
   font-size: small;
   background-color: #f4f2f9;
@@ -743,7 +750,8 @@ body .feature-card li.notable::marker {
   }
 
   /* heading sizes for paper - the screen sizes, from base.css, are too large beside 10pt text */
-  h2 {
+  h2,
+  h1.pageTitle {
     margin-bottom: 8pt;
     font-size: 20pt;
     line-height: 24pt;
@@ -777,6 +785,7 @@ body .feature-card li.notable::marker {
     font-size: 8.5pt;
   }
 
+  h1,
   h2,
   h3,
   h4,

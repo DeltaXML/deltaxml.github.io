@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XPath Tester in VS Code: Find Nodes with XPath</title>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

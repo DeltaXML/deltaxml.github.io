@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT Code Navigation in VS Code</title>
+	</head>
 	<div class="main">
 		
 		<div class="two-thirds column">

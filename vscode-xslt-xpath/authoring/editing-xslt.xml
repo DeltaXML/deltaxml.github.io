@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT and XPath Editing in VS Code: Linting and Completion</title>
+	</head>
 	<div class="main">
 		
 		<div class="two-thirds column">

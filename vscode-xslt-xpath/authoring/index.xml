@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT Editor and XPath Editor for VS Code</title>
+		<h1>XSLT Editor and XPath Editor for Visual Studio Code</h1>
+	</head>
 		<div class="main">
 			<div class="two-thirds column">
 				<p>

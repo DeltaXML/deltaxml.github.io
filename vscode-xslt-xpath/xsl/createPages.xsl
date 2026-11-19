@@ -22,6 +22,7 @@
   <xsl:template match="/">
     <xsl:apply-templates/>
     <xsl:call-template name="searchIndex"/>
+    <xsl:call-template name="llmsTxt"/>
     <xsl:call-template name="allPages"/>
   </xsl:template>
 
@@ -94,6 +95,33 @@
           </xsl:for-each>
         </body>
       </html>
+    </xsl:result-document>
+  </xsl:template>
+
+  <!-- /llms.txt, at the site's root: a summary of the guide for AI assistants and their crawlers, in the llms.txt format
+       (https://llmstxt.org) - a page's link, title and description, under the nav's headings -->
+  <xsl:template name="llmsTxt">
+    <xsl:variable name="lines" as="xs:string*">
+      <xsl:for-each-group select="/html/body//nav/ul/li" group-starting-with="li[@class eq 'nav-heading']">
+        <xsl:variable name="heading" as="xs:string" select="(current-group()[@class eq 'nav-heading'] ! normalize-space(), 'Guide')[1]"/>
+        <xsl:sequence select="'', '## ' || $heading, ''"/>
+        <xsl:for-each select="current-group()/a">
+          <xsl:variable name="mainDiv" as="element()?" select="f:page-content(substring-before(@href, '.html'))"/>
+          <xsl:variable name="title" as="xs:string" select="f:page-title(normalize-space(.), string(@href), $mainDiv)"/>
+          <xsl:variable name="description" as="xs:string" select="f:page-description($mainDiv, '')"/>
+          <xsl:sequence select="'- [' || $title || '](' || $siteUrl || @href[. ne 'index.html'] || ')' || (': ' || $description)[$description ne '']"/>
+        </xsl:for-each>
+      </xsl:for-each-group>
+    </xsl:variable>
+    <xsl:result-document href="{resolve-uri('../llms.txt', $siteDir)}" method="text" encoding="UTF-8">
+      <xsl:text># XSLT and XPath for Visual Studio Code&#10;&#10;</xsl:text>
+      <xsl:text>> DeltaXignia's free XSLT/XPath extension for Visual Studio Code: an XSLT editor, XPath editor and tester, </xsl:text>
+      <xsl:text>XSpec test runner, Schematron editor, debugger and profiler, with support for XSLT 3.0, XSLT 4.0 and AI assistants. </xsl:text>
+      <xsl:text>Install it from the Visual Studio Code Marketplace: https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath&#10;</xsl:text>
+      <xsl:text>&#10;The pages below are the extension's user guide. The whole guide is also available as one page, </xsl:text>
+      <xsl:text>{$siteUrl}all-pages.html, and as a PDF, {$siteUrl}vscode-xslt-xpath-guide.pdf.&#10;</xsl:text>
+      <xsl:value-of select="string-join($lines, '&#10;')"/>
+      <xsl:text>&#10;</xsl:text>
     </xsl:result-document>
   </xsl:template>
 
@@ -201,15 +229,31 @@
   <xsl:template match="title" mode="copyPage">
     <xsl:param name="pageTitle" as="xs:string" tunnel="yes"/>
     <xsl:param name="filePart" as="xs:string" tunnel="yes"/>
+    <xsl:param name="mainDiv" as="element()?" tunnel="yes"/>
     <xsl:copy>
-      <xsl:value-of select="f:page-title($pageTitle, $filePart)"/>
+      <xsl:value-of select="f:page-title($pageTitle, $filePart, $mainDiv)"/>
     </xsl:copy>
   </xsl:template>
 
+  <!-- the page's title, for the title element and Open Graph: its own, if authoring/<page>.xml has a <title> in its head -
+       the words people search for, such as 'XSLT Testing with XSpec in VS Code', rather than the nav's 'XSpec Tests' -
+       otherwise its nav label and the site's title -->
   <xsl:function name="f:page-title" as="xs:string">
     <xsl:param name="pageTitle" as="xs:string"/>
     <xsl:param name="filePart" as="xs:string"/>
-    <xsl:sequence select="if ($filePart eq 'index.html') then $indexTitle else $pageTitle || ' | ' || $indexTitle"/>
+    <xsl:param name="mainDiv" as="element()?"/>
+    <xsl:variable name="own" as="xs:string?" select="root($mainDiv)//head/title ! normalize-space()"/>
+    <xsl:sequence select="
+      if ($own) then $own
+      else if ($filePart eq 'index.html') then $indexTitle
+      else $pageTitle || ' | ' || $indexTitle"/>
+  </xsl:function>
+
+  <!-- the page's heading: its own, if its head has an <h1>, otherwise its nav label -->
+  <xsl:function name="f:page-heading" as="xs:string">
+    <xsl:param name="pageTitle" as="xs:string"/>
+    <xsl:param name="mainDiv" as="element()?"/>
+    <xsl:sequence select="(root($mainDiv)//head/h1 ! normalize-space(), $pageTitle)[1]"/>
   </xsl:function>
 
   <!-- the page's own description - from its first paragraph - in place of the one in layout.xml, which every page would
@@ -219,7 +263,7 @@
     <xsl:param name="filePart" as="xs:string" tunnel="yes"/>
     <xsl:param name="mainDiv" as="element()?" tunnel="yes"/>
     <xsl:variable name="description" as="xs:string" select="f:page-description($mainDiv, string(@content))"/>
-    <xsl:variable name="title" as="xs:string" select="f:page-title($pageTitle, $filePart)"/>
+    <xsl:variable name="title" as="xs:string" select="f:page-title($pageTitle, $filePart, $mainDiv)"/>
     <xsl:variable name="url" as="xs:string" select="$siteUrl || $filePart[. ne 'index.html']"/>
     <meta name="description" content="{$description}"/>
     <link rel="canonical" href="{$url}"/>
@@ -230,7 +274,48 @@
     <meta property="og:url" content="{$url}"/>
     <meta property="og:image" content="{$siteUrl}resources/deltaxml-logo.png"/>
     <meta name="twitter:card" content="summary"/>
+    <script type="application/ld+json">{f:json-ld($filePart, $title, $description, $url)}</script>
   </xsl:template>
+
+  <!-- the page's structured data, for search engines and AI assistants: the home page describes the extension as software,
+       and each other page is an article that's part of the guide -->
+  <xsl:function name="f:json-ld" as="xs:string">
+    <xsl:param name="filePart" as="xs:string"/>
+    <xsl:param name="title" as="xs:string"/>
+    <xsl:param name="description" as="xs:string"/>
+    <xsl:param name="url" as="xs:string"/>
+    <xsl:variable name="publisher" as="map(*)" select="map {
+      '@type': 'Organization', 'name': 'DeltaXignia', 'url': 'https://www.deltaxml.com/' }"/>
+    <xsl:variable name="data" as="map(*)" select="
+      if ($filePart eq 'index.html') then map {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'XSLT/XPath for Visual Studio Code',
+        'alternateName': 'XSLT Editor and XPath Editor for VS Code',
+        'description': $description,
+        'applicationCategory': 'DeveloperApplication',
+        'applicationSubCategory': 'XSLT, XPath, XSpec and Schematron editor',
+        'operatingSystem': 'Windows, macOS, Linux',
+        'url': $url,
+        'installUrl': 'https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath',
+        'offers': map { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'author': $publisher,
+        'publisher': $publisher
+      } else map {
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        'headline': $title,
+        'description': $description,
+        'url': $url,
+        'mainEntityOfPage': $url,
+        'image': $siteUrl || 'resources/deltaxml-logo.png',
+        'about': map { '@type': 'SoftwareApplication', 'name': 'XSLT/XPath for Visual Studio Code', 'url': $siteUrl },
+        'isPartOf': map { '@type': 'WebSite', 'name': $indexTitle, 'url': $siteUrl },
+        'author': $publisher,
+        'publisher': $publisher
+      }"/>
+    <xsl:sequence select="serialize($data, map { 'method': 'json', 'indent': false(), 'escape-solidus': false() })"/>
+  </xsl:function>
 
   <!-- the description in the page's own head, if authoring/<page>.xml has one - for a page whose first paragraph
        doesn't describe it - otherwise its first paragraph: whole, if it's at most 160 characters - what search results
@@ -255,7 +340,7 @@
     <xsl:param name="mainDiv" as="element()" tunnel="yes"/>
 
     <main class="main" id="main" tabindex="-1">
-      <h2 class="pageTitle">{$pageTitle}</h2>
+      <h1 class="pageTitle">{f:page-heading($pageTitle, $mainDiv)}</h1>
       <xsl:apply-templates select="$mainDiv/node()" mode="content"/>
     </main>
   </xsl:template>

@@ -15,6 +15,8 @@ To generate the HTML from VS Code, with the XSLT extension installed, run the bu
 
 - a page for each entry in the nav in `layout.xml`, with its title, a description for search results, its
   canonical URL and Open Graph tags in the head, and the 'On this page' contents
+- JSON-LD structured data in each page's head: `SoftwareApplication` on the home page and `TechArticle` on the rest
+- `/llms.txt` at the site's root: the guide's pages, with their titles and descriptions, for AI assistants
 - `all-pages.html`, the whole guide as one page, for printing and for the PDF
 - `resources/search-index.js`, for the guide's search box
 
@@ -28,6 +30,11 @@ page - it's a cross-reference, say - give the page its own description in a `<he
 	</head>
 	<div class="main">
 ```
+
+The same `<head>` can also hold a `<title>`, which is the page's title in search results and link previews - use the
+words people search for, e.g. `XSLT Testing with XSpec in VS Code`, rather than the nav's label - and an `<h1>`, if the
+page's heading should differ from its nav label (only the home page does). Without a `<title>`, the page is titled
+`<nav label> | VS Code XSLT/XPath`.
 
 The other tasks in [.vscode/tasks.json](.vscode/tasks.json):
 

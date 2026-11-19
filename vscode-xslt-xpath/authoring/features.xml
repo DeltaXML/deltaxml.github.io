@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>XSLT/XPath Extension for VS Code: Features</title>
 		<!-- the page's description for search results, in place of its first paragraph -->
 		<meta name="description" content="Features of the XSLT/XPath extension for VS Code: XSLT 4.0, checks that understand XPath, a debugger that steps into XPath, XSpec, Schematron and profiling."/>
 	</head>

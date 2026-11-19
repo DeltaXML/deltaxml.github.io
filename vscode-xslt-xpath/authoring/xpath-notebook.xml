@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XPath Notebooks in VS Code</title>
+		<meta name="description" content="XPath Notebooks for VS Code: an XPath tester that runs XPath 3.1 expressions in notebook cells against an XML source file, with the results shown beside your notes."/>
+	</head>
 	<div class="main">
 		
 		<div class="two-thirds column">

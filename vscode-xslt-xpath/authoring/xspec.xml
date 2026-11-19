@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>XSLT Testing with XSpec in VS Code</title>
 		<!-- the page's description for search results, in place of its first paragraph -->
 		<meta name="description" content="Run and debug XSpec tests for XSLT and Schematron in VS Code: Test Explorer, breakpoints in tests, coverage in the editor margin, and test times."/>
 	</head>
