@@ -1600,7 +1600,7 @@
 				<code>xsl:package</code> module open, or the <strong>used by … modules - check for problems</strong> CodeLens
 				above its <code>xsl:package</code> - the modules that use the package, and those they import or include</li>
 		</ul>
-		<p>The problems are shown in the Problems view, from <em>XSLT (workspace check)</em>. Only errors are shown, unless the
+		<p>The problems are shown in the Problems view, from <em>dx.xslt-xpath (workspace check)</em>. Only errors are shown, unless the
 			<a href="#settings--workspace-check"><code>XSLT.workspaceCheck.includeWarnings</code></a> setting is on.
 			Files in <code>node_modules</code>, hidden folders, XSpec's generated test runners and the
 			<code>files.exclude</code> setting's folders aren't checked. A progress notification shows the check, which can
@@ -5029,7 +5029,8 @@ count(//item)
 
 			<h3 id="ai-assistants--problems">Fixing problems</h3>
 			<p>The problems reported by the extension's <a href="#editing-xslt--checking">linter</a> are standard Visual
-				Studio Code diagnostics, shown in the Problems view. They identify the exact symbol at issue - an unresolved
+				Studio Code diagnostics, shown in the Problems view with <strong>dx.xslt-xpath</strong> as their source, so it's clear
+				which extension reports them - in Visual Studio Code or an editor built on it. They identify the exact symbol at issue - an unresolved
 				variable, a function called with the wrong number of arguments, a record field that doesn't exist - so an
 				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
 				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a

@@ -118,7 +118,8 @@
 
 			<h3 id="problems">Fixing problems</h3>
 			<p>The problems reported by the extension's <a href="editing-xslt.html#checking">linter</a> are standard Visual
-				Studio Code diagnostics, shown in the Problems view. They identify the exact symbol at issue - an unresolved
+				Studio Code diagnostics, shown in the Problems view with <strong>dx.xslt-xpath</strong> as their source, so it's clear
+				which extension reports them - in Visual Studio Code or an editor built on it. They identify the exact symbol at issue - an unresolved
 				variable, a function called with the wrong number of arguments, a record field that doesn't exist - so an
 				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
 				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a
