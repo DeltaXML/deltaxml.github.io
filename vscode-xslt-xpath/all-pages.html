@@ -5094,7 +5094,10 @@ count(//item)
 							<code>xpathDefaultNamespace</code> argument gives that). <code>xs</code>, <code>fn</code>,
 							<code>map</code>, <code>array</code>, <code>math</code> and <code>err</code> are predeclared (a stylesheet
 							has to declare <code>map</code>, <code>array</code> and <code>math</code>). Errors are given with Saxon's
-							code and position. Needs the <code>XSLT.tasks.saxonJar</code> setting.
+							code and position. Each node found is listed with the line and column where it starts in the XML file - from the
+							extension's own outline of it, as Find Nodes goes there, not Saxon's <code>saxon:line-number()</code>, which is
+							where the start tag ends. The <code>saxon:</code> extension functions need Saxon-PE or Saxon-EE, not Saxon-HE.
+							Needs the <code>XSLT.tasks.saxonJar</code> setting.
 							<br><strong>What it can't do:</strong> for safety - an expression can otherwise run programs - it has no
 							extension functions (calls to Java, or EXPath modules such as <code>file:</code>), no
 							<code>collection()</code> or <code>uri-collection()</code>, no <code>http:</code> addresses, and
