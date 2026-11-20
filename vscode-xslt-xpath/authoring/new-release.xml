@@ -30,7 +30,7 @@
                 <li><strong><a href="xspec.html#times">XSpec test times</a></strong> - with Saxon-PE/EE,
                     the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
                     long its tests took on each run</li>
-                <li><strong><a href="debugger.html#input-nodes">Mapping from XML inputs to the XSLT templates</a></strong> that processed them. After
+                <li><strong><a href="debugger.html#input-nodes">Mapping from source XML to the XSLT templates</a></strong> that processed them. After
                     a debug session, hover over an element in the input file to see the template rules - and
                     <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code>
                     instructions - that processed it, its attributes and its text - or the Schematron rules that fired

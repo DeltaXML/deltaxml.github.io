@@ -43,10 +43,10 @@
 				<span class="shortcut">↓</span> for the dropdown outline.
 			</p>
 			<h3>Outline View</h3>
-			<img src="resources/navigation.png" class="scale-with-grid" />
+			<img src="resources/outline-view.png" class="scale-with-grid" />
 			
 			<p>
-				The <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface#_outline-view">Outline View</a> (see right-hand panel) is a panel
+				The <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface#_outline-view">Outline View</a> (see left panel) is a panel
 				that, by default, is positioned below
 				the File Explorer in the Primary Side Bar. This can be moved however into other panels such as the Secondary Side Bar (see <a href="https://code.visualstudio.com/api/ux-guidelines/sidebars">Sidebars</a>).
 				The Outline view renders the XML or XSLT document element hierarchy as a tree, symbol names in the tree include element identifiers such
@@ -107,6 +107,12 @@
 			<!-- end -->
 
 			<h3 id="call-hierarchy">Call Hierarchy</h3>
+			<figure>
+				<img src="resources/call-hierarchy.png" class="scale-with-grid" />
+				<figcaption>
+					The call hierarchy can be viewed in the References view as here - or inline using the <strong>Peek</strong> context menu.
+				</figcaption>
+			</figure>
 			<p>Use the <strong>Show Call Hierarchy</strong> command (<span class="shortcut">⇧⌥H</span>, or from the editor's
 				context menu) on a call of a stylesheet function or named template, or anywhere within a template or
 				function, to see what calls it and what it calls. The <strong>Call Hierarchy</strong> view, in the Side
