@@ -161,6 +161,40 @@
 							module marked - as in the XSLT Imports view.</td>
 					</tr>
 					<tr>
+						<td><code>list_declarations</code></td>
+						<td>Every function, named template, global variable and parameter, mode, key, attribute set,
+							accumulator, item type and character map a module can use: its own, then those of the modules and
+							packages it imports, includes or uses - each with its parameters and types, its location, and the
+							first line of its documentation, and one overridden by a higher import precedence marked. An
+							assistant calls it before writing or changing a stylesheet, to reuse what exists. Optionally, only
+							one kind; as for <code>lint_file</code>, the top-level stylesheet can be given.</td>
+					</tr>
+					<tr>
+						<td><code>evaluate_xpath</code></td>
+						<td>Evaluates an XPath expression on an XML file with your Saxon jar - the program behind
+							<a href="xpath-queries.html">Find Nodes with XPath</a>, in a process of its own - and gives the number
+							of items and the first 100 as the debugger shows values: a node as its path, a map or array in full.
+							An assistant uses it on a stylesheet's source XML to check its structure, a match pattern or a
+							<code>select</code> expression, before writing templates. XPath 4.0 by default, or 3.1 - with Saxon-HE,
+							which can't evaluate 4.0, 3.1 is used. It's evaluated as in a stylesheet, so a result isn't better than
+							the stylesheet's: unprefixed element names are in no namespace, whatever the document's default namespace
+							- unless the assistant gives the stylesheet's <code>xpath-default-namespace</code>, and an empty result
+							says when that may be why. The prefixes the document declares are bound. To use another prefix, the assistant
+							puts a <code>declare namespace</code> line for it at the very start, each ending in a semicolon:
+							<code>declare namespace o = 'urn:orders'; declare namespace x = 'urn:x'; //o:order/x:ref</code>. Those
+							lines are the only thing allowed before the XPath - it is XPath, not XQuery, so there is no
+							<code>declare variable</code>, <code>declare function</code> or default element namespace (the
+							<code>xpathDefaultNamespace</code> argument gives that). <code>xs</code>, <code>fn</code>,
+							<code>map</code>, <code>array</code>, <code>math</code> and <code>err</code> are predeclared (a stylesheet
+							has to declare <code>map</code>, <code>array</code> and <code>math</code>). Errors are given with Saxon's
+							code and position. Needs the <code>XSLT.tasks.saxonJar</code> setting.
+							<br><strong>What it can't do:</strong> for safety - an expression can otherwise run programs - it has no
+							extension functions (calls to Java, or EXPath modules such as <code>file:</code>), no
+							<code>collection()</code> or <code>uri-collection()</code>, no <code>http:</code> addresses, and
+							<code>doc()</code> and <code>unparsed-text()</code> read only files in the workspace folders and beside the
+							XML file - not through a symbolic link out of them. The XML file's external entities aren't read.</td>
+					</tr>
+					<tr>
 						<td><code>find_declaration</code></td>
 						<td>Where a function, named template, global variable or parameter, mode, key, attribute set, accumulator,
 							item type or character map is declared, as seen from a module - with its parameters and types, and its
@@ -197,7 +231,8 @@
 				</tbody>
 			</table>
 			<p>The tools only read files: they don't change them, or run stylesheets or tests - an assistant runs
-				<code>run_configuration</code>'s command itself, if you allow it.</p>
+				<code>run_configuration</code>'s command itself, if you allow it. <code>evaluate_xpath</code> only
+				evaluates an expression on an XML file.</p>
 			<h4 id="mcp-copilot">GitHub Copilot</h4>
 			<p>With the server on, Copilot finds it by itself: its tools are listed with the other MCP tools in Copilot
 				Chat's agent mode. There's no need to add it to an <code>mcp.json</code> file - it would then be listed
