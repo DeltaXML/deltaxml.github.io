@@ -180,6 +180,12 @@
                     Quick Run would use for a stylesheet - your Saxon jar, XML context file, parameters, catalog and
                     workspace packages - so what it runs gives the same result as yours. Each VS Code window now has its
                     own server, so an assistant in a project's folder uses that project's window</li>
+                <li><strong><a href="#editing-xslt--check-files">Checking files that aren't open</a></strong> -
+                    <strong>Check Problems in Workspace</strong> and <strong>Check Problems in Folder</strong> lint
+                    stylesheets without opening them, and <a href="#xslt-packages--check-users">Check Modules Using
+                    Package</a> (also a CodeLens on <code>xsl:package</code>) checks the modules that use a package,
+                    for when a change to its visibility breaks them. A private package component is now reported as
+                    private where it's used, with a quick fix to make it public</li>
             </ul>
             <h3 id="new-release--release-2-1">Release 2.1</h3>
             <ul>
