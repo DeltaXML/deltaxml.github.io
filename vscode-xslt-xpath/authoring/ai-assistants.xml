@@ -10,7 +10,9 @@
 				XSLT/XPath extension. Most of what they use needs nothing special from it: the extension's problems,
 				documentation notes and debugging output are all in forms that assistants read and write well. For more, the
 				extension has an <a href="#mcp">MCP server</a>, so an assistant can ask it directly - for example, for the
-				problems of a stylesheet that isn't open, or where a function is declared.</p>
+				problems of a stylesheet that isn't open, where a function is declared, or what an XPath expression finds in
+				your XML - and <a href="#mcp-skill">a skill</a> that tells the assistant how to use those tools
+				well.</p>
 
 			<h3 id="problems">Fixing problems</h3>
 			<p>The problems reported by the extension's <a href="editing-xslt.html#checking">linter</a> are standard Visual
@@ -25,12 +27,14 @@
 				its change caused. When it changes several stylesheets at once, each is checked with its own declarations,
 				XSLT version and imports, so no problems are reported that aren't there.</p>
 
-			<h3 id="mcp">The MCP server (experimental)</h3>
+			<h3 id="mcp">The MCP server</h3>
 			<p>The extension can run a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> (MCP) server,
 				with tools an assistant can call to ask the extension about your stylesheets. The tools use the same code as
 				the editor - the linter, Go to Definition, Find All References and the XSLT Imports view - so their answers
 				match what you see, and they work for files that aren't open. The server is off by default: to turn it on, set
-				<code>XSLT.mcp.enabled</code> to <code>true</code> - see <a href="settings.html#settings-ai">Settings</a>.</p>
+				<code>XSLT.mcp.enabled</code> to <code>true</code> - see <a href="settings.html#settings-ai">Settings</a>. With
+				it on, the server starts with the window for a workspace that contains XSLT, XSpec or Schematron files, without
+				one being opened first - and for any other workspace, when an XML or XSLT file is opened.</p>
 			<table>
 				<thead>
 					<tr>
@@ -88,7 +92,9 @@
 							code and position. Each node found is listed with the line and column where it starts in the XML file - from the
 							extension's own outline of it, as Find Nodes goes there, not Saxon's <code>saxon:line-number()</code>, which is
 							where the start tag ends. The <code>saxon:</code> extension functions need Saxon-PE or Saxon-EE, not Saxon-HE.
-							Needs the <code>XSLT.tasks.saxonJar</code> setting.
+							Needs the <code>XSLT.tasks.saxonJar</code> setting. Requests run one at a time, so an assistant that
+							sends several at once gets each answered, and an expression that takes more than 30 seconds is stopped
+							and reported as such.
 							<br/><strong>What it can't do:</strong> for safety - an expression can otherwise run programs - it has no
 							extension functions (calls to Java, or EXPath modules such as <code>file:</code>), no
 							<code>collection()</code> or <code>uri-collection()</code>, no <code>http:</code> addresses, and
@@ -141,7 +147,8 @@
 				<p>Visual Studio Code's <strong>MCP: List Servers</strong> command lists the server as
 					<strong>XSLT/XPath</strong>: choose it to start, stop or restart it, to see its tools, or to show its output.
 					The first time it starts, Visual Studio Code may ask you to trust it. When a new release of the extension
-					adds tools, Visual Studio Code finds them the next time the server starts.</p>
+					adds tools, Visual Studio Code finds them the next time the server starts. The server also gives Copilot
+					<a href="#mcp-skill">the xslt-xpath skill</a>.</p>
 			<h4 id="mcp-claude-code">Claude Code</h4>
 			<p>Run <strong>XSLT: Set Up MCP Server for Claude Code</strong> from the Command Palette - it offers to turn the
 				server on, if it isn't, and asks whether to set it up for this project - recommended, with a window for each
@@ -163,6 +170,41 @@
 				what it can reach. The window's server serves all of its workspace folders however it's set up, and a tool given an
 				absolute path can check any file. What protects your files is the token and the local-only connection, described
 				below.</aside>
+			<h4 id="mcp-skill">The xslt-xpath skill</h4>
+			<p>The extension has a <em>skill</em>, <code>xslt-xpath</code>: a set of instructions an assistant loads when a task
+				needs it, here any work on XSLT, XSpec or XPath. It tells the assistant how to use the tools above together:</p>
+			<ul>
+				<li>find the XSLT version and never raise it, and look up what a module already declares before writing a
+					second copy of a function (<code>list_declarations</code>);</li>
+				<li>try an XPath expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it
+					differs from a stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and
+					<code>math</code> prefixes a stylesheet has to declare;</li>
+				<li>check each change with <code>lint_file</code>, read warnings that come from imports it can't resolve, and
+					not make a package component public just to silence an error;</li>
+				<li>run the stylesheet and its XSpec tests with the command from <code>run_configuration</code>, rather than
+					a Saxon command of its own;</li>
+				<li>the habits that avoid common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath
+					in an attribute, and a global variable that uses the context item, which the linter can't report - and
+					to say afterwards what it linted, ran and tested.</li>
+			</ul>
+			<p>How the assistant gets it depends on the assistant:</p>
+			<ul>
+				<li><strong>GitHub Copilot, in Visual Studio Code 1.147 or later</strong> - the server serves the skill itself, as
+					<a href="https://github.com/modelcontextprotocol/ext-skills">skills over MCP</a> (a Beta extension of the
+					protocol), so there is nothing to install and it is always the version that goes with the server's tools.
+					Visual Studio Code may ask you to allow the skill into the model's context the first time it connects to the
+					server. It is listed under the server on the Skills tab of the Agent Customizations editor. To turn off skills
+					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
+					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skill.</li>
+				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skill
+					in <code>~/.claude/skills</code> (or in the folder <code>CLAUDE_CONFIG_DIR</code> names) - for all your
+					projects, as it only applies where the server is connected. It is kept up to date with the extension: each time
+					the server starts, a copy the extension installed is replaced by the new version. A copy you have edited, or a
+					skill of that name that came from elsewhere, is left as it is - to keep your changes, edit a copy under another
+					name.</li>
+				<li><strong>Other assistants</strong> - those that support skills over MCP get it from the server in the same way;
+					the others get the tools without the skill.</li>
+			</ul>
 			<h4 id="mcp-security">Security</h4>
 			<p>The server only accepts connections from your own computer (<code>127.0.0.1</code>), and each request needs
 				a token that the extension makes once and keeps in Visual Studio Code's secret storage - it doesn't expire.
@@ -210,9 +252,11 @@
 			<code class="block">"extensions.supportAgentsWindow": { "deltaxml.xslt-xpath": true }</code>
 
 			<h3 id="limitations">Current limitations</h3>
-			<p>The MCP server's tools only read files: an assistant can't yet ask the extension to run a stylesheet, an
-				XSpec test or an XPath expression, though it can run a Quick Run task's Saxon command itself. Tools for these
-				may be added in a future release.</p>
+			<p>The MCP server's tools only read files: an assistant can't yet ask the extension to run a stylesheet or an
+				XSpec test, though it can run the Saxon command that <code>run_configuration</code> gives, or a Quick Run
+				task's, itself - and the skill tells it to. An XPath expression it can evaluate with
+				<code>evaluate_xpath</code>, within the limits described there. Tools for running stylesheets and tests may be
+				added in a future release.</p>
 			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
 				a stylesheet an assistant changes that isn't open has none there until it's opened. With the MCP server on, an
 				assistant can check such a file with <code>lint_file</code>.</p>
