@@ -5162,6 +5162,17 @@ count(//item)
 					The first time it starts, Visual Studio Code may ask you to trust it. When a new release of the extension
 					adds tools, Visual Studio Code finds them the next time the server starts. The server also gives Copilot
 					<a href="#ai-assistants--mcp-skill">the xslt-xpath skill</a>.</p>
+				<p id="ai-assistants--mcp-customizations">Visual Studio Code's Customizations editor - the <strong>Chat: Configure Custom
+					Agents...</strong> command - shows what Copilot has from the server. Its <strong>MCP Servers</strong> tab lists
+					the server as <strong>XSLT/XPath</strong>, from this extension, with the number of skills it provides, and a
+					<strong>Start</strong> button and a switch for the server - Visual Studio Code's own controls, as in <strong>MCP:
+					List Servers</strong>. Its <strong>Skills</strong> tab lists the skill under the server.</p>
+				<p>
+					<figure>
+						<img src="resources/assistant-configuration.png" class="scale-with-grid" alt="The MCP Servers tab of Visual Studio Code's Customizations editor, listing the XSLT/XPath server with 1 skill, a Start button and a switch">
+						<figcaption style="margin:auto"><i>The XSLT/XPath server in Visual Studio Code's Customizations editor.</i></figcaption>
+					</figure>
+				</p>
 			<h4 id="ai-assistants--mcp-claude-code">Claude Code</h4>
 			<p>Run <strong>XSLT: Set Up MCP Server for Claude Code</strong> from the Command Palette - it offers to turn the
 				server on, if it isn't, and asks whether to set it up for this project - recommended, with a window for each
@@ -5206,7 +5217,7 @@ count(//item)
 					<a href="https://github.com/modelcontextprotocol/ext-skills">skills over MCP</a> (a Beta extension of the
 					protocol), so there is nothing to install and it is always the version that goes with the server's tools.
 					Visual Studio Code may ask you to allow the skill into the model's context the first time it connects to the
-					server. It is listed under the server on the Skills tab of the Agent Customizations editor. To turn off skills
+					server. It is listed under the server on the Skills tab of the <a href="#ai-assistants--mcp-customizations">Customizations editor</a>. To turn off skills
 					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
 					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skill.</li>
 				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skill
