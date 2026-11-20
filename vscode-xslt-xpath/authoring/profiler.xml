@@ -104,6 +104,13 @@
 			<aside>The Timeline view's profiles need VS Code 1.145 or later, and a folder open in VS Code.</aside>
 
 			<h3 id="schematron">Profiling a Schematron schema</h3>
+			<figure>
+				<img src="resources/schematron-profiler.png" class="scale-with-grid" />
+				<figcaption>
+					A profiled schema: each rule's time in the Profile view, and above the rule in the schema - click a
+					row to go to the rule. Each profile is also kept in the schema's Timeline.
+				</figcaption>
+			</figure>
 			<p>A Schematron schema is profiled in the same view: <strong>Schematron: Profile: the XML Context File</strong>
 				times each rule and global <code>let</code> - see <a href="schematron.html#profiling">Profiling a
 				schema</a>.</p>
