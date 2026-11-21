@@ -200,6 +200,16 @@
 			<p>Either way, calling a component that isn't public is reported. When tests are run, the packages they
 				use - the package's own, and those of an <code>x:helper package-name="…"</code> - are passed to Saxon
 				with <code>-lib</code>, found as for <a href="xslt-packages.html">XSLT packages</a>.</p>
+			<p id="uses-package">A stylesheet that <em>uses</em> a package has the same trouble: XSpec imports it into the test runner,
+				and an <code>xsl:use-package</code> can't be in an imported stylesheet - at its top level, or in a module it imports or
+				includes (XTSE3008). The stylesheet attribute of <code>x:description</code>, or of an <code>x:helper</code>, is
+				reported when it is so, with the module that has the <code>xsl:use-package</code> and the package. The way
+				to test such a stylesheet is to keep the <code>xsl:use-package</code> out of what is tested: put it in a top-level stylesheet,
+				test the modules with the logic, and give the test runner the package with an <code>x:helper package-name</code> on
+				<code>x:description</code> - as the top-level stylesheet's <code>xsl:use-package</code> would. Not reported with
+				<code>run-as="external"</code>, which doesn't import the stylesheet - but with Saxon-PE 13.1, the separate
+				transformation of a stylesheet that uses a package didn't find the packages passed with <code>-lib</code>
+				(XTSE3000).</p>
 			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
 				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
 				its type.</p>

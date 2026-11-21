@@ -113,7 +113,7 @@
 				documentation notes and debugging output are all in forms that assistants read and write well. For more, the
 				extension has an <a href="#mcp">MCP server</a>, so an assistant can ask it directly - for example, for the
 				problems of a stylesheet that isn't open, where a function is declared, or what an XPath expression finds in
-				your XML - and <a href="#mcp-skill">a skill</a> that tells the assistant how to use those tools
+				your XML - and <a href="#mcp-skill">skills</a> that tell the assistant how to use those tools
 				well.</p>
 
 			<h3 id="problems">Fixing problems</h3>
@@ -148,8 +148,8 @@
 				<tbody>
 					<tr>
 						<td><code>lint_file</code></td>
-						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
-							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
+						<td>The problems in an XSLT module, XSpec file or Schematron schema - as the Problems view shows them,
+							checked with its imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
 							worse. A module that another stylesheet imports or includes is checked with that top-level
 							stylesheet's declarations too, as in the editor: the one found for it in the workspace, or one the
 							assistant gives - for example, a stylesheet outside the workspace.</td>
@@ -273,13 +273,13 @@
 					<strong>XSLT/XPath</strong>: choose it to start, stop or restart it, to see its tools, or to show its output.
 					The first time it starts, Visual Studio Code may ask you to trust it. When a new release of the extension
 					adds tools, Visual Studio Code finds them the next time the server starts. The server also gives Copilot
-					<a href="#mcp-skill">the xslt-xpath skill</a>.</p>
+					<a href="#mcp-skill">the skills</a>.</p>
 				<p id="mcp-customizations">Visual Studio Code's Customizations editor - the <strong>Chat: Configure Custom
 					Agents...</strong> command - shows what Copilot has from the server. Its <strong>MCP Servers</strong> tab lists
 					the server as <strong>XSLT/XPath</strong>, from this extension, with the number of skills it provides (once the server has
 					been started), and a
 					<strong>Start</strong> button and a switch for the server - Visual Studio Code's own controls, as in <strong>MCP:
-					List Servers</strong>. Its <strong>Skills</strong> tab lists the skill under the server. The command is part of
+					List Servers</strong>. Its <strong>Skills</strong> tab lists the skills under the server. The command is part of
 					GitHub Copilot's chat: it's there when GitHub Copilot is enabled, as it is by default in Visual Studio Code,
 					and not otherwise.</p>
 				<p>
@@ -309,42 +309,48 @@
 				what it can reach. The window's server serves all of its workspace folders however it's set up, and a tool given an
 				absolute path can check any file. What protects your files is the token and the local-only connection, described
 				below.</aside>
-			<h4 id="mcp-skill">The xslt-xpath skill</h4>
-			<p>The extension has a <em>skill</em>, <code>xslt-xpath</code>: a set of instructions an assistant loads when a task
-				needs it, here any work on XSLT, XSpec or XPath. It tells the assistant how to use the tools above together:</p>
+			<h4 id="mcp-skill">Skills</h4>
+			<p>The extension has three <em>skills</em>: sets of instructions an assistant loads when a task needs them. They tell the
+				assistant how to use the tools above together:</p>
 			<ul>
-				<li>find the XSLT version and never raise it, and look up what a module already declares before writing a
-					second copy of a function (<code>list_declarations</code>);</li>
-				<li>try an XPath expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it
-					differs from a stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and
-					<code>math</code> prefixes a stylesheet has to declare;</li>
-				<li>check each change with <code>lint_file</code>, read warnings that come from imports it can't resolve, and
-					not make a package component public just to silence an error;</li>
-				<li>run the stylesheet and its XSpec tests with the command from <code>run_configuration</code>, rather than
-					a Saxon command of its own;</li>
-				<li>the habits that avoid common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath
-					in an attribute, and a global variable that uses the context item, which the linter can't report - and
-					to say afterwards what it linted, ran and tested.</li>
+				<li><code>xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
+					module already declares before writing a second copy of a function (<code>list_declarations</code>); try an XPath
+					expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it differs from a
+					stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and <code>math</code> prefixes a
+					stylesheet has to declare; check each change with <code>lint_file</code>, read warnings that come from imports it
+					can't resolve, and not make a package component public just to silence an error; run the stylesheet with the
+					command from <code>run_configuration</code>, rather than a Saxon command of its own; and the habits that avoid
+					common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath in an attribute, and a global
+					variable that uses the context item, which the linter can't report.</li>
+				<li><code>xspec-testing</code>, for <a href="xspec.html">XSpec tests</a>: write scenarios for a function, a named template or
+					a template rule, with <code>select</code> as the expected value and <code>test</code> for a condition on
+					<code>$x:result</code>; test a package with <code>run-as="external"</code> or an <code>x:helper</code>; run the tests
+					with the commands <code>test_configuration</code> gives, and read the summary - not the exit code; and when a test
+					fails, decide whether the stylesheet or the expectation is wrong, and not change an expectation just to make it pass.</li>
+				<li><code>schematron</code>, for <a href="schematron.html">Schematron schemas</a>: write rules the way SchXslt2 runs them - the
+					first matching rule of a pattern, the prefixes <code>sch:ns</code> declares, only the XSLT declarations it copies;
+					check each change with <code>lint_file</code>; validate with the command <code>validation_configuration</code>
+					gives; and find each problem's line with <code>evaluate_xpath</code>.</li>
 			</ul>
-			<p>How the assistant gets it depends on the assistant:</p>
+			<p>All three tell the assistant to say afterwards what it linted, ran and tested. How the assistant gets them depends on the assistant:</p>
 			<ul>
-				<li><strong>GitHub Copilot, in Visual Studio Code 1.147 or later</strong> - the server serves the skill itself, as
+				<li><strong>GitHub Copilot, in Visual Studio Code 1.147 or later</strong> - the server serves the skills itself, as
 					<a href="https://github.com/modelcontextprotocol/ext-skills">skills over MCP</a> (a Beta extension of the
-					protocol), so there is nothing to install and it is always the version that goes with the server's tools.
-					Visual Studio Code may ask you to allow the skill into the model's context the first time it connects to the
-					server. It is listed under the server on the Skills tab of the <a href="#mcp-customizations">Customizations editor</a>
+					protocol), so there is nothing to install and they are always the versions that go with the server's tools.
+					Visual Studio Code may ask you to allow the skills into the model's context the first time it connects to the
+					server. They are listed under the server on the Skills tab of the <a href="#mcp-customizations">Customizations editor</a>
 					once Visual Studio Code has started the server - which it does when you use Copilot chat, or press the server's
-					<strong>Start</strong> button - so after a reload it isn't listed until then. To turn off skills
+					<strong>Start</strong> button - so after a reload they aren't listed until then. To turn off skills
 					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
-					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skill.</li>
-				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skill
+					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skills.</li>
+				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skills
 					in <code>~/.claude/skills</code> (or in the folder <code>CLAUDE_CONFIG_DIR</code> names) - for all your
-					projects, as it only applies where the server is connected. It is kept up to date with the extension: each time
+					projects, as they only apply where the server is connected. They are kept up to date with the extension: each time
 					the server starts, a copy the extension installed is replaced by the new version. A copy you have edited, or a
 					skill of that name that came from elsewhere, is left as it is - to keep your changes, edit a copy under another
-					name.</li>
-				<li><strong>Other assistants</strong> - those that support skills over MCP get it from the server in the same way;
-					the others get the tools without the skill.</li>
+					name. A skill that a later version of the extension adds is installed when you run the set-up command again.</li>
+				<li><strong>Other assistants</strong> - those that support skills over MCP get them from the server in the same way;
+					the others get the tools without the skills.</li>
 			</ul>
 			<h4 id="mcp-security">Security</h4>
 			<p>The server only accepts connections from your own computer (<code>127.0.0.1</code>), and each request needs
@@ -395,7 +401,7 @@
 			<h3 id="limitations">Current limitations</h3>
 			<p>The MCP server's tools only read files: an assistant can't ask the extension to run a stylesheet, an XSpec test or a
 				Schematron validation. It can run the commands that <code>run_configuration</code>,
-				<code>test_configuration</code> and <code>validation_configuration</code> give - and the skill tells it to - with
+				<code>test_configuration</code> and <code>validation_configuration</code> give - and the skills tell it to - with
 				the permission your assistant asks of you for a command. An XPath expression it can evaluate with
 				<code>evaluate_xpath</code>, within the limits described there.</p>
 			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
@@ -404,7 +410,7 @@
 		</div>
 
 	</main>
-	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#problems">Fixing problems</a></li><li><a href="#mcp">The MCP server</a><ul><li><a href="#mcp-copilot">GitHub Copilot</a></li><li><a href="#mcp-claude-code">Claude Code</a></li><li><a href="#mcp-skill">The xslt-xpath skill</a></li><li><a href="#mcp-security">Security</a></li></ul></li><li><a href="#notes">Documentation notes</a></li><li><a href="#debugging">Debugging output</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#agents-window">The Agents window</a></li><li><a href="#limitations">Current limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#problems">Fixing problems</a></li><li><a href="#mcp">The MCP server</a><ul><li><a href="#mcp-copilot">GitHub Copilot</a></li><li><a href="#mcp-claude-code">Claude Code</a></li><li><a href="#mcp-skill">Skills</a></li><li><a href="#mcp-security">Security</a></li></ul></li><li><a href="#notes">Documentation notes</a></li><li><a href="#debugging">Debugging output</a></li><li><a href="#running">Running XSLT</a></li><li><a href="#agents-window">The Agents window</a></li><li><a href="#limitations">Current limitations</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

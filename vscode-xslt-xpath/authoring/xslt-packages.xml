@@ -303,6 +303,14 @@
 				<li><strong>Not exposed by a package</strong> - keys, accumulators, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code>, which apply only to the package's own code, so
 					the stylesheets need their own copies of those they rely on</li>
+				<li><strong>XSpec tests</strong> - the <a href="xspec.html">XSpec</a> tests that the conversion affects, as XSpec imports
+					the stylesheet it tests into its test runner, which neither a package nor a stylesheet with an
+					<code>xsl:use-package</code> can be (XTSE3008). A test of the library, which becomes a package, needs
+					<code>run-as="external"</code> or an <code>x:helper</code>. A test of a top-level stylesheet, which gets an
+					<code>xsl:use-package</code>, stops with that error: test the modules it imports or includes instead. A test
+					of a module that imported the library needs an <code>x:helper package-name</code> for the package, as the
+					module no longer reaches it. A test with <code>run-as="external"</code> isn't affected. The conversion doesn't
+					change XSpec files: this is for you to act on, after converting</li>
 			</ul>
 			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other

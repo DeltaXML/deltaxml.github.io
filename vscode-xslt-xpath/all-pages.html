@@ -180,9 +180,9 @@
                     expression on your XML with your Saxon jar, safely and with line numbers (<code>evaluate_xpath</code>), and
                     get the exact Saxon command Quick Run would use for a stylesheet - your Saxon jar, XML context file,
                     parameters, catalog and workspace packages - so what it runs gives the same result as yours
-                    (<code>run_configuration</code>). <a href="#ai-assistants--mcp-skill">A skill</a> tells the assistant how to
-                    use them together: the server serves it to GitHub Copilot in VS Code 1.147 or later (skills over MCP), and
-                    <strong>Set Up MCP Server for Claude Code</strong> installs it for Claude Code. Each VS Code window has its
+                    (<code>run_configuration</code>). <a href="#ai-assistants--mcp-skill">Skills</a> for XSLT and XPath, XSpec tests and Schematron tell the assistant how
+                    to use them together: the server serves them to GitHub Copilot in VS Code 1.147 or later (skills over MCP), and
+                    <strong>Set Up MCP Server for Claude Code</strong> installs them for Claude Code. Each VS Code window has its
                     own server, started with the window for a workspace of XSLT files</li>
                 <li><strong><a href="#editing-xslt--check-files">Checking files that aren't open</a></strong> -
                     <strong>Check Problems in Workspace</strong> and <strong>Check Problems in Folder</strong> lint
@@ -2427,6 +2427,14 @@
 				<li><strong>Not exposed by a package</strong> - keys, accumulators, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code>, which apply only to the package's own code, so
 					the stylesheets need their own copies of those they rely on</li>
+				<li><strong>XSpec tests</strong> - the <a href="#xspec">XSpec</a> tests that the conversion affects, as XSpec imports
+					the stylesheet it tests into its test runner, which neither a package nor a stylesheet with an
+					<code>xsl:use-package</code> can be (XTSE3008). A test of the library, which becomes a package, needs
+					<code>run-as="external"</code> or an <code>x:helper</code>. A test of a top-level stylesheet, which gets an
+					<code>xsl:use-package</code>, stops with that error: test the modules it imports or includes instead. A test
+					of a module that imported the library needs an <code>x:helper package-name</code> for the package, as the
+					module no longer reaches it. A test with <code>run-as="external"</code> isn't affected. The conversion doesn't
+					change XSpec files: this is for you to act on, after converting</li>
 			</ul>
 			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other
@@ -4334,6 +4342,16 @@ npm install --save-dev xslt3</code>
 			<p>Either way, calling a component that isn't public is reported. When tests are run, the packages they
 				use - the package's own, and those of an <code>x:helper package-name="…"</code> - are passed to Saxon
 				with <code>-lib</code>, found as for <a href="#xslt-packages">XSLT packages</a>.</p>
+			<p id="xspec--uses-package">A stylesheet that <em>uses</em> a package has the same trouble: XSpec imports it into the test runner,
+				and an <code>xsl:use-package</code> can't be in an imported stylesheet - at its top level, or in a module it imports or
+				includes (XTSE3008). The stylesheet attribute of <code>x:description</code>, or of an <code>x:helper</code>, is
+				reported when it is so, with the module that has the <code>xsl:use-package</code> and the package. The way
+				to test such a stylesheet is to keep the <code>xsl:use-package</code> out of what is tested: put it in a top-level stylesheet,
+				test the modules with the logic, and give the test runner the package with an <code>x:helper package-name</code> on
+				<code>x:description</code> - as the top-level stylesheet's <code>xsl:use-package</code> would. Not reported with
+				<code>run-as="external"</code>, which doesn't import the stylesheet - but with Saxon-PE 13.1, the separate
+				transformation of a stylesheet that uses a package didn't find the packages passed with <code>-lib</code>
+				(XTSE3000).</p>
 			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
 				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
 				its type.</p>
@@ -5024,7 +5042,7 @@ count(//item)
 				documentation notes and debugging output are all in forms that assistants read and write well. For more, the
 				extension has an <a href="#ai-assistants--mcp">MCP server</a>, so an assistant can ask it directly - for example, for the
 				problems of a stylesheet that isn't open, where a function is declared, or what an XPath expression finds in
-				your XML - and <a href="#ai-assistants--mcp-skill">a skill</a> that tells the assistant how to use those tools
+				your XML - and <a href="#ai-assistants--mcp-skill">skills</a> that tell the assistant how to use those tools
 				well.</p>
 
 			<h3 id="ai-assistants--problems">Fixing problems</h3>
@@ -5059,8 +5077,8 @@ count(//item)
 				<tbody>
 					<tr>
 						<td><code>lint_file</code></td>
-						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
-							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
+						<td>The problems in an XSLT module, XSpec file or Schematron schema - as the Problems view shows them,
+							checked with its imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
 							worse. A module that another stylesheet imports or includes is checked with that top-level
 							stylesheet's declarations too, as in the editor: the one found for it in the workspace, or one the
 							assistant gives - for example, a stylesheet outside the workspace.</td>
@@ -5184,13 +5202,13 @@ count(//item)
 					<strong>XSLT/XPath</strong>: choose it to start, stop or restart it, to see its tools, or to show its output.
 					The first time it starts, Visual Studio Code may ask you to trust it. When a new release of the extension
 					adds tools, Visual Studio Code finds them the next time the server starts. The server also gives Copilot
-					<a href="#ai-assistants--mcp-skill">the xslt-xpath skill</a>.</p>
+					<a href="#ai-assistants--mcp-skill">the skills</a>.</p>
 				<p id="ai-assistants--mcp-customizations">Visual Studio Code's Customizations editor - the <strong>Chat: Configure Custom
 					Agents...</strong> command - shows what Copilot has from the server. Its <strong>MCP Servers</strong> tab lists
 					the server as <strong>XSLT/XPath</strong>, from this extension, with the number of skills it provides (once the server has
 					been started), and a
 					<strong>Start</strong> button and a switch for the server - Visual Studio Code's own controls, as in <strong>MCP:
-					List Servers</strong>. Its <strong>Skills</strong> tab lists the skill under the server. The command is part of
+					List Servers</strong>. Its <strong>Skills</strong> tab lists the skills under the server. The command is part of
 					GitHub Copilot's chat: it's there when GitHub Copilot is enabled, as it is by default in Visual Studio Code,
 					and not otherwise.</p>
 				<p>
@@ -5220,42 +5238,48 @@ count(//item)
 				what it can reach. The window's server serves all of its workspace folders however it's set up, and a tool given an
 				absolute path can check any file. What protects your files is the token and the local-only connection, described
 				below.</aside>
-			<h4 id="ai-assistants--mcp-skill">The xslt-xpath skill</h4>
-			<p>The extension has a <em>skill</em>, <code>xslt-xpath</code>: a set of instructions an assistant loads when a task
-				needs it, here any work on XSLT, XSpec or XPath. It tells the assistant how to use the tools above together:</p>
+			<h4 id="ai-assistants--mcp-skill">Skills</h4>
+			<p>The extension has three <em>skills</em>: sets of instructions an assistant loads when a task needs them. They tell the
+				assistant how to use the tools above together:</p>
 			<ul>
-				<li>find the XSLT version and never raise it, and look up what a module already declares before writing a
-					second copy of a function (<code>list_declarations</code>);</li>
-				<li>try an XPath expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it
-					differs from a stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and
-					<code>math</code> prefixes a stylesheet has to declare;</li>
-				<li>check each change with <code>lint_file</code>, read warnings that come from imports it can't resolve, and
-					not make a package component public just to silence an error;</li>
-				<li>run the stylesheet and its XSpec tests with the command from <code>run_configuration</code>, rather than
-					a Saxon command of its own;</li>
-				<li>the habits that avoid common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath
-					in an attribute, and a global variable that uses the context item, which the linter can't report - and
-					to say afterwards what it linted, ran and tested.</li>
+				<li><code>xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
+					module already declares before writing a second copy of a function (<code>list_declarations</code>); try an XPath
+					expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it differs from a
+					stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and <code>math</code> prefixes a
+					stylesheet has to declare; check each change with <code>lint_file</code>, read warnings that come from imports it
+					can't resolve, and not make a package component public just to silence an error; run the stylesheet with the
+					command from <code>run_configuration</code>, rather than a Saxon command of its own; and the habits that avoid
+					common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath in an attribute, and a global
+					variable that uses the context item, which the linter can't report.</li>
+				<li><code>xspec-testing</code>, for <a href="#xspec">XSpec tests</a>: write scenarios for a function, a named template or
+					a template rule, with <code>select</code> as the expected value and <code>test</code> for a condition on
+					<code>$x:result</code>; test a package with <code>run-as="external"</code> or an <code>x:helper</code>; run the tests
+					with the commands <code>test_configuration</code> gives, and read the summary - not the exit code; and when a test
+					fails, decide whether the stylesheet or the expectation is wrong, and not change an expectation just to make it pass.</li>
+				<li><code>schematron</code>, for <a href="#schematron">Schematron schemas</a>: write rules the way SchXslt2 runs them - the
+					first matching rule of a pattern, the prefixes <code>sch:ns</code> declares, only the XSLT declarations it copies;
+					check each change with <code>lint_file</code>; validate with the command <code>validation_configuration</code>
+					gives; and find each problem's line with <code>evaluate_xpath</code>.</li>
 			</ul>
-			<p>How the assistant gets it depends on the assistant:</p>
+			<p>All three tell the assistant to say afterwards what it linted, ran and tested. How the assistant gets them depends on the assistant:</p>
 			<ul>
-				<li><strong>GitHub Copilot, in Visual Studio Code 1.147 or later</strong> - the server serves the skill itself, as
+				<li><strong>GitHub Copilot, in Visual Studio Code 1.147 or later</strong> - the server serves the skills itself, as
 					<a href="https://github.com/modelcontextprotocol/ext-skills">skills over MCP</a> (a Beta extension of the
-					protocol), so there is nothing to install and it is always the version that goes with the server's tools.
-					Visual Studio Code may ask you to allow the skill into the model's context the first time it connects to the
-					server. It is listed under the server on the Skills tab of the <a href="#ai-assistants--mcp-customizations">Customizations editor</a>
+					protocol), so there is nothing to install and they are always the versions that go with the server's tools.
+					Visual Studio Code may ask you to allow the skills into the model's context the first time it connects to the
+					server. They are listed under the server on the Skills tab of the <a href="#ai-assistants--mcp-customizations">Customizations editor</a>
 					once Visual Studio Code has started the server - which it does when you use Copilot chat, or press the server's
-					<strong>Start</strong> button - so after a reload it isn't listed until then. To turn off skills
+					<strong>Start</strong> button - so after a reload they aren't listed until then. To turn off skills
 					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
-					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skill.</li>
-				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skill
+					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skills.</li>
+				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skills
 					in <code>~/.claude/skills</code> (or in the folder <code>CLAUDE_CONFIG_DIR</code> names) - for all your
-					projects, as it only applies where the server is connected. It is kept up to date with the extension: each time
+					projects, as they only apply where the server is connected. They are kept up to date with the extension: each time
 					the server starts, a copy the extension installed is replaced by the new version. A copy you have edited, or a
 					skill of that name that came from elsewhere, is left as it is - to keep your changes, edit a copy under another
-					name.</li>
-				<li><strong>Other assistants</strong> - those that support skills over MCP get it from the server in the same way;
-					the others get the tools without the skill.</li>
+					name. A skill that a later version of the extension adds is installed when you run the set-up command again.</li>
+				<li><strong>Other assistants</strong> - those that support skills over MCP get them from the server in the same way;
+					the others get the tools without the skills.</li>
 			</ul>
 			<h4 id="ai-assistants--mcp-security">Security</h4>
 			<p>The server only accepts connections from your own computer (<code>127.0.0.1</code>), and each request needs
@@ -5306,7 +5330,7 @@ count(//item)
 			<h3 id="ai-assistants--limitations">Current limitations</h3>
 			<p>The MCP server's tools only read files: an assistant can't ask the extension to run a stylesheet, an XSpec test or a
 				Schematron validation. It can run the commands that <code>run_configuration</code>,
-				<code>test_configuration</code> and <code>validation_configuration</code> give - and the skill tells it to - with
+				<code>test_configuration</code> and <code>validation_configuration</code> give - and the skills tell it to - with
 				the permission your assistant asks of you for a command. An XPath expression it can evaluate with
 				<code>evaluate_xpath</code>, within the limits described there.</p>
 			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
