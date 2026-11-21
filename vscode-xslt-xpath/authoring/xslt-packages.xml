@@ -309,8 +309,9 @@
 					<code>run-as="external"</code> or an <code>x:helper</code>. A test of a top-level stylesheet, which gets an
 					<code>xsl:use-package</code>, stops with that error: test the modules it imports or includes instead. A test
 					of a module that imported the library needs an <code>x:helper package-name</code> for the package, as the
-					module no longer reaches it. A test with <code>run-as="external"</code> isn't affected. The conversion doesn't
-					change XSpec files: this is for you to act on, after converting</li>
+					module no longer reaches it: <strong>Convert to Package...</strong> adds it, so these XSpec files are among
+					the files it changes - listed in the report so you know. A test with <code>run-as="external"</code> isn't
+					affected. The other two are for you to change, after converting</li>
 			</ul>
 			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other
@@ -350,6 +351,11 @@
 					<code>xsl:next-match</code></li>
 				<li>the stylesheet gets its own copies of the keys, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code> it relied on</li>
+				<li>each <a href="xspec.html">XSpec</a> file that tests a module that used the library gets an
+					<code>x:helper package-name="…" package-version="…"</code>, after its <code>x:import</code> and
+					<code>x:helper</code> elements, so its test runner uses the package, as the top-level stylesheet's
+					<code>xsl:use-package</code> does - the module doesn't reach the library any more. One that has a helper for
+					the package already is left as it is. Untick the change in the Refactor Preview to leave a file out</li>
 			</ul>
 			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
 				reports what still needs to change, mostly with quick fixes.</p>
