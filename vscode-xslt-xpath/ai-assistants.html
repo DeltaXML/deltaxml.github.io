@@ -238,10 +238,32 @@
 							such as <code>-catalog</code> and <code>-lib</code>. An assistant that runs Saxon itself then gets
 							the same result as you.</td>
 					</tr>
+					<tr>
+						<td><code>test_configuration</code></td>
+						<td>For an XSpec file: the commands that run its tests, as the Test Explorer runs them - XSpec has no single
+							command here, as the tests are compiled to a test runner, which is then run, with more steps for the tests of a
+							Schematron schema. They have the options the extension works out - Saxon's syntax extensions, the XML catalog,
+							the packages for <code>-lib</code> and the Saxon settings of the stylesheet's task - and write to a folder in the
+							temporary files, not the project. The result also gives a command that summarises the test results as text - the
+							numbers passed, failed and pending, and each failure with what was expected and what the test gave - as the run
+							exits with 0 even when tests fail. It lists the file's scenarios. Like <code>run_configuration</code>, it runs
+							nothing: the assistant runs the commands.</td>
+					</tr>
+					<tr>
+						<td><code>validation_configuration</code></td>
+						<td>For a Schematron schema and the XML file it validates - the schema's XML context file, the one an
+							<code>xml-model</code> processing instruction names, or one the assistant gives: the command that validates it, as
+							<strong>Schematron: Validate</strong> does, in one run of Saxon with the schema compiled by SchXslt2, in a phase of the
+							schema's if the assistant chooses one. It writes the SVRL report to the temporary files, and gives a command that
+							summarises it as text - the failed assertions and successful reports, each with its role, location and message. A
+							location is an XPath for the XML file, which <code>evaluate_xpath</code> turns into a line and column. It runs
+							nothing: the assistant runs the command.</td>
+					</tr>
 				</tbody>
 			</table>
-			<p>The tools only read files: they don't change them, or run stylesheets or tests - an assistant runs
-				<code>run_configuration</code>'s command itself, if you allow it. <code>evaluate_xpath</code> only
+			<p>The tools only read files: they don't change them, or run stylesheets, tests or validations - an assistant runs the
+				commands that <code>run_configuration</code>, <code>test_configuration</code> and <code>validation_configuration</code>
+				give itself, if you allow it. <code>evaluate_xpath</code> only
 				evaluates an expression on an XML file.</p>
 			<h4 id="mcp-copilot">GitHub Copilot</h4>
 			<p>With the server on, Copilot finds it by itself: its tools are listed with the other MCP tools in Copilot
@@ -254,9 +276,12 @@
 					<a href="#mcp-skill">the xslt-xpath skill</a>.</p>
 				<p id="mcp-customizations">Visual Studio Code's Customizations editor - the <strong>Chat: Configure Custom
 					Agents...</strong> command - shows what Copilot has from the server. Its <strong>MCP Servers</strong> tab lists
-					the server as <strong>XSLT/XPath</strong>, from this extension, with the number of skills it provides, and a
+					the server as <strong>XSLT/XPath</strong>, from this extension, with the number of skills it provides (once the server has
+					been started), and a
 					<strong>Start</strong> button and a switch for the server - Visual Studio Code's own controls, as in <strong>MCP:
-					List Servers</strong>. Its <strong>Skills</strong> tab lists the skill under the server.</p>
+					List Servers</strong>. Its <strong>Skills</strong> tab lists the skill under the server. The command is part of
+					GitHub Copilot's chat: it's there when GitHub Copilot is enabled, as it is by default in Visual Studio Code,
+					and not otherwise.</p>
 				<p>
 					<figure>
 						<img src="resources/assistant-configuration.png" class="scale-with-grid" alt="The MCP Servers tab of Visual Studio Code's Customizations editor, listing the XSLT/XPath server with 1 skill, a Start button and a switch">
@@ -307,7 +332,9 @@
 					<a href="https://github.com/modelcontextprotocol/ext-skills">skills over MCP</a> (a Beta extension of the
 					protocol), so there is nothing to install and it is always the version that goes with the server's tools.
 					Visual Studio Code may ask you to allow the skill into the model's context the first time it connects to the
-					server. It is listed under the server on the Skills tab of the <a href="#mcp-customizations">Customizations editor</a>. To turn off skills
+					server. It is listed under the server on the Skills tab of the <a href="#mcp-customizations">Customizations editor</a>
+					once Visual Studio Code has started the server - which it does when you use Copilot chat, or press the server's
+					<strong>Start</strong> button - so after a reload it isn't listed until then. To turn off skills
 					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
 					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skill.</li>
 				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skill
@@ -366,11 +393,11 @@
 			<code class="block">"extensions.supportAgentsWindow": { "deltaxml.xslt-xpath": true }</code>
 
 			<h3 id="limitations">Current limitations</h3>
-			<p>The MCP server's tools only read files: an assistant can't yet ask the extension to run a stylesheet or an
-				XSpec test, though it can run the Saxon command that <code>run_configuration</code> gives, or a Quick Run
-				task's, itself - and the skill tells it to. An XPath expression it can evaluate with
-				<code>evaluate_xpath</code>, within the limits described there. Tools for running stylesheets and tests may be
-				added in a future release.</p>
+			<p>The MCP server's tools only read files: an assistant can't ask the extension to run a stylesheet, an XSpec test or a
+				Schematron validation. It can run the commands that <code>run_configuration</code>,
+				<code>test_configuration</code> and <code>validation_configuration</code> give - and the skill tells it to - with
+				the permission your assistant asks of you for a command. An XPath expression it can evaluate with
+				<code>evaluate_xpath</code>, within the limits described there.</p>
 			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
 				a stylesheet an assistant changes that isn't open has none there until it's opened. With the MCP server on, an
 				assistant can check such a file with <code>lint_file</code>.</p>

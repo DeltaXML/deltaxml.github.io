@@ -41,9 +41,9 @@
                     expression on your XML with your Saxon jar, safely and with line numbers (<code>evaluate_xpath</code>), and
                     get the exact Saxon command Quick Run would use for a stylesheet - your Saxon jar, XML context file,
                     parameters, catalog and workspace packages - so what it runs gives the same result as yours
-                    (<code>run_configuration</code>). <a href="ai-assistants.html#mcp-skill">A skill</a> tells the assistant how to
-                    use them together: the server serves it to GitHub Copilot in VS Code 1.147 or later (skills over MCP), and
-                    <strong>Set Up MCP Server for Claude Code</strong> installs it for Claude Code. Each VS Code window has its
+                    (<code>run_configuration</code>). <a href="ai-assistants.html#mcp-skill">Skills</a> for XSLT and XPath, XSpec tests and Schematron tell the assistant how
+                    to use them together: the server serves them to GitHub Copilot in VS Code 1.147 or later (skills over MCP), and
+                    <strong>Set Up MCP Server for Claude Code</strong> installs them for Claude Code. Each VS Code window has its
                     own server, started with the window for a workspace of XSLT files</li>
                 <li><strong><a href="editing-xslt.html#check-files">Checking files that aren't open</a></strong> -
                     <strong>Check Problems in Workspace</strong> and <strong>Check Problems in Folder</strong> lint
