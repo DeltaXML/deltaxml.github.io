@@ -804,6 +804,18 @@
             <td>The port the MCP server listens at, on <code>127.0.0.1</code>. With more than one window open, the first
               one opened has the server.</td>
           </tr>
+          <tr>
+            <td><code>XSLT.<wbr>mcp.<wbr>debugEvaluateExtensions</code></td>
+            <td><code>restricted</code></td>
+            <td>What an assistant's <code>debug_evaluate</code> expressions can call in your paused debug session.
+              <code>restricted</code>: Saxon-HE's functions only - the standard functions and the stylesheet's own - whatever edition the
+              session runs on, and not <code>transform()</code>, <code>load-xquery-module()</code> or <code>function-lookup()</code>.
+              <code>unrestricted</code>: as your Debug Console - with Saxon-PE or EE, Java methods, the EXPath file module (which can change
+              files) and <code>saxon:</code> functions too. <code>never</code>: no expressions - choose it if the stylesheet's own functions
+              have effects, or files the session can read with <code>doc()</code> or <code>unparsed-text()</code> mustn't be.
+              <code>debug_status</code> still shows the values. Your own Debug Console, Watch and logpoints aren't affected. A user setting
+              only: a workspace can't change it.</td>
+          </tr>
         </tbody>
       </table>
 
@@ -5204,6 +5216,38 @@ count(//item)
 							nothing: the assistant runs the command.</td>
 					</tr>
 					<tr>
+						<td><code>output_origin</code></td>
+						<td>For a line of a stylesheet's output, or some text in it: the instruction that wrote each part of it, the template or
+							function it's in - with its match, name and mode - and the input node it was written for, as an XPath for the input file,
+							with its line. It reads the output of your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong>
+							with SaxonJ, as the debugger's output view maps it (<strong>Go to XSLT Source</strong>, <strong>Go to XSLT Input</strong>),
+							so run the stylesheet in VS Code first. Only XML output is mapped. It runs nothing.</td>
+					</tr>
+					<tr>
+						<td><code>input_rules</code></td>
+						<td>For an element of an input file - by its path or the line of its start tag - what processed it, its attributes and its text in
+							your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong> with SaxonJ: the template rules, with their match,
+							mode and priority, the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code> instructions, and the
+							built-in rules where no template matched, as the input file's hover shows them. For a whole file: how many elements each rule
+							processed, and the elements left to built-in rules. It runs nothing.</td>
+					</tr>
+					<tr>
+						<td><code>trace_configuration</code></td>
+						<td>For a stylesheet: the command that runs it as Quick Run does, with logpoints and no VS Code - the debugger's own adapter, run
+							from the command line. At each logpoint the assistant chooses, as the stylesheet runs, it prints the local variables (or a message
+							with <code>{XPath}</code> parts), in the debugger's notation, with <code>xsl:message</code> output and errors in between, then how many
+							times each logpoint was reached. Nothing pauses. Conditions and a limit on the messages shown are options. It runs nothing: the
+							assistant runs the command.</td>
+					</tr>
+					<tr>
+						<td><code>debug_status</code>, <code>debug_evaluate</code></td>
+						<td>Read-only access to your XSLT debug session: whether it's paused, where, the call stack, and a frame's local variables,
+							parameters and context item - waiting a while for a pause, if the assistant asks you to run to a breakpoint - and an XPath
+							expression evaluated in a frame, as the Debug Console evaluates it. The assistant can't step, continue or change breakpoints:
+							it asks you to. Its expressions have Saxon-HE's functions only - the standard functions and the stylesheet's own - whatever
+							edition the session runs on - <code>XSLT.mcp.debugEvaluateExtensions</code> can allow more (<code>unrestricted</code>) or none (<code>never</code>).</td>
+					</tr>
+					<tr>
 						<td><code>profile_configuration</code></td>
 						<td>For a stylesheet that's slow: the command that runs it as Quick Run does - with its XML source, or one the assistant
 							gives - with Saxon's timing profile (Saxon-PE or EE), several runs so that the first, the Java VM's warm-up, can be
@@ -5215,7 +5259,7 @@ count(//item)
 				</tbody>
 			</table>
 			<p>The tools only read files: they don't change them, or run stylesheets, tests or validations - an assistant runs the
-				commands that <code>run_configuration</code>, <code>test_configuration</code>, <code>validation_configuration</code> and <code>profile_configuration</code>
+				commands that <code>run_configuration</code>, <code>test_configuration</code>, <code>validation_configuration</code>, <code>trace_configuration</code> and <code>profile_configuration</code>
 				give itself, if you allow it. <code>evaluate_xpath</code> only
 				evaluates an expression on an XML file.</p>
 			<h4 id="ai-assistants--mcp-copilot">GitHub Copilot</h4>
