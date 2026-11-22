@@ -157,10 +157,27 @@
 							location is an XPath for the XML file, which <code>evaluate_xpath</code> turns into a line and column. It runs
 							nothing: the assistant runs the command.</td>
 					</tr>
+					<tr>
+						<td><code>output_origin</code></td>
+						<td>For a line of a stylesheet's output, or some text in it: the instruction that wrote each part of it, the template or
+							function it's in - with its match, name and mode - and the input node it was written for, as an XPath for the input file,
+							with its line. It reads the output of your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong>
+							with SaxonJ, as the debugger's output view maps it (<strong>Go to XSLT Source</strong>, <strong>Go to XSLT Input</strong>),
+							so run the stylesheet in VS Code first. Only XML output is mapped. It runs nothing.</td>
+					</tr>
+					<tr>
+						<td><code>profile_configuration</code></td>
+						<td>For a stylesheet that's slow: the command that runs it as Quick Run does - with its XML source, or one the assistant
+							gives - with Saxon's timing profile (Saxon-PE or EE), several runs so that the first, the Java VM's warm-up, can be
+							left out, and a command that summarises the profile as text. The summary ranks the templates, functions and global
+							variables by net time - the time in the construct itself, not in what it calls - each with its share, calls, gross time
+							and where it is declared, as the <strong>Profile Stylesheet</strong> view shows them. The profile and the result are
+							written to the temporary files, not the project. It runs nothing: the assistant runs the commands.</td>
+					</tr>
 				</tbody>
 			</table>
 			<p>The tools only read files: they don't change them, or run stylesheets, tests or validations - an assistant runs the
-				commands that <code>run_configuration</code>, <code>test_configuration</code> and <code>validation_configuration</code>
+				commands that <code>run_configuration</code>, <code>test_configuration</code>, <code>validation_configuration</code> and <code>profile_configuration</code>
 				give itself, if you allow it. <code>evaluate_xpath</code> only
 				evaluates an expression on an XML file.</p>
 			<h4 id="mcp-copilot">GitHub Copilot</h4>
