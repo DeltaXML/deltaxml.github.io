@@ -340,7 +340,9 @@
 					Visual Studio Code may ask you to allow the skills into the model's context the first time it connects to the
 					server. They are listed under the server on the Skills tab of the <a href="#mcp-customizations">Customizations editor</a>
 					once Visual Studio Code has started the server - which it does when you use Copilot chat, or press the server's
-					<strong>Start</strong> button - so after a reload they aren't listed until then. To turn off skills
+					<strong>Start</strong> button - so after a reload they aren't listed until then. If the skills aren't there, check that you didn't decline the
+					request to allow them - Visual Studio Code remembers the answer for each server, so allow the skills again
+					in a new chat. To turn off skills
 					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
 					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skills.</li>
 				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skills

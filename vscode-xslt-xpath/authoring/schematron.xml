@@ -389,5 +389,14 @@
 				another processor: <code>java -jar saxon.jar -s:schema.sch -xsl:expand-text.xsl
 				-o:schema-standard.sch</code>.</p>
 		</div>
+		<div>
+			<h3 id="pipeline">Using a schema in a pipeline</h3>
+			<p>A build or CI pipeline should compile the schema itself, with the
+				<a href="https://codeberg.org/SchXslt/schxslt2">SchXslt2</a> version the team has chosen, and keep the schema and the
+				XSLT modules it includes or imports (<code>xsl:include</code>, <code>xsl:import</code>) in the build, so that
+				the pipeline controls everything it runs. If the schema uses text value templates, which other processors don't
+				know, <strong>Schematron: Export Standard Copy...</strong> - see above - writes a copy of it as standard
+				Schematron to compile instead.</p>
+		</div>
 	</div>
 </html>

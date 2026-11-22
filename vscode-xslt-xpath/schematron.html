@@ -488,8 +488,17 @@
 				another processor: <code>java -jar saxon.jar -s:schema.sch -xsl:expand-text.xsl
 				-o:schema-standard.sch</code>.</p>
 		</div>
+		<div>
+			<h3 id="pipeline">Using a schema in a pipeline</h3>
+			<p>A build or CI pipeline should compile the schema itself, with the
+				<a href="https://codeberg.org/SchXslt/schxslt2">SchXslt2</a> version the team has chosen, and keep the schema and the
+				XSLT modules it includes or imports (<code>xsl:include</code>, <code>xsl:import</code>) in the build, so that
+				the pipeline controls everything it runs. If the schema uses text value templates, which other processors don't
+				know, <strong>Schematron: Export Standard Copy...</strong> - see above - writes a copy of it as standard
+				Schematron to compile instead.</p>
+		</div>
 	</main>
-	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#debugging">Debugging a schema</a></li><li><a href="#profiling">Profiling a schema</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li><li><a href="#text-value-templates">Text value templates in messages</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#debugging">Debugging a schema</a></li><li><a href="#profiling">Profiling a schema</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li><li><a href="#text-value-templates">Text value templates in messages</a></li><li><a href="#pipeline">Using a schema in a pipeline</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>
