@@ -1,0 +1,122 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- The page shell for the blog, which xsl/create-blog.xsl fills with each post: the title and description here are
+	     replaced by the page's own. Each post is authoring/blog/<post>.xml, and is built as blog/<post>.html - the nav
+	     below lists the posts, newest first, and is also what the sitemap and llms.txt are made from.
+	     The blog has its own navigation, apart from the user guide's, but shares its stylesheets.
+							==================================================-->
+
+	<title>An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code - The XSLT/XPath Blog</title>
+	<meta name="description" content="A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests, Schematron and AI assistant support - built on Visual Studio Code."><link rel="canonical" href="https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html"><meta property="og:type" content="article"><meta property="og:site_name" content="The XSLT/XPath Blog"><meta property="og:title" content="An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code - The XSLT/XPath Blog"><meta property="og:description" content="A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests, Schematron and AI assistant support - built on Visual Studio Code."><meta property="og:url" content="https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html"><meta property="article:published_time" content="2026-11-24"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"An XSLT editor for today","description":"A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests, Schematron and AI assistant support - built on Visual Studio Code.","url":"https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html","mainEntityOfPage":"https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","softwareVersion":"2.2"},"isPartOf":{"@type":"Blog","name":"The XSLT/XPath Blog","url":"https://deltaxml.github.io/vscode-xslt-xpath/blog/","description":"Writing, testing, debugging and profiling XSLT and XPath: articles on editing, the debugger, the profiler, XSpec, Schematron and AI assistants, from DeltaXignia.","publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"datePublished":"2026-11-24","dateModified":"2026-11-24"}</script>
+	<meta name="author" content="Philip Fearon">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../resources/base.css">
+	<link rel="stylesheet" href="../resources/skeleton.css">
+	<link rel="stylesheet" href="../resources/layout.css">
+	<link rel="stylesheet" href="../resources/custom.css">
+
+	<link rel="icon" href="../resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">The XSLT/XPath Blog</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">from DeltaXignia</h5>
+				<p class="remove-bottom" style="margin-left: 50px"><a class="guide-link" href="../index.html">XSLT and XPath for Visual Studio Code: the user guide</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="Blog posts">
+			<ul>
+				<li><a href="index.html">All posts</a></li>
+				<li class="nav-heading">Posts</li>
+				<li><a href="an-xslt-editor-for-today.html" class="active" aria-current="page">An XSLT editor for today</a></li>
+			</ul>
+			<div class="nav-footer">
+				<a href="../index.html">The user guide</a>
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Install the extension</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><article><h1 class="pageTitle">An XSLT editor for today</h1><p class="post-date"><time datetime="2026-11-24">24 November 2026</time></p>
+
+		<div class="two-thirds column">
+			<p>An XSLT editor used to be a large, separate application. Today it can be a free extension for the editor
+				many developers already use all day. DeltaXignia's XSLT/XPath extension for Visual Studio Code is an
+				XSLT editor first: it understands XSLT 3.0 and XPath 3.1, the XSLT 4.0 and XPath 4.0 features in Saxon 13, XSpec
+				and Schematron, and it runs, debugs and profiles stylesheets with Saxon. VS Code is the host - and it brings
+				Git, a terminal, themes and a large ecosystem with it.</p>
+
+			<h3>Checks that understand XPath</h3>
+			<p>The linter checks a stylesheet as you type, including the XPath inside attributes and text value templates:
+				misspelled functions, wrong argument counts, undeclared variables, and the mistakes that otherwise only
+				appear when a transformation runs. Quick fixes, completion for the XSLT in front of you and navigation -
+				go to a declaration, find every reference, a call hierarchy - work across imports, includes and packages.</p>
+
+			<h3>A debugger that steps into XPath</h3>
+			<p>Set a breakpoint, run the stylesheet with SaxonJ - any edition, including Saxon-HE - and step through
+				templates, functions and even the parts of a multi-line XPath expression, with the variables, the context item
+				and the output written so far beside you. Step back as well as forward, and from the output go to the
+				instruction that wrote it.</p>
+			<figure>
+				<img src="../resources/debugger-xpath-step.png" class="scale-with-grid" alt="The XSLT debugger stepping through an XPath expression in Visual Studio Code">
+				<figcaption>
+					<p><i style="font-style: italic">Stepping through an XPath expression in the debugger.</i></p>
+				</figcaption>
+			</figure>
+			<p>See <a href="../debugger.html">the debugger</a> in the user guide for the details.</p>
+
+			<h3>Profile, then test</h3>
+			<p>With Saxon-PE or Saxon-EE, the <a href="../profiler.html">profiler</a> shows the time of each template,
+				function and global variable, with the times above the declarations in the editor. Then
+				<a href="../xspec.html">XSpec tests</a> run from the Test Explorer, for stylesheets and for Schematron, with
+				each failure's expected and actual results side by side.</p>
+
+			<h3>XSLT 4.0 today</h3>
+			<p>The extension supports the <a href="../xslt40.html">XSLT 4.0</a> and XPath 4.0 features that Saxon 13
+				implements, such as record types, enumerations and JNodes for JSON, with completion, checks and refactoring
+				for them - so a stylesheet can use them now, with the same editor and the same tools.</p>
+
+			<h3>Working with an AI assistant</h3>
+			<p>An AI coding assistant is only as good as what it can see. The extension's
+				<a href="../ai-assistants.html#mcp">MCP server</a> gives assistants such as GitHub Copilot and Claude Code
+				tools that use the same linter, Saxon setup and debugger as you do: they can check a stylesheet, find a
+				declaration, try an XPath expression on your XML and run your stylesheet the way Quick Run does - so what an
+				assistant writes is checked as it would be for you.</p>
+
+			<h3>Try it</h3>
+			<p>The extension is free. Install it from the
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Visual Studio Code Marketplace</a>,
+				open a folder with some stylesheets, and see the <a href="../index.html">user guide</a> for what to do next.</p>
+		</div>
+	<div class="two-thirds column"><p class="post-footer"><a href="index.html">All posts</a> | <a href="../index.html">The user guide</a></p></div></article></main>
+	</div>
+</body>
+
+</html>

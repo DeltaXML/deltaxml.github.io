@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code</title>
+		<h1>An XSLT editor for today</h1>
+		<meta name="description" content="A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests, Schematron and AI assistant support - built on Visual Studio Code."/>
+		<meta name="date" content="2026-11-24"/>
+		<!-- DRAFT: outline of the first post - to be reviewed and extended before it's published -->
+	</head>
+	<div class="main">
+
+		<div class="two-thirds column">
+			<p>An XSLT editor used to be a large, separate application. Today it can be a free extension for the editor
+				many developers already use all day. DeltaXignia's XSLT/XPath extension for Visual Studio Code is an
+				XSLT editor first: it understands XSLT 3.0 and XPath 3.1, the XSLT 4.0 and XPath 4.0 features in Saxon 13, XSpec
+				and Schematron, and it runs, debugs and profiles stylesheets with Saxon. VS Code is the host - and it brings
+				Git, a terminal, themes and a large ecosystem with it.</p>
+
+			<h3>Checks that understand XPath</h3>
+			<p>The linter checks a stylesheet as you type, including the XPath inside attributes and text value templates:
+				misspelled functions, wrong argument counts, undeclared variables, and the mistakes that otherwise only
+				appear when a transformation runs. Quick fixes, completion for the XSLT in front of you and navigation -
+				go to a declaration, find every reference, a call hierarchy - work across imports, includes and packages.</p>
+
+			<h3>A debugger that steps into XPath</h3>
+			<p>Set a breakpoint, run the stylesheet with SaxonJ - any edition, including Saxon-HE - and step through
+				templates, functions and even the parts of a multi-line XPath expression, with the variables, the context item
+				and the output written so far beside you. Step back as well as forward, and from the output go to the
+				instruction that wrote it.</p>
+			<figure>
+				<img src="../resources/debugger-xpath-step.png" class="scale-with-grid" alt="The XSLT debugger stepping through an XPath expression in Visual Studio Code"/>
+				<figcaption>
+					<p><i style="font-style: italic">Stepping through an XPath expression in the debugger.</i></p>
+				</figcaption>
+			</figure>
+			<p>See <a href="../debugger.html">the debugger</a> in the user guide for the details.</p>
+
+			<h3>Profile, then test</h3>
+			<p>With Saxon-PE or Saxon-EE, the <a href="../profiler.html">profiler</a> shows the time of each template,
+				function and global variable, with the times above the declarations in the editor. Then
+				<a href="../xspec.html">XSpec tests</a> run from the Test Explorer, for stylesheets and for Schematron, with
+				each failure's expected and actual results side by side.</p>
+
+			<h3>XSLT 4.0 today</h3>
+			<p>The extension supports the <a href="../xslt40.html">XSLT 4.0</a> and XPath 4.0 features that Saxon 13
+				implements, such as record types, enumerations and JNodes for JSON, with completion, checks and refactoring
+				for them - so a stylesheet can use them now, with the same editor and the same tools.</p>
+
+			<h3>Working with an AI assistant</h3>
+			<p>An AI coding assistant is only as good as what it can see. The extension's
+				<a href="../ai-assistants.html#mcp">MCP server</a> gives assistants such as GitHub Copilot and Claude Code
+				tools that use the same linter, Saxon setup and debugger as you do: they can check a stylesheet, find a
+				declaration, try an XPath expression on your XML and run your stylesheet the way Quick Run does - so what an
+				assistant writes is checked as it would be for you.</p>
+
+			<h3>Try it</h3>
+			<p>The extension is free. Install it from the
+				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Visual Studio Code Marketplace</a>,
+				open a folder with some stylesheets, and see the <a href="../index.html">user guide</a> for what to do next.</p>
+		</div>
+	</div>
+</html>
