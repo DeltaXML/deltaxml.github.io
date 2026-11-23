@@ -14,7 +14,8 @@
 
 	<!-- The page shell for the blog, which xsl/create-blog.xsl fills with each post: the title and description here are
 	     replaced by the page's own. Each post is authoring/blog/<post>.xml, and is built as blog/<post>.html - the nav
-	     below lists the posts, newest first, and is also what the sitemap and llms.txt are made from.
+	     below lists the posts, newest first, and is also what the sitemap and llms.txt are made from. The newest post, the
+	     first, is also built as index.html, the blog's address.
 	     The blog has its own navigation, apart from the user guide's, but shares its stylesheets.
 							==================================================-->
 
@@ -46,16 +47,13 @@
 				</a>
 			</div>
 			<div class="six columns topTitle">
-				<h3 class="remove-bottom" style="color: #aaeaaa">The XSLT/XPath Blog</h3>
-				<h5 style="color: #aaeaaa;padding-bottom:2px">from DeltaXignia</h5>
-				<p class="remove-bottom" style="margin-left: 50px"><a class="guide-link" href="../index.html">XSLT and XPath for Visual Studio Code: the user guide</a></p>
+				<h3 class="remove-bottom" style="color: #aaeaaa; margin-top: 20px">The XSLT/XPath Blog</h3>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
 		<nav aria-label="Blog posts">
 			<ul>
-				<li><a href="index.html">All posts</a></li>
 				<li class="nav-heading">Posts</li>
 				<li><a href="an-xslt-editor-for-today.html" class="active" aria-current="page">An XSLT editor for today</a></li>
 			</ul>
@@ -115,7 +113,7 @@
 				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Visual Studio Code Marketplace</a>,
 				open a folder with some stylesheets, and see the <a href="../index.html">user guide</a> for what to do next.</p>
 		</div>
-	<div class="two-thirds column"><p class="post-footer"><a href="index.html">All posts</a> | <a href="../index.html">The user guide</a></p></div></article></main>
+	<div class="two-thirds column"><p class="post-footer"><a href="../index.html">The user guide</a></p></div></article></main>
 	</div>
 </body>
 
