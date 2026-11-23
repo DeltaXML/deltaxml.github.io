@@ -10,8 +10,8 @@
 	<div class="main">
 
 		<div class="two-thirds column">
-			<p>An XSLT editor used to be a large, separate application. Today it can be a free extension for the editor
-				many developers already use all day. DeltaXignia's XSLT/XPath extension for Visual Studio Code is an
+			<p>An XSLT editor used to be incorporated within a large standalone XML IDE. Today it can be a free extension wihin 
+				a development environment most users are familiar with. DeltaXignia's XSLT/XPath extension for Visual Studio Code is an
 				XSLT editor first: it understands XSLT 3.0 and XPath 3.1, the XSLT 4.0 and XPath 4.0 features in Saxon 13, XSpec
 				and Schematron, and it runs, debugs and profiles stylesheets with Saxon. VS Code is the host - and it brings
 				Git, a terminal, themes and a large ecosystem with it.</p>
