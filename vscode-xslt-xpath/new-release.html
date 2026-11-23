@@ -127,21 +127,24 @@
                     slowest first, with times above the declarations in the editor, warm-up runs left out, and earlier
                     profiles appear in the Timeline view for comparison. A <a href="schematron.html#profiling">Schematron
                     schema</a> is profiled the same way, with the time of each rule</li>
-                <li><strong><a href="xspec.html#times">XSpec test times</a></strong> - with Saxon-PE/EE,
-                    the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
-                    long its tests took on each run</li>
                 <li><strong><a href="debugger.html#input-nodes">Mapping from source XML to the XSLT templates</a></strong> that processed them. After
                     a debug session, hover over an element in the input file to see the template rules - and
                     <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code>
                     instructions - that processed it, its attributes and its text - or the Schematron rules that fired
                     for it - and go to them; above each template or instruction, the nodes it processed. From the output view, go to the input that part of the
                     output was written for, as well as to the instruction that wrote it</li>
-                <li><strong><a href="ai-assistants.html#mcp">AI assistants that use your stylesheets</a></strong> (MCP) - new tools
-                    let an assistant list what a module can use before it writes (<code>list_declarations</code>), try an XPath
-                    expression on your XML with your Saxon jar, safely and with line numbers (<code>evaluate_xpath</code>), and
-                    get the exact Saxon command Quick Run would use for a stylesheet - your Saxon jar, XML context file,
-                    parameters, catalog and workspace packages - so what it runs gives the same result as yours
-                    (<code>run_configuration</code>). <a href="ai-assistants.html#mcp-skill">Skills</a> for XSLT and XPath, XSpec tests and Schematron tell the assistant how
+                <li><strong><a href="ai-assistants.html#mcp">AI assistants that use your stylesheets</a></strong> (MCP) - eleven new tools let an assistant look up what a module can use, evaluate XPath on your XML, get the commands that run and test your stylesheets and validate with Schematron, find why output is wrong, and profile a slow stylesheet:
+					<table class="tool-grid">
+						<tbody>
+						<tr><td>run_configuration</td><td>list_declarations</td></tr>
+						<tr><td>test_configuration</td><td>output_origin</td></tr>
+						<tr><td>validation_configuration</td><td>input_rules</td></tr>
+						<tr><td>profile_configuration</td><td>debug_status</td></tr>
+						<tr><td>trace_configuration</td><td>debug_evaluate</td></tr>
+						<tr><td>evaluate_xpath</td><td></td></tr>
+						</tbody>
+					</table>
+					<a href="ai-assistants.html#mcp-skill">Skills</a> for XSLT and XPath, XSpec tests and Schematron tell the assistant how
                     to use them together: the server serves them to GitHub Copilot in VS Code 1.147 or later (skills over MCP), and
                     <strong>Set Up MCP Server for Claude Code</strong> installs them for Claude Code. Each VS Code window has its
                     own server, started with the window for a workspace of XSLT files</li>
@@ -151,6 +154,9 @@
                     Package</a> (also a CodeLens on <code>xsl:package</code>) checks the modules that use a package,
                     for when a change to its visibility breaks them. A private package component is now reported as
                     private where it's used, with a quick fix to make it public</li>
+                <li><strong><a href="xspec.html#times">XSpec test times</a></strong> - with Saxon-PE/EE,
+                    the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
+                    long its tests took on each run</li>
             </ul>
             <h3 id="release-2-1">Release 2.1</h3>
             <ul>

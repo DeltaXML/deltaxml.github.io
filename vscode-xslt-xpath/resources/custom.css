@@ -60,6 +60,21 @@ code.title {
   font-weight: bold;
 }
 
+/* a grid of names, as in the release notes: no borders, in columns */
+table.tool-grid,
+table.tool-grid td {
+  border: none;
+  margin: 0;
+}
+table.tool-grid {
+  margin: 10px;
+  font-style: italic;
+}
+
+table.tool-grid td {
+  padding: 2px 28px 2px 0;
+}
+
 code.block {
   font-size: small;
   display: block;
