@@ -49,4 +49,4 @@ The pages below are the extension's user guide. The whole guide is also availabl
 
 ## The XSLT/XPath Blog
 
-- [An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html): A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests, Schematron and AI assistant support - built on Visual Studio Code.
+- [An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html): A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests and Schematron - for developers and their AI assistants, built on Visual Studio Code.
