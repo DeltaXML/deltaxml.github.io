@@ -22,16 +22,17 @@
 				same checks, navigation and debugger to read, question and correct what it wrote.</p>
 
 			<h3>Checks that understand the language structure</h3>
-			<p>The linter checks a stylesheet as you type, including the XPath inside attributes and text value templates:
+			<p>The <a href="../editing-xslt.html#checking">linter</a> checks a stylesheet as you type, including the XPath inside attributes and text value templates:
 				misspelled functions, wrong argument counts, undeclared variables, and the mistakes that otherwise only
 				appear when a transformation runs. Quick fixes, completion for the XSLT in front of you and navigation -
-				go to a declaration, find every reference, a call hierarchy - work across imports, includes and packages.</p>
+				<a href="../navigation.html">go to a declaration, find every reference, a call hierarchy</a> - work across imports, includes and
+				<a href="../xslt-packages.html">packages</a>.</p>
 
 			<h3>A debugger that steps into XPath</h3>
 			<p>Set a breakpoint, run the stylesheet with SaxonJ - any edition, including Saxon-HE - and step through
 				templates, functions and even the parts of a multi-line XPath expression, with the variables, the context item
-				and the output written so far beside you. Step back as well as forward, and from the output go to the
-				instruction that wrote it.</p>
+				and the output written so far beside you. Step back as well as forward, and <a href="../debugger.html#input-nodes">from the output go to the
+				instruction that wrote it</a>.</p>
 			<figure>
 				<img src="../resources/debugger-xpath-step.png" class="scale-with-grid" alt="The XSLT debugger stepping through an XPath expression in Visual Studio Code"/>
 				<figcaption>
@@ -43,13 +44,19 @@
 			<h3>Profile, then test</h3>
 			<p>With Saxon-PE or Saxon-EE, the <a href="../profiler.html">profiler</a> shows the time of each template,
 				function and global variable, with the times above the declarations in the editor.</p>
+			<figure>
+				<img src="../resources/blog-profiler.png" class="scale-with-grid" alt="A stylesheet in Visual Studio Code with call counts and times above each function, beside the profile report ranking templates and functions by net time"/>
+				<figcaption>
+					<p><i style="font-style: italic">Profiling a stylesheet: each template and function's calls and time shown above its declaration, and the slowest first in the report.</i></p>
+				</figcaption>
+			</figure>
 			<p>Tests are not an afterthought. <a href="../xspec.html">XSpec</a> is given equal footing with XSLT, as a
 				first-class language that extends it: XSpec files are checked as you edit them, with completion and hover
-				help, and you can move freely between a test and what it tests, in both directions. Go to Definition on an
+				help, and you can <a href="../xspec.html#navigation">move freely between a test and what it tests</a>, in both directions. Go to Definition on an
 				<code>x:call</code> opens the function or template under test, and Find All References on that function or
 				template lists the scenarios that cover it, so you can see what is tested and what isn't. Rename a function
-				and its uses in the XSpec files change with it. Tests run from the Test Explorer, for stylesheets and for
-				Schematron, with each failure's expected and actual results side by side, and can be debugged in the same way.</p>
+				and its uses in the XSpec files change with it. Tests <a href="../xspec.html#running">run from the Test Explorer</a>, for stylesheets and for
+				<a href="../schematron.html">Schematron</a>, with each failure's expected and actual results side by side, and can be debugged in the same way.</p>
 			<figure>
 				<img src="../resources/test-running.png" class="scale-with-grid" alt="XSpec scenarios in the Test Explorer, beside an XSpec file whose x:call names the function under test, in Visual Studio Code"/>
 				<figcaption>
@@ -62,15 +69,19 @@
 
 			<h3>XSLT 4.0 today</h3>
 			<p>The extension supports the <a href="../xslt40.html">XSLT 4.0</a> and XPath 4.0 features that Saxon 13
-				implements, such as record types, enumerations and JNodes for JSON, with completion, checks and refactoring
+				implements, such as <a href="../xslt40-records.html">record types, enumerations</a> and <a href="../xslt40-jnodes.html">JNodes for JSON</a>, with completion, checks and refactoring
 				for them - so a stylesheet can use them now, with the same editor and the same tools.</p>
 
 			<h3>Working with an AI assistant</h3>
 			<p>An AI coding assistant is only as good as what it can see. The extension's
-				<a href="../ai-assistants.html#mcp">MCP server</a> gives assistants such as GitHub Copilot and Claude Code
+				<a href="../ai-assistants.html#mcp">MCP server</a> gives assistants such as <a href="../ai-assistants.html#mcp-copilot">GitHub Copilot</a> and <a href="../ai-assistants.html#mcp-claude-code">Claude Code</a>
 				tools that use the same linter, Saxon setup and debugger as you do: they can check a stylesheet, find a
-				declaration, try an XPath expression on your XML and run your stylesheet the way Quick Run does - so what an
+				declaration, try an XPath expression on your XML and run your stylesheet <a href="../quick-run.html">the way Quick Run does</a> - so what an
 				assistant writes is checked as it would be for you.</p>
+			<p>The extension also includes <a href="../ai-assistants.html#mcp-skill">skills</a> for XSLT and XPath, XSpec tests
+				and Schematron: sets of instructions that tell an assistant how to use these tools together - to look up what
+				a module already declares before writing a second copy of a function, to check each change, and to treat a
+				failing test as a question about the stylesheet or the expectation, not something to change until it passes.</p>
 			<figure>
 				<img src="../resources/mcp-tools.png" class="scale-with-grid" alt="Claude Code answering where f:line-total is used and what debug-xpath.xsl declares, using the extension's MCP tools, in Visual Studio Code"/>
 				<figcaption>
@@ -80,7 +91,8 @@
 			<h3>Try it</h3>
 			<p>The extension is free. Install it from the
 				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Visual Studio Code Marketplace</a>,
-				open a folder with some stylesheets, and see the <a href="../index.html">user guide</a> for what to do next.</p>
+				open a folder with some stylesheets, and see the <a href="../index.html">user guide</a> for what to do next, or
+				<a href="../new-release.html#release-2-2">what's new in release 2.2</a>.</p>
 		</div>
 	</div>
 </html>
