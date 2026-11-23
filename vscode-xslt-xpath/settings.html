@@ -346,6 +346,17 @@
               one opened has the server.</td>
           </tr>
           <tr>
+            <td><code>XSLT.<wbr>mcp.<wbr>runForAssistant</code></td>
+            <td><code>ask</code></td>
+            <td>When an assistant's <code>output_origin</code> or <code>input_rules</code> needs a run of a stylesheet - there's none yet,
+              or the stylesheet or input has changed since - whether the extension runs it for the assistant, as Run Without Debugging with
+              your Quick Run task - its result written to the temporary files, without asking where, and relative
+              <code>xsl:result-document</code> outputs with it. <code>ask</code>: a notification asks you - <strong>Run Without Debugging</strong>, <strong>Always Run for
+              This Workspace</strong> or <strong>Not Now</strong>; <strong>XSLT: Ask Before Running a Stylesheet for an AI Assistant</strong>
+              asks again after <strong>Always</strong>. <code>always</code>: run without asking, in every workspace. <code>never</code>: don't
+              run it, nor ask. A user setting only.</td>
+          </tr>
+          <tr>
             <td><code>XSLT.<wbr>mcp.<wbr>debugEvaluateExtensions</code></td>
             <td><code>restricted</code></td>
             <td>What an assistant's <code>debug_evaluate</code> expressions can call in your paused debug session.

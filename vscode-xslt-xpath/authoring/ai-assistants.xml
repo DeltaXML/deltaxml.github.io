@@ -134,7 +134,10 @@
 							XSpec installation and the XSLT packages - and for a stylesheet, its Quick Run: the XML context file,
 							the parameters, and the exact <code>java</code> command line, with the options the extension adds,
 							such as <code>-catalog</code> and <code>-lib</code>. An assistant that runs Saxon itself then gets
-							the same result as you.</td>
+							the same result as you. With <code>tasks</code>, it also gives the XSLT tasks in <code>.vscode/tasks.json</code> -
+							the stylesheet's, or all - with their problems (a file that isn't there, a property a task doesn't have, an
+							undefined <code>${input:...}</code>), and the properties a task has, with what each does: so an assistant asked to
+							change how a stylesheet runs uses the right names.</td>
 					</tr>
 					<tr>
 						<td><code>test_configuration</code></td>
