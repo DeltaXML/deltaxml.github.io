@@ -5122,7 +5122,7 @@ count(//item)
 				</thead>
 				<tbody>
 					<tr>
-						<td><code>lint_file</code></td>
+						<td><code class="title">lint_file</code></td>
 						<td>The problems in an XSLT module, XSpec file or Schematron schema - as the Problems view shows them,
 							checked with its imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
 							worse. A module that another stylesheet imports or includes is checked with that top-level
@@ -5130,18 +5130,18 @@ count(//item)
 							assistant gives - for example, a stylesheet outside the workspace.</td>
 					</tr>
 					<tr>
-						<td><code>lint_files</code></td>
+						<td><code class="title">lint_files</code></td>
 						<td>The problems in each XSLT and XSpec file in a folder: a summary, then only the files with problems.
 							By default, warnings and errors - not hints, such as unused variables. Files in hidden folders, such as
 								<code>.git</code>, and those the <code>files.exclude</code> setting hides aren't checked.</td>
 					</tr>
 					<tr>
-						<td><code>module_imports</code></td>
+						<td><code class="title">module_imports</code></td>
 						<td>The tree of imports, includes and packages from a module's top-level stylesheet down, with the
 							module marked - as in the XSLT Imports view.</td>
 					</tr>
 					<tr>
-						<td><code>list_declarations</code></td>
+						<td><code class="title">list_declarations</code></td>
 						<td>Every function, named template, global variable and parameter, mode, key, attribute set,
 							accumulator, item type and character map a module can use: its own, then those of the modules and
 							packages it imports, includes or uses - each with its parameters and types, its location, and the
@@ -5150,7 +5150,7 @@ count(//item)
 							one kind; as for <code>lint_file</code>, the top-level stylesheet can be given.</td>
 					</tr>
 					<tr>
-						<td><code>evaluate_xpath</code></td>
+						<td><code class="title">evaluate_xpath</code></td>
 						<td>Evaluates an XPath expression on an XML file with your Saxon jar - the program behind
 							<a href="#xpath-queries">Find Nodes with XPath</a>, in a process of its own - and gives the number
 							of items and the first 100 as the debugger shows values: a node as its path, a map or array in full.
@@ -5180,7 +5180,7 @@ count(//item)
 							XML file - not through a symbolic link out of them. The XML file's external entities aren't read.</td>
 					</tr>
 					<tr>
-						<td><code>find_declaration</code></td>
+						<td><code class="title">find_declaration</code></td>
 						<td>Where a function, named template, global variable or parameter, mode, key, attribute set, accumulator,
 							item type or character map is declared, as seen from a module - with its parameters and types, and its
 							documentation: its <a href="#xslt40-notes">documentation note</a>, or a comment just before it.
@@ -5189,24 +5189,24 @@ count(//item)
 							from.</td>
 					</tr>
 					<tr>
-						<td><code>find_references</code></td>
+						<td><code class="title">find_references</code></td>
 						<td>The references to one of these, as Find All References finds them - in the modules that use it and
 							the XSpec files that test it - with each reference's line. The XSpec uses are listed last, as the
 							tests, each with the scenario it's in.</td>
 					</tr>
 					<tr>
-						<td><code>describe_type</code></td>
+						<td><code class="title">describe_type</code></td>
 						<td>An XSLT 4.0 named item type: a record type's fields, with their types and <code>@field</code>
 							documentation, or an enumeration type's values - with a top-level stylesheet given, as for
 							<code>find_declaration</code>.</td>
 					</tr>
 					<tr>
-						<td><code>xpath_function</code></td>
+						<td><code class="title">xpath_function</code></td>
 						<td>The signature and description of a built-in XPath or XSLT function, for XPath 3.1 or 4.0 - for a
 							function declared in a stylesheet, the assistant uses <code>find_declaration</code>.</td>
 					</tr>
 					<tr>
-						<td><code>run_configuration</code></td>
+						<td><code class="title">run_configuration</code></td>
 						<td>How you run stylesheets: the Saxon jar, with its edition, version and licence, the XML catalog, the
 							XSpec installation and the XSLT packages - and for a stylesheet, its Quick Run: the XML context file,
 							the parameters, and the exact <code>java</code> command line, with the options the extension adds,
@@ -5217,7 +5217,7 @@ count(//item)
 							change how a stylesheet runs uses the right names.</td>
 					</tr>
 					<tr>
-						<td><code>test_configuration</code></td>
+						<td><code class="title">test_configuration</code></td>
 						<td>For an XSpec file: the commands that run its tests, as the Test Explorer runs them - XSpec has no single
 							command here, as the tests are compiled to a test runner, which is then run, with more steps for the tests of a
 							Schematron schema. They have the options the extension works out - Saxon's syntax extensions, the XML catalog,
@@ -5228,7 +5228,7 @@ count(//item)
 							nothing: the assistant runs the commands.</td>
 					</tr>
 					<tr>
-						<td><code>validation_configuration</code></td>
+						<td><code class="title">validation_configuration</code></td>
 						<td>For a Schematron schema and the XML file it validates - the schema's XML context file, the one an
 							<code>xml-model</code> processing instruction names, or one the assistant gives: the command that validates it, as
 							<strong>Schematron: Validate</strong> does, in one run of Saxon with the schema compiled by SchXslt2, in a phase of the
@@ -5238,7 +5238,7 @@ count(//item)
 							nothing: the assistant runs the command.</td>
 					</tr>
 					<tr>
-						<td><code>output_origin</code></td>
+						<td><code class="title">output_origin</code></td>
 						<td>For a line of a stylesheet's output, or some text in it: the instruction that wrote each part of it, the template or
 							function it's in - with its match, name and mode - and the input node it was written for, as an XPath for the input file,
 							with its line. It reads the output of your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong>
@@ -5248,7 +5248,7 @@ count(//item)
 							for the run (see <code>XSLT.mcp.runForAssistant</code>). Only XML output is mapped.</td>
 					</tr>
 					<tr>
-						<td><code>input_rules</code></td>
+						<td><code class="title">input_rules</code></td>
 						<td>For an element of an input file - by its path or the line of its start tag - what processed it, its attributes and its text in
 							your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong> with SaxonJ: the template rules, with their match,
 							mode and priority, the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code> instructions, and the
@@ -5257,7 +5257,7 @@ count(//item)
 							that input file, or the stylesheet or input has changed since.</td>
 					</tr>
 					<tr>
-						<td><code>trace_configuration</code></td>
+						<td><code class="title">trace_configuration</code></td>
 						<td>For a stylesheet: the command that runs it as Quick Run does, with logpoints and no VS Code - the debugger's own adapter, run
 							from the command line. At each logpoint the assistant chooses, as the stylesheet runs, it prints the local variables (or a message
 							with <code>{XPath}</code> parts), in the debugger's notation, with <code>xsl:message</code> output and errors in between, then how many
@@ -5267,7 +5267,7 @@ count(//item)
 							the command.</td>
 					</tr>
 					<tr>
-						<td><code>debug_status</code>, <code>debug_evaluate</code></td>
+						<td><code class="title">debug_status</code>, <code class="title">debug_evaluate</code></td>
 						<td>Read-only access to your XSLT debug session: whether it's paused, where, the call stack, and a frame's local variables,
 							parameters and context item - waiting a while for a pause, if the assistant asks you to run to a breakpoint - and an XPath
 							expression evaluated in a frame, as the Debug Console evaluates it. The assistant can't step, continue or change breakpoints:
@@ -5275,7 +5275,7 @@ count(//item)
 							edition the session runs on - <code>XSLT.mcp.debugEvaluateExtensions</code> can allow more (<code>unrestricted</code>) or none (<code>never</code>).</td>
 					</tr>
 					<tr>
-						<td><code>profile_configuration</code></td>
+						<td><code class="title">profile_configuration</code></td>
 						<td>For a stylesheet that's slow: the command that runs it as Quick Run does - with its XML source, or one the assistant
 							gives - with Saxon's timing profile (Saxon-PE or EE), several runs so that the first, the Java VM's warm-up, can be
 							left out, and a command that summarises the profile as text. The summary ranks the templates, functions and global
@@ -5337,7 +5337,7 @@ count(//item)
 			<p>The extension has four <em>skills</em>: sets of instructions an assistant loads when a task needs them. They tell the
 				assistant how to use the tools above together:</p>
 			<ul>
-				<li><code>xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
+				<li><code class="title">xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
 					module already declares before writing a second copy of a function (<code>list_declarations</code>); try an XPath
 					expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it differs from a
 					stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and <code>math</code> prefixes a
@@ -5346,17 +5346,17 @@ count(//item)
 					command from <code>run_configuration</code>, rather than a Saxon command of its own; and the habits that avoid
 					common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath in an attribute, and a global
 					variable that uses the context item, which the linter can't report.</li>
-				<li><code>xslt-debugging</code>, for finding why a stylesheet's output is wrong or a run is slow: find the instruction and
+				<li><code class="title">xslt-debugging</code>, for finding why a stylesheet's output is wrong or a run is slow: find the instruction and
 					template behind wrong output (<code>output_origin</code>) and what processed an input element, or left it to the built-in
 					rules (<code>input_rules</code>); see values inside templates and functions with logpoints (<code>trace_configuration</code>)
 					or in your paused debug session (<code>debug_status</code>, <code>debug_evaluate</code>); and profile a slow stylesheet
 					(<code>profile_configuration</code>), reading the times by net time.</li>
-				<li><code>xspec-testing</code>, for <a href="#xspec">XSpec tests</a>: write scenarios for a function, a named template or
+				<li><code class="title">xspec-testing</code>, for <a href="#xspec">XSpec tests</a>: write scenarios for a function, a named template or
 					a template rule, with <code>select</code> as the expected value and <code>test</code> for a condition on
 					<code>$x:result</code>; test a package with <code>run-as="external"</code> or an <code>x:helper</code>; run the tests
 					with the commands <code>test_configuration</code> gives, and read the summary - not the exit code; and when a test
 					fails, decide whether the stylesheet or the expectation is wrong, and not change an expectation just to make it pass.</li>
-				<li><code>schematron</code>, for <a href="#schematron">Schematron schemas</a>: write rules the way SchXslt2 runs them - the
+				<li><code class="title">schematron</code>, for <a href="#schematron">Schematron schemas</a>: write rules the way SchXslt2 runs them - the
 					first matching rule of a pattern, the prefixes <code>sch:ns</code> declares, only the XSLT declarations it copies;
 					check each change with <code>lint_file</code>; validate with the command <code>validation_configuration</code>
 					gives; and find each problem's line with <code>evaluate_xpath</code>.</li>

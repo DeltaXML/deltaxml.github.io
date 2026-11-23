@@ -54,6 +54,12 @@ p.caption {
   font-style: italic;
 }
 
+code.title {
+  color: black;
+  font-size: small;
+  font-weight: bold;
+}
+
 code.block {
   font-size: small;
   display: block;
@@ -114,6 +120,10 @@ aside {
 
   .shortcut {
     color: #00b2fe;
+  }
+
+  code.title {
+    color: #ffffff;
   }
 
   a,
