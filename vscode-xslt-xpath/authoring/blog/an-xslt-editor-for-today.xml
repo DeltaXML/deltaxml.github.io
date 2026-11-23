@@ -92,7 +92,9 @@
 			<p>The extension is free. Install it from the
 				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Visual Studio Code Marketplace</a>,
 				open a folder with some stylesheets, and see the <a href="../index.html">user guide</a> for what to do next, or
-				<a href="../new-release.html#release-2-2">what's new in release 2.2</a>.</p>
+				<a href="../new-release.html#release-2-2">what's new in release 2.2</a>. If Visual Studio Code is new to you,
+				<a href="../vscode.html">Using VS Code</a> in the guide covers the user interface, the Command Palette and keyboard
+				shortcuts.</p>
 		</div>
 	</div>
 </html>
