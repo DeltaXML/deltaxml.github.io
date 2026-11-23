@@ -235,6 +235,13 @@ aside {
   padding: 10px 8px 0px 20px;
 }
 
+/* the release the guide describes, after the install count in the top bar */
+.release-version {
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 /* the logo lines up with the nav, rather than being centred in skeleton's 960px container */
 @media only screen and (min-width: 960px) {
   .topbar .container {

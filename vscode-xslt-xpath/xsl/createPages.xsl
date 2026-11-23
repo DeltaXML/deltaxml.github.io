@@ -18,6 +18,10 @@
   <xsl:variable name="indexTitle" as="xs:string" select="normalize-space(/html/head/title)"/>
   <!-- the guide's public URL, for each page's canonical link and Open Graph tags - also the base URL in xsl/make-sitemap.sh -->
   <xsl:variable name="siteUrl" as="xs:string" select="'https://deltaxml.github.io/vscode-xslt-xpath/'"/>
+  <!-- the extension release the guide describes (as package.json's version, without the patch number): shown in each
+       page's top bar and on the all-pages cover, and given in the structured data and llms.txt - the one place to
+       change for a new release -->
+  <xsl:variable name="releaseVersion" as="xs:string" select="'2.2'"/>
 
   <xsl:template match="/">
     <xsl:apply-templates/>
@@ -55,7 +59,7 @@
           <section class="cover">
             <img src="../resources/tiny-white-logo.png" alt="DeltaXignia"/>
             <h1>XSLT and XPath<br/>for Visual Studio Code</h1>
-            <p class="cover-subtitle">User Guide</p>
+            <p class="cover-subtitle">User Guide - Release {$releaseVersion}</p>
           </section>
           <nav class="contents">
             <h2>Contents</h2>
@@ -118,6 +122,7 @@
       <xsl:text>> DeltaXignia's free XSLT/XPath extension for Visual Studio Code: an XSLT editor, XPath editor and tester, </xsl:text>
       <xsl:text>XSpec test runner, Schematron editor, debugger and profiler, with support for XSLT 3.0, XSLT 4.0 and AI assistants. </xsl:text>
       <xsl:text>Install it from the Visual Studio Code Marketplace: https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath&#10;</xsl:text>
+      <xsl:text>&#10;Current release: {$releaseVersion}. The guide describes this release; the What's New page lists the changes in each release.&#10;</xsl:text>
       <xsl:text>&#10;The pages below are the extension's user guide. The whole guide is also available as one page, </xsl:text>
       <xsl:text>{$siteUrl}all-pages.html, and as a PDF, {$siteUrl}vscode-xslt-xpath-guide.pdf.&#10;</xsl:text>
       <xsl:value-of select="string-join($lines, '&#10;')"/>
@@ -301,6 +306,7 @@
         'operatingSystem': 'Windows, macOS, Linux',
         'url': $url,
         'installUrl': 'https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath',
+        'softwareVersion': $releaseVersion,
         'offers': map { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
         'author': $publisher,
         'publisher': $publisher
@@ -312,7 +318,8 @@
         'url': $url,
         'mainEntityOfPage': $url,
         'image': $siteUrl || 'resources/og-image.png',
-        'about': map { '@type': 'SoftwareApplication', 'name': 'XSLT/XPath for Visual Studio Code', 'url': $siteUrl },
+        'about': map { '@type': 'SoftwareApplication', 'name': 'XSLT/XPath for Visual Studio Code', 'url': $siteUrl,
+          'softwareVersion': $releaseVersion },
         'isPartOf': map { '@type': 'WebSite', 'name': $indexTitle, 'url': $siteUrl },
         'author': $publisher,
         'publisher': $publisher
@@ -394,6 +401,14 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- the release the guide describes, in the top bar -->
+  <xsl:template match="span[@class eq 'release-version']" mode="copyPage">
+    <xsl:copy>
+      <xsl:copy-of select="@*"/>
+      <xsl:text>Release {$releaseVersion}</xsl:text>
+    </xsl:copy>
+  </xsl:template>
+
   <xsl:template match="nav//ul/li/a" mode="copyPage">
     <xsl:param name="filePart" as="xs:string" tunnel="yes"/>
     <xsl:copy>

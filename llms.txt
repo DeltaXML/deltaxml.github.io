@@ -2,6 +2,8 @@
 
 > DeltaXignia's free XSLT/XPath extension for Visual Studio Code: an XSLT editor, XPath editor and tester, XSpec test runner, Schematron editor, debugger and profiler, with support for XSLT 3.0, XSLT 4.0 and AI assistants. Install it from the Visual Studio Code Marketplace: https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath
 
+Current release: 2.2. The guide describes this release; the What's New page lists the changes in each release.
+
 The pages below are the extension's user guide. The whole guide is also available as one page, https://deltaxml.github.io/vscode-xslt-xpath/all-pages.html, and as a PDF, https://deltaxml.github.io/vscode-xslt-xpath/vscode-xslt-xpath-guide.pdf.
 
 ## Guide
