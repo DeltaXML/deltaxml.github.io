@@ -3,20 +3,25 @@
 	<head>
 		<title>An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code</title>
 		<h1>An XSLT editor for today</h1>
-		<meta name="description" content="A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests, Schematron and AI assistant support - built on Visual Studio Code."/>
+		<meta name="description" content="A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests and Schematron - for developers and their AI assistants, built on Visual Studio Code."/>
 		<meta name="date" content="2026-11-24"/>
 		<!-- DRAFT: outline of the first post - to be reviewed and extended before it's published -->
 	</head>
 	<div class="main">
 
 		<div class="two-thirds column">
-			<p>An XSLT editor used to be incorporated within a large standalone XML IDE. Today it can be a free extension wihin 
+			<p>An XSLT editor used to be incorporated within a large standalone XML IDE. Today it can be a free extension within 
 				a development environment most users are familiar with. DeltaXignia's XSLT/XPath extension for Visual Studio Code is an
 				XSLT editor first: it understands XSLT 3.0 and XPath 3.1, the XSLT 4.0 and XPath 4.0 features in Saxon 13, XSpec
 				and Schematron, and it runs, debugs and profiles stylesheets with Saxon. VS Code is the host - and it brings
 				Git, a terminal, themes and a large ecosystem with it.</p>
+			<p>It is also an editor for the way XSLT is written now. Many developers work with an AI coding assistant
+				beside them, and what it drafts still has to be right: checked, run, tested and understood by the person
+				responsible for it. The extension is designed for the two to work together. The assistant is given the same
+				linter, Saxon setup and debugger that you use, so its changes are checked as yours are - and you have the
+				same checks, navigation and debugger to read, question and correct what it wrote.</p>
 
-			<h3>Checks that understand XPath</h3>
+			<h3>Checks that understand the language structure</h3>
 			<p>The linter checks a stylesheet as you type, including the XPath inside attributes and text value templates:
 				misspelled functions, wrong argument counts, undeclared variables, and the mistakes that otherwise only
 				appear when a transformation runs. Quick fixes, completion for the XSLT in front of you and navigation -
@@ -37,9 +42,23 @@
 
 			<h3>Profile, then test</h3>
 			<p>With Saxon-PE or Saxon-EE, the <a href="../profiler.html">profiler</a> shows the time of each template,
-				function and global variable, with the times above the declarations in the editor. Then
-				<a href="../xspec.html">XSpec tests</a> run from the Test Explorer, for stylesheets and for Schematron, with
-				each failure's expected and actual results side by side.</p>
+				function and global variable, with the times above the declarations in the editor.</p>
+			<p>Tests are not an afterthought. <a href="../xspec.html">XSpec</a> is given equal footing with XSLT, as a
+				first-class language that extends it: XSpec files are checked as you edit them, with completion and hover
+				help, and you can move freely between a test and what it tests, in both directions. Go to Definition on an
+				<code>x:call</code> opens the function or template under test, and Find All References on that function or
+				template lists the scenarios that cover it, so you can see what is tested and what isn't. Rename a function
+				and its uses in the XSpec files change with it. Tests run from the Test Explorer, for stylesheets and for
+				Schematron, with each failure's expected and actual results side by side, and can be debugged in the same way.</p>
+			<figure>
+				<img src="../resources/test-running.png" class="scale-with-grid" alt="XSpec scenarios in the Test Explorer, beside an XSpec file whose x:call names the function under test, in Visual Studio Code"/>
+				<figcaption>
+					<p><i style="font-style: italic">XSpec tests in the Test Explorer, beside the XSpec file. Debug breakpoints can be added here too.</i></p>
+				</figcaption>
+			</figure>
+			<p>It is the same picture the AI assistant gets: when it looks up a function's references, the XSpec files that
+				test it are listed with the rest, so it can find the tests for what it is changing, and it checks the XSpec
+				files with the same linter. A change that isn't covered by a test is as visible to it as it is to you.</p>
 
 			<h3>XSLT 4.0 today</h3>
 			<p>The extension supports the <a href="../xslt40.html">XSLT 4.0</a> and XPath 4.0 features that Saxon 13
@@ -52,7 +71,12 @@
 				tools that use the same linter, Saxon setup and debugger as you do: they can check a stylesheet, find a
 				declaration, try an XPath expression on your XML and run your stylesheet the way Quick Run does - so what an
 				assistant writes is checked as it would be for you.</p>
-
+			<figure>
+				<img src="../resources/mcp-tools.png" class="scale-with-grid" alt="Claude Code answering where f:line-total is used and what debug-xpath.xsl declares, using the extension's MCP tools, in Visual Studio Code"/>
+				<figcaption>
+					<p><i style="font-style: italic">Asked where a function is used, Claude Code answers from the extension's MCP tools: every call, with its line and template, and everything else the stylesheet declares - without running or reading the stylesheet by hand.</i></p>
+				</figcaption>
+			</figure>
 			<h3>Try it</h3>
 			<p>The extension is free. Install it from the
 				<a href="https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath">Visual Studio Code Marketplace</a>,
