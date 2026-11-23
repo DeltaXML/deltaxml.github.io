@@ -16,6 +16,9 @@
 				documentation for the debug toolbar, views and keyboard shortcuts.</p>
 			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
 				<a href="code-diagnostics.html">Print Debugging</a>.</p>
+			<p>AI assistants can use the debugger too: with the <a href="ai-assistants.html#mcp">MCP server</a>, an
+				assistant can read the variables in your paused debug session, see which instruction wrote a line of
+				output, and run a stylesheet with logpoints.</p>
 			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
 				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Debugging with SaxonJS or
 				SaxonC isn't supported. For XPath 4.0 syntax in an XSLT 4.0 stylesheet, Saxon-PE or Saxon-EE is
