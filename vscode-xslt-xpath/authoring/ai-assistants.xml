@@ -144,7 +144,7 @@
 							the packages for <code>-lib</code> and the Saxon settings of the stylesheet's task - and write to a folder in the
 							temporary files, not the project. The result also gives a command that summarises the test results as text - the
 							numbers passed, failed and pending, and each failure with what was expected and what the test gave - as the run
-							exits with 0 even when tests fail. It lists the file's scenarios. Like <code>run_configuration</code>, it runs
+							exits with 0 even when tests fail - and one command that runs the steps, then the summary. It lists the file's scenarios. Like <code>run_configuration</code>, it runs
 							nothing: the assistant runs the commands.</td>
 					</tr>
 					<tr>
@@ -163,7 +163,9 @@
 							function it's in - with its match, name and mode - and the input node it was written for, as an XPath for the input file,
 							with its line. It reads the output of your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong>
 							with SaxonJ, as the debugger's output view maps it (<strong>Go to XSLT Source</strong>, <strong>Go to XSLT Input</strong>),
-							so run the stylesheet in VS Code first. Only XML output is mapped. It runs nothing.</td>
+							and when there's no run yet, or the stylesheet has changed since, it asks you whether the extension should run it: a notification
+							with <strong>Run Without Debugging</strong>, <strong>Always Run for This Workspace</strong> or <strong>Not Now</strong> - the tool waits
+							for the run (see <code>XSLT.mcp.runForAssistant</code>). Only XML output is mapped.</td>
 					</tr>
 					<tr>
 						<td><code>input_rules</code></td>
@@ -171,15 +173,18 @@
 							your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong> with SaxonJ: the template rules, with their match,
 							mode and priority, the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code> instructions, and the
 							built-in rules where no template matched, as the input file's hover shows them. For a whole file: how many elements each rule
-							processed, and the elements left to built-in rules. It runs nothing.</td>
+							processed, and the elements left to built-in rules. Like <code>output_origin</code>, it asks you for a run when there's none of
+							that input file, or the stylesheet or input has changed since.</td>
 					</tr>
 					<tr>
 						<td><code>trace_configuration</code></td>
 						<td>For a stylesheet: the command that runs it as Quick Run does, with logpoints and no VS Code - the debugger's own adapter, run
 							from the command line. At each logpoint the assistant chooses, as the stylesheet runs, it prints the local variables (or a message
 							with <code>{XPath}</code> parts), in the debugger's notation, with <code>xsl:message</code> output and errors in between, then how many
-							times each logpoint was reached. Nothing pauses. Conditions and a limit on the messages shown are options. It runs nothing: the
-							assistant runs the command.</td>
+							times each logpoint was reached. Nothing pauses. Conditions and a limit on the messages shown are options, and
+							<code>--rules</code> adds what processed each input file's elements - the summary <code>input_rules</code> gives from your
+							run - so an assistant can find an element no template matched without a run of yours. It runs nothing: the assistant runs
+							the command.</td>
 					</tr>
 					<tr>
 						<td><code>debug_status</code>, <code>debug_evaluate</code></td>
@@ -249,7 +254,7 @@
 				absolute path can check any file. What protects your files is the token and the local-only connection, described
 				below.</aside>
 			<h4 id="mcp-skill">Skills</h4>
-			<p>The extension has three <em>skills</em>: sets of instructions an assistant loads when a task needs them. They tell the
+			<p>The extension has four <em>skills</em>: sets of instructions an assistant loads when a task needs them. They tell the
 				assistant how to use the tools above together:</p>
 			<ul>
 				<li><code>xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
@@ -261,6 +266,11 @@
 					command from <code>run_configuration</code>, rather than a Saxon command of its own; and the habits that avoid
 					common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath in an attribute, and a global
 					variable that uses the context item, which the linter can't report.</li>
+				<li><code>xslt-debugging</code>, for finding why a stylesheet's output is wrong or a run is slow: find the instruction and
+					template behind wrong output (<code>output_origin</code>) and what processed an input element, or left it to the built-in
+					rules (<code>input_rules</code>); see values inside templates and functions with logpoints (<code>trace_configuration</code>)
+					or in your paused debug session (<code>debug_status</code>, <code>debug_evaluate</code>); and profile a slow stylesheet
+					(<code>profile_configuration</code>), reading the times by net time.</li>
 				<li><code>xspec-testing</code>, for <a href="xspec.html">XSpec tests</a>: write scenarios for a function, a named template or
 					a template rule, with <code>select</code> as the expected value and <code>test</code> for a condition on
 					<code>$x:result</code>; test a package with <code>run-as="external"</code> or an <code>x:helper</code>; run the tests
@@ -289,7 +299,8 @@
 					projects, as they only apply where the server is connected. They are kept up to date with the extension: each time
 					the server starts, a copy the extension installed is replaced by the new version. A copy you have edited, or a
 					skill of that name that came from elsewhere, is left as it is - to keep your changes, edit a copy under another
-					name. A skill that a later version of the extension adds is installed when you run the set-up command again.</li>
+					name. A skill that a later version of the extension adds is installed the first time the server starts after the update - a skill
+					you have deleted isn't installed again; the set-up command installs every skill.</li>
 				<li><strong>Other assistants</strong> - those that support skills over MCP get them from the server in the same way;
 					the others get the tools without the skills.</li>
 			</ul>
