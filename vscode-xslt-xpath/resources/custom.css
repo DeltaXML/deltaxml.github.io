@@ -235,6 +235,22 @@ aside {
   padding: 10px 8px 0px 20px;
 }
 
+/* the blog: the link to the guide in its top bar, and a post's date and footer */
+.topbar a.guide-link {
+  color: #aaeaaa;
+}
+
+.post-date {
+  margin-bottom: 14px;
+  color: #6b6b6b;
+}
+
+.post-footer {
+  margin-top: 30px;
+  padding-top: 14px;
+  border-top: 1px solid #c8c8c8;
+}
+
 /* the release the guide describes, after the install count in the top bar */
 .release-version {
   margin-left: 16px;

@@ -16,12 +16,8 @@
        each page's content is authoring/<page>.xml, and the page is written to <page>.html in the site folder -->
   <xsl:variable name="siteDir" as="xs:string" select="resolve-uri('../', static-base-uri())"/>
   <xsl:variable name="indexTitle" as="xs:string" select="normalize-space(/html/head/title)"/>
-  <!-- the guide's public URL, for each page's canonical link and Open Graph tags - also the base URL in xsl/make-sitemap.sh -->
-  <xsl:variable name="siteUrl" as="xs:string" select="'https://deltaxml.github.io/vscode-xslt-xpath/'"/>
-  <!-- the extension release the guide describes (as package.json's version, without the patch number): shown in each
-       page's top bar and on the all-pages cover, and given in the structured data and llms.txt - the one place to
-       change for a new release -->
-  <xsl:variable name="releaseVersion" as="xs:string" select="'2.2'"/>
+  <!-- the site's addresses, the release the guide describes, and blog post details: shared with create-blog.xsl -->
+  <xsl:include href="common.xsl"/>
 
   <xsl:template match="/">
     <xsl:apply-templates/>
@@ -116,6 +112,15 @@
           <xsl:sequence select="'- [' || $title || '](' || $siteUrl || @href[. ne 'index.html'] || ')' || (': ' || $description)[$description ne '']"/>
         </xsl:for-each>
       </xsl:for-each-group>
+      <!-- the blog's posts, newest first, as listed in authoring/blog/blog-layout.xml -->
+      <xsl:variable name="blogLayout" as="document-node()?" select="doc(resolve-uri('authoring/blog/blog-layout.xml', $siteDir))[exists(.//nav//a)]"/>
+      <xsl:if test="exists($blogLayout)">
+        <xsl:sequence select="'', '## ' || $blogTitle, ''"/>
+        <xsl:for-each select="$blogLayout//nav//li/a[@href ne 'index.html']">
+          <xsl:variable name="post" as="document-node()" select="doc(resolve-uri('authoring/blog/' || substring-before(@href, '.html') || '.xml', $siteDir))"/>
+          <xsl:sequence select="'- [' || f:post-title($post) || '](' || $blogUrl || @href || ')' || (': ' || f:post-description($post))[f:post-description($post) ne '']"/>
+        </xsl:for-each>
+      </xsl:if>
     </xsl:variable>
     <xsl:result-document href="{resolve-uri('../llms.txt', $siteDir)}" method="text" encoding="UTF-8">
       <xsl:text># XSLT and XPath for Visual Studio Code&#10;&#10;</xsl:text>
@@ -292,8 +297,7 @@
     <xsl:param name="title" as="xs:string"/>
     <xsl:param name="description" as="xs:string"/>
     <xsl:param name="url" as="xs:string"/>
-    <xsl:variable name="publisher" as="map(*)" select="map {
-      '@type': 'Organization', 'name': 'DeltaXignia', 'url': 'https://www.deltaxml.com/' }"/>
+    <xsl:variable name="publisher" as="map(*)" select="f:publisher()"/>
     <xsl:variable name="data" as="map(*)" select="
       if ($filePart eq 'index.html') then map {
         '@context': 'https://schema.org',

@@ -46,3 +46,7 @@ The pages below are the extension's user guide. The whole guide is also availabl
 - [XPath 4.0 Records and Enums in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-records.html): XPath 4.0 adds record types, for maps with a known set of fields, and enumeration types, for strings with a known set of values.
 - [XSLT 4.0 JSON and JNodes in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-jnodes.html): XPath 4.0 path expressions can navigate JSON - maps and arrays - as they do XML.
 - [XSLT 4.0 Code Documentation with xsl:note in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-notes.html): XSLT 4.0 adds the xsl:note element, for documentation within a stylesheet.
+
+## The XSLT/XPath Blog
+
+- [An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html): A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests and Schematron - for developers and their AI assistants, built on Visual Studio Code.
