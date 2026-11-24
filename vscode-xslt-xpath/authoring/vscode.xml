@@ -1,4 +1,9 @@
 <html lang="en">
+	<head>
+		<title>Using VS Code for XSLT and XPath Development</title>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Visual Studio Code for XSLT developers: the user interface, the Command Palette, keyboard shortcuts, settings, and installing the XSLT/XPath extension."/>
+	</head>
     <div class="main">
         <div class="two-thirds column">
             <p>

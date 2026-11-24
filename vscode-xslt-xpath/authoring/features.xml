@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT/XPath Extension for VS Code: Features</title>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Features of the XSLT/XPath extension for VS Code: XSLT 4.0, checks that understand XPath, a debugger that steps into XPath, XSpec, Schematron and profiling."/>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">
-			<p>The extension's features at a glance, grouped by task. Each one links to the part of this guide that
-				describes it.</p>
-
+			<p>The extension's features, grouped by task, each linking to the part of this guide that describes it. Those
+				marked <span class="notable-key">★</span> are rarely found in other XML development environments.</p>			
 			<div class="feature-cards">
 
 				<section class="feature-card">
@@ -15,11 +19,11 @@
 					<h3 id="languages">XSLT and XPath languages</h3>
 					<ul>
 						<li><a href="xslt30.html">XSLT 3.0</a> and XPath 3.1</li>
-						<li><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0, as implemented in Saxon 13</li>
-						<li>Advanced <a href="xslt-packages.html">XSLT 3.0 package</a> features</li>
-						<li>SaxonJS interactive extensions (IXSL)</li>
-						<li><a href="editing-xslt.html#highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
+						<li class="notable"><a href="xslt40.html">XSLT 4.0</a> and XPath 4.0 - as in Saxon 13</li>
+						<li class="notable"><a href="xspec.html">XSpec</a> testing and coverage</li>
+						<li class="notable"><a href="schematron.html">Schematron</a> with debugging</li>
 						<li><a href="editing.html">XML</a> editing, formatting and navigation</li>
+						<li><a href="xml-catalogs.html">XML catalogs</a> and <a href="xslt-packages.html#workspace-packages">package indexing</a> for imports</li>
 					</ul>
 				</section>
 
@@ -30,12 +34,12 @@
 					</svg>
 					<h3 id="xslt40">XSLT 4.0</h3>
 					<ul>
-						<li><a href="xslt40-records.html">Record and enum types</a>, with type-aware checks</li>
+						<li class="notable"><a href="xslt40-records.html">Record and enum types</a>, with type-aware checks</li>
 						<li>Named item types: <code>xsl:item-type</code></li>
 						<li><a href="xslt40-records.html#switch"><code>xsl:switch</code></a>, with quick fixes for missing cases</li>
 						<li>Keyword arguments and optional parameters</li>
 						<li>Functions in no namespace</li>
-						<li><a href="xslt40-jnodes.html">Path expressions on JSON</a> (JNodes)</li>
+						<li class="notable"><a href="xslt40-jnodes.html">Path expressions on JSON</a> (JNodes)</li>
 					</ul>
 				</section>
 
@@ -46,7 +50,7 @@
 					</svg>
 					<h3 id="editing">Editing</h3>
 					<ul>
-						<li><a href="editing-xslt.html#intellisense">Context-aware auto-completion</a>, including node names from
+						<li class="notable"><a href="editing-xslt.html#intellisense">Context-aware auto-completion</a>, including node names from
 							the XML context file</li>
 						<li><a href="editing-xslt.html#hover">Signature help and hover help</a></li>
 						<li><a href="editing-xslt.html#xslt-instruction-snippets">Snippets</a>, including new stylesheets for 3.0
@@ -65,13 +69,11 @@
 					<h3 id="linter">Linter</h3>
 					<ul>
 						<li><a href="editing-xslt.html#checking">XPath syntax and XSLT instructions</a>, checked as you type</li>
-						<li>Types, records, enums and function arguments</li>
+						<li class="notable">Types, records, enums and function arguments</li>
 						<li><a href="editing-xslt.html#unused-variables">Unused XSLT and XPath variables or parameters</a></li>
 						<li>References across imported modules</li>
-						<li><a href="editing-xslt.html#compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
-							Problems view</li>
 						<li><a href="editing-xslt.html#quick-fixes">Quick fixes</a> for common problems</li>
-						<li><a href="ai-assistants.html">MCP server</a> for AI assistants (experimental)</li>
+						<li class="notable"><a href="ai-assistants.html">MCP server</a> lint tools for AI assistants</li>
 					</ul>
 				</section>
 
@@ -85,15 +87,14 @@
 						<li><a href="navigation.html#peek-goto-definition">Go to (or peek) definition</a>, and
 							<a href="navigation.html#goto-peek-references-find-all-references">find references</a></li>
 						<li><a href="navigation.html#call-hierarchy">Call hierarchy</a> of functions and templates</li>
-						<li><a href="xslt40-records.html#hover-and-navigation">Go to the declarations of record fields</a></li>
+						<li class="notable"><a href="xslt40-records.html#hover-and-navigation">Go to the declarations of record fields</a></li>
 						<li><a href="navigation.html#outline-view">Outline</a>,
 							<a href="navigation.html#xslt-xml-breadcrumbs">breadcrumbs</a> and
 							<a href="navigation.html#goto-symbol">Go to Symbol</a></li>
 						<li><a href="navigation.html#file-links">Links</a> for <code>xsl:import</code> and
 							<code>xsl:include</code></li>
-						<li><a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>, with
-							<a href="editing-xslt.html#inferred-imports">inferred top-level stylesheets</a></li>
-						<li><a href="xpath-queries.html">Find nodes with XPath</a> in XML files</li>
+						<li class="notable"><a href="editing-xslt.html#inferred-imports">Inferred top-level modules</a>,
+							with <a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a></li>
 					</ul>
 				</section>
 
@@ -107,7 +108,7 @@
 						<li><a href="editing-xslt.html#renaming">Safe symbol renaming</a></li>
 						<li><a href="refactoring-xslt.html">Extract <code>xsl:function</code> or <code>xsl:template</code></a></li>
 						<li><a href="refactoring-xslt.html">Extract <code>xsl:variable</code></a> from an XPath expression</li>
-						<li><a href="xslt40-records.html#record-refactoring">Extract a record type</a> from a map</li>
+						<li class="notable"><a href="xslt-packages.html#converting">Conversion</a> of a library to an XSLT package</li>
 						<li><a href="editing-xslt.html#refactoring"><strong>Wrap with...</strong></a> an instruction
 							(<span class="shortcut">⌥⇧W</span> / <span class="shortcut">Alt+Shift+W</span>)</li>
 						<li><a href="xslt40-notes.html#adding">Add a documentation note</a></li>
@@ -125,11 +126,9 @@
 							<span class="shortcut">Ctrl+Alt+R</span>)</li>
 						<li><a href="run-xslt.html">Tasks</a> for <a href="run-xslt.html#saxonj-tasks">SaxonJ</a>,
 							<a href="run-xslt.html#saxonjs-tasks">SaxonJS</a> and <a href="run-xslt.html#saxonc-tasks">SaxonC</a></li>
-						<li><a href="quick-run.html#required-parameters">Required <code>xsl:param</code> values</a> asked for when
-							a task runs</li>
-						<li><code>xsl:param</code> values controlled by tasks</li>
+						<li><code>xsl:param</code> values set by tasks or user prompts</li>
 						<li><a href="xml-catalogs.html">XML catalogs</a> for <code>xsl:import</code> URIs</li>
-						<li><a href="xslt-packages.html">XSLT Packages</a> - no configuration needed</li>
+						<li class="notable">Configuration free <a href="xslt-packages.html">XSLT Packages</a></li>
 						<li><a href="run-xslt.html#user-input-for-file-selection-within-a-task">File pickers</a> for task
 							inputs</li>
 						<li><a href="run-xslt.html#java-extension-functions">Java extension functions</a></li>
@@ -141,16 +140,15 @@
 						<rect x="8" y="8" width="8" height="12" rx="4"/>
 						<path d="M9.5 8a2.5 2.5 0 0 1 5 0M12 12v8M8 13H4M20 13h-4M8 17l-3 2M16 17l3 2M8.5 10L5 7.5M15.5 10L19 7.5"/>
 					</svg>
-					<h3 id="debugging">Debugging</h3>
+					<h3 id="debugging">Debugging and Profiling</h3>
 					<ul>
-						<li><a href="debugger.html">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
-						<li><a href="debugger.html#xpath">Stepping through multi-line XPath</a></li>
+						<li class="notable">Debug from <a href="debugger.html">XSLT</a>, <a href="schematron.html#debugging">Schematron</a> and <a href="xspec.html#debugging">XSpec</a></li>
+						<li class="notable"><a href="debugger.html#xpath">Stepping through multi-line XPath</a></li>
+						<li class="notable"><a href="debugger.html#step-back">Step Back and Reverse Continue</a></li>
 						<li><a href="debugger.html#conditional">Conditional breakpoints and hit counts</a></li>
 						<li><a href="debugger.html#logpoints">Logpoints</a>, with formatted and colored values</li>
-						<li><a href="debugger.html#variables">Views of the locals, globals, context and output</a></li>
-						<li><a href="debugger.html#evaluating">Watch expressions, hovers and the Debug Console</a></li>
-						<li><a href="debugger.html#output">The output so far</a>, mapped back to the XSLT that wrote it</li>
-						<li><a href="code-diagnostics.html">Formatted and colored print debugging</a></li>
+						<li><a href="debugger.html#input-nodes">Inputs</a> and <a href="debugger.html#output">Outputs</a> map to the XSLT</li>
+						<li class="notable"><a href="profiler.html">Profiler</a> timings in the editor and Timeline*</li>
 					</ul>
 				</section>
 
@@ -162,13 +160,11 @@
 					<h3 id="xspec">Testing with XSpec</h3>
 					<ul>
 						<li><a href="xspec.html#running">Test Explorer</a> for running tests and comparing output</li>
-						<li><a href="xspec.html#debugging">Debug tests</a> in the XSpec file or from the XSLT source</li>
-						<li>Run <a href="xspec.html#schematron">Schematron tests</a>, compiled with SchXslt2</li>
-						<li><a href="xspec.html#creating">Generate tests</a> for a function or template</li>
+						<li>Debug <a href="xspec.html#debugging">XSLT</a> or <a href="xspec.html#schematron">Schematron</a> from test or source</li>
+						<li><a href="xspec.html#creating">Generate tests</a></li>
 						<li><a href="xspec.html#editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
-						<li><a href="xspec.html#coverage">Test coverage</a> percentages and line margin highlights</li>
-						<li><a href="xspec.html#navigation">Navigate</a> between tests and the underlying code</li>
-						<li><a href="xspec.html#stylesheet-under-test">Checks and assistance</a> for component calls</li>
+						<li class="notable"><a href="xspec.html#coverage">Test coverage</a> percentages and line margin highlights</li>
+						<li><a href="xspec.html#times">Timings</a> in Test Explorer and <a href="xspec.html#timeline">Timeline</a>*</li>
 					</ul>
 				</section>
 
@@ -179,7 +175,7 @@
 					</svg>
 					<h3 id="code-documentation">Code documentation</h3>
 					<ul>
-						<li><a href="xslt40-notes.html#writing"><code>xsl:note</code></a> with
+						<li class="notable"><a href="xslt40-notes.html#writing"><code>xsl:note</code></a> with
 							<a href="xslt40-notes.html#markdown">Markdown</a> and <a href="xslt40-notes.html#tags">xqDoc-style
 							tags</a></li>
 						<li><a href="xslt40-notes.html#where-shown">Shown in hover and signature help</a></li>
@@ -192,6 +188,8 @@
 					</ul>
 				</section>
 			</div>
+
+			<p class="feature-note">* Timings need Saxon-PE or Saxon-EE. Everything else works with the free Saxon-HE.</p>
 		</div>
 
 	</div>

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT and XPath Editing in VS Code: Linting and Completion</title>
+	</head>
 	<div class="main">
 		
 		<div class="two-thirds column">
@@ -98,7 +101,8 @@
 		<p>A parent stylesheet opened recently in Visual Studio Code is used first. Otherwise, the parent is found from the workspace's
 			XSLT files, which are scanned in the background the first time they're needed, so the parent doesn't have to be opened
 			first. The scan only reads the <code>href</code> attributes of <code>xsl:import</code> and <code>xsl:include</code>
-			instructions, and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
+			instructions - and their <code>_href</code> attributes, where they can be resolved (see
+			<a href="#shadow-href">below</a>) - and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
 			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
 			setting.
 		</p>
@@ -110,6 +114,18 @@
 			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
 			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
 		</p>
+		<h4 id="shadow-href">Imports with a _href shadow attribute</h4>
+		<p>An <code>xsl:import</code> or <code>xsl:include</code> can have its location set when the stylesheet is compiled,
+			with a <code>_href</code> shadow attribute that uses static parameters. The module it refers to is used, as for
+			<code>href</code>, when each expression in <code>_href</code> is a static parameter or variable of the same module
+			with a string literal value:</p>
+		<code class="block">&lt;xsl:param name="dir" static="yes" select="'lib'"/&gt;
+&lt;xsl:import _href="{$dir}/common.xsl"/&gt;</code>
+		<p>The module is found with the default value, here <code>lib/common.xsl</code>. A different value given when the
+			stylesheet is compiled isn't known to the editor.</p>
+		<p>Any other <code>_href</code> - for example, one with a function call, or a parameter that isn't static - can't be
+			resolved. Then a template, function or other declaration that isn't found is reported as a warning, not an error,
+			as it may be declared in the module that's imported or included.</p>
 		<h4 id="the-xslt-imports-view">The XSLT Imports view</h4>
 		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
 			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
@@ -354,6 +370,28 @@
 					<code>use-when="function-available('name')"</code>.</li>
 			</ul>
 		</details>
+		<h4 id="check-files">Checking files that aren't open</h4>
+		<p>The linter checks the files open in editors. A change in one file can break others that aren't open - e.g.
+			renaming a function, or making a <a href="xslt-packages.html#check-users">package component private</a>. To see
+			those problems without opening each file, check the files that aren't open:</p>
+		<ul>
+			<li><strong>XSLT: Check Problems in Workspace</strong>, from the Command Palette - the XSLT and XSpec files in
+				every workspace folder</li>
+			<li><strong>XSLT: Check Problems in Folder</strong>, from a folder's context menu in the Explorer - the files in
+				that folder and its subfolders</li>
+			<li><strong>XSLT: Check Modules Using Package</strong>, from the Command Palette with an
+				<code>xsl:package</code> module open, or the <strong>used by … modules - check for problems</strong> CodeLens
+				above its <code>xsl:package</code> - the modules that use the package, and those they import or include</li>
+		</ul>
+		<p>The problems are shown in the Problems view, from <em>dx.xslt-xpath (workspace check)</em>. Only errors are shown, unless the
+			<a href="settings.html#workspace-check"><code>XSLT.workspaceCheck.includeWarnings</code></a> setting is on.
+			Files in <code>node_modules</code>, hidden folders, XSpec's generated test runners and the
+			<code>files.exclude</code> setting's folders aren't checked. A progress notification shows the check, which can
+			be cancelled - with more than 1000 files, you're asked first.</p>
+		<p>A file's problems from a check are removed when it's opened in an editor - the editor's checks then show its
+			problems - and when it's changed or deleted outside VS Code, as they may no longer apply. Checking a folder again
+			replaces its results. To remove them all, use <strong>Clear</strong> in the notification at the end of a
+			check, or <strong>XSLT: Clear Workspace Check Problems</strong>.</p>
 		<h4 id="mode-checks">Checks on modes</h4>
 		<p>A large transform may run in many modes, and a template rule applied in the wrong mode fails silently. The linter
 			warns about:</p>
@@ -368,6 +406,14 @@
 				rule's modes include the default mode - the unnamed mode, or the mode named by the innermost
 				<code>[xsl:]default-mode</code> attribute - or <code>#all</code>, nor for a template rule within an XSLT 4.0
 				<code>xsl:mode</code>, where the enclosing mode is the default.</li>
+			<li><strong>A mode that nothing applies</strong> (a hint) - a template rule's mode that no
+				<code>xsl:apply-templates</code> in the stylesheet's modules applies, and no <code>default-mode</code> names: often a mode
+				added to a template rule but not to the <code>xsl:apply-templates</code> meant to reach it, so the built-in rules run
+				instead. Not for a mode with a template rule for the document node (<code>match="/"</code>), which is the initial mode
+				a run starts in, as a rule, nor for a package's public or final mode - by its <code>xsl:mode</code>'s
+				<code>visibility</code>, or the package's <code>xsl:expose</code> - which the stylesheets that use the package may apply;
+				a package's private mode is checked, as only the package can apply it. It may still be the initial mode, set when the
+				stylesheet is run - hence a hint, not a warning.</li>
 			<li>XSLT 4.0: an <code>xsl:mode</code> with enclosed template rules but no <code>name</code>, and an enclosed
 				template rule with a <code>mode</code> or <code>name</code> attribute, or without a <code>match</code>.</li>
 		</ul>

@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT Debugger for VS Code</title>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Step-through XSLT debugger for VS Code with SaxonJ: breakpoints and stepping inside multi-line XPath, step back, variables, and output mapped to its XSLT."/>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">
@@ -11,6 +16,9 @@
 				documentation for the debug toolbar, views and keyboard shortcuts.</p>
 			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
 				<a href="code-diagnostics.html">Print Debugging</a>.</p>
+			<p>AI assistants can use the debugger too: with the <a href="ai-assistants.html#mcp">MCP server</a>, an
+				assistant can read the variables in your paused debug session, see which instruction wrote a line of
+				output, and run a stylesheet with logpoints.</p>
 			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
 				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Debugging with SaxonJS or
 				SaxonC isn't supported. For XPath 4.0 syntax in an XSLT 4.0 stylesheet, Saxon-PE or Saxon-EE is
@@ -73,11 +81,15 @@
 				<a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug configuration</a>
 				in the VS Code documentation for more on <code>launch.json</code>.</p>
 			<aside>An XSpec test can be debugged from the Test Explorer, with breakpoints in the stylesheet under test
-				and in the XSpec file itself - see <a href="xspec.html#debugging">Debugging a test</a>.</aside>
+				and in the XSpec file itself - see <a href="xspec.html#debugging">Debugging a test</a>. A Schematron
+				schema can be debugged too, on its own rules and assertions - see
+				<a href="schematron.html#debugging">Debugging a schema</a>.</aside>
 
 			<h3 id="breakpoints">Breakpoints</h3>
 			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
-				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
+				breakpoint anywhere in a multi-line start tag is moved to the tag's first line. A breakpoint in an XML
+				comment is moved to the first instruction after the comment, if there's one before the end of the
+				element the comment is in.</p>
 			<p>Breakpoints can also be set inside a multi-line XPath expression - see
 				<a href="#xpath">Stepping through XPath</a>.</p>
 			<h4 id="conditional">Conditional breakpoints and hit counts</h4>
@@ -399,6 +411,12 @@
 				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
 					written to the Debug Console.</li>
 			</ul>
+			<figure>
+				<img src="resources/debug-output-mapping.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">Trace XSLT output back to the XSLT that created it - <strong>Peek Definition</strong> shows the instruction.</i></p>
+				</figcaption>
+			</figure>
 			<p>XML output can be traced back to the stylesheet. With the cursor on a line of the output, a hint at the
 				end of the line - e.g. <code>→ report.xsl:4</code> - shows where that part of the output was written.
 				To go there, use <strong>Go to XSLT Source</strong> on the output's context menu,
@@ -407,6 +425,13 @@
 				<code>ctrlCmd</code>. The stylesheet is shown in another editor group from the output's. For HTML, JSON
 				or text output, <strong>Go to XSLT Source</strong> reports that only XML output can be traced back to
 				the stylesheet.</p>
+			<p>XML output can be traced back to the input too: the input node that was the context item when that part
+				of the output was written. When it was a node of an input file - the XML source, or a document read with
+				<code>doc()</code> - the hint shows it after the stylesheet's location, e.g.
+				<code>→ report.xsl:4 · input: order, orders.xml:12</code>, and <strong>Go to XSLT Input</strong>, on the
+				output's context menu, goes to its element's start tag - for an attribute or text node, its element's.
+				Not for a context item the stylesheet constructed, e.g. in a temporary tree, or one that isn't a node.
+				From the source XML, you can go on to <a href="#input-nodes">all the templates that processed it</a>.</p>
 			<p>When the session ends, a notification offers to <strong>Open</strong> the result file - or, for HTML,
 				to <strong>Open in Browser</strong>.</p>
 			<h4 id="saxon-errors">Saxon errors</h4>
@@ -416,6 +441,53 @@
 			<p>When the transform fails, the notification at the end of the session gives Saxon's reason - for
 				example, that the XML source file doesn't exist - or, for a dynamic error, its message, code and line.
 				For a stylesheet with static errors, which can't be debugged, it gives the first of them.</p>
+
+			<h3 id="input-nodes">From the source XML to the XSLT instruction</h3>
+			<figure>
+				<img src="resources/debug-xslt-mapping.png" class="scale-with-grid" />
+				<figcaption>
+					<p><i style="font-style: italic">The margin highlights processed Source XML elements - <strong>Peek Definition</strong> shows the instruction.</i></p>
+				</figcaption>
+			</figure>
+			<p>When a debug session ends - including debugger runs without pausing using <strong>Debug: Start Without Debugging</strong>
+				(<span class="shortcut">Ctrl+F5</span>, or <strong>Run › Run Without Debugging</strong>)
+				- each node of the input files is linked to the
+				template rules that processed it: the one <code>xsl:apply-templates</code> chose, those
+				<code>xsl:next-match</code> or <code>xsl:apply-imports</code> went on to, or the built-in rules, when no
+				template matched it - and the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and
+				<code>xsl:iterate</code> instructions that processed it. For <code>xsl:for-each-group</code>, that's
+				each member of each group, not only the first: a node in two groups is counted twice.</p>
+			<ul>
+				<li><strong>Markers</strong> - a bar in the gutter of the input file, and in its scrollbar - show the elements
+					there's something for: green for those a template rule or an instruction processed (or whose
+					attributes or text it did), amber for those only the built-in rules processed - no template matched
+					them. Elements with no marker weren't processed by either, e.g. only read by an XPath expression. When
+					debugging a <a href="schematron.html#debugging">Schematron schema</a>, the bar is blue, not green: a rule
+					checked the element - which isn't that it's valid, as an assertion may have failed. The problems say
+					that.</li>
+				<li><strong>Hover</strong> over an element's start tag in the input file: the templates that processed
+					it, and its attributes and text - e.g. <code>@product: match="@product" mode="attr"</code> - with the
+					number of times, if more than once, and a link to each template. Whitespace between elements that only
+					the built-in rules processed isn't listed.</li>
+				<li><strong>Go to Definition</strong> (<span class="shortcut">F12</span>) on the start tag goes to those
+					templates.</li>
+				<li>Above each template rule, <code>xsl:for-each</code>, <code>xsl:for-each-group</code> or
+					<code>xsl:iterate</code> in the stylesheet: the number of nodes it processed - click it for the
+					list.</li>
+			</ul>
+			<p>Nodes that only an XPath expression reads aren't included: e.g. the steps of a path such as
+				<code>orders/order/line</code>, the items of <code>for $line in $lines return ...</code> or
+				<code>$lines ! ...</code>, or a node passed to a function.</p>
+			<p>It's for the last run only (<strong>XSLT: Clear Input Mapping</strong> removes it), and for documents read from files - the XML source, and those read with
+				<code>doc()</code> or <code>document()</code> - not trees the stylesheet constructs. The input file can
+				be edited, or formatted, after the run: an element is found again by its position among the file's
+				elements - but not once elements are added or removed before it. An input file changed or replaced
+				outside VS Code, e.g. by a script or a git checkout, is taken to be another file: what was recorded
+				for it is removed.</p>
+			<p>Recording this, and the input each part of the output was written for, costs little time - with an input
+				of 400,000 nodes, about half a second more - but memory and data in proportion to the input and output. To
+				turn both off, e.g. for very large inputs, set <code>XSLT.debug.mapInputNodes</code> to
+				<code>false</code>.</p>
 
 			<h3 id="demo">Sample: stepping through XPath</h3>
 			<p>The <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/sample/debugger-demo">debugger-demo</a>

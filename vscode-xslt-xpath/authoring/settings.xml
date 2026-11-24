@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT/XPath Extension Settings for VS Code</title>
+		<meta name="description" content="How to set up user and workspace settings for the XSLT/XPath extension in Visual Studio Code, with a table of every extension setting, including Saxon, catalogs, packages and the MCP server."/>
+	</head>
   <div class="main">
 
     <div class="two-thirds column">
@@ -48,6 +52,13 @@
             <td>The processor <a href="quick-run.html">Quick Run</a> uses: <code>"xslt"</code> (SaxonJ),
               <code>"xslt-js"</code> (SaxonJS) or <code>"xslt-c"</code> (SaxonC). Switching processor in Quick Run
               saves the choice here.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr/>tasks.<wbr/>profileRuns</code></td>
+            <td><code>1</code></td>
+            <td>How many times <a href="profiler.html">Profile Stylesheet</a> runs the transform. With more than one,
+              the first is a warm-up run, left out, and the Profile view shows the average of the others - see
+              <a href="profiler.html#runs">Warm-up runs</a>.</td>
           </tr>
           <tr>
             <td><code>XSLT.<wbr/>tasks.<wbr/>java.<wbr/>enabled</code></td>
@@ -120,6 +131,13 @@
             <td>-</td>
             <td>The files for <code>xsl:use-package</code> names - see <a href="#xslt-packages">XSLT packages</a>.</td>
           </tr>
+          <tr id="workspace-check">
+            <td><code>XSLT.<wbr/>workspaceCheck.<wbr/>includeWarnings</code></td>
+            <td><code>false</code></td>
+            <td>Show warnings too, not only errors, for the files that <strong>Check Problems in Workspace</strong>,
+              <strong>Check Problems in Folder</strong> and <strong>Check Modules Using Package</strong> check - see
+              <a href="editing-xslt.html#check-files">Checking files that aren't open</a>.</td>
+          </tr>
           <tr>
             <td><code>XSLT.<wbr/>resources.<wbr/>inferParentFromWorkspace</code></td>
             <td><code>true</code></td>
@@ -154,6 +172,13 @@
             <td>Warn in every stylesheet before XSLT 4.0 about union patterns whose branches have different default
               priorities - not only where XSLT 4.0's rule applies already - see
               <a href="editing-xslt.html#union-priorities">Union patterns and XSLT 4.0</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr/>schematron.<wbr/>allowExpandText</code></td>
+            <td><code>false</code></td>
+            <td>Allow text value templates in Schematron messages with <code>xsl:expand-text="yes"</code> - a
+              non-standard extension, for every Schematron file - see
+              <a href="schematron.html#text-value-templates">Text value templates in messages</a>.</td>
           </tr>
         </tbody>
       </table>
@@ -218,6 +243,29 @@
             <td><code>6745</code></td>
             <td>The port the MCP server listens at, on <code>127.0.0.1</code>. With more than one window open, the first
               one opened has the server.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr/>mcp.<wbr/>runForAssistant</code></td>
+            <td><code>ask</code></td>
+            <td>When an assistant's <code>output_origin</code> or <code>input_rules</code> needs a run of a stylesheet - there's none yet,
+              or the stylesheet or input has changed since - whether the extension runs it for the assistant, as Run Without Debugging with
+              your Quick Run task - its result written to the temporary files, without asking where, and relative
+              <code>xsl:result-document</code> outputs with it. <code>ask</code>: a notification asks you - <strong>Run Without Debugging</strong>, <strong>Always Run for
+              This Workspace</strong> or <strong>Not Now</strong>; <strong>XSLT: Ask Before Running a Stylesheet for an AI Assistant</strong>
+              asks again after <strong>Always</strong>. <code>always</code>: run without asking, in every workspace. <code>never</code>: don't
+              run it, nor ask. A user setting only.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr/>mcp.<wbr/>debugEvaluateExtensions</code></td>
+            <td><code>restricted</code></td>
+            <td>What an assistant's <code>debug_evaluate</code> expressions can call in your paused debug session.
+              <code>restricted</code>: Saxon-HE's functions only - the standard functions and the stylesheet's own - whatever edition the
+              session runs on, and not <code>transform()</code>, <code>load-xquery-module()</code> or <code>function-lookup()</code>.
+              <code>unrestricted</code>: as your Debug Console - with Saxon-PE or EE, Java methods, the EXPath file module (which can change
+              files) and <code>saxon:</code> functions too. <code>never</code>: no expressions - choose it if the stylesheet's own functions
+              have effects, or files the session can read with <code>doc()</code> or <code>unparsed-text()</code> mustn't be.
+              <code>debug_status</code> still shows the values. Your own Debug Console, Watch and logpoints aren't affected. A user setting
+              only: a workspace can't change it.</td>
           </tr>
         </tbody>
       </table>

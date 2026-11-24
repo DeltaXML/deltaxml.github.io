@@ -2,5 +2,9 @@
     "cSpell.enableFiletypes": [
         "xml"
     ],
-    "cSpell.enabled": true
+    "cSpell.enabled": true,
+    "cSpell.words": [
+        "licence",
+        "Schematron"
+    ]
 }

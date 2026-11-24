@@ -1,4 +1,4 @@
-<!DOCTYPE HTML><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>XSLT and XPath for Visual Studio Code - User Guide</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code."><meta name="author" content="Philip Fearon"><link rel="stylesheet" href="./resources/base.css"><link rel="stylesheet" href="./resources/skeleton.css"><link rel="stylesheet" href="./resources/layout.css"><link rel="stylesheet" href="./resources/custom.css"><link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"><link rel="stylesheet" href="./resources/all-pages.css"></head><body class="all-pages"><div class="all-pages-bar"><a href="index.html">Back to the guide</a><a href="vscode-xslt-xpath-guide.pdf">Download PDF</a><button type="button" onclick="window.print()">Print or save as PDF</button></div><section class="cover"><img src="../resources/tiny-white-logo.png" alt="DeltaXignia"><h1>XSLT and XPath<br>for Visual Studio Code</h1><p class="cover-subtitle">User Guide</p></section><nav class="contents"><h2>Contents</h2><ul><li class="contents-page"><a href="#index">Overview</a><ul><li><a href="#index--getting-started">Getting started</a></li><li><a href="#index--writing">Writing XSLT</a></li><li><a href="#index--reviewing">Reviewing XSLT</a></li><li><a href="#index--running">Running XSLT</a></li><li><a href="#index--debugging">Debugging XSLT</a></li><li><a href="#index--scope">Scope</a></li><li><a href="#index--edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</a></li><li><a href="#index--run-xslt-quick-start">Run XSLT - Quick Start</a></li></ul></li><li class="contents-page"><a href="#new-release">What's New</a><ul><li><a href="#new-release--release-2-1">Release 2.1</a></li><li><a href="#new-release--release-2-0">Release 2.0</a></li></ul></li><li class="contents-page"><a href="#features">Features</a><ul><li><a href="#features--languages">XSLT and XPath languages</a></li><li><a href="#features--xslt40">XSLT 4.0</a></li><li><a href="#features--editing">Editing</a></li><li><a href="#features--linter">Linter</a></li><li><a href="#features--navigation">Navigation</a></li><li><a href="#features--refactoring">Refactoring</a></li><li><a href="#features--running">Running XSLT</a></li><li><a href="#features--debugging">Debugging</a></li><li><a href="#features--xspec">Testing with XSpec</a></li><li><a href="#features--code-documentation">Code documentation</a></li></ul></li><li class="contents-page"><a href="#vscode">Using VS Code</a><ul><li><a href="#vscode--the-user-interface">The User Interface</a></li><li><a href="#vscode--the-command-palette">The Command Palette</a></li><li><a href="#vscode--opening-workspace-files">Opening Workspace Files</a></li><li><a href="#vscode--keyboard-shortcuts">Keyboard Shortcuts</a></li><li><a href="#vscode--settings">Settings</a></li><li><a href="#vscode--install-the-xslt-xpath-extension">Install the XSLT/XPath Extension</a></li><li><a href="#vscode--color-theme-extensions">Color Theme Extensions</a></li><li><a href="#vscode--viewing-html-output">Viewing HTML Output</a></li></ul></li><li class="contents-page"><a href="#settings">Settings</a><ul><li><a href="#settings--creating">Creating User and Workspace Settings</a></li><li><a href="#settings--xslt-settings">XSLT/XPath Extension Settings</a></li><li><a href="#settings--general-settings">General Settings for XSLT</a></li></ul></li><li class="contents-group">Editing</li><li class="contents-page"><a href="#editing">Editing XML</a><ul><li><a href="#editing--xml-elements">XML Elements</a></li><li><a href="#editing--auto-completion">Auto-Completion</a></li><li><a href="#editing--emmet">Emmet</a></li><li><a href="#editing--well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#editing--entities">Entities</a></li><li><a href="#editing--xmlformatting">XML Formatting</a></li><li><a href="#editing--xml-element-selection">XML Element Selection</a></li></ul></li><li class="contents-page"><a href="#editing-xslt">Editing XSLT/XPath</a><ul><li><a href="#editing-xslt--highlighting">Syntax Highlighting</a></li><li><a href="#editing-xslt--formatting">Formatting</a></li><li><a href="#editing-xslt--folding">Folding</a></li><li><a href="#editing-xslt--inferred-imports">Imports and Top-Level Stylesheets</a></li><li><a href="#editing-xslt--intellisense">IntelliSense (Auto Complete)</a></li><li><a href="#editing-xslt--bracket-matching">Bracket Matching</a></li><li><a href="#editing-xslt--renaming">Symbol Renaming</a></li><li><a href="#editing-xslt--refactoring">Code Refactoring</a></li><li><a href="#editing-xslt--checking">XSLT Linter</a></li></ul></li><li class="contents-page"><a href="#navigation">Code Navigation</a><ul><li><a href="#navigation--file-navigation">File Navigation</a></li><li><a href="#navigation--xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a></li><li><a href="#navigation--outline-view">Outline View</a></li><li><a href="#navigation--peek-goto-definition">Peek/Go to Definition</a></li><li><a href="#navigation--goto-peek-references-find-all-references">Go to (Peek) References/Find All References</a></li><li><a href="#navigation--call-hierarchy">Call Hierarchy</a></li><li><a href="#navigation--goto-symbol">Go to Symbol</a></li><li><a href="#navigation--find-nodes-with-xpath">Find Nodes with XPath</a></li><li><a href="#navigation--xslt-imports-view">XSLT Imports View</a></li></ul></li><li class="contents-page"><a href="#refactoring-xslt">Refactoring</a><ul><li><a href="#refactoring-xslt--intro">Introduction</a></li><li><a href="#refactoring-xslt--example">A Sample Refactor</a></li><li><a href="#refactoring-xslt--restrictions">Known Restrictions</a></li><li><a href="#refactoring-xslt--context-properties">Context Properties</a></li></ul></li><li class="contents-page"><a href="#xml-catalogs">XML Catalogs</a><ul><li><a href="#xml-catalogs--setup">Setting up a catalog</a></li><li><a href="#xml-catalogs--catalog-files">Catalog files</a></li><li><a href="#xml-catalogs--editing">In the editor</a></li><li><a href="#xml-catalogs--running">Running stylesheets with the catalog</a></li><li><a href="#xml-catalogs--limitations">Limitations</a></li><li><a href="#xml-catalogs--demo">Catalog demo</a></li></ul></li><li class="contents-page"><a href="#xslt-packages">XSLT Packages</a><ul><li><a href="#xslt-packages--workspace-packages">Packages in the workspace</a></li><li><a href="#xslt-packages--setting">Packages outside the workspace</a></li><li><a href="#xslt-packages--versions">Which version is used</a></li><li><a href="#xslt-packages--visibility">What a stylesheet can use from a package</a></li><li><a href="#xslt-packages--overriding">Overriding package components</a></li><li><a href="#xslt-packages--package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#xslt-packages--declared-modes">Declared modes</a></li><li><a href="#xslt-packages--hover">Hover help</a></li><li><a href="#xslt-packages--converting">Converting a library to a package</a></li><li><a href="#xslt-packages--running">Running and debugging</a></li><li><a href="#xslt-packages--not-found">A package that isn't found</a></li><li><a href="#xslt-packages--completion">Auto-completion</a></li><li><a href="#xslt-packages--navigation">Navigating to a package</a></li><li><a href="#xslt-packages--override-navigation">Navigating between overrides</a></li></ul></li><li class="contents-group">Running and Debugging</li><li class="contents-page"><a href="#quick-run">Quick Run</a><ul><li><a href="#quick-run--running-a-stylesheet">Running a stylesheet</a></li><li><a href="#quick-run--modules">Running a module that another stylesheet imports</a></li><li><a href="#quick-run--choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#quick-run--first-use-a-task-is-created-for-you">First use: a task is created for you</a></li><li><a href="#quick-run--subsequent-runs">Subsequent runs</a></li><li><a href="#quick-run--initial-template">Starting from xsl:initial-template</a></li><li><a href="#quick-run--running-from-an-xml-file">Running from an XML file</a></li><li><a href="#quick-run--context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#quick-run--the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></li><li class="contents-page"><a href="#run-xslt">Tasks</a><ul><li><a href="#run-xslt--saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#run-xslt--saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#run-xslt--saxonc-tasks">SaxonC Tasks</a></li><li><a href="#run-xslt--to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#run-xslt--references">Variable References in Tasks</a></li><li><a href="#run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#run-xslt--configuring-more-tasks">Configuring more tasks</a></li><li><a href="#run-xslt--catalogs">XML catalogs</a></li><li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li><li><a href="#run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></li><li class="contents-page"><a href="#debugger">Debugger</a><ul><li><a href="#debugger--starting">Starting a debug session</a></li><li><a href="#debugger--breakpoints">Breakpoints</a></li><li><a href="#debugger--stepping">Stepping</a></li><li><a href="#debugger--call-stack">Call stack</a></li><li><a href="#debugger--variables">Variables</a></li><li><a href="#debugger--evaluating">Watch, hover and the Debug Console</a></li><li><a href="#debugger--output">Output while debugging</a></li><li><a href="#debugger--demo">Sample: stepping through XPath</a></li><li><a href="#debugger--limitations">Limitations</a></li><li><a href="#debugger--troubleshooting">Troubleshooting</a></li></ul></li><li class="contents-page"><a href="#xspec">XSpec Tests</a><ul><li><a href="#xspec--creating">Creating a test</a></li><li><a href="#xspec--editing">Editing XSpec files</a></li><li><a href="#xspec--stylesheet-under-test">The stylesheet under test</a></li><li><a href="#xspec--navigation">Navigating between tests and the stylesheet</a></li><li><a href="#xspec--running">Running tests</a></li><li><a href="#xspec--schematron">Testing a Schematron</a></li><li><a href="#xspec--debugging">Debugging a test</a></li><li><a href="#xspec--coverage">Coverage</a></li><li><a href="#xspec--settings">Settings</a></li><li><a href="#xspec--task-settings">The stylesheet's task</a></li><li><a href="#xspec--legacy">Tests written for older XSpec</a></li></ul></li><li class="contents-page"><a href="#code-diagnostics">Print Debugging</a><ul><li><a href="#code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a></li><li><a href="#code-diagnostics--xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></li><li class="contents-group">Tools</li><li class="contents-page"><a href="#xpath-queries">Find Nodes with XPath</a><ul><li><a href="#xpath-queries--opening">Opening the query file</a></li><li><a href="#xpath-queries--writing">Writing expressions</a></li><li><a href="#xpath-queries--running">Running an expression</a></li><li><a href="#xpath-queries--results">Results</a></li><li><a href="#xpath-queries--switching">Switching between XML files</a></li><li><a href="#xpath-queries--limitations">Limitations</a></li></ul></li><li class="contents-page"><a href="#xpath-notebook">XPath Notebooks</a><ul><li><a href="#xpath-notebook--why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#xpath-notebook--quick-start">Quick Start</a></li></ul></li><li class="contents-page"><a href="#ai-assistants">AI Assistants</a><ul><li><a href="#ai-assistants--problems">Fixing problems</a></li><li><a href="#ai-assistants--mcp">The MCP server (experimental)</a></li><li><a href="#ai-assistants--notes">Documentation notes</a></li><li><a href="#ai-assistants--debugging">Debugging output</a></li><li><a href="#ai-assistants--running">Running XSLT</a></li><li><a href="#ai-assistants--agents-window">The Agents window</a></li><li><a href="#ai-assistants--limitations">Current limitations</a></li></ul></li><li class="contents-group">XSLT Language</li><li class="contents-page"><a href="#xslt30">XSLT 3.0</a><ul><li><a href="#xslt30--learning-xslt-3-0">Learning XSLT 3.0</a></li><li><a href="#xslt30--supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></li><li class="contents-page"><a href="#xslt40">XSLT 4.0</a><ul><li><a href="#xslt40--editing-xslt-4-0">Editing XSLT 4.0</a></li><li><a href="#xslt40--running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#xslt40--other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></li><li class="contents-page"><a href="#xslt40-records">Records and Enums</a><ul><li><a href="#xslt40-records--declaring">Declaring types</a></li><li><a href="#xslt40-records--building-records">Building records</a></li><li><a href="#xslt40-records--using-records">Using records</a></li><li><a href="#xslt40-records--record-refactoring">Refactoring: Extract record type</a></li><li><a href="#xslt40-records--enums">Enumeration types</a></li></ul></li><li class="contents-page"><a href="#xslt40-jnodes">JSON and JNodes</a><ul><li><a href="#xslt40-jnodes--navigating">Navigating JSON with JNodes</a></li><li><a href="#xslt40-jnodes--typed-jnodes">JNodes with a record type</a></li><li><a href="#xslt40-jnodes--debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#xslt40-jnodes--limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#xslt40-jnodes--sample">Sample: JSON Schema to record types</a></li></ul></li><li class="contents-page"><a href="#xslt40-notes">Code Documentation</a><ul><li><a href="#xslt40-notes--writing">Writing a documentation note</a></li><li><a href="#xslt40-notes--adding">Adding a note</a></li><li><a href="#xslt40-notes--where-shown">Where notes are shown</a></li><li><a href="#xslt40-notes--references">References to other declarations</a></li><li><a href="#xslt40-notes--module-notes">Module notes</a></li><li><a href="#xslt40-notes--xslt30">Notes in XSLT 3.0</a></li><li><a href="#xslt40-notes--highlighting">Highlighting Details</a></li><li><a href="#xslt40-notes--xml">Notes as XML</a></li><li><a href="#xslt40-notes--checks">Tag Checks</a></li></ul></li></ul></nav><article class="main doc-page" id="index"><h2 class="pageTitle">Overview</h2>
+<!DOCTYPE HTML><html lang="en"><head><meta charset="UTF-8"><title>XSLT and XPath for Visual Studio Code - User Guide</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code."><meta name="author" content="Philip Fearon"><meta name="robots" content="noindex"><link rel="stylesheet" href="./resources/base.css"><link rel="stylesheet" href="./resources/skeleton.css"><link rel="stylesheet" href="./resources/layout.css"><link rel="stylesheet" href="./resources/custom.css"><link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32"><link rel="stylesheet" href="./resources/all-pages.css"></head><body class="all-pages"><div class="all-pages-bar"><a href="index.html">Back to the guide</a><a href="vscode-xslt-xpath-guide.pdf">Download PDF</a><button type="button" onclick="window.print()">Print or save as PDF</button></div><section class="cover"><img src="../resources/tiny-white-logo.png" alt="DeltaXignia"><h1>XSLT and XPath<br>for Visual Studio Code</h1><p class="cover-subtitle">User Guide - Release 2.2</p></section><nav class="contents"><h2>Contents</h2><ul><li class="contents-page"><a href="#index">Overview</a><ul><li><a href="#index--getting-started">Getting started</a></li><li><a href="#index--writing">Writing XSLT</a></li><li><a href="#index--reviewing">Reviewing XSLT</a></li><li><a href="#index--running">Running XSLT</a></li><li><a href="#index--debugging">Debugging XSLT and Schematron</a></li><li><a href="#index--scope">Scope</a></li><li><a href="#index--edit-xml-xslt-or-xpath">Edit XML, XSLT or XPath</a></li><li><a href="#index--run-xslt-quick-start">Run XSLT - Quick Start</a></li></ul></li><li class="contents-page"><a href="#new-release">What's New</a><ul><li><a href="#new-release--release-2-2">Release 2.2</a></li><li><a href="#new-release--release-2-1">Release 2.1</a></li><li><a href="#new-release--release-2-0">Release 2.0</a></li></ul></li><li class="contents-page"><a href="#features">Features</a><ul><li><a href="#features--languages">XSLT and XPath languages</a></li><li><a href="#features--xslt40">XSLT 4.0</a></li><li><a href="#features--editing">Editing</a></li><li><a href="#features--linter">Linter</a></li><li><a href="#features--navigation">Navigation</a></li><li><a href="#features--refactoring">Refactoring</a></li><li><a href="#features--running">Running XSLT</a></li><li><a href="#features--debugging">Debugging and Profiling</a></li><li><a href="#features--xspec">Testing with XSpec</a></li><li><a href="#features--code-documentation">Code documentation</a></li></ul></li><li class="contents-page"><a href="#vscode">Using VS Code</a><ul><li><a href="#vscode--the-user-interface">The User Interface</a></li><li><a href="#vscode--the-command-palette">The Command Palette</a></li><li><a href="#vscode--opening-workspace-files">Opening Workspace Files</a></li><li><a href="#vscode--keyboard-shortcuts">Keyboard Shortcuts</a></li><li><a href="#vscode--settings">Settings</a></li><li><a href="#vscode--install-the-xslt-xpath-extension">Install the XSLT/XPath Extension</a></li><li><a href="#vscode--color-theme-extensions">Color Theme Extensions</a></li><li><a href="#vscode--viewing-html-output">Viewing HTML Output</a></li></ul></li><li class="contents-page"><a href="#settings">Settings</a><ul><li><a href="#settings--creating">Creating User and Workspace Settings</a></li><li><a href="#settings--xslt-settings">XSLT/XPath Extension Settings</a></li><li><a href="#settings--general-settings">General Settings for XSLT</a></li></ul></li><li class="contents-group">Editing</li><li class="contents-page"><a href="#editing">Editing XML</a><ul><li><a href="#editing--xml-elements">XML Elements</a></li><li><a href="#editing--auto-completion">Auto-Completion</a></li><li><a href="#editing--emmet">Emmet</a></li><li><a href="#editing--well-formed-xml-checks">Well-Formed XML Checks</a></li><li><a href="#editing--entities">Entities</a></li><li><a href="#editing--xmlformatting">XML Formatting</a></li><li><a href="#editing--xml-element-selection">XML Element Selection</a></li></ul></li><li class="contents-page"><a href="#editing-xslt">Editing XSLT/XPath</a><ul><li><a href="#editing-xslt--highlighting">Syntax Highlighting</a></li><li><a href="#editing-xslt--formatting">Formatting</a></li><li><a href="#editing-xslt--folding">Folding</a></li><li><a href="#editing-xslt--inferred-imports">Imports and Top-Level Stylesheets</a></li><li><a href="#editing-xslt--intellisense">IntelliSense (Auto Complete)</a></li><li><a href="#editing-xslt--bracket-matching">Bracket Matching</a></li><li><a href="#editing-xslt--renaming">Symbol Renaming</a></li><li><a href="#editing-xslt--refactoring">Code Refactoring</a></li><li><a href="#editing-xslt--checking">XSLT Linter</a></li></ul></li><li class="contents-page"><a href="#navigation">Code Navigation</a><ul><li><a href="#navigation--file-navigation">File Navigation</a></li><li><a href="#navigation--xslt-xml-breadcrumbs">XSLT/XML Breadcrumbs</a></li><li><a href="#navigation--outline-view">Outline View</a></li><li><a href="#navigation--peek-goto-definition">Peek/Go to Definition</a></li><li><a href="#navigation--goto-peek-references-find-all-references">Go to (Peek) References/Find All References</a></li><li><a href="#navigation--call-hierarchy">Call Hierarchy</a></li><li><a href="#navigation--goto-symbol">Go to Symbol</a></li><li><a href="#navigation--find-nodes-with-xpath">Find Nodes with XPath</a></li><li><a href="#navigation--xslt-imports-view">XSLT Imports View</a></li></ul></li><li class="contents-page"><a href="#refactoring-xslt">Refactoring</a><ul><li><a href="#refactoring-xslt--intro">Introduction</a></li><li><a href="#refactoring-xslt--example">A Sample Refactor</a></li><li><a href="#refactoring-xslt--restrictions">Known Restrictions</a></li><li><a href="#refactoring-xslt--context-properties">Context Properties</a></li></ul></li><li class="contents-page"><a href="#xml-catalogs">XML Catalogs</a><ul><li><a href="#xml-catalogs--setup">Setting up a catalog</a></li><li><a href="#xml-catalogs--catalog-files">Catalog files</a></li><li><a href="#xml-catalogs--editing">In the editor</a></li><li><a href="#xml-catalogs--running">Running stylesheets with the catalog</a></li><li><a href="#xml-catalogs--limitations">Limitations</a></li><li><a href="#xml-catalogs--demo">Catalog demo</a></li></ul></li><li class="contents-page"><a href="#xslt-packages">XSLT Packages</a><ul><li><a href="#xslt-packages--workspace-packages">Packages in the workspace</a></li><li><a href="#xslt-packages--setting">Packages outside the workspace</a></li><li><a href="#xslt-packages--versions">Which version is used</a></li><li><a href="#xslt-packages--visibility">What a stylesheet can use from a package</a></li><li><a href="#xslt-packages--overriding">Overriding package components</a></li><li><a href="#xslt-packages--package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#xslt-packages--declared-modes">Declared modes</a></li><li><a href="#xslt-packages--hover">Hover help</a></li><li><a href="#xslt-packages--converting">Converting a library to a package</a></li><li><a href="#xslt-packages--running">Running and debugging</a></li><li><a href="#xslt-packages--not-found">A package that isn't found</a></li><li><a href="#xslt-packages--completion">Auto-completion</a></li><li><a href="#xslt-packages--navigation">Navigating to a package</a></li><li><a href="#xslt-packages--override-navigation">Navigating between overrides</a></li></ul></li><li class="contents-page"><a href="#schematron">Schematron</a><ul><li><a href="#schematron--validating">Validating an XML file</a></li><li><a href="#schematron--debugging">Debugging a schema</a></li><li><a href="#schematron--profiling">Profiling a schema</a></li><li><a href="#schematron--editing">Editing</a></li><li><a href="#schematron--navigation">Navigation</a></li><li><a href="#schematron--hover">Hover help</a></li><li><a href="#schematron--checks">Checks</a></li><li><a href="#schematron--xslt">XSLT in a schema</a></li><li><a href="#schematron--text-value-templates">Text value templates in messages</a></li><li><a href="#schematron--pipeline">Using a schema in a pipeline</a></li></ul></li><li class="contents-group">Running and Debugging</li><li class="contents-page"><a href="#quick-run">Quick Run</a><ul><li><a href="#quick-run--running-a-stylesheet">Running a stylesheet</a></li><li><a href="#quick-run--modules">Running a module that another stylesheet imports</a></li><li><a href="#quick-run--choosing-the-processor-saxonj-saxonjs-or-saxonc">Choosing the processor: SaxonJ, SaxonJS or SaxonC</a></li><li><a href="#quick-run--first-use-a-task-is-created-for-you">First use: a task is created for you</a></li><li><a href="#quick-run--subsequent-runs">Subsequent runs</a></li><li><a href="#quick-run--initial-template">Starting from xsl:initial-template</a></li><li><a href="#quick-run--running-from-an-xml-file">Running from an XML file</a></li><li><a href="#quick-run--context-per-stylesheet">Each stylesheet has its own XML context file</a></li><li><a href="#quick-run--the-xml-context-file-is-remembered">The XML context file is remembered</a></li></ul></li><li class="contents-page"><a href="#run-xslt">Tasks</a><ul><li><a href="#run-xslt--saxonj-tasks">Saxon (Java) setup</a></li><li><a href="#run-xslt--saxonjs-tasks">Saxon-JS Tasks</a></li><li><a href="#run-xslt--saxonc-tasks">SaxonC Tasks</a></li><li><a href="#run-xslt--to-configure-the-initial-task">To configure the initial task:</a></li><li><a href="#run-xslt--references">Variable References in Tasks</a></li><li><a href="#run-xslt--command-options-for-pickfile">Command Options for 'pickFile'</a></li><li><a href="#run-xslt--configuring-more-tasks">Configuring more tasks</a></li><li><a href="#run-xslt--catalogs">XML catalogs</a></li><li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li><li><a href="#run-xslt--the-visual-studio-code-terminal">The Visual Studio Code terminal</a></li></ul></li><li class="contents-page"><a href="#debugger">Debugger</a><ul><li><a href="#debugger--starting">Starting a debug session</a></li><li><a href="#debugger--breakpoints">Breakpoints</a></li><li><a href="#debugger--stepping">Stepping</a></li><li><a href="#debugger--call-stack">Call stack</a></li><li><a href="#debugger--variables">Variables</a></li><li><a href="#debugger--evaluating">Watch, hover and the Debug Console</a></li><li><a href="#debugger--output">Output while debugging</a></li><li><a href="#debugger--input-nodes">From the source XML to the XSLT instruction</a></li><li><a href="#debugger--demo">Sample: stepping through XPath</a></li><li><a href="#debugger--limitations">Limitations</a></li><li><a href="#debugger--troubleshooting">Troubleshooting</a></li></ul></li><li class="contents-page"><a href="#profiler">Profiler</a><ul><li><a href="#profiler--profiling">Profiling a stylesheet</a></li><li><a href="#profiler--view">The Profile view</a></li><li><a href="#profiler--codelens">Times in the editor</a></li><li><a href="#profiler--runs">Warm-up runs</a></li><li><a href="#profiler--timeline">Earlier profiles</a></li><li><a href="#profiler--schematron">Profiling a Schematron schema</a></li><li><a href="#profiler--accuracy">What the times show</a></li></ul></li><li class="contents-page"><a href="#xspec">XSpec Tests</a><ul><li><a href="#xspec--creating">Creating a test</a></li><li><a href="#xspec--editing">Editing XSpec files</a></li><li><a href="#xspec--stylesheet-under-test">The stylesheet under test</a></li><li><a href="#xspec--navigation">Navigating between tests and the stylesheet</a></li><li><a href="#xspec--running">Running tests</a></li><li><a href="#xspec--schematron">Testing a Schematron</a></li><li><a href="#xspec--debugging">Debugging a test</a></li><li><a href="#xspec--coverage">Coverage</a></li><li><a href="#xspec--settings">Settings</a></li><li><a href="#xspec--task-settings">The stylesheet's task</a></li><li><a href="#xspec--legacy">Tests written for older XSpec</a></li></ul></li><li class="contents-page"><a href="#code-diagnostics">Print Debugging</a><ul><li><a href="#code-diagnostics--diagnosing-state-of-in-scope-xslt-variables">Diagnosing state of in-scope XSLT variables</a></li><li><a href="#code-diagnostics--xdm-trace">Tracing a value within an expression: xdm:trace()</a></li></ul></li><li class="contents-group">Tools</li><li class="contents-page"><a href="#xpath-queries">Find Nodes with XPath</a><ul><li><a href="#xpath-queries--opening">Opening the query file</a></li><li><a href="#xpath-queries--writing">Writing expressions</a></li><li><a href="#xpath-queries--running">Running an expression</a></li><li><a href="#xpath-queries--results">Results</a></li><li><a href="#xpath-queries--switching">Switching between XML files</a></li><li><a href="#xpath-queries--limitations">Limitations</a></li></ul></li><li class="contents-page"><a href="#xpath-notebook">XPath Notebooks</a><ul><li><a href="#xpath-notebook--why-use-an-xpath-notebook">Why use an XPath Notebook?</a></li><li><a href="#xpath-notebook--quick-start">Quick Start</a></li></ul></li><li class="contents-page"><a href="#ai-assistants">AI Assistants</a><ul><li><a href="#ai-assistants--problems">Fixing problems</a></li><li><a href="#ai-assistants--mcp">The MCP server</a></li><li><a href="#ai-assistants--notes">Documentation notes</a></li><li><a href="#ai-assistants--debugging">Debugging output</a></li><li><a href="#ai-assistants--running">Running XSLT</a></li><li><a href="#ai-assistants--agents-window">The Agents window</a></li><li><a href="#ai-assistants--limitations">Current limitations</a></li></ul></li><li class="contents-group">XSLT Language</li><li class="contents-page"><a href="#xslt30">XSLT 3.0</a><ul><li><a href="#xslt30--learning-xslt-3-0">Learning XSLT 3.0</a></li><li><a href="#xslt30--supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></li><li class="contents-page"><a href="#xslt40">XSLT 4.0</a><ul><li><a href="#xslt40--editing-xslt-4-0">Editing XSLT 4.0</a></li><li><a href="#xslt40--running-xslt-4-0">Running XSLT 4.0</a></li><li><a href="#xslt40--other-editors-for-xslt-4-0">Other Editors for XSLT 4.0</a></li></ul></li><li class="contents-page"><a href="#xslt40-records">Records and Enums</a><ul><li><a href="#xslt40-records--declaring">Declaring types</a></li><li><a href="#xslt40-records--building-records">Building records</a></li><li><a href="#xslt40-records--using-records">Using records</a></li><li><a href="#xslt40-records--record-refactoring">Refactoring: Extract record type</a></li><li><a href="#xslt40-records--enums">Enumeration types</a></li></ul></li><li class="contents-page"><a href="#xslt40-jnodes">JSON and JNodes</a><ul><li><a href="#xslt40-jnodes--navigating">Navigating JSON with JNodes</a></li><li><a href="#xslt40-jnodes--typed-jnodes">JNodes with a record type</a></li><li><a href="#xslt40-jnodes--debugging">Debugging: xdm:debug() shows JNode paths</a></li><li><a href="#xslt40-jnodes--limits">Things to know about JNodes and record types in Saxon 13</a></li><li><a href="#xslt40-jnodes--sample">Sample: JSON Schema to record types</a></li></ul></li><li class="contents-page"><a href="#xslt40-notes">Code Documentation</a><ul><li><a href="#xslt40-notes--writing">Writing a documentation note</a></li><li><a href="#xslt40-notes--adding">Adding a note</a></li><li><a href="#xslt40-notes--where-shown">Where notes are shown</a></li><li><a href="#xslt40-notes--references">References to other declarations</a></li><li><a href="#xslt40-notes--module-notes">Module notes</a></li><li><a href="#xslt40-notes--xslt30">Notes in XSLT 3.0</a></li><li><a href="#xslt40-notes--highlighting">Highlighting Details</a></li><li><a href="#xslt40-notes--xml">Notes as XML</a></li><li><a href="#xslt40-notes--checks">Tag Checks</a></li></ul></li></ul></nav><article class="main doc-page" id="index"><h2 class="pageTitle">Overview</h2>
 			<div class="two-thirds column">
 				<p>
 					DeltaXignia's
@@ -7,14 +7,12 @@
 					the <a href="#xslt40">XSLT 4.0</a> and XPath 4.0 features implemented in Saxon 13.
 				</p>
 				<p>
-					The aim is to make writing, reviewing, testing and debugging XSLT and XPath easier.
+					The aim is to make writing, reviewing, testing and debugging XSLT, XPath, XSpec and Schematron easier.
 				</p>
 				<p>The extension understands XPath expressions within the XSLT semantically,
-				so it can detect problems immediately, whether code is written manually or generated by an <a href="#ai-assistants">AI assistant</a>, 
-					navigate directly to declarations across imported modules, safely rename
-					variables, functions and templates, and step through XPath expressions in the debugger. It distinguishes
-					variables, functions and node tests, tracks where each is declared, and uses this information throughout
-					editing, navigation, refactoring and debugging.
+				so it can detect problems immediately, whether code is written manually or generated by an <a href="#ai-assistants">AI assistant</a>,
+				navigate directly to declarations across imported modules, safely rename variables, functions and templates,
+				debug XSpec tests, and step through XPath expressions in the debugger.
 				</p>
 				<aside>
 				For an overview of the extension's capabilities, see <a href="#features">Features</a>. 
@@ -72,9 +70,9 @@
 						context file (3), shown in the status bar</figcaption>
 				</figure>
 
-				<h3 id="index--debugging">Debugging XSLT</h3>
+				<h3 id="index--debugging">Debugging XSLT and Schematron</h3>
 				<p>
-					The debugger sets breakpoints and steps through templates, functions and multi-line XPath
+					The debugger used breakpoints set in the source or an <a href="#xspec--debugging">XSpec test</a>. It steps through templates, functions and multi-line XPath
 					expressions, showing variables, the context item and the output written so far. Where Saxon's
 					standard tracing stops at XSLT instructions, this debugger uses Saxon's own APIs to inject extra
 					trace points and re-parse XPath to locate sub-expressions, so it can stop deep inside multi-line
@@ -150,8 +148,55 @@
         
         <div class="two-thirds column">
             <p>
-                Highlights of the features added in releases 2.0 and 2.1:
+                Highlights of the features added in releases 2.0, 2.1 and 2.2:
             </p>
+            <h3 id="new-release--release-2-2">Release 2.2</h3>
+            <ul>
+                <li><strong><a href="#schematron">Schematron</a></strong> - For editing, Schematron files are checked as
+                    SchXslt2, the processor XSpec uses. There are quick fixes for any XSLT instructions
+                    that SchXslt2 ignores or doesn't run. Auto-completion follows ISO Schematron 2025.
+                    <strong>Schematron: Validate</strong> validates an XML file
+                    with a schema, with failed assertions shown in the Problems view. Messages in Schematron can use
+                    <a href="#schematron--text-value-templates">text value templates</a> - a non-standard extension,
+                    with a setting - and <strong>Schematron: Export Standard Copy...</strong> writes a standardised copy that
+                    will run on standard processors. <a href="#schematron--debugging">Debug a schema</a> with breakpoints and stepping
+                    on its rules, lets and assertions, in the phase shown in the status bar</li>
+                <li><strong><a href="#profiler">Profiler</a></strong> - profile any XSLT with Saxon-PE/EE 
+                    to see a breakdown on performance: the time of each template, function and global variable, the
+                    slowest first, with times above the declarations in the editor, warm-up runs left out, and earlier
+                    profiles appear in the Timeline view for comparison. A <a href="#schematron--profiling">Schematron
+                    schema</a> is profiled the same way, with the time of each rule</li>
+                <li><strong><a href="#debugger--input-nodes">Mapping from source XML to the XSLT templates</a></strong> that processed them. After
+                    a debug session, hover over an element in the input file to see the template rules - and
+                    <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code>
+                    instructions - that processed it, its attributes and its text - or the Schematron rules that fired
+                    for it - and go to them; above each template or instruction, the nodes it processed. From the output view, go to the input that part of the
+                    output was written for, as well as to the instruction that wrote it</li>
+                <li><strong><a href="#ai-assistants--mcp">AI assistants that use your stylesheets</a></strong> (MCP) - eleven new tools let an assistant look up what a module can use, evaluate XPath on your XML, get the commands that run and test your stylesheets and validate with Schematron, find why output is wrong, and profile a slow stylesheet:
+					<table class="tool-grid">
+						<tbody>
+						<tr><td>run_configuration</td><td>list_declarations</td></tr>
+						<tr><td>test_configuration</td><td>output_origin</td></tr>
+						<tr><td>validation_configuration</td><td>input_rules</td></tr>
+						<tr><td>profile_configuration</td><td>debug_status</td></tr>
+						<tr><td>trace_configuration</td><td>debug_evaluate</td></tr>
+						<tr><td>evaluate_xpath</td><td></td></tr>
+						</tbody>
+					</table>
+					<a href="#ai-assistants--mcp-skill">Skills</a> for XSLT and XPath, XSpec tests and Schematron tell the assistant how
+                    to use them together: the server serves them to GitHub Copilot in VS Code 1.147 or later (skills over MCP), and
+                    <strong>Set Up MCP Server for Claude Code</strong> installs them for Claude Code. Each VS Code window has its
+                    own server, started with the window for a workspace of XSLT files</li>
+                <li><strong><a href="#editing-xslt--check-files">Checking files that aren't open</a></strong> -
+                    <strong>Check Problems in Workspace</strong> and <strong>Check Problems in Folder</strong> lint
+                    stylesheets without opening them, and <a href="#xslt-packages--check-users">Check Modules Using
+                    Package</a> (also a CodeLens on <code>xsl:package</code>) checks the modules that use a package,
+                    for when a change to its visibility breaks them. A private package component is now reported as
+                    private where it's used, with a quick fix to make it public</li>
+                <li><strong><a href="#xspec--times">XSpec test times</a></strong> - with Saxon-PE/EE,
+                    the Test Explorer shows how long each test took, and an XSpec file's Timeline shows how
+                    long its tests took on each run</li>
+            </ul>
             <h3 id="new-release--release-2-1">Release 2.1</h3>
             <ul>
                 <li><strong><a href="#debugger">Step-through debugging</a></strong> - debug stylesheets with SaxonJ
@@ -225,9 +270,8 @@
     </article><article class="main doc-page" id="features"><h2 class="pageTitle">Features</h2>
 
 		<div class="two-thirds column">
-			<p>The extension's features at a glance, grouped by task. Each one links to the part of this guide that
-				describes it.</p>
-
+			<p>The extension's features, grouped by task, each linking to the part of this guide that describes it. Those
+				marked <span class="notable-key">★</span> are rarely found in other XML development environments.</p>			
 			<div class="feature-cards">
 
 				<section class="feature-card">
@@ -237,11 +281,11 @@
 					<h3 id="features--languages">XSLT and XPath languages</h3>
 					<ul>
 						<li><a href="#xslt30">XSLT 3.0</a> and XPath 3.1</li>
-						<li><a href="#xslt40">XSLT 4.0</a> and XPath 4.0, as implemented in Saxon 13</li>
-						<li>Advanced <a href="#xslt-packages">XSLT 3.0 package</a> features</li>
-						<li>SaxonJS interactive extensions (IXSL)</li>
-						<li><a href="#editing-xslt--highlighting">Fast semantic highlighting</a>, from a full XPath parser</li>
+						<li class="notable"><a href="#xslt40">XSLT 4.0</a> and XPath 4.0 - as in Saxon 13</li>
+						<li class="notable"><a href="#xspec">XSpec</a> testing and coverage</li>
+						<li class="notable"><a href="#schematron">Schematron</a> with debugging</li>
 						<li><a href="#editing">XML</a> editing, formatting and navigation</li>
+						<li><a href="#xml-catalogs">XML catalogs</a> and <a href="#xslt-packages--workspace-packages">package indexing</a> for imports</li>
 					</ul>
 				</section>
 
@@ -252,12 +296,12 @@
 					</svg>
 					<h3 id="features--xslt40">XSLT 4.0</h3>
 					<ul>
-						<li><a href="#xslt40-records">Record and enum types</a>, with type-aware checks</li>
+						<li class="notable"><a href="#xslt40-records">Record and enum types</a>, with type-aware checks</li>
 						<li>Named item types: <code>xsl:item-type</code></li>
 						<li><a href="#xslt40-records--switch"><code>xsl:switch</code></a>, with quick fixes for missing cases</li>
 						<li>Keyword arguments and optional parameters</li>
 						<li>Functions in no namespace</li>
-						<li><a href="#xslt40-jnodes">Path expressions on JSON</a> (JNodes)</li>
+						<li class="notable"><a href="#xslt40-jnodes">Path expressions on JSON</a> (JNodes)</li>
 					</ul>
 				</section>
 
@@ -268,7 +312,7 @@
 					</svg>
 					<h3 id="features--editing">Editing</h3>
 					<ul>
-						<li><a href="#editing-xslt--intellisense">Context-aware auto-completion</a>, including node names from
+						<li class="notable"><a href="#editing-xslt--intellisense">Context-aware auto-completion</a>, including node names from
 							the XML context file</li>
 						<li><a href="#editing-xslt--hover">Signature help and hover help</a></li>
 						<li><a href="#editing-xslt--xslt-instruction-snippets">Snippets</a>, including new stylesheets for 3.0
@@ -287,13 +331,11 @@
 					<h3 id="features--linter">Linter</h3>
 					<ul>
 						<li><a href="#editing-xslt--checking">XPath syntax and XSLT instructions</a>, checked as you type</li>
-						<li>Types, records, enums and function arguments</li>
+						<li class="notable">Types, records, enums and function arguments</li>
 						<li><a href="#editing-xslt--unused-variables">Unused XSLT and XPath variables or parameters</a></li>
 						<li>References across imported modules</li>
-						<li><a href="#editing-xslt--compile-time-and-run-time-problems">Saxon errors from runs</a>, in the
-							Problems view</li>
 						<li><a href="#editing-xslt--quick-fixes">Quick fixes</a> for common problems</li>
-						<li><a href="#ai-assistants">MCP server</a> for AI assistants (experimental)</li>
+						<li class="notable"><a href="#ai-assistants">MCP server</a> lint tools for AI assistants</li>
 					</ul>
 				</section>
 
@@ -307,15 +349,14 @@
 						<li><a href="#navigation--peek-goto-definition">Go to (or peek) definition</a>, and
 							<a href="#navigation--goto-peek-references-find-all-references">find references</a></li>
 						<li><a href="#navigation--call-hierarchy">Call hierarchy</a> of functions and templates</li>
-						<li><a href="#xslt40-records--hover-and-navigation">Go to the declarations of record fields</a></li>
+						<li class="notable"><a href="#xslt40-records--hover-and-navigation">Go to the declarations of record fields</a></li>
 						<li><a href="#navigation--outline-view">Outline</a>,
 							<a href="#navigation--xslt-xml-breadcrumbs">breadcrumbs</a> and
 							<a href="#navigation--goto-symbol">Go to Symbol</a></li>
 						<li><a href="#navigation--file-links">Links</a> for <code>xsl:import</code> and
 							<code>xsl:include</code></li>
-						<li><a href="#editing-xslt--the-xslt-imports-view">XSLT Imports view</a>, with
-							<a href="#editing-xslt--inferred-imports">inferred top-level stylesheets</a></li>
-						<li><a href="#xpath-queries">Find nodes with XPath</a> in XML files</li>
+						<li class="notable"><a href="#editing-xslt--inferred-imports">Inferred top-level modules</a>,
+							with <a href="#editing-xslt--the-xslt-imports-view">XSLT Imports view</a></li>
 					</ul>
 				</section>
 
@@ -329,7 +370,7 @@
 						<li><a href="#editing-xslt--renaming">Safe symbol renaming</a></li>
 						<li><a href="#refactoring-xslt">Extract <code>xsl:function</code> or <code>xsl:template</code></a></li>
 						<li><a href="#refactoring-xslt">Extract <code>xsl:variable</code></a> from an XPath expression</li>
-						<li><a href="#xslt40-records--record-refactoring">Extract a record type</a> from a map</li>
+						<li class="notable"><a href="#xslt-packages--converting">Conversion</a> of a library to an XSLT package</li>
 						<li><a href="#editing-xslt--refactoring"><strong>Wrap with...</strong></a> an instruction
 							(<span class="shortcut">⌥⇧W</span> / <span class="shortcut">Alt+Shift+W</span>)</li>
 						<li><a href="#xslt40-notes--adding">Add a documentation note</a></li>
@@ -347,11 +388,9 @@
 							<span class="shortcut">Ctrl+Alt+R</span>)</li>
 						<li><a href="#run-xslt">Tasks</a> for <a href="#run-xslt--saxonj-tasks">SaxonJ</a>,
 							<a href="#run-xslt--saxonjs-tasks">SaxonJS</a> and <a href="#run-xslt--saxonc-tasks">SaxonC</a></li>
-						<li><a href="#quick-run--required-parameters">Required <code>xsl:param</code> values</a> asked for when
-							a task runs</li>
-						<li><code>xsl:param</code> values controlled by tasks</li>
+						<li><code>xsl:param</code> values set by tasks or user prompts</li>
 						<li><a href="#xml-catalogs">XML catalogs</a> for <code>xsl:import</code> URIs</li>
-						<li><a href="#xslt-packages">XSLT Packages</a> - no configuration needed</li>
+						<li class="notable">Configuration free <a href="#xslt-packages">XSLT Packages</a></li>
 						<li><a href="#run-xslt--user-input-for-file-selection-within-a-task">File pickers</a> for task
 							inputs</li>
 						<li><a href="#run-xslt--java-extension-functions">Java extension functions</a></li>
@@ -363,16 +402,15 @@
 						<rect x="8" y="8" width="8" height="12" rx="4"></rect>
 						<path d="M9.5 8a2.5 2.5 0 0 1 5 0M12 12v8M8 13H4M20 13h-4M8 17l-3 2M16 17l3 2M8.5 10L5 7.5M15.5 10L19 7.5"></path>
 					</svg>
-					<h3 id="features--debugging">Debugging</h3>
+					<h3 id="features--debugging">Debugging and Profiling</h3>
 					<ul>
-						<li><a href="#debugger">Step-through XSLT debugger</a> (SaxonJ, any edition)</li>
-						<li><a href="#debugger--xpath">Stepping through multi-line XPath</a></li>
+						<li class="notable">Debug from <a href="#debugger">XSLT</a>, <a href="#schematron--debugging">Schematron</a> and <a href="#xspec--debugging">XSpec</a></li>
+						<li class="notable"><a href="#debugger--xpath">Stepping through multi-line XPath</a></li>
+						<li class="notable"><a href="#debugger--step-back">Step Back and Reverse Continue</a></li>
 						<li><a href="#debugger--conditional">Conditional breakpoints and hit counts</a></li>
 						<li><a href="#debugger--logpoints">Logpoints</a>, with formatted and colored values</li>
-						<li><a href="#debugger--variables">Views of the locals, globals, context and output</a></li>
-						<li><a href="#debugger--evaluating">Watch expressions, hovers and the Debug Console</a></li>
-						<li><a href="#debugger--output">The output so far</a>, mapped back to the XSLT that wrote it</li>
-						<li><a href="#code-diagnostics">Formatted and colored print debugging</a></li>
+						<li><a href="#debugger--input-nodes">Inputs</a> and <a href="#debugger--output">Outputs</a> map to the XSLT</li>
+						<li class="notable"><a href="#profiler">Profiler</a> timings in the editor and Timeline*</li>
 					</ul>
 				</section>
 
@@ -384,13 +422,11 @@
 					<h3 id="features--xspec">Testing with XSpec</h3>
 					<ul>
 						<li><a href="#xspec--running">Test Explorer</a> for running tests and comparing output</li>
-						<li><a href="#xspec--debugging">Debug tests</a> in the XSpec file or from the XSLT source</li>
-						<li>Run <a href="#xspec--schematron">Schematron tests</a>, compiled with SchXslt2</li>
-						<li><a href="#xspec--creating">Generate tests</a> for a function or template</li>
+						<li>Debug <a href="#xspec--debugging">XSLT</a> or <a href="#xspec--schematron">Schematron</a> from test or source</li>
+						<li><a href="#xspec--creating">Generate tests</a></li>
 						<li><a href="#xspec--editing">Edit XSpec</a> with checks, quick-fixes, auto-completion</li>
-						<li><a href="#xspec--coverage">Test coverage</a> percentages and line margin highlights</li>
-						<li><a href="#xspec--navigation">Navigate</a> between tests and the underlying code</li>
-						<li><a href="#xspec--stylesheet-under-test">Checks and assistance</a> for component calls</li>
+						<li class="notable"><a href="#xspec--coverage">Test coverage</a> percentages and line margin highlights</li>
+						<li><a href="#xspec--times">Timings</a> in Test Explorer and <a href="#xspec--timeline">Timeline</a>*</li>
 					</ul>
 				</section>
 
@@ -401,7 +437,7 @@
 					</svg>
 					<h3 id="features--code-documentation">Code documentation</h3>
 					<ul>
-						<li><a href="#xslt40-notes--writing"><code>xsl:note</code></a> with
+						<li class="notable"><a href="#xslt40-notes--writing"><code>xsl:note</code></a> with
 							<a href="#xslt40-notes--markdown">Markdown</a> and <a href="#xslt40-notes--tags">xqDoc-style
 							tags</a></li>
 						<li><a href="#xslt40-notes--where-shown">Shown in hover and signature help</a></li>
@@ -414,6 +450,8 @@
 					</ul>
 				</section>
 			</div>
+
+			<p class="feature-note">* Timings need Saxon-PE or Saxon-EE. Everything else works with the free Saxon-HE.</p>
 		</div>
 
 	</article><article class="main doc-page" id="vscode"><h2 class="pageTitle">Using VS Code</h2>
@@ -582,6 +620,13 @@
               saves the choice here.</td>
           </tr>
           <tr>
+            <td><code>XSLT.<wbr>tasks.<wbr>profileRuns</code></td>
+            <td><code>1</code></td>
+            <td>How many times <a href="#profiler">Profile Stylesheet</a> runs the transform. With more than one,
+              the first is a warm-up run, left out, and the Profile view shows the average of the others - see
+              <a href="#profiler--runs">Warm-up runs</a>.</td>
+          </tr>
+          <tr>
             <td><code>XSLT.<wbr>tasks.<wbr>java.<wbr>enabled</code></td>
             <td><code>true</code></td>
             <td>Offer SaxonJ (<code>xslt</code>) tasks - see <a href="#settings--task-types">Task types</a>.</td>
@@ -652,6 +697,13 @@
             <td>-</td>
             <td>The files for <code>xsl:use-package</code> names - see <a href="#settings--xslt-packages">XSLT packages</a>.</td>
           </tr>
+          <tr id="settings--workspace-check">
+            <td><code>XSLT.<wbr>workspaceCheck.<wbr>includeWarnings</code></td>
+            <td><code>false</code></td>
+            <td>Show warnings too, not only errors, for the files that <strong>Check Problems in Workspace</strong>,
+              <strong>Check Problems in Folder</strong> and <strong>Check Modules Using Package</strong> check - see
+              <a href="#editing-xslt--check-files">Checking files that aren't open</a>.</td>
+          </tr>
           <tr>
             <td><code>XSLT.<wbr>resources.<wbr>inferParentFromWorkspace</code></td>
             <td><code>true</code></td>
@@ -686,6 +738,13 @@
             <td>Warn in every stylesheet before XSLT 4.0 about union patterns whose branches have different default
               priorities - not only where XSLT 4.0's rule applies already - see
               <a href="#editing-xslt--union-priorities">Union patterns and XSLT 4.0</a>.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>schematron.<wbr>allowExpandText</code></td>
+            <td><code>false</code></td>
+            <td>Allow text value templates in Schematron messages with <code>xsl:expand-text="yes"</code> - a
+              non-standard extension, for every Schematron file - see
+              <a href="#schematron--text-value-templates">Text value templates in messages</a>.</td>
           </tr>
         </tbody>
       </table>
@@ -750,6 +809,29 @@
             <td><code>6745</code></td>
             <td>The port the MCP server listens at, on <code>127.0.0.1</code>. With more than one window open, the first
               one opened has the server.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>mcp.<wbr>runForAssistant</code></td>
+            <td><code>ask</code></td>
+            <td>When an assistant's <code>output_origin</code> or <code>input_rules</code> needs a run of a stylesheet - there's none yet,
+              or the stylesheet or input has changed since - whether the extension runs it for the assistant, as Run Without Debugging with
+              your Quick Run task - its result written to the temporary files, without asking where, and relative
+              <code>xsl:result-document</code> outputs with it. <code>ask</code>: a notification asks you - <strong>Run Without Debugging</strong>, <strong>Always Run for
+              This Workspace</strong> or <strong>Not Now</strong>; <strong>XSLT: Ask Before Running a Stylesheet for an AI Assistant</strong>
+              asks again after <strong>Always</strong>. <code>always</code>: run without asking, in every workspace. <code>never</code>: don't
+              run it, nor ask. A user setting only.</td>
+          </tr>
+          <tr>
+            <td><code>XSLT.<wbr>mcp.<wbr>debugEvaluateExtensions</code></td>
+            <td><code>restricted</code></td>
+            <td>What an assistant's <code>debug_evaluate</code> expressions can call in your paused debug session.
+              <code>restricted</code>: Saxon-HE's functions only - the standard functions and the stylesheet's own - whatever edition the
+              session runs on, and not <code>transform()</code>, <code>load-xquery-module()</code> or <code>function-lookup()</code>.
+              <code>unrestricted</code>: as your Debug Console - with Saxon-PE or EE, Java methods, the EXPath file module (which can change
+              files) and <code>saxon:</code> functions too. <code>never</code>: no expressions - choose it if the stylesheet's own functions
+              have effects, or files the session can read with <code>doc()</code> or <code>unparsed-text()</code> mustn't be.
+              <code>debug_status</code> still shows the values. Your own Debug Console, Watch and logpoints aren't affected. A user setting
+              only: a workspace can't change it.</td>
           </tr>
         </tbody>
       </table>
@@ -1078,7 +1160,8 @@
 			<p>Outside of the auto-complete (IntelliSense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
 			from the auto-completion list:</p>
 			<img src="resources/suggestions.png" class="scale-with-grid">
-			<p>After a <code>&lt;</code> within an element, the tag snippets insert an element with a placeholder for its name,
+			<p>After a <code>&lt;</code> within an element, press <span class="shortcut">⌃Space</span> for the tag snippets - in an
+				XML file, typing <code>&lt;</code> doesn't open the list. Each inserts an element with a placeholder for its name,
 				which is used for both the start and end tags:</p>
 			<ul>
 				<li><code>block-start-end-tag</code> - start and end tags on separate lines, with the cursor on the indented line between them</li>
@@ -1105,6 +1188,11 @@
 			between problems, the Problems view (press <span class="shortcut">⇧⌘M</span> to toggle) shows a list of XML syntax
 			problems. Problems are also highlighted in the Outline View. Selecting a Problems view list item, or Outline View node will
 				navigate you to the corresponding token in the XML editor.</p>
+			<p>XML files aren't validated against an XML Schema, RELAX NG schema or DTD. For that, install
+				<a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's XML extension</a>
+				alongside this one. While its validation is on (the <code>xml.validation.enabled</code> setting), it
+				reports the well-formedness problems in XML files too, so this extension doesn't report them again. XSLT,
+				XSpec and Schematron files are still checked by this extension.</p>
 			<h3 id="editing--entities">Entities</h3>
 			<p>An XML or XSLT file can declare entities in its DOCTYPE's internal subset, to use as references such as
 				<code>&amp;company;</code>:</p>
@@ -1260,7 +1348,8 @@
 		<p>A parent stylesheet opened recently in Visual Studio Code is used first. Otherwise, the parent is found from the workspace's
 			XSLT files, which are scanned in the background the first time they're needed, so the parent doesn't have to be opened
 			first. The scan only reads the <code>href</code> attributes of <code>xsl:import</code> and <code>xsl:include</code>
-			instructions, and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
+			instructions - and their <code>_href</code> attributes, where they can be resolved (see
+			<a href="#editing-xslt--shadow-href">below</a>) - and is kept up to date as files change. Where a module is imported by more than one stylesheet, the one in the
 			nearest folder is used. The workspace scan can be turned off with the <code>XSLT.resources.inferParentFromWorkspace</code>
 			setting.
 		</p>
@@ -1272,6 +1361,18 @@
 			for the workspace, and <strong>XSLT: Reset Top-Level Stylesheet Choices</strong> clears them all. The XSLT Imports view
 			marks a chosen stylesheet <em>chosen</em>, rather than <em>inferred</em>.
 		</p>
+		<h4 id="editing-xslt--shadow-href">Imports with a _href shadow attribute</h4>
+		<p>An <code>xsl:import</code> or <code>xsl:include</code> can have its location set when the stylesheet is compiled,
+			with a <code>_href</code> shadow attribute that uses static parameters. The module it refers to is used, as for
+			<code>href</code>, when each expression in <code>_href</code> is a static parameter or variable of the same module
+			with a string literal value:</p>
+		<code class="block">&lt;xsl:param name="dir" static="yes" select="'lib'"/&gt;
+&lt;xsl:import _href="{$dir}/common.xsl"/&gt;</code>
+		<p>The module is found with the default value, here <code>lib/common.xsl</code>. A different value given when the
+			stylesheet is compiled isn't known to the editor.</p>
+		<p>Any other <code>_href</code> - for example, one with a function call, or a parameter that isn't static - can't be
+			resolved. Then a template, function or other declaration that isn't found is reported as a warning, not an error,
+			as it may be declared in the module that's imported or included.</p>
 		<h4 id="editing-xslt--the-xslt-imports-view">The XSLT Imports view</h4>
 		<p>The <strong>XSLT Imports</strong> view in the Explorer shows, for the XSLT module in the active editor, its top-level
 			stylesheet - marked <em>inferred</em> when it was found from the workspace - with its tree of imports and includes. The
@@ -1516,6 +1617,28 @@
 					<code>use-when="function-available('name')"</code>.</li>
 			</ul>
 		</details>
+		<h4 id="editing-xslt--check-files">Checking files that aren't open</h4>
+		<p>The linter checks the files open in editors. A change in one file can break others that aren't open - e.g.
+			renaming a function, or making a <a href="#xslt-packages--check-users">package component private</a>. To see
+			those problems without opening each file, check the files that aren't open:</p>
+		<ul>
+			<li><strong>XSLT: Check Problems in Workspace</strong>, from the Command Palette - the XSLT and XSpec files in
+				every workspace folder</li>
+			<li><strong>XSLT: Check Problems in Folder</strong>, from a folder's context menu in the Explorer - the files in
+				that folder and its subfolders</li>
+			<li><strong>XSLT: Check Modules Using Package</strong>, from the Command Palette with an
+				<code>xsl:package</code> module open, or the <strong>used by … modules - check for problems</strong> CodeLens
+				above its <code>xsl:package</code> - the modules that use the package, and those they import or include</li>
+		</ul>
+		<p>The problems are shown in the Problems view, from <em>dx.xslt-xpath (workspace check)</em>. Only errors are shown, unless the
+			<a href="#settings--workspace-check"><code>XSLT.workspaceCheck.includeWarnings</code></a> setting is on.
+			Files in <code>node_modules</code>, hidden folders, XSpec's generated test runners and the
+			<code>files.exclude</code> setting's folders aren't checked. A progress notification shows the check, which can
+			be cancelled - with more than 1000 files, you're asked first.</p>
+		<p>A file's problems from a check are removed when it's opened in an editor - the editor's checks then show its
+			problems - and when it's changed or deleted outside VS Code, as they may no longer apply. Checking a folder again
+			replaces its results. To remove them all, use <strong>Clear</strong> in the notification at the end of a
+			check, or <strong>XSLT: Clear Workspace Check Problems</strong>.</p>
 		<h4 id="editing-xslt--mode-checks">Checks on modes</h4>
 		<p>A large transform may run in many modes, and a template rule applied in the wrong mode fails silently. The linter
 			warns about:</p>
@@ -1530,6 +1653,14 @@
 				rule's modes include the default mode - the unnamed mode, or the mode named by the innermost
 				<code>[xsl:]default-mode</code> attribute - or <code>#all</code>, nor for a template rule within an XSLT 4.0
 				<code>xsl:mode</code>, where the enclosing mode is the default.</li>
+			<li><strong>A mode that nothing applies</strong> (a hint) - a template rule's mode that no
+				<code>xsl:apply-templates</code> in the stylesheet's modules applies, and no <code>default-mode</code> names: often a mode
+				added to a template rule but not to the <code>xsl:apply-templates</code> meant to reach it, so the built-in rules run
+				instead. Not for a mode with a template rule for the document node (<code>match="/"</code>), which is the initial mode
+				a run starts in, as a rule, nor for a package's public or final mode - by its <code>xsl:mode</code>'s
+				<code>visibility</code>, or the package's <code>xsl:expose</code> - which the stylesheets that use the package may apply;
+				a package's private mode is checked, as only the package can apply it. It may still be the initial mode, set when the
+				stylesheet is run - hence a hint, not a warning.</li>
 			<li>XSLT 4.0: an <code>xsl:mode</code> with enclosed template rules but no <code>name</code>, and an enclosed
 				template rule with a <code>mode</code> or <code>name</code> attribute, or without a <code>match</code>.</li>
 		</ul>
@@ -1623,10 +1754,10 @@
 				<span class="shortcut">↓</span> for the dropdown outline.
 			</p>
 			<h3 id="navigation--outline-view">Outline View</h3>
-			<img src="resources/navigation.png" class="scale-with-grid">
+			<img src="resources/outline-view.png" class="scale-with-grid">
 			
 			<p>
-				The <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface#_outline-view">Outline View</a> (see right-hand panel) is a panel
+				The <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface#_outline-view">Outline View</a> (see left panel) is a panel
 				that, by default, is positioned below
 				the File Explorer in the Primary Side Bar. This can be moved however into other panels such as the Secondary Side Bar (see <a href="https://code.visualstudio.com/api/ux-guidelines/sidebars">Sidebars</a>).
 				The Outline view renders the XML or XSLT document element hierarchy as a tree, symbol names in the tree include element identifiers such
@@ -1687,6 +1818,12 @@
 			<!-- end -->
 
 			<h3 id="navigation--call-hierarchy">Call Hierarchy</h3>
+			<figure>
+				<img src="resources/call-hierarchy.png" class="scale-with-grid">
+				<figcaption>
+					The call hierarchy can be viewed in the References view as here - or inline using the <strong>Peek</strong> context menu.
+				</figcaption>
+			</figure>
 			<p>Use the <strong>Show Call Hierarchy</strong> command (<span class="shortcut">⇧⌥H</span>, or from the editor's
 				context menu) on a call of a stylesheet function or named template, or anywhere within a template or
 				function, to see what calls it and what it calls. The <strong>Call Hierarchy</strong> view, in the Side
@@ -1724,6 +1861,8 @@
 				stylesheet with its tree of imports and includes, expanded down to the active module. Click a module in the tree to open it.
 				The view is collapsed initially - click its title in the Explorer to expand it. See
 				<a href="#editing-xslt--the-xslt-imports-view">The XSLT Imports view</a> for details.</p>
+			<p>For a Schematron file, the same view - <strong>Schematron Includes</strong> - shows the schema that includes
+				it, with the files the schema brings in - see <a href="#schematron--navigation">Schematron</a>.</p>
 		
 		</div>
 		
@@ -2143,6 +2282,18 @@
 &lt;/xsl:use-package&gt;</code>
 			<p>A package that uses another package doesn't pass its components on: they're private to it, unless its own
 				<code>xsl:accept</code> or <code>xsl:expose</code> makes them public.</p>
+			<h4 id="xslt-packages--check-users">Using a private component</h4>
+			<p>A reference to a function, named template, variable or attribute set that's private in the package is reported
+				as that - e.g. <em>The function str:helper#1 is private in package 'http://example.com/strings', so it can't be
+				used here</em> - in the module with the <code>xsl:use-package</code>, the modules it imports or includes, and
+				XSpec files with the package as a helper. The quick fix <strong>Make … public in package …</strong> adds
+				<code>visibility="public"</code> to its declaration in the package.</p>
+			<p>So you can narrow a package's API - e.g. change a function's visibility to <code>private</code> - and then see
+				which uses now fail. Modules that aren't open aren't checked as you edit the package: the
+				<strong>used by … modules - check for problems</strong> CodeLens above the <code>xsl:package</code>, or
+				<strong>XSLT: Check Modules Using Package</strong>, checks the modules that use it, and those they import or
+				include, and shows their problems in the Problems view - see
+				<a href="#editing-xslt--check-files">Checking files that aren't open</a>.</p>
 
 			<h3 id="xslt-packages--overriding">Overriding package components</h3>
 			<p>An <code>xsl:override</code> declaration must have the same signature as the component it replaces, so the
@@ -2262,6 +2413,14 @@
 				declaration with the name of the library's must move into <code>xsl:override</code>, and some declarations
 				aren't exposed as package components at all. <strong>Analyse as Package...</strong> shows what would have to change
 				for the stylesheets to work as before - it changes nothing.</p>
+			<figure>
+				<img src="resources/package-convert.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The report from <strong>Analyse as Package...</strong> for a library of three
+						modules: the proposed package name and version, the stylesheets that use it, and the verdict - it can
+						be converted, with one decision.</i></p>
+				</figcaption>
+			</figure>
 			<p>Run it from the Command Palette, with the library open, or from the context menu of a module in the
 				<a href="#editing-xslt--the-xslt-imports-view">XSLT Imports view</a>. It checks each top-level stylesheet
 				in the workspace that imports or includes the library, directly or indirectly, and opens a report in the
@@ -2269,6 +2428,10 @@
 			<ul>
 				<li><strong>To rework first</strong> - what would fail in a package:
 					<ul>
+						<li>an error in a module the conversion reads: the library's modules, and those of each stylesheet that
+							uses it, in every workspace folder, are checked first, with the linter's errors. The conversion
+							starts from modules without them, so that a problem after it is one it made. Warnings don't
+							block it</li>
 						<li>a global variable whose value uses the context item, e.g. <code>select="/*"</code>, which has none
 							in a library package (<code>XPDY0002</code>)</li>
 						<li>a stylesheet's <code>xsl:global-context-item</code> that overrides the library's by import
@@ -2282,11 +2445,19 @@
 					</ul>
 				</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
-					the stylesheets use</li>
+					the stylesheets use. Any stylesheet in the workspace that uses one makes it public, so some may not
+					belong in the package's API: after converting, narrow those - the uses that then fail are reported (see
+					<a href="#xslt-packages--check-users">Using a private component</a>)</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
 					precedence, which move into <code>xsl:override</code></li>
-				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but only
-					the stylesheets declare, which the package declares as abstract</li>
+				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but one of
+					the stylesheets declares, which the package declares as abstract</li>
+				<li><strong>Modules included in the package</strong> - a module that several of the stylesheets share, and
+					declares what the library uses, e.g. a module of helper functions. It belongs with the library, so the
+					package includes it, with the modules it imports, and the stylesheets don't import it any more. Otherwise
+					each stylesheet would have a copy of its code in its <code>xsl:override</code>. A module that imports
+					the library is a decision instead: convert it, not the library. One that stylesheets that don't use the
+					library import too needs reworking first, as they'd lose it</li>
 				<li><strong>Modes and template rules</strong> - the library's named modes that the stylesheets use, and their
 					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, if the library
 					shares it with the stylesheets, which becomes a named mode, as a package keeps its unnamed mode to
@@ -2294,6 +2465,15 @@
 				<li><strong>Not exposed by a package</strong> - keys, accumulators, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code>, which apply only to the package's own code, so
 					the stylesheets need their own copies of those they rely on</li>
+				<li><strong>XSpec tests</strong> - the <a href="#xspec">XSpec</a> tests that the conversion affects, as XSpec imports
+					the stylesheet it tests into its test runner, which neither a package nor a stylesheet with an
+					<code>xsl:use-package</code> can be (XTSE3008). A test of the library, which becomes a package, needs
+					<code>run-as="external"</code> or an <code>x:helper</code>. A test of a top-level stylesheet, which gets an
+					<code>xsl:use-package</code>, stops with that error: test the modules it imports or includes instead. A test
+					of a module that imported the library needs an <code>x:helper package-name</code> for the package, as the
+					module no longer reaches it: <strong>Convert to Package...</strong> adds it, so these XSpec files are among
+					the files it changes - listed in the report so you know. A test with <code>run-as="external"</code> isn't
+					affected. The other two are for you to change, after converting</li>
 			</ul>
 			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other
@@ -2303,15 +2483,28 @@
 				uses the context item, the linter checks its value as the body of a function, where there's no context
 				item.</aside>
 			<h4 id="xslt-packages--convert">Convert to Package...</h4>
+			<figure>
+				<img src="resources/package-refactor.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The changes <strong>Convert to Package...</strong> makes, in the Refactor Preview:
+						the stylesheets' imports replaced by <code>xsl:use-package</code>, the functions they use made public,
+						and the library's root element becoming <code>xsl:package</code>. Untick a change to leave it out, then
+						<strong>Apply</strong>.</i></p>
+				</figcaption>
+			</figure>
 			<p>When nothing needs reworking first, <strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
-				module in the XSLT Imports view. It asks for the package's name and version, then shows the changes to
+				module in the XSLT Imports view. It asks for the package's name and version - the name proposed is the namespace of
+				the library's own functions, with the module's name added when it's a part of a larger library, or a placeholder,
+				<code>http://example.com/packages/</code> and the module's name, where it declares none: replace it with
+				one of your own - then shows the changes to
 				every module in the <strong>Refactor Preview</strong>, where you can check them before they're made:</p>
 			<ul>
 				<li>the library's root element becomes <code>xsl:package</code>, with the name and version, and
 					<code>declared-modes="no"</code></li>
 				<li>its components that the stylesheets use or override get <code>visibility="public"</code>, its named
-					modes they use a public <code>xsl:mode</code>, and the functions it calls that only the stylesheets
-					declare an abstract declaration</li>
+					modes they use a public <code>xsl:mode</code>, and the functions it calls that a stylesheet declares
+					an abstract declaration. The shared modules it uses are included with <code>xsl:include</code>,
+					at the end of its root element</li>
 				<li>in each top-level stylesheet, the <code>xsl:import</code> or <code>xsl:include</code> of the library -
 					in any of its modules - is replaced by an <code>xsl:use-package</code> in the top-level module, after its
 					imports: <code>xsl:use-package</code> can't be in an imported module (<code>XTSE3008</code>)</li>
@@ -2320,9 +2513,18 @@
 					<code>xsl:next-match</code></li>
 				<li>the stylesheet gets its own copies of the keys, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code> it relied on</li>
+				<li>each <a href="#xspec">XSpec</a> file that tests a module that used the library gets an
+					<code>x:helper package-name="…" package-version="…"</code>, after its <code>x:import</code> and
+					<code>x:helper</code> elements, so its test runner uses the package, as the top-level stylesheet's
+					<code>xsl:use-package</code> does - the module doesn't reach the library any more. One that has a helper for
+					the package already is left as it is. Untick the change in the Refactor Preview to leave a file out</li>
 			</ul>
 			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
 				reports what still needs to change, mostly with quick fixes.</p>
+			<p>Only the stylesheets in the workspace are converted. A stylesheet elsewhere - e.g. in another repository - that
+				imports or includes the library must be changed to use the package with <code>xsl:use-package</code>: an
+				<code>xsl:package</code> module can't be imported or included, and Saxon reports <code>XTSE0165</code>. The
+				linter reports this too.</p>
 			<h4 id="xslt-packages--unnamed-mode">The unnamed mode</h4>
 			<p>A library and the stylesheets that import it often share the unnamed mode: the stylesheets apply the library's
 				template rules, and add rules of their own, which take precedence. A package's unnamed mode is private to it,
@@ -2406,6 +2608,398 @@
 				declarations that override it.</p>
 			<aside>Renaming a package component renames it in the package only, not the declarations overriding it in the
 				stylesheets that use the package - nor their calls of it.</aside>
+		</div>
+	</article><article class="main doc-page" id="schematron"><h2 class="pageTitle">Schematron</h2>
+
+		<div class="two-thirds column">
+			<p>Schematron files (<code>.sch</code>) are checked as you edit them, with auto-completion and
+				formatting. They're checked as <a href="https://codeberg.org/dmaus/schxslt2">SchXslt2</a> runs them:
+				SchXslt2 1.11.3 - the ISO Schematron processor XSpec uses, as a patch update to XSpec's own copy - which compiles a schema to an XSLT 3.0
+				stylesheet - see <a href="#xspec--schematron">Testing a Schematron</a>.</p>
+
+			<details style="margin-bottom: 0">
+				<summary>About legacy Schematron versions</summary>
+				<p>A schema is checked as ISO Schematron 2025 with an XSLT query binding, e.g.
+					<code>queryBinding="xslt3"</code> - with <code>queryBinding="xslt4"</code>, its XPath is checked as XPath
+					4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
+					it - with a quick fix, <strong>Convert to ISO Schematron</strong>, that changes the namespace, a
+					pattern's <code>name</code> to its <code>title</code>, and <code>sch:key</code> to
+					<code>xsl:key</code>. A pattern in ISO Schematron's namespace with Schematron 1.5's <code>name</code> -
+					e.g. once the namespace is changed by hand - has quick fixes that replace it with a title, for the pattern
+					or each one.</p>
+			</details>
+
+			<h3 id="schematron--validating">Validating an XML file</h3>
+			<figure>
+				<img src="resources/schematron-validate.png" class="scale-with-grid">
+				<figcaption>
+					Schematron validation problems are highlighted inline in the XML and listed in the problems view.
+				</figcaption>
+			</figure>
+			<p>With an XML file in the editor, run <strong>Schematron: Validate</strong> from the Command
+				Palette - or <strong>Validate with Schematron</strong> from the <strong>More Actions</strong>
+				(<strong>...</strong>) menu in the editor's title bar. The
+				file is validated as SchXslt2 validates it, with the Saxon of the <code>XSLT.tasks.saxonJar</code>
+				setting - any edition - and each failed assertion and successful report is shown in the
+				<strong>Problems</strong> view, at the element or attribute it's about, with its message and diagnostics.
+				Its severity is the assertion's <code>severity</code> or <code>role</code> - e.g. <code>warning</code>
+				or <code>info</code> - and otherwise an error. To go to the assertion in the schema that reported a problem,
+				click its id - or <code>assert</code> or <code>report</code> - in the problem's hover or the
+				<strong>Problems</strong> view, use the <strong>Show the assertion</strong> quick fix
+				(<span class="shortcut">⌘.</span>), or the link below the problem in the <strong>Problems</strong>
+				view.</p>
+			<p>The schema is the one an <code>xml-model</code> processing instruction in the file associates with it,
+				e.g. <code>&lt;?xml-model href="rules.sch"
+				schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</code> - otherwise the one last used for the
+				file, or one you choose from the workspace's. <strong>Schematron: Validate (Choose
+				Schema)...</strong> chooses again.</p>
+			<p>A schema has an <strong>XML context file</strong>, as a stylesheet does: the XML file you develop it
+				for. It's shown in the status bar for a Schematron file - click it to choose one, or run
+				<strong>Schematron: Choose XML Context File...</strong>: the files whose <code>xml-model</code> names the
+				schema are listed first. Until you choose one, it's inferred: the file last validated with the schema,
+				else an open file whose <code>xml-model</code> names it. Validating another file with the schema, from
+				its own editor, doesn't change one you've chosen. A file that <code>sch:include</code> brings in has the
+				context file of the schema that includes it.</p>
+			<p>A file that more than one schema includes belongs to the one in the nearest folder - unless you choose
+				another with <strong>Schematron: Choose Including Schema...</strong>, or the button in the title of the
+				<strong>Schematron Includes</strong> view. The schema chosen is then used for the files it includes, as a
+				chosen top-level stylesheet is for its modules. It gives the file's XML context file, and what's in scope
+				where it's included - for checking it, and for navigation. <strong>XSLT: Reset Top-Level Stylesheet
+				Choices</strong> clears these choices too.</p>
+			<p>With a Schematron file in the editor, <strong>Quick Run</strong> - the ▶ button in the editor's title
+				bar, or <strong>Schematron: Quick Run: Validate the XML Context File</strong> - validates the context
+				file with the schema, and so does <strong>Schematron: Validate</strong>. The problems are shown for the
+				XML file, and above the schema's rules, while the schema stays in the editor: edit a rule, run, and see
+				what it reports.</p>
+			<p>In the schema, the validation is shown above each rule: the nodes it fired for, with its failed assertions
+				and reports - the nodes it was suppressed for, as an earlier rule of its pattern matched them first - or
+				that it <strong>never fired</strong>, which usually means its <code>context</code> isn't what was meant.
+				Above each pattern is how many of its rules fired, or that it wasn't active in the phase. Click one to open
+				the XML file.</p>
+			<p>Once a file is validated, it's validated again each time it, or the schema, is saved - so you can edit
+				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
+				the <strong>Schematron</strong> output channel.</p>
+			<p>The result of the last validation is shown in the status bar while the XML file - or the schema, for its
+				context file - is in the editor: <strong>✓ rules.sch</strong> when the file is valid, or the number of
+				problems, e.g. <strong>⊗ 3 · rules.sch</strong> - with an error icon when any is an error, else a warning
+				or info icon - and the time it was validated in the hover. Click it to validate again - or, with problems,
+				to show them in the <strong>Problems</strong> view. When the file, the schema or a file the schema includes
+				is edited after the validation, the icon is
+				an empty circle until it's validated again, as the result may be out of date. A validation at the end of a
+				<a href="#schematron--debugging">debug session</a> is shown too.</p>
+			<p>The schema's default phase is used - its <code>defaultPhase</code>, or all its patterns without one.
+				The phase is shown in the status bar for a Schematron file - and for an XML file with a schema - e.g.
+				<strong>phase: books (default)</strong>: click it, or run <strong>Schematron: Choose Phase...</strong>, to
+				choose another: one of the schema's phases, with its title, or <code>#ALL</code> for all its patterns. The
+				phase is kept for the XML file and the schema, and Quick Run, Validate and Debug all use it - a file already
+				validated is validated again with it. It's shown with the result, and above a pattern that wasn't active
+				in it.</p>
+			<aside>Saxon's syntax extensions are turned on as for the schema's
+				XSpec tests, e.g. for <code>xsl:note</code> or <code>queryBinding="xslt4"</code>, and the
+				<code>XSLT.resources.catalog</code> setting is used for the files it refers to.</aside>
+
+			<h3 id="schematron--debugging">Debugging a schema</h3>
+			<figure>
+				<img src="resources/schematron-debugging.png" class="scale-with-grid">
+				<figcaption>
+					For debugging, set breakpoints in a Schema or enable a rule to, for example, break on failed assertions.
+				</figcaption>
+			</figure>
+			<p>With a Schematron file in the editor, the debug button in the editor's title bar - or
+				<strong>Schematron: Debug: the XML Context File</strong> - validates the schema's
+				<a href="#schematron--validating">XML context file</a> in the <a href="#debugger">XSLT debugger</a>, with the
+				schema's phase. SchXslt2 compiles the schema to a stylesheet, which the debugger runs - but breakpoints,
+				pauses and stepping are at the schema's own lines, so you don't see the compiled stylesheet.</p>
+			<ul>
+				<li><strong>Breakpoints</strong> - set them on a rule, a rule's <code>let</code>, an <code>assert</code> or
+					<code>report</code>, or a <code>value-of</code> in a message, in the schema or a file it includes. On a
+					rule, it pauses each time the rule fires, with the node it fired for as the context item - on a pattern,
+					at each of its rules. A breakpoint where there's nothing to pause at is moved when you add it, keeping its
+					condition, to the step it's in - e.g. from a line of an assertion's message to the assertion, or from a
+					pattern's <code>param</code>, which SchXslt2 replaces with its value, to the pattern - or removed if
+					there's none, e.g. on the schema's title, or a global <code>let</code>, whose value is in
+					<strong>Globals</strong>. The status bar says which. A breakpoint in a pattern that isn't active in the
+					phase isn't verified, and says so.
+					<a href="#debugger--conditional">Conditions</a> and <a href="#debugger--logpoints">logpoints</a>
+					work as in a stylesheet, e.g. a condition <code>@id = 'B2'</code>.</li>
+				<li><strong>Failed assertions</strong> - check <strong>Failed Assertions</strong>, or
+					<strong>Successful Reports</strong>, in the <strong>Breakpoints</strong> view to pause at each one, on
+					the node it's for, with its message shown at the assertion - without a breakpoint on each. To pause
+					only for some, edit its condition (the pencil button) to the roles or severities to pause for, e.g.
+					<code>error fatal</code>: one with neither is an error, as in the <strong>Problems</strong> view.
+					For one node, use a conditional breakpoint on the assertion.</li>
+				<li><strong>Stepping</strong> goes from one of the schema's steps to the next - a rule, its lets, then its
+					assertions and reports - not through SchXslt2's own code.</li>
+				<li><strong>Variables</strong> are the schema's: the rule's <code>let</code>s, and the schema's and
+					pattern's in <strong>Globals</strong> - SchXslt2's own variables are hidden. In the rule of an abstract
+					pattern, the call stack names the pattern that uses it - e.g. <strong>rule order - order-dates (is-a
+					required)</strong> - and its <code>param</code> values are in a <strong>Parameters</strong> scope. In
+					<strong>Watch</strong>, the <strong>Debug Console</strong> and a hover, a parameter, e.g.
+					<code>$required</code>, is replaced by its value, as SchXslt2 replaces it in the pattern's copy. A
+					breakpoint in an abstract pattern pauses in each pattern that uses it - one on the line of a pattern
+					with <code>is-a</code> pauses in that one alone.</li>
+				<li><strong>Watch</strong> and the <strong>Debug Console</strong> evaluate XPath with the rule's node as
+					the context item - e.g. to try out a test before you change it - and hovering a variable shows its
+					value.</li>
+				<li><strong><a href="#debugger--empty-steps">Empty steps</a></strong> - while paused in a rule, the
+					first step in a path of its lets, tests and messages after which the path is empty is faded, with why
+					in its hover - e.g. <code>line</code> in <code>test="line"</code>, for an <code>order</code> that has
+					no lines. Not the rule's <code>context</code>. In an abstract pattern's rule, a path that starts
+					with a parameter is checked with the parameter's value - and the parameter alone too, as its value is
+					often a path, e.g. <code>@name</code>.</li>
+			</ul>
+			<p>When the session ends, its result is shown as a validation's: in the <strong>Problems</strong> view and
+				above the schema's rules. And in the XML file, hovering over an element's start tag shows the rules that
+				fired for it, and its attributes and text, with a link to each - <strong>Go to Definition</strong>
+				(<span class="shortcut">F12</span>) goes to them - see <a href="#debugger--input-nodes">From the input
+				to the templates</a>.</p>
+
+			<h3 id="schematron--profiling">Profiling a schema</h3>
+			<figure>
+				<img src="resources/schematron-profiler.png" class="scale-with-grid">
+				<figcaption>
+					A profiled schema: each rule's time in the Profile view, and above the rule in the schema - click a
+					row to go to the rule. Each profile is also kept in the schema's Timeline.
+				</figcaption>
+			</figure>
+			<p>To find which rules take the time, run <strong>Schematron: Profile: the XML Context File</strong> - from the
+				Command Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title
+				bar. The schema runs as it does for <a href="#schematron--debugging">debugging</a> - SchXslt2 compiles it, with its
+				phase, and Saxon runs the result on the schema's <a href="#schematron--validating">XML context file</a>, timing each
+				template, function and global variable - and the times are shown in the <a href="#profiler--view">Profile view</a>, as for a stylesheet.</p>
+			<ul>
+				<li><strong>Rows</strong> - each rule, with its pattern, the number of times it fired, and its net and
+					gross time - and each global <code>sch:let</code> and <code>sch:param</code>. The rules of an abstract
+					pattern are added up over each rule that extends it. A click goes to the rule in the schema, or the
+					file it's in.</li>
+				<li><strong>Functions</strong> of the XSLT modules the schema uses, e.g. with <code>xsl:include</code>,
+					are rows as in a stylesheet's profile. SchXslt2's own templates and functions are left out.</li>
+				<li><strong>In the editor</strong> - while the view is open, each rule and global <code>let</code> shows
+					its times above it in the schema, and in the files it includes.</li>
+				<li><strong>Timeline</strong> - each profile is kept in the schema's Timeline view, to show again and
+					compare, as for a stylesheet.</li>
+			</ul>
+			<p>A rule's time is that of its template: its <code>let</code>s, assertions and reports, and what they call.
+				Saxon times templates, functions and globals, not each instruction, so there's a time for a rule but not
+				for an assertion in it - to find a slow assertion, try removing or simplifying one at a time, or step
+				through the rule in the <a href="#schematron--debugging">debugger</a>. The times are from a run with tracing on:
+				<a href="#profiler--accuracy">compare them with each other</a>. It needs Saxon-PE or Saxon-EE, and
+				uses the same <code>XSLT.tasks.profileRuns</code> setting for <a href="#profiler--runs">warm-up
+				runs</a>.</p>
+
+			<h3 id="schematron--editing">Editing</h3>
+			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
+				e.g. <code>sch:group</code>, <code>sch:param</code>, an assertion's <code>severity</code>, and a phase's
+				<code>from</code> and <code>when</code> - with a description of each element. It works whatever prefix
+				the schema uses for Schematron - <code>sch</code>, another, or none, with the Schematron namespace as the
+				default. In a new file, it offers a schema with a pattern.</p>
+			<p>An element is inserted with the attributes it requires, in each form it's commonly written - e.g.
+				<code>sch:rule</code> with <code>context</code>, <code>sch:rule (abstract)</code> with
+				<code>abstract="true"</code> and <code>id</code>, <code>sch:assert</code> with <code>test</code> and its
+				message, and <code>sch:let</code> with <code>name</code> and <code>value</code>, or its content - as are
+				the XSLT declarations SchXslt2 copies, e.g. <code>xsl:function</code> with <code>name</code> and
+				<code>as</code>.</p>
+			<p>In XPath, auto-completion offers the variables in scope - the schema's, the pattern's and the rule's -
+				and element and attribute names from the schema's <a href="#schematron--validating">XML context file</a>.</p>
+			<p>XPath expressions are highlighted and checked in <code>context</code>, <code>test</code>,
+				<code>subject</code>, <code>select</code>, <code>path</code>, <code>value</code>,
+				<code>visit-each</code>, <code>documents</code>, and a phase's <code>from</code> and <code>when</code>.
+				<code>role</code>, <code>flag</code> and <code>severity</code> are attribute value templates, e.g.
+				<code>role="{$level}"</code>, as SchXslt2 copies them into its report.</p>
+
+			<h3 id="schematron--navigation">Navigation</h3>
+			<ul>
+				<li><strong>Ids</strong> - in a reference - <code>is-a</code>, <code>extends</code>'s <code>rule</code>, a
+					phase's <code>active</code>, <code>defaultPhase</code>, and an assertion's <code>diagnostics</code> and
+					<code>properties</code> - auto-completion offers the ids it can refer to, e.g. the abstract rules for
+					<code>extends</code>, and in a pattern with <code>is-a</code>, a parameter's <code>name</code> offers
+					the abstract pattern's parameters. Go to Definition, Find All References and Rename work on an id,
+					in the schema and the files it includes</li>
+				<li><strong>Variables</strong> - Go to Definition, Find All References and Rename on a variable reference
+					or an <code>sch:let</code> or <code>sch:param</code>, with the variable's scope as SchXslt2 has it - and
+					for an abstract pattern's parameter, the <code>sch:param</code> of each pattern with
+					<code>is-a</code> for it. Across files, as SchXslt2 assembles them: a variable used in a file that
+					<code>sch:include</code> brings in, but declared in the schema, goes to the schema's declaration - with
+					its hover - and a declaration's references and Rename include those in the files the schema includes
+					in its scope, unless a file declares the name itself</li>
+				<li><strong>Schematron Includes</strong> - for a Schematron file, the Imports view in the Explorer -
+					<strong>XSLT Imports</strong> for a stylesheet - shows the schema that includes it, found from the
+					workspace's <code>.sch</code> files, with the files the schema brings in: with <code>sch:include</code>,
+					<code>sch:extends</code>'s <code>href</code>, and <code>xsl:include</code> and <code>xsl:import</code> -
+					each XSLT module with its own imports and includes - expanded down to the file in the editor. Click a
+					file to open it. A file that <code>sch:include</code> brings in, e.g. one whose outermost element is a
+					pattern, is checked with what's in scope where it's included: the schema's <code>sch:ns</code>
+					prefixes, the variables of the schema, its phases and the elements containing the
+					<code>sch:include</code>, and the XSLT functions the schema declares or includes - and for the XSLT
+					SchXslt2 ignores, as a schema is. A schema's variable used only in a file it includes isn't reported
+					as unused</li>
+				<li><strong>Functions</strong> - Go to Definition, Find All References and Rename for a call of an XSLT
+					function: declared with <code>xsl:function</code> in the schema, or in a module its
+					<code>xsl:include</code> or <code>xsl:import</code> brings in - also from a file the schema includes.
+					From the declaration in a stylesheet, its references and Rename include the calls in the Schematron
+					files that use its module</li>
+				<li><strong>Outline</strong> - each element by what identifies it: a pattern by its id, a rule by its
+					context, an assertion or report by its id, else its test</li>
+			</ul>
+
+			<h3 id="schematron--hover">Hover help</h3>
+			<figure>
+				<img src="resources/schematron-is-a.png" class="scale-with-grid">
+				<figcaption>
+					Hover help provides additional information forx a schema's components.
+				</figcaption>
+			</figure>
+			<p>Hover help is for reviewing a schema as much as for editing it:</p>
+			<ul>
+				<li><strong>A pattern's <code>is-a</code></strong> - the abstract pattern's title, its parameters with the
+					values this pattern gives - or their defaults - and its rules and their tests with those values in
+					place, as SchXslt2 instantiates them</li>
+				<li><strong><code>extends</code></strong> - the abstract rule's variables and tests, as they're copied into
+					the rule</li>
+				<li><strong>A rule</strong> - its context, variables and assertions, and the earlier rules of its pattern:
+					a node is handled only by the first rule whose context matches it, so a rule that comes after a rule
+					that matches the same nodes is never used</li>
+				<li><strong>An assertion or report</strong> - when it's reported, its severity, role and flag, its
+					message, and the text of its diagnostics</li>
+				<li><strong>A variable</strong> - its <code>sch:let</code> or <code>sch:param</code>, with its value and
+					where it's declared - or in an abstract pattern, its parameter and the value each pattern gives it</li>
+				<li><strong>A phase's <code>active</code></strong>, and an assertion's <code>diagnostics</code> and
+					<code>properties</code> - the pattern's title and rules, and the diagnostic's or property's text</li>
+				<li><strong>Functions</strong> - as in a stylesheet: the signature of a built-in function, and of a
+					function declared in the schema or a module it includes, with its documentation</li>
+			</ul>
+
+			<h3 id="schematron--checks">Checks</h3>
+			<p>The problems are shown in the <strong>Problems</strong> view, as for a stylesheet:</p>
+			<ul>
+				<li><strong>Variables</strong> - <code>sch:let</code> and <code>sch:param</code> are in scope as
+					SchXslt2 declares them: the schema's and a phase's are global, a pattern's are in scope in its
+					rules, and a rule's in its assertions and reports</li>
+				<li><strong>Namespace prefixes</strong> - SchXslt2 declares only the prefixes of
+					<code>sch:ns</code> in its stylesheet, so a prefix declared only with <code>xmlns</code> - or not at
+					all - is reported, e.g. <code>xs</code> in <code>xs:integer(@n)</code>, with a quick fix that adds the
+					<code>sch:ns</code>. Within an XSLT element, e.g. <code>xsl:function</code>, its
+					<code>xmlns</code> declarations apply too</li>
+				<li><strong>Abstract patterns and rules</strong> - an abstract pattern's parameters aren't variables,
+					so they aren't reported, and an abstract rule and the rules that extend it share their
+					<code>sch:let</code>, as SchXslt2 copies its content into each of them</li>
+				<li><strong>References</strong> - as SchXslt2 resolves them, with the files <code>sch:include</code>
+					brings in: an error where it stops - <code>is-a</code> that isn't the id of an abstract pattern (or
+					group), or doesn't supply a parameter the abstract pattern declares with no value, and
+					<code>extends</code> whose <code>rule</code> isn't the id of an abstract rule - and a warning where it
+					ignores the reference: a phase's <code>active</code> for a pattern that isn't declared, or is abstract,
+					<code>diagnostics</code> or <code>properties</code> that aren't declared, and ids that aren't unique.
+					Go to Definition on a reference goes to its declaration, also in an included file</li>
+				<li><strong>Files</strong> - the <code>href</code> of <code>sch:include</code>, <code>sch:extends</code>,
+					<code>xsl:include</code> and <code>xsl:import</code> is a link to the file - and a file that isn't
+					found is reported, as SchXslt2 stops</li>
+				<li><strong>Rules that never fire</strong> - a node is handled only by the first rule of a pattern whose
+					context matches it, so a rule with the same context as an earlier one, or one for elements after a
+					rule for every element, e.g. <code>context="*"</code>, is reported - not in a group, where every
+					matching rule is used</li>
+				<li><strong>Required attributes</strong> - an element without an attribute ISO Schematron requires is
+					reported, with a quick fix that adds it: an error where SchXslt2 fails without it, e.g. a rule's
+					<code>context</code>, an assertion's <code>test</code> or <code>sch:ns</code>'s <code>uri</code>, and a
+					warning where it carries on, but the element can't be referred to or does nothing, e.g. a phase with
+					no <code>id</code></li>
+				<li><strong>Elements and attributes</strong> - those that ISO Schematron doesn't allow where they are.
+					Elements in other namespaces, e.g. Schematron QuickFix's <code>sqf:fix</code>, aren't checked against
+					Schematron's schema, and a file that <code>sch:include</code> includes may start with any Schematron
+					element, e.g. <code>sch:pattern</code></li>
+			</ul>
+
+			<h3 id="schematron--xslt">XSLT in a schema</h3>
+			<p>An <code>xsl:function</code>, <code>xsl:key</code> or <code>xsl:accumulator</code> in the schema is
+				checked as in a stylesheet, and its functions can be called in the schema's XPath. So can the
+				functions of the modules that <code>xsl:include</code> and <code>xsl:import</code> bring in.</p>
+			<p>SchXslt2 copies only these XSLT declarations of a schema into its stylesheet:
+				<code>xsl:accumulator</code>, <code>xsl:function</code>, <code>xsl:include</code>,
+				<code>xsl:import</code>, <code>xsl:import-schema</code>, <code>xsl:key</code> and
+				<code>xsl:use-package</code>. Other XSLT isn't used as written, so it's reported:</p>
+			<table>
+				<thead>
+					<tr><th>In the schema</th><th>With SchXslt2</th><th>Quick fix</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>another XSLT declaration, e.g. <code>xsl:param</code>, <code>xsl:variable</code> or
+						<code>xsl:template</code></td><td>ignored</td><td><code>sch:param</code>, or
+						<code>sch:let</code></td></tr>
+					<tr><td>XSLT in a rule, e.g. <code>xsl:variable</code></td><td>ignored</td><td><code>sch:let</code></td></tr>
+					<tr><td>XSLT in a message, e.g. <code>xsl:value-of</code> in <code>sch:assert</code></td><td>not run -
+						copied into the report as it is</td><td><code>sch:value-of</code></td></tr>
+					<tr><td>XSLT in the content of <code>sch:let</code></td><td>not run - copied into the
+						value</td><td></td></tr>
+					<tr><td>an XSLT attribute of a Schematron element, e.g. <code>xsl:use-when</code> - or
+						<code>xsl:expand-text</code>, unless it's <a href="#schematron--text-value-templates">allowed</a></td>
+						<td>ignored</td><td>remove it</td></tr>
+				</tbody>
+			</table>
+			<p>An <code>xsl:note</code> in a declaration SchXslt2 copies, e.g. <code>xsl:function</code>, is copied
+				with it, and its stylesheet is XSLT 3.0: Saxon runs it only with its syntax extensions, which XSpec turns on
+				for the tests of the schema - with the default <code>XSLT.xspec.allowSyntaxExtensions</code> setting,
+				<code>auto</code> - as it does for <code>queryBinding="xslt4"</code>. A note is reported when the Saxon of
+				the <code>XSLT.tasks.saxonJar</code> setting can't run it - Saxon-HE, or a Saxon before 13 - or the setting
+				is <code>off</code>, with a quick fix that adds <code>use-when="false()"</code>, with which Saxon leaves
+				the note out.</p>
+			<p>SchXslt2 also declares the unnamed mode, with the schema's own accumulators. An included or imported
+				module that declares the unnamed mode with <code>use-accumulators</code> is reported, as Saxon reports
+				XTSE0545 for the two, and so is one that declares accumulators, as SchXslt2's modes don't use
+				them: declare them in the schema instead.</p>
+
+			<h3 id="schematron--text-value-templates">Text value templates in messages</h3>
+			<figure>
+				<img src="resources/schematron-tvt.png" class="scale-with-grid">
+				<figcaption>
+					Text value templates allow text to include values from XPath enclosed within curly braces.
+				</figcaption>
+			</figure>
+			<p>A message can use text value templates instead of <code>sch:value-of</code>, as in XSLT: with
+				<code>xsl:expand-text="yes"</code>, <code>Order {@id} has an invalid date: {@date}</code> is
+				<code>Order &lt;value-of select="@id"/&gt; has an invalid date: &lt;value-of select="@date"/&gt;</code>.
+				It's a non-standard extension - ISO Schematron doesn't have it - so it's allowed only with the
+				<code>XSLT.schematron.allowExpandText</code> setting, which is off by default. For a Schematron file,
+				the status bar shows <strong>tvt:on</strong> or <strong>tvt:off</strong> for the setting; click it to open
+				the setting - it's for every Schematron file, not just the one in the editor.</p>
+			<ul>
+				<li><strong>Where</strong> - <code>xsl:expand-text</code> is inherited, as in XSLT: on the schema, it's for
+					every message; on a pattern, rule or assertion, for those within it - and <code>"no"</code> turns it
+					off within. The <code>xsl</code> prefix is the one the schema declares for XSLT</li>
+				<li><strong>Messages</strong> - the text of <code>sch:assert</code>, <code>sch:report</code>,
+					<code>sch:diagnostic</code> and <code>sch:property</code>, and of <code>sch:emph</code>,
+					<code>sch:span</code> and <code>sch:dir</code> within them: where <code>sch:value-of</code> is allowed.
+					A title or <code>sch:p</code> is text</li>
+				<li><strong>Braces</strong> - <code>{{</code> and <code>}}</code> are braces in the text. Within an
+					expression, braces and quotes are the expression's - e.g. <code>{map { 'a': 1 }?a}</code> or
+					<code>{"it's {fine}"}</code></li>
+				<li><strong>Included files</strong> - a file <code>sch:include</code> brings in has its own
+					<code>xsl:expand-text</code>: a file without it is unchanged, so a library's braces, e.g. in
+					<code>[A-Z]{2}</code>, are still text</li>
+				<li><strong>Abstract patterns</strong> - a parameter in a text value template is replaced, as in an
+					attribute, e.g. <code>{$attribute}</code></li>
+			</ul>
+			<p>In the editor, text value templates are highlighted and checked as XPath, with auto-completion, and Go to
+				Definition, Find All References, Rename and hover for their variables.
+				<strong>Schematron: Validate</strong>, and the <a href="#xspec--schematron">XSpec tests</a> of a
+				schema, rewrite them as <code>sch:value-of</code> before SchXslt2 compiles the schema - with the space
+				between two of them, e.g. <code>{@first} {@last}</code>, kept. Without the setting,
+				<code>xsl:expand-text</code> is reported as ignored, with quick fixes to remove it or to open the
+				setting.</p>
+			<p>Other Schematron processors ignore <code>xsl:expand-text</code>, so the braces would be in their reports
+				as written. For them, <strong>Schematron: Export Standard Copy...</strong> writes a copy of the schema as
+				standard ISO Schematron: its text value templates as <code>sch:value-of</code>, with the files it includes
+				in it, and paths relative to the copy. The stylesheet it uses, <code>expand-text.xsl</code> - in the
+				extension's <code>xslt-resources/schematron</code> folder - can also be run on its own, e.g. before
+				another processor: <code>java -jar saxon.jar -s:schema.sch -xsl:expand-text.xsl
+				-o:schema-standard.sch</code>.</p>
+		</div>
+		<div>
+			<h3 id="schematron--pipeline">Using a schema in a pipeline</h3>
+			<p>A build or CI pipeline should compile the schema itself, with the
+				<a href="https://codeberg.org/SchXslt/schxslt2">SchXslt2</a> version the team has chosen, and keep the schema and the
+				XSLT modules it includes or imports (<code>xsl:include</code>, <code>xsl:import</code>) in the build, so that
+				the pipeline controls everything it runs. If the schema uses text value templates, which other processors don't
+				know, <strong>Schematron: Export Standard Copy...</strong> - see above - writes a copy of it as standard
+				Schematron to compile instead.</p>
 		</div>
 	</article><article class="main doc-page" id="quick-run"><h2 class="pageTitle">Quick Run</h2>
 
@@ -3048,6 +3642,9 @@ npm install --save-dev xslt3</code>
 				documentation for the debug toolbar, views and keyboard shortcuts.</p>
 			<p>For debugging by adding <code>xsl:message</code> instructions to the stylesheet, see
 				<a href="#code-diagnostics">Print Debugging</a>.</p>
+			<p>AI assistants can use the debugger too: with the <a href="#ai-assistants--mcp">MCP server</a>, an
+				assistant can read the variables in your paused debug session, see which instruction wrote a line of
+				output, and run a stylesheet with logpoints.</p>
 			<aside><strong>Requirements:</strong> SaxonJ 12 or later - any edition, including Saxon-HE - set with the
 				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Debugging with SaxonJS or
 				SaxonC isn't supported. For XPath 4.0 syntax in an XSLT 4.0 stylesheet, Saxon-PE or Saxon-EE is
@@ -3110,11 +3707,15 @@ npm install --save-dev xslt3</code>
 				<a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug configuration</a>
 				in the VS Code documentation for more on <code>launch.json</code>.</p>
 			<aside>An XSpec test can be debugged from the Test Explorer, with breakpoints in the stylesheet under test
-				and in the XSpec file itself - see <a href="#xspec--debugging">Debugging a test</a>.</aside>
+				and in the XSpec file itself - see <a href="#xspec--debugging">Debugging a test</a>. A Schematron
+				schema can be debugged too, on its own rules and assertions - see
+				<a href="#schematron--debugging">Debugging a schema</a>.</aside>
 
 			<h3 id="debugger--breakpoints">Breakpoints</h3>
 			<p>A breakpoint can be set on a line where an XSLT instruction or a literal result element starts. A
-				breakpoint anywhere in a multi-line start tag is moved to the tag's first line.</p>
+				breakpoint anywhere in a multi-line start tag is moved to the tag's first line. A breakpoint in an XML
+				comment is moved to the first instruction after the comment, if there's one before the end of the
+				element the comment is in.</p>
 			<p>Breakpoints can also be set inside a multi-line XPath expression - see
 				<a href="#debugger--xpath">Stepping through XPath</a>.</p>
 			<h4 id="debugger--conditional">Conditional breakpoints and hit counts</h4>
@@ -3436,6 +4037,12 @@ npm install --save-dev xslt3</code>
 				<li><code>xsl:message</code> output, and the result when there's no <code>resultPath</code>, are
 					written to the Debug Console.</li>
 			</ul>
+			<figure>
+				<img src="resources/debug-output-mapping.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">Trace XSLT output back to the XSLT that created it - <strong>Peek Definition</strong> shows the instruction.</i></p>
+				</figcaption>
+			</figure>
 			<p>XML output can be traced back to the stylesheet. With the cursor on a line of the output, a hint at the
 				end of the line - e.g. <code>→ report.xsl:4</code> - shows where that part of the output was written.
 				To go there, use <strong>Go to XSLT Source</strong> on the output's context menu,
@@ -3444,6 +4051,13 @@ npm install --save-dev xslt3</code>
 				<code>ctrlCmd</code>. The stylesheet is shown in another editor group from the output's. For HTML, JSON
 				or text output, <strong>Go to XSLT Source</strong> reports that only XML output can be traced back to
 				the stylesheet.</p>
+			<p>XML output can be traced back to the input too: the input node that was the context item when that part
+				of the output was written. When it was a node of an input file - the XML source, or a document read with
+				<code>doc()</code> - the hint shows it after the stylesheet's location, e.g.
+				<code>→ report.xsl:4 · input: order, orders.xml:12</code>, and <strong>Go to XSLT Input</strong>, on the
+				output's context menu, goes to its element's start tag - for an attribute or text node, its element's.
+				Not for a context item the stylesheet constructed, e.g. in a temporary tree, or one that isn't a node.
+				From the source XML, you can go on to <a href="#debugger--input-nodes">all the templates that processed it</a>.</p>
 			<p>When the session ends, a notification offers to <strong>Open</strong> the result file - or, for HTML,
 				to <strong>Open in Browser</strong>.</p>
 			<h4 id="debugger--saxon-errors">Saxon errors</h4>
@@ -3453,6 +4067,53 @@ npm install --save-dev xslt3</code>
 			<p>When the transform fails, the notification at the end of the session gives Saxon's reason - for
 				example, that the XML source file doesn't exist - or, for a dynamic error, its message, code and line.
 				For a stylesheet with static errors, which can't be debugged, it gives the first of them.</p>
+
+			<h3 id="debugger--input-nodes">From the source XML to the XSLT instruction</h3>
+			<figure>
+				<img src="resources/debug-xslt-mapping.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The margin highlights processed Source XML elements - <strong>Peek Definition</strong> shows the instruction.</i></p>
+				</figcaption>
+			</figure>
+			<p>When a debug session ends - including debugger runs without pausing using <strong>Debug: Start Without Debugging</strong>
+				(<span class="shortcut">Ctrl+F5</span>, or <strong>Run › Run Without Debugging</strong>)
+				- each node of the input files is linked to the
+				template rules that processed it: the one <code>xsl:apply-templates</code> chose, those
+				<code>xsl:next-match</code> or <code>xsl:apply-imports</code> went on to, or the built-in rules, when no
+				template matched it - and the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and
+				<code>xsl:iterate</code> instructions that processed it. For <code>xsl:for-each-group</code>, that's
+				each member of each group, not only the first: a node in two groups is counted twice.</p>
+			<ul>
+				<li><strong>Markers</strong> - a bar in the gutter of the input file, and in its scrollbar - show the elements
+					there's something for: green for those a template rule or an instruction processed (or whose
+					attributes or text it did), amber for those only the built-in rules processed - no template matched
+					them. Elements with no marker weren't processed by either, e.g. only read by an XPath expression. When
+					debugging a <a href="#schematron--debugging">Schematron schema</a>, the bar is blue, not green: a rule
+					checked the element - which isn't that it's valid, as an assertion may have failed. The problems say
+					that.</li>
+				<li><strong>Hover</strong> over an element's start tag in the input file: the templates that processed
+					it, and its attributes and text - e.g. <code>@product: match="@product" mode="attr"</code> - with the
+					number of times, if more than once, and a link to each template. Whitespace between elements that only
+					the built-in rules processed isn't listed.</li>
+				<li><strong>Go to Definition</strong> (<span class="shortcut">F12</span>) on the start tag goes to those
+					templates.</li>
+				<li>Above each template rule, <code>xsl:for-each</code>, <code>xsl:for-each-group</code> or
+					<code>xsl:iterate</code> in the stylesheet: the number of nodes it processed - click it for the
+					list.</li>
+			</ul>
+			<p>Nodes that only an XPath expression reads aren't included: e.g. the steps of a path such as
+				<code>orders/order/line</code>, the items of <code>for $line in $lines return ...</code> or
+				<code>$lines ! ...</code>, or a node passed to a function.</p>
+			<p>It's for the last run only (<strong>XSLT: Clear Input Mapping</strong> removes it), and for documents read from files - the XML source, and those read with
+				<code>doc()</code> or <code>document()</code> - not trees the stylesheet constructs. The input file can
+				be edited, or formatted, after the run: an element is found again by its position among the file's
+				elements - but not once elements are added or removed before it. An input file changed or replaced
+				outside VS Code, e.g. by a script or a git checkout, is taken to be another file: what was recorded
+				for it is removed.</p>
+			<p>Recording this, and the input each part of the output was written for, costs little time - with an input
+				of 400,000 nodes, about half a second more - but memory and data in proportion to the input and output. To
+				turn both off, e.g. for very large inputs, set <code>XSLT.debug.mapInputNodes</code> to
+				<code>false</code>.</p>
 
 			<h3 id="debugger--demo">Sample: stepping through XPath</h3>
 			<p>The <a href="https://github.com/DeltaXML/vscode-xslt-tokenizer/tree/master/sample/debugger-demo">debugger-demo</a>
@@ -3515,6 +4176,131 @@ npm install --save-dev xslt3</code>
 				Java runtime is too old for the Saxon jar.</p>
 			<p>The <strong>XSLT Debugger</strong> log, in the Output panel, shows how each session was launched: the
 				Java command line, the Saxon product, the Java runtime and the Saxon options used.</p>
+		</div>
+
+	</article><article class="main doc-page" id="profiler"><h2 class="pageTitle">Profiler</h2>
+
+		<div class="two-thirds column">
+			<p>To find where a stylesheet spends its time, profile it: the stylesheet runs as <a href="#quick-run">Quick Run</a> runs it, with Saxon timing each template, function and global
+				variable, and the times are shown in the <strong>Profile</strong> view - the slowest first - and above
+				each declaration in the editor.</p>
+
+			<aside><strong>Requirements:</strong> Saxon-PE or Saxon-EE - SaxonJ, set with the
+				<code>XSLT.tasks.saxonJar</code> setting, or SaxonC, set with the <code>XSLT.tasks.saxonCPath</code>
+				setting. Profiling uses Saxon's timing profile (its <code>-TP</code> option), a feature of Saxon-PE and
+				Saxon-EE, so it isn't available with Saxon-HE. SaxonJS has no timing profile: when Quick Run uses
+				SaxonJS, SaxonJ is used instead.</aside>
+
+			<h3 id="profiler--profiling">Profiling a stylesheet</h3>
+			<figure>
+				<img src="resources/profiler-report.png" class="scale-with-grid">
+				<figcaption>
+					The profiler report. Click on an entry to navigate to the corresponding code.
+				</figcaption>
+			</figure>
+			<p>With the stylesheet in the editor, run <strong>XSLT: Profile Stylesheet</strong> - from the Command
+				Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title bar.</p>
+			<p>The stylesheet runs as <a href="#quick-run">Quick Run</a> runs it, using the same Quick Run task:
+				with the XML context file, or from <code>xsl:initial-template</code> when there's no context file, and
+				with the task's parameters - you're asked for the values of any <a href="#quick-run--required-parameters">required parameters</a>, as when the task runs. When the
+				stylesheet is imported or included by another, you're offered the choice of profiling the parent
+				stylesheet instead.</p>
+			<p>The processor is the one Quick Run uses: SaxonJ or SaxonC. The run's output appears in the terminal as
+				for a task, and its result file is written as usual. When the run ends, the <strong>Profile</strong> view opens beside the editor.</p>
+
+			<h3 id="profiler--view">The Profile view</h3>
+			<p>The view has a row for each template, function and global variable or parameter that ran, sorted by net
+				time, the slowest first:</p>
+			<ul>
+				<li><strong>Template / function</strong> - its kind, and a match template's pattern as written in the
+					stylesheet, with its mode, or the name of a named template or function, or <code>$name</code> for a
+					global variable or parameter</li>
+				<li><strong>Module</strong> - the module and line of the declaration</li>
+				<li><strong>Calls</strong> - how many times it ran</li>
+				<li><strong>Net (ms)</strong> - the time spent in it, leaving out the templates and functions it
+					called</li>
+				<li><strong>Net %</strong> - its share of the time spent in all the templates, functions and globals,
+					with a bar to compare at a glance</li>
+				<li><strong>Gross (ms)</strong> - the time spent in it, including the templates and functions it
+					called</li>
+				<li><strong>Avg net (ms)</strong> - the net time for each call</li>
+			</ul>
+			<p>Net times add up to the time spent in the templates, functions and globals, so the rows with the most
+				net time are where the time goes. Gross times overlap - a template's gross time includes the gross time
+				of everything it calls - so the template the run starts from has the largest gross time.</p>
+			<p>Click a column heading to sort by it, and again to reverse the order. Click a row, or press
+				<span class="shortcut">Enter</span> on it, to go to its declaration, with its name or match pattern
+				selected; the up and down arrow keys move between rows. <strong>Run Again</strong> profiles the
+				stylesheet again.</p>
+			<p>The view's header shows the total time of the run, and how much of it was spent in the templates,
+				functions and globals. The rest is time Saxon spends outside them, e.g. reading the XML source and
+				writing the result.</p>
+
+			<h4 id="profiler--run-settings">Run settings</h4>
+			<p>The times depend on the XML source and the parameters as much as on the stylesheet, so the view shows
+				what the run used: the Quick Run task, the XML source and its size (or the initial template, with no
+				source), the initial mode, each stylesheet parameter with its value - for a parameter you're asked for,
+				the value you entered - and the number of runs. Click the <strong>Run settings</strong> line to show or
+				hide them.</p>
+
+			<h3 id="profiler--codelens">Times in the editor</h3>
+			<p>While the Profile view is open, each profiled template, function and global shows its times above its
+				declaration, in the stylesheet and the modules it imports or includes - for example:</p>
+			<code class="block">3 calls · 1.20 ms net (13%) · 4.50 ms gross
+&lt;xsl:template match="order"&gt;</code>
+			<p>Click the times to show the declaration's row in the Profile view. As you edit a module, the times stay
+				with their declarations, found by name, or by match pattern and mode. Close the Profile view to remove
+				them.</p>
+
+			<h3 id="profiler--runs">Warm-up runs</h3>
+			<p>The first time a stylesheet runs, the Java VM is still starting up and compiling code, so the first
+				run's times include this warm-up. For a transform that takes a second or less, the warm-up can be most
+				of the time: in one small example, the first run took 17 ms and later runs about 1 ms.</p>
+			<p>For times without the warm-up, set <code>XSLT.tasks.profileRuns</code> to the number of times to run the
+				transform, e.g. <code>5</code>. The first run is then a warm-up run, left out, and the times shown are
+				the average of the other runs - the view's run settings say, e.g., <strong>average of runs
+				2-5</strong>. Each run takes as long as a Quick Run, so for a long transform, where the warm-up is a
+				small part of the time, one run is enough.</p>
+
+			<h3 id="profiler--timeline">Earlier profiles</h3>
+			<p>Each profile is kept, and listed in the stylesheet's <strong>Timeline</strong> view, in the Explorer - or
+				right-click the stylesheet and choose <strong>Open Timeline</strong>. An item shows the time spent in
+				the templates, functions and globals, the XML source and the runs; hover over it for the slowest rows.
+				Click an item to show that profile in the Profile view again, e.g. to compare the times before and after
+				a change.</p>
+			<p>The last 20 profiles are kept for each stylesheet, for each workspace.</p>
+			<p>To remove a profile, right-click it in the Timeline view and choose <strong>Delete</strong>. To remove
+				them all, use <strong>Clear Profiles and XSpec Runs from Timeline (Current File)</strong> from the
+				Timeline view's <strong>...</strong> menu or the Command Palette - or <strong>(All Files)</strong>, for
+				every stylesheet and XSpec file in the workspace. Only the extension's profiles and XSpec runs are
+				removed, not other entries such as Git commits.</p>
+			<aside>The Timeline view's profiles need VS Code 1.145 or later, and a folder open in VS Code.</aside>
+
+			<h3 id="profiler--schematron">Profiling a Schematron schema</h3>
+			<figure>
+				<img src="resources/schematron-profiler.png" class="scale-with-grid">
+				<figcaption>
+					A profiled schema: each rule's time in the Profile view, and above the rule in the schema - click a
+					row to go to the rule. Each profile is also kept in the schema's Timeline.
+				</figcaption>
+			</figure>
+			<p>A Schematron schema is profiled in the same view: <strong>Schematron: Profile: the XML Context File</strong>
+				times each rule and global <code>let</code> - see <a href="#schematron--profiling">Profiling a
+				schema</a>.</p>
+
+			<h3 id="profiler--accuracy">What the times show</h3>
+			<ul>
+				<li>Saxon times the run with tracing on, which turns off some of its optimisations, so the times are
+					longer than in a normal run. Compare them with each other, rather than as timings of the
+					stylesheet.</li>
+				<li>Only templates, functions and global variables and parameters are timed - not each instruction or
+					expression within them. An instruction's time is part of the net time of the template, function or
+					global it's in.</li>
+				<li>A global variable is evaluated when it's first used, so its time is also part of the gross time of
+					the template or function that first used it.</li>
+				<li>Times vary a little from run to run. For a small difference between two profiles, profile each
+					version with several runs - see <a href="#profiler--runs">Warm-up runs</a>.</li>
+			</ul>
 		</div>
 
 	</article><article class="main doc-page" id="xspec"><h2 class="pageTitle">XSpec Tests</h2>
@@ -3612,6 +4398,16 @@ npm install --save-dev xslt3</code>
 			<p>Either way, calling a component that isn't public is reported. When tests are run, the packages they
 				use - the package's own, and those of an <code>x:helper package-name="…"</code> - are passed to Saxon
 				with <code>-lib</code>, found as for <a href="#xslt-packages">XSLT packages</a>.</p>
+			<p id="xspec--uses-package">A stylesheet that <em>uses</em> a package has the same trouble: XSpec imports it into the test runner,
+				and an <code>xsl:use-package</code> can't be in an imported stylesheet - at its top level, or in a module it imports or
+				includes (XTSE3008). The stylesheet attribute of <code>x:description</code>, or of an <code>x:helper</code>, is
+				reported when it is so, with the module that has the <code>xsl:use-package</code> and the package. The way
+				to test such a stylesheet is to keep the <code>xsl:use-package</code> out of what is tested: put it in a top-level stylesheet,
+				test the modules with the logic, and give the test runner the package with an <code>x:helper package-name</code> on
+				<code>x:description</code> - as the top-level stylesheet's <code>xsl:use-package</code> would. Not reported with
+				<code>run-as="external"</code>, which doesn't import the stylesheet - but with Saxon-PE 13.1, the separate
+				transformation of a stylesheet that uses a package didn't find the packages passed with <code>-lib</code>
+				(XTSE3000).</p>
 			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
 				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
 				its type.</p>
@@ -3639,6 +4435,10 @@ npm install --save-dev xslt3</code>
 			<p>Auto-completion offers the elements, attributes and values XSpec allows where you are, and hover help on
 				an XSpec element's name shows its description from the schema. The Outline view lists the scenarios and
 				expectations by their labels.</p>
+			<p>In XPath, e.g. an <code>x:expect</code>'s <code>test</code>, auto-completion of element and attribute
+				names offers those of the test data: the content of <code>x:context</code>, <code>x:expect</code>,
+				<code>x:param</code> and <code>x:variable</code>, and of the documents their <code>href</code> attributes
+				refer to - not XSpec's own elements and attributes.</p>
 
 			<h3 id="xspec--stylesheet-under-test">The stylesheet under test</h3>
 			<p>The stylesheet of <code>x:description</code> - and of each <code>x:helper</code> - is read, as an
@@ -3711,6 +4511,14 @@ npm install --save-dev xslt3</code>
 				expected <code>...</code> matches - an attribute's value, text, or an element's content - is shown as
 				<code>...</code> in the actual result too, so only the differences that made it fail are shown.
 				<strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+			<h4 id="xspec--times">Test times</h4>
+			<p>With Saxon-PE or Saxon-EE, the Test Explorer shows how long each test took, beside it. The tests are
+				compiled with XSpec's <code>measure-time</code> option, which times each scenario - so the expectations
+				in a scenario all have its time, and a scenario's time includes the scenarios in it. The HTML report
+				shows the times too.</p>
+			<p>The first scenario run includes the Java VM's warm-up, so on a quick test file it may be the slowest
+				for that reason alone. Tests aren't timed with Saxon-HE, as XSpec times them with a Saxon extension
+				function, or when debugging, or with coverage.</p>
 			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
 				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
 				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
@@ -3742,14 +4550,55 @@ npm install --save-dev xslt3</code>
 				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
 				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
+			<p>With <a href="#xspec--times">test times</a>, an event also shows how long the file's tests took to run, e.g.
+				<strong>tests 36.7 ms</strong> - just running the tests, not starting Java, compiling or reporting - so
+				you can see when a change made them slower. The workspace's timeline shows each run's time in all,
+				with each file's test time when you hover over it.</p>
+			<p>To remove a run, right-click it in the Timeline view and choose <strong>Delete</strong>. To remove all
+				of a file's runs, use <strong>Clear Profiles and XSpec Runs from Timeline (Current File)</strong> from
+				the Timeline view's <strong>...</strong> menu or the Command Palette - or <strong>(All Files)</strong>,
+				for every XSpec file and stylesheet in the workspace. For a run of more than one XSpec file, only the
+				current file's results are removed - the run is kept for the others. Other entries, such as Git
+				commits, aren't removed.</p>
 			<h3 id="xspec--schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
-				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
-				XSpec), to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
+				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (1.11.3 
+				- a patch update to XSpec's own copy),
+				to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
 				expectations such as <code>x:expect-assert</code> and <code>x:expect-not-report</code> appear in the Test
 				Explorer with the labels XSpec gives them, e.g. <em>not assert a001</em>.</p>
 			<aside>Only a Schematron with an XSLT query binding, e.g. <code>queryBinding="xslt3"</code>, is supported -
 				not one for XQuery.</aside>
+
+						<p>In the XSpec file, the expectations' ids are linked to the schema - in it and the files it includes:
+				auto-completion of <code>id</code> offers its assertions' ids for <code>x:expect-assert</code> and
+				<code>x:expect-not-assert</code>, its reports' for <code>x:expect-report</code> and
+				<code>x:expect-not-report</code>, and its rules' for <code>x:expect-rule</code> - as well as its roles for
+				<code>role</code>, and its rules' contexts for <code>x:expect-rule</code>'s <code>context</code>. Go to
+				Definition and hover go from an id to the assertion, report or rule, and an id the schema doesn't have is
+				reported, as the expectation always fails - or, for <code>x:expect-not-assert</code> and
+				<code>x:expect-not-report</code>, always passes. From the schema, Find All References and Rename on an
+				assertion's, report's or rule's id include the XSpec tests that use it.</p>
+
+			<h4 id="xspec--schematron-generated">Creating tests from the XML context file</h4>
+			<p>In a Schematron file, code actions (<span class="shortcut">⌘.</span>) create XSpec scenarios from the
+				schema's <a href="#schematron--validating">XML context file</a> - in the XSpec file whose
+				<code>schematron</code> attribute names the schema, or a new one beside it:</p>
+			<ul>
+				<li><strong>On a rule</strong> - a scenario for a node it fires for, with an expectation for each of its
+					assertions and reports</li>
+				<li><strong>On an assertion or report</strong> - a scenario for a node where it fails (or is reported),
+					and one for a node where it passes (or isn't)</li>
+				<li><strong>On the schema's outermost element</strong> - a scenario for each rule that has none yet</li>
+			</ul>
+			<p>A scenario's <code>x:context</code> is the node, with its ancestors - and its expectations are the
+				schema's results for that data, found by running the schema on it: the tests pass when they're made,
+				describing what the schema does now, for you to review. When the node with its ancestors alone doesn't
+				give the result a scenario is for - e.g. an id that must be unique, with no other node to share it - the
+				data has the siblings at its level too, or the whole document, and the expectations name the node with
+				<code>location</code>. An assertion with no id is expected by its message. A rule that no node of the
+				context file fires for - or a schema with no context file, or no Saxon - has a pending scenario, to be
+				completed.</p>
 
 			<h3 id="xspec--debugging">Debugging a test</h3>
 			<p>The <strong>Debug</strong> button beside a scenario - or the Test Explorer's <strong>Debug Test</strong>
@@ -3794,6 +4643,10 @@ npm install --save-dev xslt3</code>
 				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the
 				tests, without pausing, so it works with any edition of Saxon. The modules the stylesheet imports or
 				includes have their coverage too - not XSpec's own modules, or the test runner.</p>
+			<p>After a coverage run, or debugging a test, a scenario's context file - <code>x:context href="..."</code>
+				- is linked to the templates that processed its nodes, as after a <a href="#debugger--input-nodes">debug
+				session</a>: hover over an element's start tag in it. Not an inline <code>x:context</code>, whose nodes
+				are constructed by the test.</p>
 
 			<h3 id="xspec--settings">Settings</h3>
 			<table>
@@ -3813,7 +4666,9 @@ npm install --save-dev xslt3</code>
 			<aside>By default, tests are run with Saxon's syntax extensions on (<code>--allowSyntaxExtensions:on</code>)
 				only when they're needed: when the stylesheet tested - or a module it imports, includes or uses, or a
 				helper - is XSLT 4.0, or uses item types or notes, e.g. record types with <code>version="3.0"</code>,
-				with <code>run-as="external"</code> too. Not otherwise, as with them on, Saxon 13 runs a stylesheet
+				with <code>run-as="external"</code> too - or for a Schematron, when it has <code>xsl:note</code> in an
+				<code>xsl:function</code> or other declaration SchXslt2 copies, <code>queryBinding="xslt4"</code>, or a
+				module it includes that needs them (see <a href="#schematron--xslt">XSLT in a schema</a>). Not otherwise, as with them on, Saxon 13 runs a stylesheet
 				before XSLT 4.0 with some of 4.0's rules - e.g. a union pattern's priority, which can change the
 				template rule chosen (Saxon's warning SXWN9052). Never with Saxon-HE, which fails every transform with
 				them on. The <code>XSLT.xspec.allowSyntaxExtensions</code> setting turns them on or off.</aside>
@@ -4054,8 +4909,8 @@ xdm:trace($value as item()*, $label as xs:string?, $useColor as xs:boolean) as i
 			</figure>
 
 			<aside><strong>Requirements:</strong> SaxonJ - any edition, including Saxon-HE - set with the
-				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. With Saxon-PE or Saxon-EE,
-				expressions can use XPath 4.0 syntax. With Saxon-HE, they're XPath 3.1.</aside>
+				<code>XSLT.tasks.saxonJar</code> setting, and a Java runtime on the PATH. Expressions are XPath 4.0 or
+				XPath 3.1 - see <a href="#xpath-queries--version">XPath version</a>. XPath 4.0 needs Saxon-PE or Saxon-EE.</aside>
 
 			<h3 id="xpath-queries--opening">Opening the query file</h3>
 			<p>In the editor of an XML file, click the search button in the editor's title bar, or run
@@ -4082,6 +4937,24 @@ count(//item)
   /@id</code>
 			<p>As in any XPath file, expressions are highlighted and checked as you type, and auto-completion includes
 				the names of the elements and attributes in the XML file. Each expression is checked on its own.</p>
+			<h4 id="xpath-queries--version">XPath version</h4>
+			<p>While the query file is in the editor, the status bar shows the XPath version of its expressions:
+				<strong>XPath 4.0</strong> or <strong>XPath 3.1</strong>. Click it to switch between them, or run
+				<strong>XML: Switch XPath Version of Queries (3.1 / 4.0)</strong>. The version is kept for the
+				workspace.</p>
+			<p>Expressions are checked, auto-completed and run as that version:</p>
+			<ul>
+				<li><strong>XPath 4.0</strong> - with XPath 4.0's syntax and functions, e.g. <code>{ 'a': 1 }</code> or
+					<code>characters('abc')</code>, as Saxon-PE and Saxon-EE run them</li>
+				<li><strong>XPath 3.1</strong> - as in XSLT 3.0: XPath 4.0 syntax and functions are reported as problems
+					and aren't offered by auto-completion, and Saxon runs the expression without its syntax extensions -
+					so an expression that works here works in an XSLT 3.0 stylesheet</li>
+			</ul>
+			<p>The version starts as XPath 4.0 - or XPath 3.1 if the <code>XSLT.tasks.saxonJar</code> setting is a
+				Saxon-HE jar. Other XPath files, such as XPath notebooks, are always XPath 4.0.</p>
+			<aside>Saxon-HE runs XPath 3.1 only. If XPath 4.0 is chosen with Saxon-HE, the status bar item shows a
+				warning, and the <strong>XPath Query</strong> output panel says the expression was run as XPath
+				3.1.</aside>
 			<h4 id="xpath-queries--namespaces">Namespaces</h4>
 			<p>The namespaces declared on the XML file's root element can be used without declaring them:</p>
 			<ul>
@@ -4128,10 +5001,23 @@ count(//item)
 					short if they're long</li>
 				<li><code>= ()  nothing found</code> - an empty sequence</li>
 			</ul>
-			<p>Click it to see the whole result in the <strong>XPath Query</strong> output panel, with each item on a
-				line of its own. A map, array or function is written on one line, e.g.
-				<code>map{"a":[1,"two",true()]}</code> or <code>fn:count#1</code> - to see part of a large map, change
-				the expression to select it.</p>
+			<p>Click it to see the whole result in the <strong>XPath Query</strong> output panel. The panel is cleared
+				each time an expression runs, so it shows only the latest result - or Saxon's error. The result is
+				written as <code>xdm:debug()</code> writes values, with each sequence item, map entry and array member on
+				a line of its own:</p>
+			<code class="block">(
+  {
+    'name': 'Ada',
+    'tags': (
+      'a',
+      'b'
+    )
+  },
+  /orders/order[1]/@id
+  @id="A1"
+)</code>
+			<p>A node is shown as its location above a copy of it, with long text cut short. At most 100 items are
+				shown in the panel - to see part of a large result, change the expression to select it.</p>
 			<p>When the result has nodes, the XML file's editor shows the first, with the nodes listed beside it, as
 				VS Code lists references. Click one to go to it, or press <span class="shortcut">F4</span> /
 				<span class="shortcut">⇧F4</span> to go to the next or previous node. The name of an element or
@@ -4150,7 +5036,10 @@ count(//item)
 
 			<h3 id="xpath-queries--limitations">Limitations</h3>
 			<ul>
-				<li>Each run starts Java, so it takes about a second.</li>
+				<li>The first run starts Java, so it takes about a second. Later runs reuse it and are quicker, until no
+					expression has run for 5 minutes.</li>
+				<li>In the output panel, a result with a function item, e.g. <code>fn:count#1</code>, is listed with each
+					item on one line, as Saxon writes it.</li>
 				<li>Results shown after the expressions aren't kept when VS Code is closed.</li>
 			</ul>
 		</div>
@@ -4208,11 +5097,14 @@ count(//item)
 				XSLT/XPath extension. Most of what they use needs nothing special from it: the extension's problems,
 				documentation notes and debugging output are all in forms that assistants read and write well. For more, the
 				extension has an <a href="#ai-assistants--mcp">MCP server</a>, so an assistant can ask it directly - for example, for the
-				problems of a stylesheet that isn't open, or where a function is declared.</p>
+				problems of a stylesheet that isn't open, where a function is declared, or what an XPath expression finds in
+				your XML - and <a href="#ai-assistants--mcp-skill">skills</a> that tell the assistant how to use those tools
+				well.</p>
 
 			<h3 id="ai-assistants--problems">Fixing problems</h3>
 			<p>The problems reported by the extension's <a href="#editing-xslt--checking">linter</a> are standard Visual
-				Studio Code diagnostics, shown in the Problems view. They identify the exact symbol at issue - an unresolved
+				Studio Code diagnostics, shown in the Problems view with <strong>dx.xslt-xpath</strong> as their source, so it's clear
+				which extension reports them - in Visual Studio Code or an editor built on it. They identify the exact symbol at issue - an unresolved
 				variable, a function called with the wrong number of arguments, a record field that doesn't exist - so an
 				assistant that reads the diagnostics can explain and fix them precisely, and check its own changes the same way.
 				For example, GitHub Copilot can include the problems with <code>#problems</code> in a chat prompt, or fix a
@@ -4223,12 +5115,14 @@ count(//item)
 				its change caused. When it changes several stylesheets at once, each is checked with its own declarations,
 				XSLT version and imports, so no problems are reported that aren't there.</p>
 
-			<h3 id="ai-assistants--mcp">The MCP server (experimental)</h3>
+			<h3 id="ai-assistants--mcp">The MCP server</h3>
 			<p>The extension can run a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> (MCP) server,
 				with tools an assistant can call to ask the extension about your stylesheets. The tools use the same code as
 				the editor - the linter, Go to Definition, Find All References and the XSLT Imports view - so their answers
 				match what you see, and they work for files that aren't open. The server is off by default: to turn it on, set
-				<code>XSLT.mcp.enabled</code> to <code>true</code> - see <a href="#settings--settings-ai">Settings</a>.</p>
+				<code>XSLT.mcp.enabled</code> to <code>true</code> - see <a href="#settings--settings-ai">Settings</a>. With
+				it on, the server starts with the window for a workspace that contains XSLT, XSpec or Schematron files, without
+				one being opened first - and for any other workspace, when an XML or XSLT file is opened.</p>
 			<table>
 				<thead>
 					<tr>
@@ -4238,59 +5132,268 @@ count(//item)
 				</thead>
 				<tbody>
 					<tr>
-						<td><code>lint_file</code></td>
-						<td>The problems in an XSLT module or XSpec file - as the Problems view shows them, checked with its
-							imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
-							worse.</td>
+						<td><code class="title">lint_file</code></td>
+						<td>The problems in an XSLT module, XSpec file or Schematron schema - as the Problems view shows them,
+							checked with its imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
+							worse. A module that another stylesheet imports or includes is checked with that top-level
+							stylesheet's declarations too, as in the editor: the one found for it in the workspace, or one the
+							assistant gives - for example, a stylesheet outside the workspace.</td>
 					</tr>
 					<tr>
-						<td><code>lint_files</code></td>
+						<td><code class="title">lint_files</code></td>
 						<td>The problems in each XSLT and XSpec file in a folder: a summary, then only the files with problems.
-							By default, warnings and errors - not hints, such as unused variables.</td>
+							By default, warnings and errors - not hints, such as unused variables. Files in hidden folders, such as
+								<code>.git</code>, and those the <code>files.exclude</code> setting hides aren't checked.</td>
 					</tr>
 					<tr>
-						<td><code>module_imports</code></td>
+						<td><code class="title">module_imports</code></td>
 						<td>The tree of imports, includes and packages from a module's top-level stylesheet down, with the
 							module marked - as in the XSLT Imports view.</td>
 					</tr>
 					<tr>
-						<td><code>find_declaration</code></td>
+						<td><code class="title">list_declarations</code></td>
+						<td>Every function, named template, global variable and parameter, mode, key, attribute set,
+							accumulator, item type and character map a module can use: its own, then those of the modules and
+							packages it imports, includes or uses - each with its parameters and types, its location, and the
+							first line of its documentation, and one overridden by a higher import precedence marked. An
+							assistant calls it before writing or changing a stylesheet, to reuse what exists. Optionally, only
+							one kind; as for <code>lint_file</code>, the top-level stylesheet can be given.</td>
+					</tr>
+					<tr>
+						<td><code class="title">evaluate_xpath</code></td>
+						<td>Evaluates an XPath expression on an XML file with your Saxon jar - the program behind
+							<a href="#xpath-queries">Find Nodes with XPath</a>, in a process of its own - and gives the number
+							of items and the first 100 as the debugger shows values: a node as its path, a map or array in full.
+							An assistant uses it on a stylesheet's source XML to check its structure, a match pattern or a
+							<code>select</code> expression, before writing templates. XPath 4.0 by default, or 3.1 - with Saxon-HE,
+							which can't evaluate 4.0, 3.1 is used. It's evaluated as in a stylesheet, so a result isn't better than
+							the stylesheet's: unprefixed element names are in no namespace, whatever the document's default namespace
+							- unless the assistant gives the stylesheet's <code>xpath-default-namespace</code>, and an empty result
+							says when that may be why. The prefixes the document declares are bound. To use another prefix, the assistant
+							puts a <code>declare namespace</code> line for it at the very start, each ending in a semicolon:
+							<code>declare namespace o = 'urn:orders'; declare namespace x = 'urn:x'; //o:order/x:ref</code>. Those
+							lines are the only thing allowed before the XPath - it is XPath, not XQuery, so there is no
+							<code>declare variable</code>, <code>declare function</code> or default element namespace (the
+							<code>xpathDefaultNamespace</code> argument gives that). <code>xs</code>, <code>fn</code>,
+							<code>map</code>, <code>array</code>, <code>math</code> and <code>err</code> are predeclared (a stylesheet
+							has to declare <code>map</code>, <code>array</code> and <code>math</code>). Errors are given with Saxon's
+							code and position. Each node found is listed with the line and column where it starts in the XML file - from the
+							extension's own outline of it, as Find Nodes goes there, not Saxon's <code>saxon:line-number()</code>, which is
+							where the start tag ends. The <code>saxon:</code> extension functions need Saxon-PE or Saxon-EE, not Saxon-HE.
+							Needs the <code>XSLT.tasks.saxonJar</code> setting. Requests run one at a time, so an assistant that
+							sends several at once gets each answered, and an expression that takes more than 30 seconds is stopped
+							and reported as such.
+							<br><strong>What it can't do:</strong> for safety - an expression can otherwise run programs - it has no
+							extension functions (calls to Java, or EXPath modules such as <code>file:</code>), no
+							<code>collection()</code> or <code>uri-collection()</code>, no <code>http:</code> addresses, and
+							<code>doc()</code> and <code>unparsed-text()</code> read only files in the workspace folders and beside the
+							XML file - not through a symbolic link out of them. The XML file's external entities aren't read.</td>
+					</tr>
+					<tr>
+						<td><code class="title">find_declaration</code></td>
 						<td>Where a function, named template, global variable or parameter, mode, key, attribute set, accumulator,
 							item type or character map is declared, as seen from a module - with its parameters and types, and its
 							documentation: its <a href="#xslt40-notes">documentation note</a>, or a comment just before it.
-							When more than one module declares it, the one used, with the highest import precedence, is first.</td>
+							When more than one module declares it, the one used, with the highest import precedence, is first.
+							As for <code>lint_file</code>, the assistant can give the top-level stylesheet the module is seen
+							from.</td>
 					</tr>
 					<tr>
-						<td><code>find_references</code></td>
+						<td><code class="title">find_references</code></td>
 						<td>The references to one of these, as Find All References finds them - in the modules that use it and
 							the XSpec files that test it - with each reference's line. The XSpec uses are listed last, as the
 							tests, each with the scenario it's in.</td>
 					</tr>
 					<tr>
-						<td><code>describe_type</code></td>
+						<td><code class="title">describe_type</code></td>
 						<td>An XSLT 4.0 named item type: a record type's fields, with their types and <code>@field</code>
-							documentation, or an enumeration type's values.</td>
+							documentation, or an enumeration type's values - with a top-level stylesheet given, as for
+							<code>find_declaration</code>.</td>
 					</tr>
 					<tr>
-						<td><code>xpath_function</code></td>
+						<td><code class="title">xpath_function</code></td>
 						<td>The signature and description of a built-in XPath or XSLT function, for XPath 3.1 or 4.0 - for a
 							function declared in a stylesheet, the assistant uses <code>find_declaration</code>.</td>
 					</tr>
+					<tr>
+						<td><code class="title">run_configuration</code></td>
+						<td>How you run stylesheets: the Saxon jar, with its edition, version and licence, the XML catalog, the
+							XSpec installation and the XSLT packages - and for a stylesheet, its Quick Run: the XML context file,
+							the parameters, and the exact <code>java</code> command line, with the options the extension adds,
+							such as <code>-catalog</code> and <code>-lib</code>. An assistant that runs Saxon itself then gets
+							the same result as you. With <code>tasks</code>, it also gives the XSLT tasks in <code>.vscode/tasks.json</code> -
+							the stylesheet's, or all - with their problems (a file that isn't there, a property a task doesn't have, an
+							undefined <code>${input:...}</code>), and the properties a task has, with what each does: so an assistant asked to
+							change how a stylesheet runs uses the right names.</td>
+					</tr>
+					<tr>
+						<td><code class="title">test_configuration</code></td>
+						<td>For an XSpec file: the commands that run its tests, as the Test Explorer runs them - XSpec has no single
+							command here, as the tests are compiled to a test runner, which is then run, with more steps for the tests of a
+							Schematron schema. They have the options the extension works out - Saxon's syntax extensions, the XML catalog,
+							the packages for <code>-lib</code> and the Saxon settings of the stylesheet's task - and write to a folder in the
+							temporary files, not the project. The result also gives a command that summarises the test results as text - the
+							numbers passed, failed and pending, and each failure with what was expected and what the test gave - as the run
+							exits with 0 even when tests fail - and one command that runs the steps, then the summary. It lists the file's scenarios. Like <code>run_configuration</code>, it runs
+							nothing: the assistant runs the commands.</td>
+					</tr>
+					<tr>
+						<td><code class="title">validation_configuration</code></td>
+						<td>For a Schematron schema and the XML file it validates - the schema's XML context file, the one an
+							<code>xml-model</code> processing instruction names, or one the assistant gives: the command that validates it, as
+							<strong>Schematron: Validate</strong> does, in one run of Saxon with the schema compiled by SchXslt2, in a phase of the
+							schema's if the assistant chooses one. It writes the SVRL report to the temporary files, and gives a command that
+							summarises it as text - the failed assertions and successful reports, each with its role, location and message. A
+							location is an XPath for the XML file, which <code>evaluate_xpath</code> turns into a line and column. It runs
+							nothing: the assistant runs the command.</td>
+					</tr>
+					<tr>
+						<td><code class="title">output_origin</code></td>
+						<td>For a line of a stylesheet's output, or some text in it: the instruction that wrote each part of it, the template or
+							function it's in - with its match, name and mode - and the input node it was written for, as an XPath for the input file,
+							with its line. It reads the output of your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong>
+							with SaxonJ, as the debugger's output view maps it (<strong>Go to XSLT Source</strong>, <strong>Go to XSLT Input</strong>),
+							and when there's no run yet, or the stylesheet has changed since, it asks you whether the extension should run it: a notification
+							with <strong>Run Without Debugging</strong>, <strong>Always Run for This Workspace</strong> or <strong>Not Now</strong> - the tool waits
+							for the run (see <code>XSLT.mcp.runForAssistant</code>). Only XML output is mapped.</td>
+					</tr>
+					<tr>
+						<td><code class="title">input_rules</code></td>
+						<td>For an element of an input file - by its path or the line of its start tag - what processed it, its attributes and its text in
+							your last <strong>Run and Debug</strong> or <strong>Run Without Debugging</strong> with SaxonJ: the template rules, with their match,
+							mode and priority, the <code>xsl:for-each</code>, <code>xsl:for-each-group</code> and <code>xsl:iterate</code> instructions, and the
+							built-in rules where no template matched, as the input file's hover shows them. For a whole file: how many elements each rule
+							processed, and the elements left to built-in rules. Like <code>output_origin</code>, it asks you for a run when there's none of
+							that input file, or the stylesheet or input has changed since.</td>
+					</tr>
+					<tr>
+						<td><code class="title">trace_configuration</code></td>
+						<td>For a stylesheet: the command that runs it as Quick Run does, with logpoints and no VS Code - the debugger's own adapter, run
+							from the command line. At each logpoint the assistant chooses, as the stylesheet runs, it prints the local variables (or a message
+							with <code>{XPath}</code> parts), in the debugger's notation, with <code>xsl:message</code> output and errors in between, then how many
+							times each logpoint was reached. Nothing pauses. Conditions and a limit on the messages shown are options, and
+							<code>--rules</code> adds what processed each input file's elements - the summary <code>input_rules</code> gives from your
+							run - so an assistant can find an element no template matched without a run of yours. It runs nothing: the assistant runs
+							the command.</td>
+					</tr>
+					<tr>
+						<td><code class="title">debug_status</code>, <code class="title">debug_evaluate</code></td>
+						<td>Read-only access to your XSLT debug session: whether it's paused, where, the call stack, and a frame's local variables,
+							parameters and context item - waiting a while for a pause, if the assistant asks you to run to a breakpoint - and an XPath
+							expression evaluated in a frame, as the Debug Console evaluates it. The assistant can't step, continue or change breakpoints:
+							it asks you to. Its expressions have Saxon-HE's functions only - the standard functions and the stylesheet's own - whatever
+							edition the session runs on - <code>XSLT.mcp.debugEvaluateExtensions</code> can allow more (<code>unrestricted</code>) or none (<code>never</code>).</td>
+					</tr>
+					<tr>
+						<td><code class="title">profile_configuration</code></td>
+						<td>For a stylesheet that's slow: the command that runs it as Quick Run does - with its XML source, or one the assistant
+							gives - with Saxon's timing profile (Saxon-PE or EE), several runs so that the first, the Java VM's warm-up, can be
+							left out, and a command that summarises the profile as text. The summary ranks the templates, functions and global
+							variables by net time - the time in the construct itself, not in what it calls - each with its share, calls, gross time
+							and where it is declared, as the <strong>Profile Stylesheet</strong> view shows them. The profile and the result are
+							written to the temporary files, not the project. It runs nothing: the assistant runs the commands.</td>
+					</tr>
 				</tbody>
 			</table>
-			<p>The tools only read files: they don't change them, or run stylesheets or tests.</p>
+			<p>The tools only read files: they don't change them, or run stylesheets, tests or validations - an assistant runs the
+				commands that <code>run_configuration</code>, <code>test_configuration</code>, <code>validation_configuration</code>, <code>trace_configuration</code> and <code>profile_configuration</code>
+				give itself, if you allow it. <code>evaluate_xpath</code> only
+				evaluates an expression on an XML file.</p>
 			<h4 id="ai-assistants--mcp-copilot">GitHub Copilot</h4>
 			<p>With the server on, Copilot finds it by itself: its tools are listed with the other MCP tools in Copilot
-				Chat's agent mode.</p>
+				Chat's agent mode. There's no need to add it to an <code>mcp.json</code> file - it would then be listed
+					twice, and with a token that <strong>XSLT: Reset MCP Server Token</strong> would make out of date.</p>
+				<p>Visual Studio Code's <strong>MCP: List Servers</strong> command lists the server as
+					<strong>XSLT/XPath</strong>: choose it to start, stop or restart it, to see its tools, or to show its output.
+					The first time it starts, Visual Studio Code may ask you to trust it. When a new release of the extension
+					adds tools, Visual Studio Code finds them the next time the server starts. The server also gives Copilot
+					<a href="#ai-assistants--mcp-skill">the skills</a>.</p>
+				<p id="ai-assistants--mcp-customizations">Visual Studio Code's Customizations editor - the <strong>Chat: Configure Custom
+					Agents...</strong> command - shows what Copilot has from the server. Its <strong>MCP Servers</strong> tab lists
+					the server as <strong>XSLT/XPath</strong>, from this extension, with the number of skills it provides (once the server has
+					been started), and a
+					<strong>Start</strong> button and a switch for the server - Visual Studio Code's own controls, as in <strong>MCP:
+					List Servers</strong>. Its <strong>Skills</strong> tab lists the skills under the server. The command is part of
+					GitHub Copilot's chat: it's there when GitHub Copilot is enabled, as it is by default in Visual Studio Code,
+					and not otherwise.</p>
+				<p>
+					<figure>
+						<img src="resources/assistant-configuration.png" class="scale-with-grid" alt="The MCP Servers tab of Visual Studio Code's Customizations editor, listing the XSLT/XPath server with 1 skill, a Start button and a switch">
+						<figcaption style="margin:auto"><i>The XSLT/XPath server in Visual Studio Code's Customizations editor.</i></figcaption>
+					</figure>
+				</p>
 			<h4 id="ai-assistants--mcp-claude-code">Claude Code</h4>
 			<p>Run <strong>XSLT: Set Up MCP Server for Claude Code</strong> from the Command Palette - it offers to turn the
-				server on, if it isn't, and asks whether to set it up for all your projects or only this one. It runs
+				server on, if it isn't, and asks whether to set it up for this project - recommended, with a window for each
+				project - or for all your projects, which then use this window's server. Run it in each project's window. It runs
 				Claude Code's <code>claude mcp add</code> command for you. A Claude Code session started after that can use
-				the tools, whether it runs in Visual Studio Code or in a terminal of its own; in a session already running,
-				run <code>/mcp</code> to connect.</p>
+				the tools, whether it runs in Visual Studio Code or in a terminal of its own. A session already running keeps
+				the settings it started with, so <code>/mcp</code> doesn't connect it: start a new one - in Visual Studio
+				Code, a new conversation in the Claude panel.</p>
 			<p>If the <code>claude</code> command isn't found - for example, it isn't on the path Visual Studio Code
 				uses - the <code>claude mcp add</code> command is copied instead: run it in a terminal - for one project, in
 				that project's folder.</p>
+			<p>In a workspace with several folders, choose the folder that Claude Code is started in. The server can see
+				all the folders, and the tools' relative paths - and the paths they show - are from that folder, not the
+				workspace's first. The set-up is for one folder: to use Claude Code in another folder of the workspace, run
+				the command again and choose it. A folder added to the workspace later needs the same - the server itself
+				doesn't change. The assistant is told the paths of the workspace's folders when it connects - and
+				<code>run_configuration</code> lists them - so it can check a file in any of them.</p>
+			<aside>These choices are about which Claude Code sessions use the server, and where its relative paths start - not
+				what it can reach. The window's server serves all of its workspace folders however it's set up, and a tool given an
+				absolute path can check any file. What protects your files is the token and the local-only connection, described
+				below.</aside>
+			<h4 id="ai-assistants--mcp-skill">Skills</h4>
+			<p>The extension has four <em>skills</em>: sets of instructions an assistant loads when a task needs them. They tell the
+				assistant how to use the tools above together:</p>
+			<ul>
+				<li><code class="title">xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
+					module already declares before writing a second copy of a function (<code>list_declarations</code>); try an XPath
+					expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it differs from a
+					stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and <code>math</code> prefixes a
+					stylesheet has to declare; check each change with <code>lint_file</code>, read warnings that come from imports it
+					can't resolve, and not make a package component public just to silence an error; run the stylesheet with the
+					command from <code>run_configuration</code>, rather than a Saxon command of its own; and the habits that avoid
+					common errors - such as writing <code>&amp;lt;</code> for <code>&lt;</code> in XPath in an attribute, and a global
+					variable that uses the context item, which the linter can't report.</li>
+				<li><code class="title">xslt-debugging</code>, for finding why a stylesheet's output is wrong or a run is slow: find the instruction and
+					template behind wrong output (<code>output_origin</code>) and what processed an input element, or left it to the built-in
+					rules (<code>input_rules</code>); see values inside templates and functions with logpoints (<code>trace_configuration</code>)
+					or in your paused debug session (<code>debug_status</code>, <code>debug_evaluate</code>); and profile a slow stylesheet
+					(<code>profile_configuration</code>), reading the times by net time.</li>
+				<li><code class="title">xspec-testing</code>, for <a href="#xspec">XSpec tests</a>: write scenarios for a function, a named template or
+					a template rule, with <code>select</code> as the expected value and <code>test</code> for a condition on
+					<code>$x:result</code>; test a package with <code>run-as="external"</code> or an <code>x:helper</code>; run the tests
+					with the commands <code>test_configuration</code> gives, and read the summary - not the exit code; and when a test
+					fails, decide whether the stylesheet or the expectation is wrong, and not change an expectation just to make it pass.</li>
+				<li><code class="title">schematron</code>, for <a href="#schematron">Schematron schemas</a>: write rules the way SchXslt2 runs them - the
+					first matching rule of a pattern, the prefixes <code>sch:ns</code> declares, only the XSLT declarations it copies;
+					check each change with <code>lint_file</code>; validate with the command <code>validation_configuration</code>
+					gives; and find each problem's line with <code>evaluate_xpath</code>.</li>
+			</ul>
+			<p>All three tell the assistant to say afterwards what it linted, ran and tested. How the assistant gets them depends on the assistant:</p>
+			<ul>
+				<li><strong>GitHub Copilot, in Visual Studio Code 1.147 or later</strong> - the server serves the skills itself, as
+					<a href="https://github.com/modelcontextprotocol/ext-skills">skills over MCP</a> (a Beta extension of the
+					protocol), so there is nothing to install and they are always the versions that go with the server's tools.
+					Visual Studio Code may ask you to allow the skills into the model's context the first time it connects to the
+					server. They are listed under the server on the Skills tab of the <a href="#ai-assistants--mcp-customizations">Customizations editor</a>
+					once Visual Studio Code has started the server - which it does when you use Copilot chat, or press the server's
+					<strong>Start</strong> button - so after a reload they aren't listed until then. If the skills aren't there, check that you didn't decline the
+					request to allow them - Visual Studio Code remembers the answer for each server, so allow the skills again
+					in a new chat. To turn off skills
+					from all MCP servers, use Visual Studio Code's <code>chat.agentHost.mcpSkills.enabled</code> setting. In an
+					earlier version of Visual Studio Code, Copilot still has all the server's tools, but not the skills.</li>
+				<li><strong>Claude Code</strong> - <strong>XSLT: Set Up MCP Server for Claude Code</strong> also installs the skills
+					in <code>~/.claude/skills</code> (or in the folder <code>CLAUDE_CONFIG_DIR</code> names) - for all your
+					projects, as they only apply where the server is connected. They are kept up to date with the extension: each time
+					the server starts, a copy the extension installed is replaced by the new version. A copy you have edited, or a
+					skill of that name that came from elsewhere, is left as it is - to keep your changes, edit a copy under another
+					name. A skill that a later version of the extension adds is installed the first time the server starts after the update - a skill
+					you have deleted isn't installed again; the set-up command installs every skill.</li>
+				<li><strong>Other assistants</strong> - those that support skills over MCP get them from the server in the same way;
+					the others get the tools without the skills.</li>
+			</ul>
 			<h4 id="ai-assistants--mcp-security">Security</h4>
 			<p>The server only accepts connections from your own computer (<code>127.0.0.1</code>), and each request needs
 				a token that the extension makes once and keeps in Visual Studio Code's secret storage - it doesn't expire.
@@ -4298,13 +5401,16 @@ count(//item)
 				keep the command private. To make a new token - for example, if the old one has been shared - run
 				<strong>XSLT: Reset MCP Server Token</strong>. Copilot uses the new token straight away, and Claude Code is
 				set up again with it - for all projects, or for a project in the workspace - where it was set up with the
-				old one.</p>
-			<p>The server listens at the port of <code>XSLT.mcp.port</code> (6745 by default). With more than one Visual
-				Studio Code window open, the first one opened has the server. Its tools work best for the files of that window's
-				workspace: a relative path is taken from its first folder, and a module's top-level stylesheet is found from
-				the workspace's modules. The
-				<strong>XSLT MCP Server</strong> output channel shows whether the server started, or why it didn't - for
-				example, because another program uses the port.</p>
+				old one. A Claude Code session already running keeps the old token: start a new one.</p>
+			<p id="ai-assistants--mcp-windows">Each Visual Studio Code window has a server of its own, for its workspace, so with a window
+				for each project, an assistant started in a project's folder uses that project's window. Its tools work
+				best for the files of that workspace: a relative path is taken from its first folder, and a module's
+				top-level stylesheet is found from the workspace's modules. A window's port is the same each time its
+				workspace is opened - one of the 999 after <code>XSLT.mcp.port</code> (6745 by default), chosen for the
+				workspace, or the next free one if another program has it; if it ever changes, Claude Code set up for the
+				project is set up again with it. A window with no folder open uses <code>XSLT.mcp.port</code> itself. The
+				<strong>XSLT MCP Server</strong> output channel shows each window's address, or why its server didn't
+				start.</p>
 
 			<h3 id="ai-assistants--notes">Documentation notes</h3>
 			<p>XSLT 4.0 <a href="#xslt40-notes">documentation notes</a> - <code>xsl:note format="xdoc-md"</code> - use
@@ -4335,9 +5441,11 @@ count(//item)
 			<code class="block">"extensions.supportAgentsWindow": { "deltaxml.xslt-xpath": true }</code>
 
 			<h3 id="ai-assistants--limitations">Current limitations</h3>
-			<p>The MCP server's tools only read files: an assistant can't yet ask the extension to run a stylesheet, an
-				XSpec test or an XPath expression, though it can run a Quick Run task's Saxon command itself. Tools for these
-				may be added in a future release.</p>
+			<p>The MCP server's tools only read files: an assistant can't ask the extension to run a stylesheet, an XSpec test or a
+				Schematron validation. It can run the commands that <code>run_configuration</code>,
+				<code>test_configuration</code> and <code>validation_configuration</code> give - and the skills tell it to - with
+				the permission your assistant asks of you for a command. An XPath expression it can evaluate with
+				<code>evaluate_xpath</code>, within the limits described there.</p>
 			<p>In the Problems view, problems are only shown for files open in an editor, as by most language extensions:
 				a stylesheet an assistant changes that isn't open has none there until it's opened. With the MCP server on, an
 				assistant can check such a file with <code>lint_file</code>.</p>

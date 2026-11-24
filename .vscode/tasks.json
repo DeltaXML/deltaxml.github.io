@@ -17,6 +17,20 @@
 			]
 		},
 		{
+			"type": "xslt",
+			"label": "createVSCodeBlog",
+			"saxonJar": "${config:XSLT.tasks.saxonJar}",
+			"xsltFile": "${workspaceFolder}/vscode-xslt-xpath/xsl/create-blog.xsl",
+			"xmlSource": "${workspaceFolder}/vscode-xslt-xpath/authoring/blog/blog-layout.xml",
+			"resultPath": "${workspaceFolder}/vscode-xslt-xpath/xslt-out/blog-result.xml",
+			"group": {
+				"kind": "build"
+			},
+			"problemMatcher": [
+				"$saxon-xslt"
+			]
+		},
+		{
 			// the whole guide as a PDF, from all-pages.html - after building the pages. Needs WeasyPrint
 			// (brew install weasyprint): make-pdf.py runs it with its Python, so the PDF opens with its outline showing
 			"type": "shell",

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT 4.0 and XPath 4.0 in VS Code</title>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

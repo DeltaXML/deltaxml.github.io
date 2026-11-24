@@ -1,0 +1,507 @@
+<!DOCTYPE HTML><html lang="en">
+
+<head><meta charset="UTF-8">
+	<!-- Google tag (gtag.js) -->
+	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-GEZCTHQENJ');
+	</script>
+	
+
+	<!-- Basic Page Needs
+							==================================================-->
+
+	<title>Schematron Editor for VS Code: Validation and Debugger</title>
+	<meta name="description" content="Schematron in VS Code: checked as SchXslt2 runs it, with quick fixes and completion, validation of XML files, and a debugger for rules and assertions."><link rel="canonical" href="https://deltaxml.github.io/vscode-xslt-xpath/schematron.html"><meta property="og:type" content="article"><meta property="og:site_name" content="VS Code XSLT/XPath"><meta property="og:title" content="Schematron Editor for VS Code: Validation and Debugger"><meta property="og:description" content="Schematron in VS Code: checked as SchXslt2 runs it, with quick fixes and completion, validation of XML files, and a debugger for rules and assertions."><meta property="og:url" content="https://deltaxml.github.io/vscode-xslt-xpath/schematron.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Schematron Editor for VS Code: Validation and Debugger","description":"Schematron in VS Code: checked as SchXslt2 runs it, with quick fixes and completion, validation of XML files, and a debugger for rules and assertions.","url":"https://deltaxml.github.io/vscode-xslt-xpath/schematron.html","mainEntityOfPage":"https://deltaxml.github.io/vscode-xslt-xpath/schematron.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","softwareVersion":"2.2"},"isPartOf":{"@type":"WebSite","name":"VS Code XSLT/XPath","url":"https://deltaxml.github.io/vscode-xslt-xpath/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}}</script>
+	<meta name="author" content="Philip Fearon">
+
+	<!-- Mobile Specific Metas
+							==================================================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS
+							==================================================-->
+	<link rel="stylesheet" href="./resources/base.css">
+	<link rel="stylesheet" href="./resources/skeleton.css">
+	<link rel="stylesheet" href="./resources/layout.css">
+	<link rel="stylesheet" href="./resources/custom.css">
+
+
+	<!-- Favicons
+							==================================================-->
+	<link rel="icon" href="resources/tiny-white-logo.png" sizes="32x32">
+
+</head>
+
+<body>
+
+	<a class="skip-link" href="#main">Skip to content</a>
+
+
+
+	<!-- Primary Page Layout
+							==================================================-->
+
+	<!-- Delete everything in this .container and get started on your own site! -->
+	<div class="colorBar">&nbsp;</div>
+	<div class="topbar">
+		<div class="container">
+			<div class="four columns" style="padding-left: 20px;">
+				<a href="https://www.deltaxml.com/">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+				</a>
+			</div>
+			<div class="six columns topTitle">
+				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
+				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
+				<p class="remove-bottom" style="color: white"><span>144K Installs</span><span class="release-version">Release 2.2</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper">
+		<nav aria-label="Guide pages">
+			<div class="search">
+				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
+			</div>
+			<ul>
+				<li><a href="index.html">Overview</a></li>
+				<li><a href="new-release.html">What's New</a></li>
+				<li><a href="features.html">Features</a></li>
+				<li><a href="vscode.html">Using VS Code</a></li>
+				<li><a href="settings.html">Settings</a></li>
+				<li class="nav-heading">Editing</li>
+				<li><a href="editing.html">Editing XML</a></li>
+				<li><a href="editing-xslt.html">Editing XSLT/XPath</a></li>
+				<li><a href="navigation.html">Code Navigation</a></li>
+				<li><a href="refactoring-xslt.html">Refactoring</a></li>
+				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
+				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li><a href="schematron.html" class="active" aria-current="page">Schematron</a></li>
+				<li class="nav-heading">Running and Debugging</li>
+				<li><a href="quick-run.html">Quick Run</a></li>
+				<li><a href="run-xslt.html">Tasks</a></li>
+				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="profiler.html">Profiler</a></li>
+				<li><a href="xspec.html">XSpec Tests</a></li>
+				<li><a href="code-diagnostics.html">Print Debugging</a></li>
+				<li class="nav-heading">Tools</li>
+				<li><a href="xpath-queries.html">Find Nodes with XPath</a></li>
+				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
+				<li><a href="ai-assistants.html">AI Assistants</a></li>
+				<li class="nav-heading">XSLT Language</li>
+				<li><a href="xslt30.html">XSLT 3.0</a></li>
+				<li><a href="xslt40.html">XSLT 4.0</a></li>
+				<li><a href="xslt40-records.html">Records and Enums</a></li>
+				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
+				<li><a href="xslt40-notes.html">Code Documentation</a></li>
+			</ul>
+			<!-- outside the list, as all-pages.html and the PDF aren't made from authoring/<page>.xml files -->
+			<div class="nav-footer">
+				<a href="all-pages.html">Print all pages</a>
+				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+				<a href="blog/index.html">The XSLT/XPath Blog</a>
+			</div>
+		</nav>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">Schematron</h1>
+
+		<div class="two-thirds column">
+			<p>Schematron files (<code>.sch</code>) are checked as you edit them, with auto-completion and
+				formatting. They're checked as <a href="https://codeberg.org/dmaus/schxslt2">SchXslt2</a> runs them:
+				SchXslt2 1.11.3 - the ISO Schematron processor XSpec uses, as a patch update to XSpec's own copy - which compiles a schema to an XSLT 3.0
+				stylesheet - see <a href="xspec.html#schematron">Testing a Schematron</a>.</p>
+
+			<details style="margin-bottom: 0">
+				<summary>About legacy Schematron versions</summary>
+				<p>A schema is checked as ISO Schematron 2025 with an XSLT query binding, e.g.
+					<code>queryBinding="xslt3"</code> - with <code>queryBinding="xslt4"</code>, its XPath is checked as XPath
+					4.0. A schema in the namespace of Schematron 1.5 is reported, as SchXslt2 doesn't validate with
+					it - with a quick fix, <strong>Convert to ISO Schematron</strong>, that changes the namespace, a
+					pattern's <code>name</code> to its <code>title</code>, and <code>sch:key</code> to
+					<code>xsl:key</code>. A pattern in ISO Schematron's namespace with Schematron 1.5's <code>name</code> -
+					e.g. once the namespace is changed by hand - has quick fixes that replace it with a title, for the pattern
+					or each one.</p>
+			</details>
+
+			<h3 id="validating">Validating an XML file</h3>
+			<figure>
+				<img src="resources/schematron-validate.png" class="scale-with-grid">
+				<figcaption>
+					Schematron validation problems are highlighted inline in the XML and listed in the problems view.
+				</figcaption>
+			</figure>
+			<p>With an XML file in the editor, run <strong>Schematron: Validate</strong> from the Command
+				Palette - or <strong>Validate with Schematron</strong> from the <strong>More Actions</strong>
+				(<strong>...</strong>) menu in the editor's title bar. The
+				file is validated as SchXslt2 validates it, with the Saxon of the <code>XSLT.tasks.saxonJar</code>
+				setting - any edition - and each failed assertion and successful report is shown in the
+				<strong>Problems</strong> view, at the element or attribute it's about, with its message and diagnostics.
+				Its severity is the assertion's <code>severity</code> or <code>role</code> - e.g. <code>warning</code>
+				or <code>info</code> - and otherwise an error. To go to the assertion in the schema that reported a problem,
+				click its id - or <code>assert</code> or <code>report</code> - in the problem's hover or the
+				<strong>Problems</strong> view, use the <strong>Show the assertion</strong> quick fix
+				(<span class="shortcut">⌘.</span>), or the link below the problem in the <strong>Problems</strong>
+				view.</p>
+			<p>The schema is the one an <code>xml-model</code> processing instruction in the file associates with it,
+				e.g. <code>&lt;?xml-model href="rules.sch"
+				schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</code> - otherwise the one last used for the
+				file, or one you choose from the workspace's. <strong>Schematron: Validate (Choose
+				Schema)...</strong> chooses again.</p>
+			<p>A schema has an <strong>XML context file</strong>, as a stylesheet does: the XML file you develop it
+				for. It's shown in the status bar for a Schematron file - click it to choose one, or run
+				<strong>Schematron: Choose XML Context File...</strong>: the files whose <code>xml-model</code> names the
+				schema are listed first. Until you choose one, it's inferred: the file last validated with the schema,
+				else an open file whose <code>xml-model</code> names it. Validating another file with the schema, from
+				its own editor, doesn't change one you've chosen. A file that <code>sch:include</code> brings in has the
+				context file of the schema that includes it.</p>
+			<p>A file that more than one schema includes belongs to the one in the nearest folder - unless you choose
+				another with <strong>Schematron: Choose Including Schema...</strong>, or the button in the title of the
+				<strong>Schematron Includes</strong> view. The schema chosen is then used for the files it includes, as a
+				chosen top-level stylesheet is for its modules. It gives the file's XML context file, and what's in scope
+				where it's included - for checking it, and for navigation. <strong>XSLT: Reset Top-Level Stylesheet
+				Choices</strong> clears these choices too.</p>
+			<p>With a Schematron file in the editor, <strong>Quick Run</strong> - the ▶ button in the editor's title
+				bar, or <strong>Schematron: Quick Run: Validate the XML Context File</strong> - validates the context
+				file with the schema, and so does <strong>Schematron: Validate</strong>. The problems are shown for the
+				XML file, and above the schema's rules, while the schema stays in the editor: edit a rule, run, and see
+				what it reports.</p>
+			<p>In the schema, the validation is shown above each rule: the nodes it fired for, with its failed assertions
+				and reports - the nodes it was suppressed for, as an earlier rule of its pattern matched them first - or
+				that it <strong>never fired</strong>, which usually means its <code>context</code> isn't what was meant.
+				Above each pattern is how many of its rules fired, or that it wasn't active in the phase. Click one to open
+				the XML file.</p>
+			<p>Once a file is validated, it's validated again each time it, or the schema, is saved - so you can edit
+				the schema's rules and see what they report. Saxon's messages, e.g. for an error in the schema, are in
+				the <strong>Schematron</strong> output channel.</p>
+			<p>The result of the last validation is shown in the status bar while the XML file - or the schema, for its
+				context file - is in the editor: <strong>✓ rules.sch</strong> when the file is valid, or the number of
+				problems, e.g. <strong>⊗ 3 · rules.sch</strong> - with an error icon when any is an error, else a warning
+				or info icon - and the time it was validated in the hover. Click it to validate again - or, with problems,
+				to show them in the <strong>Problems</strong> view. When the file, the schema or a file the schema includes
+				is edited after the validation, the icon is
+				an empty circle until it's validated again, as the result may be out of date. A validation at the end of a
+				<a href="#debugging">debug session</a> is shown too.</p>
+			<p>The schema's default phase is used - its <code>defaultPhase</code>, or all its patterns without one.
+				The phase is shown in the status bar for a Schematron file - and for an XML file with a schema - e.g.
+				<strong>phase: books (default)</strong>: click it, or run <strong>Schematron: Choose Phase...</strong>, to
+				choose another: one of the schema's phases, with its title, or <code>#ALL</code> for all its patterns. The
+				phase is kept for the XML file and the schema, and Quick Run, Validate and Debug all use it - a file already
+				validated is validated again with it. It's shown with the result, and above a pattern that wasn't active
+				in it.</p>
+			<aside>Saxon's syntax extensions are turned on as for the schema's
+				XSpec tests, e.g. for <code>xsl:note</code> or <code>queryBinding="xslt4"</code>, and the
+				<code>XSLT.resources.catalog</code> setting is used for the files it refers to.</aside>
+
+			<h3 id="debugging">Debugging a schema</h3>
+			<figure>
+				<img src="resources/schematron-debugging.png" class="scale-with-grid">
+				<figcaption>
+					For debugging, set breakpoints in a Schema or enable a rule to, for example, break on failed assertions.
+				</figcaption>
+			</figure>
+			<p>With a Schematron file in the editor, the debug button in the editor's title bar - or
+				<strong>Schematron: Debug: the XML Context File</strong> - validates the schema's
+				<a href="#validating">XML context file</a> in the <a href="debugger.html">XSLT debugger</a>, with the
+				schema's phase. SchXslt2 compiles the schema to a stylesheet, which the debugger runs - but breakpoints,
+				pauses and stepping are at the schema's own lines, so you don't see the compiled stylesheet.</p>
+			<ul>
+				<li><strong>Breakpoints</strong> - set them on a rule, a rule's <code>let</code>, an <code>assert</code> or
+					<code>report</code>, or a <code>value-of</code> in a message, in the schema or a file it includes. On a
+					rule, it pauses each time the rule fires, with the node it fired for as the context item - on a pattern,
+					at each of its rules. A breakpoint where there's nothing to pause at is moved when you add it, keeping its
+					condition, to the step it's in - e.g. from a line of an assertion's message to the assertion, or from a
+					pattern's <code>param</code>, which SchXslt2 replaces with its value, to the pattern - or removed if
+					there's none, e.g. on the schema's title, or a global <code>let</code>, whose value is in
+					<strong>Globals</strong>. The status bar says which. A breakpoint in a pattern that isn't active in the
+					phase isn't verified, and says so.
+					<a href="debugger.html#conditional">Conditions</a> and <a href="debugger.html#logpoints">logpoints</a>
+					work as in a stylesheet, e.g. a condition <code>@id = 'B2'</code>.</li>
+				<li><strong>Failed assertions</strong> - check <strong>Failed Assertions</strong>, or
+					<strong>Successful Reports</strong>, in the <strong>Breakpoints</strong> view to pause at each one, on
+					the node it's for, with its message shown at the assertion - without a breakpoint on each. To pause
+					only for some, edit its condition (the pencil button) to the roles or severities to pause for, e.g.
+					<code>error fatal</code>: one with neither is an error, as in the <strong>Problems</strong> view.
+					For one node, use a conditional breakpoint on the assertion.</li>
+				<li><strong>Stepping</strong> goes from one of the schema's steps to the next - a rule, its lets, then its
+					assertions and reports - not through SchXslt2's own code.</li>
+				<li><strong>Variables</strong> are the schema's: the rule's <code>let</code>s, and the schema's and
+					pattern's in <strong>Globals</strong> - SchXslt2's own variables are hidden. In the rule of an abstract
+					pattern, the call stack names the pattern that uses it - e.g. <strong>rule order - order-dates (is-a
+					required)</strong> - and its <code>param</code> values are in a <strong>Parameters</strong> scope. In
+					<strong>Watch</strong>, the <strong>Debug Console</strong> and a hover, a parameter, e.g.
+					<code>$required</code>, is replaced by its value, as SchXslt2 replaces it in the pattern's copy. A
+					breakpoint in an abstract pattern pauses in each pattern that uses it - one on the line of a pattern
+					with <code>is-a</code> pauses in that one alone.</li>
+				<li><strong>Watch</strong> and the <strong>Debug Console</strong> evaluate XPath with the rule's node as
+					the context item - e.g. to try out a test before you change it - and hovering a variable shows its
+					value.</li>
+				<li><strong><a href="debugger.html#empty-steps">Empty steps</a></strong> - while paused in a rule, the
+					first step in a path of its lets, tests and messages after which the path is empty is faded, with why
+					in its hover - e.g. <code>line</code> in <code>test="line"</code>, for an <code>order</code> that has
+					no lines. Not the rule's <code>context</code>. In an abstract pattern's rule, a path that starts
+					with a parameter is checked with the parameter's value - and the parameter alone too, as its value is
+					often a path, e.g. <code>@name</code>.</li>
+			</ul>
+			<p>When the session ends, its result is shown as a validation's: in the <strong>Problems</strong> view and
+				above the schema's rules. And in the XML file, hovering over an element's start tag shows the rules that
+				fired for it, and its attributes and text, with a link to each - <strong>Go to Definition</strong>
+				(<span class="shortcut">F12</span>) goes to them - see <a href="debugger.html#input-nodes">From the input
+				to the templates</a>.</p>
+
+			<h3 id="profiling">Profiling a schema</h3>
+			<figure>
+				<img src="resources/schematron-profiler.png" class="scale-with-grid">
+				<figcaption>
+					A profiled schema: each rule's time in the Profile view, and above the rule in the schema - click a
+					row to go to the rule. Each profile is also kept in the schema's Timeline.
+				</figcaption>
+			</figure>
+			<p>To find which rules take the time, run <strong>Schematron: Profile: the XML Context File</strong> - from the
+				Command Palette, or the <strong>More Actions</strong> (<strong>...</strong>) menu in the editor's title
+				bar. The schema runs as it does for <a href="#debugging">debugging</a> - SchXslt2 compiles it, with its
+				phase, and Saxon runs the result on the schema's <a href="#validating">XML context file</a>, timing each
+				template, function and global variable - and the times are shown in the <a href="profiler.html#view">Profile view</a>, as for a stylesheet.</p>
+			<ul>
+				<li><strong>Rows</strong> - each rule, with its pattern, the number of times it fired, and its net and
+					gross time - and each global <code>sch:let</code> and <code>sch:param</code>. The rules of an abstract
+					pattern are added up over each rule that extends it. A click goes to the rule in the schema, or the
+					file it's in.</li>
+				<li><strong>Functions</strong> of the XSLT modules the schema uses, e.g. with <code>xsl:include</code>,
+					are rows as in a stylesheet's profile. SchXslt2's own templates and functions are left out.</li>
+				<li><strong>In the editor</strong> - while the view is open, each rule and global <code>let</code> shows
+					its times above it in the schema, and in the files it includes.</li>
+				<li><strong>Timeline</strong> - each profile is kept in the schema's Timeline view, to show again and
+					compare, as for a stylesheet.</li>
+			</ul>
+			<p>A rule's time is that of its template: its <code>let</code>s, assertions and reports, and what they call.
+				Saxon times templates, functions and globals, not each instruction, so there's a time for a rule but not
+				for an assertion in it - to find a slow assertion, try removing or simplifying one at a time, or step
+				through the rule in the <a href="#debugging">debugger</a>. The times are from a run with tracing on:
+				<a href="profiler.html#accuracy">compare them with each other</a>. It needs Saxon-PE or Saxon-EE, and
+				uses the same <code>XSLT.tasks.profileRuns</code> setting for <a href="profiler.html#runs">warm-up
+				runs</a>.</p>
+
+			<h3 id="editing">Editing</h3>
+			<p>Auto-completion offers the elements, attributes and values ISO Schematron 2025 allows where you are -
+				e.g. <code>sch:group</code>, <code>sch:param</code>, an assertion's <code>severity</code>, and a phase's
+				<code>from</code> and <code>when</code> - with a description of each element. It works whatever prefix
+				the schema uses for Schematron - <code>sch</code>, another, or none, with the Schematron namespace as the
+				default. In a new file, it offers a schema with a pattern.</p>
+			<p>An element is inserted with the attributes it requires, in each form it's commonly written - e.g.
+				<code>sch:rule</code> with <code>context</code>, <code>sch:rule (abstract)</code> with
+				<code>abstract="true"</code> and <code>id</code>, <code>sch:assert</code> with <code>test</code> and its
+				message, and <code>sch:let</code> with <code>name</code> and <code>value</code>, or its content - as are
+				the XSLT declarations SchXslt2 copies, e.g. <code>xsl:function</code> with <code>name</code> and
+				<code>as</code>.</p>
+			<p>In XPath, auto-completion offers the variables in scope - the schema's, the pattern's and the rule's -
+				and element and attribute names from the schema's <a href="#validating">XML context file</a>.</p>
+			<p>XPath expressions are highlighted and checked in <code>context</code>, <code>test</code>,
+				<code>subject</code>, <code>select</code>, <code>path</code>, <code>value</code>,
+				<code>visit-each</code>, <code>documents</code>, and a phase's <code>from</code> and <code>when</code>.
+				<code>role</code>, <code>flag</code> and <code>severity</code> are attribute value templates, e.g.
+				<code>role="{$level}"</code>, as SchXslt2 copies them into its report.</p>
+
+			<h3 id="navigation">Navigation</h3>
+			<ul>
+				<li><strong>Ids</strong> - in a reference - <code>is-a</code>, <code>extends</code>'s <code>rule</code>, a
+					phase's <code>active</code>, <code>defaultPhase</code>, and an assertion's <code>diagnostics</code> and
+					<code>properties</code> - auto-completion offers the ids it can refer to, e.g. the abstract rules for
+					<code>extends</code>, and in a pattern with <code>is-a</code>, a parameter's <code>name</code> offers
+					the abstract pattern's parameters. Go to Definition, Find All References and Rename work on an id,
+					in the schema and the files it includes</li>
+				<li><strong>Variables</strong> - Go to Definition, Find All References and Rename on a variable reference
+					or an <code>sch:let</code> or <code>sch:param</code>, with the variable's scope as SchXslt2 has it - and
+					for an abstract pattern's parameter, the <code>sch:param</code> of each pattern with
+					<code>is-a</code> for it. Across files, as SchXslt2 assembles them: a variable used in a file that
+					<code>sch:include</code> brings in, but declared in the schema, goes to the schema's declaration - with
+					its hover - and a declaration's references and Rename include those in the files the schema includes
+					in its scope, unless a file declares the name itself</li>
+				<li><strong>Schematron Includes</strong> - for a Schematron file, the Imports view in the Explorer -
+					<strong>XSLT Imports</strong> for a stylesheet - shows the schema that includes it, found from the
+					workspace's <code>.sch</code> files, with the files the schema brings in: with <code>sch:include</code>,
+					<code>sch:extends</code>'s <code>href</code>, and <code>xsl:include</code> and <code>xsl:import</code> -
+					each XSLT module with its own imports and includes - expanded down to the file in the editor. Click a
+					file to open it. A file that <code>sch:include</code> brings in, e.g. one whose outermost element is a
+					pattern, is checked with what's in scope where it's included: the schema's <code>sch:ns</code>
+					prefixes, the variables of the schema, its phases and the elements containing the
+					<code>sch:include</code>, and the XSLT functions the schema declares or includes - and for the XSLT
+					SchXslt2 ignores, as a schema is. A schema's variable used only in a file it includes isn't reported
+					as unused</li>
+				<li><strong>Functions</strong> - Go to Definition, Find All References and Rename for a call of an XSLT
+					function: declared with <code>xsl:function</code> in the schema, or in a module its
+					<code>xsl:include</code> or <code>xsl:import</code> brings in - also from a file the schema includes.
+					From the declaration in a stylesheet, its references and Rename include the calls in the Schematron
+					files that use its module</li>
+				<li><strong>Outline</strong> - each element by what identifies it: a pattern by its id, a rule by its
+					context, an assertion or report by its id, else its test</li>
+			</ul>
+
+			<h3 id="hover">Hover help</h3>
+			<figure>
+				<img src="resources/schematron-is-a.png" class="scale-with-grid">
+				<figcaption>
+					Hover help provides additional information forx a schema's components.
+				</figcaption>
+			</figure>
+			<p>Hover help is for reviewing a schema as much as for editing it:</p>
+			<ul>
+				<li><strong>A pattern's <code>is-a</code></strong> - the abstract pattern's title, its parameters with the
+					values this pattern gives - or their defaults - and its rules and their tests with those values in
+					place, as SchXslt2 instantiates them</li>
+				<li><strong><code>extends</code></strong> - the abstract rule's variables and tests, as they're copied into
+					the rule</li>
+				<li><strong>A rule</strong> - its context, variables and assertions, and the earlier rules of its pattern:
+					a node is handled only by the first rule whose context matches it, so a rule that comes after a rule
+					that matches the same nodes is never used</li>
+				<li><strong>An assertion or report</strong> - when it's reported, its severity, role and flag, its
+					message, and the text of its diagnostics</li>
+				<li><strong>A variable</strong> - its <code>sch:let</code> or <code>sch:param</code>, with its value and
+					where it's declared - or in an abstract pattern, its parameter and the value each pattern gives it</li>
+				<li><strong>A phase's <code>active</code></strong>, and an assertion's <code>diagnostics</code> and
+					<code>properties</code> - the pattern's title and rules, and the diagnostic's or property's text</li>
+				<li><strong>Functions</strong> - as in a stylesheet: the signature of a built-in function, and of a
+					function declared in the schema or a module it includes, with its documentation</li>
+			</ul>
+
+			<h3 id="checks">Checks</h3>
+			<p>The problems are shown in the <strong>Problems</strong> view, as for a stylesheet:</p>
+			<ul>
+				<li><strong>Variables</strong> - <code>sch:let</code> and <code>sch:param</code> are in scope as
+					SchXslt2 declares them: the schema's and a phase's are global, a pattern's are in scope in its
+					rules, and a rule's in its assertions and reports</li>
+				<li><strong>Namespace prefixes</strong> - SchXslt2 declares only the prefixes of
+					<code>sch:ns</code> in its stylesheet, so a prefix declared only with <code>xmlns</code> - or not at
+					all - is reported, e.g. <code>xs</code> in <code>xs:integer(@n)</code>, with a quick fix that adds the
+					<code>sch:ns</code>. Within an XSLT element, e.g. <code>xsl:function</code>, its
+					<code>xmlns</code> declarations apply too</li>
+				<li><strong>Abstract patterns and rules</strong> - an abstract pattern's parameters aren't variables,
+					so they aren't reported, and an abstract rule and the rules that extend it share their
+					<code>sch:let</code>, as SchXslt2 copies its content into each of them</li>
+				<li><strong>References</strong> - as SchXslt2 resolves them, with the files <code>sch:include</code>
+					brings in: an error where it stops - <code>is-a</code> that isn't the id of an abstract pattern (or
+					group), or doesn't supply a parameter the abstract pattern declares with no value, and
+					<code>extends</code> whose <code>rule</code> isn't the id of an abstract rule - and a warning where it
+					ignores the reference: a phase's <code>active</code> for a pattern that isn't declared, or is abstract,
+					<code>diagnostics</code> or <code>properties</code> that aren't declared, and ids that aren't unique.
+					Go to Definition on a reference goes to its declaration, also in an included file</li>
+				<li><strong>Files</strong> - the <code>href</code> of <code>sch:include</code>, <code>sch:extends</code>,
+					<code>xsl:include</code> and <code>xsl:import</code> is a link to the file - and a file that isn't
+					found is reported, as SchXslt2 stops</li>
+				<li><strong>Rules that never fire</strong> - a node is handled only by the first rule of a pattern whose
+					context matches it, so a rule with the same context as an earlier one, or one for elements after a
+					rule for every element, e.g. <code>context="*"</code>, is reported - not in a group, where every
+					matching rule is used</li>
+				<li><strong>Required attributes</strong> - an element without an attribute ISO Schematron requires is
+					reported, with a quick fix that adds it: an error where SchXslt2 fails without it, e.g. a rule's
+					<code>context</code>, an assertion's <code>test</code> or <code>sch:ns</code>'s <code>uri</code>, and a
+					warning where it carries on, but the element can't be referred to or does nothing, e.g. a phase with
+					no <code>id</code></li>
+				<li><strong>Elements and attributes</strong> - those that ISO Schematron doesn't allow where they are.
+					Elements in other namespaces, e.g. Schematron QuickFix's <code>sqf:fix</code>, aren't checked against
+					Schematron's schema, and a file that <code>sch:include</code> includes may start with any Schematron
+					element, e.g. <code>sch:pattern</code></li>
+			</ul>
+
+			<h3 id="xslt">XSLT in a schema</h3>
+			<p>An <code>xsl:function</code>, <code>xsl:key</code> or <code>xsl:accumulator</code> in the schema is
+				checked as in a stylesheet, and its functions can be called in the schema's XPath. So can the
+				functions of the modules that <code>xsl:include</code> and <code>xsl:import</code> bring in.</p>
+			<p>SchXslt2 copies only these XSLT declarations of a schema into its stylesheet:
+				<code>xsl:accumulator</code>, <code>xsl:function</code>, <code>xsl:include</code>,
+				<code>xsl:import</code>, <code>xsl:import-schema</code>, <code>xsl:key</code> and
+				<code>xsl:use-package</code>. Other XSLT isn't used as written, so it's reported:</p>
+			<table>
+				<thead>
+					<tr><th>In the schema</th><th>With SchXslt2</th><th>Quick fix</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>another XSLT declaration, e.g. <code>xsl:param</code>, <code>xsl:variable</code> or
+						<code>xsl:template</code></td><td>ignored</td><td><code>sch:param</code>, or
+						<code>sch:let</code></td></tr>
+					<tr><td>XSLT in a rule, e.g. <code>xsl:variable</code></td><td>ignored</td><td><code>sch:let</code></td></tr>
+					<tr><td>XSLT in a message, e.g. <code>xsl:value-of</code> in <code>sch:assert</code></td><td>not run -
+						copied into the report as it is</td><td><code>sch:value-of</code></td></tr>
+					<tr><td>XSLT in the content of <code>sch:let</code></td><td>not run - copied into the
+						value</td><td></td></tr>
+					<tr><td>an XSLT attribute of a Schematron element, e.g. <code>xsl:use-when</code> - or
+						<code>xsl:expand-text</code>, unless it's <a href="#text-value-templates">allowed</a></td>
+						<td>ignored</td><td>remove it</td></tr>
+				</tbody>
+			</table>
+			<p>An <code>xsl:note</code> in a declaration SchXslt2 copies, e.g. <code>xsl:function</code>, is copied
+				with it, and its stylesheet is XSLT 3.0: Saxon runs it only with its syntax extensions, which XSpec turns on
+				for the tests of the schema - with the default <code>XSLT.xspec.allowSyntaxExtensions</code> setting,
+				<code>auto</code> - as it does for <code>queryBinding="xslt4"</code>. A note is reported when the Saxon of
+				the <code>XSLT.tasks.saxonJar</code> setting can't run it - Saxon-HE, or a Saxon before 13 - or the setting
+				is <code>off</code>, with a quick fix that adds <code>use-when="false()"</code>, with which Saxon leaves
+				the note out.</p>
+			<p>SchXslt2 also declares the unnamed mode, with the schema's own accumulators. An included or imported
+				module that declares the unnamed mode with <code>use-accumulators</code> is reported, as Saxon reports
+				XTSE0545 for the two, and so is one that declares accumulators, as SchXslt2's modes don't use
+				them: declare them in the schema instead.</p>
+
+			<h3 id="text-value-templates">Text value templates in messages</h3>
+			<figure>
+				<img src="resources/schematron-tvt.png" class="scale-with-grid">
+				<figcaption>
+					Text value templates allow text to include values from XPath enclosed within curly braces.
+				</figcaption>
+			</figure>
+			<p>A message can use text value templates instead of <code>sch:value-of</code>, as in XSLT: with
+				<code>xsl:expand-text="yes"</code>, <code>Order {@id} has an invalid date: {@date}</code> is
+				<code>Order &lt;value-of select="@id"/&gt; has an invalid date: &lt;value-of select="@date"/&gt;</code>.
+				It's a non-standard extension - ISO Schematron doesn't have it - so it's allowed only with the
+				<code>XSLT.schematron.allowExpandText</code> setting, which is off by default. For a Schematron file,
+				the status bar shows <strong>tvt:on</strong> or <strong>tvt:off</strong> for the setting; click it to open
+				the setting - it's for every Schematron file, not just the one in the editor.</p>
+			<ul>
+				<li><strong>Where</strong> - <code>xsl:expand-text</code> is inherited, as in XSLT: on the schema, it's for
+					every message; on a pattern, rule or assertion, for those within it - and <code>"no"</code> turns it
+					off within. The <code>xsl</code> prefix is the one the schema declares for XSLT</li>
+				<li><strong>Messages</strong> - the text of <code>sch:assert</code>, <code>sch:report</code>,
+					<code>sch:diagnostic</code> and <code>sch:property</code>, and of <code>sch:emph</code>,
+					<code>sch:span</code> and <code>sch:dir</code> within them: where <code>sch:value-of</code> is allowed.
+					A title or <code>sch:p</code> is text</li>
+				<li><strong>Braces</strong> - <code>{{</code> and <code>}}</code> are braces in the text. Within an
+					expression, braces and quotes are the expression's - e.g. <code>{map { 'a': 1 }?a}</code> or
+					<code>{"it's {fine}"}</code></li>
+				<li><strong>Included files</strong> - a file <code>sch:include</code> brings in has its own
+					<code>xsl:expand-text</code>: a file without it is unchanged, so a library's braces, e.g. in
+					<code>[A-Z]{2}</code>, are still text</li>
+				<li><strong>Abstract patterns</strong> - a parameter in a text value template is replaced, as in an
+					attribute, e.g. <code>{$attribute}</code></li>
+			</ul>
+			<p>In the editor, text value templates are highlighted and checked as XPath, with auto-completion, and Go to
+				Definition, Find All References, Rename and hover for their variables.
+				<strong>Schematron: Validate</strong>, and the <a href="xspec.html#schematron">XSpec tests</a> of a
+				schema, rewrite them as <code>sch:value-of</code> before SchXslt2 compiles the schema - with the space
+				between two of them, e.g. <code>{@first} {@last}</code>, kept. Without the setting,
+				<code>xsl:expand-text</code> is reported as ignored, with quick fixes to remove it or to open the
+				setting.</p>
+			<p>Other Schematron processors ignore <code>xsl:expand-text</code>, so the braces would be in their reports
+				as written. For them, <strong>Schematron: Export Standard Copy...</strong> writes a copy of the schema as
+				standard ISO Schematron: its text value templates as <code>sch:value-of</code>, with the files it includes
+				in it, and paths relative to the copy. The stylesheet it uses, <code>expand-text.xsl</code> - in the
+				extension's <code>xslt-resources/schematron</code> folder - can also be run on its own, e.g. before
+				another processor: <code>java -jar saxon.jar -s:schema.sch -xsl:expand-text.xsl
+				-o:schema-standard.sch</code>.</p>
+		</div>
+		<div>
+			<h3 id="pipeline">Using a schema in a pipeline</h3>
+			<p>A build or CI pipeline should compile the schema itself, with the
+				<a href="https://codeberg.org/SchXslt/schxslt2">SchXslt2</a> version the team has chosen, and keep the schema and the
+				XSLT modules it includes or imports (<code>xsl:include</code>, <code>xsl:import</code>) in the build, so that
+				the pipeline controls everything it runs. If the schema uses text value templates, which other processors don't
+				know, <strong>Schematron: Export Standard Copy...</strong> - see above - writes a copy of it as standard
+				Schematron to compile instead.</p>
+		</div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#validating">Validating an XML file</a></li><li><a href="#debugging">Debugging a schema</a></li><li><a href="#profiling">Profiling a schema</a></li><li><a href="#editing">Editing</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#hover">Hover help</a></li><li><a href="#checks">Checks</a></li><li><a href="#xslt">XSLT in a schema</a></li><li><a href="#text-value-templates">Text value templates in messages</a></li><li><a href="#pipeline">Using a schema in a pipeline</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	<script src="resources/search-index.js" defer></script>
+	<script src="resources/search.js" defer></script>
+</body>
+
+</html>

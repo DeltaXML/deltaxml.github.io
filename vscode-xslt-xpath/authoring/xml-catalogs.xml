@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XML Catalogs in VS Code for XSLT and XML</title>
+		<meta name="description" content="XML catalogs in VS Code: map the URIs used in a stylesheet's imports and includes to local files, set up a catalog, and use it in the editor and when running stylesheets."/>
+	</head>
 	<div class="main">
 
 		<div class="two-thirds column">

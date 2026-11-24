@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head><meta charset="UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -15,8 +15,8 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT 3.0 | VS Code XSLT/XPath</title>
-	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<title>XSLT 3.0 in VS Code</title>
+	<meta name="description" content="XSLT 3.0, published by W3C on 8 June 2017, is the current W3C Recommendation for XSLT, alongside XPath 3.1."><link rel="canonical" href="https://deltaxml.github.io/vscode-xslt-xpath/xslt30.html"><meta property="og:type" content="article"><meta property="og:site_name" content="VS Code XSLT/XPath"><meta property="og:title" content="XSLT 3.0 in VS Code"><meta property="og:description" content="XSLT 3.0, published by W3C on 8 June 2017, is the current W3C Recommendation for XSLT, alongside XPath 3.1."><meta property="og:url" content="https://deltaxml.github.io/vscode-xslt-xpath/xslt30.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"XSLT 3.0 in VS Code","description":"XSLT 3.0, published by W3C on 8 June 2017, is the current W3C Recommendation for XSLT, alongside XPath 3.1.","url":"https://deltaxml.github.io/vscode-xslt-xpath/xslt30.html","mainEntityOfPage":"https://deltaxml.github.io/vscode-xslt-xpath/xslt30.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","softwareVersion":"2.2"},"isPartOf":{"@type":"WebSite","name":"VS Code XSLT/XPath","url":"https://deltaxml.github.io/vscode-xslt-xpath/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}}</script>
 	<meta name="author" content="Philip Fearon">
 
 	<!-- Mobile Specific Metas
@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,18 +52,18 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
+				<p class="remove-bottom" style="color: white"><span>144K Installs</span><span class="release-version">Release 2.2</span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -78,10 +80,12 @@
 				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
 				<li><a href="xslt-packages.html">XSLT Packages</a></li>
+				<li><a href="schematron.html">Schematron</a></li>
 				<li class="nav-heading">Running and Debugging</li>
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
 				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="profiler.html">Profiler</a></li>
 				<li><a href="xspec.html">XSpec Tests</a></li>
 				<li><a href="code-diagnostics.html">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
@@ -89,7 +93,7 @@
 				<li><a href="xpath-notebook.html">XPath Notebooks</a></li>
 				<li><a href="ai-assistants.html">AI Assistants</a></li>
 				<li class="nav-heading">XSLT Language</li>
-				<li><a href="xslt30.html" class="active">XSLT 3.0</a></li>
+				<li><a href="xslt30.html" class="active" aria-current="page">XSLT 3.0</a></li>
 				<li><a href="xslt40.html">XSLT 4.0</a></li>
 				<li><a href="xslt40-records.html">Records and Enums</a></li>
 				<li><a href="xslt40-jnodes.html">JSON and JNodes</a></li>
@@ -99,9 +103,10 @@
 			<div class="nav-footer">
 				<a href="all-pages.html">Print all pages</a>
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+				<a href="blog/index.html">The XSLT/XPath Blog</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT 3.0</h2>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">XSLT 3.0</h1>
 		
 		<div class="two-thirds column">
 			<p>
@@ -156,8 +161,8 @@
 			</p>
 		</div>
 		
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#learning-xslt-3-0">Learning XSLT 3.0</a><ul><li><a href="#offline-reading-material">Offline Reading Material</a></li><li><a href="#video-tutorials">Video Tutorials</a></li></ul></li><li><a href="#supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#learning-xslt-3-0">Learning XSLT 3.0</a><ul><li><a href="#offline-reading-material">Offline Reading Material</a></li><li><a href="#video-tutorials">Video Tutorials</a></li></ul></li><li><a href="#supporting-xslt-processors">Supporting XSLT Processors</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

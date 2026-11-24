@@ -1,6 +1,6 @@
 <!DOCTYPE HTML><html lang="en">
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head><meta charset="UTF-8">
 	<!-- Google tag (gtag.js) -->
 	<script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-GEZCTHQENJ"></script>
 	<script>
@@ -15,8 +15,8 @@
 	<!-- Basic Page Needs
 							==================================================-->
 
-	<title>XSLT Packages | VS Code XSLT/XPath</title>
-	<meta name="description" content="User Guide for DeltaXignia's XSLT/XPath Editor extension for Visual Studio Code.">
+	<title>XSLT Packages in VS Code</title>
+	<meta name="description" content="An XSLT package is a stylesheet module whose root element is xsl:package, with a name - usually a URI - and optionally a package-version."><link rel="canonical" href="https://deltaxml.github.io/vscode-xslt-xpath/xslt-packages.html"><meta property="og:type" content="article"><meta property="og:site_name" content="VS Code XSLT/XPath"><meta property="og:title" content="XSLT Packages in VS Code"><meta property="og:description" content="An XSLT package is a stylesheet module whose root element is xsl:package, with a name - usually a URI - and optionally a package-version."><meta property="og:url" content="https://deltaxml.github.io/vscode-xslt-xpath/xslt-packages.html"><meta property="og:image" content="https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The XSLT debugger in Visual Studio Code, stopped at a breakpoint in a stylesheet"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"XSLT Packages in VS Code","description":"An XSLT package is a stylesheet module whose root element is xsl:package, with a name - usually a URI - and optionally a package-version.","url":"https://deltaxml.github.io/vscode-xslt-xpath/xslt-packages.html","mainEntityOfPage":"https://deltaxml.github.io/vscode-xslt-xpath/xslt-packages.html","image":"https://deltaxml.github.io/vscode-xslt-xpath/resources/og-image.png","about":{"@type":"SoftwareApplication","name":"XSLT/XPath for Visual Studio Code","url":"https://deltaxml.github.io/vscode-xslt-xpath/","softwareVersion":"2.2"},"isPartOf":{"@type":"WebSite","name":"VS Code XSLT/XPath","url":"https://deltaxml.github.io/vscode-xslt-xpath/"},"author":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"},"publisher":{"@type":"Organization","name":"DeltaXignia","url":"https://www.deltaxml.com/"}}</script>
 	<meta name="author" content="Philip Fearon">
 
 	<!-- Mobile Specific Metas
@@ -39,6 +39,8 @@
 
 <body>
 
+	<a class="skip-link" href="#main">Skip to content</a>
+
 
 
 	<!-- Primary Page Layout
@@ -50,18 +52,18 @@
 		<div class="container">
 			<div class="four columns" style="padding-left: 20px;">
 				<a href="https://www.deltaxml.com/">
-					<img src="../resources/tiny-white-logo.png" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
+					<img src="../resources/tiny-white-logo.png" alt="DeltaXignia" width="200px" style="float: left; padding-top: 10px; padding-right: 20px; margin-top:0px">
 				</a>
 			</div>
 			<div class="six columns topTitle">
 				<h3 class="remove-bottom" style="color: #aaeaaa">XSLT and XPath</h3>
 				<h5 style="color: #aaeaaa;padding-bottom:2px">for Visual Studio Code</h5>
-				<p class="remove-bottom" style="margin-left: 50px; color: white"><span>143K Installs: </span></p>
+				<p class="remove-bottom" style="color: white"><span>144K Installs</span><span class="release-version">Release 2.2</span></p>
 			</div>
 		</div>
 	</div>
 	<div class="wrapper">
-		<nav>
+		<nav aria-label="Guide pages">
 			<div class="search">
 				<input type="search" id="search-input" placeholder="Search  ( / )" aria-label="Search the documentation" autocomplete="off" spellcheck="false">
 			</div>
@@ -77,11 +79,13 @@
 				<li><a href="navigation.html">Code Navigation</a></li>
 				<li><a href="refactoring-xslt.html">Refactoring</a></li>
 				<li><a href="xml-catalogs.html">XML Catalogs</a></li>
-				<li><a href="xslt-packages.html" class="active">XSLT Packages</a></li>
+				<li><a href="xslt-packages.html" class="active" aria-current="page">XSLT Packages</a></li>
+				<li><a href="schematron.html">Schematron</a></li>
 				<li class="nav-heading">Running and Debugging</li>
 				<li><a href="quick-run.html">Quick Run</a></li>
 				<li><a href="run-xslt.html">Tasks</a></li>
 				<li><a href="debugger.html">Debugger</a></li>
+				<li><a href="profiler.html">Profiler</a></li>
 				<li><a href="xspec.html">XSpec Tests</a></li>
 				<li><a href="code-diagnostics.html">Print Debugging</a></li>
 				<li class="nav-heading">Tools</li>
@@ -99,9 +103,10 @@
 			<div class="nav-footer">
 				<a href="all-pages.html">Print all pages</a>
 				<a href="vscode-xslt-xpath-guide.pdf">Download PDF</a>
+				<a href="blog/index.html">The XSLT/XPath Blog</a>
 			</div>
 		</nav>
-		<div class="main"><h2 class="pageTitle">XSLT Packages</h2>
+		<main class="main" id="main" tabindex="-1"><h1 class="pageTitle">XSLT Packages</h1>
 
 		<div class="two-thirds column">
 			<p>An <strong>XSLT package</strong> is a stylesheet module whose root element is <code>xsl:package</code>,
@@ -218,6 +223,18 @@
 &lt;/xsl:use-package&gt;</code>
 			<p>A package that uses another package doesn't pass its components on: they're private to it, unless its own
 				<code>xsl:accept</code> or <code>xsl:expose</code> makes them public.</p>
+			<h4 id="check-users">Using a private component</h4>
+			<p>A reference to a function, named template, variable or attribute set that's private in the package is reported
+				as that - e.g. <em>The function str:helper#1 is private in package 'http://example.com/strings', so it can't be
+				used here</em> - in the module with the <code>xsl:use-package</code>, the modules it imports or includes, and
+				XSpec files with the package as a helper. The quick fix <strong>Make … public in package …</strong> adds
+				<code>visibility="public"</code> to its declaration in the package.</p>
+			<p>So you can narrow a package's API - e.g. change a function's visibility to <code>private</code> - and then see
+				which uses now fail. Modules that aren't open aren't checked as you edit the package: the
+				<strong>used by … modules - check for problems</strong> CodeLens above the <code>xsl:package</code>, or
+				<strong>XSLT: Check Modules Using Package</strong>, checks the modules that use it, and those they import or
+				include, and shows their problems in the Problems view - see
+				<a href="editing-xslt.html#check-files">Checking files that aren't open</a>.</p>
 
 			<h3 id="overriding">Overriding package components</h3>
 			<p>An <code>xsl:override</code> declaration must have the same signature as the component it replaces, so the
@@ -337,6 +354,14 @@
 				declaration with the name of the library's must move into <code>xsl:override</code>, and some declarations
 				aren't exposed as package components at all. <strong>Analyse as Package...</strong> shows what would have to change
 				for the stylesheets to work as before - it changes nothing.</p>
+			<figure>
+				<img src="resources/package-convert.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The report from <strong>Analyse as Package...</strong> for a library of three
+						modules: the proposed package name and version, the stylesheets that use it, and the verdict - it can
+						be converted, with one decision.</i></p>
+				</figcaption>
+			</figure>
 			<p>Run it from the Command Palette, with the library open, or from the context menu of a module in the
 				<a href="editing-xslt.html#the-xslt-imports-view">XSLT Imports view</a>. It checks each top-level stylesheet
 				in the workspace that imports or includes the library, directly or indirectly, and opens a report in the
@@ -344,6 +369,10 @@
 			<ul>
 				<li><strong>To rework first</strong> - what would fail in a package:
 					<ul>
+						<li>an error in a module the conversion reads: the library's modules, and those of each stylesheet that
+							uses it, in every workspace folder, are checked first, with the linter's errors. The conversion
+							starts from modules without them, so that a problem after it is one it made. Warnings don't
+							block it</li>
 						<li>a global variable whose value uses the context item, e.g. <code>select="/*"</code>, which has none
 							in a library package (<code>XPDY0002</code>)</li>
 						<li>a stylesheet's <code>xsl:global-context-item</code> that overrides the library's by import
@@ -357,11 +386,19 @@
 					</ul>
 				</li>
 				<li><strong>Made public</strong> - the library's functions, templates, variables and attribute sets that
-					the stylesheets use</li>
+					the stylesheets use. Any stylesheet in the workspace that uses one makes it public, so some may not
+					belong in the package's API: after converting, narrow those - the uses that then fail are reported (see
+					<a href="#check-users">Using a private component</a>)</li>
 				<li><strong>Overrides</strong> - the stylesheets' declarations that override the library's by import
 					precedence, which move into <code>xsl:override</code></li>
-				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but only
-					the stylesheets declare, which the package declares as abstract</li>
+				<li><strong>Abstract components</strong> - functions, templates and variables that the library uses but one of
+					the stylesheets declares, which the package declares as abstract</li>
+				<li><strong>Modules included in the package</strong> - a module that several of the stylesheets share, and
+					declares what the library uses, e.g. a module of helper functions. It belongs with the library, so the
+					package includes it, with the modules it imports, and the stylesheets don't import it any more. Otherwise
+					each stylesheet would have a copy of its code in its <code>xsl:override</code>. A module that imports
+					the library is a decision instead: convert it, not the library. One that stylesheets that don't use the
+					library import too needs reworking first, as they'd lose it</li>
 				<li><strong>Modes and template rules</strong> - the library's named modes that the stylesheets use, and their
 					template rules in them, which move into <code>xsl:override</code> - and the unnamed mode, if the library
 					shares it with the stylesheets, which becomes a named mode, as a package keeps its unnamed mode to
@@ -369,6 +406,15 @@
 				<li><strong>Not exposed by a package</strong> - keys, accumulators, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code>, which apply only to the package's own code, so
 					the stylesheets need their own copies of those they rely on</li>
+				<li><strong>XSpec tests</strong> - the <a href="xspec.html">XSpec</a> tests that the conversion affects, as XSpec imports
+					the stylesheet it tests into its test runner, which neither a package nor a stylesheet with an
+					<code>xsl:use-package</code> can be (XTSE3008). A test of the library, which becomes a package, needs
+					<code>run-as="external"</code> or an <code>x:helper</code>. A test of a top-level stylesheet, which gets an
+					<code>xsl:use-package</code>, stops with that error: test the modules it imports or includes instead. A test
+					of a module that imported the library needs an <code>x:helper package-name</code> for the package, as the
+					module no longer reaches it: <strong>Convert to Package...</strong> adds it, so these XSpec files are among
+					the files it changes - listed in the report so you know. A test with <code>run-as="external"</code> isn't
+					affected. The other two are for you to change, after converting</li>
 			</ul>
 			<p>The report starts with a verdict: whether the library can be converted, with how many changes, or which
 				items need a decision or reworking first. Each item has a link to its place, then a list of the other
@@ -378,15 +424,28 @@
 				uses the context item, the linter checks its value as the body of a function, where there's no context
 				item.</aside>
 			<h4 id="convert">Convert to Package...</h4>
+			<figure>
+				<img src="resources/package-refactor.png" class="scale-with-grid">
+				<figcaption>
+					<p><i style="font-style: italic">The changes <strong>Convert to Package...</strong> makes, in the Refactor Preview:
+						the stylesheets' imports replaced by <code>xsl:use-package</code>, the functions they use made public,
+						and the library's root element becoming <code>xsl:package</code>. Untick a change to leave it out, then
+						<strong>Apply</strong>.</i></p>
+				</figcaption>
+			</figure>
 			<p>When nothing needs reworking first, <strong>Convert to Package...</strong> makes the changes, from the Command Palette or the context menu of a
-				module in the XSLT Imports view. It asks for the package's name and version, then shows the changes to
+				module in the XSLT Imports view. It asks for the package's name and version - the name proposed is the namespace of
+				the library's own functions, with the module's name added when it's a part of a larger library, or a placeholder,
+				<code>http://example.com/packages/</code> and the module's name, where it declares none: replace it with
+				one of your own - then shows the changes to
 				every module in the <strong>Refactor Preview</strong>, where you can check them before they're made:</p>
 			<ul>
 				<li>the library's root element becomes <code>xsl:package</code>, with the name and version, and
 					<code>declared-modes="no"</code></li>
 				<li>its components that the stylesheets use or override get <code>visibility="public"</code>, its named
-					modes they use a public <code>xsl:mode</code>, and the functions it calls that only the stylesheets
-					declare an abstract declaration</li>
+					modes they use a public <code>xsl:mode</code>, and the functions it calls that a stylesheet declares
+					an abstract declaration. The shared modules it uses are included with <code>xsl:include</code>,
+					at the end of its root element</li>
 				<li>in each top-level stylesheet, the <code>xsl:import</code> or <code>xsl:include</code> of the library -
 					in any of its modules - is replaced by an <code>xsl:use-package</code> in the top-level module, after its
 					imports: <code>xsl:use-package</code> can't be in an imported module (<code>XTSE3008</code>)</li>
@@ -395,9 +454,18 @@
 					<code>xsl:next-match</code></li>
 				<li>the stylesheet gets its own copies of the keys, decimal formats, character maps,
 					<code>xsl:strip-space</code> and <code>xsl:output</code> it relied on</li>
+				<li>each <a href="xspec.html">XSpec</a> file that tests a module that used the library gets an
+					<code>x:helper package-name="…" package-version="…"</code>, after its <code>x:import</code> and
+					<code>x:helper</code> elements, so its test runner uses the package, as the top-level stylesheet's
+					<code>xsl:use-package</code> does - the module doesn't reach the library any more. One that has a helper for
+					the package already is left as it is. Untick the change in the Refactor Preview to leave a file out</li>
 			</ul>
 			<p>Any items the analysis listed as needing a decision are left as they are - after the conversion, the linter
 				reports what still needs to change, mostly with quick fixes.</p>
+			<p>Only the stylesheets in the workspace are converted. A stylesheet elsewhere - e.g. in another repository - that
+				imports or includes the library must be changed to use the package with <code>xsl:use-package</code>: an
+				<code>xsl:package</code> module can't be imported or included, and Saxon reports <code>XTSE0165</code>. The
+				linter reports this too.</p>
 			<h4 id="unnamed-mode">The unnamed mode</h4>
 			<p>A library and the stylesheets that import it often share the unnamed mode: the stylesheets apply the library's
 				template rules, and add rules of their own, which take precedence. A package's unnamed mode is private to it,
@@ -482,8 +550,8 @@
 			<aside>Renaming a package component renames it in the package only, not the declarations overriding it in the
 				stylesheets that use the package - nor their calls of it.</aside>
 		</div>
-	</div>
-	<div class="page-toc"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#visibility">What a stylesheet can use from a package</a></li><li><a href="#overriding">Overriding package components</a><ul><li><a href="#abstract">Abstract components that aren't overridden</a></li></ul></li><li><a href="#package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#declared-modes">Declared modes</a></li><li><a href="#hover">Hover help</a></li><li><a href="#converting">Converting a library to a package</a><ul><li><a href="#convert">Convert to Package...</a></li><li><a href="#unnamed-mode">The unnamed mode</a></li></ul></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li><li><a href="#override-navigation">Navigating between overrides</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
+	</main>
+	<div class="page-toc" role="navigation" aria-label="On this page"><p class="page-toc-title">On this page</p><ul><li><a href="#workspace-packages">Packages in the workspace</a></li><li><a href="#setting">Packages outside the workspace</a></li><li><a href="#versions">Which version is used</a></li><li><a href="#visibility">What a stylesheet can use from a package</a><ul><li><a href="#check-users">Using a private component</a></li></ul></li><li><a href="#overriding">Overriding package components</a><ul><li><a href="#abstract">Abstract components that aren't overridden</a></li></ul></li><li><a href="#package-problems">Problems with xsl:accept and xsl:override</a></li><li><a href="#declared-modes">Declared modes</a></li><li><a href="#hover">Hover help</a></li><li><a href="#converting">Converting a library to a package</a><ul><li><a href="#convert">Convert to Package...</a></li><li><a href="#unnamed-mode">The unnamed mode</a></li></ul></li><li><a href="#running">Running and debugging</a></li><li><a href="#not-found">A package that isn't found</a></li><li><a href="#completion">Auto-completion</a></li><li><a href="#navigation">Navigating to a package</a></li><li><a href="#override-navigation">Navigating between overrides</a></li></ul></div><script src="resources/page-toc.js" defer></script></div>
 	<script src="resources/search-index.js" defer></script>
 	<script src="resources/search.js" defer></script>
 </body>

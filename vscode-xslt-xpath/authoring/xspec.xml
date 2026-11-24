@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>XSLT Testing with XSpec in VS Code</title>
+		<!-- the page's description for search results, in place of its first paragraph -->
+		<meta name="description" content="Run and debug XSpec tests for XSLT and Schematron in VS Code: Test Explorer, breakpoints in tests, coverage in the editor margin, and test times."/>
+	</head>
 	<div class="main">
 		<div class="two-thirds column">
 			<figure>
@@ -95,6 +100,16 @@
 			<p>Either way, calling a component that isn't public is reported. When tests are run, the packages they
 				use - the package's own, and those of an <code>x:helper package-name="…"</code> - are passed to Saxon
 				with <code>-lib</code>, found as for <a href="xslt-packages.html">XSLT packages</a>.</p>
+			<p id="uses-package">A stylesheet that <em>uses</em> a package has the same trouble: XSpec imports it into the test runner,
+				and an <code>xsl:use-package</code> can't be in an imported stylesheet - at its top level, or in a module it imports or
+				includes (XTSE3008). The stylesheet attribute of <code>x:description</code>, or of an <code>x:helper</code>, is
+				reported when it is so, with the module that has the <code>xsl:use-package</code> and the package. The way
+				to test such a stylesheet is to keep the <code>xsl:use-package</code> out of what is tested: put it in a top-level stylesheet,
+				test the modules with the logic, and give the test runner the package with an <code>x:helper package-name</code> on
+				<code>x:description</code> - as the top-level stylesheet's <code>xsl:use-package</code> would. Not reported with
+				<code>run-as="external"</code>, which doesn't import the stylesheet - but with Saxon-PE 13.1, the separate
+				transformation of a stylesheet that uses a package didn't find the packages passed with <code>-lib</code>
+				(XTSE3000).</p>
 			<p>Within an <code>x:call</code>, auto-completion after <code>&lt;</code> offers an <code>x:param</code>
 				for each parameter not passed yet: by name for a template, and for a function, the next in order, with
 				its type.</p>
@@ -122,6 +137,10 @@
 			<p>Auto-completion offers the elements, attributes and values XSpec allows where you are, and hover help on
 				an XSpec element's name shows its description from the schema. The Outline view lists the scenarios and
 				expectations by their labels.</p>
+			<p>In XPath, e.g. an <code>x:expect</code>'s <code>test</code>, auto-completion of element and attribute
+				names offers those of the test data: the content of <code>x:context</code>, <code>x:expect</code>,
+				<code>x:param</code> and <code>x:variable</code>, and of the documents their <code>href</code> attributes
+				refer to - not XSpec's own elements and attributes.</p>
 
 			<h3 id="stylesheet-under-test">The stylesheet under test</h3>
 			<p>The stylesheet of <code>x:description</code> - and of each <code>x:helper</code> - is read, as an
@@ -194,6 +213,14 @@
 				expected <code>...</code> matches - an attribute's value, text, or an element's content - is shown as
 				<code>...</code> in the actual result too, so only the differences that made it fail are shown.
 				<strong>XSpec: Open Report</strong> opens XSpec's HTML report of the last run.</p>
+			<h4 id="times">Test times</h4>
+			<p>With Saxon-PE or Saxon-EE, the Test Explorer shows how long each test took, beside it. The tests are
+				compiled with XSpec's <code>measure-time</code> option, which times each scenario - so the expectations
+				in a scenario all have its time, and a scenario's time includes the scenarios in it. The HTML report
+				shows the times too.</p>
+			<p>The first scenario run includes the Java VM's warm-up, so on a quick test file it may be the slowest
+				for that reason alone. Tests aren't timed with Saxon-HE, as XSpec times them with a Saxon extension
+				function, or when debugging, or with coverage.</p>
 			<p>A test is run in XSpec's steps - each a Saxon transform - and nothing is hidden. The
 				<strong>XSpec</strong> output channel shows each Saxon command, and Saxon's messages, including the
 				errors in a test that doesn't compile. The files are where XSpec's own command line puts them, in an
@@ -225,14 +252,55 @@
 				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
 				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
+			<p>With <a href="#times">test times</a>, an event also shows how long the file's tests took to run, e.g.
+				<strong>tests 36.7 ms</strong> - just running the tests, not starting Java, compiling or reporting - so
+				you can see when a change made them slower. The workspace's timeline shows each run's time in all,
+				with each file's test time when you hover over it.</p>
+			<p>To remove a run, right-click it in the Timeline view and choose <strong>Delete</strong>. To remove all
+				of a file's runs, use <strong>Clear Profiles and XSpec Runs from Timeline (Current File)</strong> from
+				the Timeline view's <strong>...</strong> menu or the Command Palette - or <strong>(All Files)</strong>,
+				for every XSpec file and stylesheet in the workspace. For a run of more than one XSpec file, only the
+				current file's results are removed - the run is kept for the others. Other entries, such as Git
+				commits, aren't removed.</p>
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
-				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (included with
-				XSpec), to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
+				come first, as in XSpec's command line: the Schematron is compiled to XSLT with SchXslt2 (1.11.3 
+				- a patch update to XSpec's own copy),
+				to <code>name-sch-preprocessed.xsl</code>, and the XSpec file is converted to test it. Schematron
 				expectations such as <code>x:expect-assert</code> and <code>x:expect-not-report</code> appear in the Test
 				Explorer with the labels XSpec gives them, e.g. <em>not assert a001</em>.</p>
 			<aside>Only a Schematron with an XSLT query binding, e.g. <code>queryBinding="xslt3"</code>, is supported -
 				not one for XQuery.</aside>
+
+						<p>In the XSpec file, the expectations' ids are linked to the schema - in it and the files it includes:
+				auto-completion of <code>id</code> offers its assertions' ids for <code>x:expect-assert</code> and
+				<code>x:expect-not-assert</code>, its reports' for <code>x:expect-report</code> and
+				<code>x:expect-not-report</code>, and its rules' for <code>x:expect-rule</code> - as well as its roles for
+				<code>role</code>, and its rules' contexts for <code>x:expect-rule</code>'s <code>context</code>. Go to
+				Definition and hover go from an id to the assertion, report or rule, and an id the schema doesn't have is
+				reported, as the expectation always fails - or, for <code>x:expect-not-assert</code> and
+				<code>x:expect-not-report</code>, always passes. From the schema, Find All References and Rename on an
+				assertion's, report's or rule's id include the XSpec tests that use it.</p>
+
+			<h4 id="schematron-generated">Creating tests from the XML context file</h4>
+			<p>In a Schematron file, code actions (<span class="shortcut">⌘.</span>) create XSpec scenarios from the
+				schema's <a href="schematron.html#validating">XML context file</a> - in the XSpec file whose
+				<code>schematron</code> attribute names the schema, or a new one beside it:</p>
+			<ul>
+				<li><strong>On a rule</strong> - a scenario for a node it fires for, with an expectation for each of its
+					assertions and reports</li>
+				<li><strong>On an assertion or report</strong> - a scenario for a node where it fails (or is reported),
+					and one for a node where it passes (or isn't)</li>
+				<li><strong>On the schema's outermost element</strong> - a scenario for each rule that has none yet</li>
+			</ul>
+			<p>A scenario's <code>x:context</code> is the node, with its ancestors - and its expectations are the
+				schema's results for that data, found by running the schema on it: the tests pass when they're made,
+				describing what the schema does now, for you to review. When the node with its ancestors alone doesn't
+				give the result a scenario is for - e.g. an id that must be unique, with no other node to share it - the
+				data has the siblings at its level too, or the whole document, and the expectations name the node with
+				<code>location</code>. An assertion with no id is expected by its message. A rule that no node of the
+				context file fires for - or a schema with no context file, or no Saxon - has a pending scenario, to be
+				completed.</p>
 
 			<h3 id="debugging">Debugging a test</h3>
 			<p>The <strong>Debug</strong> button beside a scenario - or the Test Explorer's <strong>Debug Test</strong>
@@ -277,6 +345,10 @@
 				function and template, run or not, with the number of times. It's measured as the XSLT debugger runs the
 				tests, without pausing, so it works with any edition of Saxon. The modules the stylesheet imports or
 				includes have their coverage too - not XSpec's own modules, or the test runner.</p>
+			<p>After a coverage run, or debugging a test, a scenario's context file - <code>x:context href="..."</code>
+				- is linked to the templates that processed its nodes, as after a <a href="debugger.html#input-nodes">debug
+				session</a>: hover over an element's start tag in it. Not an inline <code>x:context</code>, whose nodes
+				are constructed by the test.</p>
 
 			<h3 id="settings">Settings</h3>
 			<table>
@@ -296,7 +368,9 @@
 			<aside>By default, tests are run with Saxon's syntax extensions on (<code>--allowSyntaxExtensions:on</code>)
 				only when they're needed: when the stylesheet tested - or a module it imports, includes or uses, or a
 				helper - is XSLT 4.0, or uses item types or notes, e.g. record types with <code>version="3.0"</code>,
-				with <code>run-as="external"</code> too. Not otherwise, as with them on, Saxon 13 runs a stylesheet
+				with <code>run-as="external"</code> too - or for a Schematron, when it has <code>xsl:note</code> in an
+				<code>xsl:function</code> or other declaration SchXslt2 copies, <code>queryBinding="xslt4"</code>, or a
+				module it includes that needs them (see <a href="schematron.html#xslt">XSLT in a schema</a>). Not otherwise, as with them on, Saxon 13 runs a stylesheet
 				before XSLT 4.0 with some of 4.0's rules - e.g. a union pattern's priority, which can change the
 				template rule chosen (Saxon's warning SXWN9052). Never with Saxon-HE, which fails every transform with
 				them on. The <code>XSLT.xspec.allowSyntaxExtensions</code> setting turns them on or off.</aside>

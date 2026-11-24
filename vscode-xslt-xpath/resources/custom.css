@@ -34,6 +34,13 @@ a:focus {
   color: #0071BC;
 }
 
+/* the page heading is an h1, for search engines, but looks as the h2 it was */
+h1.pageTitle {
+  font-size: 35px;
+  line-height: 40px;
+  margin-bottom: 10px;
+}
+
 code {
   font-size: small;
   background-color: #f4f2f9;
@@ -45,6 +52,27 @@ p.caption {
   padding: 0 0 0 0;
   margin: 0 0 0 0;
   font-style: italic;
+}
+
+code.title {
+  color: black;
+  font-size: small;
+  font-weight: bold;
+}
+
+/* a grid of names, as in the release notes: no borders, in columns */
+table.tool-grid,
+table.tool-grid td {
+  border: none;
+  margin: 0;
+}
+table.tool-grid {
+  margin: 10px;
+  font-style: italic;
+}
+
+table.tool-grid td {
+  padding: 2px 28px 2px 0;
 }
 
 code.block {
@@ -107,6 +135,10 @@ aside {
 
   .shortcut {
     color: #00b2fe;
+  }
+
+  code.title {
+    color: #ffffff;
   }
 
   a,
@@ -203,6 +235,29 @@ aside {
   padding: 10px 8px 0px 20px;
 }
 
+/* the blog: the link to the guide in its top bar, and a post's date and footer */
+.topbar a.guide-link {
+  color: #aaeaaa;
+}
+
+.post-date {
+  margin-bottom: 14px;
+  color: #6b6b6b;
+}
+
+.post-footer {
+  margin-top: 30px;
+  padding-top: 14px;
+  border-top: 1px solid #c8c8c8;
+}
+
+/* the release the guide describes, after the install count in the top bar */
+.release-version {
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 /* the logo lines up with the nav, rather than being centred in skeleton's 960px container */
 @media only screen and (min-width: 960px) {
   .topbar .container {
@@ -242,7 +297,7 @@ nav li.nav-heading {
   font-weight: bold;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: #6b6b6b;
 }
 
 /* below the nav's list of pages: the whole guide, to print or as a PDF */
@@ -504,6 +559,39 @@ figcaption {
   }
 }
 
+/* the features page: bullets for features rarely found in other XML environments are marked with a star, which is
+   a marker, so it also shows in all-pages.html and the PDF */
+.notable-key {
+  color: #d98200;
+}
+
+.feature-card li.notable {
+  font-weight: 600;
+}
+
+body .feature-card li.notable::marker {
+  content: "\2605  ";
+  color: #d98200;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .notable-key,
+  body .feature-card li.notable::marker {
+    color: #ffb340;
+  }
+}
+
+.feature-note {
+  font-size: 0.85em;
+  color: #6b6b6b;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .feature-note {
+    color: #a0a0a0;
+  }
+}
+
 /* in all-pages.html, and so the PDF: a compact two-column table of the sections, in smaller text, so that the
    features fit on one sheet - the greys are translucent to suit both light and dark colour schemes */
 .all-pages .feature-cards {
@@ -557,7 +645,7 @@ figcaption {
   font-weight: bold;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: #6b6b6b;
 }
 
 .page-toc ul {
@@ -710,7 +798,8 @@ figcaption {
   }
 
   /* heading sizes for paper - the screen sizes, from base.css, are too large beside 10pt text */
-  h2 {
+  h2,
+  h1.pageTitle {
     margin-bottom: 8pt;
     font-size: 20pt;
     line-height: 24pt;
@@ -744,6 +833,7 @@ figcaption {
     font-size: 8.5pt;
   }
 
+  h1,
   h2,
   h3,
   h4,
@@ -796,5 +886,34 @@ figcaption {
   a,
   a:visited {
     color: #0057a0;
+  }
+}
+/* off-screen until it takes keyboard focus, so keyboard and screen-reader users can jump past the nav */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 8px 14px;
+  background: #fff;
+  color: #0071BC;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+}
+
+/* the main region takes focus from the skip link, which needs no outline */
+main:focus {
+  outline: none;
+}
+
+/* the nav's group headings and 'On this page' title: dark enough to read on white, light enough on the dark theme */
+@media screen and (prefers-color-scheme: dark) {
+  nav li.nav-heading,
+  .page-toc-title {
+    color: #a0a0a0;
   }
 }

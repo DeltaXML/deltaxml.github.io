@@ -1,0 +1,52 @@
+# XSLT and XPath for Visual Studio Code
+
+> DeltaXignia's free XSLT/XPath extension for Visual Studio Code: an XSLT editor, XPath editor and tester, XSpec test runner, Schematron editor, debugger and profiler, with support for XSLT 3.0, XSLT 4.0 and AI assistants. Install it from the Visual Studio Code Marketplace: https://marketplace.visualstudio.com/items?itemName=deltaxml.xslt-xpath
+
+Current release: 2.2. The guide describes this release; the What's New page lists the changes in each release.
+
+The pages below are the extension's user guide. The whole guide is also available as one page, https://deltaxml.github.io/vscode-xslt-xpath/all-pages.html, and as a PDF, https://deltaxml.github.io/vscode-xslt-xpath/vscode-xslt-xpath-guide.pdf.
+
+## Guide
+
+- [XSLT Editor and XPath Editor for VS Code](https://deltaxml.github.io/vscode-xslt-xpath/): DeltaXignia's XSLT/XPath extension for Visual Studio Code supports XSLT 3.0 and XPath 3.1, and the XSLT 4.0 and XPath 4.0 features implemented in Saxon 13.
+- [What's New in the XSLT/XPath Extension for VS Code](https://deltaxml.github.io/vscode-xslt-xpath/new-release.html): What's new in the XSLT/XPath extension for VS Code: the features of releases 2.0, 2.1 and 2.2, from the debugger and XSpec to Schematron and profiling.
+- [XSLT/XPath Extension for VS Code: Features](https://deltaxml.github.io/vscode-xslt-xpath/features.html): Features of the XSLT/XPath extension for VS Code: XSLT 4.0, checks that understand XPath, a debugger that steps into XPath, XSpec, Schematron and profiling.
+- [Using VS Code for XSLT and XPath Development](https://deltaxml.github.io/vscode-xslt-xpath/vscode.html): Visual Studio Code for XSLT developers: the user interface, the Command Palette, keyboard shortcuts, settings, and installing the XSLT/XPath extension.
+- [XSLT/XPath Extension Settings for VS Code](https://deltaxml.github.io/vscode-xslt-xpath/settings.html): How to set up user and workspace settings for the XSLT/XPath extension in Visual Studio Code, with a table of every extension setting, including Saxon, catalogs, packages and the MCP server.
+
+## Editing
+
+- [XML Editing in VS Code for XSLT Developers](https://deltaxml.github.io/vscode-xslt-xpath/editing.html): XSLT developers benefit from a set of XML editing features that are also available for any XML file. These general purpose features are described here.
+- [XSLT and XPath Editing in VS Code: Linting and Completion](https://deltaxml.github.io/vscode-xslt-xpath/editing-xslt.html): With DeltaXignia's XSLT/XPath extension, Visual Studio Code is a fully featured XSLT 3.0 editor, with support for the XSLT 4.0 and XPath 4.0 features…
+- [XSLT Code Navigation in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/navigation.html): Visual Studio Code includes a compelling set of features for code navigation, the language-neutral details are outlined here.
+- [XSLT Refactoring in VS Code: Extract Function](https://deltaxml.github.io/vscode-xslt-xpath/refactoring-xslt.html): Extract selected XSLT or XPath code to a new xsl:function, in full or partial mode, with the context properties it needs passed as parameters.
+- [XML Catalogs in VS Code for XSLT and XML](https://deltaxml.github.io/vscode-xslt-xpath/xml-catalogs.html): XML catalogs in VS Code: map the URIs used in a stylesheet's imports and includes to local files, set up a catalog, and use it in the editor and when running stylesheets.
+- [XSLT Packages in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt-packages.html): An XSLT package is a stylesheet module whose root element is xsl:package, with a name - usually a URI - and optionally a package-version.
+- [Schematron Editor for VS Code: Validation and Debugger](https://deltaxml.github.io/vscode-xslt-xpath/schematron.html): Schematron in VS Code: checked as SchXslt2 runs it, with quick fixes and completion, validation of XML files, and a debugger for rules and assertions.
+
+## Running and Debugging
+
+- [Run XSLT in VS Code with Quick Run](https://deltaxml.github.io/vscode-xslt-xpath/quick-run.html): Quick Run is the fastest way to run an XSLT stylesheet, without first creating a task by hand.
+- [Run XSLT in VS Code: Tasks for Saxon](https://deltaxml.github.io/vscode-xslt-xpath/run-xslt.html): Visual Studio Code's Tasks include custom task types for configuring and running XSLT transforms with SaxonJ (Java), SaxonJS (JavaScript) or SaxonC (C/C++).
+- [XSLT Debugger for VS Code](https://deltaxml.github.io/vscode-xslt-xpath/debugger.html): Step-through XSLT debugger for VS Code with SaxonJ: breakpoints and stepping inside multi-line XPath, step back, variables, and output mapped to its XSLT.
+- [XSLT Profiler for VS Code](https://deltaxml.github.io/vscode-xslt-xpath/profiler.html): To find where a stylesheet spends its time, profile it: the stylesheet runs as Quick Run runs it, with Saxon timing each template, function and global…
+- [XSLT Testing with XSpec in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xspec.html): Run and debug XSpec tests for XSLT and Schematron in VS Code: Test Explorer, breakpoints in tests, coverage in the editor margin, and test times.
+- [XSLT Print Debugging in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/code-diagnostics.html): Print debugging for XSLT: xsl:message completions that write in-scope variables with xdm:debug(), in color, and xdm:trace() for a value within an expression.
+
+## Tools
+
+- [XPath Tester in VS Code: Find Nodes with XPath](https://deltaxml.github.io/vscode-xslt-xpath/xpath-queries.html): To find nodes in an XML file with XPath, write expressions in a query file, an XPath editor below the XML file, and run them one at a time.
+- [XPath Notebooks in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xpath-notebook.html): XPath Notebooks for VS Code: an XPath tester that runs XPath 3.1 expressions in notebook cells against an XML source file, with the results shown beside your notes.
+- [AI for XSLT and XPath: Copilot and Claude Code in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/ai-assistants.html): AI coding assistants in Visual Studio Code - such as GitHub Copilot or Claude Code - can make good use of the XSLT/XPath extension.
+
+## XSLT Language
+
+- [XSLT 3.0 in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt30.html): XSLT 3.0, published by W3C on 8 June 2017, is the current W3C Recommendation for XSLT, alongside XPath 3.1.
+- [XSLT 4.0 and XPath 4.0 in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40.html): XSLT 4.0 currently comprises a set of draft proposals maintained by the W3C XSLT 4.0 Community group.
+- [XPath 4.0 Records and Enums in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-records.html): XPath 4.0 adds record types, for maps with a known set of fields, and enumeration types, for strings with a known set of values.
+- [XSLT 4.0 JSON and JNodes in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-jnodes.html): XPath 4.0 path expressions can navigate JSON - maps and arrays - as they do XML.
+- [XSLT 4.0 Code Documentation with xsl:note in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/xslt40-notes.html): XSLT 4.0 adds the xsl:note element, for documentation within a stylesheet.
+
+## The XSLT/XPath Blog
+
+- [An XSLT Editor for Today: XSLT 3.0 and 4.0 in VS Code](https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html): A free XSLT 3.0 and 4.0 editor with a debugger that steps into XPath, a profiler, XSpec tests and Schematron - for developers and their AI assistants, built on Visual Studio Code.
