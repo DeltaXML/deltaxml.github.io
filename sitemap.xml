@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/new-release.html</loc>
@@ -10,11 +10,11 @@
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/features.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/vscode.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/settings.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/editing.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-24</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/editing-xslt.html</loc>
@@ -30,31 +30,31 @@
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/navigation.html</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/refactoring-xslt.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xml-catalogs.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xslt-packages.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/schematron.html</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/quick-run.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/run-xslt.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/debugger.html</loc>
@@ -62,23 +62,23 @@
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/profiler.html</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xspec.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/code-diagnostics.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xpath-queries.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xpath-notebook.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/ai-assistants.html</loc>
@@ -86,22 +86,26 @@
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xslt30.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xslt40.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xslt40-records.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xslt40-jnodes.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://deltaxml.github.io/vscode-xslt-xpath/xslt40-notes.html</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://deltaxml.github.io/vscode-xslt-xpath/blog/an-xslt-editor-for-today.html</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
 </urlset>
