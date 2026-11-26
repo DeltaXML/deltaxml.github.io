@@ -31,27 +31,30 @@
 			<h4>Auto tag-close</h4>
 			<p>Element tags are auto-closed when typing <code>&lt;/</code> when an element is unclosed.
 				<i>Note that this feature is only enabled when the VS Code user-setting <em>Format on Type</em> is set (indentation is fixed at the same time).</i></p>
-			<h3>Auto-Completion</h3>
-			<p>Outside of the auto-complete (IntelliSense) features for XSLT and XPath, a small set of snippets for general purpose XML elements is accessible
-			from the auto-completion list:</p>
-			<img src="resources/suggestions.png" class="scale-with-grid" />
-			<p>After a <code>&lt;</code> within an element, press <span class="shortcut">⌃Space</span> for the tag snippets - in an
-				XML file, typing <code>&lt;</code> doesn't open the list. Each inserts an element with a placeholder for its name,
-				which is used for both the start and end tags:</p>
+			<h3 id="xml-completion">Auto-Completion</h3>
+			<p>In an XML file without a schema, auto-completion offers the names the document itself uses - so a file of data,
+				test data or a sample source is quicker to extend, with the names spelled as they are elsewhere:</p>
 			<ul>
-				<li><code>block-start-end-tag</code> - start and end tags on separate lines, with the cursor on the indented line between them</li>
-				<li><code>inline-start-end-tag</code> - start and end tags on the same line, with a placeholder for the text between them</li>
-				<li><code>self-closed-tag</code> - a self-closed element</li>
+				<li><strong>Elements</strong> - after a <code>&lt;</code>, the child elements that other elements with the
+					parent's name have, in the order they first appear, with how often, e.g. <em>in order: 2 of 3</em>. The element is
+					inserted with its end tag - or self-closed, if it's always empty - and with the attributes it always has, as
+					placeholders. Within an element whose name has no children elsewhere, e.g. a new one, all the document's element
+					names are offered.</li>
+				<li><strong>Attributes</strong> - in a start tag, the attributes that other elements with its name have, the most used
+					first, and <code>xml:lang</code>, <code>xml:space</code> and <code>xml:base</code>. On the root element,
+					<code>xmlns:xsi</code> for the XML Schema instance namespace - and once it's declared,
+					<code>xsi:schemaLocation</code>, <code>xsi:noNamespaceSchemaLocation</code>, <code>xsi:type</code> and
+					<code>xsi:nil</code>.</li>
+				<li><strong>Attribute values</strong> - the values the attribute has on other elements with the name, the most used
+					first, where they repeat - not where each is different, as for an id.</li>
 			</ul>
-			<p>Each has a <code>-with</code> variant, such as <code>block-start-end-tag-with</code>, that also inserts an attribute.
-				Before the root element of a file, the <code>XML Root Element Snippet</code> inserts an XML declaration and a root element
-				with an attribute and a child element.</p>
-			<p>
-				With the cursor in the element start tag where you wish to add the attribute, press <span class="shortcut">⌃Space</span>
-				and select <code>attribute</code> to insert the code snippet:
-			</p>
-			<code class="block"><strong>name</strong>="<strong>value</strong>"</code>
-			<p>Edit the <code>name</code> and then press <span class="shortcut">Tab</span> to edit the <code>value</code>.</p>
+			<p>Typing <code>&lt;</code> opens the list where there are names to offer. With
+				<a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's XML extension</a>
+				installed, a file with a schema or DTD - associated by <code>xsi:schemaLocation</code>,
+				<code>xsi:noNamespaceSchemaLocation</code>, an <code>xml-model</code> processing instruction, a DOCTYPE, or the
+				<code>xml.fileAssociations</code> setting - has its element and attribute names from the schema, from Red Hat's
+				extension, so this extension doesn't offer the document's as well; Red Hat's extension also offers the
+				<code>xsi:</code> attributes.</p>
 			<h3>Emmet</h3>
 			<p>Emmet can be used to insert XML snippets using a shorthand notation. Emmet should be enabled in user settings.
 				See the <a href="settings.html">Settings</a> section for an example.	
