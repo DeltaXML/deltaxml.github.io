@@ -153,7 +153,15 @@
 							checked with its imports, includes and packages - whether or not it's open. Optionally, only those of a severity or
 							worse. A module that another stylesheet imports or includes is checked with that top-level
 							stylesheet's declarations too, as in the editor: the one found for it in the workspace, or one the
-							assistant gives - for example, a stylesheet outside the workspace.</td>
+							assistant gives - for example, a stylesheet outside the workspace.
+							<br>Also an XML file - <code>.xml</code>, or another file VS Code opens as XML, such as <code>.xsd</code>:
+							its well-formedness and, when <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's
+							XML extension</a> is installed, its validation against the schema or DTD associated with it, e.g. by
+							<code>xsi:schemaLocation</code>, a DOCTYPE or an <code>xml-model</code> processing instruction. Red Hat's problems
+							are marked as its, and a problem both report is given once. The result says what the file was checked with - for
+							example, that no schema is associated with it. A file outside the workspace folders that has changed since VS Code
+							opened it is checked for well-formedness only, as VS Code doesn't reload it, so Red Hat's problems would be for
+							the older version.</td>
 					</tr>
 					<tr>
 						<td><code class="title">lint_files</code></td>
