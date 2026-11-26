@@ -372,7 +372,11 @@
 				assistant how to use the tools above together:</p>
 			<ul>
 				<li><code class="title">xslt-xpath</code>, for writing XSLT and XPath: find the XSLT version and never raise it, and look up what a
-					module already declares before writing a second copy of a function (<code>list_declarations</code>); try an XPath
+					module already declares before writing a second copy of a function (<code>list_declarations</code>); summarize an XML
+					file before writing XSLT for it - its source, a lookup file or its expected output - rather than reading it, which for
+					a large file may not be possible: with <code>evaluate_xpath</code>, a line for each element name, with how many
+					there are, the elements they're in, their attributes and whether they have text, and the namespaces the file uses -
+					then, where it matters, the values of an attribute with how often each occurs; try an XPath
 					expression on the stylesheet's source XML (<code>evaluate_xpath</code>) - including how it differs from a
 					stylesheet's: the default namespace, and the <code>map</code>, <code>array</code> and <code>math</code> prefixes a
 					stylesheet has to declare; check each change with <code>lint_file</code>, read warnings that come from imports it
