@@ -1449,6 +1449,8 @@
 			<code>return</code> or <code>satisfies</code> within a <code>for</code>, <code>let</code>,
 			<code>some</code> or <code>every</code> expression. Short operators such as <code>and</code>,
 			<code>eq</code> and <code>div</code> are quicker to type, so aren't included.</p>
+		<p>In the options map of a built-in function, e.g. <code>serialize($doc, map { |</code>, the suggestions are the
+			function's options - see <a href="#editing-xslt--function-options">Options of built-in functions</a>.</p>
 		<h4 id="editing-xslt--parameters-for-xsl-call-template">Parameters for xsl:call-template</h4>
 		<p>Typing <span class="shortcut">&lt;</span> within an <code>xsl:call-template</code> suggests an
 			<code>xsl:with-param</code> for each of the called template's parameters that isn't passed yet, for
@@ -1682,6 +1684,38 @@
 		</ul>
 		<p>Other stylesheets before 4.0 are run without the syntax extensions by default, so they keep XSLT 3.0's
 			rule.</p>
+		<h4 id="editing-xslt--function-options">Options of built-in functions</h4>
+		<p>Several built-in functions take a map of options, e.g. <code>parse-json($json, map { 'liberal': true() })</code>.
+			Where the options argument is a map constructor, its keys and values are checked against the options the function has,
+			as Saxon 13 implements them - which in places differ from the XPath 4.0 drafts:</p>
+		<ul>
+			<li>XPath 3.1: <code>parse-json</code>, <code>json-doc</code>, <code>json-to-xml</code>, <code>xml-to-json</code>,
+				<code>serialize</code>, <code>transform</code>, <code>load-xquery-module</code> and <code>map:merge</code></li>
+			<li>XPath and XSLT 4.0: <code>map:build</code>, <code>deep-equal</code>, <code>doc</code>, <code>doc-available</code>,
+				<code>parse-xml</code>, <code>parse-xml-fragment</code>, <code>unparsed-text</code>,
+				<code>unparsed-text-available</code>, <code>unparsed-text-lines</code>, <code>path</code> and
+				<code>apply-templates</code></li>
+		</ul>
+		<p>The linter reports:</p>
+		<ul>
+			<li><strong>An option the function doesn't have</strong>, e.g. <code>'liberall'</code> - with quick fixes for the closest
+				options. Saxon ignores it, unless the stylesheet is run with its syntax extensions - for XSLT 4.0, or when it uses
+				item types - when it raises XPTY0004: so it's a warning, or an error where the syntax extensions are on. A key that
+				isn't a string, e.g. a QName for one of Saxon's own serialization parameters, isn't checked.</li>
+			<li><strong>A value of the wrong type</strong>, e.g. <code>'indent': 'yes'</code> rather than <code>true()</code>,
+				<code>'initial-template': 'main'</code> rather than <code>QName('', 'main')</code> - a string isn't converted to a
+				QName - or <code>'standalone': 'omit'</code> rather than <code>()</code>.</li>
+			<li><strong>A value that isn't allowed</strong>, e.g. <code>'duplicates': 'retain'</code> for <code>parse-json</code>
+				(only <code>json-to-xml</code> allows it), or the serialization method <code>'csv'</code>.</li>
+		</ul>
+		<p>The serialization parameters of <code>transform</code>'s <code>serialization-params</code> are checked as
+			<code>serialize</code>'s options. Auto-completion within the map offers the options not yet used, with the values of
+			an option that has a fixed set of them, or <code>true()</code> and <code>false()</code>; hover over an option shows
+			its type, purpose and default, and whether it's XPath 4.0 or a Saxon extension.</p>
+		<p><code>system-property()</code>: auto-completion of the property names in the XSLT namespace, e.g.
+			<code>xsl:supports-streaming</code>, with the stylesheet's prefix for it, and hover for each. A name in the XSLT
+			namespace that isn't a system property, e.g. <code>'xsl:verson'</code>, is reported as a warning, as the function
+			returns an empty string for it.</p>
 		<h4 id="editing-xslt--unused-variables">Unused Variables</h4>
 		<p>The linter detects unused variables and parameters declared in either XSLT or XPath expressions. These are highlighted by being 'grayed out' in
 			the editor. Global variables are shown as unused if they are not referenced in the current file, the 'unused' state is not affected by
