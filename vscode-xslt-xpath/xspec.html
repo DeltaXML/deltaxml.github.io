@@ -353,6 +353,10 @@
 				The Timeline view for the selected XSpec file shows these timeline events, along with other events for
 				this file such as git commits. Hover over an XSpec event in the timeline to see a list of scenarios that failed.
 			</p>
+			<p>The stylesheet or Schematron schema an XSpec file tests has the run in its timeline too, with the XSpec
+				file's results and name, e.g. <strong>XSpec run: 3 passed, 1 failed</strong> <em>tests.xspec</em> -
+				one event for each XSpec file that tests it - so you can see how the tests went alongside the
+				stylesheet's own history, such as its commits and <a href="profiler.html">profiles</a>.</p>
 			<p>With <a href="#times">test times</a>, an event also shows how long the file's tests took to run, e.g.
 				<strong>tests 36.7 ms</strong> - just running the tests, not starting Java, compiling or reporting - so
 				you can see when a change made them slower. The workspace's timeline shows each run's time in all,
@@ -361,7 +365,9 @@
 				of a file's runs, use <strong>Clear Profiles and XSpec Runs from Timeline (Current File)</strong> from
 				the Timeline view's <strong>...</strong> menu or the Command Palette - or <strong>(All Files)</strong>,
 				for every XSpec file and stylesheet in the workspace. For a run of more than one XSpec file, only the
-				current file's results are removed - the run is kept for the others. Other entries, such as Git
+				current file's results are removed - the run is kept for the others. In a stylesheet's or schema's
+				timeline, these remove the results of the XSpec files that test it, which are then gone from their
+				timelines too. Other entries, such as Git
 				commits, aren't removed.</p>
 			<h3 id="schematron">Testing a Schematron</h3>
 			<p>For an XSpec file whose <code>x:description</code> has a <code>schematron</code> attribute, two steps
