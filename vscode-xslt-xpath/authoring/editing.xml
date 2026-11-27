@@ -48,13 +48,32 @@
 				<li><strong>Attribute values</strong> - the values the attribute has on other elements with the name, the most used
 					first, where they repeat - not where each is different, as for an id.</li>
 			</ul>
-			<p>Typing <code>&lt;</code> opens the list where there are names to offer. With
+			<p>Typing <code>&lt;</code> opens the list where there are names to offer, and choosing an attribute opens the list
+				of its values. Nothing is offered in text, a comment or an end tag.</p>
+			<p>In an XSLT stylesheet, literal result elements are completed in the same way - see
+				<a href="editing-xslt.html#literal-result-elements">Literal Result Elements</a>.</p>
+			<h4 id="xml-markup-completion">Comments, CDATA Sections and Processing Instructions</h4>
+			<ul>
+				<li><strong><code>&lt;!</code></strong> - an XML comment, and within the root element a CDATA section.</li>
+				<li><strong><code>&lt;?</code></strong> - a processing instruction, with or without a value. Before the root
+					element, also an <code>xml-model</code> processing instruction associating a Schematron schema, as
+					<a href="schematron.html#validating">Schematron: Validate</a> reads it - unless the file has one already -
+					and at the very start of the file, the XML declaration.</li>
+			</ul>
+			<h4>Large files</h4>
+			<p>The names are read from the whole document - about 50ms a megabyte. For a document over 500KB, the names read
+				a moment ago are used while you type, and read again after a pause of a few seconds; a document over 5MB isn't
+				read for names.</p>
+			<h4>With Red Hat's XML extension</h4>
+			<p>With
 				<a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's XML extension</a>
 				installed, a file with a schema or DTD - associated by <code>xsi:schemaLocation</code>,
 				<code>xsi:noNamespaceSchemaLocation</code>, an <code>xml-model</code> processing instruction, a DOCTYPE, or the
 				<code>xml.fileAssociations</code> setting - has its element and attribute names from the schema, from Red Hat's
 				extension, so this extension doesn't offer the document's as well; Red Hat's extension also offers the
-				<code>xsi:</code> attributes.</p>
+				<code>xsi:</code> attributes, and the attribute values. A file without a schema or DTD still has the document's
+				names. Whether or not a file has a schema, the XML comment, CDATA section and XML declaration aren't
+				offered when Red Hat's extension is installed, as it offers them itself.</p>
 			<h3>Emmet</h3>
 			<p>Emmet can be used to insert XML snippets using a shorthand notation. Emmet should be enabled in user settings.
 				See the <a href="settings.html">Settings</a> section for an example.	

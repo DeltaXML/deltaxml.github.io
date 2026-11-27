@@ -1173,13 +1173,32 @@
 				<li><strong>Attribute values</strong> - the values the attribute has on other elements with the name, the most used
 					first, where they repeat - not where each is different, as for an id.</li>
 			</ul>
-			<p>Typing <code>&lt;</code> opens the list where there are names to offer. With
+			<p>Typing <code>&lt;</code> opens the list where there are names to offer, and choosing an attribute opens the list
+				of its values. Nothing is offered in text, a comment or an end tag.</p>
+			<p>In an XSLT stylesheet, literal result elements are completed in the same way - see
+				<a href="#editing-xslt--literal-result-elements">Literal Result Elements</a>.</p>
+			<h4 id="editing--xml-markup-completion">Comments, CDATA Sections and Processing Instructions</h4>
+			<ul>
+				<li><strong><code>&lt;!</code></strong> - an XML comment, and within the root element a CDATA section.</li>
+				<li><strong><code>&lt;?</code></strong> - a processing instruction, with or without a value. Before the root
+					element, also an <code>xml-model</code> processing instruction associating a Schematron schema, as
+					<a href="#schematron--validating">Schematron: Validate</a> reads it - unless the file has one already -
+					and at the very start of the file, the XML declaration.</li>
+			</ul>
+			<h4 id="editing--large-files">Large files</h4>
+			<p>The names are read from the whole document - about 50ms a megabyte. For a document over 500KB, the names read
+				a moment ago are used while you type, and read again after a pause of a few seconds; a document over 5MB isn't
+				read for names.</p>
+			<h4 id="editing--with-red-hat-s-xml-extension">With Red Hat's XML extension</h4>
+			<p>With
 				<a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">Red Hat's XML extension</a>
 				installed, a file with a schema or DTD - associated by <code>xsi:schemaLocation</code>,
 				<code>xsi:noNamespaceSchemaLocation</code>, an <code>xml-model</code> processing instruction, a DOCTYPE, or the
 				<code>xml.fileAssociations</code> setting - has its element and attribute names from the schema, from Red Hat's
 				extension, so this extension doesn't offer the document's as well; Red Hat's extension also offers the
-				<code>xsi:</code> attributes.</p>
+				<code>xsi:</code> attributes, and the attribute values. A file without a schema or DTD still has the document's
+				names. Whether or not a file has a schema, the XML comment, CDATA section and XML declaration aren't
+				offered when Red Hat's extension is installed, as it offers them itself.</p>
 			<h3 id="editing--emmet">Emmet</h3>
 			<p>Emmet can be used to insert XML snippets using a shorthand notation. Emmet should be enabled in user settings.
 				See the <a href="#settings">Settings</a> section for an example.	
@@ -1460,6 +1479,46 @@
 			example <code>xsl:with-param colour</code>, which inserts the parameter name. The same applies to the
 			parameters of the enclosing <code>xsl:iterate</code> within an <code>xsl:next-iteration</code>. The
 			<code>name</code> attribute of an <code>xsl:with-param</code> also offers the parameter names.</p>
+		<h4 id="editing-xslt--literal-result-elements">Literal Result Elements</h4>
+		<p>Auto-completion offers the names the stylesheet's literal result elements use, as in an
+			<a href="#editing--xml-completion">XML file</a> - so the HTML or XML a stylesheet writes is quicker to add
+			to, with the names spelled as they are elsewhere. XSLT instructions are taken as if they weren't there: in
+			<code>&lt;tr&gt;&lt;xsl:for-each …&gt;&lt;td&gt;</code>, <code>td</code> is a child of <code>tr</code>.</p>
+		<ul>
+			<li><strong>Elements</strong> - after a <code>&lt;</code>, with the XSLT instructions: first the children that
+				other literal result elements with the parent's name have, with how often, e.g. <em>in tr: 2 of 2</em>, then
+				- after the instructions - every other name the stylesheet uses, the most used first, as an element's
+				children are often written in another template, e.g. a <code>td</code> in a template a <code>tr</code>
+				applies. The element is inserted with its end tag - or self-closed, if it's always empty - and with the
+				attributes its start tag always has.</li>
+			<li><strong>Attributes</strong> - in a literal result element's start tag, the attributes that others with
+				its name have, the most used first - also those an <code>xsl:attribute</code> with a literal name adds
+				within one - but not XSLT attributes, e.g. <code>xsl:use-attribute-sets</code>.</li>
+			<li><strong>Attribute values</strong> - the values the attribute has elsewhere, where they repeat, e.g. a
+				<code>class</code>. Not attribute value templates, e.g. <code>title="{@t}"</code>, nor within one's
+				expression.</li>
+		</ul>
+		<p>The names come from the stylesheet in the editor, not from the modules it includes or imports. Elements at the
+			top level that aren't XSLT, e.g. a lookup table, and the content of <code>xsl:note</code> are left out.</p>
+		<p><strong>HTML output</strong> - within an HTML literal result element, e.g. a <code>div</code> or a
+			<code>tr</code>, in a stylesheet whose output is HTML - by <code>xsl:output</code> with <code>method="html"</code>
+			or <code>"xhtml"</code>, or an <code>html-version</code>, or literal result elements in the XHTML namespace, or an
+			<code>html</code> or <code>body</code> element - HTML's own names are offered too, after those the stylesheet
+			uses, with descriptions and links to MDN:</p>
+		<ul>
+			<li><strong>Elements</strong> - those HTML allows in the parent: only <code>li</code> in a <code>ul</code>,
+				<code>td</code> and <code>th</code> in a <code>tr</code>, or <code>option</code> in a <code>select</code>,
+				and only phrasing elements, e.g. <code>em</code> or <code>a</code>, in a <code>p</code> or a
+				<code>span</code> - and elsewhere none that belong only in the <code>head</code> or in a particular parent.
+				An empty element, e.g. <code>br</code>, is inserted self-closed: the serializer writes it as HTML.</li>
+			<li><strong>Attributes</strong> - the element's, then the global attributes, e.g. <code>class</code> and
+				<code>id</code> - not event handlers such as <code>onclick</code>.</li>
+			<li><strong>Attribute values</strong> - those HTML has for the attribute, e.g. for <code>input</code>'s
+				<code>type</code>; a boolean attribute, e.g. <code>checked</code>, has its name as its value.</li>
+		</ul>
+		<p>Directly in a template, with no HTML element around the <code>&lt;</code>, and where the output isn't HTML -
+			e.g. DocBook, which also has a <code>table</code> and a <code>title</code> - HTML's names aren't offered.
+			The HTML data is VS Code's own, from <a href="https://github.com/microsoft/vscode-custom-data">vscode-custom-data</a>.</p>
 		<h4 id="editing-xslt--xslt-instruction-snippets">XSLT Instruction Snippets</h4>
 		<p>In an empty file, the <code>xsl:stylesheet</code> and <code>xsl:package</code> suggestions insert a
 			boilerplate stylesheet complete with namespace declarations, including one for your own functions - an
